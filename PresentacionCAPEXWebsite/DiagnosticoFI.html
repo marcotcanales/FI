@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico de Recursos | Facultad de Ingeniería UNITEC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .federal-blue-bg { background-color: #06065C; }
+        .federal-blue-text { color: #06065C; }
+        .cobalt-blue-bg { background-color: #0F4986; }
+        .pacific-cyan-text { color: #03AED2; }
+        .vivid-sky-blue-text { color: #47C8FD; }
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background-color: #06065C;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .info-card {
+            display: none;
+        }
+        .info-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+
+    <header class="federal-blue-bg text-white p-8 text-center shadow-lg">
+        <h1 class="text-3xl md:text-4xl font-bold mb-1">Diagnóstico de Recursos Actuales</h1>
+        <p class="text-lg md:text-xl font-light pacific-cyan-text">Facultad de Ingeniería</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="sintesis-recursos" class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold federal-blue-text mb-8 text-center">Síntesis de Recursos por Campus</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Campus Tegucigalpa (TGU)</h3>
+                    <p class="mb-6 text-gray-600">Dispone de <span class="font-bold federal-blue-text">12 espacios especializados</span> y <span class="font-bold federal-blue-text">4 áreas informales</span>. Presenta una debilidad crítica por la inexistencia de un laboratorio para Ing. en Sistemas.</p>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold federal-blue-text border-b-2 border-pacific-cyan-text pb-1 mb-2">Espacios Especializados</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 pl-2">
+                                <li>Laboratorios de: Ing. Industrial, Civil, Concreto, Redes, Telecom. y Electrónica, Automatización, Biomédica, Energía, IA, Química, Física.</li>
+                                <li>Taller de Máquinas Herramientas.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold federal-blue-text border-b-2 border-pacific-cyan-text pb-1 mb-2">Áreas Informales Externas</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 pl-2">
+                                <li>Terreno de Construcción y Estacionamiento de Topografía (Civil).</li>
+                                <li>Taller de Fundición (Mecatrónica).</li>
+                                <li>Biodigestor (Energía).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Campus San Pedro Sula (SPS)</h3>
+                    <p class="mb-6 text-gray-600">Cuenta con <span class="font-bold federal-blue-text">14 espacios especializados</span> y <span class="font-bold federal-blue-text">4 áreas informales</span>. El desafío principal es la capacidad insuficiente en laboratorios de alta demanda.</p>
+                     <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold federal-blue-text border-b-2 border-pacific-cyan-text pb-1 mb-2">Espacios Especializados</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 pl-2">
+                                <li>Laboratorios de: Software, Ing. Industrial, Civil, Redes, Telecom., Electrónica, Mecatrónica, Automatización, Biomédica, Energía, IA, Química, Física.</li>
+                                <li>Taller de Máquinas Herramientas.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold federal-blue-text border-b-2 border-pacific-cyan-text pb-1 mb-2">Áreas Informales Externas</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 pl-2">
+                                <li>Terreno de Construcción y Estacionamiento de Topografía (Civil).</li>
+                                <li>Área de Soldadura (Mecatrónica).</li>
+                                <li>Biodigestor (Energía).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="estrategia-inversion" class="mb-12 bg-white rounded-lg shadow-xl p-8">
+             <h2 class="text-2xl md:text-3xl font-bold federal-blue-text mb-8 text-center">Estrategia de Inversión a 5 Años</h2>
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <div class="text-6xl mb-4">🗑️</div>
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-2">Eliminar y Descartar</h3>
+                    <p>Dar de baja equipos obsoletos para reducir costos de mantenimiento y liberar espacio valioso, especialmente en Biomédica y Telecomunicaciones.</p>
+                </div>
+                <div class="p-6">
+                    <div class="text-6xl mb-4">🔄</div>
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-2">Mantener y Renovar</h3>
+                    <p>Implementar un plan de renovación progresiva para equipos clave (servidores, PLCs, routers) para evitar inversiones masivas y disruptivas en el futuro.</p>
+                </div>
+                <div class="p-6">
+                    <div class="text-6xl mb-4">🚀</div>
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-2">Actualizar e Innovar</h3>
+                    <p>Priorizar la incorporación de tecnologías emergentes (VR/AR, drones, escáneres 3D, IA) para mantener el liderazgo y la pertinencia académica.</p>
+                </div>
+             </div>
+        </section>
+
+        <section id="diagnostico-detallado">
+            <h2 class="text-2xl md:text-3xl font-bold federal-blue-text mb-8 text-center">Diagnóstico Detallado por Programa</h2>
+            <div id="tabs-container" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                <button data-target="sistemas" class="tab-button active bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Sistemas</button>
+                <button data-target="industrial" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Industrial</button>
+                <button data-target="civil" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Civil</button>
+                <button data-target="telecom" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Telecom</button>
+                <button data-target="mecatronica" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Mecatrónica</button>
+                <button data-target="biomedica" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Biomédica</button>
+                <button data-target="energia" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Energía</button>
+                <button data-target="ia" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Ciencia de Datos e IA</button>
+                <button data-target="ciencias" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Ciencias y Mat.</button>
+                <button data-target="fablab" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">FabLab</button>
+            </div>
+
+            <div id="info-container" class="bg-white rounded-lg shadow-xl p-6 md:p-8 min-h-[200px]">
+                <div id="sistemas" class="info-card active">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Laboratorios de Software y Ciberseguridad</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><h4 class="font-semibold federal-blue-text">Diagnóstico y Valoración:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold text-red-600">Debilidad Crítica (TGU):</span> Inexistencia de un laboratorio especializado, limitando el potencial práctico del programa (observación de ACAAI).</li><li><span class="font-bold">Riesgo de Obsolescencia (SPS):</span> Servidores clave adquiridos post-2018 se acercan al final de su vida útil.</li></ul></div>
+                        <div><h4 class="font-semibold federal-blue-text">Uso, Capacidad y Demanda:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold">Alta Demanda:</span> Es el programa con mayor primer ingreso, generando una necesidad creciente de espacios.</li><li><span class="font-bold">Uso Transversal:</span> El equipo sirve a Ciencia de Datos e IA y a Telecomunicaciones, multiplicando su uso.</li></ul></div>
+                    </div>
+                </div>
+                <div id="industrial" class="info-card">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Laboratorio de Ingeniería Industrial</h3>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><h4 class="font-semibold federal-blue-text">Diagnóstico y Valoración:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold">Alto Desgaste:</span> Es uno de los laboratorios con mayor tasa de ocupación en toda la universidad, provocando deterioro acelerado.</li><li><span class="font-bold">Necesidad de Modernización:</span> El equipamiento actual requiere una actualización para incorporar tecnologías de la Industria 4.0.</li></ul></div>
+                        <div><h4 class="font-semibold federal-blue-text">Uso, Capacidad y Demanda:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold">Uso Permanente:</span> Utilizado por múltiples facultades, se mantiene en uso constante.</li><li><span class="font-bold text-red-600">Limitación de Crecimiento:</span> El mobiliario actual restringe la matrícula en asignaturas clave.</li></ul></div>
+                    </div>
+                </div>
+                <div id="civil" class="info-card">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Laboratorios de Ing. Civil y Construcción</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><h4 class="font-semibold federal-blue-text">Diagnóstico y Valoración:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold text-red-600">Riesgo de Seguridad (TGU):</span> La falta de un espacio formal y seguro para prácticas de construcción presenta serios riesgos.</li><li><span class="font-bold text-red-600">Insuficiencia de Espacio (SPS):</span> El laboratorio es insosteniblemente pequeño para su población estudiantil.</li><li><span class="font-bold">Obsolescencia Tecnológica:</span> El equipo de topografía está desfasado frente a los estándares de la industria.</li></ul></div>
+                        <div><h4 class="font-semibold federal-blue-text">Uso, Capacidad y Demanda:</h4><p>Uso constante por estudiantes de Ingeniería Civil y Arquitectura. La demanda aumentará con la modernización del equipo.</p></div>
+                    </div>
+                </div>
+                <div id="telecom" class="info-card">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Laboratorios de Redes y Electrónica</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><h4 class="font-semibold federal-blue-text">Diagnóstico y Valoración:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold text-red-600">Limitación Operativa (TGU):</span> La falta de un coordinador dedicado es una debilidad crítica que ha generado irregularidades.</li><li><span class="font-bold text-red-600">Obsolescencia Crítica:</span> El equipo de redes (routers y switches) está obsoleto y necesita renovación completa.</li></ul></div>
+                        <div><h4 class="font-semibold federal-blue-text">Uso, Capacidad y Demanda:</h4><p>El laboratorio de electrónica tiene un <span class="font-bold">uso transversal elevado</span>, sirviendo a todas las carreras electromecánicas.</p></div>
+                    </div>
+                </div>
+                <div id="mecatronica" class="info-card">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Talleres y Laboratorios de Mecatrónica</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><h4 class="font-semibold federal-blue-text">Diagnóstico y Valoración:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold text-red-600">Insuficiencia de Espacio (SPS):</span> Con casi 400 estudiantes, el Taller es insuficiente y limita la oferta de secciones.</li><li><span class="font-bold">Desgaste Acelerado:</span> La alta población y el uso constante aceleran el deterioro del equipo.</li><li><span class="font-bold">Reto de Coordinación (SPS):</span> Un solo coordinador para todos los laboratorios es un desafío operativo.</li></ul></div>
+                        <div><h4 class="font-semibold federal-blue-text">Uso, Capacidad y Demanda:</h4><p>Uso <span class="font-bold">constante, elevado y multidisciplinario</span> por parte de todas las carreras electromecánicas.</p></div>
+                    </div>
+                </div>
+                <div id="biomedica" class="info-card">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Laboratorio de Ingeniería Biomédica</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><h4 class="font-semibold federal-blue-text">Diagnóstico y Valoración:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold">Insuficiencia de Espacio (TGU):</span> El laboratorio es insuficiente en horas pico.</li><li><span class="font-bold">Falta de Coordinación:</span> Dificulta la gestión de insumos y ha contribuido al daño de equipo sensible.</li><li><span class="font-bold">Necesidad de Renovación:</span> Una parte significativa del equipo médico requiere actualización.</li></ul></div>
+                        <div><h4 class="font-semibold federal-blue-text">Uso, Capacidad y Demanda:</h4><p>Es una <span class="font-bold">carrera estratégica</span> con la mejor curva de crecimiento. El uso del laboratorio es constante y la congestión es un problema operativo.</p></div>
+                    </div>
+                </div>
+                <div id="energia" class="info-card">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Laboratorio de Energía</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><h4 class="font-semibold federal-blue-text">Diagnóstico y Valoración:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold">Oportunidad de Crecimiento:</span> Expandir el equipamiento hacia nuevas áreas de energías renovables (ej. biomasa).</li><li><span class="font-bold">Debilidad Operativa (TGU):</span> Comparte la debilidad de la falta de un coordinador dedicado.</li></ul></div>
+                        <div><h4 class="font-semibold federal-blue-text">Uso, Capacidad y Demanda:</h4><p>Uso específico y transversal. El cambio de ubicación propuesto en TGU no afectaría su operatividad y beneficiaría a Biomédica.</p></div>
+                    </div>
+                </div>
+                <div id="ia" class="info-card">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Laboratorio de Inteligencia Artificial</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><h4 class="font-semibold federal-blue-text">Diagnóstico y Valoración:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold text-red-600">Obsolescencia Acelerada:</span> El equipo tiene el ciclo de obsolescencia más rápido de la facultad.</li><li><span class="font-bold">Capacidad a Futuro:</span> El espacio físico podría resultar limitado para los nuevos cohortes.</li></ul></div>
+                        <div><h4 class="font-semibold federal-blue-text">Uso, Capacidad y Demanda:</h4><p>La demanda <span class="font-bold">incrementa</span> conforme avanzan las primeras generaciones de la carrera.</p></div>
+                    </div>
+                </div>
+                <div id="ciencias" class="info-card">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Laboratorios de Física y Química</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><h4 class="font-semibold federal-blue-text">Diagnóstico y Valoración:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold text-red-600">Cuello de Botella (SPS):</span> El laboratorio de Física limita la programación académica de toda la universidad.</li><li><span class="font-bold text-red-600">Riesgo de Seguridad:</span> La falta de lockers en Química es un riesgo crítico.</li><li><span class="font-bold">Deterioro (TGU):</span> El mobiliario de Química presenta daños por filtraciones pasadas.</li></ul></div>
+                        <div><h4 class="font-semibold federal-blue-text">Uso, Capacidad y Demanda:</h4><p>Son laboratorios de <span class="font-bold">servicio universal</span> con una tasa de ocupación extremadamente alta.</p></div>
+                    </div>
+                </div>
+                <div id="fablab" class="info-card">
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">FabLab - Ecosistema de Innovación</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><h4 class="font-semibold federal-blue-text">Diagnóstico y Valoración:</h4><ul class="list-disc list-inside text-sm mt-1 space-y-1"><li><span class="font-bold">Pilar de Innovación:</span> Espacio fundamental para investigación aplicada y proyectos multidisciplinarios.</li><li><span class="font-bold">Necesidades Básicas:</span> Requiere atención en infraestructura (cortinas, llavines).</li></ul></div>
+                        <div><h4 class="font-semibold federal-blue-text">Uso, Capacidad y Demanda:</h4><p>Uso cíclico con <span class="font-bold">máxima congestión en semanas 8 y 9</span>, presentando una oportunidad para proyectos externos en períodos de baja intensidad.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-6 mt-8 federal-blue-bg text-white text-sm">
+        <p>Facultad de Ingeniería | UNITEC &copy; 2025</p>
+    </footer>
+
+    <script>
+        const tabsContainer = document.getElementById('tabs-container');
+        const infoCards = document.querySelectorAll('.info-card');
+        const buttons = tabsContainer.querySelectorAll('.tab-button');
+
+        tabsContainer.addEventListener('click', (event) => {
+            const clickedButton = event.target.closest('.tab-button');
+            if (!clickedButton) return;
+
+            const targetId = clickedButton.dataset.target;
+            
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            clickedButton.classList.add('active');
+
+            infoCards.forEach(card => {
+                if (card.id === targetId) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
