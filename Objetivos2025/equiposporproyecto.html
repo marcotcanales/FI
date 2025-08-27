@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipos de Proyecto 2025 - Facultad de Ingeniería UNITEC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        :root {
+            --unitec-federal-blue: #06065C;
+            --unitec-cobalt-blue: #0F4986;
+            --unitec-pacific-cyan: #03AED2;
+            --unitec-vivid-sky-blue: #47C8FD;
+        }
+        .bg-federal-blue { background-color: var(--unitec-federal-blue); }
+        .bg-cobalt-blue { background-color: var(--unitec-cobalt-blue); }
+        .text-pacific-cyan { color: var(--unitec-pacific-cyan); }
+        .text-cobalt-blue { color: var(--unitec-cobalt-blue); }
+        .border-cobalt-blue { border-color: var(--unitec-cobalt-blue); }
+        .bg-pacific-cyan-lightest { background-color: #F0FAFB; }
+
+        .project-team-card {
+            transition: box-shadow 0.3s ease;
+        }
+        .project-team-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .role-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid;
+        }
+        .leader { color: #16a34a; border-color: #16a34a; } /* Green 600 */
+        .responsible { color: #0284c7; border-color: #0284c7; } /* Sky 600 */
+        .support { color: #f59e0b; border-color: #f59e0b; } /* Amber 500 */
+
+        .member-tag {
+            background-color: #e5e7eb; /* gray-200 */
+            color: #374151; /* gray-700 */
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            margin: 0.25rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="bg-federal-blue shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <svg class="h-12 w-12 mr-3" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 0L100 25V75L50 100L0 75V25L50 0Z" fill="#03AED2"/><path d="M50 0L0 25V75L50 100L100 75V25L50 0ZM50 6.7L93.3 28.3V71.7L50 93.3L6.7 71.7V28.3L50 6.7Z" fill="#06065C"/><path d="M50 13.4L6.7 28.3V71.7L50 86.6L93.3 71.7V28.3L50 13.4ZM50 20.1L86.6 36.7V63.3L50 79.9L13.4 63.3V36.7L50 20.1Z" fill="white"/></svg>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold text-white">Facultad de Ingeniería</h1>
+                    <p class="text-sm text-vivid-sky-blue">Equipos de Proyecto 2025</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+        <div class="text-center mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-cobalt-blue mb-2">Composición de Equipos por Proyecto</h2>
+            <p class="text-gray-600 max-w-3xl mx-auto">
+                Visualización de los roles y responsabilidades de los colaboradores de la Facultad de Ingeniería en cada uno de los proyectos del Plan de Mejora 2025.
+            </p>
+        </div>
+
+        <div id="teams-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project team cards will be injected here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-federal-blue text-white text-center p-4 mt-12">
+        <p>&copy; 2025 UNITEC - Facultad de Ingeniería. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // --- DATA ---
+        const projectsData = [
+             { title: "Acreditación de Telecomunicaciones y Electrónica", code: "PRO1A"},
+            { title: "Redacción de sílabos por competencias", code: "PRO1B"},
+            { title: "Reforma de Mecatrónica y Biomédica", code: "PRO1C"},
+            { title: "Diagnóstico y Perfil del Estudiante", code: "PRO1D"},
+            { title: "Actualización del modelo educativo", code: "PRO1E"},
+            { title: "Fomento a la cultura del aprendizaje", code: "PRO1F"},
+            { title: "Articulación y visitas entre campus", code: "PRO1G"},
+            { title: "Mejora tasa de éxito en Álgebra", code: "PRO1H"},
+            { title: "Motivación de uso del FabLab", code: "PRO1I"},
+            { title: "Concursos, hackathons y competencias", code: "PRO1J"},
+            { title: "Participación en Comité de Innovación Educativa", code: "PRO1K"},
+            { title: "Transversalización de los ODS en currículo", code: "PRO2A"},
+            { title: "Acciones de visibilidad institucional", code: "PRO2B"},
+            { title: "Formación de Industry Advisory Boards", code: "PRO2C"},
+            { title: "Fomento a la internacionalidad del currículo", code: "PRO2D"},
+            { title: "Propuestas a fondos externos (Erasmus+)", code: "PRO2E"},
+            { title: "Implementación de acciones de internacionalidad", code: "PRO2F"},
+            { title: "Programa de docentes visitantes", code: "PRO2G"},
+            { title: "Activación de presencia en LinkedIn", code: "PRO2H"},
+            { title: "Portafolio de Proyectos FI en micrositio", code: "PRO2I"},
+            { title: "Presentación Institucional de la FI", code: "PRO2J"},
+            { title: "Semana Internacional de Ingeniería 2025", code: "PRO2K"},
+            { title: "Herramientas para seguimiento de pendientes", code: "PRO3A"},
+            { title: "Revisión de normas de seguridad en laboratorios", code: "PRO3B"},
+            { title: "Talleres técnicos para formación docente", code: "PRO3C"},
+            { title: "Apoyo a Prospección y Admisiones", code: "PRO3D"},
+            { title: "Apoyo a proyectos institucionales", code: "PRO3E"},
+            { title: "Articulación con Formación Continua", code: "PRO3F"},
+            { title: "Acciones transversales a metas de la FI", code: "PRO3G"},
+            { title: "Plan de Inversión a 5 años de la FI", code: "PRO3H"}
+        ];
+
+        const collaboratorsCSV = `Nombre,Area Academica,PRO1A,PRO1B,PRO1C,PRO1D,PRO1E,PRO1F,PRO1G,PRO1H,PRO1I,PRO1J,PRO1K,PRO2A,PRO2B,PRO2C,PRO2D,PRO2E,PRO2F,PRO2G,PRO2H,PRO2I,PRO2J,PRO2K,PRO3A,PRO3B,PRO3C,PRO3D,PRO3E,PRO3F,PRO3G,PRO3H
+Marco Canales,Decanatura y Direccion,A,x,A,L,L,x,L,R,x,R,L,A,A,A,L,L,L,R,R,R,R,A,L,x,x,A,R,R,R,L
+Edwin Dore,Decanatura y Direccion,A,x,A,L,R,x,A,L,x,L,A,A,A,A,L,R,L,R,R,R,L,R,R,x,x,A,R,L,R,R
+Karen Martinez,Decanatura y Direccion,A,x,x,A,x,A,x,x,A,A,x,x,x,A,x,x,x,x,x,x,A,A,R,A,x,A,x,x,R,x
+Ana Martinez,Decanatura y Direccion,A,x,x,A,x,A,x,x,x,A,x,x,x,A,x,x,x,x,x,x,A,A,R,A,x,A,x,x,R,x
+Geovanny Fortin,FabLab,x,x,x,A,x,x,x,x,L,L,A,x,R,x,x,x,R,x,R,L,A,A,x,R,L,A,x,R,R,A
+Reynod Bocanegra,Ciencias de la Computacion,x,L,x,R,A,x,R,x,A,R,A,x,A,R,R,R,R,L,A,A,A,A,x,x,x,R,R,A,R,A
+Carlos Perez,Ciencias de la Computacion,R,L,x,R,A,x,A,x,x,R,A,x,A,R,R,A,R,R,A,A,A,A,x,x,A,R,R,A,R,A
+Georgina Galeano,Industrial,x,R,x,R,A,x,A,x,A,R,A,x,A,L,R,A,R,R,A,A,A,A,x,A,x,L,R,A,R,A
+Mendel Nelson,Industrial,x,R,x,A,x,A,x,x,x,A,x,x,R,x,A,x,R,x,x,x,x,x,x,A,x,x,R,x,R,x
+Maria Elena Perdomo,Industrial,x,A,x,A,x,A,x,x,x,A,x,x,R,x,R,x,A,x,x,x,x,x,x,x,x,x,x,A,R,R
+Julio Cesar Lopez,Civil,x,R,x,R,A,x,A,x,A,R,A,x,L,R,R,A,R,R,A,A,A,A,x,x,x,R,R,A,R,A
+Hector Padilla,Civil,x,R,x,R,A,x,A,x,x,R,A,x,A,L,R,R,R,R,A,A,A,R,x,A,A,R,R,A,R,A
+Juan Carlos Reyes,Civil,x,A,x,A,x,A,x,x,R,A,x,x,R,x,x,x,A,x,x,x,x,x,x,L,R,A,R,A,R,x
+Ada Rodriguez,Civil,x,A,x,A,x,A,x,x,x,A,x,x,R,x,R,x,A,x,x,x,x,x,x,x,x,x,x,A,R,A
+Rene Leon,Mecatrónica,A,R,L,R,A,x,A,x,A,R,A,x,A,R,R,A,R,L,A,A,A,L,x,x,x,R,R,A,R,A
+Juan Miguel Mejia,Mecatrónica,A,R,R,R,A,x,A,x,x,R,A,x,R,L,R,A,R,R,A,A,A,A,x,A,A,R,R,A,R,A
+Favell Nuñez,Mecatrónica,x,A,A,A,x,A,x,x,x,A,x,x,R,x,R,x,A,x,x,x,x,x,x,x,x,x,x,A,R,A
+Jose Luis Ordoñez,Mecatrónica,x,A,A,A,x,A,x,x,x,A,x,x,R,x,R,x,A,x,x,x,x,x,x,x,x,x,x,A,R,R
+Daniel Ramos,Mecatrónica,A,A,A,A,x,A,x,x,R,A,x,x,R,A,x,x,A,x,x,x,x,x,x,R,R,A,R,A,R,x
+Fernanda Caceres,Biomédica,A,R,R,R,A,x,A,x,A,R,A,x,R,L,R,A,R,R,L,A,A,A,x,x,x,R,R,A,R,A
+Reyna Valle,Biomédica,A,R,L,R,A,x,A,x,x,R,A,x,R,R,R,A,R,R,A,A,A,L,x,x,x,R,R,A,R,A
+Yaro Caceres,Biomédica,x,R,A,A,x,A,x,x,x,A,x,x,R,x,A,A,A,x,x,x,x,x,x,x,x,x,x,x,R,x
+Manuel Gamero,Biomédica,x,R,A,A,x,A,x,x,x,A,x,x,R,x,A,A,A,x,x,x,x,x,x,x,x,x,x,x,R,x
+Vielka Barahona,Energia,x,A,x,R,A,x,A,x,x,R,A,x,L,R,R,A,R,R,A,A,A,R,x,x,x,R,R,A,R,A
+Alex Sanchez,Ciencias y Matematicas,x,A,x,R,A,L,A,R,A,R,A,L,A,x,R,A,R,R,A,A,A,A,x,x,A,R,R,A,R,A
+Julio Ramirez,Ciencias y Matematicas,x,A,x,R,A,L,A,R,x,R,A,L,A,x,R,A,R,R,A,A,A,A,x,R,R,R,R,A,R,A
+Nereyda Lainez,Ciencias y Matematicas,x,x,x,A,x,R,x,A,R,A,x,R,R,A,x,x,A,x,x,x,x,x,x,R,R,A,x,A,R,x
+Emilson Fortin,Ciencias y Matematicas,x,x,x,A,x,R,x,A,R,A,x,R,x,x,x,x,x,x,x,x,x,x,x,R,A,A,x,x,R,x
+Winder Matamoros,Decanatura y Direccion,A,x,x,A,x,A,x,x,x,A,x,x,x,x,x,x,x,x,x,x,x,x,x,L,L,A,R,x,R,x
+Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x,x,x,x,x,x,R,x`;
+
+        // --- SCRIPT LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('teams-container');
+
+            // 1. Parse CSV and build collaborator data structure
+            const lines = collaboratorsCSV.trim().split('\n');
+            const headers = lines[0].split(',');
+            const collaboratorsData = lines.slice(1).map(line => {
+                const values = line.split(',');
+                const collaborator = {
+                    name: values[0],
+                    area: values[1],
+                    projects: {}
+                };
+                headers.slice(2).forEach((header, index) => {
+                    const role = values[index + 2];
+                    if (role && role.toLowerCase() !== 'x') {
+                        collaborator.projects[header] = role;
+                    }
+                });
+                return collaborator;
+            });
+
+            // 2. Build project teams data structure
+            const projectTeams = projectsData.map(project => {
+                const team = {
+                    L: [],
+                    R: [],
+                    A: []
+                };
+                collaboratorsData.forEach(collaborator => {
+                    const role = collaborator.projects[project.code];
+                    if (role && team[role]) {
+                        team[role].push(collaborator.name);
+                    }
+                });
+                return { ...project, team };
+            });
+
+            // 3. Render project team cards
+            projectTeams.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-team-card bg-white p-6 rounded-lg shadow-md border-t-4 border-cobalt-blue';
+                
+                const leadersHtml = project.team.L.length > 0 
+                    ? project.team.L.map(name => `<span class="member-tag">${name}</span>`).join('')
+                    : '<p class="text-sm text-red-600 font-semibold">Temporalmente sin líder asignado</p>';
+
+                const responsiblesHtml = project.team.R.length > 0
+                    ? project.team.R.map(name => `<span class="member-tag">${name}</span>`).join('')
+                    : '<p class="text-sm text-gray-500">N/A</p>';
+
+                const supportHtml = project.team.A.length > 0
+                    ? project.team.A.map(name => `<span class="member-tag">${name}</span>`).join('')
+                    : '<p class="text-sm text-gray-500">N/A</p>';
+
+                card.innerHTML = `
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-cobalt-blue">${project.code}</h3>
+                        <p class="font-semibold text-gray-800">${project.title}</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="role-title leader">Líder(es)</h4>
+                            <div class="flex flex-wrap">
+                                ${leadersHtml}
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="role-title responsible">Responsables</h4>
+                             <div class="flex flex-wrap">
+                                ${responsiblesHtml}
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="role-title support">Apoyo</h4>
+                             <div class="flex flex-wrap">
+                                ${supportHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>
