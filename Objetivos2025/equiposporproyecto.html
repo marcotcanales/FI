@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan de Mejora 2025 - Facultad de Ingeniería UNITEC</title>
+    <title>Equipos de Proyecto 2025 - Facultad de Ingeniería UNITEC</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,102 +17,77 @@
             --unitec-cobalt-blue: #0F4986;
             --unitec-pacific-cyan: #03AED2;
             --unitec-vivid-sky-blue: #47C8FD;
-            --objective-excelencia: #16a34a; /* Green-600 */
-            --objective-visibilidad: #2563eb; /* Blue-600 */
-            --objective-eficiencia: #d97706; /* Amber-600 */
         }
         .bg-federal-blue { background-color: var(--unitec-federal-blue); }
         .bg-cobalt-blue { background-color: var(--unitec-cobalt-blue); }
         .text-pacific-cyan { color: var(--unitec-pacific-cyan); }
-        .text-vivid-sky-blue { color: var(--unitec-vivid-sky-blue); }
-        .border-pacific-cyan { border-color: var(--unitec-pacific-cyan); }
+        .text-cobalt-blue { color: var(--unitec-cobalt-blue); }
         .border-cobalt-blue { border-color: var(--unitec-cobalt-blue); }
-        .bg-pacific-cyan-light { background-color: #e0f7fa; }
+        
+        .project-team-card {
+            transition: box-shadow 0.3s ease;
+        }
+        .project-team-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .role-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid;
+        }
+        .leader { color: #16a34a; border-color: #16a34a; }
+        .responsible { color: #0284c7; border-color: #0284c7; }
+        .support { color: #f59e0b; border-color: #f59e0b; }
 
-        .collaborator-btn {
-            transition: all 0.2s ease-in-out;
-        }
-        .collaborator-btn.active {
-            background-color: var(--unitec-cobalt-blue);
-            color: white;
-            transform: scale(1.02);
-        }
-        .project-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 12px;
-            margin: 4px;
+        .member-tag {
+            background-color: #e5e7eb;
+            color: #374151;
+            padding: 0.25rem 0.75rem;
             border-radius: 9999px;
-            font-weight: 500;
             font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            border-width: 2px;
+            margin: 0.25rem;
+            display: inline-block;
         }
-        .project-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .role-badge {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            margin-right: 8px;
-            flex-shrink: 0;
-        }
-        .role-L { background-color: #16a34a; } /* Green 600 */
-        .role-R { background-color: #0284c7; } /* Sky 600 */
-        .role-A { background-color: #f59e0b; } /* Amber 500 */
-
-        /* Objective Colors */
-        .objective-excelencia { border-color: var(--objective-excelencia); }
-        .objective-visibilidad { border-color: var(--objective-visibilidad); }
-        .objective-eficiencia { border-color: var(--objective-eficiencia); }
-        .legend-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 4px; }
-
-
-        .status-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; }
-        .status-en-desarrollo { background-color: #f59e0b; }
-        .status-con-atrasos { background-color: #ef4444; }
-        .status-sin-iniciar { background-color: #6b7280; }
-        .status-completo { background-color: #22c55e; }
 
         .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); padding-top: 60px; }
         .modal-content { position: relative; background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 700px; border-radius: 10px; animation: fadeIn 0.5s; }
         .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
         .close-button:hover, .close-button:focus { color: black; text-decoration: none; }
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+        .status-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+        .status-en-desarrollo { background-color: #f59e0b; }
+        .status-con-atrasos { background-color: #ef4444; }
+        .status-sin-iniciar { background-color: #6b7280; }
+        .status-completo { background-color: #22c55e; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-100">
 
-    <header class="bg-federal-blue shadow-lg">
+    <header class="bg-federal-blue shadow-md">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center">
                 <svg class="h-12 w-12 mr-3" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 0L100 25V75L50 100L0 75V25L50 0Z" fill="#03AED2"/><path d="M50 0L0 25V75L50 100L100 75V25L50 0ZM50 6.7L93.3 28.3V71.7L50 93.3L6.7 71.7V28.3L50 6.7Z" fill="#06065C"/><path d="M50 13.4L6.7 28.3V71.7L50 86.6L93.3 71.7V28.3L50 13.4ZM50 20.1L86.6 36.7V63.3L50 79.9L13.4 63.3V36.7L50 20.1Z" fill="white"/></svg>
                 <div>
                     <h1 class="text-xl md:text-2xl font-bold text-white">Facultad de Ingeniería</h1>
-                    <p class="text-sm text-vivid-sky-blue">Plan de Mejora 2025</p>
+                    <p class="text-sm text-vivid-sky-blue">Equipos de Proyecto 2025</p>
                 </div>
             </div>
         </div>
     </header>
 
     <main class="container mx-auto p-4 md:p-8">
-        <div class="text-center mb-10 bg-white p-6 rounded-lg shadow">
-            <h2 class="text-2xl md:text-3xl font-bold text-cobalt-blue mb-2">Visualización de Proyectos por Colaborador</h2>
+        <div class="text-center mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-cobalt-blue mb-2">Composición de Equipos por Proyecto</h2>
             <p class="text-gray-600 max-w-3xl mx-auto">
-                Bienvenido. Seleccione un área académica y luego un colaborador para visualizar los proyectos en los que está involucrado y su rol específico en cada uno.
+                Visualización de los roles y responsabilidades de los colaboradores de la Facultad de Ingeniería en cada uno de los proyectos del Plan de Mejora 2025.
             </p>
         </div>
 
-        <div id="collaborators-board">
-            <!-- Contenido generado dinámicamente -->
+        <div id="teams-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project team cards will be injected here by JavaScript -->
         </div>
     </main>
 
@@ -256,19 +231,19 @@ Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x
 
         // --- SCRIPT LOGIC ---
         document.addEventListener('DOMContentLoaded', () => {
-            const board = document.getElementById('collaborators-board');
+            const container = document.getElementById('teams-container');
             const modal = document.getElementById('projectModal');
             const modalBody = document.getElementById('modalBody');
             const closeButton = document.querySelector('.close-button');
 
-            // 1. Parse CSV and build data structures
+            // 1. Parse CSV and build collaborator data structure
             const lines = collaboratorsCSV.trim().split('\n');
             const headers = lines[0].split(',');
             const collaboratorsData = lines.slice(1).map(line => {
                 const values = line.split(',');
                 const collaborator = {
                     name: values[0],
-                    area: values[1].replace(/ /g, ' '), // Keep spaces
+                    area: values[1],
                     projects: {}
                 };
                 headers.slice(2).forEach((header, index) => {
@@ -280,158 +255,99 @@ Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x
                 return collaborator;
             });
 
-            const collaboratorsByArea = collaboratorsData.reduce((acc, coll) => {
-                if (!acc[coll.area]) {
-                    acc[coll.area] = [];
-                }
-                acc[coll.area].push(coll);
-                return acc;
-            }, {});
+            // 2. Build project teams data structure
+            const projectTeams = projectsData.map(project => {
+                const team = {
+                    L: [],
+                    R: [],
+                    A: []
+                };
+                collaboratorsData.forEach(collaborator => {
+                    const role = collaborator.projects[project.code];
+                    if (role && team[role]) {
+                        team[role].push(collaborator.name);
+                    }
+                });
+                return { ...project, team };
+            });
 
-            const projectLeaders = projectsData.reduce((acc, proj) => {
-                acc[proj.code] = [];
-                return acc;
-            }, {});
+            // 3. Render project team cards
+            projectTeams.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-team-card bg-white p-6 rounded-lg shadow-md border-t-4 border-cobalt-blue flex flex-col';
+                
+                const leadersHtml = project.team.L.length > 0 
+                    ? project.team.L.map(name => `<span class="member-tag">${name}</span>`).join('')
+                    : '<p class="text-sm text-red-600 font-semibold">Temporalmente sin líder asignado</p>';
 
-            collaboratorsData.forEach(coll => {
-                for (const projCode in coll.projects) {
-                    if (coll.projects[projCode] === 'L') {
-                        projectLeaders[projCode].push(coll.name);
+                const responsiblesHtml = project.team.R.length > 0
+                    ? project.team.R.map(name => `<span class="member-tag">${name}</span>`).join('')
+                    : '<p class="text-sm text-gray-500">N/A</p>';
+
+                const supportHtml = project.team.A.length > 0
+                    ? project.team.A.map(name => `<span class="member-tag">${name}</span>`).join('')
+                    : '<p class="text-sm text-gray-500">N/A</p>';
+
+                card.innerHTML = `
+                    <div class="flex-grow">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-bold text-cobalt-blue">${project.code}</h3>
+                            <p class="font-semibold text-gray-800">${project.title}</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="role-title leader">Líder(es)</h4>
+                                <div class="flex flex-wrap">
+                                    ${leadersHtml}
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="role-title responsible">Responsables</h4>
+                                 <div class="flex flex-wrap">
+                                    ${responsiblesHtml}
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="role-title support">Apoyo</h4>
+                                 <div class="flex flex-wrap">
+                                    ${supportHtml}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-right">
+                         <button class="details-btn text-sm font-semibold text-pacific-cyan hover:text-cobalt-blue" data-code="${project.code}">Ver Detalles &rarr;</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            // 4. Event Listeners for Modal
+            container.addEventListener('click', (e) => {
+                const detailsBtn = e.target.closest('.details-btn');
+                if (detailsBtn) {
+                    const projectCode = detailsBtn.dataset.code;
+                    const project = projectsData.find(p => p.code === projectCode);
+                    if (project) {
+                        showModal(project);
                     }
                 }
             });
 
-            // 2. Render board
-            for (const area in collaboratorsByArea) {
-                const areaColor = getAreaColor(area);
-                const section = document.createElement('section');
-                section.className = 'mb-12';
-                section.innerHTML = `
-                    <div class="flex items-center mb-4">
-                        <div class="w-2 h-6 ${areaColor} rounded-r-full mr-3"></div>
-                        <h3 class="text-xl font-bold text-cobalt-blue">${area}</h3>
-                    </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                        ${collaboratorsByArea[area].map(coll => `
-                            <button class="collaborator-btn w-full text-left p-3 bg-white rounded-lg shadow border border-gray-200 hover:bg-cobalt-blue hover:text-white hover:shadow-lg focus:outline-none" data-name="${coll.name}">
-                                ${coll.name}
-                            </button>
-                        `).join('')}
-                    </div>
-                    <div id="projects-for-${area.replace(/\s+/g, '-')}" class="mt-4"></div>
-                `;
-                board.appendChild(section);
-            }
-
-            // 3. Event Listeners
-            board.addEventListener('click', (e) => {
-                const collaboratorBtn = e.target.closest('.collaborator-btn');
-                const projectBtn = e.target.closest('.project-btn');
-
-                if (collaboratorBtn) {
-                    handleCollaboratorClick(collaboratorBtn);
-                }
-                if (projectBtn) {
-                    handleProjectClick(projectBtn);
-                }
-            });
-            
             closeButton.onclick = () => { modal.style.display = "none"; };
             window.onclick = (event) => { if (event.target == modal) { modal.style.display = "none"; } };
 
-            // --- HELPER FUNCTIONS ---
-            function handleCollaboratorClick(btn) {
-                const name = btn.dataset.name;
-                const collaborator = collaboratorsData.find(c => c.name === name);
-                const containerId = `projects-for-${collaborator.area.replace(/\s+/g, '-')}`;
-                const container = document.getElementById(containerId);
-
-                const areaContainer = btn.closest('.grid').parentElement;
-                areaContainer.querySelectorAll('.collaborator-btn.active').forEach(b => {
-                     if (b !== btn) {
-                        b.classList.remove('active');
-                        const otherContainer = document.getElementById(`projects-for-${b.closest('section').querySelector('h3').textContent.replace(/\s+/g, '-')}`);
-                        if(otherContainer) otherContainer.innerHTML = '';
-                     }
-                });
-
-
-                btn.classList.toggle('active');
-
-                if (btn.classList.contains('active')) {
-                    renderProjectsFor(collaborator, container);
-                } else {
-                    container.innerHTML = '';
-                }
-            }
-            
-            function handleProjectClick(btn) {
-                const projectCode = btn.dataset.code;
-                const project = projectsData.find(p => p.code === projectCode);
-                if (project) {
-                    showModal(project);
-                }
-            }
-
-            function renderProjectsFor(collaborator, container) {
-                const roleOrder = { 'L': 1, 'R': 2, 'A': 3 };
-                const projectEntries = Object.entries(collaborator.projects);
-                
-                projectEntries.sort(([, roleA], [, roleB]) => roleOrder[roleA] - roleOrder[roleB]);
-
-                const getObjectiveClass = (objective) => {
-                    if (!objective) return 'border-gray-300';
-                    if (objective.toLowerCase().includes('excelencia')) return 'objective-excelencia';
-                    if (objective.toLowerCase().includes('visibilidad')) return 'objective-visibilidad';
-                    if (objective.toLowerCase().includes('eficiencia')) return 'objective-eficiencia';
-                    return 'border-gray-300';
-                };
-
-                container.innerHTML = `
-                    <div class="p-4 bg-pacific-cyan-light rounded-lg border-l-4 border-cobalt-blue">
-                        <div class="flex flex-wrap justify-between items-center mb-3 gap-4">
-                            <p class="font-semibold text-cobalt-blue">Proyectos de ${collaborator.name}:</p>
-                            <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-700">
-                                <span class="font-semibold">Roles:</span>
-                                <span class="flex items-center"><span class="role-badge role-L text-xs">L</span>Líder</span>
-                                <span class="flex items-center"><span class="role-badge role-R text-xs">R</span>Responsable</span>
-                                <span class="flex items-center"><span class="role-badge role-A text-xs">A</span>Apoyo</span>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-700">
-                                <span class="font-semibold">Objetivos:</span>
-                                <span class="flex items-center"><span class="legend-dot" style="background-color: var(--objective-excelencia);"></span>Excelencia</span>
-                                <span class="flex items-center"><span class="legend-dot" style="background-color: var(--objective-visibilidad);"></span>Visibilidad</span>
-                                <span class="flex items-center"><span class="legend-dot" style="background-color: var(--objective-eficiencia);"></span>Eficiencia</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap">
-                            ${projectEntries.map(([code, role]) => {
-                                const project = projectsData.find(p => p.code === code);
-                                const objectiveClass = project ? getObjectiveClass(project.objective) : 'border-gray-300';
-                                const title = project ? project.title.split('(')[0].trim() : code; // Shorten title for button
-                                return `
-                                <div class="project-btn bg-white ${objectiveClass}" data-code="${code}">
-                                    <span class="role-badge role-${role}">${role}</span>
-                                    <span>${title}</span>
-                                </div>
-                                `;
-                            }).join('')}
-                        </div>
-                    </div>
-                `;
-            }
-
             function showModal(project) {
-                 const leaders = projectLeaders[project.code];
-                 const leaderText = leaders && leaders.length > 0 ? leaders.join(', ') : '<span class="text-red-600 font-semibold">Temporalmente sin líder asignado</span>';
-
+                const team = projectTeams.find(p => p.code === project.code).team;
+                const leadersHtml = team.L.length > 0 ? team.L.join(', ') : '<span class="text-red-600 font-semibold">Temporalmente sin líder asignado</span>';
+                
                 modalBody.innerHTML = `
                     <div class="border-b-2 border-gray-200 pb-4 mb-4">
                         <h3 class="text-2xl font-bold text-cobalt-blue">${project.title}</h3>
                         <p class="text-sm text-gray-500">Código: ${project.code}</p>
                     </div>
                     <div class="space-y-4 text-gray-700">
-                        <div><strong class="font-semibold text-gray-800">Líder(es) del Proyecto:</strong> ${leaderText}</div>
+                        <div><strong class="font-semibold text-gray-800">Líder(es) del Proyecto:</strong> ${leadersHtml}</div>
                         <div><strong class="font-semibold text-gray-800">Estado:</strong> <span class="inline-flex items-center"><span class="status-dot ${getStatusClass(project.status)}"></span>${project.status}</span></div>
                         <div><strong class="font-semibold text-gray-800">Métrica de Avance:</strong> ${project.metric}</div>
                         <div><strong class="font-semibold text-gray-800">Indicador de Éxito:</strong> ${project.indicator}</div>
@@ -451,16 +367,6 @@ Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x
                 if (status.toLowerCase().includes('sin iniciar')) return 'status-sin-iniciar';
                 if (status.toLowerCase().includes('completo')) return 'status-completo';
                 return 'bg-gray-400';
-            }
-
-            function getAreaColor(area) {
-                // Simple hash function to assign a color based on area name
-                let hash = 0;
-                for (let i = 0; i < area.length; i++) {
-                    hash = area.charCodeAt(i) + ((hash << 5) - hash);
-                }
-                const colors = ['bg-cobalt-blue', 'bg-pacific-cyan', 'bg-vivid-sky-blue'];
-                return colors[Math.abs(hash) % colors.length];
             }
         });
     </script>
