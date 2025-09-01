@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz de Colaboración Institucional - Unitec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8; /* A very light grey/blue */
+        }
+        .unitec-bg-blue {
+            background-color: #06065C;
+        }
+        .unitec-text-blue {
+            color: #06065C;
+        }
+        .area-card, .capability-card {
+            transition: all 0.3s ease-in-out;
+        }
+        .area-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        .capability-card.faded {
+            opacity: 0.2;
+            transform: scale(0.95);
+        }
+        .capability-card.highlight {
+            opacity: 1;
+            transform: scale(1.05);
+            border-color: #03AED2; /* Pacific Cyan */
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Header -->
+    <header class="unitec-bg-blue text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
+                    <path d="M50 0L100 50L50 100L0 50L50 0Z" fill="#47C8FD"/>
+                    <path d="M50 10L89.5 50L50 90L10.5 50L50 10Z" fill="white"/>
+                    <path d="M50 20L79 50L50 80L21 50L50 20Z" fill="#03AED2"/>
+                </svg>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold">Matriz de Colaboración Institucional</h1>
+                    <p class="text-sm text-gray-300 hidden sm:block">Apoyo al Desarrollo de Capacidades</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 md:p-10">
+        
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold unitec-text-blue">¿Quién Apoya Cada Capacidad?</h2>
+            <p class="mt-3 text-gray-600 max-w-4xl mx-auto">El desarrollo de un graduado Unitec es un esfuerzo colaborativo. Pasa el cursor sobre cada área institucional para ver al instante las capacidades que ayuda a formar. La Academia es el pilar fundamental que apoya a todas.</p>
+        </div>
+
+        <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+            <!-- Left Column: Areas -->
+            <div class="lg:col-span-1">
+                <h3 class="text-2xl font-bold unitec-text-blue mb-6 text-center lg:text-left">Áreas de Apoyo</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4">
+                    
+                    <div id="area-academia" class="area-card bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center text-center">
+                        <svg class="h-8 w-8 mb-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"/></svg>
+                        <h4 class="font-semibold text-sm">Academia</h4>
+                    </div>
+                    <div id="area-vida" class="area-card bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center text-center">
+                        <svg class="h-8 w-8 mb-2 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h4 class="font-semibold text-sm">Vida Estudiantil</h4>
+                    </div>
+                    <div id="area-bienestar" class="area-card bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center text-center">
+                        <svg class="h-8 w-8 mb-2 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                        <h4 class="font-semibold text-sm">Bienestar Estudiantil</h4>
+                    </div>
+                    <div id="area-rse" class="area-card bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center text-center">
+                        <svg class="h-8 w-8 mb-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.737 11l-.546 9h10.618l-.546-9M12 4v7m-4-4l4 4 4-4"/></svg>
+                        <h4 class="font-semibold text-sm">RSE</h4>
+                    </div>
+                    <div id="area-hub" class="area-card bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center text-center">
+                        <svg class="h-8 w-8 mb-2 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        <h4 class="font-semibold text-sm">Hub Emprendimiento</h4>
+                    </div>
+                    <div id="area-fablab" class="area-card bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center text-center">
+                        <svg class="h-8 w-8 mb-2 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg>
+                        <h4 class="font-semibold text-sm">FabLab</h4>
+                    </div>
+                    <div id="area-internacional" class="area-card bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center text-center">
+                        <svg class="h-8 w-8 mb-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945M12 4a8 8 0 110 16 8 8 0 010-16z"/></svg>
+                        <h4 class="font-semibold text-sm">Internacional</h4>
+                    </div>
+                    <div id="area-vinculacion" class="area-card bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center text-center">
+                       <svg class="h-8 w-8 mb-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                        <h4 class="font-semibold text-sm">Vinculación Empresarial</h4>
+                    </div>
+                    <div id="area-investigacion" class="area-card bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center text-center col-span-2 md:col-span-1 lg:col-span-2">
+                        <svg class="h-8 w-8 mb-2 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <h4 class="font-semibold text-sm">Investigación</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Capabilities -->
+            <div class="lg:col-span-2 mt-12 lg:mt-0">
+                <h3 class="text-2xl font-bold unitec-text-blue mb-6 text-center lg:text-left">Capacidades del Graduado</h3>
+                <div id="capabilities-container" class="space-y-4">
+                    <div id="cap-lider" class="capability-card bg-white p-4 rounded-lg shadow-md border-l-4 border-gray-200">
+                        <h4 class="font-bold text-lg unitec-text-blue">El líder con propósito</h4>
+                    </div>
+                    <div id="cap-ciudadano" class="capability-card bg-white p-4 rounded-lg shadow-md border-l-4 border-gray-200">
+                        <h4 class="font-bold text-lg unitec-text-blue">El ciudadano responsable</h4>
+                    </div>
+                    <div id="cap-solucionador" class="capability-card bg-white p-4 rounded-lg shadow-md border-l-4 border-gray-200">
+                        <h4 class="font-bold text-lg unitec-text-blue">El solucionador de problemas empático</h4>
+                    </div>
+                    <div id="cap-innovador" class="capability-card bg-white p-4 rounded-lg shadow-md border-l-4 border-gray-200">
+                        <h4 class="font-bold text-lg unitec-text-blue">El innovador creativo</h4>
+                    </div>
+                    <div id="cap-colaborador" class="capability-card bg-white p-4 rounded-lg shadow-md border-l-4 border-gray-200">
+                        <h4 class="font-bold text-lg unitec-text-blue">El colaborador constructivo</h4>
+                    </div>
+                    <div id="cap-comunicador" class="capability-card bg-white p-4 rounded-lg shadow-md border-l-4 border-gray-200">
+                        <h4 class="font-bold text-lg unitec-text-blue">El comunicador efectivo</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const relationships = {
+            academia: ['lider', 'ciudadano', 'solucionador', 'innovador', 'colaborador', 'comunicador'],
+            vida: ['lider', 'ciudadano'],
+            bienestar: ['lider', 'solucionador'],
+            rse: ['ciudadano', 'solucionador', 'comunicador'],
+            hub: ['innovador'],
+            fablab: ['innovador'],
+            internacional: ['colaborador'],
+            vinculacion: ['colaborador'],
+            investigacion: ['comunicador']
+        };
+
+        const capabilitiesContainer = document.getElementById('capabilities-container');
+        const allCapabilities = capabilitiesContainer.querySelectorAll('.capability-card');
+
+        document.querySelectorAll('.area-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const areaId = card.id.split('-')[1]; // e.g., 'vida' from 'area-vida'
+                const supportedCapabilities = relationships[areaId] || [];
+
+                allCapabilities.forEach(capCard => {
+                    const capId = capCard.id.split('-')[1]; // e.g., 'lider' from 'cap-lider'
+                    if (supportedCapabilities.includes(capId)) {
+                        capCard.classList.remove('faded');
+                        capCard.classList.add('highlight');
+                    } else {
+                        capCard.classList.add('faded');
+                        capCard.classList.remove('highlight');
+                    }
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                allCapabilities.forEach(capCard => {
+                    capCard.classList.remove('faded', 'highlight');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
