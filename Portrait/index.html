@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retrato Interactivo del Graduado - Unitec</title>
+    <title>Modelo Educativo Unitec: El Retrato del Egresado</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f4f8fa;
+            background-color: #ffffff;
         }
         .unitec-bg-blue {
             background-color: #06065C;
@@ -19,26 +19,25 @@
         .unitec-text-blue {
             color: #06065C;
         }
-        .summary-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
+        .unitec-text-cyan {
+            color: #03AED2;
         }
-        .summary-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        .gradient-text {
+            background: linear-gradient(90deg, #03AED2, #06065C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .modal {
-            transition: opacity 0.3s ease-in-out;
-        }
-        .modal-content {
-            transition: transform 0.3s ease-in-out;
+        .hero-bg {
+            background-image: linear-gradient(rgba(6, 6, 92, 0.85), rgba(6, 6, 92, 0.85)), url('https://placehold.co/1200x800/e2e8f0/e2e8f0?text=.');
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased text-gray-700">
 
     <!-- Header -->
-    <header class="unitec-bg-blue text-white shadow-lg sticky top-0 z-40">
+    <header class="unitec-bg-blue text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
                 <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
@@ -46,328 +45,105 @@
                     <path d="M50 10L89.5 50L50 90L10.5 50L50 10Z" fill="white"/>
                     <path d="M50 20L79 50L50 80L21 50L50 20Z" fill="#03AED2"/>
                 </svg>
-                <div>
-                    <h1 class="text-xl md:text-2xl font-bold">Retrato Interactivo del Graduado</h1>
-                    <p class="text-sm text-gray-300 hidden sm:block">El Nuevo Modelo Educativo de Unitec</p>
-                </div>
+                <h1 class="text-xl md:text-2xl font-bold tracking-tight">Modelo Educativo Unitec</h1>
             </div>
         </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="hero-bg text-white">
+        <div class="container mx-auto px-6 py-20 md:py-32 text-center">
+            <h2 class="text-4xl md:text-6xl font-extrabold tracking-tighter">Formando Egresados con Carácter y Propósito</h2>
+            <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-200">
+                Presentamos la evolución de nuestro modelo educativo: una visión integral centrada en el "porqué" de cada estudiante y colaborador.
+            </p>
+        </div>
+    </section>
+    
     <!-- Main Content -->
-    <main class="container mx-auto p-6 md:p-10">
+    <main class="container mx-auto px-6 py-16 md:py-24">
         
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold unitec-text-blue">Las 6 Capacidades Fundamentales</h2>
-            <p class="mt-3 text-gray-600 max-w-3xl mx-auto">Haz clic en cada capacidad para descubrir cómo se desarrolla a lo largo de la carrera, integrando academia, proyectos y apoyo institucional.</p>
-        </div>
-
-        <!-- Capacities Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <!-- Card Trigger 1: Líder con Propósito -->
-            <div onclick="openModal('modal1')" class="summary-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center border-b-4 border-green-400 hover:border-green-500">
-                <div class="bg-green-100 p-3 rounded-full"><svg class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div>
-                <h3 class="text-xl font-bold unitec-text-blue mt-4">El Líder con Propósito</h3>
-                <p class="text-gray-500 text-sm mt-2">Actúa con integridad y resiliencia para servir a su comunidad.</p>
+        <!-- Introduction -->
+        <section class="max-w-4xl mx-auto">
+            <div class="text-center">
+                <p class="unitec-text-cyan font-semibold tracking-wide">MÁS ALLÁ DE LAS COMPETENCIAS</p>
+                <h3 class="mt-2 text-3xl md:text-4xl font-bold unitec-text-blue">El Retrato del Egresado Unitec</h3>
             </div>
+            <div class="mt-8 text-base md:text-lg text-gray-600 space-y-6 text-justify">
+                <p>
+                    En Unitec, entendemos que la educación superior debe ir más allá de la simple transmisión de conocimientos y habilidades. Como una evolución natural de nuestro exitoso modelo por competencias, presentamos el <strong>Retrato del Egresado</strong>. Este nuevo enfoque se centra en el desarrollo del <strong>carácter y el propósito</strong>, brindando un sentido de "porqué" (Why) tanto al estudiante en su formación como al colaborador en su misión educativa.
+                </p>
+                <p>
+                    Buscamos formar profesionales que no solo dominen su disciplina, sino que también sean líderes íntegros, ciudadanos comprometidos y solucionadores de problemas empáticos. Para lograrlo, hemos diseñado un ecosistema educativo donde todas las dimensiones de la universidad—desde la academia hasta la vida estudiantil y la vinculación empresarial—colaboran de manera holística e integrada.
+                </p>
+                <p class="font-semibold unitec-text-blue">
+                    El resultado final es un egresado con las herramientas para triunfar profesionalmente y con la claridad de propósito para transformar positivamente su entorno.
+                </p>
+            </div>
+        </section>
 
-             <!-- Card Trigger 2: Ciudadano Responsable -->
-            <div onclick="openModal('modal2')" class="summary-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center border-b-4 border-red-400 hover:border-red-500">
-                <div class="bg-red-100 p-3 rounded-full"><svg class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
-                <h3 class="text-xl font-bold unitec-text-blue mt-4">El Ciudadano Responsable</h3>
-                <p class="text-gray-500 text-sm mt-2">Transforma su entorno para sostener sistemas sociales y ecológicos saludables.</p>
+        <!-- Visual Divider with Icons -->
+        <section class="max-w-5xl mx-auto py-16">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
+                <!-- Icon 1 -->
+                <div class="flex flex-col items-center">
+                    <div class="bg-green-100 p-3 rounded-full"><svg class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div>
+                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Líder con Propósito</p>
+                </div>
+                 <!-- Icon 2 -->
+                 <div class="flex flex-col items-center">
+                    <div class="bg-red-100 p-3 rounded-full"><svg class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
+                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Ciudadano Responsable</p>
+                </div>
+                 <!-- Icon 3 -->
+                 <div class="flex flex-col items-center">
+                    <div class="bg-orange-100 p-3 rounded-full"><svg class="h-8 w-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg></div>
+                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Solucionador Empático</p>
+                </div>
+                 <!-- Icon 4 -->
+                 <div class="flex flex-col items-center">
+                    <div class="bg-sky-100 p-3 rounded-full"><svg class="h-8 w-8 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg></div>
+                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Innovador Creativo</p>
+                </div>
+                 <!-- Icon 5 -->
+                 <div class="flex flex-col items-center">
+                    <div class="bg-lime-100 p-3 rounded-full"><svg class="h-8 w-8 text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg></div>
+                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Colaborador Constructivo</p>
+                </div>
+                 <!-- Icon 6 -->
+                 <div class="flex flex-col items-center">
+                    <div class="bg-indigo-100 p-3 rounded-full"><svg class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-2.236 9.168-5.584C18.354 1.832 18 3.65 18 4.5v.5c0 2.623-1.42 4.904-3.5 6.168" /></svg></div>
+                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Comunicador Efectivo</p>
+                </div>
             </div>
+        </section>
 
-            <!-- Card Trigger 3: Solucionador de Problemas Empático -->
-            <div onclick="openModal('modal3')" class="summary-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center border-b-4 border-orange-400 hover:border-orange-500">
-                <div class="bg-orange-100 p-3 rounded-full"><svg class="h-8 w-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg></div>
-                <h3 class="text-xl font-bold unitec-text-blue mt-4">El Solucionador de Problemas Empático</h3>
-                <p class="text-gray-500 text-sm mt-2">Crea soluciones sostenibles combinando análisis crítico y empatía.</p>
-            </div>
-            
-            <!-- Card Trigger 4: Innovador Creativo -->
-            <div onclick="openModal('modal4')" class="summary-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center border-b-4 border-sky-400 hover:border-sky-500">
-                <div class="bg-sky-100 p-3 rounded-full"><svg class="h-8 w-8 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg></div>
-                <h3 class="text-xl font-bold unitec-text-blue mt-4">El Innovador Creativo</h3>
-                <p class="text-gray-500 text-sm mt-2">Aporta originalidad y espíritu emprendedor para resolver problemas.</p>
-            </div>
-
-            <!-- Card Trigger 5: Colaborador Constructivo -->
-            <div onclick="openModal('modal5')" class="summary-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center border-b-4 border-lime-400 hover:border-lime-500">
-                <div class="bg-lime-100 p-3 rounded-full"><svg class="h-8 w-8 text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg></div>
-                <h3 class="text-xl font-bold unitec-text-blue mt-4">El Colaborador Constructivo</h3>
-                <p class="text-gray-500 text-sm mt-2">Trabaja eficazmente en equipos diversos para alcanzar objetivos comunes.</p>
-            </div>
-
-            <!-- Card Trigger 6: Comunicador Efectivo -->
-            <div onclick="openModal('modal6')" class="summary-card bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center border-b-4 border-indigo-400 hover:border-indigo-500">
-                <div class="bg-indigo-100 p-3 rounded-full"><svg class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-2.236 9.168-5.584C18.354 1.832 18 3.65 18 4.5v.5c0 2.623-1.42 4.904-3.5 6.168" /></svg></div>
-                <h3 class="text-xl font-bold unitec-text-blue mt-4">El Comunicador Efectivo</h3>
-                <p class="text-gray-500 text-sm mt-2">Expresa ideas complejas de forma ética, estratégica y persuasiva.</p>
-            </div>
-        </div>
     </main>
 
-    <!-- Modals Container -->
-    <!-- Modal 1 -->
-    <div id="modal1" class="modal fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center p-4 z-50" onclick="closeModal('modal1')">
-        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95" onclick="event.stopPropagation()">
-            <div class="sticky top-0 bg-white p-5 border-b flex justify-between items-center">
-                <h2 class="text-2xl font-bold unitec-text-blue">El Líder con Propósito</h2>
-                <button onclick="closeModal('modal1')" class="text-gray-400 hover:text-gray-600">&times;</button>
-            </div>
-            <div class="p-6">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Comprensión Conceptual</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            <li>El propósito brinda dirección y resiliencia.</li>
-                            <li>La integridad es la alineación consistente de valores, decisiones y acciones.</li>
-                            <li>El liderazgo se basa en el servicio a los demás y la responsabilidad colectiva.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Capacidades Clave</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            <li>Articular y perseguir un propósito personal y profesional.</li>
-                            <li>Demostrar adaptabilidad y resiliencia ante los desafíos.</li>
-                            <li>Tomar decisiones éticas que prioricen el bien común.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mt-6 bg-gray-50 p-4 rounded-lg">
-                    <h4 class="font-bold text-lg mb-3 unitec-text-blue">Ruta de Desarrollo</h4>
-                    <p class="text-sm"><strong class="font-semibold">Proyecto Culminante (3er Semestre):</strong> Diseño de un Marco Estratégico de Bienestar y Propósito.</p>
-                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm">
-                        <div><strong class="font-semibold">Clases Relevantes:</strong> Introducción a la Ingeniería, Matemáticas.</div>
-                        <div><strong class="font-semibold">Áreas de Apoyo:</strong> Acompañamiento y Vida Estudiantil.</div>
-                    </div>
-                </div>
+    <!-- Call to Action / Footer Links -->
+    <footer class="bg-gray-50">
+        <div class="container mx-auto px-6 py-16 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold unitec-text-blue">Explora el Nuevo Modelo Educativo</h3>
+            <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                Descubre en detalle cómo cada pieza del ecosistema Unitec contribuye a formar a los líderes que Honduras necesita.
+            </p>
+            <div class="mt-10 flex flex-col md:flex-row justify-center items-center gap-4">
+                <!-- NOTE: Replace '#' with the actual file paths when deploying -->
+                <a href="#" class="w-full md:w-auto bg-white hover:unitec-bg-blue hover:text-white text-unitec-blue font-bold py-3 px-6 rounded-lg shadow-md border-2 border-unitec-blue transition-all duration-300">
+                    Ver el Retrato del Egresado
+                </a>
+                <a href="#" class="w-full md:w-auto bg-white hover:unitec-bg-blue hover:text-white text-unitec-blue font-bold py-3 px-6 rounded-lg shadow-md border-2 border-unitec-blue transition-all duration-300">
+                    Explorar Áreas de Apoyo
+                </a>
+                <a href="#" class="w-full md:w-auto unitec-bg-blue hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-300">
+                    Conocer el Roadmap del Estudiante
+                </a>
             </div>
         </div>
-    </div>
-    
-    <!-- Modal 2 -->
-    <div id="modal2" class="modal fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center p-4 z-50" onclick="closeModal('modal2')">
-        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95" onclick="event.stopPropagation()">
-            <div class="sticky top-0 bg-white p-5 border-b flex justify-between items-center">
-                <h2 class="text-2xl font-bold unitec-text-blue">El Ciudadano Responsable</h2>
-                <button onclick="closeModal('modal2')" class="text-gray-400 hover:text-gray-600">&times;</button>
-            </div>
-             <div class="p-6">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Comprensión Conceptual</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            <li>La ciudadanía implica tanto derechos como responsabilidades.</li>
-                            <li>El desarrollo sostenible requiere un equilibrio entre sistemas sociales, económicos y ambientales.</li>
-                             <li>Las acciones individuales éticas y cívicas pueden generar un cambio significativo.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Capacidades Clave</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            <li>Demostrar responsabilidad cívica a través de la participación comunitaria.</li>
-                            <li>Tomar decisiones que promuevan activamente la sostenibilidad y la equidad.</li>
-                            <li>Contribuir a la salud de los ecosistemas y sistemas sociales.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mt-6 bg-gray-50 p-4 rounded-lg">
-                    <h4 class="font-bold text-lg mb-3 unitec-text-blue">Ruta de Desarrollo</h4>
-                    <p class="text-sm"><strong class="font-semibold">Proyecto Culminante (4to Semestre):</strong> Diseño e implementación de una iniciativa de compromiso cívico.</p>
-                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm">
-                        <div><strong class="font-semibold">Clases Relevantes:</strong> Sociología, Filosofía, Ética y Ciudadanía.</div>
-                        <div><strong class="font-semibold">Áreas de Apoyo:</strong> Vida Estudiantil, Responsabilidad Social y Empresarial.</div>
-                    </div>
-                </div>
-            </div>
+        <div class="unitec-bg-blue text-center p-4 text-gray-300 text-sm">
+            <p>© 2025 Unitec. Transformando la educación superior.</p>
         </div>
-    </div>
-
-     <!-- Modal 3 -->
-    <div id="modal3" class="modal fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center p-4 z-50" onclick="closeModal('modal3')">
-        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95" onclick="event.stopPropagation()">
-            <div class="sticky top-0 bg-white p-5 border-b flex justify-between items-center">
-                <h2 class="text-2xl font-bold unitec-text-blue">El Solucionador de Problemas Empático</h2>
-                <button onclick="closeModal('modal3')" class="text-gray-400 hover:text-gray-600">&times;</button>
-            </div>
-             <div class="p-6">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Comprensión Conceptual</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            <li>Los problemas complejos están interconectados y deben abordarse de forma sistémica.</li>
-                             <li>La empatía fortalece las soluciones, asegurando que sean inclusivas y equitativas.</li>
-                            <li>Las soluciones sostenibles equilibran las necesidades inmediatas con los impactos a largo plazo.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Capacidades Clave</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            <li>Analizar problemas críticamente, identificando causas raíz.</li>
-                            <li>Escuchar activamente a diversas perspectivas en la toma de decisiones.</li>
-                            <li>Diseñar soluciones que atiendan necesidades tanto humanas como ambientales.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mt-6 bg-gray-50 p-4 rounded-lg">
-                    <h4 class="font-bold text-lg mb-3 unitec-text-blue">Ruta de Desarrollo</h4>
-                    <p class="text-sm"><strong class="font-semibold">Proyecto Culminante (5to Semestre):</strong> Análisis y diseño de una solución a un reto social o ambiental.</p>
-                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm">
-                        <div><strong class="font-semibold">Clases Relevantes:</strong> Clases de carrera (2do y 3er año), Historia de Honduras.</div>
-                        <div><strong class="font-semibold">Áreas de Apoyo:</strong> Responsabilidad Social y Empresarial.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 4 -->
-    <div id="modal4" class="modal fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center p-4 z-50" onclick="closeModal('modal4')">
-        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95" onclick="event.stopPropagation()">
-            <div class="sticky top-0 bg-white p-5 border-b flex justify-between items-center">
-                <h2 class="text-2xl font-bold unitec-text-blue">El Innovador Creativo</h2>
-                <button onclick="closeModal('modal4')" class="text-gray-400 hover:text-gray-600">&times;</button>
-            </div>
-             <div class="p-6">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Comprensión Conceptual</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            <li>La innovación se construye sobre la curiosidad, la imaginación y la toma de riesgos.</li>
-                            <li>La creatividad se expresa tanto en ideas como en resultados tangibles.</li>
-                             <li>El espíritu emprendedor transforma oportunidades en soluciones de valor.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Capacidades Clave</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            <li>Generar ideas novedosas y aplicarlas en contextos prácticos.</li>
-                            <li>Experimentar, tomar riesgos calculados y aprender de los contratiempos.</li>
-                            <li>Diseñar e implementar soluciones emprendedoras a desafíos del mundo real.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mt-6 bg-gray-50 p-4 rounded-lg">
-                    <h4 class="font-bold text-lg mb-3 unitec-text-blue">Ruta de Desarrollo</h4>
-                    <p class="text-sm"><strong class="font-semibold">Proyecto Culminante (6to Semestre):</strong> Desarrollo y "pitch" de una innovación original.</p>
-                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm">
-                        <div><strong class="font-semibold">Clases Relevantes:</strong> Generación de Empresas I & II, Gestión de la Innovación, Administración.</div>
-                        <div><strong class="font-semibold">Áreas de Apoyo:</strong> Hub de Emprendimiento, FabLab.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 5 -->
-    <div id="modal5" class="modal fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center p-4 z-50" onclick="closeModal('modal5')">
-        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95" onclick="event.stopPropagation()">
-            <div class="sticky top-0 bg-white p-5 border-b flex justify-between items-center">
-                <h2 class="text-2xl font-bold unitec-text-blue">El Colaborador Constructivo</h2>
-                <button onclick="closeModal('modal5')" class="text-gray-400 hover:text-gray-600">&times;</button>
-            </div>
-            <div class="p-6">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Comprensión Conceptual</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                             <li>La colaboración efectiva requiere valorar la diversidad de perspectivas y fortalezas.</li>
-                            <li>Las relaciones respetuosas construyen confianza y amplifican el impacto.</li>
-                            <li>Los objetivos compartidos y la rendición de cuentas conducen a resultados significativos.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Capacidades Clave</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            <li>Participar productivamente en equipos interdisciplinarios y multiculturales.</li>
-                            <li>Comunicarse abiertamente y resolver conflictos de manera constructiva.</li>
-                            <li>Co-crear soluciones que superen las contribuciones individuales.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mt-6 bg-gray-50 p-4 rounded-lg">
-                    <h4 class="font-bold text-lg mb-3 unitec-text-blue">Ruta de Desarrollo</h4>
-                    <p class="text-sm"><strong class="font-semibold">Proyecto Culminante (7mo Semestre):</strong> Diseño y facilitación de un proyecto interdisciplinario.</p>
-                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm">
-                        <div><strong class="font-semibold">Clases Relevantes:</strong> Clases de carrera de 4to año, Proyecto de Diseño.</div>
-                        <div><strong class="font-semibold">Áreas de Apoyo:</strong> Vinculación Empresarial, Internacionalización.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 6 -->
-    <div id="modal6" class="modal fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center p-4 z-50" onclick="closeModal('modal6')">
-        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95" onclick="event.stopPropagation()">
-            <div class="sticky top-0 bg-white p-5 border-b flex justify-between items-center">
-                <h2 class="text-2xl font-bold unitec-text-blue">El Comunicador Efectivo</h2>
-                <button onclick="closeModal('modal6')" class="text-gray-400 hover:text-gray-600">&times;</button>
-            </div>
-            <div class="p-6">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Comprensión Conceptual</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            <li>La comunicación es esencial para la colaboración, el liderazgo y el impacto.</li>
-                            <li>La comunicación ética respeta la verdad, el contexto y la audiencia.</li>
-                            <li>Las herramientas digitales amplifican tanto los riesgos como el poder de la comunicación.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-lg mb-2 unitec-text-blue">Capacidades Clave</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            <li>Comunicar persuasivamente a través de diferentes medios y audiencias.</li>
-                            <li>Escuchar profundamente y adaptar los mensajes al contexto.</li>
-                            <li>Usar la comunicación para abogar por la equidad, la justicia y la sostenibilidad.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mt-6 bg-gray-50 p-4 rounded-lg">
-                    <h4 class="font-bold text-lg mb-3 unitec-text-blue">Ruta de Desarrollo</h4>
-                    <p class="text-sm"><strong class="font-semibold">Proyecto Culminante (8vo Semestre):</strong> Diseño y entrega de una campaña pública de comunicación.</p>
-                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm">
-                        <div><strong class="font-semibold">Clases Relevantes:</strong> Comunicación Oral y Escrita, Metodología de Investigación, Proyecto de Graduación.</div>
-                        <div><strong class="font-semibold">Áreas de Apoyo:</strong> Dirección de Investigación, Responsabilidad Social.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Footer -->
-    <footer class="text-center p-6 mt-8 text-gray-500 text-sm">
-        <p>© 2025 Unitec. Propuesta visual para el Nuevo Modelo Educativo.</p>
     </footer>
-
-    <script>
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modal.querySelector('.modal-content').classList.remove('scale-95');
-            }, 10);
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.add('opacity-0');
-            modal.querySelector('.modal-content').classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                document.body.style.overflow = 'auto';
-            }, 300);
-        }
-    </script>
 
 </body>
 </html>
-
