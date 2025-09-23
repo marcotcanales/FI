@@ -107,7 +107,17 @@
                 </div>
                 <div class="md:col-span-2">
                     <div class="chart-container">
-                        <canvas id="anualChart"></canvas>
+                        <canvas id="anualIndispensableChart"></canvas>
+                    </div>
+                </div>
+                 <div class="md:col-span-2">
+                    <div class="chart-container">
+                        <canvas id="anualDeseableChart"></canvas>
+                    </div>
+                </div>
+                <div class="md:col-span-2">
+                    <div class="chart-container">
+                        <canvas id="anualTotalChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -189,12 +199,20 @@
                 type: 'bar',
                 data: {
                     labels: ['Tegucigalpa (TGU)', 'San Pedro Sula (SPS)'],
-                    datasets: [{
-                        label: 'Inversión Total (L)',
-                        data: [33553441, 33605836],
-                        backgroundColor: [CHART_COLORS.pacific, CHART_COLORS.cobalt],
-                        borderRadius: 5,
-                    }]
+                    datasets: [
+                        {
+                            label: 'Indispensable',
+                            data: [19663301, 15562194],
+                            backgroundColor: CHART_COLORS.cobalt,
+                            borderRadius: 5,
+                        },
+                        {
+                            label: 'Deseable',
+                            data: [13890140, 18043643],
+                            backgroundColor: CHART_COLORS.pacific,
+                            borderRadius: 5,
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
@@ -202,33 +220,35 @@
                     scales: {
                         y: {
                             beginAtZero: true,
+                            stacked: true,
                             ticks: {
                                 callback: value => `${(value / 1000000).toFixed(0)} M`
                             },
                             grid: { color: GRID_COLOR }
                         },
                         x: { 
+                            stacked: true,
                             grid: { display: false },
                             ticks: { font: { size: 14 } }
                         }
                     },
                     plugins: {
                         title: { display: true, text: 'Inversión Total por Campus', font: { size: 16 }, padding: { bottom: 20 }},
-                        legend: { display: false },
+                        legend: { position: 'top' },
                         tooltip: { callbacks: { title: tooltipTitleCallback } }
                     }
                 }
             });
 
-            new Chart(document.getElementById('anualChart'), {
+            new Chart(document.getElementById('anualIndispensableChart'), {
                 type: 'line',
                 data: {
                     labels: ['2026', '2027', '2028', '2029', '2030'],
                     datasets: [{
                         label: 'Inversión Indispensable (L)',
                         data: [11809212, 8945293, 7628230, 4887759, 1955000],
-                        borderColor: CHART_COLORS.pacific,
-                        backgroundColor: 'rgba(3, 174, 210, 0.1)',
+                        borderColor: CHART_COLORS.cobalt,
+                        backgroundColor: 'rgba(15, 73, 134, 0.1)',
                         fill: true,
                         tension: 0.3,
                         pointBackgroundColor: CHART_COLORS.cobalt,
@@ -255,9 +275,80 @@
                     }
                 }
             });
+            
+            new Chart(document.getElementById('anualDeseableChart'), {
+                type: 'line',
+                data: {
+                    labels: ['2026', '2027', '2028', '2029', '2030'],
+                    datasets: [{
+                        label: 'Inversión Deseable (L)',
+                        data: [7080947, 4410419, 7173124, 4484293, 8785000],
+                        borderColor: CHART_COLORS.pacific,
+                        backgroundColor: 'rgba(3, 174, 210, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: CHART_COLORS.pacific,
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: value => `${(value / 1000000).toFixed(1)} M`
+                            },
+                            grid: { color: GRID_COLOR }
+                        },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: {
+                        title: { display: true, text: 'Proyección de Inversión Deseable Anual', font: { size: 16 }, padding: { bottom: 20 }},
+                        legend: { display: false },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('anualTotalChart'), {
+                type: 'line',
+                data: {
+                    labels: ['2026', '2027', '2028', '2029', '2030'],
+                    datasets: [{
+                        label: 'Inversión Total (L)',
+                        data: [18890159, 13355712, 14801354, 9372052, 10740000],
+                        borderColor: CHART_COLORS.federal,
+                        backgroundColor: 'rgba(6, 6, 92, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: CHART_COLORS.federal,
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: value => `${(value / 1000000).toFixed(1)} M`
+                            },
+                            grid: { color: GRID_COLOR }
+                        },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: {
+                        title: { display: true, text: 'Proyección de Inversión Total Anual', font: { size: 16 }, padding: { bottom: 20 }},
+                        legend: { display: false },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
         });
     </script>
 </body>
 </html>
-
 
