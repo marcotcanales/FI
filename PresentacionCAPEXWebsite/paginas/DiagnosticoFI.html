@@ -27,10 +27,10 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .info-card {
+        .info-card, .gallery-card {
             display: none;
         }
-        .info-card.active {
+        .info-card.active, .gallery-card.active {
             display: block;
             animation: fadeIn 0.5s ease-in-out;
         }
@@ -118,7 +118,7 @@
              </div>
         </section>
 
-        <section id="diagnostico-detallado">
+        <section id="diagnostico-detallado" class="mb-12">
             <h2 class="text-2xl md:text-3xl font-bold federal-blue-text mb-8 text-center">Diagnóstico Detallado por Programa</h2>
             <div id="tabs-container" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
                 <button data-target="sistemas" class="tab-button active bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Sistemas</button>
@@ -206,6 +206,98 @@
                 </div>
             </div>
         </section>
+        
+        <section id="galeria-imagenes" class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold federal-blue-text mb-8 text-center">Galería de Espacios Especializados</h2>
+             <div id="gallery-tabs-container" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                <button data-target="gallery-indsps" class="tab-button active bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Ing Industrial SPS</button>
+                <button data-target="gallery-indtgu" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Ing Industrial TGU</button>
+                <button data-target="gallery-civsps" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Ing Civil SPS</button>
+                <button data-target="gallery-civtgu" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Ing Civil TGU</button>
+                <button data-target="gallery-mecsps" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Ing Mecatrónica SPS</button>
+                <button data-target="gallery-bmdtgu" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Ing Biomédica TGU</button>
+                <button data-target="gallery-enetgu" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">Ing Energia TGU</button>
+                <button data-target="gallery-ccmm" class="tab-button bg-white text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md">CCyMM</button>
+            </div>
+            
+            <div id="gallery-container" class="bg-white rounded-lg shadow-xl p-6 md:p-8 min-h-[400px]">
+                <div id="gallery-indsps" class="gallery-card active">
+                     <div class="flex flex-wrap gap-4 justify-center">
+                        <img src="jpg/INDSPS_1.jpg" alt="Ingeniería Industrial SPS 1" class="rounded-lg shadow-md max-h-80 object-contain">
+                        <img src="jpg/INDSPS_2.jpg" alt="Ingeniería Industrial SPS 2" class="rounded-lg shadow-md max-h-80 object-contain">
+                        <img src="jpg/INDSPS_3.jpg" alt="Ingeniería Industrial SPS 3" class="rounded-lg shadow-md max-h-80 object-contain">
+                    </div>
+                </div>
+                <div id="gallery-indtgu" class="gallery-card">
+                     <div class="flex flex-wrap gap-4 justify-center">
+                        <img src="jpg/INDTGU_1.jpg" alt="Ingeniería Industrial TGU 1" class="rounded-lg shadow-md max-h-80 object-contain">
+                        <img src="jpg/INDTGU_2.jpg" alt="Ingeniería Industrial TGU 2" class="rounded-lg shadow-md max-h-80 object-contain">
+                        <img src="jpg/INDTGU_3.jpg" alt="Ingeniería Industrial TGU 3" class="rounded-lg shadow-md max-h-80 object-contain">
+                        <img src="jpg/INDTGU_4.jpg" alt="Ingeniería Industrial TGU 4" class="rounded-lg shadow-md max-h-80 object-contain">
+                    </div>
+                </div>
+                <div id="gallery-civsps" class="gallery-card">
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <img src="jpg/CIVSPS_1.jpg" alt="Ingeniería Civil SPS 1" class="rounded-lg shadow-md max-h-64 object-contain">
+                        <img src="jpg/CIVSPS_2.jpg" alt="Ingeniería Civil SPS 2" class="rounded-lg shadow-md max-h-64 object-contain">
+                        <img src="jpg/CIVSPS_3.jpg" alt="Ingeniería Civil SPS 3" class="rounded-lg shadow-md max-h-64 object-contain">
+                        <img src="jpg/CIVSPS_4.jpg" alt="Ingeniería Civil SPS 4" class="rounded-lg shadow-md max-h-64 object-contain">
+                        <img src="jpg/CIVSPS_5.jpg" alt="Ingeniería Civil SPS 5" class="rounded-lg shadow-md max-h-64 object-contain">
+                        <img src="jpg/CIVSPS_6.jpg" alt="Ingeniería Civil SPS 6" class="rounded-lg shadow-md max-h-96 object-contain">
+                        <img src="jpg/CIVSPS_7.jpg" alt="Ingeniería Civil SPS 7" class="rounded-lg shadow-md max-h-96 object-contain">
+                    </div>
+                </div>
+                <div id="gallery-civtgu" class="gallery-card">
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <img src="jpg/CIVTGU_1.jpg" alt="Ingeniería Civil TGU 1" class="rounded-lg shadow-md max-h-72 object-contain">
+                        <img src="jpg/CIVTGU_2.jpg" alt="Ingeniería Civil TGU 2" class="rounded-lg shadow-md max-h-72 object-contain">
+                        <img src="jpg/CIVTGU_3.jpg" alt="Ingeniería Civil TGU 3" class="rounded-lg shadow-md max-h-72 object-contain">
+                        <img src="jpg/CIVTGU_4.jpg" alt="Ingeniería Civil TGU 4" class="rounded-lg shadow-md max-h-72 object-contain">
+                        <img src="jpg/CIVTGU_5.jpg" alt="Ingeniería Civil TGU 5" class="rounded-lg shadow-md max-h-72 object-contain">
+                        <img src="jpg/CIVTGU_6.jpg" alt="Ingeniería Civil TGU 6" class="rounded-lg shadow-md max-h-72 object-contain">
+                        <img src="jpg/CIVTGU_7.jpg" alt="Ingeniería Civil TGU 7" class="rounded-lg shadow-md max-h-96 object-contain">
+                    </div>
+                </div>
+                <div id="gallery-mecsps" class="gallery-card">
+                     <div class="flex flex-wrap gap-4 justify-center items-center">
+                        <img src="jpg/MECSPS_1.jpg" alt="Ingeniería Mecatrónica SPS 1" class="rounded-lg shadow-md max-h-72 object-contain">
+                        <img src="jpg/MECSPS_2.jpg" alt="Ingeniería Mecatrónica SPS 2" class="rounded-lg shadow-md max-h-72 object-contain">
+                        <img src="jpg/MECSPS_3.jpg" alt="Ingeniería Mecatrónica SPS 3" class="rounded-lg shadow-md max-h-72 object-contain">
+                        <img src="jpg/MECSPS_4.jpg" alt="Ingeniería Mecatrónica SPS 4" class="rounded-lg shadow-md max-h-72 object-contain">
+                        <img src="jpg/MECSPS_5.jpg" alt="Ingeniería Mecatrónica SPS 5" class="rounded-lg shadow-md max-h-96 object-contain w-full">
+                    </div>
+                </div>
+                <div id="gallery-bmdtgu" class="gallery-card">
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <img src="jpg/BMDTGU_1.jpg" alt="Ingeniería Biomédica TGU 1" class="rounded-lg shadow-md max-h-80 object-contain">
+                        <img src="jpg/BMDTGU_2.jpg" alt="Ingeniería Biomédica TGU 2" class="rounded-lg shadow-md max-h-80 object-contain">
+                        <img src="jpg/BMDTGU_3.jpg" alt="Ingeniería Biomédica TGU 3" class="rounded-lg shadow-md max-h-96 object-contain">
+                        <img src="jpg/BMDTGU_4.jpg" alt="Ingeniería Biomédica TGU 4" class="rounded-lg shadow-md max-h-96 object-contain">
+                    </div>
+                </div>
+                 <div id="gallery-enetgu" class="gallery-card">
+                    <div class="flex flex-wrap gap-4 justify-center items-start">
+                        <img src="jpg/ENETGU_1.jpg" alt="Ingeniería Energia TGU 1" class="rounded-lg shadow-md max-h-96 object-contain">
+                        <div class="flex flex-col gap-4">
+                           <img src="jpg/ENETGU_2.jpg" alt="Ingeniería Energia TGU 2" class="rounded-lg shadow-md max-h-64 object-contain">
+                           <img src="jpg/ENETGU_3.jpg" alt="Ingeniería Energia TGU 3" class="rounded-lg shadow-md max-h-64 object-contain">
+                        </div>
+                    </div>
+                </div>
+                 <div id="gallery-ccmm" class="gallery-card">
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <img src="jpg/CCMMTGU_1.jpg" alt="Ciencias y Matemáticas 1" class="rounded-lg shadow-md max-h-48 object-contain">
+                        <img src="jpg/CCMMTGU_2.jpg" alt="Ciencias y Matemáticas 2" class="rounded-lg shadow-md max-h-48 object-contain">
+                        <img src="jpg/CCMMTGU_3.jpg" alt="Ciencias y Matemáticas 3" class="rounded-lg shadow-md max-h-64 object-contain">
+                        <img src="jpg/CCMMTGU_4.jpg" alt="Ciencias y Matemáticas 4" class="rounded-lg shadow-md max-h-48 object-contain">
+                        <img src="jpg/CCMMTGU_5.jpg" alt="Ciencias y Matemáticas 5" class="rounded-lg shadow-md max-h-48 object-contain">
+                        <img src="jpg/CCMMTGU_6.jpg" alt="Ciencias y Matemáticas 6" class="rounded-lg shadow-md max-h-64 object-contain">
+                        <img src="jpg/CCMMTGU_7.jpg" alt="Ciencias y Matemáticas 7" class="rounded-lg shadow-md max-h-64 object-contain">
+                        <img src="jpg/CCMMTGU_8.jpg" alt="Ciencias y Matemáticas 8" class="rounded-lg shadow-md max-h-96 object-contain">
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 
@@ -237,9 +329,32 @@
                 }
             });
         });
+        
+        const galleryTabsContainer = document.getElementById('gallery-tabs-container');
+        const galleryCards = document.querySelectorAll('.gallery-card');
+        const galleryButtons = galleryTabsContainer.querySelectorAll('.tab-button');
+
+        galleryTabsContainer.addEventListener('click', (event) => {
+            const clickedButton = event.target.closest('.tab-button');
+            if (!clickedButton) return;
+
+            const targetId = clickedButton.dataset.target;
+            
+            galleryButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            clickedButton.classList.add('active');
+
+            galleryCards.forEach(card => {
+                if (card.id === targetId) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+        });
     </script>
 
 </body>
 </html>
-
 
