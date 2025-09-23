@@ -91,11 +91,11 @@
         </section>
 
         <section id="inversion-resumen" class="mb-12 bg-white rounded-lg shadow-xl p-6 md:p-8">
-            <h2 class="text-2d md:text-3xl font-bold federal-blue-text mb-8 text-center">La Inversión en Perspectiva</h2>
+            <h2 class="text-2xl md:text-3xl font-bold federal-blue-text mb-8 text-center">La Inversión en Perspectiva</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div class="text-center">
                     <p class="text-lg federal-blue-text">Inversión Total Proyectada</p>
-                    <p class="text-6xl font-bold pacific-cyan-text my-2">L 64.9 M</p>
+                    <p class="text-6xl font-bold pacific-cyan-text my-2">L 67.2 M</p>
                     <div class="chart-container h-64">
                         <canvas id="distribucionChart"></canvas>
                     </div>
@@ -167,9 +167,9 @@
             new Chart(document.getElementById('distribucionChart'), {
                 type: 'doughnut',
                 data: {
-                    labels: ['Indispensable (60%)', 'Deseable / Innovación (40%)'],
+                    labels: ['Indispensable (58%)', 'Deseable / Innovación (42%)'],
                     datasets: [{
-                        data: [39025494, 25833783],
+                        data: [38949219, 28210058],
                         backgroundColor: [CHART_COLORS.cobalt, CHART_COLORS.pacific],
                         borderColor: '#ffffff',
                         borderWidth: 4,
@@ -191,7 +191,7 @@
                     labels: ['Tegucigalpa (TGU)', 'San Pedro Sula (SPS)'],
                     datasets: [{
                         label: 'Inversión Total (L)',
-                        data: [31253441, 33605836],
+                        data: [33553441, 33605836],
                         backgroundColor: [CHART_COLORS.pacific, CHART_COLORS.cobalt],
                         borderRadius: 5,
                     }]
@@ -226,7 +226,7 @@
                     labels: ['2026', '2027', '2028', '2029', '2030'],
                     datasets: [{
                         label: 'Inversión Indispensable (L)',
-                        data: [11609212, 8945293, 9628230, 4887759, 3955000],
+                        data: [11724212, 8754018, 9628230, 4887759, 3955000],
                         borderColor: CHART_COLORS.pacific,
                         backgroundColor: 'rgba(3, 174, 210, 0.1)',
                         fill: true,
