@@ -92,7 +92,7 @@
 
                 <div class="bg-white rounded-lg shadow-lg p-6">
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ingeniería en Biomédica</h3>
-                    <p class="federal-blue-text kpi-value font-bold">L 7,278,241</p>
+                    <p class="federal-blue-text kpi-value font-bold">L 7,178,241</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2030)</p>
                     <h4 class="font-semibold mb-2 federal-blue-text">Necesidades Clave:</h4>
                     <ul class="list-disc list-inside space-y-1 text-gray-700">
@@ -142,7 +142,7 @@
                 
                 <div class="bg-white rounded-lg shadow-lg p-6">
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ingeniería en Energía</h3>
-                    <p class="federal-blue-text kpi-value font-bold">L 2,300,000</p>
+                    <p class="federal-blue-text kpi-value font-bold">L 4,600,000</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2028)</p>
                     <h4 class="font-semibold mb-2 federal-blue-text">Necesidades Clave:</h4>
                     <ul class="list-disc list-inside space-y-1 text-gray-700">
@@ -153,7 +153,7 @@
                 </div>
 
                 <div class="bg-white rounded-lg shadow-lg p-6">
-                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ing. en Sistemas Computacionales</h3>
+                    <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ing. en Sistemas Computacionales</h3>
                     <p class="federal-blue-text kpi-value font-bold">L 1,876,000</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2029)</p>
                     <h4 class="font-semibold mb-2 federal-blue-text">Necesidades Clave:</h4>
@@ -166,7 +166,7 @@
 
                 <div class="bg-white rounded-lg shadow-lg p-6">
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">FabLab Unitec</h3>
-                    <p class="federal-blue-text kpi-value font-bold">L 1,466,000</p>
+                    <p class="federal-blue-text kpi-value font-bold">L 1,566,000</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2029)</p>
                     <h4 class="font-semibold mb-2 federal-blue-text">Necesidades Clave:</h4>
                     <ul class="list-disc list-inside space-y-1 text-gray-700">
@@ -198,100 +198,102 @@
     </footer>
 
     <script>
-        const FONT_COLOR = '#06065C';
-        const GRID_COLOR = '#e0e0e0';
-        const CHART_COLORS = {
-            cobalt: '#0F4986',
-            pacific: '#03AED2',
-            sky: '#47C8FD',
-            federal: '#06065C'
-        };
+        window.addEventListener('DOMContentLoaded', () => {
+            const FONT_COLOR = '#06065C';
+            const GRID_COLOR = '#e0e0e0';
+            const CHART_COLORS = {
+                cobalt: '#0F4986',
+                pacific: '#03AED2',
+                sky: '#47C8FD',
+                federal: '#06065C'
+            };
 
-        const tooltipTitleCallback = (tooltipItems) => {
-            const item = tooltipItems[0];
-            let label = item.chart.data.labels[item.dataIndex];
-            if (Array.isArray(label)) {
-                return label.join(' ');
-            }
-            return label;
-        };
-        
-        const processLabels = (labels) => {
-            return labels.map(label => {
-                if (label.length > 16) {
-                    const words = label.split(' ');
-                    const lines = [];
-                    let currentLine = '';
-                    words.forEach(word => {
-                        if ((currentLine + word).length > 16) {
-                            lines.push(currentLine.trim());
-                            currentLine = '';
-                        }
-                        currentLine += word + ' ';
-                    });
-                    lines.push(currentLine.trim());
-                    return lines;
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
                 }
                 return label;
-            });
-        };
-
-        Chart.defaults.font.family = 'Poppins';
-        Chart.defaults.color = FONT_COLOR;
-
-        const rankingDataRaw = [
-            { label: 'Ingeniería Civil', value: 20231670 },
-            { label: 'Ingeniería en Mecatrónica', value: 16687100 },
-            { label: 'Ingeniería en Biomédica', value: 7278241 },
-            { label: 'Ing. en Telecom y Electrónica', value: 6827000 },
-            { label: 'Ing. Industrial y de Sistemas', value: 5495797 },
-            { label: 'Ciencias y Matemáticas', value: 2697470 },
-            { label: 'Ingeniería en Energía', value: 2300000 },
-            { label: 'Ing. en Sistemas Computacionales', value: 1876000 },
-            { label: 'FabLab Unitec', value: 1466000 }
-        ];
-
-        const sortedRankingData = rankingDataRaw.sort((a, b) => a.value - b.value);
-
-        new Chart(document.getElementById('rankingChart'), {
-            type: 'bar',
-            data: {
-                labels: processLabels(sortedRankingData.map(d => d.label)),
-                datasets: [{
-                    label: 'Inversión Total (L)',
-                    data: sortedRankingData.map(d => d.value),
-                    backgroundColor: CHART_COLORS.cobalt,
-                    borderColor: CHART_COLORS.pacific,
-                    borderWidth: 2,
-                    borderRadius: 5,
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: value => `${(value / 1000000).toFixed(1)} M`
-                        },
-                        grid: { color: GRID_COLOR }
-                    },
-                    y: { 
-                        grid: { display: false }
+            };
+            
+            const processLabels = (labels) => {
+                return labels.map(label => {
+                    if (label.length > 16) {
+                        const words = label.split(' ');
+                        const lines = [];
+                        let currentLine = '';
+                        words.forEach(word => {
+                            if ((currentLine + word).length > 16) {
+                                lines.push(currentLine.trim());
+                                currentLine = '';
+                            }
+                            currentLine += word + ' ';
+                        });
+                        lines.push(currentLine.trim());
+                        return lines;
                     }
+                    return label;
+                });
+            };
+
+            Chart.defaults.font.family = 'Poppins';
+            Chart.defaults.color = FONT_COLOR;
+
+            const rankingDataRaw = [
+                { label: 'Ingeniería Civil', value: 20231670 },
+                { label: 'Ingeniería en Mecatrónica', value: 16687100 },
+                { label: 'Ingeniería en Biomédica', value: 7178241 },
+                { label: 'Ing. en Telecom y Electrónica', value: 6827000 },
+                { label: 'Ing. Industrial y de Sistemas', value: 5495797 },
+                { label: 'Ingeniería en Energía', value: 4600000 },
+                { label: 'Ciencias y Matemáticas', value: 2697470 },
+                { label: 'Ing. en Sistemas Computacionales', value: 1876000 },
+                { label: 'FabLab Unitec', value: 1566000 }
+            ];
+
+            const sortedRankingData = rankingDataRaw.sort((a, b) => a.value - b.value);
+
+            new Chart(document.getElementById('rankingChart'), {
+                type: 'bar',
+                data: {
+                    labels: processLabels(sortedRankingData.map(d => d.label)),
+                    datasets: [{
+                        label: 'Inversión Total (L)',
+                        data: sortedRankingData.map(d => d.value),
+                        backgroundColor: CHART_COLORS.cobalt,
+                        borderColor: CHART_COLORS.pacific,
+                        borderWidth: 2,
+                        borderRadius: 5,
+                    }]
                 },
-                plugins: {
-                    legend: { display: false },
-                    tooltip: { 
-                        callbacks: { 
-                            title: tooltipTitleCallback,
-                            label: (context) => `L ${context.raw.toLocaleString('en-US', { maximumFractionDigits: 0 })}`
-                        } 
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: value => `${(value / 1000000).toFixed(1)} M`
+                            },
+                            grid: { color: GRID_COLOR }
+                        },
+                        y: { 
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { 
+                            callbacks: { 
+                                title: tooltipTitleCallback,
+                                label: (context) => `L ${context.raw.toLocaleString('en-US', { maximumFractionDigits: 0 })}`
+                            } 
+                        }
                     }
                 }
-            }
+            });
         });
     </script>
 </body>
