@@ -28,18 +28,20 @@
             height: 400px;
             max-height: 500px;
         }
-        .small-chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 350px;
-        }
         .kpi-value {
             font-size: 2.5rem;
             line-height: 1.2;
+        }
+        .detail-card {
+            position: relative;
+            padding-top: 2rem;
+        }
+        .mini-chart-container {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 80px;
+            height: 80px;
         }
     </style>
 </head>
@@ -64,7 +66,10 @@
             <h2 class="text-2xl md:text-3xl font-bold federal-blue-text mb-8 text-center">Análisis Detallado por Área</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 detail-card">
+                    <div class="mini-chart-container">
+                        <canvas id="doughnutCivil"></canvas>
+                    </div>
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ingeniería Civil</h3>
                     <p class="federal-blue-text kpi-value font-bold">L 20,231,670</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2029)</p>
@@ -77,7 +82,10 @@
                     </ul>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 detail-card">
+                    <div class="mini-chart-container">
+                        <canvas id="doughnutMecatronica"></canvas>
+                    </div>
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ingeniería en Mecatrónica</h3>
                     <p class="federal-blue-text kpi-value font-bold">L 16,687,100</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2030)</p>
@@ -90,7 +98,10 @@
                     </ul>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 detail-card">
+                    <div class="mini-chart-container">
+                        <canvas id="doughnutBiomedica"></canvas>
+                    </div>
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ingeniería en Biomédica</h3>
                     <p class="federal-blue-text kpi-value font-bold">L 7,178,241</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2030)</p>
@@ -103,7 +114,10 @@
                     </ul>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 detail-card">
+                     <div class="mini-chart-container">
+                        <canvas id="doughnutTeleco"></canvas>
+                    </div>
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ing. en Telecomunicaciones y Electrónica</h3>
                     <p class="federal-blue-text kpi-value font-bold">L 6,827,000</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2028)</p>
@@ -115,7 +129,10 @@
                     </ul>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 detail-card">
+                    <div class="mini-chart-container">
+                        <canvas id="doughnutIndustrial"></canvas>
+                    </div>
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ing. Industrial y de Sistemas</h3>
                     <p class="federal-blue-text kpi-value font-bold">L 5,495,797</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2030)</p>
@@ -128,7 +145,10 @@
                     </ul>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 detail-card">
+                     <div class="mini-chart-container">
+                        <canvas id="doughnutCiencias"></canvas>
+                    </div>
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ciencias y Matemáticas</h3>
                     <p class="federal-blue-text kpi-value font-bold">L 2,697,470</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2030)</p>
@@ -140,7 +160,10 @@
                     </ul>
                 </div>
                 
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 detail-card">
+                    <div class="mini-chart-container">
+                        <canvas id="doughnutEnergia"></canvas>
+                    </div>
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ingeniería en Energía</h3>
                     <p class="federal-blue-text kpi-value font-bold">L 4,600,000</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2028)</p>
@@ -152,7 +175,10 @@
                     </ul>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 detail-card">
+                    <div class="mini-chart-container">
+                        <canvas id="doughnutSistemas"></canvas>
+                    </div>
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ing. en Sistemas Computacionales</h3>
                     <p class="federal-blue-text kpi-value font-bold">L 1,876,000</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2029)</p>
@@ -164,7 +190,10 @@
                     </ul>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 detail-card">
+                    <div class="mini-chart-container">
+                        <canvas id="doughnutFablab"></canvas>
+                    </div>
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">FabLab Unitec</h3>
                     <p class="federal-blue-text kpi-value font-bold">L 1,566,000</p>
                     <p class="text-gray-500 mb-4">Inversión Total (2026-2029)</p>
@@ -176,10 +205,10 @@
                     </ul>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 detail-card">
                     <h3 class="text-xl font-bold pacific-cyan-text mb-4">Ing. en Ciencia de Datos e IA</h3>
                     <p class="federal-blue-text kpi-value font-bold">Inversión Anual</p>
-                    <p class="text-gray-500 mb-4">Incluida con I-01</p>
+                    <p class="text-gray-500 mb-4">Incluida con Ing. en Sistemas</p>
                     <h4 class="font-semibold mb-2 federal-blue-text">Necesidades Clave:</h4>
                     <ul class="list-disc list-inside space-y-1 text-gray-700">
                         <li>Establecer plan de inversión progresivo por rápida obsolescencia.</li>
@@ -241,31 +270,35 @@
             Chart.defaults.color = FONT_COLOR;
 
             const rankingDataRaw = [
-                { label: 'Ingeniería Civil', value: 20231670 },
-                { label: 'Ingeniería en Mecatrónica', value: 16687100 },
-                { label: 'Ingeniería en Biomédica', value: 7178241 },
-                { label: 'Ing. en Telecom y Electrónica', value: 6827000 },
-                { label: 'Ing. Industrial y de Sistemas', value: 5495797 },
-                { label: 'Ingeniería en Energía', value: 4600000 },
-                { label: 'Ciencias y Matemáticas', value: 2697470 },
-                { label: 'Ing. en Sistemas Computacionales', value: 1876000 },
-                { label: 'FabLab Unitec', value: 1566000 }
+                 { label: 'Ingeniería Civil', indispensable: 8242101, deseable: 11989569 },
+                 { label: 'Ingeniería en Mecatrónica', indispensable: 8717555, deseable: 7969545 },
+                 { label: 'Ingeniería en Biomédica', indispensable: 3178241, deseable: 4000000 },
+                 { label: 'Ing. en Telecom y Electrónica', indispensable: 6817000, deseable: 10000 },
+                 { label: 'Ing. Industrial y de Sistemas', indispensable: 3576597, deseable: 1919200 },
+                 { label: 'Ingeniería en Energía', indispensable: 400000, deseable: 4200000 },
+                 { label: 'Ciencias y Matemáticas', indispensable: 852000, deseable: 1845470 },
+                 { label: 'Ing. en Sistemas Computacionales', indispensable: 1876000, deseable: 0 },
+                 { label: 'FabLab Unitec', indispensable: 1566000, deseable: 0 }
             ];
 
-            const sortedRankingData = rankingDataRaw.sort((a, b) => a.value - b.value);
+            const sortedRankingData = rankingDataRaw.sort((a, b) => (a.indispensable + a.deseable) - (b.indispensable + b.deseable));
 
             new Chart(document.getElementById('rankingChart'), {
                 type: 'bar',
                 data: {
                     labels: processLabels(sortedRankingData.map(d => d.label)),
-                    datasets: [{
-                        label: 'Inversión Total (L)',
-                        data: sortedRankingData.map(d => d.value),
-                        backgroundColor: CHART_COLORS.cobalt,
-                        borderColor: CHART_COLORS.pacific,
-                        borderWidth: 2,
-                        borderRadius: 5,
-                    }]
+                    datasets: [
+                        {
+                            label: 'Indispensable',
+                            data: sortedRankingData.map(d => d.indispensable),
+                            backgroundColor: CHART_COLORS.cobalt,
+                        },
+                        {
+                            label: 'Deseable',
+                            data: sortedRankingData.map(d => d.deseable),
+                            backgroundColor: CHART_COLORS.pacific,
+                        }
+                    ]
                 },
                 options: {
                     indexAxis: 'y',
@@ -273,6 +306,7 @@
                     maintainAspectRatio: false,
                     scales: {
                         x: {
+                            stacked: true,
                             beginAtZero: true,
                             ticks: {
                                 callback: value => `${(value / 1000000).toFixed(1)} M`
@@ -280,20 +314,70 @@
                             grid: { color: GRID_COLOR }
                         },
                         y: { 
+                            stacked: true,
                             grid: { display: false }
                         }
                     },
                     plugins: {
-                        legend: { display: false },
+                        legend: { position: 'top' },
                         tooltip: { 
                             callbacks: { 
                                 title: tooltipTitleCallback,
-                                label: (context) => `L ${context.raw.toLocaleString('en-US', { maximumFractionDigits: 0 })}`
+                                label: (context) => {
+                                    const label = context.dataset.label || '';
+                                    const value = context.raw || 0;
+                                    return `${label}: L ${value.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+                                }
                             } 
                         }
                     }
                 }
             });
+
+            const createDoughnutChart = (canvasId, data, title) => {
+                new Chart(document.getElementById(canvasId), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Indispensable', 'Deseable'],
+                        datasets: [{
+                            data: data,
+                            backgroundColor: [CHART_COLORS.cobalt, CHART_COLORS.pacific],
+                            borderColor: '#ffffff',
+                            borderWidth: 2,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '60%',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => {
+                                        const label = context.label || '';
+                                        const value = context.raw || 0;
+                                        const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                        const percentage = total > 0 ? ((value / total) * 100).toFixed(0) : 0;
+                                        return `${label}: ${percentage}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            createDoughnutChart('doughnutCivil', [8242101, 11989569]);
+            createDoughnutChart('doughnutMecatronica', [8717555, 7969545]);
+            createDoughnutChart('doughnutBiomedica', [3178241, 4000000]);
+            createDoughnutChart('doughnutTeleco', [6817000, 10000]);
+            createDoughnutChart('doughnutIndustrial', [3576597, 1919200]);
+            createDoughnutChart('doughnutCiencias', [852000, 1845470]);
+            createDoughnutChart('doughnutEnergia', [400000, 4200000]);
+            createDoughnutChart('doughnutSistemas', [1876000, 0]);
+            createDoughnutChart('doughnutFablab', [1566000, 0]);
+
         });
     </script>
 </body>
