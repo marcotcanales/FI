@@ -743,6 +743,20 @@
                 </ul>
             </div>
         </div>
+
+        <!-- QR Code Section -->
+        <div class="section-card" id="qr-code">
+            <div class="section-header">
+                <h2 class="text-xl font-bold">Acceso Rápido al Informe</h2>
+            </div>
+            <div class="section-content text-center">
+                <p class="mb-4">Escanee el código QR con su dispositivo móvil para acceder a este informe en cualquier momento.</p>
+                <div class="flex justify-center">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://capexfi25-30.netlify.app/modalidadq4/" alt="Código QR para acceder al informe" class="p-2 bg-white border rounded-lg shadow-sm">
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer class="bg-gray-800 text-white mt-8">
@@ -756,7 +770,7 @@
         <div class="modal-content">
             <div class="flex justify-between items-center mb-4">
                 <h3 id="modalTitle" class="text-xl font-bold text-gray-800"></h3>
-                <button id="closeModal" class="text-gray-500 hover:text-gray-800">&times;</button>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
             </div>
             <p id="modalDescription" class="text-gray-600"></p>
         </div>
