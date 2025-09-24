@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -85,30 +86,30 @@
             </div>
         </section>
 
-        <!-- Categorías de Software -->
+        <!-- Data hidden -->
         <div id="software-data" class="hidden">
             {
                 "mantener": [
-                    {"nombre": "BODY INTERACT", "costo": 3199117.26, "tipo": "Simulación Clínica", "descripcion": "Simulador de casos clínicos para ciencias de la salud.", "facultades": "FCS, FI, Psicología", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual por usuario y copago (3 años)", "observacion": "Continuar renovando."},
-                    {"nombre": "SOLIDWORKS", "costo": 315424.67, "tipo": "Diseño CAD/3D", "descripcion": "Software de diseño CAD 3D, análisis y simulación.", "facultades": "FI, FabLab", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual ilimitado (pago por 3 años)", "observacion": "Incluye 2000 vouchers de certificación que podrían generar ingresos."},
-                    {"nombre": "MATHWORKS (MATLAB)", "costo": 273520.00, "tipo": "Cálculo Numérico", "descripcion": "Plataforma de programación y cálculo numérico.", "facultades": "Uso transversal (FI, FCS, FCAS, FP)", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual ilimitado", "observacion": "Se puede ampliar su uso para aprovechar Simulink en clases que usan Labview."},
-                    {"nombre": "Minitab", "costo": 576896.10, "tipo": "Análisis Estadístico", "descripcion": "Software estadístico para análisis y visualización de datos.", "facultades": "FI, FCAS, FP", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual ilimitado", "observacion": "Se debería continuar utilizando."},
-                    {"nombre": "Simuladores y Casos Harvard", "costo": 1208591.00, "tipo": "Simulación de Negocios", "descripcion": "Simuladores y casos de negocio.", "facultades": "FP, FCAS, DUV", "institucion": "UNITEC y CEUTEC", "licenciamiento": "No especificado", "observacion": "Se está haciendo un esfuerzo por aplicar su uso de forma más general."},
-                    {"nombre": "LABSAG", "costo": 486087.50, "tipo": "Simulación de Negocios", "descripcion": "Simulación de negocios.", "facultades": "FI, FCAS, FP, DUV", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "Se está reincorporando su uso en FCAS en otras áreas distintas a Admin."},
-                    {"nombre": "Smile", "costo": 126386.00, "tipo": "Aplicaciones de Salud", "descripcion": "Plataformas de aplicaciones para Odontología.", "facultades": "FCS", "institucion": "UNITEC", "licenciamiento": "Compra única con renovación anual", "observacion": "Se debería continuar utilizando."},
-                    {"nombre": "Table License Sectra", "costo": 1789285.00, "tipo": "Visualización Médica", "descripcion": "Software para visualización en Ciencias de la Salud.", "facultades": "FCS", "institucion": "UNITEC", "licenciamiento": "Usuarios limitados (pago cada 2 años)", "observacion": "Se debería continuar utilizando."},
-                    {"nombre": "Flexsim", "costo": 27457.00, "tipo": "Simulación de Procesos", "descripcion": "Simulación de procesos y operaciones.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual", "observacion": "Se debería continuar utilizando."}
+                    {"nombre": "BODY INTERACT", "costo": 3199117.26, "tipo": "Simulación Clínica", "descripcion": "Simulador de casos clínicos para ciencias de la salud.", "facultades": "FCS, FI, Psicología (FCAS)", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual por usuario y copago (3 años)", "observacion": "Continuar renovando.", "facultades_array": ["FCS", "FI", "FCAS"], "institucion_array": ["UNITEC", "CEUTEC"]},
+                    {"nombre": "SOLIDWORKS", "costo": 315424.67, "tipo": "Diseño CAD/3D", "descripcion": "Software de diseño CAD 3D, análisis y simulación.", "facultades": "FI, FabLab", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual ilimitado (pago por 3 años)", "observacion": "Incluye 2000 vouchers de certificación que podrían generar ingresos.", "facultades_array": ["FI"], "institucion_array": ["UNITEC", "CEUTEC"]},
+                    {"nombre": "MATHWORKS (MATLAB)", "costo": 273520.00, "tipo": "Cálculo Numérico", "descripcion": "Plataforma de programación y cálculo numérico.", "facultades": "Uso transversal (FI, FCS, FCAS, FP)", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual ilimitado", "observacion": "Se puede ampliar su uso para aprovechar Simulink en clases que usan Labview.", "facultades_array": ["FI", "FCS", "FCAS", "FP"], "institucion_array": ["UNITEC", "CEUTEC"]},
+                    {"nombre": "Minitab", "costo": 576896.10, "tipo": "Análisis Estadístico", "descripcion": "Software estadístico para análisis y visualización de datos.", "facultades": "FI, FCAS, FP", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual ilimitado", "observacion": "Se debería continuar utilizando.", "facultades_array": ["FI", "FCAS", "FP"], "institucion_array": ["UNITEC", "CEUTEC"]},
+                    {"nombre": "Simuladores y Casos Harvard", "costo": 1208591.00, "tipo": "Simulación de Negocios", "descripcion": "Simuladores y casos de negocio.", "facultades": "FP, FCAS, DUV", "institucion": "UNITEC y CEUTEC", "licenciamiento": "No especificado", "observacion": "Se está haciendo un esfuerzo por aplicar su uso de forma más general.", "facultades_array": ["FP", "FCAS"], "institucion_array": ["UNITEC", "CEUTEC"]},
+                    {"nombre": "LABSAG", "costo": 486087.50, "tipo": "Simulación de Negocios", "descripcion": "Simulación de negocios.", "facultades": "FI, FCAS, FP, DUV", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "Se está reincorporando su uso en FCAS en otras áreas distintas a Admin.", "facultades_array": ["FI", "FCAS", "FP"], "institucion_array": ["UNITEC"]},
+                    {"nombre": "Smile", "costo": 126386.00, "tipo": "Aplicaciones de Salud", "descripcion": "Plataformas de aplicaciones para Odontología.", "facultades": "FCS", "institucion": "UNITEC", "licenciamiento": "Compra única con renovación anual", "observacion": "Se debería continuar utilizando.", "facultades_array": ["FCS"], "institucion_array": ["UNITEC"]},
+                    {"nombre": "Table License Sectra", "costo": 1789285.00, "tipo": "Visualización Médica", "descripcion": "Software para visualización en Ciencias de la Salud.", "facultades": "FCS", "institucion": "UNITEC", "licenciamiento": "Usuarios limitados (pago cada 2 años)", "observacion": "Se debería continuar utilizando.", "facultades_array": ["FCS"], "institucion_array": ["UNITEC"]},
+                    {"nombre": "Flexsim", "costo": 27457.00, "tipo": "Simulación de Procesos", "descripcion": "Simulación de procesos y operaciones.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual", "observacion": "Se debería continuar utilizando.", "facultades_array": ["FI"], "institucion_array": ["UNITEC", "CEUTEC"]}
                 ],
                 "renegociar": [
-                    {"nombre": "Adobe Creative Cloud", "costo": 5142353.30, "tipo": "Diseño Creativo", "descripcion": "Suite de diseño, video y desarrollo web.", "facultades": "FI (Arquitectura), FCAS (Diseño Gráfico, Modas)", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Mixto (1,700 licencias + ilimitado para Ceutec)", "observacion": "Continuar renovando – Se puede analizar esquema de licenciamiento."},
-                    {"nombre": "Multisim", "costo": 236700.00, "tipo": "Simulación de Circuitos", "descripcion": "Simulación de circuitos electrónicos.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "100 licencias Lab y 1000k", "observacion": "Renegociar para uso en aplicación web. Clave para Electrónica en Ceutec."},
-                    {"nombre": "SAP", "costo": 71305.00, "tipo": "ERP", "descripcion": "Software de planificación de recursos empresariales (ERP).", "facultades": "FI, FCAS, FP", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual por usuario", "observacion": "Duplicar la cantidad de licencias beneficiaría a Ing. Industrial y Logística."},
-                    {"nombre": "SPSS", "costo": 332637.50, "tipo": "Análisis Estadístico", "descripcion": "Software estadístico para investigación en ciencias sociales.", "facultades": "FCAS, FP", "institucion": "UNITEC", "licenciamiento": "Anual por usuario (26 licencias en red)", "observacion": "Buscar otro esquema de licenciamiento para mayor provecho. Oportunidad en investigación FCAS."}
+                    {"nombre": "Adobe Creative Cloud", "costo": 5142353.30, "tipo": "Diseño Creativo", "descripcion": "Suite de diseño, video y desarrollo web.", "facultades": "FI (Arquitectura), FCAS/EAD (Diseño Gráfico, Modas)", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Mixto (1,700 licencias + ilimitado para Ceutec)", "observacion": "Continuar renovando – Se puede analizar esquema de licenciamiento.", "facultades_array": ["FI", "EAD"], "institucion_array": ["UNITEC", "CEUTEC"]},
+                    {"nombre": "Multisim", "costo": 236700.00, "tipo": "Simulación de Circuitos", "descripcion": "Simulación de circuitos electrónicos.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "100 licencias Lab y 1000k", "observacion": "Renegociar para uso en aplicación web. Clave para Electrónica en Ceutec.", "facultades_array": ["FI"], "institucion_array": ["UNITEC", "CEUTEC"]},
+                    {"nombre": "SAP", "costo": 71305.00, "tipo": "ERP", "descripcion": "Software de planificación de recursos empresariales (ERP).", "facultades": "FI, FCAS, FP", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual por usuario", "observacion": "Duplicar la cantidad de licencias beneficiaría a Ing. Industrial y Logística.", "facultades_array": ["FI", "FCAS", "FP"], "institucion_array": ["UNITEC", "CEUTEC"]},
+                    {"nombre": "SPSS", "costo": 332637.50, "tipo": "Análisis Estadístico", "descripcion": "Software estadístico para investigación en ciencias sociales.", "facultades": "FCAS, FP", "institucion": "UNITEC", "licenciamiento": "Anual por usuario (26 licencias en red)", "observacion": "Buscar otro esquema de licenciamiento para mayor provecho. Oportunidad en investigación FCAS.", "facultades_array": ["FCAS", "FP"], "institucion_array": ["UNITEC"]}
                 ],
                 "descontinuar": [
-                    {"nombre": "Labview", "costo": 157800.00, "tipo": "Programación Gráfica", "descripcion": "Simulación y programación de sistemas.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "100 licencias Lab y 1000 estudiantes", "observacion": "Reemplazar con Simulink (incluido en MATLAB). La industria no utiliza este software."},
-                    {"nombre": "Glifing", "costo": 315000.00, "tipo": "Entrenamiento Lectura", "descripcion": "Entrenador de lectura.", "facultades": "FCS", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "No se logra identificar quién lo utiliza."},
-                    {"nombre": "CESIM", "costo": 1381719.42, "tipo": "Simulación de Negocios", "descripcion": "Simulación y Laboratorios Virtuales.", "facultades": "FP y FCAS", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "Según las áreas consultadas, no es una licencia que se deba seguir pagando."}
+                    {"nombre": "Labview", "costo": 157800.00, "tipo": "Programación Gráfica", "descripcion": "Simulación y programación de sistemas.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "100 licencias Lab y 1000 estudiantes", "observacion": "Reemplazar con Simulink (incluido en MATLAB). La industria no utiliza este software.", "facultades_array": ["FI"], "institucion_array": ["UNITEC", "CEUTEC"]},
+                    {"nombre": "Glifing", "costo": 315000.00, "tipo": "Entrenamiento Lectura", "descripcion": "Entrenador de lectura.", "facultades": "FCS", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "No se logra identificar quién lo utiliza.", "facultades_array": ["FCS"], "institucion_array": ["UNITEC"]},
+                    {"nombre": "CESIM", "costo": 1381719.42, "tipo": "Simulación de Negocios", "descripcion": "Simulación y Laboratorios Virtuales.", "facultades": "FP y FCAS", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "Según las áreas consultadas, no es una licencia que se deba seguir pagando.", "facultades_array": ["FP", "FCAS"], "institucion_array": ["UNITEC"]}
                 ]
             }
         </div>
@@ -116,30 +117,24 @@
         <!-- Sección: Mantener -->
         <section id="mantener" class="mb-12">
             <h2 class="section-title text-green-600 border-green-500">1. Software que se debe continuar utilizando</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="mantener-grid">
-                <!-- Cards se insertarán aquí -->
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="mantener-grid"></div>
         </section>
 
         <!-- Sección: Renegociar -->
         <section id="renegociar" class="mb-12">
             <h2 class="section-title text-orange-600 border-orange-500">2. Software que se debe renegociar o ampliar</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="renegociar-grid">
-                <!-- Cards se insertarán aquí -->
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="renegociar-grid"></div>
         </section>
 
         <!-- Sección: Descontinuar -->
         <section id="descontinuar" class="mb-12">
             <h2 class="section-title text-red-600 border-red-500">3. Software que se debe reevaluar o descontinuar</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="descontinuar-grid">
-                 <!-- Cards se insertarán aquí -->
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="descontinuar-grid"></div>
         </section>
 
-        <!-- Resumen de Costos y Clasificación -->
-        <section id="resumen" class="mb-12">
-             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Resumen de Inversión y Gráficos -->
+        <section id="resumen-visual" class="mb-12 space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Resumen de costos -->
                 <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-cobalt-blue">
                      <h2 class="section-title text-cobalt-blue border-pacific-cyan">Resumen de Inversión Anual</h2>
@@ -162,15 +157,36 @@
                         </div>
                      </div>
                 </div>
-                 <!-- Gráfico de pastel -->
+                 <!-- Gráfico de pastel: Categorías de Inversión -->
                  <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-pacific-cyan">
-                    <h2 class="section-title text-cobalt-blue border-pacific-cyan">Clasificación de Software por Uso</h2>
+                    <h2 class="section-title text-cobalt-blue border-pacific-cyan">Distribución de la Inversión</h2>
                     <div class="w-full h-80 flex justify-center items-center">
-                        <canvas id="usageChart"></canvas>
+                        <canvas id="investmentCategoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-pacific-cyan">
+                <h2 class="section-title text-cobalt-blue border-pacific-cyan">Clasificación de Software por Uso</h2>
+                <div class="w-full h-96 flex justify-center items-center">
+                    <canvas id="usageChart"></canvas>
+                </div>
+            </div>
+             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-cobalt-blue">
+                     <h2 class="section-title text-cobalt-blue border-pacific-cyan">Inversión por Facultad</h2>
+                     <div class="w-full h-80 flex justify-center items-center">
+                        <canvas id="facultyChart"></canvas>
+                    </div>
+                </div>
+                 <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-pacific-cyan">
+                    <h2 class="section-title text-cobalt-blue border-pacific-cyan">Inversión por Institución</h2>
+                    <div class="w-full h-80 flex justify-center items-center">
+                        <canvas id="institutionChart"></canvas>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <!-- Conclusiones y Recomendaciones -->
         <section id="conclusiones" class="mb-12">
@@ -210,8 +226,11 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Register the datalabels plugin globally
+            Chart.register(ChartDataLabels);
+
             const dataContainer = document.getElementById('software-data');
-            const data = JSON.parse(dataContainer.textContent);
+            const softwareData = JSON.parse(dataContainer.textContent);
 
             const formatCurrency = (value) => {
                 return new Intl.NumberFormat('es-HN', {
@@ -244,16 +263,20 @@
 
             const renderCards = (category, gridId, cardClass) => {
                 const grid = document.getElementById(gridId);
-                data[category].forEach(item => {
+                // Sort by cost descending before rendering
+                const sortedData = softwareData[category].sort((a, b) => b.costo - a.costo);
+                sortedData.forEach(item => {
                     grid.innerHTML += createCard(item, cardClass);
                 });
             };
 
+            // Render all cards sorted by price
             renderCards('mantener', 'mantener-grid', 'card-mantener');
             renderCards('renegociar', 'renegociar-grid', 'card-renegociar');
             renderCards('descontinuar', 'descontinuar-grid', 'card-descontinuar');
 
-            const calculateTotal = (category) => data[category].reduce((sum, item) => sum + item.costo, 0);
+            // --- CALCULATIONS ---
+            const calculateTotal = (category) => softwareData[category].reduce((sum, item) => sum + item.costo, 0);
 
             const totalMantener = calculateTotal('mantener');
             const totalRenegociar = calculateTotal('renegociar');
@@ -264,31 +287,62 @@
             document.getElementById('total-renegociar').textContent = formatCurrency(totalRenegociar);
             document.getElementById('total-descontinuar').textContent = formatCurrency(totalDescontinuar);
             document.getElementById('total-general').textContent = formatCurrency(totalGeneral);
+            
+            const allSoftware = [...softwareData.mantener, ...softwareData.renegociar, ...softwareData.descontinuar];
 
-            // Pie Chart Logic
-            const allSoftware = [...data.mantener, ...data.renegociar, ...data.descontinuar];
+            // --- CHART 1: Investment Category Distribution ---
+            const investmentCtx = document.getElementById('investmentCategoryChart').getContext('2d');
+            new Chart(investmentCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Continuar Utilizando', 'Renegociar o Ampliar', 'Reevaluar o Descontinuar'],
+                    datasets: [{
+                        data: [totalMantener, totalRenegociar, totalDescontinuar],
+                        backgroundColor: ['#22c55e', '#f97316', '#ef4444'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: { label: (context) => `${context.label}: ${formatCurrency(context.raw)}` }
+                        },
+                        datalabels: {
+                            formatter: (value, ctx) => {
+                                let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                let percentage = (value * 100 / sum).toFixed(1) + '%';
+                                return percentage;
+                            },
+                            color: '#fff',
+                            font: { weight: 'bold', size: 14 }
+                        }
+                    }
+                }
+            });
+
+            // --- CHART 2: Software Classification by Use ---
             const usageCounts = allSoftware.reduce((acc, item) => {
                 acc[item.tipo] = (acc[item.tipo] || 0) + 1;
                 return acc;
             }, {});
-
-            const chartLabels = Object.keys(usageCounts);
-            const chartData = Object.values(usageCounts);
+            const usageTotal = allSoftware.length;
             
-            const chartColors = [
-                '#06065C', '#0F4986', '#03AED2', '#47C8FD', '#7dd3fc', '#0284c7',
-                '#075985', '#0891b2', '#0e7490', '#f97316', '#fb923c', '#ea580c'
-            ];
+            const usageChartLabels = Object.keys(usageCounts);
+            const usageChartData = Object.values(usageCounts);
+            const usageColors = ['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a','#ffff99','#b15928'];
 
-            const ctx = document.getElementById('usageChart').getContext('2d');
-            new Chart(ctx, {
+            const usageCtx = document.getElementById('usageChart').getContext('2d');
+            new Chart(usageCtx, {
                 type: 'pie',
                 data: {
-                    labels: chartLabels,
+                    labels: usageChartLabels,
                     datasets: [{
-                        label: 'Cantidad de Software por Tipo',
-                        data: chartData,
-                        backgroundColor: chartColors.slice(0, chartLabels.length),
+                        data: usageChartData,
+                        backgroundColor: usageColors.slice(0, usageChartLabels.length),
                         borderColor: '#ffffff',
                         borderWidth: 2
                     }]
@@ -300,37 +354,116 @@
                         legend: {
                             position: 'right',
                             labels: {
-                                font: {
-                                     family: "'Poppins', sans-serif"
-                                },
+                                font: { family: "'Poppins', sans-serif" },
                                 boxWidth: 20,
-                                padding: 20
+                                padding: 15,
+                                generateLabels: (chart) => {
+                                    const data = chart.data;
+                                    if (data.labels.length && data.datasets.length) {
+                                        const { labels, datasets } = data;
+                                        return labels.map((label, i) => {
+                                            const value = datasets[0].data[i];
+                                            const percentage = ((value / usageTotal) * 100).toFixed(1);
+                                            return {
+                                                text: `${label}: ${percentage}%`,
+                                                fillStyle: datasets[0].backgroundColor[i],
+                                                hidden: isNaN(datasets[0].data[i]) || chart.getDatasetMeta(0).data[i].hidden,
+                                                index: i
+                                            };
+                                        });
+                                    }
+                                    return [];
+                                }
                             }
                         },
                         tooltip: {
-                             bodyFont: {
-                                family: "'Poppins', sans-serif"
+                            callbacks: { label: (c) => `${c.label}: ${c.raw} (${((c.raw/usageTotal)*100).toFixed(1)}%)` }
+                        },
+                        datalabels: { display: false }
+                    }
+                }
+            });
+
+            // --- CHART 3: Investment by Faculty ---
+            const facultyInvestment = { FI: 0, FCS: 0, FCAS: 0, EAD: 0, FP: 0 };
+            allSoftware.forEach(item => {
+                const costPerFaculty = item.costo / item.facultades_array.length;
+                item.facultades_array.forEach(faculty => {
+                    if (facultyInvestment.hasOwnProperty(faculty)) {
+                        facultyInvestment[faculty] += costPerFaculty;
+                    }
+                });
+            });
+            
+            const facultyCtx = document.getElementById('facultyChart').getContext('2d');
+            new Chart(facultyCtx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(facultyInvestment),
+                    datasets: [{
+                        data: Object.values(facultyInvestment),
+                        backgroundColor: ['#06065C', '#0F4986', '#03AED2', '#47C8FD', '#7dd3fc'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } },
+                        datalabels: {
+                            formatter: (value, ctx) => {
+                                let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                return (value * 100 / sum).toFixed(1) + '%';
                             },
-                             titleFont: {
-                                family: "'Poppins', sans-serif"
-                            },
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed !== null) {
-                                        label += context.parsed;
-                                    }
-                                    return label;
-                                }
-                            }
+                            color: '#fff', font: { weight: 'bold' }
                         }
                     }
                 }
             });
+
+            // --- CHART 4: Investment by Institution ---
+            const institutionInvestment = { UNITEC: 0, CEUTEC: 0 };
+            allSoftware.forEach(item => {
+                const costPerInstitution = item.costo / item.institucion_array.length;
+                item.institucion_array.forEach(inst => {
+                    if (institutionInvestment.hasOwnProperty(inst)) {
+                        institutionInvestment[inst] += costPerInstitution;
+                    }
+                });
+            });
+
+            const institutionCtx = document.getElementById('institutionChart').getContext('2d');
+            new Chart(institutionCtx, {
+                 type: 'pie',
+                data: {
+                    labels: Object.keys(institutionInvestment),
+                    datasets: [{
+                        data: Object.values(institutionInvestment),
+                        backgroundColor: ['#06065C', '#03AED2'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } },
+                        datalabels: {
+                            formatter: (value, ctx) => {
+                                let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                return (value * 100 / sum).toFixed(1) + '%';
+                            },
+                            color: '#fff', font: { weight: 'bold', size: 14 }
+                        }
+                    }
+                }
+            });
+
         });
     </script>
 </body>
 </html>
+
