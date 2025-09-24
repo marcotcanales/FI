@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -51,6 +52,20 @@
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 3px solid;
+        }
+        #qrcode-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        #qrcode {
+            padding: 10px;
+            background: white;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
     </style>
 </head>
@@ -212,6 +227,19 @@
                         </ul>
                     </div>
                  </div>
+            </div>
+        </section>
+
+        <!-- QR Code Section -->
+        <section id="qr-section" class="mb-12">
+            <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-pacific-cyan">
+                <h2 class="section-title text-cobalt-blue border-pacific-cyan">Acceso a Versión en Línea</h2>
+                <div id="qrcode-container">
+                    <div id="qrcode"></div>
+                    <p class="text-gray-700 text-center">
+                        Escanee el código QR para acceder a la versión interactiva de este reporte.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -533,6 +561,16 @@
                         }
                     }
                 }
+            });
+
+            // --- QR Code Generation ---
+            new QRCode(document.getElementById("qrcode"), {
+                text: "https://capexfi25-30.netlify.app/analisislicencias/",
+                width: 150,
+                height: 150,
+                colorDark : "#06065C",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
             });
 
         });
