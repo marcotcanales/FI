@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen de Licenciamiento de Software - UNITEC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc; /* Tailwind's gray-50 */
+        }
+        /* Colores de marca UNITEC */
+        :root {
+            --unitec-federal-blue: #06065C;
+            --unitec-cobalt-blue: #0F4986;
+            --unitec-pacific-cyan: #03AED2;
+            --unitec-vivid-sky: #47C8FD;
+        }
+        .bg-federal-blue { background-color: var(--unitec-federal-blue); }
+        .text-federal-blue { color: var(--unitec-federal-blue); }
+        .bg-cobalt-blue { background-color: var(--unitec-cobalt-blue); }
+        .text-cobalt-blue { color: var(--unitec-cobalt-blue); }
+        .border-pacific-cyan { border-color: var(--unitec-pacific-cyan); }
+        .text-pacific-cyan { color: var(--unitec-pacific-cyan); }
+        .bg-vivid-sky { background-color: var(--unitec-vivid-sky); }
+
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border-left: 5px solid transparent;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .card-mantener { border-left-color: #22c55e; /* green-500 */ }
+        .card-renegociar { border-left-color: #f97316; /* orange-500 */ }
+        .card-descontinuar { border-left-color: #ef4444; /* red-500 */ }
+
+        .section-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-federal-blue text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                 <svg class="h-12 w-12 mr-3" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 0L100 50L50 100L0 50L50 0Z" fill="#03AED2"/>
+                    <path d="M50 15L85 50L50 85L15 50L50 15Z" fill="white"/>
+                     <path d="M50 25L75 50L50 75L25 50L50 25Z" fill="#06065C"/>
+                </svg>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold">UNITEC</h1>
+                    <p class="text-sm md:text-md text-gray-300">Resumen de Licenciamiento de Software Académico</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Introducción -->
+        <section id="introduccion" class="mb-12">
+            <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-pacific-cyan">
+                <h2 class="section-title text-cobalt-blue border-pacific-cyan">Introducción</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    A continuación se presenta un consolidado de las licencias de software utilizadas en las distintas facultades de UNITEC y CEUTEC, con el objetivo de proporcionar una visión clara de la inversión, alcance y uso de estas herramientas tecnológicas. Este análisis busca evaluar la alineación del software con las necesidades académicas, identificar oportunidades de optimización y guiar la toma de decisiones estratégicas para futuras negociaciones y adquisiciones.
+                </p>
+            </div>
+        </section>
+
+        <!-- Categorías de Software -->
+        <div id="software-data" class="hidden">
+            {
+                "mantener": [
+                    {"nombre": "BODY INTERACT", "costo": 3199117.26, "tipo": "Simulación Clínica", "descripcion": "Simulador de casos clínicos para ciencias de la salud.", "facultades": "FCS, FI, Psicología", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual por usuario y copago (3 años)", "observacion": "Continuar renovando."},
+                    {"nombre": "SOLIDWORKS", "costo": 315424.67, "tipo": "Diseño CAD/3D", "descripcion": "Software de diseño CAD 3D, análisis y simulación.", "facultades": "FI, FabLab", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual ilimitado (pago por 3 años)", "observacion": "Incluye 2000 vouchers de certificación que podrían generar ingresos."},
+                    {"nombre": "MATHWORKS (MATLAB)", "costo": 273520.00, "tipo": "Cálculo Numérico", "descripcion": "Plataforma de programación y cálculo numérico.", "facultades": "Uso transversal (FI, FCS, FCAS, FP)", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual ilimitado", "observacion": "Se puede ampliar su uso para aprovechar Simulink en clases que usan Labview."},
+                    {"nombre": "Minitab", "costo": 576896.10, "tipo": "Análisis Estadístico", "descripcion": "Software estadístico para análisis y visualización de datos.", "facultades": "FI, FCAS, FP", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual ilimitado", "observacion": "Se debería continuar utilizando."},
+                    {"nombre": "Simuladores y Casos Harvard", "costo": 1208591.00, "tipo": "Simulación de Negocios", "descripcion": "Simuladores y casos de negocio.", "facultades": "FP, FCAS, DUV", "institucion": "UNITEC y CEUTEC", "licenciamiento": "No especificado", "observacion": "Se está haciendo un esfuerzo por aplicar su uso de forma más general."},
+                    {"nombre": "LABSAG", "costo": 486087.50, "tipo": "Simulación de Negocios", "descripcion": "Simulación de negocios.", "facultades": "FI, FCAS, FP, DUV", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "Se está reincorporando su uso en FCAS en otras áreas distintas a Admin."},
+                    {"nombre": "Smile", "costo": 126386.00, "tipo": "Aplicaciones de Salud", "descripcion": "Plataformas de aplicaciones para Odontología.", "facultades": "FCS", "institucion": "UNITEC", "licenciamiento": "Compra única con renovación anual", "observacion": "Se debería continuar utilizando."},
+                    {"nombre": "Table License Sectra", "costo": 1789285.00, "tipo": "Visualización Médica", "descripcion": "Software para visualización en Ciencias de la Salud.", "facultades": "FCS", "institucion": "UNITEC", "licenciamiento": "Usuarios limitados (pago cada 2 años)", "observacion": "Se debería continuar utilizando."},
+                    {"nombre": "Flexsim", "costo": 27457.00, "tipo": "Simulación de Procesos", "descripcion": "Simulación de procesos y operaciones.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual", "observacion": "Se debería continuar utilizando."}
+                ],
+                "renegociar": [
+                    {"nombre": "Adobe Creative Cloud", "costo": 5142353.30, "tipo": "Diseño Creativo", "descripcion": "Suite de diseño, video y desarrollo web.", "facultades": "FI (Arquitectura), FCAS (Diseño Gráfico, Modas)", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Mixto (1,700 licencias + ilimitado para Ceutec)", "observacion": "Continuar renovando – Se puede analizar esquema de licenciamiento."},
+                    {"nombre": "Multisim", "costo": 236700.00, "tipo": "Simulación de Circuitos", "descripcion": "Simulación de circuitos electrónicos.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "100 licencias Lab y 1000k", "observacion": "Renegociar para uso en aplicación web. Clave para Electrónica en Ceutec."},
+                    {"nombre": "SAP", "costo": 71305.00, "tipo": "ERP", "descripcion": "Software de planificación de recursos empresariales (ERP).", "facultades": "FI, FCAS, FP", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual por usuario", "observacion": "Duplicar la cantidad de licencias beneficiaría a Ing. Industrial y Logística."},
+                    {"nombre": "SPSS", "costo": 332637.50, "tipo": "Análisis Estadístico", "descripcion": "Software estadístico para investigación en ciencias sociales.", "facultades": "FCAS, FP", "institucion": "UNITEC", "licenciamiento": "Anual por usuario (26 licencias en red)", "observacion": "Buscar otro esquema de licenciamiento para mayor provecho. Oportunidad en investigación FCAS."}
+                ],
+                "descontinuar": [
+                    {"nombre": "Labview", "costo": 157800.00, "tipo": "Programación Gráfica", "descripcion": "Simulación y programación de sistemas.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "100 licencias Lab y 1000 estudiantes", "observacion": "Reemplazar con Simulink (incluido en MATLAB). La industria no utiliza este software."},
+                    {"nombre": "Glifing", "costo": 315000.00, "tipo": "Entrenamiento Lectura", "descripcion": "Entrenador de lectura.", "facultades": "FCS", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "No se logra identificar quién lo utiliza."},
+                    {"nombre": "CESIM", "costo": 1381719.42, "tipo": "Simulación de Negocios", "descripcion": "Simulación y Laboratorios Virtuales.", "facultades": "FP y FCAS", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "Según las áreas consultadas, no es una licencia que se deba seguir pagando."}
+                ]
+            }
+        </div>
+
+        <!-- Sección: Mantener -->
+        <section id="mantener" class="mb-12">
+            <h2 class="section-title text-green-600 border-green-500">1. Software que se debe continuar utilizando</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="mantener-grid">
+                <!-- Cards se insertarán aquí -->
+            </div>
+        </section>
+
+        <!-- Sección: Renegociar -->
+        <section id="renegociar" class="mb-12">
+            <h2 class="section-title text-orange-600 border-orange-500">2. Software que se debe renegociar o ampliar</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="renegociar-grid">
+                <!-- Cards se insertarán aquí -->
+            </div>
+        </section>
+
+        <!-- Sección: Descontinuar -->
+        <section id="descontinuar" class="mb-12">
+            <h2 class="section-title text-red-600 border-red-500">3. Software que se debe reevaluar o descontinuar</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="descontinuar-grid">
+                 <!-- Cards se insertarán aquí -->
+            </div>
+        </section>
+
+        <!-- Resumen de Costos y Clasificación -->
+        <section id="resumen" class="mb-12">
+             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Resumen de costos -->
+                <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-cobalt-blue">
+                     <h2 class="section-title text-cobalt-blue border-pacific-cyan">Resumen de Inversión Anual</h2>
+                     <div class="space-y-4 text-lg">
+                        <div class="flex justify-between items-center p-3 bg-green-100 rounded-lg">
+                            <span class="font-semibold text-green-800">Continuar Utilizando:</span>
+                            <span class="font-bold text-green-900" id="total-mantener">L 0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-orange-100 rounded-lg">
+                            <span class="font-semibold text-orange-800">Renegociar o Ampliar:</span>
+                            <span class="font-bold text-orange-900" id="total-renegociar">L 0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-red-100 rounded-lg">
+                            <span class="font-semibold text-red-800">Reevaluar o Descontinuar:</span>
+                            <span class="font-bold text-red-900" id="total-descontinuar">L 0.00</span>
+                        </div>
+                         <div class="flex justify-between items-center p-4 bg-gray-200 rounded-lg mt-4 border-t-4 border-federal-blue">
+                            <span class="font-bold text-xl text-federal-blue">Inversión Total Actual:</span>
+                            <span class="font-extrabold text-xl text-federal-blue" id="total-general">L 0.00</span>
+                        </div>
+                     </div>
+                </div>
+                 <!-- Gráfico de pastel -->
+                 <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-pacific-cyan">
+                    <h2 class="section-title text-cobalt-blue border-pacific-cyan">Clasificación de Software por Uso</h2>
+                    <div class="w-full h-80 flex justify-center items-center">
+                        <canvas id="usageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusiones y Recomendaciones -->
+        <section id="conclusiones" class="mb-12">
+             <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-federal-blue">
+                 <h2 class="section-title text-cobalt-blue border-pacific-cyan">Conclusiones y Próximos Pasos</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-bold text-xl text-cobalt-blue mb-3">Conclusiones Clave</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>La inversión en software es significativa y está fuertemente alineada con áreas estratégicas (Salud y Diseño).</li>
+                            <li>El modelo de licencia campus-wide (MATHWORKS) demuestra ser el más eficiente en costo-beneficio.</li>
+                            <li>Existen oportunidades para evaluar la utilización real de licencias por usuario (Adobe, SPSS) y buscar sinergias.</li>
+                            <li>La gestión y negociación centralizada son clave para obtener mejores condiciones.</li>
+                        </ul>
+                    </div>
+                    <div>
+                         <h3 class="font-bold text-xl text-orange-600 mb-3">Recomendaciones ➡️</h3>
+                         <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong class="text-gray-900">Auditoría de Uso:</strong> Realizar un análisis del uso real de licencias de Adobe y SPSS para adecuar el número de licencias.</li>
+                            <li><strong class="text-gray-900">Evaluación de Consolidación:</strong> Crear un comité para evaluar la posible consolidación de herramientas estadísticas (ej. Minitab vs. SPSS).</li>
+                            <li><strong class="text-gray-900">Centralizar Negociaciones:</strong> Continuar negociando renovaciones de forma centralizada y buscar acuerdos multianuales.</li>
+                             <li><strong class="text-gray-900">Fomentar Alianzas Educativas:</strong> Crear un programa proactivo para buscar y gestionar más convenios de software sin costo.</li>
+                        </ul>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-federal-blue text-white mt-12">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-400">
+            &copy; 2024 UNITEC. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dataContainer = document.getElementById('software-data');
+            const data = JSON.parse(dataContainer.textContent);
+
+            const formatCurrency = (value) => {
+                return new Intl.NumberFormat('es-HN', {
+                    style: 'currency',
+                    currency: 'HNL',
+                    minimumFractionDigits: 2
+                }).format(value);
+            };
+
+            const createCard = (item, categoryClass) => {
+                return `
+                    <div class="card ${categoryClass} p-6 flex flex-col">
+                        <h3 class="text-xl font-bold text-cobalt-blue mb-2">${item.nombre}</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">${item.descripcion}</p>
+                        <div class="text-sm space-y-2 mb-4">
+                            <p><strong class="font-semibold text-gray-800">Facultades:</strong> ${item.facultades}</p>
+                            <p><strong class="font-semibold text-gray-800">Institución:</strong> ${item.institucion}</p>
+                            <p><strong class="font-semibold text-gray-800">Licenciamiento:</strong> ${item.licenciamiento}</p>
+                        </div>
+                        <div class="mt-auto">
+                           <p class="mb-3 p-2 bg-gray-100 rounded-md text-center"><strong class="font-semibold text-gray-800">Costo Anual:</strong> <span class="font-bold text-cobalt-blue">${formatCurrency(item.costo)}</span></p>
+                           <div class="p-3 bg-blue-50 border border-blue-200 rounded-md">
+                                <p class="text-xs font-semibold text-cobalt-blue">Observación:</p>
+                                <p class="text-sm text-cobalt-blue">${item.observacion}</p>
+                           </div>
+                        </div>
+                    </div>
+                `;
+            };
+
+            const renderCards = (category, gridId, cardClass) => {
+                const grid = document.getElementById(gridId);
+                data[category].forEach(item => {
+                    grid.innerHTML += createCard(item, cardClass);
+                });
+            };
+
+            renderCards('mantener', 'mantener-grid', 'card-mantener');
+            renderCards('renegociar', 'renegociar-grid', 'card-renegociar');
+            renderCards('descontinuar', 'descontinuar-grid', 'card-descontinuar');
+
+            const calculateTotal = (category) => data[category].reduce((sum, item) => sum + item.costo, 0);
+
+            const totalMantener = calculateTotal('mantener');
+            const totalRenegociar = calculateTotal('renegociar');
+            const totalDescontinuar = calculateTotal('descontinuar');
+            const totalGeneral = totalMantener + totalRenegociar + totalDescontinuar;
+
+            document.getElementById('total-mantener').textContent = formatCurrency(totalMantener);
+            document.getElementById('total-renegociar').textContent = formatCurrency(totalRenegociar);
+            document.getElementById('total-descontinuar').textContent = formatCurrency(totalDescontinuar);
+            document.getElementById('total-general').textContent = formatCurrency(totalGeneral);
+
+            // Pie Chart Logic
+            const allSoftware = [...data.mantener, ...data.renegociar, ...data.descontinuar];
+            const usageCounts = allSoftware.reduce((acc, item) => {
+                acc[item.tipo] = (acc[item.tipo] || 0) + 1;
+                return acc;
+            }, {});
+
+            const chartLabels = Object.keys(usageCounts);
+            const chartData = Object.values(usageCounts);
+            
+            const chartColors = [
+                '#06065C', '#0F4986', '#03AED2', '#47C8FD', '#7dd3fc', '#0284c7',
+                '#075985', '#0891b2', '#0e7490', '#f97316', '#fb923c', '#ea580c'
+            ];
+
+            const ctx = document.getElementById('usageChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: chartLabels,
+                    datasets: [{
+                        label: 'Cantidad de Software por Tipo',
+                        data: chartData,
+                        backgroundColor: chartColors.slice(0, chartLabels.length),
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                font: {
+                                     family: "'Poppins', sans-serif"
+                                },
+                                boxWidth: 20,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                             bodyFont: {
+                                family: "'Poppins', sans-serif"
+                            },
+                             titleFont: {
+                                family: "'Poppins', sans-serif"
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
