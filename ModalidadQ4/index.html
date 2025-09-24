@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan de Adecuaciones Académicas Q4 2025 - UNITEC</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
         .section-card {
             background-color: #ffffff;
@@ -19,7 +21,7 @@
             border: 1px solid #e5e7eb;
         }
         .section-header {
-            background-color: #003366; /* UNITEC Blue */
+            background-color: #06065C; /* UNITEC Federal Blue */
             color: white;
             padding: 1rem 1.5rem;
             border-bottom: 1px solid #e5e7eb;
@@ -42,8 +44,102 @@
             padding: 2rem 1rem;
         }
         .word-cloud span {
-            color: #1e40af;
+            color: #0F4986; /* Cobalt Blue */
             padding: 0.25rem 0.5rem;
+        }
+        .flow-container {
+            display: flex;
+            align-items: stretch;
+            gap: 1rem;
+            width: 100%;
+        }
+        .flow-box {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: left;
+            border: 1px solid;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .activity-box {
+            background-color: #eef2ff;
+            border-color: #a5b4fc;
+            color: #312e81;
+        }
+        .adequacy-box {
+            background-color: #f0fdf4;
+            border-color: #86efac;
+            color: #14532d;
+        }
+        .flow-box h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .connector-horizontal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0F4986; /* Cobalt Blue */
+        }
+        .icon-tray {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed #a3e635;
+        }
+        .icon-tray svg {
+            width: 1.5rem; /* Increased size for better clicking */
+            height: 1.5rem;
+            color: #15803d;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .icon-tray svg:hover {
+            transform: scale(1.1);
+        }
+        .action-list-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+         .action-list-item svg {
+            flex-shrink: 0;
+            width: 1.75rem; /* Increased size */
+            height: 1.75rem;
+            color: #0F4986;
+        }
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        @media (max-width: 768px) {
+            .flow-container {
+                flex-direction: column;
+            }
+            .connector-horizontal svg {
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
+            }
         }
     </style>
 </head>
@@ -60,13 +156,53 @@
         <!-- Introduction Section -->
         <div class="section-card">
             <div class="section-content">
-                <h2 class="text-2xl font-bold mb-4 text-[#003366]">Introducción y Contexto</h2>
+                <h2 class="text-2xl font-bold mb-4 text-[#06065C]">Introducción y Contexto</h2>
                 <p class="mb-4">
                     En respuesta al comunicado emitido por el Pleno del Consejo de Educación Superior, UNITEC ha establecido un plan de adecuaciones académicas para el cuarto período de 2025. El objetivo es culminar la mayoría de las actividades presenciales antes del 30 de noviembre, permitiendo a nuestros estudiantes y docentes participar activamente en las elecciones presidenciales sin la presión de responsabilidades académicas.
                 </p>
                 <p>
                     La modalidad para este período será de <strong>7 semanas presenciales</strong> (semana 1 a 7), seguidas de <strong>3 semanas en formato de teledocencia</strong> (semana 8 a 10). A continuación, se detallan las estrategias diseñadas por cada área académica de la Facultad de Ingeniería para asegurar la continuidad y la excelencia educativa.
                 </p>
+            </div>
+        </div>
+        
+        <!-- Transversal Actions Section -->
+        <div class="section-card" id="acciones-transversales">
+            <div class="section-header">
+                <h2 class="text-xl font-bold">Acciones Transversales Clave para la Facultad</h2>
+            </div>
+            <div class="section-content">
+                <p class="mb-6">El análisis de los planes de cada área revela la necesidad de coordinar acciones a nivel de Facultad para garantizar una implementación exitosa y coherente. Las siguientes acciones estratégicas se proponen para ser gestionadas de forma centralizada:</p>
+                <ul class="space-y-4">
+                    <li class="action-list-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75h7.5L8.25 14.25h7.5" /></svg>
+                        <div>
+                            <h4 class="font-semibold">Gestión de Licencias</h4>
+                            <p class="text-sm text-gray-600">Centralizar la habilitación de licencias de software (Zoom, Sumadi, simuladores, etc.) y la implementación de una herramienta de proctoring para garantizar la integridad de las evaluaciones virtuales.</p>
+                        </div>
+                    </li>
+                    <li class="action-list-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        <div>
+                            <h4 class="font-semibold">Protocolo de PP, PG y Pasantías</h4>
+                            <p class="text-sm text-gray-600">Definir y comunicar un protocolo único para la gestión de Prácticas Profesionales, Pasantías y Proyectos de Graduación adaptado a la modalidad mixta del período.</p>
+                        </div>
+                    </li>
+                    <li class="action-list-item">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.72 3.72a.75.75 0 01-1.06 0l-3.72-3.72C9.347 17.1 8.5 16.136 8.5 15v-4.286c0-.97.616-1.813 1.5-2.097m6.75 0a9.006 9.006 0 00-6.75 0M10.5 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
+                        <div>
+                            <h4 class="font-semibold">Comunicación Institucional</h4>
+                            <p class="text-sm text-gray-600">Lanzar una campaña de comunicación institucional para informar de manera coherente a estudiantes y docentes sobre los cambios, fechas clave y expectativas; mencionando que estos cambios superceden al calendario académico.</p>
+                        </div>
+                    </li>
+                    <li class="action-list-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-7.5 5.25h7.5" /></svg>
+                        <div>
+                            <h4 class="font-semibold">Coordinación Logística de Laboratorios</h4>
+                            <p class="text-sm text-gray-600">Mantener una comunicación fluida entre las areas académicas para garantizar un uso compartido de laboratorios y talleres sin conflictos, optimizando la disponibilidad de recursos durante la alta demanda de las primeras 7 semanas.</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
 
@@ -78,16 +214,26 @@
                 <h2 class="text-xl font-bold">1. Ing. en Sistemas Computacionales y Ciencia de Datos e IA</h2>
             </div>
             <div class="section-content">
-                <h3 class="text-lg font-semibold text-gray-700 mb-3">Estrategia a Nivel Nacional</h3>
-                 <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                    <h4 class="font-semibold">Actividades Afectadas:</h4>
-                    <ul class="list-disc list-inside mt-1 text-gray-700">
-                        <li>Evento "DevFest 2025"</li>
-                    </ul>
-                </div>
-                <div class="pl-4 border-l-4 border-green-600">
-                    <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                    <p class="mt-1 text-gray-700">El evento se reprogramará para el viernes 31 de octubre en Unitec SPS y el sábado 01 de noviembre en Ceutec Central.</p>
+                <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">Estrategia a Nivel Nacional</h3>
+                <div class="flow-container">
+                    <div class="flow-box activity-box">
+                        <div>
+                            <h4>Actividad Afectada</h4>
+                            <p>Evento "DevFest 2025"</p>
+                        </div>
+                    </div>
+                    <div class="connector-horizontal">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
+                    <div class="flow-box adequacy-box">
+                        <div>
+                            <h4>Adecuación Propuesta</h4>
+                            <p>El evento se reprogramará para el viernes 31 de octubre en Unitec SPS y el sábado 01 de noviembre en Ceutec Central.</p>
+                        </div>
+                        <div class="icon-tray">
+                            <svg data-action-id="comunicacion" title="Comunicación Institucional" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.72 3.72a.75.75 0 01-1.06 0l-3.72-3.72C9.347 17.1 8.5 16.136 8.5 15v-4.286c0-.97.616-1.813 1.5-2.097m6.75 0a9.006 9.006 0 00-6.75 0M10.5 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,23 +243,52 @@
             <div class="section-header">
                 <h2 class="text-xl font-bold">2. Ing. Industrial y de Sistemas</h2>
             </div>
-            <div class="section-content">
-                <h3 class="text-lg font-semibold text-gray-700 mb-3">Estrategia a Nivel Nacional</h3>
-                <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                    <h4 class="font-semibold">Actividades Afectadas:</h4>
-                    <ul class="list-disc list-inside mt-1 text-gray-700">
-                        <li>Prácticas de laboratorio y talleres transversales.</li>
-                        <li>Cóctel anual de alumni de la carrera.</li>
-                    </ul>
+            <div class="section-content space-y-6">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">Estrategia a Nivel Nacional</h3>
+                <div class="flow-container">
+                    <div class="flow-box activity-box">
+                        <div>
+                            <h4>Actividad Afectada</h4>
+                            <p>Prácticas de laboratorio y talleres transversales.</p>
+                        </div>
+                    </div>
+                    <div class="connector-horizontal">
+                       <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
+                    <div class="flow-box adequacy-box">
+                        <div>
+                            <h4>Adecuación Propuesta</h4>
+                            <ul class="list-disc list-inside text-left">
+                                <li>Adelantar la programación para las primeras 7 semanas.</li>
+                                <li>Adaptar algunos talleres a formato virtual.</li>
+                                <li>Solicitar licencias de Zoom para docentes.</li>
+                            </ul>
+                        </div>
+                        <div class="icon-tray">
+                             <svg data-action-id="logistica" title="Coordinación Logística de Laboratorios" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-7.5 5.25h7.5" /></svg>
+                             <svg data-action-id="licencias" title="Gestión de Licencias" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75h7.5L8.25 14.25h7.5" /></svg>
+                        </div>
+                    </div>
                 </div>
-                <div class="pl-4 border-l-4 border-green-600">
-                    <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                    <ul class="list-disc list-inside mt-1 text-gray-700">
-                        <li>Adelantar la programación de todos los laboratorios y talleres para las primeras 7 semanas.</li>
-                        <li>Adaptar algunos talleres a formato virtual, aprovechando la experiencia previa.</li>
-                        <li>Solicitar licencias de Zoom para los docentes que las requieran.</li>
-                        <li>Reprogramar el cóctel de alumni a una fecha no conflictiva, sujeta al calendario de elecciones estudiantiles.</li>
-                    </ul>
+                <div class="flow-container">
+                    <div class="flow-box activity-box">
+                        <div>
+                            <h4>Actividad Afectada</h4>
+                            <p>Cóctel anual de alumni de la carrera.</p>
+                        </div>
+                    </div>
+                    <div class="connector-horizontal">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
+                    <div class="flow-box adequacy-box">
+                        <div>
+                            <h4>Adecuación Propuesta</h4>
+                            <p>Reprogramar el cóctel a una fecha no conflictiva, sujeta al calendario de elecciones estudiantiles.</p>
+                        </div>
+                         <div class="icon-tray">
+                            <svg data-action-id="comunicacion" title="Comunicación Institucional" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.72 3.72a.75.75 0 01-1.06 0l-3.72-3.72C9.347 17.1 8.5 16.136 8.5 15v-4.286c0-.97.616-1.813 1.5-2.097m6.75 0a9.006 9.006 0 00-6.75 0M10.5 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,41 +300,87 @@
             </div>
             <div>
                 <div class="campus-header"><h3 class="text-lg font-semibold text-gray-700">Campus Tegucigalpa (TGU)</h3></div>
-                <div class="section-content">
-                    <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                        <h4 class="font-semibold">Actividades Afectadas:</h4>
-                        <ul class="list-disc list-inside mt-1 text-gray-700">
-                           <li>Laboratorio de Mecánica de Suelos I (LCI 303).</li>
-                           <li>Laboratorios de Topografía I (LCI201) y Topografía II (LCI302).</li>
-                        </ul>
+                <div class="section-content space-y-6">
+                    <div class="flow-container">
+                        <div class="flow-box activity-box">
+                            <div>
+                                <h4>Actividad Afectada</h4>
+                                <p>Laboratorio de Mecánica de Suelos I (LCI 303).</p>
+                            </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                            <div>
+                                <h4>Adecuación Propuesta</h4>
+                                <p>Intensificar las prácticas en semanas 1-7 y reforzar teoría de forma virtual en semanas 8-10.</p>
+                            </div>
+                            <div class="icon-tray">
+                                <svg data-action-id="logistica" title="Coordinación Logística de Laboratorios" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-7.5 5.25h7.5" /></svg>
+                                <svg data-action-id="licencias" title="Gestión de Licencias" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75h7.5L8.25 14.25h7.5" /></svg>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pl-4 border-l-4 border-green-600">
-                        <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                         <ul class="list-disc list-inside mt-1 text-gray-700">
-                            <li><strong>Mecánica de Suelos I:</strong> Intensificar las prácticas de laboratorio en las semanas 1-7 y reforzar la teoría de forma virtual en las semanas 8-10.</li>
-                            <li><strong>Topografía I:</strong> Iniciar prácticas desde la semana 1 y realizar las prácticas 6 y 7 de forma conjunta.</li>
-                            <li><strong>Topografía II:</strong> Iniciar prácticas desde la semana 1, impartir las prácticas de software (5, 6, 7) de forma virtual y realizar la práctica de campo (8) en la semana 7.</li>
-                        </ul>
+                    <div class="flow-container">
+                        <div class="flow-box activity-box">
+                            <div>
+                                <h4>Actividad Afectada</h4>
+                                <p>Laboratorios de Topografía I y II.</p>
+                            </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                            <div>
+                                <h4>Adecuación Propuesta</h4>
+                                 <ul class="list-disc list-inside text-left">
+                                    <li><strong>Topo I:</strong> Iniciar prácticas en semana 1 y unir prácticas 6 y 7.</li>
+                                    <li><strong>Topo II:</strong> Iniciar prácticas en semana 1, virtualizar prácticas de software y realizar práctica de campo en semana 7.</li>
+                                </ul>
+                            </div>
+                            <div class="icon-tray">
+                                <svg data-action-id="logistica" title="Coordinación Logística de Laboratorios" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-7.5 5.25h7.5" /></svg>
+                                <svg data-action-id="licencias" title="Gestión de Licencias" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75h7.5L8.25 14.25h7.5" /></svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="campus-header"><h3 class="text-lg font-semibold text-gray-700">Campus San Pedro Sula (SPS)</h3></div>
-                <div class="section-content">
-                    <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                        <h4 class="font-semibold">Actividades Afectadas:</h4>
-                        <ul class="list-disc list-inside mt-1 text-gray-700">
-                           <li>Prácticas de laboratorio.</li>
-                           <li>Pasantías y prácticas laborales.</li>
-                           <li>Trabajos de campo.</li>
-                        </ul>
+                <div class="section-content space-y-6">
+                    <div class="flow-container">
+                        <div class="flow-box activity-box">
+                           <div>
+                               <h4>Actividad Afectada</h4>
+                               <p>Prácticas de laboratorio y trabajos de campo.</p>
+                           </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                           <div>
+                               <h4>Adecuación Propuesta</h4>
+                               <p>Realizar dos prácticas de laboratorio en algunas semanas para completar el programa antes de la fase virtual.</p>
+                           </div>
+                           <div class="icon-tray">
+                                <svg data-action-id="logistica" title="Coordinación Logística de Laboratorios" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-7.5 5.25h7.5" /></svg>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pl-4 border-l-4 border-green-600">
-                        <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                        <ul class="list-disc list-inside mt-1 text-gray-700">
-                           <li>Realizar dos prácticas de laboratorio en algunas semanas para completar el programa antes de la fase virtual.</li>
-                           <li>Limitar la duración de las pasantías al tiempo presencial disponible.</li>
-                           <li>Aprobar el inicio de la práctica profesional desde la semana 0 (6-11 de Octubre).</li>
-                        </ul>
+                     <div class="flow-container">
+                        <div class="flow-box activity-box">
+                           <div>
+                               <h4>Actividad Afectada</h4>
+                               <p>Pasantías y prácticas laborales.</p>
+                           </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                           <div>
+                               <h4>Adecuación Propuesta</h4>
+                               <p>Limitar la duración al tiempo presencial disponible y aprobar inicio desde la semana 0 (6-11 de Octubre).</p>
+                           </div>
+                           <div class="icon-tray">
+                                <svg data-action-id="protocolos" title="Protocolo de PP, PG y Pasantías" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -171,17 +392,30 @@
                 <h2 class="text-xl font-bold">4. Ing. en Telecomunicaciones y Redes, y Laboratorio de Electrónica</h2>
             </div>
             <div class="section-content">
-                <h3 class="text-lg font-semibold text-gray-700 mb-3">Estrategia a Nivel Nacional</h3>
-                 <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                    <h4 class="font-semibold">Actividades Afectadas:</h4>
-                    <ul class="list-disc list-inside mt-1 text-gray-700">
-                        <li>Prácticas de los laboratorios de electrónica.</li>
-                        <li>Laboratorio de redes.</li>
-                    </ul>
-                </div>
-                <div class="pl-4 border-l-4 border-green-600">
-                    <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                    <p class="mt-1 text-gray-700">Se está comunicando con los docentes para poder asegurar que se calendaricen las actividades presenciales previas al 30 de noviembre.</p>
+                <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">Estrategia a Nivel Nacional</h3>
+                <div class="flow-container">
+                    <div class="flow-box activity-box">
+                        <div>
+                            <h4>Actividades Afectadas</h4>
+                            <ul class="list-disc list-inside">
+                               <li>Prácticas de los laboratorios de electrónica.</li>
+                               <li>Laboratorio de redes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="connector-horizontal">
+                       <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
+                    <div class="flow-box adequacy-box">
+                        <div>
+                            <h4>Adecuación Propuesta</h4>
+                            <p>Se está comunicando con los docentes para poder asegurar que se calendaricen las actividades presenciales previas al 30 de noviembre.</p>
+                        </div>
+                        <div class="icon-tray">
+                             <svg data-action-id="logistica" title="Coordinación Logística de Laboratorios" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-7.5 5.25h7.5" /></svg>
+                            <svg data-action-id="comunicacion" title="Comunicación Institucional" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.72 3.72a.75.75 0 01-1.06 0l-3.72-3.72C9.347 17.1 8.5 16.136 8.5 15v-4.286c0-.97.616-1.813 1.5-2.097m6.75 0a9.006 9.006 0 00-6.75 0M10.5 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -192,39 +426,83 @@
                 <h2 class="text-xl font-bold">5. Ing. en Mecatrónica</h2>
             </div>
             <div>
-                <div class="campus-header"><h3 class="text-lg font-semibold text-gray-700">Campus Tegucigalpa (TGU)</h3></div>
-                <div class="section-content">
-                     <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                        <h4 class="font-semibold">Actividades Afectadas:</h4>
-                        <ul class="list-disc list-inside mt-1 text-gray-700">
-                           <li>Asignatura de Máquinas Herramientas.</li>
-                           <li>Sistemas Automatizados de Manufactura 1.</li>
-                        </ul>
+                 <div class="campus-header"><h3 class="text-lg font-semibold text-gray-700">Campus Tegucigalpa (TGU)</h3></div>
+                <div class="section-content space-y-6">
+                    <div class="flow-container">
+                        <div class="flow-box activity-box">
+                            <div>
+                                <h4>Actividad Afectada</h4>
+                                <p>Asignatura de Máquinas Herramientas.</p>
+                            </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                            <div>
+                                <h4>Adecuación Propuesta</h4>
+                                <p>Concentrar todas las actividades prácticas del Taller en las primeras 7 semanas.</p>
+                            </div>
+                            <div class="icon-tray">
+                                <svg data-action-id="logistica" title="Coordinación Logística de Laboratorios" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-7.5 5.25h7.5" /></svg>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pl-4 border-l-4 border-green-600">
-                        <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                         <ul class="list-disc list-inside mt-1 text-gray-700">
-                            <li><strong>Máquinas Herramientas:</strong> Concentrar todas las actividades prácticas del Taller en las primeras 7 semanas.</li>
-                            <li><strong>Sistemas Automatizados de Manufactura 1:</strong> Las prácticas de impresión 3D y maquinado CNC se realizarán únicamente por simulación.</li>
-                        </ul>
+                    <div class="flow-container">
+                        <div class="flow-box activity-box">
+                            <div>
+                                <h4>Actividad Afectada</h4>
+                                <p>Sistemas Automatizados de Manufactura 1.</p>
+                            </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                            <div>
+                                <h4>Adecuación Propuesta</h4>
+                                <p>Las prácticas de impresión 3D y maquinado CNC se realizarán únicamente por simulación.</p>
+                            </div>
+                             <div class="icon-tray">
+                                <svg data-action-id="licencias" title="Gestión de Licencias" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75h7.5L8.25 14.25h7.5" /></svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="campus-header"><h3 class="text-lg font-semibold text-gray-700">Campus San Pedro Sula (SPS)</h3></div>
-                <div class="section-content">
-                    <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                        <h4 class="font-semibold">Actividades Afectadas:</h4>
-                        <ul class="list-disc list-inside mt-1 text-gray-700">
-                           <li>Evento "Mecaton".</li>
-                           <li>Gestión de Prácticas Profesionales.</li>
-                        </ul>
+                 <div class="section-content space-y-6">
+                    <div class="flow-container">
+                        <div class="flow-box activity-box">
+                           <div>
+                               <h4>Actividad Afectada</h4>
+                               <p>Evento "Mecaton".</p>
+                           </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                            <div>
+                                <h4>Adecuación Propuesta</h4>
+                                <p>Adelantar el evento para que se realice en la semana 7.</p>
+                            </div>
+                            <div class="icon-tray">
+                                <svg data-action-id="comunicacion" title="Comunicación Institucional" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.72 3.72a.75.75 0 01-1.06 0l-3.72-3.72C9.347 17.1 8.5 16.136 8.5 15v-4.286c0-.97.616-1.813 1.5-2.097m6.75 0a9.006 9.006 0 00-6.75 0M10.5 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pl-4 border-l-4 border-green-600">
-                        <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                        <ul class="list-disc list-inside mt-1 text-gray-700">
-                           <li>Adelantar el evento "Mecaton" para que se realice en la semana 7.</li>
-                           <li>Detallar y comunicar un procedimiento claro para los alumnos en Práctica Profesional.</li>
-                        </ul>
+                    <div class="flow-container">
+                        <div class="flow-box activity-box">
+                           <div>
+                               <h4>Actividad Afectada</h4>
+                               <p>Gestión de Prácticas Profesionales.</p>
+                           </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                           <div>
+                               <h4>Adecuación Propuesta</h4>
+                               <p>Detallar y comunicar un procedimiento claro para los alumnos en Práctica Profesional.</p>
+                           </div>
+                           <div class="icon-tray">
+                                <svg data-action-id="protocolos" title="Protocolo de PP, PG y Pasantías" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -238,33 +516,51 @@
             <div>
                 <div class="campus-header"><h3 class="text-lg font-semibold text-gray-700">Campus Tegucigalpa (TGU)</h3></div>
                 <div class="section-content">
-                     <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                        <h4 class="font-semibold">Actividades Afectadas:</h4>
-                        <ul class="list-disc list-inside mt-1 text-gray-700">
-                           <li>Laboratorios y proyectos de Biomecánica, Bioinstrumentación 1 y 2, Sistemas de Imágenes Médicas y Proyecto de Investigación.</li>
-                        </ul>
-                    </div>
-                    <div class="pl-4 border-l-4 border-green-600">
-                        <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                         <p class="mt-1 text-gray-700">Adelantar todas las actividades prácticas para que se completen dentro de las primeras 7 semanas, coordinando con los docentes antes del inicio del período.</p>
+                    <div class="flow-container">
+                        <div class="flow-box activity-box">
+                            <div>
+                                <h4>Actividades Afectadas</h4>
+                                <p>Laboratorios y proyectos de Biomecánica, Bioinstrumentación 1 y 2, Sistemas de Imágenes Médicas y Proyecto de Investigación.</p>
+                            </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                            <div>
+                                <h4>Adecuación Propuesta</h4>
+                                 <p>Adelantar todas las actividades prácticas para que se completen dentro de las primeras 7 semanas, coordinando con los docentes antes del inicio del período.</p>
+                            </div>
+                             <div class="icon-tray">
+                                <svg data-action-id="logistica" title="Coordinación Logística de Laboratorios" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-7.5 5.25h7.5" /></svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="campus-header"><h3 class="text-lg font-semibold text-gray-700">Campus San Pedro Sula (SPS)</h3></div>
                 <div class="section-content">
-                    <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                        <h4 class="font-semibold">Actividades Afectadas:</h4>
-                        <ul class="list-disc list-inside mt-1 text-gray-700">
-                           <li>Prácticas de laboratorio, proyectos de vinculación y visitas de campo (semanas 7 a 9).</li>
-                        </ul>
-                    </div>
-                    <div class="pl-4 border-l-4 border-green-600">
-                        <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                        <ul class="list-disc list-inside mt-1 text-gray-700">
-                           <li>Reorganizar sílabos para adelantar laboratorios y visitas.</li>
-                           <li>Posible cancelación de proyectos de vinculación para priorizar actividades prácticas.</li>
-                           <li>Programar charlas y talleres extracurriculares en las primeras semanas.</li>
-                        </ul>
+                    <div class="flow-container">
+                        <div class="flow-box activity-box">
+                            <div>
+                                <h4>Actividades Afectadas</h4>
+                                <p>Prácticas de laboratorio, proyectos de vinculación y visitas de campo (semanas 7 a 9).</p>
+                            </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                           <div>
+                               <h4>Adecuaciones Propuestas</h4>
+                               <ul class="list-disc list-inside text-left">
+                                  <li>Reorganizar sílabos para adelantar laboratorios y visitas.</li>
+                                  <li>Posible cancelación de proyectos de vinculación para priorizar actividades prácticas.</li>
+                                  <li>Programar charlas y talleres extracurriculares en las primeras semanas.</li>
+                               </ul>
+                           </div>
+                           <div class="icon-tray">
+                                <svg data-action-id="logistica" title="Coordinación Logística de Laboratorios" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-7.5 5.25h7.5" /></svg>
+                                <svg data-action-id="protocolos" title="Protocolo de PP, PG y Pasantías" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                <svg data-action-id="comunicacion" title="Comunicación Institucional" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.72 3.72a.75.75 0 01-1.06 0l-3.72-3.72C9.347 17.1 8.5 16.136 8.5 15v-4.286c0-.97.616-1.813 1.5-2.097m6.75 0a9.006 9.006 0 00-6.75 0M10.5 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -276,17 +572,27 @@
                 <h2 class="text-xl font-bold">7. Ing. en Energía</h2>
             </div>
              <div class="section-content">
-                <h3 class="text-lg font-semibold text-gray-700 mb-3">Estrategia a Nivel Nacional</h3>
-                 <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                    <h4 class="font-semibold">Actividades Afectadas:</h4>
-                    <ul class="list-disc list-inside mt-1 text-gray-700">
-                        <li>Laboratorios de Química Orgánica y de energía en general.</li>
-                        <li>Visitas técnicas de cursos especializados.</li>
-                    </ul>
-                </div>
-                <div class="pl-4 border-l-4 border-green-600">
-                    <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                    <p class="mt-1 text-gray-700">Programar de forma anticipada todos los laboratorios. En cursos como Máquinas Elétricas, se invertirán los parciales para poder adelantar las prácticas.</p>
+                <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">Estrategia a Nivel Nacional</h3>
+                 <div class="flow-container">
+                    <div class="flow-box activity-box">
+                        <div>
+                            <h4>Actividades Afectadas</h4>
+                            <ul class="list-disc list-inside">
+                               <li>Laboratorios de Química Orgánica y de energía en general.</li>
+                               <li>Visitas técnicas de cursos especializados.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                    <div class="flow-box adequacy-box">
+                        <div>
+                            <h4>Adecuación Propuesta</h4>
+                            <p>Programar de forma anticipada todos los laboratorios. En cursos como Máquinas Elétricas, se invertirán los parciales para poder adelantar las prácticas.</p>
+                        </div>
+                        <div class="icon-tray">
+                            <svg data-action-id="logistica" title="Coordinación Logística de Laboratorios" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-7.5 5.25h7.5" /></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -299,33 +605,49 @@
             <div>
                 <div class="campus-header"><h3 class="text-lg font-semibold text-gray-700">Campus Tegucigalpa (TGU)</h3></div>
                 <div class="section-content">
-                     <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                        <h4 class="font-semibold">Actividades Afectadas:</h4>
-                        <ul class="list-disc list-inside mt-1 text-gray-700">
-                           <li>Aplicación del segundo examen parcial y 2 pruebas.</li>
-                        </ul>
-                    </div>
-                    <div class="pl-4 border-l-4 border-green-600">
-                        <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                         <p class="mt-1 text-gray-700">Modificar la evaluación del segundo parcial, adelantando la evaluación por partes para evitar un solo examen virtual. Se considera ventajosa la incorporación de herramientas de proctoring.</p>
+                     <div class="flow-container">
+                        <div class="flow-box activity-box">
+                            <div>
+                                <h4>Actividad Afectada</h4>
+                                <p>Aplicación del segundo examen parcial y 2 pruebas.</p>
+                            </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                            <div>
+                                <h4>Adecuación Propuesta</h4>
+                                 <p>Modificar la evaluación del segundo parcial, adelantando la evaluación por partes para evitar un solo examen virtual. Se considera ventajosa la incorporación de herramientas de proctoring.</p>
+                            </div>
+                            <div class="icon-tray">
+                                <svg data-action-id="licencias" title="Gestión de Licencias" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75h7.5L8.25 14.25h7.5" /></svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="campus-header"><h3 class="text-lg font-semibold text-gray-700">Campus San Pedro Sula (SPS)</h3></div>
                 <div class="section-content">
-                    <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                        <h4 class="font-semibold">Actividades Afectadas:</h4>
-                        <ul class="list-disc list-inside mt-1 text-gray-700">
-                           <li>Segundo examen parcial unificado.</li>
-                        </ul>
+                    <div class="flow-container">
+                        <div class="flow-box activity-box">
+                           <div>
+                               <h4>Actividad Afectada</h4>
+                               <p>Segundo examen parcial unificado.</p>
+                           </div>
+                        </div>
+                        <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                        <div class="flow-box adequacy-box">
+                            <div>
+                                <h4>Adecuación Propuesta</h4>
+                                <p>Se buscarán alternativas en caso de que el examen del segundo parcial no se pueda realizar de forma presencial.</p>
+                            </div>
+                            <div class="icon-tray">
+                                <svg data-action-id="licencias" title="Gestión de Licencias" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75h7.5L8.25 14.25h7.5" /></svg>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pl-4 border-l-4 border-green-600">
-                        <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                        <p class="mt-1 text-gray-700">Se buscarán alternativas en caso de que el examen del segundo parcial no se pueda realizar de forma presencial.</p>
-                    </div>
-                    <div class="pl-4 border-l-4 border-yellow-500 mt-4">
-                        <h4 class="font-semibold">Observaciones Adicionales:</h4>
-                        <p class="mt-1 text-gray-700">El evento de la Olimpiada de Física no se ve afectado, ya que está programado para la semana 6.</p>
+                    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mt-6 rounded-r-lg" role="alert">
+                      <p class="font-bold">Observación Adicional</p>
+                      <p>El evento de la Olimpiada de Física no se ve afectado, ya que está programado para la semana 6.</p>
                     </div>
                 </div>
             </div>
@@ -337,22 +659,33 @@
                 <h2 class="text-xl font-bold">9. FabLab</h2>
             </div>
             <div class="section-content">
-                <h3 class="text-lg font-semibold text-gray-700 mb-3">Estrategia a Nivel Nacional</h3>
-                 <div class="pl-4 border-l-4 border-blue-600 mb-4">
-                    <h4 class="font-semibold">Actividades Afectadas:</h4>
-                    <ul class="list-disc list-inside mt-1 text-gray-700">
-                        <li>Proyectos de estudiantes.</li>
-                        <li>Actividades con Asociaciones (talleres, competencias).</li>
-                        <li>Competencia del Club de Robótica.</li>
-                        <li>Visitas de colegios y talleres.</li>
-                    </ul>
-                </div>
-                <div class="pl-4 border-l-4 border-green-600">
-                    <h4 class="font-semibold">Adecuaciones Propuestas:</h4>
-                     <ul class="list-disc list-inside mt-1 text-gray-700">
-                        <li>Solicitar a los docentes que los estudiantes avancen y terminen sus proyectos entre la semana 1 y 7.</li>
-                        <li>Lanzar una campaña de comunicación masiva (redes sociales, correos) desde el inicio de Q4 para informar sobre esta medida.</li>
-                    </ul>
+                <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">Estrategia a Nivel Nacional</h3>
+                 <div class="flow-container">
+                    <div class="flow-box activity-box">
+                        <div>
+                            <h4>Actividades Afectadas</h4>
+                            <ul class="list-disc list-inside">
+                               <li>Proyectos de estudiantes.</li>
+                               <li>Actividades con Asociaciones (talleres, competencias).</li>
+                               <li>Competencia del Club de Robótica.</li>
+                               <li>Visitas de colegios y talleres.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="connector-horizontal"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
+                    <div class="flow-box adequacy-box">
+                        <div>
+                            <h4>Adecuaciones Propuestas</h4>
+                             <ul class="list-disc list-inside text-left">
+                                <li>Solicitar a los docentes que los estudiantes avancen y terminen sus proyectos entre la semana 1 y 7.</li>
+                                <li>Lanzar una campaña de comunicación masiva (redes sociales, correos) desde el inicio de Q4 para informar sobre esta medida.</li>
+                            </ul>
+                        </div>
+                        <div class="icon-tray">
+                            <svg data-action-id="logistica" title="Coordinación Logística de Laboratorios" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-7.5 5.25h7.5" /></svg>
+                            <svg data-action-id="comunicacion" title="Comunicación Institucional" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.72 3.72a.75.75 0 01-1.06 0l-3.72-3.72C9.347 17.1 8.5 16.136 8.5 15v-4.286c0-.97.616-1.813 1.5-2.097m6.75 0a9.006 9.006 0 00-6.75 0M10.5 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -379,31 +712,6 @@
             </div>
         </div>
         
-        <!-- Transversal Actions Section -->
-        <div class="section-card" id="acciones-transversales">
-            <div class="section-header">
-                <h2 class="text-xl font-bold">Acciones Transversales Clave para la Facultad</h2>
-            </div>
-            <div class="section-content">
-                <p class="mb-4">El análisis de los planes de cada área revela la necesidad de coordinar acciones a nivel de Facultad para garantizar una implementación exitosa, coherente y eficiente. Las siguientes acciones estratégicas se proponen para ser gestionadas de forma centralizada:</p>
-                <ul class="list-disc list-inside space-y-3">
-                    <li>
-                        <strong>Gestión de Recursos Tecnológicos:</strong> Centralizar la habilitación de licencias de software (Zoom, simuladores) y la implementación de una herramienta de proctoring para garantizar la integridad de las evaluaciones virtuales.
-                    </li>
-                    <li>
-                        <strong>Protocolos Académicos Unificados:</strong> Definir y comunicar un protocolo único para la gestión de Prácticas Profesionales, Pasantías y Proyectos de Graduación adaptado a la modalidad mixta del período.
-                    </li>
-                    <li>
-                        <strong>Comunicación Centralizada:</strong> Lanzar una campaña de comunicación institucional desde la Facultad para informar de manera coherente a estudiantes y docentes sobre los cambios, fechas clave y expectativas.
-                    </li>
-                    <li>
-                        <strong>Coordinación Logística de Laboratorios:</strong> Implementar un sistema de gestión centralizado para la reserva y uso de laboratorios y talleres, optimizando su disponibilidad durante la alta demanda de las primeras 7 semanas.
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-
         <!-- Conclusions & Recommendations -->
         <div class="section-card" id="conclusiones">
             <div class="section-header">
@@ -435,7 +743,6 @@
                 </ul>
             </div>
         </div>
-
     </main>
 
     <footer class="bg-gray-800 text-white mt-8">
@@ -443,7 +750,70 @@
             <p>&copy; 2025 UNITEC - Facultad de Ingeniería. Todos los derechos reservados.</p>
         </div>
     </footer>
+    
+    <!-- Modal Structure -->
+    <div id="actionModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modalTitle" class="text-xl font-bold text-gray-800"></h3>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <p id="modalDescription" class="text-gray-600"></p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const actions = {
+                licencias: {
+                    title: 'Gestión de Licencias',
+                    description: 'Centralizar la habilitación de licencias de software (Zoom, Sumadi, simuladores, etc.) y la implementación de una herramienta de proctoring para garantizar la integridad de las evaluaciones virtuales.'
+                },
+                protocolos: {
+                    title: 'Protocolo de PP, PG y Pasantías',
+                    description: 'Definir y comunicar un protocolo único para la gestión de Prácticas Profesionales, Pasantías y Proyectos de Graduación adaptado a la modalidad mixta del período.'
+                },
+                comunicacion: {
+                    title: 'Comunicación Institucional',
+                    description: 'Lanzar una campaña de comunicación institucional para informar de manera coherente a estudiantes y docentes sobre los cambios, fechas clave y expectativas; mencionando que estos cambios superceden al calendario académico.'
+                },
+                logistica: {
+                    title: 'Coordinación Logística de Laboratorios',
+                    description: 'Mantener una comunicación fluida entre las areas académicas para garantizar un uso compartido de laboratorios y talleres sin conflictos, optimizando la disponibilidad de recursos durante la alta demanda de las primeras 7 semanas.'
+                }
+            };
 
+            const modal = document.getElementById('actionModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const closeModalBtn = document.getElementById('closeModal');
+            
+            const icons = document.querySelectorAll('[data-action-id]');
+
+            icons.forEach(icon => {
+                icon.addEventListener('click', () => {
+                    const actionId = icon.getAttribute('data-action-id');
+                    const action = actions[actionId];
+                    if (action) {
+                        modalTitle.textContent = action.title;
+                        modalDescription.textContent = action.description;
+                        modal.classList.remove('hidden');
+                    }
+                });
+            });
+
+            const closeModal = () => {
+                modal.classList.add('hidden');
+            };
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 
