@@ -260,18 +260,42 @@
                     <canvas id="usageChart"></canvas>
                 </div>
             </div>
-             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Inversión por Facultad -->
                 <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-cobalt-blue">
                      <h2 class="section-title text-cobalt-blue border-pacific-cyan">Inversión por Facultad</h2>
                      <div class="w-full h-80 flex justify-center items-center">
-                        <canvas id="facultyChart"></canvas>
+                        <canvas id="facultyInvestmentChart"></canvas>
                     </div>
+                    <p class="text-sm text-gray-600 mt-4 text-center">Este gráfico distribuye el costo de cada licencia de manera equitativa entre las facultades que la utilizan. La suma de los segmentos es igual a la inversión total.</p>
                 </div>
+                <!-- Inversión por Institución -->
                  <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-pacific-cyan">
                     <h2 class="section-title text-cobalt-blue border-pacific-cyan">Inversión por Institución</h2>
                     <div class="w-full h-80 flex justify-center items-center">
-                        <canvas id="institutionChart"></canvas>
+                        <canvas id="institutionInvestmentChart"></canvas>
                     </div>
+                    <p class="text-sm text-gray-600 mt-4 text-center">Este gráfico distribuye el costo de cada licencia de manera equitativa entre las instituciones que la utilizan. La suma de los segmentos es igual a la inversión total.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Aprovechamiento por Facultad -->
+                <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-cobalt-blue">
+                     <h2 class="section-title text-cobalt-blue border-pacific-cyan">Aprovechamiento de la Inversión por Facultad</h2>
+                     <div class="w-full h-80 flex justify-center items-center">
+                        <canvas id="facultyLeverageChart"></canvas>
+                    </div>
+                     <p class="text-sm text-gray-600 mt-4 text-center">Este gráfico muestra el valor total de software al que cada facultad tiene acceso. El costo de una licencia compartida se suma íntegramente a cada facultad, reflejando el valor total disponible para ellas.</p>
+                </div>
+                <!-- Aprovechamiento por Institución -->
+                 <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-pacific-cyan">
+                    <h2 class="section-title text-cobalt-blue border-pacific-cyan">Aprovechamiento de la Inversión por Institución</h2>
+                    <div class="w-full h-80 flex justify-center items-center">
+                        <canvas id="institutionLeverageChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-4 text-center">Este gráfico muestra el valor total de software al que cada institución tiene acceso. El costo de una licencia compartida se suma íntegramente a cada institución, reflejando el valor total disponible para ellas.</p>
                 </div>
             </div>
         </section>
@@ -341,7 +365,7 @@
     <!-- Footer -->
     <footer class="bg-federal-blue text-white mt-12">
         <div class="container mx-auto px-6 py-4 text-center text-gray-400">
-            &copy; 2025 UNITEC. Todos los derechos reservados.
+            &copy; 2024 UNITEC. Todos los derechos reservados.
         </div>
     </footer>
     
@@ -440,7 +464,7 @@
             
             const allSoftware = [...softwareData.mantener, ...softwareData.renegociar, ...softwareData.descontinuar];
 
-            // --- ALL CHARTS RENDER HERE (omitted for brevity, no changes from previous version) ---
+            // --- CHART 1 & 2 (Unchanged) ---
             const investmentCtx = document.getElementById('investmentCategoryChart').getContext('2d');
             new Chart(investmentCtx, { type: 'pie', data: { labels: ['Continuar Utilizando', 'Renegociar o Ampliar', 'Reevaluar o Descontinuar'], datasets: [{ data: [totalMantener, totalRenegociar, totalDescontinuar], backgroundColor: ['#22c55e', '#f97316', '#ef4444'], borderColor: '#ffffff', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (context) => `${context.label}: ${formatCurrency(context.raw)}` } }, datalabels: { formatter: (value, ctx) => { const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); const percentage = (value * 100 / sum).toFixed(1) + '%'; return percentage; }, color: '#fff', font: { weight: 'bold', size: 14 } } } } });
             const areaPalettes = { 'Salud': ['#0F4986', '#47C8FD', '#7dd3fc', '#0284c7'], 'Diseño': ['#33a02c', '#b2df8a'], 'Negocios': ['#ff7f00', '#fdbf6f', '#fb9a99', '#e31a1c'], 'Ingeniería': ['#6a3d9a', '#cab2d6', '#1f78b4', '#a6cee3'] };
@@ -450,14 +474,57 @@
             sortedAreas.forEach((area) => { let areaTotalCost = 0; const palette = areaPalettes[area]; let colorIndex = 0; const sortedTypes = Object.keys(softwareCostByArea[area]).sort(); sortedTypes.forEach(tipo => { const cost = softwareCostByArea[area][tipo]; areaTotalCost += cost; innerLabels.push(tipo); innerData.push(cost); innerColors.push(palette[colorIndex % palette.length]); colorIndex++; }); outerData.push(areaTotalCost); outerColors.push(palette[0]); });
             const usageCtx = document.getElementById('usageChart').getContext('2d');
             new Chart(usageCtx, { type: 'doughnut', data: { labels: innerLabels, datasets: [ { label: 'Área', data: outerData, backgroundColor: outerColors, borderColor: '#ffffff', borderWidth: 2, }, { label: 'Tipo de Uso', data: innerData, backgroundColor: innerColors, borderColor: '#ffffff', borderWidth: 2, } ] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { family: "'Poppins', sans-serif" }, boxWidth: 20, padding: 15, generateLabels: (chart) => { const data = chart.data; const innerDataset = data.datasets[1]; return data.labels.map((label, i) => { const value = innerDataset.data[i]; const percentage = ((value / totalGeneral) * 100).toFixed(1); return { text: `${label}: ${percentage}%`, fillStyle: innerDataset.backgroundColor[i], strokeStyle: innerDataset.backgroundColor[i], hidden: isNaN(value), index: i }; }); } } }, tooltip: { callbacks: { title: () => '', label: (context) => { const value = context.raw; const percentage = ((value / totalGeneral) * 100).toFixed(1); let label = ''; if (context.datasetIndex === 0) { label = outerLabels[context.dataIndex]; return `Área ${label}: ${formatCurrency(value)} (${percentage}%)`; } else { label = context.label || ''; return `${label}: ${formatCurrency(value)} (${percentage}%)`; } } } }, datalabels: { formatter: (value, ctx) => { const percentage = (value * 100 / totalGeneral); if (percentage < 3) return null; if (ctx.datasetIndex === 0) { const label = outerLabels[ctx.dataIndex]; return `${label}\n${percentage.toFixed(1)}%`; } if (ctx.datasetIndex === 1) { return percentage.toFixed(1) + '%'; } return null; }, color: '#fff', font: { weight: 'bold' }, textAlign: 'center' } } } });
+            
+            // --- CHART 3: Investment by Faculty (Distributed Cost) ---
             const facultyInvestment = { FI: 0, FCS: 0, FCAS: 0, EAD: 0, FP: 0, DUV: 0 };
-            allSoftware.forEach(item => { const costPerFaculty = item.costo / item.facultades_array.length; item.facultades_array.forEach(faculty => { if (facultyInvestment.hasOwnProperty(faculty)) { facultyInvestment[faculty] += costPerFaculty; } }); });
-            const facultyCtx = document.getElementById('facultyChart').getContext('2d');
-            new Chart(facultyCtx, { type: 'pie', data: { labels: Object.keys(facultyInvestment), datasets: [{ data: Object.values(facultyInvestment), backgroundColor: ['#06065C', '#0F4986', '#03AED2', '#47C8FD', '#7dd3fc', '#f97316'], borderColor: '#ffffff', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } }, datalabels: { formatter: (value, ctx) => { const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); if (value / sum < 0.03) return ''; return (value * 100 / sum).toFixed(1) + '%'; }, color: '#fff', font: { weight: 'bold' } } } } });
+            allSoftware.forEach(item => {
+                const costPerFaculty = item.facultades_array.length > 0 ? item.costo / item.facultades_array.length : 0;
+                item.facultades_array.forEach(faculty => {
+                    if (facultyInvestment.hasOwnProperty(faculty)) {
+                        facultyInvestment[faculty] += costPerFaculty;
+                    }
+                });
+            });
+            const facultyInvestmentCtx = document.getElementById('facultyInvestmentChart').getContext('2d');
+            new Chart(facultyInvestmentCtx, { type: 'pie', data: { labels: Object.keys(facultyInvestment), datasets: [{ data: Object.values(facultyInvestment), backgroundColor: ['#06065C', '#0F4986', '#03AED2', '#47C8FD', '#7dd3fc', '#f97316'], borderColor: '#ffffff', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } }, datalabels: { formatter: (value, ctx) => { const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); if (value / sum < 0.03) return ''; return (value * 100 / sum).toFixed(1) + '%'; }, color: '#fff', font: { weight: 'bold' } } } } });
+
+            // --- CHART 4: Investment by Institution (Distributed Cost) ---
             const institutionInvestment = { UNITEC: 0, CEUTEC: 0 };
-            allSoftware.forEach(item => { const costPerInstitution = item.costo / item.institucion_array.length; item.institucion_array.forEach(inst => { if (institutionInvestment.hasOwnProperty(inst)) { institutionInvestment[inst] += costPerInstitution; } }); });
-            const institutionCtx = document.getElementById('institutionChart').getContext('2d');
-            new Chart(institutionCtx, { type: 'pie', data: { labels: Object.keys(institutionInvestment), datasets: [{ data: Object.values(institutionInvestment), backgroundColor: ['#06065C', '#03AED2'], borderColor: '#ffffff', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } }, datalabels: { formatter: (value, ctx) => { const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); return (value * 100 / sum).toFixed(1) + '%'; }, color: '#fff', font: { weight: 'bold', size: 14 } } } } });
+            allSoftware.forEach(item => {
+                const costPerInstitution = item.institucion_array.length > 0 ? item.costo / item.institucion_array.length : 0;
+                item.institucion_array.forEach(inst => {
+                    if (institutionInvestment.hasOwnProperty(inst)) {
+                        institutionInvestment[inst] += costPerInstitution;
+                    }
+                });
+            });
+            const institutionInvestmentCtx = document.getElementById('institutionInvestmentChart').getContext('2d');
+            new Chart(institutionInvestmentCtx, { type: 'pie', data: { labels: Object.keys(institutionInvestment), datasets: [{ data: Object.values(institutionInvestment), backgroundColor: ['#06065C', '#03AED2'], borderColor: '#ffffff', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } }, datalabels: { formatter: (value, ctx) => { const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); return (value * 100 / sum).toFixed(1) + '%'; }, color: '#fff', font: { weight: 'bold', size: 14 } } } } });
+
+            // --- CHART 5: Investment Leverage by Faculty ---
+            const facultyLeverage = { FI: 0, FCS: 0, FCAS: 0, EAD: 0, FP: 0, DUV: 0 };
+            allSoftware.forEach(item => {
+                item.facultades_array.forEach(faculty => {
+                    if (facultyLeverage.hasOwnProperty(faculty)) {
+                        facultyLeverage[faculty] += item.costo;
+                    }
+                });
+            });
+            const facultyLeverageCtx = document.getElementById('facultyLeverageChart').getContext('2d');
+            new Chart(facultyLeverageCtx, { type: 'pie', data: { labels: Object.keys(facultyLeverage), datasets: [{ data: Object.values(facultyLeverage), backgroundColor: ['#06065C', '#0F4986', '#03AED2', '#47C8FD', '#7dd3fc', '#f97316'], borderColor: '#ffffff', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } }, datalabels: { formatter: (value, ctx) => { const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); if (value / sum < 0.03) return ''; return (value * 100 / sum).toFixed(1) + '%'; }, color: '#fff', font: { weight: 'bold' } } } } });
+
+            // --- CHART 6: Investment Leverage by Institution ---
+            const institutionLeverage = { UNITEC: 0, CEUTEC: 0 };
+            allSoftware.forEach(item => {
+                item.institucion_array.forEach(inst => {
+                    if (institutionLeverage.hasOwnProperty(inst)) {
+                        institutionLeverage[inst] += item.costo;
+                    }
+                });
+            });
+            const institutionLeverageCtx = document.getElementById('institutionLeverageChart').getContext('2d');
+            new Chart(institutionLeverageCtx, { type: 'pie', data: { labels: Object.keys(institutionLeverage), datasets: [{ data: Object.values(institutionLeverage), backgroundColor: ['#06065C', '#03AED2'], borderColor: '#ffffff', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } }, datalabels: { formatter: (value, ctx) => { const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); return (value * 100 / sum).toFixed(1) + '%'; }, color: '#fff', font: { weight: 'bold', size: 14 } } } } });
+
 
             // --- QR Code Generation ---
             new QRCode(document.getElementById("qrcode"), { text: "https://capexfi25-30.netlify.app/analisislicencias/", width: 150, height: 150, colorDark : "#06065C", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H });
@@ -636,5 +703,4 @@
     </script>
 </body>
 </html>
-
 
