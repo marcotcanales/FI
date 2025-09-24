@@ -67,6 +67,80 @@
             margin-bottom: 1rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        .modal-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--unitec-cobalt-blue);
+            margin-bottom: 1rem;
+        }
+         .modal-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--unitec-cobalt-blue);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .modal-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-top: 1rem;
+        }
+         .modal-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .ai-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--unitec-cobalt-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .ai-button:hover {
+            background-color: var(--unitec-federal-blue);
+        }
     </style>
 </head>
 <body>
@@ -116,15 +190,15 @@
                     {"nombre": "Flexsim", "costo": 27457.00, "tipo": "Simulación de Procesos", "descripcion": "Simulación de procesos y operaciones.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual", "observacion": "Se debería continuar utilizando.", "facultades_array": ["FI"], "institucion_array": ["UNITEC", "CEUTEC"], "area": "Ingeniería"}
                 ],
                 "renegociar": [
-                    {"nombre": "Adobe Creative Cloud", "costo": 5142353.30, "tipo": "Diseño Creativo", "descripcion": "Suite de diseño, video y desarrollo web.", "facultades": "FI (Arquitectura), FCAS/EAD (Diseño Gráfico, Modas)", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Mixto (1,700 licencias + ilimitado para Ceutec)", "observacion": "Continuar renovando – Se puede analizar esquema de licenciamiento.", "facultades_array": ["FI", "EAD"], "institucion_array": ["UNITEC", "CEUTEC"], "area": "Diseño"},
-                    {"nombre": "Multisim", "costo": 236700.00, "tipo": "Simulación de Circuitos", "descripcion": "Simulación de circuitos electrónicos.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "100 licencias Lab y 1000k", "observacion": "Renegociar para uso en aplicación web. Clave para Electrónica en CeutEC.", "facultades_array": ["FI"], "institucion_array": ["UNITEC", "CEUTEC"], "area": "Ingeniería"},
-                    {"nombre": "SAP", "costo": 71305.00, "tipo": "ERP", "descripcion": "Software de planificación de recursos empresariales (ERP).", "facultades": "FI, FCAS, FP", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual por usuario", "observacion": "Duplicar la cantidad de licencias beneficiaría a Ing. Industrial y Logística.", "facultades_array": ["FI", "FCAS", "FP"], "institucion_array": ["UNITEC", "CEUTEC"], "area": "Negocios"},
-                    {"nombre": "SPSS", "costo": 332637.50, "tipo": "Análisis Estadístico", "descripcion": "Software estadístico para investigación en ciencias sociales.", "facultades": "FCAS, FP", "institucion": "UNITEC", "licenciamiento": "Anual por usuario (26 licencias en red)", "observacion": "Buscar otro esquema de licenciamiento para mayor provecho. Oportunidad en investigación FCAS.", "facultades_array": ["FCAS", "FP"], "institucion_array": ["UNITEC"], "area": "Negocios"}
+                    {"nombre": "Adobe Creative Cloud", "costo": 5142353.30, "tipo": "Diseño Creativo", "descripcion": "Suite de diseño, video y desarrollo web.", "facultades": "FI (Arquitectura), FCAS/EAD (Diseño Gráfico, Modas)", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Mixto (1,700 licencias + ilimitado para Ceutec)", "observacion": "Continuar renovando – Se puede analizar esquema de licenciamiento.", "facultades_array": ["FI", "EAD"], "institucion_array": ["UNITEC", "CEUTEC"], "area": "Diseño", "id": "adobe"},
+                    {"nombre": "Multisim", "costo": 236700.00, "tipo": "Simulación de Circuitos", "descripcion": "Simulación de circuitos electrónicos.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "100 licencias Lab y 1000k", "observacion": "Renegociar para uso en aplicación web. Clave para Electrónica en CeutEC.", "facultades_array": ["FI"], "institucion_array": ["UNITEC", "CEUTEC"], "area": "Ingeniería", "id": "multisim"},
+                    {"nombre": "SAP", "costo": 71305.00, "tipo": "ERP", "descripcion": "Software de planificación de recursos empresariales (ERP).", "facultades": "FI, FCAS, FP", "institucion": "UNITEC y CEUTEC", "licenciamiento": "Anual por usuario", "observacion": "Duplicar la cantidad de licencias beneficiaría a Ing. Industrial y Logística.", "facultades_array": ["FI", "FCAS", "FP"], "institucion_array": ["UNITEC", "CEUTEC"], "area": "Negocios", "id": "sap"},
+                    {"nombre": "SPSS", "costo": 332637.50, "tipo": "Análisis Estadístico", "descripcion": "Software estadístico para investigación en ciencias sociales.", "facultades": "FCAS, FP", "institucion": "UNITEC", "licenciamiento": "Anual por usuario (26 licencias en red)", "observacion": "Buscar otro esquema de licenciamiento para mayor provecho. Oportunidad en investigación FCAS.", "facultades_array": ["FCAS", "FP"], "institucion_array": ["UNITEC"], "area": "Negocios", "id": "spss"}
                 ],
                 "descontinuar": [
-                    {"nombre": "Labview", "costo": 157800.00, "tipo": "Programación Gráfica", "descripcion": "Simulación y programación de sistemas.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "100 licencias Lab y 1000 estudiantes", "observacion": "Reemplazar con Simulink (incluido en MATLAB). La industria no utiliza este software.", "facultades_array": ["FI"], "institucion_array": ["UNITEC", "CEUTEC"], "area": "Ingeniería"},
-                    {"nombre": "Glifing", "costo": 315000.00, "tipo": "Entrenamiento Lectura", "descripcion": "Entrenador de lectura.", "facultades": "FCS", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "No se logra identificar quién lo utiliza.", "facultades_array": ["FCS"], "institucion_array": ["UNITEC"], "area": "Salud"},
-                    {"nombre": "CESIM", "costo": 1381719.42, "tipo": "Simulación de Negocios", "descripcion": "Simulación y Laboratorios Virtuales.", "facultades": "FP y FCAS", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "Según las áreas consultadas, no es una licencia que se deba seguir pagando.", "facultades_array": ["FP", "FCAS"], "institucion_array": ["UNITEC"], "area": "Negocios"}
+                    {"nombre": "Labview", "costo": 157800.00, "tipo": "Programación Gráfica", "descripcion": "Simulación y programación de sistemas.", "facultades": "FI", "institucion": "UNITEC y CEUTEC", "licenciamiento": "100 licencias Lab y 1000 estudiantes", "observacion": "Reemplazar con Simulink (incluido en MATLAB). La industria no utiliza este software.", "facultades_array": ["FI"], "institucion_array": ["UNITEC", "CEUTEC"], "area": "Ingeniería", "id": "labview"},
+                    {"nombre": "Glifing", "costo": 315000.00, "tipo": "Entrenamiento Lectura", "descripcion": "Entrenador de lectura.", "facultades": "FCS", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "No se logra identificar quién lo utiliza.", "facultades_array": ["FCS"], "institucion_array": ["UNITEC"], "area": "Salud", "id": "glifing"},
+                    {"nombre": "CESIM", "costo": 1381719.42, "tipo": "Simulación de Negocios", "descripcion": "Simulación y Laboratorios Virtuales.", "facultades": "FP y FCAS", "institucion": "UNITEC", "licenciamiento": "Anual ilimitado", "observacion": "Según las áreas consultadas, no es una licencia que se deba seguir pagando.", "facultades_array": ["FP", "FCAS"], "institucion_array": ["UNITEC"], "area": "Negocios", "id": "cesim"}
                 ]
             }
         </div>
@@ -202,7 +276,6 @@
             </div>
         </section>
 
-
         <!-- Conclusiones y Recomendaciones -->
         <section id="conclusiones" class="mb-12">
              <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-federal-blue">
@@ -231,6 +304,24 @@
                  </div>
             </div>
         </section>
+        
+        <!-- AI Strategic Recommendations -->
+        <section id="ai-strategic-recommendations" class="mb-12">
+            <div class="bg-white p-8 rounded-lg shadow-md border-l-8 border-federal-blue">
+                <h2 class="section-title text-cobalt-blue border-pacific-cyan">Recomendaciones Estratégicas con IA</h2>
+                 <p class="text-gray-600 mb-6">Las siguientes recomendaciones fueron generadas por un modelo de IA, utilizando toda la información contenida en este reporte para proporcionar un análisis profundo y accionable.</p>
+                <div class="text-center mb-6 space-x-4">
+                    <button class="ai-button" onclick="handleRecommendationClick('strategic', 'extended')">
+                        <span>📄</span>
+                        <span>Extendido</span>
+                    </button>
+                    <button class="ai-button" onclick="handleRecommendationClick('strategic', 'synthesis')">
+                         <span>✨</span>
+                        <span>Síntesis</span>
+                    </button>
+                </div>
+            </div>
+        </section>
 
         <!-- QR Code Section -->
         <section id="qr-section" class="mb-12">
@@ -253,6 +344,18 @@
             &copy; 2024 UNITEC. Todos los derechos reservados.
         </div>
     </footer>
+    
+    <!-- Modal -->
+    <div id="ai-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modal-title"></h3>
+            <div id="modal-body" class="text-gray-700 leading-relaxed"></div>
+            <div class="text-right mt-6">
+                 <button id="modal-close-btn" class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -270,9 +373,28 @@
                 }).format(value);
             };
 
-            const createCard = (item, categoryClass) => {
+            const createCard = (item, category) => {
+                let aiButtonHtml = '';
+                if (item.id) {
+                    aiButtonHtml = `
+                        <div class="mt-4 border-t pt-3">
+                            <p class="text-sm font-semibold text-center mb-2 text-cobalt-blue">Recomendaciones de la IA</p>
+                            <div class="flex justify-center gap-4">
+                               <button class="ai-button text-xs" onclick="handleRecommendationClick('${item.id}', 'extended')">📄 Extendido</button>
+                               <button class="ai-button text-xs" onclick="handleRecommendationClick('${item.id}', 'synthesis')">✨ Síntesis</button>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                const categoryClassMap = {
+                    mantener: 'card-mantener',
+                    renegociar: 'card-renegociar',
+                    descontinuar: 'card-descontinuar'
+                };
+
                 return `
-                    <div class="card ${categoryClass} p-6 flex flex-col">
+                    <div class="card ${categoryClassMap[category]} p-6 flex flex-col">
                         <h3 class="text-xl font-bold text-cobalt-blue mb-2">${item.nombre}</h3>
                         <p class="text-gray-600 mb-4 flex-grow">${item.descripcion}</p>
                         <div class="text-sm space-y-2 mb-4">
@@ -286,22 +408,23 @@
                                 <p class="text-xs font-semibold text-cobalt-blue">Observación:</p>
                                 <p class="text-sm text-cobalt-blue">${item.observacion}</p>
                            </div>
+                           ${aiButtonHtml}
                         </div>
                     </div>
                 `;
             };
 
-            const renderCards = (category, gridId, cardClass) => {
+            const renderCards = (category, gridId) => {
                 const grid = document.getElementById(gridId);
                 const sortedData = softwareData[category].sort((a, b) => b.costo - a.costo);
                 sortedData.forEach(item => {
-                    grid.innerHTML += createCard(item, cardClass);
+                    grid.innerHTML += createCard(item, category);
                 });
             };
 
-            renderCards('mantener', 'mantener-grid', 'card-mantener');
-            renderCards('renegociar', 'renegociar-grid', 'card-renegociar');
-            renderCards('descontinuar', 'descontinuar-grid', 'card-descontinuar');
+            renderCards('mantener', 'mantener-grid');
+            renderCards('renegociar', 'renegociar-grid');
+            renderCards('descontinuar', 'descontinuar-grid');
 
             const calculateTotal = (category) => softwareData[category].reduce((sum, item) => sum + item.costo, 0);
 
@@ -317,264 +440,198 @@
             
             const allSoftware = [...softwareData.mantener, ...softwareData.renegociar, ...softwareData.descontinuar];
 
-            // --- CHART 1: Investment Category Distribution ---
+            // --- ALL CHARTS RENDER HERE (omitted for brevity, no changes from previous version) ---
             const investmentCtx = document.getElementById('investmentCategoryChart').getContext('2d');
-            new Chart(investmentCtx, {
-                type: 'pie',
-                data: {
-                    labels: ['Continuar Utilizando', 'Renegociar o Ampliar', 'Reevaluar o Descontinuar'],
-                    datasets: [{
-                        data: [totalMantener, totalRenegociar, totalDescontinuar],
-                        backgroundColor: ['#22c55e', '#f97316', '#ef4444'],
-                        borderColor: '#ffffff',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'top' },
-                        tooltip: { callbacks: { label: (context) => `${context.label}: ${formatCurrency(context.raw)}` } },
-                        datalabels: {
-                            formatter: (value, ctx) => {
-                                const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                const percentage = (value * 100 / sum).toFixed(1) + '%';
-                                return percentage;
-                            },
-                            color: '#fff',
-                            font: { weight: 'bold', size: 14 }
-                        }
-                    }
-                }
-            });
-
-            // --- CHART 2: Software Classification by Area & Use (Cost-based) ---
-            const areaPalettes = {
-                'Salud': ['#0F4986', '#47C8FD', '#7dd3fc', '#0284c7'],
-                'Diseño': ['#33a02c', '#b2df8a'],
-                'Negocios': ['#ff7f00', '#fdbf6f', '#fb9a99', '#e31a1c'],
-                'Ingeniería': ['#6a3d9a', '#cab2d6', '#1f78b4', '#a6cee3']
-            };
-            
-            const softwareCostByArea = allSoftware.reduce((acc, item) => {
-                const area = item.area;
-                if (!acc[area]) acc[area] = {};
-                acc[area][item.tipo] = (acc[area][item.tipo] || 0) + item.costo;
-                return acc;
-            }, {});
-
+            new Chart(investmentCtx, { type: 'pie', data: { labels: ['Continuar Utilizando', 'Renegociar o Ampliar', 'Reevaluar o Descontinuar'], datasets: [{ data: [totalMantener, totalRenegociar, totalDescontinuar], backgroundColor: ['#22c55e', '#f97316', '#ef4444'], borderColor: '#ffffff', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (context) => `${context.label}: ${formatCurrency(context.raw)}` } }, datalabels: { formatter: (value, ctx) => { const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); const percentage = (value * 100 / sum).toFixed(1) + '%'; return percentage; }, color: '#fff', font: { weight: 'bold', size: 14 } } } } });
+            const areaPalettes = { 'Salud': ['#0F4986', '#47C8FD', '#7dd3fc', '#0284c7'], 'Diseño': ['#33a02c', '#b2df8a'], 'Negocios': ['#ff7f00', '#fdbf6f', '#fb9a99', '#e31a1c'], 'Ingeniería': ['#6a3d9a', '#cab2d6', '#1f78b4', '#a6cee3'] };
+            const softwareCostByArea = allSoftware.reduce((acc, item) => { const area = item.area; if (!acc[area]) acc[area] = {}; acc[area][item.tipo] = (acc[area][item.tipo] || 0) + item.costo; return acc; }, {});
             const sortedAreas = Object.keys(softwareCostByArea).sort();
-            
-            const outerLabels = sortedAreas;
-            const outerData = [];
-            const outerColors = [];
-            
-            const innerLabels = [];
-            const innerData = [];
-            const innerColors = [];
-
-            sortedAreas.forEach((area) => {
-                let areaTotalCost = 0;
-                const palette = areaPalettes[area];
-                let colorIndex = 0;
-                const sortedTypes = Object.keys(softwareCostByArea[area]).sort();
-
-                sortedTypes.forEach(tipo => {
-                    const cost = softwareCostByArea[area][tipo];
-                    areaTotalCost += cost;
-                    innerLabels.push(tipo);
-                    innerData.push(cost);
-                    innerColors.push(palette[colorIndex % palette.length]);
-                    colorIndex++;
-                });
-
-                outerData.push(areaTotalCost);
-                outerColors.push(palette[0]);
-            });
-
+            const outerLabels = sortedAreas; const outerData = []; const outerColors = []; const innerLabels = []; const innerData = []; const innerColors = [];
+            sortedAreas.forEach((area) => { let areaTotalCost = 0; const palette = areaPalettes[area]; let colorIndex = 0; const sortedTypes = Object.keys(softwareCostByArea[area]).sort(); sortedTypes.forEach(tipo => { const cost = softwareCostByArea[area][tipo]; areaTotalCost += cost; innerLabels.push(tipo); innerData.push(cost); innerColors.push(palette[colorIndex % palette.length]); colorIndex++; }); outerData.push(areaTotalCost); outerColors.push(palette[0]); });
             const usageCtx = document.getElementById('usageChart').getContext('2d');
-            new Chart(usageCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: innerLabels,
-                    datasets: [
-                        {
-                            label: 'Área',
-                            data: outerData,
-                            backgroundColor: outerColors,
-                            borderColor: '#ffffff',
-                            borderWidth: 2,
-                        },
-                        {
-                            label: 'Tipo de Uso',
-                            data: innerData,
-                            backgroundColor: innerColors,
-                            borderColor: '#ffffff',
-                            borderWidth: 2,
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: {
-                                font: { family: "'Poppins', sans-serif" },
-                                boxWidth: 20,
-                                padding: 15,
-                                generateLabels: (chart) => {
-                                    const data = chart.data;
-                                    const innerDataset = data.datasets[1];
-                                    return data.labels.map((label, i) => {
-                                        const value = innerDataset.data[i];
-                                        const percentage = ((value / totalGeneral) * 100).toFixed(1);
-                                        return {
-                                            text: `${label}: ${percentage}%`,
-                                            fillStyle: innerDataset.backgroundColor[i],
-                                            strokeStyle: innerDataset.backgroundColor[i],
-                                            hidden: isNaN(value),
-                                            index: i
-                                        };
-                                    });
-                                }
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                title: () => '', // Esto elimina el título por defecto que causaba el problema
-                                label: (context) => {
-                                    const value = context.raw;
-                                    const percentage = ((value / totalGeneral) * 100).toFixed(1);
-                                    let label = '';
-
-                                    if (context.datasetIndex === 0) {
-                                       // Aro exterior (Área)
-                                       label = outerLabels[context.dataIndex];
-                                       return `Área ${label}: ${formatCurrency(value)} (${percentage}%)`;
-                                    } else {
-                                       // Aro interior (Tipo de Software)
-                                       label = context.label || '';
-                                       return `${label}: ${formatCurrency(value)} (${percentage}%)`;
-                                    }
-                                }
-                            }
-                        },
-                        datalabels: {
-                            formatter: (value, ctx) => {
-                                const percentage = (value * 100 / totalGeneral);
-                                if (percentage < 3) return null; 
-
-                                if (ctx.datasetIndex === 0) { // Outer ring
-                                    const label = outerLabels[ctx.dataIndex];
-                                    return `${label}\n${percentage.toFixed(1)}%`;
-                                }
-                                if (ctx.datasetIndex === 1) { // Inner ring
-                                    return percentage.toFixed(1) + '%';
-                                }
-                                return null;
-                            },
-                            color: '#fff',
-                            font: {
-                                weight: 'bold'
-                            },
-                            textAlign: 'center'
-                        }
-                    }
-                }
-            });
-
-            // --- CHART 3: Investment by Faculty ---
+            new Chart(usageCtx, { type: 'doughnut', data: { labels: innerLabels, datasets: [ { label: 'Área', data: outerData, backgroundColor: outerColors, borderColor: '#ffffff', borderWidth: 2, }, { label: 'Tipo de Uso', data: innerData, backgroundColor: innerColors, borderColor: '#ffffff', borderWidth: 2, } ] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { family: "'Poppins', sans-serif" }, boxWidth: 20, padding: 15, generateLabels: (chart) => { const data = chart.data; const innerDataset = data.datasets[1]; return data.labels.map((label, i) => { const value = innerDataset.data[i]; const percentage = ((value / totalGeneral) * 100).toFixed(1); return { text: `${label}: ${percentage}%`, fillStyle: innerDataset.backgroundColor[i], strokeStyle: innerDataset.backgroundColor[i], hidden: isNaN(value), index: i }; }); } } }, tooltip: { callbacks: { title: () => '', label: (context) => { const value = context.raw; const percentage = ((value / totalGeneral) * 100).toFixed(1); let label = ''; if (context.datasetIndex === 0) { label = outerLabels[context.dataIndex]; return `Área ${label}: ${formatCurrency(value)} (${percentage}%)`; } else { label = context.label || ''; return `${label}: ${formatCurrency(value)} (${percentage}%)`; } } } }, datalabels: { formatter: (value, ctx) => { const percentage = (value * 100 / totalGeneral); if (percentage < 3) return null; if (ctx.datasetIndex === 0) { const label = outerLabels[ctx.dataIndex]; return `${label}\n${percentage.toFixed(1)}%`; } if (ctx.datasetIndex === 1) { return percentage.toFixed(1) + '%'; } return null; }, color: '#fff', font: { weight: 'bold' }, textAlign: 'center' } } } });
             const facultyInvestment = { FI: 0, FCS: 0, FCAS: 0, EAD: 0, FP: 0, DUV: 0 };
-            allSoftware.forEach(item => {
-                const costPerFaculty = item.costo / item.facultades_array.length;
-                item.facultades_array.forEach(faculty => {
-                    if (facultyInvestment.hasOwnProperty(faculty)) {
-                        facultyInvestment[faculty] += costPerFaculty;
-                    }
-                });
-            });
-            
+            allSoftware.forEach(item => { const costPerFaculty = item.costo / item.facultades_array.length; item.facultades_array.forEach(faculty => { if (facultyInvestment.hasOwnProperty(faculty)) { facultyInvestment[faculty] += costPerFaculty; } }); });
             const facultyCtx = document.getElementById('facultyChart').getContext('2d');
-            new Chart(facultyCtx, {
-                type: 'pie',
-                data: {
-                    labels: Object.keys(facultyInvestment),
-                    datasets: [{
-                        data: Object.values(facultyInvestment),
-                        backgroundColor: ['#06065C', '#0F4986', '#03AED2', '#47C8FD', '#7dd3fc', '#f97316'],
-                        borderColor: '#ffffff',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'top' },
-                        tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } },
-                        datalabels: {
-                            formatter: (value, ctx) => {
-                                const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                if (value / sum < 0.03) return ''; // Hide small percentages
-                                return (value * 100 / sum).toFixed(1) + '%';
-                            },
-                            color: '#fff', font: { weight: 'bold' }
-                        }
-                    }
-                }
-            });
-
-            // --- CHART 4: Investment by Institution ---
+            new Chart(facultyCtx, { type: 'pie', data: { labels: Object.keys(facultyInvestment), datasets: [{ data: Object.values(facultyInvestment), backgroundColor: ['#06065C', '#0F4986', '#03AED2', '#47C8FD', '#7dd3fc', '#f97316'], borderColor: '#ffffff', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } }, datalabels: { formatter: (value, ctx) => { const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); if (value / sum < 0.03) return ''; return (value * 100 / sum).toFixed(1) + '%'; }, color: '#fff', font: { weight: 'bold' } } } } });
             const institutionInvestment = { UNITEC: 0, CEUTEC: 0 };
-            allSoftware.forEach(item => {
-                const costPerInstitution = item.costo / item.institucion_array.length;
-                item.institucion_array.forEach(inst => {
-                    if (institutionInvestment.hasOwnProperty(inst)) {
-                        institutionInvestment[inst] += costPerInstitution;
-                    }
-                });
-            });
-
+            allSoftware.forEach(item => { const costPerInstitution = item.costo / item.institucion_array.length; item.institucion_array.forEach(inst => { if (institutionInvestment.hasOwnProperty(inst)) { institutionInvestment[inst] += costPerInstitution; } }); });
             const institutionCtx = document.getElementById('institutionChart').getContext('2d');
-            new Chart(institutionCtx, {
-                 type: 'pie',
-                data: {
-                    labels: Object.keys(institutionInvestment),
-                    datasets: [{
-                        data: Object.values(institutionInvestment),
-                        backgroundColor: ['#06065C', '#03AED2'],
-                        borderColor: '#ffffff',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'top' },
-                        tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } },
-                        datalabels: {
-                            formatter: (value, ctx) => {
-                                const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                return (value * 100 / sum).toFixed(1) + '%';
-                            },
-                            color: '#fff', font: { weight: 'bold', size: 14 }
-                        }
-                    }
-                }
-            });
+            new Chart(institutionCtx, { type: 'pie', data: { labels: Object.keys(institutionInvestment), datasets: [{ data: Object.values(institutionInvestment), backgroundColor: ['#06065C', '#03AED2'], borderColor: '#ffffff', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (c) => `${c.label}: ${formatCurrency(c.raw)}` } }, datalabels: { formatter: (value, ctx) => { const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); return (value * 100 / sum).toFixed(1) + '%'; }, color: '#fff', font: { weight: 'bold', size: 14 } } } } });
 
             // --- QR Code Generation ---
-            new QRCode(document.getElementById("qrcode"), {
-                text: "https://capexfi25-30.netlify.app/analisislicencias/",
-                width: 150,
-                height: 150,
-                colorDark : "#06065C",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            });
+            new QRCode(document.getElementById("qrcode"), { text: "https://capexfi25-30.netlify.app/analisislicencias/", width: 150, height: 150, colorDark : "#06065C", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H });
 
+            // --- Static AI Recommendations Logic ---
+            const aiRecommendations = {
+                adobe: {
+                    title: "Recomendaciones para Adobe Creative Cloud",
+                    extended: `<h4>Puntos Clave de Negociación para Adobe Creative Cloud (Renovación)</h4>
+                        <ol class="list-decimal pl-5 space-y-3">
+                            <li><strong>Transición a un Modelo Enterprise (ETLA) o VIP Consolidado:</strong> Apalancándose en el precedente de Ceutec para pasar del esquema mixto a un modelo de contrato Enterprise Term License Agreement (ETLA) o Value Incentive Plan (VIP) consolidado. Esto simplificará la administración y buscará un costo por usuario significativamente menor.</li>
+                            <li><strong>Negociación de Descuentos por Volumen Mejorados y Compromiso Multianual:</strong> Asegurar un descuento por volumen sustancialmente mayor, aprovechando las 1,700 licencias y la posibilidad de un compromiso a largo plazo (2-3 años) para protegerse de futuros aumentos de precio.</li>
+                            <li><strong>Análisis de Uso Real y Licenciamiento por Niveles (Tiered Licensing):</strong> Realizar un estudio del uso de aplicaciones específicas para negociar un esquema de licenciamiento por niveles o "bundles" más ajustado, evitando pagar por funcionalidades no utilizadas por la mayoría.</li>
+                            <li><strong>Exploración de Valor Adicional y Condiciones de Pago Flexibles:</strong> Negociar beneficios adicionales como soporte técnico dedicado, capacitaciones exclusivas, o condiciones de pago trimestrales/semestrales en lugar de anuales.</li>
+                        </ol>`,
+                    synthesis: `<ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Modelo Enterprise (ETLA):</strong> Unificar licenciamiento para reducir costos.</li>
+                                <li><strong>Contrato Multianual:</strong> Negociar descuentos por volumen y compromiso.</li>
+                                <li><strong>Licencias por Niveles:</strong> Analizar uso real para optimizar paquetes.</li>
+                                <li><strong>Valor Añadido:</strong> Buscar soporte, capacitación y pagos flexibles.</li>
+                              </ul>`
+                },
+                spss: {
+                    title: "Recomendaciones para SPSS",
+                    extended: `<h4>Puntos Clave de Negociación para SPSS</h4>
+                        <ol class="list-decimal pl-5 space-y-3">
+                           <li><strong>Exploración de Licenciamiento Académico/Institucional (Sitio o Departamento):</strong> Negociar un esquema de licencias de sitio (Site Licenses) que permita un número ilimitado o muy elevado de usuarios dentro de un campus o facultad, reduciendo el costo por usuario y permitiendo un crecimiento exponencial en el uso en investigación.</li>
+                           <li><strong>Acuerdo Multi-anual con Descuentos por Volumen y Crecimiento Proyectado:</strong> Proponer un contrato de 2 a 3 años para asegurar un descuento por compromiso a largo plazo y negociar precios escalonados si el uso supera ciertos umbrales en el futuro.</li>
+                           <li><strong>Análisis de Uso y Optimización del Modelo de Licencias Concurrentes:</strong> Solicitar datos de uso de las 26 licencias actuales para entender los picos de concurrencia. Si el uso es bajo, negociar un modelo de licencias concurrentes reales o una reducción en el número total de licencias.</li>
+                           <li><strong>Paquetes Integrados de "Data Science" de IBM para Investigación:</strong> Investigar la posibilidad de adquirir SPSS como parte de un paquete más amplio de herramientas de "Data Science" de IBM, lo que podría ofrecer un valor añadido sustancial a un costo menor que adquirir cada componente por separado.</li>
+                        </ol>`,
+                    synthesis: `<ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Licencia de Sitio/Académica:</strong> Buscar licenciamiento ilimitado para expandir uso.</li>
+                                <li><strong>Acuerdo Multianual:</strong> Proponer para obtener descuentos por volumen.</li>
+                                <li><strong>Uso Concurrente:</strong> Analizar para ajustar número de licencias.</li>
+                                <li><strong>Paquetes "Data Science":</strong> Considerar bundles de IBM para mayor valor.</li>
+                              </ul>`
+                },
+                multisim: {
+                    title: "Recomendaciones para Multisim",
+                    extended: `<h4>Puntos Clave de Negociación para Multisim</h4>
+                        <ol class="list-decimal pl-5 space-y-3">
+                           <li><strong>Transición a Licenciamiento de Uso Concurrente o por Servidor para Aplicación Web:</strong> Cambiar el modelo de licencias de laboratorio a un modelo de licencias concurrentes (basado en usuarios simultáneos) o por servidor, lo que alinea el costo con el uso real en un entorno web.</li>
+                           <li><strong>Optimización del Costo Anual y Descuento por Volumen Académico Estratégico:</strong> Exigir un descuento significativo por volumen académico y explorar un acuerdo multi-anual (3-5 años) a cambio de una tarifa anual reducida y fija.</li>
+                           <li><strong>Exploración de Modelos Híbridos o Basados en Consumo (Usage-Based):</strong> Investigar si National Instruments (NI) ofrece modelos de licenciamiento basados en el consumo real (ej. número de simulaciones, horas de uso), permitiendo que CeutEC pague solo por lo que consume.</li>
+                           <li><strong>Soporte Técnico Especializado e Integración para Despliegue Web:</strong> Negociar un paquete de soporte técnico premium que incluya asistencia directa para la implementación y la integración de APIs, asegurando una transición fluida y un rendimiento óptimo de la aplicación.</li>
+                        </ol>`,
+                    synthesis: `<ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Licencia Web:</strong> Migrar a modelo concurrente o por servidor.</li>
+                                <li><strong>Optimización de Costo:</strong> Buscar descuento académico y acuerdo multianual.</li>
+                                <li><strong>Pago por Consumo:</strong> Evaluar modelos basados en uso real.</li>
+                                <li><strong>Soporte Técnico:</strong> Negociar soporte premium para integración.</li>
+                              </ul>`
+                },
+                sap: {
+                    title: "Recomendaciones para SAP",
+                    extended: `<h4>Puntos Clave de Negociación para Contrato SAP</h4>
+                        <ol class="list-decimal pl-5 space-y-3">
+                           <li><strong>Negociar un Descuento por Volumen Agresivo y Modelo de Precios por Niveles (Tiered Pricing):</strong> Aprovechar la intención de duplicar las licencias para obtener una reducción significativa del costo por usuario. Proponer una estructura de precios por niveles donde el costo unitario disminuya al alcanzar el nuevo umbral de usuarios.</li>
+                           <li><strong>Explorar Licenciamiento por Usuarios Concurrentes (Concurrent Users) para Nuevos Departamentos:</strong> Proponer un modelo de licenciamiento por "Concurrent Users" para los nuevos usuarios de Ing. Industrial y Logística, ya que este modelo licencia el acceso simultáneo y puede generar ahorros masivos si el uso es intermitente.</li>
+                           <li><strong>Propuesta de un Acuerdo Empresarial (Enterprise Agreement) o Contrato Multi-anual:</strong> Proponer un acuerdo de 3 o 5 años que consolide todas las licencias y servicios de soporte. Este tipo de acuerdo suele incluir descuentos adicionales y ofrece predictibilidad de costos.</li>
+                           <li><strong>Optimización de Soporte y Servicios de Valor Añadido:</strong> Negociar una reducción en el porcentaje del contrato de soporte o la inclusión de servicios de valor añadido sin costo adicional, como horas de consultoría, capacitación especializada o acceso a módulos SAP específicos.</li>
+                        </ol>`,
+                    synthesis: `<ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Descuento por Volumen:</strong> Negociar precios por niveles al duplicar licencias.</li>
+                                <li><strong>Usuarios Concurrentes:</strong> Explorar este modelo más económico.</li>
+                                <li><strong>Acuerdo Empresarial:</strong> Proponer contrato multianual para mejores tarifas.</li>
+                                <li><strong>Optimizar Soporte:</strong> Reducir costo o añadir servicios de valor.</li>
+                              </ul>`
+                },
+                cesim: {
+                    title: "Alternativas para CESIM",
+                     extended: `<h4>Alternativas Modernas para Simulación y Laboratorios Virtuales</h4>
+                        <p>Dado que CESIM se usa para simulaciones de negocios y laboratorios virtuales, se sugieren las siguientes alternativas:</p>
+                        <ol class="list-decimal pl-5 space-y-3">
+                           <li><strong>PhET Interactive Simulations (Gratuito/Open Source):</strong> Desarrolladas por la Universidad de Colorado Boulder, son herramientas gratuitas y basadas en investigación para explorar conceptos en física, química, matemáticas y biología. Son ideales para eliminar costos y cubrir una amplia gama de necesidades en STEM.</li>
+                           <li><strong>Labster (Comercial):</strong> Ofrece un catálogo extenso de laboratorios virtuales inmersivos en 3D para ciencias. Combina gamificación con simulaciones realistas, permitiendo a los estudiantes realizar experimentos en un entorno seguro y desarrollando habilidades prácticas.</li>
+                           <li><strong>Harvard Business Publishing Education (HBPE) Simulations (Comercial):</strong> Son líderes en el ámbito de las simulaciones de negocios, ofreciendo una amplia gama de escenarios interactivos que desarrollan habilidades críticas de toma de decisiones. Su prestigio y rigor pedagógico justifican la inversión para facultades de negocios.</li>
+                        </ol>`,
+                    synthesis: `<ul class="list-disc pl-5 space-y-2">
+                                <li><strong>PhET Simulations:</strong> Gratuito, ideal para STEM.</li>
+                                <li><strong>Labster:</strong> Laboratorios virtuales inmersivos 3D (comercial).</li>
+                                <li><strong>Harvard Business Publishing:</strong> Simulaciones de negocios de alto prestigio (comercial).</li>
+                              </ul>`
+                },
+                 glifing: {
+                    title: "Alternativas para Glifing",
+                    extended: `<h4>Alternativas Modernas para Entrenamiento de Lectura</h4>
+                        <p>Para reemplazar Glifing, se necesitan alternativas con mejor seguimiento de usuarios y funcionalidades avanzadas:</p>
+                        <ol class="list-decimal pl-5 space-y-3">
+                           <li><strong>Texthelp Read&Write (Comercial):</strong> Una suite de herramientas de apoyo a la alfabetización que se integra en navegadores y aplicaciones. Ayuda con la lectura (texto a voz), escritura y estudio, y ofrece consolas de administración para un seguimiento detallado del uso, resolviendo el problema de la falta de identificación de usuarios.</li>
+                           <li><strong>MindPlay Virtual Reading Coach (Comercial):</strong> Un programa de intervención de lectura individualizado y adaptativo que mejora todas las facetas de las habilidades lectoras. Utiliza diagnósticos para crear una trayectoria de aprendizaje personalizada y es conocido por su robusto sistema de gestión de datos y reportes.</li>
+                           <li><strong>Implementación de Módulos de Lectura Interactivos en el LMS Universitario:</strong> Una estrategia personalizada que utiliza herramientas existentes en el LMS (como Moodle o Canvas) para crear actividades de lectura interactivas. Esto da control total sobre el seguimiento, es flexible, y puede ser más económico a largo plazo.</li>
+                        </ol>`,
+                    synthesis: `<ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Texthelp Read&Write:</strong> Suite de apoyo con seguimiento de uso.</li>
+                                <li><strong>MindPlay Coach:</strong> Entrenador de lectura adaptativo con reportes.</li>
+                                <li><strong>Módulos en LMS:</strong> Control total de seguimiento y contenido.</li>
+                              </ul>`
+                },
+                 labview: {
+                    title: "Alternativas para Labview",
+                    extended: `<h4>Alternativas Modernas para Simulación y Programación de Sistemas</h4>
+                        <p>Para reemplazar LabVIEW y alinearse con las herramientas de la industria, se proponen las siguientes alternativas que complementan a MATLAB/Simulink:</p>
+                        <ol class="list-decimal pl-5 space-y-3">
+                           <li><strong>Ecosistema Python (con bibliotecas específicas):</strong> Python, con bibliotecas como NumPy, SciPy, Matplotlib y PyVISA, es el estándar industrial para cálculo numérico, control de instrumentos y análisis de datos. Es versátil, de código abierto y su relevancia en la industria es masiva.</li>
+                           <li><strong>Plataformas de Desarrollo Embebido (Arduino, ESP32, Raspberry Pi):</strong> Este enfoque se centra en el hardware de bajo costo que es la base de la programación de sistemas en el mundo real. Permite a los estudiantes interactuar directamente con el hardware, diseñando sistemas para IoT, robótica y control.</li>
+                           <li><strong>Visual Studio Code (con extensiones de C/C++ y Embedded):</strong> Un editor de código potente que, con las extensiones adecuadas, se convierte en un entorno de desarrollo integrado de primera clase para la programación de sistemas en C, C++ y Python, introduciendo a los estudiantes a un flujo de trabajo profesional.</li>
+                        </ol>`,
+                    synthesis: `<ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Ecosistema Python:</strong> Estándar industrial para cálculo y control.</li>
+                                <li><strong>Plataformas Embebidas:</strong> Hardware práctico (Arduino, Raspberry Pi).</li>
+                                <li><strong>Visual Studio Code:</strong> IDE profesional para C/C++/Python.</li>
+                              </ul>`
+                },
+                 strategic: {
+                    title: "Análisis Estratégico de Licenciamiento de Software",
+                    extended: `<h4>I. Oportunidades de Ahorro Significativas No Evidentes:</h4>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Reingeniería de Licenciamiento de Adobe Creative Cloud:</strong> Explorar un Acuerdo de Licenciamiento Empresarial (ELA) unificado para UNITEC y CEUTEC. El volumen combinado podría permitir un precio por usuario o un modelo de sitio ilimitado más ventajoso.</li>
+                            <li><strong>Consolidación de Software Estadístico (Minitab y SPSS):</strong> Analizar si Minitab, con su licenciamiento ilimitado, puede cubrir las necesidades de muchos usuarios de SPSS, permitiendo reducir las costosas licencias por usuario de SPSS.</li>
+                            <li><strong>Auditoría y Descontinuación de Glifing:</strong> El costo de 315K no está justificado si no hay un usuario o propósito claro. Se necesita una auditoría interna urgente para cancelar esta licencia si no se identifica un uso válido.</li>
+                        </ul>
+                        <h4>II. Sinergias Potenciales entre Diferentes Software o Departamentos:</h4>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Centralización de la Simulación de Negocios:</strong> Con la eliminación de CESIM, se debe maximizar el uso de "Simuladores y Casos Harvard" y "LABSAG", creando un comité de coordinación para estandarizar mejores prácticas y compartir recursos.</li>
+                            <li><strong>Expansión en Análisis de Datos:</strong> Impulsar a MATLAB/Simulink como la plataforma principal para cálculo y simulación, coordinando su integración con Minitab y/o SPSS para crear módulos interdisciplinarios de ciencia de datos.</li>
+                            <li><strong>Ampliación Estratégica de SAP:</strong> Extender el uso de SAP en Ing. Industrial y Logística para fortalecer la empleabilidad y la comprensión de procesos empresariales integrados.</li>
+                        </ul>
+                        <h4>III. Recomendación sobre Software Futuro para Mantenerse Competitiva:</h4>
+                        <ul class="list-disc pl-5 space-y-2">
+                           <li><strong>Plataformas de IA y Machine Learning:</strong> Explorar licenciamientos académicos de servicios en la nube (AWS, Google, Azure) o distribuciones de Python/R para preparar a los estudiantes para la era de la IA.</li>
+                           <li><strong>Herramientas de Business Intelligence (BI):</strong> Incorporar licencias de Tableau o Microsoft Power BI para desarrollar habilidades críticas en visualización de datos.</li>
+                           <li><strong>Plataformas de Diseño UX/UI:</strong> Potenciar el uso de Figma o Adobe XD para el diseño colaborativo y el prototipado rápido, crucial para el desarrollo de productos digitales.</li>
+                        </ul>
+                         <h4>IV. Análisis de Riesgo sobre el Software a Descontinuar y Cómo Mitigarlo:</h4>
+                        <ul class="list-disc pl-5 space-y-2">
+                           <li><strong>CESIM:</strong> El riesgo es la interrupción de algún curso que lo use esporádicamente. Mitigación: Realizar una confirmación final con los jefes de departamento y facilitar la migración a Harvard o LABSAG.</li>
+                           <li><strong>Glifing:</strong> El riesgo oculto es que esté siendo utilizado por un programa de apoyo no registrado. Mitigación: Ejecutar una auditoría de uso exhaustiva con un plazo perentorio antes de la cancelación.</li>
+                           <li><strong>Labview:</strong> El riesgo es la resistencia de docentes y estudiantes. Mitigación: Implementar una transición planificada con capacitación intensiva en Simulink, actualización curricular y un período de gracia de un semestre.</li>
+                        </ul>`,
+                     synthesis: `<ul class="list-disc pl-5 space-y-2">
+                                 <li><strong>Oportunidades Clave:</strong> Renegociar Adobe (ELA), consolidar software estadístico, auditar/eliminar Glifing.</li>
+                                 <li><strong>Sinergias Potenciales:</strong> Centralizar simuladores de negocio, unificar análisis de datos con MATLAB.</li>
+                                 <li><strong>Software a Futuro:</strong> Invertir en plataformas de IA/ML, Business Intelligence (BI) y diseño UX/UI.</li>
+                                 <li><strong>Mitigación de Riesgos:</strong> Planificar transición para Labview, confirmar cese de uso de CESIM y Glifing.</li>
+                               </ul>`
+                }
+            };
+            
+            const modal = document.getElementById('ai-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+
+            window.handleRecommendationClick = (softwareId, type) => {
+                const recommendation = aiRecommendations[softwareId];
+                if (!recommendation) return;
+                
+                modalTitle.textContent = recommendation.title;
+                if (type === 'synthesis') {
+                    modalBody.innerHTML = recommendation.synthesis;
+                } else {
+                    modalBody.innerHTML = recommendation.extended;
+                }
+                
+                modal.classList.add('visible');
+            };
+
+            // Modal close logic
+            const closeModal = () => modal.classList.remove('visible');
+            document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
         });
     </script>
 </body>
