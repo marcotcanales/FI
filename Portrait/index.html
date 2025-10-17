@@ -11,7 +11,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #ffffff;
+            background-color: #f8fafc; /* Lighter gray for background */
         }
         .unitec-bg-blue {
             background-color: #06065C;
@@ -21,11 +21,6 @@
         }
         .unitec-text-cyan {
             color: #03AED2;
-        }
-        .gradient-text {
-            background: linear-gradient(90deg, #03AED2, #06065C);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
         .hero-bg {
             background-image: linear-gradient(rgba(6, 6, 92, 0.85), rgba(6, 6, 92, 0.85)), url('https://placehold.co/1200x800/e2e8f0/e2e8f0?text=.');
@@ -64,7 +59,7 @@
     <main class="container mx-auto px-6 py-16 md:py-24">
         
         <!-- Introduction -->
-        <section class="max-w-4xl mx-auto">
+        <section class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
             <div class="text-center">
                 <p class="unitec-text-cyan font-semibold tracking-wide">MÁS ALLÁ DE LAS COMPETENCIAS</p>
                 <h3 class="mt-2 text-3xl md:text-4xl font-bold unitec-text-blue">El Retrato del Egresado Unitec</h3>
@@ -82,38 +77,66 @@
             </div>
         </section>
 
-        <!-- Visual Divider with Icons -->
-        <section class="max-w-5xl mx-auto py-16">
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
-                <!-- Icon 1 -->
-                <div class="flex flex-col items-center">
-                    <div class="bg-green-100 p-3 rounded-full"><svg class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div>
-                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Líder con Propósito</p>
+        <!-- Human Capacities Section -->
+        <section class="py-16 md:py-24">
+            <div class="text-center mb-12">
+                <p class="unitec-text-cyan font-semibold tracking-wide">LAS 6 CAPACIDADES HUMANAS</p>
+                <h3 class="mt-2 text-3xl md:text-4xl font-bold unitec-text-blue">Pilares de Nuestro Egresado</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1: Líder con Propósito -->
+                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="bg-green-100 p-4 rounded-full mb-4">
+                        <svg class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                    </div>
+                    <h4 class="text-xl font-bold unitec-text-blue mb-2">Líder con Propósito</h4>
+                    <p class="text-gray-600 text-sm">Se guía por la curiosidad y un compromiso con el aprendizaje a lo largo de la vida. Tiene un fuerte sentido de propósito y es adaptable y resiliente en la búsqueda de sus metas. Actúa con integridad y sirve a sus comunidades.</p>
                 </div>
-                 <!-- Icon 2 -->
-                 <div class="flex flex-col items-center">
-                    <div class="bg-red-100 p-3 rounded-full"><svg class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
-                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Ciudadano Responsable</p>
+
+                <!-- Card 2: Ciudadano Responsable -->
+                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="bg-red-100 p-4 rounded-full mb-4">
+                        <svg class="h-10 w-10 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    </div>
+                    <h4 class="text-xl font-bold unitec-text-blue mb-2">Ciudadano Responsable</h4>
+                    <p class="text-gray-600 text-sm">Siente un sentido de responsabilidad personal por sostener sistemas sociales saludables y ecosistemas naturales, y actúa para transformar su entorno para mejorarlo.</p>
                 </div>
-                 <!-- Icon 3 -->
-                 <div class="flex flex-col items-center">
-                    <div class="bg-orange-100 p-3 rounded-full"><svg class="h-8 w-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg></div>
-                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Solucionador Empático</p>
+
+                <!-- Card 3: Solucionador Empático -->
+                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="bg-orange-100 p-4 rounded-full mb-4">
+                        <svg class="h-10 w-10 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    </div>
+                    <h4 class="text-xl font-bold unitec-text-blue mb-2">Solucionador Empático</h4>
+                    <p class="text-gray-600 text-sm">Es un pensador crítico con un profundo entendimiento de la causalidad, y combina esto con empatía para abordar problemas complejos y crear soluciones sostenibles y equitativas.</p>
                 </div>
-                 <!-- Icon 4 -->
-                 <div class="flex flex-col items-center">
-                    <div class="bg-sky-100 p-3 rounded-full"><svg class="h-8 w-8 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg></div>
-                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Innovador Creativo</p>
+
+                <!-- Card 4: Innovador Creativo -->
+                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="bg-sky-100 p-4 rounded-full mb-4">
+                        <svg class="h-10 w-10 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                    </div>
+                    <h4 class="text-xl font-bold unitec-text-blue mb-2">Innovador Creativo</h4>
+                    <p class="text-gray-600 text-sm">Aporta originalidad de interpretación y creatividad de expresión a su experiencia del mundo. Crea nuevos artefactos, tecnologías y herramientas, llevando un espíritu emprendedor a la solución de problemas.</p>
                 </div>
-                 <!-- Icon 5 -->
-                 <div class="flex flex-col items-center">
-                    <div class="bg-lime-100 p-3 rounded-full"><svg class="h-8 w-8 text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg></div>
-                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Colaborador Constructivo</p>
+
+                <!-- Card 5: Colaborador Constructivo -->
+                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="bg-lime-100 p-4 rounded-full mb-4">
+                         <svg class="h-10 w-10 text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg>
+                    </div>
+                    <h4 class="text-xl font-bold unitec-text-blue mb-2">Colaborador Constructivo</h4>
+                    <p class="text-gray-600 text-sm">Trabaja eficazmente con personas de distintos orígenes, disciplinas y culturas. Construye relaciones respetuosas para alcanzar metas comunes con apertura, empatía y respeto.</p>
                 </div>
-                 <!-- Icon 6 -->
-                 <div class="flex flex-col items-center">
-                    <div class="bg-indigo-100 p-3 rounded-full"><svg class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-2.236 9.168-5.584C18.354 1.832 18 3.65 18 4.5v.5c0 2.623-1.42 4.904-3.5 6.168" /></svg></div>
-                    <p class="text-xs font-semibold mt-2 unitec-text-blue">Comunicador Efectivo</p>
+
+                <!-- Card 6: Comunicador Efectivo -->
+                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="bg-indigo-100 p-4 rounded-full mb-4">
+                        <svg class="h-10 w-10 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-2.236 9.168-5.584C18.354 1.832 18 3.65 18 4.5v.5c0 2.623-1.42 4.904-3.5 6.168" /></svg>
+                    </div>
+                    <h4 class="text-xl font-bold unitec-text-blue mb-2">Comunicador Efectivo</h4>
+                    <p class="text-gray-600 text-sm">Domina las habilidades de comunicación oral, escrita y digital. Expresa ideas complejas de manera efectiva, ética y estratégica, utilizando la comunicación para defender principios y compartir ideas que importan.</p>
                 </div>
             </div>
         </section>
@@ -121,14 +144,13 @@
     </main>
 
     <!-- Call to Action / Footer Links -->
-    <footer class="bg-gray-50">
+    <footer class="bg-gray-100">
         <div class="container mx-auto px-6 py-16 text-center">
             <h3 class="text-2xl md:text-3xl font-bold unitec-text-blue">Explora el Nuevo Modelo Educativo</h3>
             <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
                 Descubre en detalle cómo cada pieza del ecosistema Unitec contribuye a formar a los líderes que Honduras necesita.
             </p>
             <div class="mt-10 flex flex-col md:flex-row justify-center items-center gap-4">
-                <!-- NOTE: Replace '#' with the actual file paths when deploying -->
                 <a href="https://capexfi25-30.netlify.app/portrait/retrato-mosaico2/" class="w-full md:w-auto bg-white hover:unitec-bg-blue hover:text-white text-unitec-blue font-bold py-3 px-6 rounded-lg shadow-md border-2 border-unitec-blue transition-all duration-300">
                     Ver el Retrato del Egresado
                 </a>
@@ -147,5 +169,3 @@
 
 </body>
 </html>
-
-
