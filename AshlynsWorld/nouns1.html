@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Noun Sorter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Patrick Hand', cursive;
+            background-color: #f7f3e8;
+            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+            background-size: 20px 20px;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Prevent highlighting text when tapping fast */
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: #5d4037;
+            font-size: 2rem;
+            margin: 0 0 15px 0;
+            text-align: center;
+        }
+
+        /* --- NAVIGATION --- */
+        .back-link {
+            align-self: flex-start;
+            text-decoration: none;
+            color: #5d4037;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.8);
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+
+        /* --- THE SWITCHES --- */
+        .switch-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 40px;
+            box-shadow: 0 4px 5px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 95%;
+            max-width: 600px;
+        }
+
+        .switch {
+            flex: 1;
+            padding: 15px 10px;
+            font-size: 1.2rem;
+            text-align: center;
+            border-radius: 30px;
+            border: 4px solid #eee;
+            cursor: pointer;
+            font-family: 'Fredoka One', cursive;
+            color: #999;
+            background: #fff;
+            min-width: 80px;
+            transition: transform 0.1s, background-color 0.2s;
+        }
+
+        /* Active Colors */
+        .switch.active-person { background-color: #ff5252; color: white; border-color: #ff5252; transform: scale(1.05); }
+        .switch.active-place { background-color: #ff9800; color: white; border-color: #ff9800; transform: scale(1.05); }
+        .switch.active-thing { background-color: #fff176; color: #5d4037; border-color: #fbc02d; transform: scale(1.05); }
+
+        /* --- THE GRID --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+            padding-bottom: 50px;
+        }
+
+        .noun-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .noun-sign {
+            background-color: white;
+            border: 3px solid #333;
+            border-radius: 10px;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+            transition: transform 0.1s;
+            z-index: 2;
+            text-align: center;
+            line-height: 1.1;
+            /* Ensure taps register */
+            touch-action: manipulation;
+        }
+
+        .noun-sign:active {
+            transform: scale(0.95);
+        }
+
+        /* The Stick */
+        .post {
+            width: 12px;
+            height: 25px;
+            background: #8d6e63;
+            margin-top: -3px;
+            border-left: 2px solid #5d4037;
+            border-right: 2px solid #5d4037;
+            z-index: 1;
+        }
+
+        /* Icons */
+        .status-icon {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.5rem;
+            display: none; 
+            background: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        /* --- FOOTER --- */
+        .action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.9);
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .btn-action {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.2rem;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+        }
+        .btn-clear { background-color: #90a4ae; }
+        .btn-check { background-color: #4caf50; }
+
+        /* Animation class */
+        .shake { animation: shake 0.4s; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-link">← Ashlyn's World</a>
+
+    <h1>Type of Noun?</h1>
+
+    <!-- CONTROLS -->
+    <div class="switch-container" id="switch-box">
+        <div class="switch" id="sw-person" onclick="pickMode('person')">Person</div>
+        <div class="switch" id="sw-place" onclick="pickMode('place')">Place</div>
+        <div class="switch" id="sw-thing" onclick="pickMode('thing')">Thing</div>
+    </div>
+
+    <!-- GRID -->
+    <div class="grid-container" id="game-grid">
+        <!-- JS fills this -->
+    </div>
+
+    <!-- FOOTER -->
+    <div class="action-bar">
+        <button class="btn-action btn-clear" onclick="resetBoard()">Clear</button>
+        <button class="btn-action btn-check" onclick="checkAnswers()">Check Work</button>
+    </div>
+
+    <script>
+        // --- 1. CONFIGURATION ---
+        const nouns = [
+            { t: "boy", c: "person" }, { t: "hat", c: "thing" }, { t: "pencil", c: "thing" },
+            { t: "acorn", c: "thing" }, { t: "girl", c: "person" }, { t: "school", c: "place" },
+            { t: "home", c: "place" }, { t: "apple", c: "thing" }, { t: "farmer", c: "person" },
+            { t: "crow", c: "thing" }, { t: "doctor", c: "person" }, { t: "pumpkin patch", c: "place" },
+            { t: "teacher", c: "person" }, { t: "straw", c: "thing" }, { t: "leaf", c: "thing" },
+            { t: "pie", c: "thing" }, { t: "sister", c: "person" }, { t: "turkey", c: "thing" },
+            { t: "pilgrim", c: "person" }, { t: "pumpkin", c: "thing" }
+        ];
+
+        let currentMode = null; 
+        const synth = window.speechSynthesis;
+
+        // --- 2. INITIALIZATION ---
+        const grid = document.getElementById('game-grid');
+        
+        nouns.forEach((item, index) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'noun-wrapper';
+
+            const sign = document.createElement('div');
+            sign.className = 'noun-sign';
+            sign.innerText = item.t;
+            sign.dataset.correct = item.c;
+            sign.dataset.state = "none"; 
+            sign.id = "sign-" + index;
+
+            // Direct Click Listener
+            sign.onclick = () => handleTap(sign, item.t);
+
+            const icon = document.createElement('div');
+            icon.className = 'status-icon';
+            icon.id = "icon-" + index;
+
+            const post = document.createElement('div');
+            post.className = 'post';
+
+            wrapper.appendChild(sign);
+            wrapper.appendChild(icon);
+            wrapper.appendChild(post);
+            grid.appendChild(wrapper);
+        });
+
+        // --- 3. GAME LOGIC ---
+
+        function pickMode(mode) {
+            currentMode = mode;
+            
+            // Visual Reset
+            document.getElementById('sw-person').className = 'switch';
+            document.getElementById('sw-place').className = 'switch';
+            document.getElementById('sw-thing').className = 'switch';
+
+            // Set Active
+            document.getElementById('sw-' + mode).classList.add('active-' + mode);
+            
+            // Speak the switch name
+            trySpeak(mode);
+        }
+
+        function handleTap(element, text) {
+            // ALWAYS speak the word when tapped, even if no color selected yet
+            trySpeak(text);
+
+            // 1. Check if a brush is selected
+            if (!currentMode) {
+                const box = document.getElementById('switch-box');
+                box.classList.remove('shake');
+                void box.offsetWidth; 
+                box.classList.add('shake');
+                return;
+            }
+
+            // 2. APPLY COLOR IMMEDIATELY
+            element.dataset.state = currentMode;
+            
+            if (currentMode === 'person') element.style.backgroundColor = '#ff5252';
+            if (currentMode === 'place') element.style.backgroundColor = '#ff9800';
+            if (currentMode === 'thing') element.style.backgroundColor = '#fff176';
+
+            // Clear icons if they were there
+            document.querySelectorAll('.status-icon').forEach(i => i.style.display = 'none');
+        }
+
+        function resetBoard() {
+            trySpeak("Start over");
+            currentMode = null;
+            
+            // Reset switches
+            document.getElementById('sw-person').className = 'switch';
+            document.getElementById('sw-place').className = 'switch';
+            document.getElementById('sw-thing').className = 'switch';
+
+            // Reset signs
+            const signs = document.querySelectorAll('.noun-sign');
+            signs.forEach(s => {
+                s.style.backgroundColor = 'white';
+                s.dataset.state = 'none';
+            });
+
+            // Reset icons
+            document.querySelectorAll('.status-icon').forEach(i => i.style.display = 'none');
+        }
+
+        function checkAnswers() {
+            trySpeak("Let's check");
+            
+            let correctCount = 0;
+            const signs = document.querySelectorAll('.noun-sign');
+            
+            signs.forEach((s, index) => {
+                const icon = document.getElementById('icon-' + index);
+                icon.style.display = 'flex';
+                
+                if (s.dataset.state === s.dataset.correct) {
+                    icon.innerText = "✅";
+                    icon.style.color = "green";
+                    correctCount++;
+                } else {
+                    icon.innerText = "❌";
+                    icon.style.color = "red";
+                }
+            });
+
+            // Wait a moment for the "Let's check" to finish before saying the result
+            setTimeout(() => {
+                if (correctCount === nouns.length) {
+                    trySpeak("You did it! Amazing!");
+                } else {
+                    trySpeak("Good try. Check the X marks.");
+                }
+            }, 1500);
+        }
+
+        // --- 4. AUDIO UTILITY ---
+        function trySpeak(text) {
+            if (!synth) return;
+            
+            // Cancel any current speech to prevent queue buildup
+            synth.cancel();
+
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.rate = 0.9;
+            utter.lang = 'en-US';
+            
+            synth.speak(utter);
+        }
+
+        // Force voice load for Android
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = function() {
+                window.speechSynthesis.getVoices();
+            };
+        }
+
+    </script>
+</body>
+</html>
