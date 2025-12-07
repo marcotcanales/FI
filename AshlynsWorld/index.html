@@ -23,7 +23,7 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow: hidden; /* Keeps the stars inside */
+            overflow-x: hidden; /* Changed to overflow-x to allow scrolling if needed */
             color: white;
             text-align: center;
         }
@@ -74,6 +74,7 @@
             gap: 30px;
             max-width: 1000px;
             z-index: 10;
+            margin-bottom: 40px;
         }
 
         /* The Adventure Cards */
@@ -126,6 +127,22 @@
         .card-pond h2 { color: #01579b; }
         .card-pond .icon { font-size: 5rem; }
 
+        /* Noun Town */
+        .card-town {
+            background: linear-gradient(to bottom, #ffcc80, #ff7043);
+            border-color: #d84315;
+        }
+        .card-town h2 { color: #bf360c; }
+        .card-town .icon { font-size: 5rem; }
+
+        /* Noun Game */
+        .card-game {
+            background: linear-gradient(to bottom, #e1bee7, #ba68c8);
+            border-color: #8e24aa;
+        }
+        .card-game h2 { color: #4a148c; }
+        .card-game .icon { font-size: 5rem; }
+
         .adventure-card h2 {
             margin: 0;
             font-size: 1.8rem;
@@ -143,10 +160,11 @@
 
         /* Footer */
         .footer {
-            margin-top: 50px;
+            margin-top: 20px;
             font-size: 1rem;
             opacity: 0.8;
             z-index: 10;
+            padding-bottom: 20px;
         }
 
     </style>
@@ -179,6 +197,20 @@
             <div class="icon">🐸</div>
             <h2>Magic Pond</h2>
             <div class="play-badge">List #3</div>
+        </a>
+
+        <!-- Noun Town -->
+        <a href="nouns1.html" class="adventure-card card-town">
+            <div class="icon">🏘️</div>
+            <h2>Noun Town</h2>
+            <div class="play-badge">Sorting</div>
+        </a>
+
+        <!-- Noun Game -->
+        <a href="nouns2.html" class="adventure-card card-game">
+            <div class="icon">🧩</div>
+            <h2>Noun Game</h2>
+            <div class="play-badge">Grid</div>
         </a>
     </div>
 
