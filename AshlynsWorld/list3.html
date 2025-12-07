@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>List #3: The Magic Pond</title>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Pond Theme Colors */
+            --water-deep: #0277bd;
+            --water-shallow: #4fc3f7;
+            --lilypad-green: #7cb342;
+            --fish-orange: #ff9800;
+            --text-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Comic Neue', cursive;
+            /* Water gradient background */
+            background: linear-gradient(to bottom, var(--water-shallow), var(--water-deep));
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-family: 'Luckiest Guy', cursive;
+            color: var(--fish-orange);
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+            font-size: 3rem;
+            letter-spacing: 1px;
+            margin: 10px 0;
+        }
+
+        /* Mode Switcher */
+        .controls {
+            background: rgba(0,0,0, 0.3);
+            padding: 10px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            border: 2px solid var(--water-shallow);
+        }
+
+        button {
+            background-color: rgba(255,255,255,0.9);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            font-family: 'Luckiest Guy', cursive;
+            color: var(--water-deep);
+            border-radius: 25px;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        button:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        button.active-mode {
+            background-color: var(--lilypad-green);
+            color: white;
+        }
+
+        /* Container Areas */
+        #study-area, #game-area {
+            width: 100%;
+            max-width: 800px;
+            display: none;
+        }
+
+        .visible {
+            display: flex !important;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Flashcards (Study Mode) - Styled like Lily Pads */
+        .lilypad {
+            background-color: var(--lilypad-green);
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Circle */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 0 #558b2f;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s;
+            border: 4px solid #aed581;
+            position: relative;
+            /* Little "cutout" triangle to make it look like a lilypad */
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 85%, 0% 100%);
+        }
+
+        .lilypad:active {
+            transform: scale(0.95) rotate(5deg);
+        }
+
+        /* Game Mode Styles */
+        .game-status {
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        /* Styled as Fish */
+        .fish {
+            background-color: var(--fish-orange);
+            width: 140px;
+            height: 100px;
+            border-radius: 70% 30% 30% 70%; /* Oval fish body shape */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            box-shadow: inset -5px -5px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            border: 2px solid #ffcc80;
+            animation: swim 4s ease-in-out infinite;
+            position: relative;
+        }
+        
+        /* Fish Tail */
+        .fish::after {
+            content: '';
+            position: absolute;
+            right: -25px;
+            width: 0; 
+            height: 0; 
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+            border-left: 30px solid var(--fish-orange);
+        }
+
+        .fish:nth-child(even) { animation-duration: 5s; background-color: #ffab40; }
+        .fish:nth-child(3n) { animation-duration: 6s; background-color: #ffc107; }
+        .fish:nth-child(even)::after { border-left-color: #ffab40; }
+        .fish:nth-child(3n)::after { border-left-color: #ffc107; }
+
+
+        @keyframes swim {
+            0% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+            25% { transform: translateX(10px) translateY(-10px) rotate(2deg); }
+            50% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+            75% { transform: translateX(-10px) translateY(10px) rotate(-2deg); }
+            100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+        }
+
+        /* Animations */
+        .correct {
+            background-color: var(--water-shallow) !important; /* Turn into water color */
+            color: white !important;
+            transform: scale(1.2) rotate(360deg) !important; /* Spin! */
+            border-color: white !important;
+            transition: all 0.5s;
+            opacity: 0; /* Fade out */
+        }
+
+        .shake {
+            animation: shake 0.5s;
+            background-color: #d32f2f !important; /* Red tint on error */
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        #start-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2, 119, 189, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .big-btn {
+            font-size: 2.5rem;
+            padding: 30px 50px;
+            background: var(--fish-orange);
+            color: white;
+            border: 5px solid white;
+            border-radius: 20px;
+            font-family: 'Luckiest Guy', cursive;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="start-overlay">
+        <button class="big-btn" onclick="initAudio()">Jump in the Pond! 🐸</button>
+    </div>
+
+    <h1>List #3: The Magic Pond</h1>
+
+    <div class="controls">
+        <button id="btn-study" class="active-mode" onclick="setMode('study')">Lily Pads (Study)</button>
+        <button id="btn-game" onclick="setMode('game')">Catch Fish (Play)</button>
+    </div>
+
+    <div id="study-area" class="visible">
+        </div>
+
+    <div id="game-area">
+        <div class="game-status">
+            Catch the fish: <span id="target-word" style="color: var(--fish-orange); text-decoration: underline;">???</span>
+            <br>
+            <button onclick="speakTarget()" style="padding: 5px 15px; font-size: 1rem; margin-top: 10px; font-family: 'Comic Neue'; color: var(--water-deep);">🔊 Hear it again</button>
+        </div>
+        <div id="fish-container" class="visible">
+            </div>
+    </div>
+
+    <script>
+        // UPDATED LIST #3
+        const wordList = ["cut", "one", "make", "two", "run", "fish", "her", "into", "hop", "shop"];
+        
+        let currentTarget = "";
+        let synth = window.speechSynthesis;
+        let voices = [];
+
+        function loadVoices() {
+            voices = synth.getVoices();
+        }
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function initAudio() {
+            document.getElementById('start-overlay').style.display = 'none';
+            const utter = new SpeechSynthesisUtterance('');
+            synth.speak(utter);
+            loadVoices();
+            renderStudy();
+        }
+
+        function speak(text) {
+            if (synth.speaking) {
+                synth.cancel();
+            }
+            const utterThis = new SpeechSynthesisUtterance(text);
+            // Kept the slower rate for ESL clarity
+            utterThis.rate = 0.8; 
+            utterThis.pitch = 1.0; // Slightly deeper pitch for pond theme
+            utterThis.lang = 'en-US';
+            synth.speak(utterThis);
+        }
+
+        function setMode(mode) {
+            document.getElementById('study-area').classList.remove('visible');
+            document.getElementById('game-area').style.display = 'none';
+            document.getElementById('btn-study').classList.remove('active-mode');
+            document.getElementById('btn-game').classList.remove('active-mode');
+
+            if (mode === 'study') {
+                document.getElementById('study-area').classList.add('visible');
+                document.getElementById('btn-study').classList.add('active-mode');
+                renderStudy();
+            } else {
+                document.getElementById('game-area').style.display = 'block';
+                document.getElementById('btn-game').classList.add('active-mode');
+                startRound();
+            }
+        }
+
+        function renderStudy() {
+            const container = document.getElementById('study-area');
+            container.innerHTML = '';
+            wordList.forEach(word => {
+                const pad = document.createElement('div');
+                // Changed class name to 'lilypad'
+                pad.className = 'lilypad';
+                pad.innerText = word;
+                pad.onclick = () => {
+                    speak(word);
+                    // A little hop animation
+                    pad.style.transform = "translateY(-10px)";
+                    setTimeout(() => pad.style.transform = "translateY(0px)", 200);
+                };
+                container.appendChild(pad);
+            });
+        }
+
+        function startRound() {
+            currentTarget = wordList[Math.floor(Math.random() * wordList.length)];
+            document.getElementById('target-word').innerText = "???";
+            
+            setTimeout(() => speak("Catch... " + currentTarget), 500);
+
+            const container = document.getElementById('fish-container');
+            container.innerHTML = '';
+            
+            const shuffled = [...wordList].sort(() => 0.5 - Math.random());
+
+            shuffled.forEach(word => {
+                const fish = document.createElement('div');
+                // Changed class name to 'fish'
+                fish.className = 'fish';
+                fish.innerText = word;
+                fish.onclick = () => checkAnswer(word, fish);
+                container.appendChild(fish);
+            });
+        }
+
+        function speakTarget() {
+            speak("Catch... " + currentTarget);
+        }
+
+        function checkAnswer(selectedWord, element) {
+            if (selectedWord === currentTarget) {
+                element.classList.add('correct');
+                // Encourage with a "splash" sound effect in voice
+                const winUtter = new SpeechSynthesisUtterance("Splash! Got it!");
+                winUtter.rate = 1.1;
+                synth.speak(winUtter);
+
+                document.getElementById('target-word').innerText = currentTarget;
+                // Wait slightly longer for the spin animation to finish
+                setTimeout(startRound, 1500);
+            } else {
+                element.classList.add('shake');
+                speak("Oops, try again");
+                setTimeout(() => element.classList.remove('shake'), 500);
+            }
+        }
+    </script>
+</body>
+</html>
