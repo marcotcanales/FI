@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Sorting Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0f9ff;
+            overflow: hidden; /* Prevent scrolling while dragging */
+            touch-action: none; /* Prevent browser gestures */
+        }
+        
+        h1, .font-heading {
+            font-family: 'Fredoka One', cursive;
+        }
+
+        .basket {
+            transition: all 0.3s ease;
+        }
+
+        .basket.hovered {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* The Draggable Card */
+        #word-card {
+            touch-action: none;
+            user-select: none;
+            cursor: grab;
+            transition: transform 0.1s;
+            z-index: 50;
+        }
+
+        #word-card:active {
+            cursor: grabbing;
+            transform: scale(1.1);
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        /* Success Animation Class */
+        .success-pulse {
+            animation: successPulse 0.5s ease-in-out;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-2px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-8px, 0, 0); }
+            40%, 60% { transform: translate3d(8px, 0, 0); }
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col items-center justify-between p-4 relative">
+
+    <!-- Header -->
+    <div class="text-center mt-2">
+        <h1 class="text-3xl md:text-5xl text-blue-600 mb-2 tracking-wide">Word Sorting</h1>
+        <div class="flex items-center justify-center gap-4 text-xl font-bold text-gray-600">
+            <span>⭐ Score: <span id="score">0</span></span>
+        </div>
+    </div>
+
+    <!-- Game Area - The Draggable Word -->
+    <div class="flex-grow flex items-center justify-center w-full relative" id="game-area">
+        
+        <!-- Placeholder for where the card spawns -->
+        <div id="card-spawn-point" class="w-64 h-32 border-4 border-dashed border-gray-300 rounded-2xl flex items-center justify-center">
+            <span class="text-gray-300 font-bold text-xl">Next Word</span>
+        </div>
+
+        <!-- The Draggable Card (Absolute positioned initially) -->
+        <div id="word-card" class="absolute w-64 h-32 bg-white rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.15)] border-b-8 border-blue-500 flex flex-col items-center justify-center transform hover:-translate-y-1">
+            <span id="current-word" class="font-heading text-5xl text-gray-800">Start</span>
+            <span class="text-sm text-gray-400 mt-2">Drag me to a basket!</span>
+        </div>
+
+        <!-- Win Message Overlay -->
+        <div id="win-message" class="hidden absolute inset-0 bg-white/90 z-50 flex flex-col items-center justify-center animate-fade-in">
+            <h2 class="font-heading text-6xl text-purple-600 mb-4">Great Job!</h2>
+            <p class="text-2xl text-gray-600 mb-8">You sorted all the words!</p>
+            <button onclick="restartGame()" class="px-8 py-4 bg-green-500 hover:bg-green-600 text-white rounded-full font-bold text-xl shadow-lg transform transition hover:scale-105">
+                Play Again 🔄
+            </button>
+        </div>
+    </div>
+
+    <!-- Baskets Container -->
+    <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 h-auto">
+        
+        <!-- Basket: Animals -->
+        <div class="basket bg-orange-100 border-4 border-orange-300 rounded-xl p-4 flex flex-col items-center justify-start h-40 md:h-48" data-category="Animals">
+            <div class="text-5xl mb-2">🐶</div>
+            <h2 class="font-heading text-xl md:text-2xl text-orange-600">Animals</h2>
+        </div>
+
+        <!-- Basket: Places -->
+        <div class="basket bg-green-100 border-4 border-green-300 rounded-xl p-4 flex flex-col items-center justify-start h-40 md:h-48" data-category="Places">
+            <div class="text-5xl mb-2">🏠</div>
+            <h2 class="font-heading text-xl md:text-2xl text-green-600">Places</h2>
+        </div>
+
+        <!-- Basket: Persons -->
+        <div class="basket bg-purple-100 border-4 border-purple-300 rounded-xl p-4 flex flex-col items-center justify-start h-40 md:h-48" data-category="Persons">
+            <div class="text-5xl mb-2">👤</div>
+            <h2 class="font-heading text-xl md:text-2xl text-purple-600">Persons</h2>
+        </div>
+
+        <!-- Basket: Things -->
+        <div class="basket bg-blue-100 border-4 border-blue-300 rounded-xl p-4 flex flex-col items-center justify-start h-40 md:h-48" data-category="Things">
+            <div class="text-5xl mb-2">🧸</div>
+            <h2 class="font-heading text-xl md:text-2xl text-blue-600">Things</h2>
+        </div>
+
+    </div>
+
+    <!-- Audio Elements (Using generated sounds via AudioContext in JS for reliability, but placeholders here for structure) -->
+    
+    <script>
+        // --- Game Data ---
+        const wordData = [
+            // Animals
+            { text: "Cat", category: "Animals" },
+            { text: "Dog", category: "Animals" },
+            { text: "Pig", category: "Animals" },
+            { text: "Cow", category: "Animals" },
+            { text: "Bird", category: "Animals" },
+            // Places
+            { text: "Park", category: "Places" },
+            { text: "Home", category: "Places" },
+            { text: "Zoo", category: "Places" },
+            { text: "Shop", category: "Places" },
+            { text: "School", category: "Places" },
+            // Persons
+            { text: "Mom", category: "Persons" },
+            { text: "Dad", category: "Persons" },
+            { text: "Baby", category: "Persons" },
+            { text: "Boy", category: "Persons" },
+            { text: "Girl", category: "Persons" },
+            // Things
+            { text: "Ball", category: "Things" },
+            { text: "Hat", category: "Things" },
+            { text: "Cup", category: "Things" },
+            { text: "Box", category: "Things" },
+            { text: "Car", category: "Things" }
+        ];
+
+        // --- Game State ---
+        let currentQueue = [];
+        let currentWordObj = null;
+        let score = 0;
+        let isDragging = false;
+        
+        // --- Elements ---
+        const wordCard = document.getElementById('word-card');
+        const wordText = document.getElementById('current-word');
+        const scoreDisplay = document.getElementById('score');
+        const baskets = document.querySelectorAll('.basket');
+        const winMessage = document.getElementById('win-message');
+        const spawnPoint = document.getElementById('card-spawn-point');
+
+        // --- Sound Effects (Simple Synths) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            if (type === 'correct') {
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(500, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.1);
+                gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.3);
+            } else if (type === 'wrong') {
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(200, audioCtx.currentTime);
+                oscillator.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.2);
+                gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.2);
+            } else if (type === 'pop') {
+                oscillator.type = 'triangle';
+                oscillator.frequency.setValueAtTime(400, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.1);
+            }
+        }
+
+        // --- Game Logic ---
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initGame() {
+            currentQueue = shuffle([...wordData]);
+            score = 0;
+            scoreDisplay.textContent = score;
+            winMessage.classList.add('hidden');
+            nextWord();
+        }
+
+        function restartGame() {
+            initGame();
+        }
+
+        function nextWord() {
+            if (currentQueue.length === 0) {
+                gameWin();
+                return;
+            }
+            currentWordObj = currentQueue.pop();
+            wordText.textContent = currentWordObj.text;
+            resetCardPosition();
+            playSound('pop');
+        }
+
+        function gameWin() {
+            wordCard.style.display = 'none';
+            winMessage.classList.remove('hidden');
+            celebrate();
+        }
+
+        function resetCardPosition() {
+            wordCard.style.display = 'flex';
+            wordCard.style.transform = `translate(0px, 0px)`;
+            // Center the card over the spawn point visually
+            const rect = spawnPoint.getBoundingClientRect();
+            // Since wordCard is absolute and centered by flex in parent originally, we remove transform
+            // But let's make it actually sit on the spawn point
+            // The CSS centers the #game-area contents, so removing transform is usually enough 
+            // if the HTML structure aligns them.
+            // Let's explicitly center it.
+            wordCard.style.left = '50%';
+            wordCard.style.top = '50%';
+            wordCard.style.marginLeft = '-8rem'; // half of w-64
+            wordCard.style.marginTop = '-4rem';  // half of h-32
+            wordCard.setAttribute('data-x', 0);
+            wordCard.setAttribute('data-y', 0);
+        }
+
+        // --- Drag and Drop Logic ---
+
+        let startX = 0;
+        let startY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        function handleStart(e) {
+            if (e.type === 'touchstart') {
+                startX = e.touches[0].clientX - currentX;
+                startY = e.touches[0].clientY - currentY;
+            } else {
+                startX = e.clientX - currentX;
+                startY = e.clientY - currentY;
+            }
+            
+            isDragging = true;
+            wordCard.style.transition = 'none'; // Remove transition for instant follow
+            wordCard.style.cursor = 'grabbing';
+            playSound('pop');
+        }
+
+        function handleMove(e) {
+            if (!isDragging) return;
+            e.preventDefault(); // Prevent scrolling
+
+            let clientX, clientY;
+            if (e.type === 'touchmove') {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+
+            currentX = clientX - startX;
+            currentY = clientY - startY;
+
+            wordCard.style.transform = `translate(${currentX}px, ${currentY}px) scale(1.1)`;
+
+            // Highlight potential drop zones
+            checkHover(clientX, clientY);
+        }
+
+        function handleEnd(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            wordCard.style.cursor = 'grab';
+            wordCard.style.transition = 'transform 0.3s ease';
+
+            // Get drop position
+            // For touch, we need the last known coordinates, usually stored or retrieved
+            // Since 'touchend' has no coordinates, we use the center of the card
+            const cardRect = wordCard.getBoundingClientRect();
+            const cardCenterX = cardRect.left + cardRect.width / 2;
+            const cardCenterY = cardRect.top + cardRect.height / 2;
+
+            const droppedBasket = checkDrop(cardCenterX, cardCenterY);
+
+            if (droppedBasket) {
+                const category = droppedBasket.getAttribute('data-category');
+                if (category === currentWordObj.category) {
+                    handleCorrect(droppedBasket);
+                } else {
+                    handleWrong();
+                }
+            } else {
+                // Return to center
+                currentX = 0;
+                currentY = 0;
+                wordCard.style.transform = `translate(0px, 0px)`;
+            }
+
+            // Remove hover effects
+            baskets.forEach(b => b.classList.remove('hovered'));
+        }
+
+        function checkHover(x, y) {
+            baskets.forEach(basket => {
+                const rect = basket.getBoundingClientRect();
+                if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                    basket.classList.add('hovered');
+                } else {
+                    basket.classList.remove('hovered');
+                }
+            });
+        }
+
+        function checkDrop(x, y) {
+            let target = null;
+            baskets.forEach(basket => {
+                const rect = basket.getBoundingClientRect();
+                if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                    target = basket;
+                }
+            });
+            return target;
+        }
+
+        function handleCorrect(basket) {
+            playSound('correct');
+            score += 10;
+            scoreDisplay.textContent = score;
+            
+            // Visual feedback on basket
+            basket.classList.add('success-pulse');
+            setTimeout(() => basket.classList.remove('success-pulse'), 500);
+
+            // Hide card temporarily then spawn next
+            wordCard.style.transform = `scale(0)`;
+            setTimeout(() => {
+                currentX = 0;
+                currentY = 0;
+                nextWord();
+            }, 300);
+        }
+
+        function handleWrong() {
+            playSound('wrong');
+            wordCard.classList.add('shake');
+            
+            // Return to start
+            setTimeout(() => {
+                currentX = 0;
+                currentY = 0;
+                wordCard.style.transform = `translate(0px, 0px)`;
+                wordCard.classList.remove('shake');
+            }, 500);
+        }
+
+        // --- Confetti Effect ---
+        function celebrate() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+            for (let i = 0; i < 50; i++) {
+                const conf = document.createElement('div');
+                conf.classList.add('confetti');
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(conf);
+                
+                // Cleanup
+                setTimeout(() => conf.remove(), 5000);
+            }
+        }
+
+        // --- Event Listeners ---
+        
+        // Mouse
+        wordCard.addEventListener('mousedown', handleStart);
+        window.addEventListener('mousemove', handleMove);
+        window.addEventListener('mouseup', handleEnd);
+
+        // Touch
+        wordCard.addEventListener('touchstart', handleStart, { passive: false });
+        window.addEventListener('touchmove', handleMove, { passive: false });
+        window.addEventListener('touchend', handleEnd);
+
+        // Resize handler to recenter if needed
+        window.addEventListener('resize', () => {
+            if(!isDragging && currentWordObj) {
+                resetCardPosition();
+            }
+        });
+
+        // Initialize
+        resetCardPosition(); // Set initial CSS
+        initGame();
+
+    </script>
+</body>
+</html>

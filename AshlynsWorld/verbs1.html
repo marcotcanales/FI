@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noun & Verb Sorter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fdf2f8; /* Light pink/warm background */
+            overscroll-behavior: none;
+            touch-action: none;
+        }
+        
+        h1, h2, .font-heading {
+            font-family: 'Fredoka One', cursive;
+        }
+
+        /* Basket Styles */
+        .basket {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 180px;
+        }
+
+        .basket.drag-over {
+            transform: scale(1.02);
+            box-shadow: 0 0 0 4px #fbbf24; /* Amber ring */
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Word Card Styles */
+        .word-card {
+            touch-action: none;
+            cursor: grab;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .word-card:active {
+            cursor: grabbing;
+            transform: scale(1.1) !important;
+            z-index: 100 !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+
+        .word-card.wrong {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+            background-color: #fee2e2; /* Red-100 */
+            border-color: #ef4444; /* Red-500 */
+        }
+
+        .word-card.correct {
+            background-color: #dcfce7; /* Green-100 */
+            border-color: #22c55e; /* Green-500 */
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        /* Button Press Effect */
+        .btn-press:active {
+            transform: scale(0.95);
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #f00;
+            animation: fall linear forwards;
+            z-index: 100;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col overflow-hidden relative">
+
+    <!-- Header -->
+    <header class="p-4 text-center shrink-0">
+        <h1 class="text-4xl text-pink-600 tracking-wide drop-shadow-sm">Nouns & Verbs</h1>
+        <p class="text-gray-500 text-lg mt-1">Tap a word to hear it. Drag it to a basket!</p>
+    </header>
+
+    <!-- Main Game Area -->
+    <div class="flex-grow flex flex-col gap-4 px-4 pb-24 relative max-w-6xl mx-auto w-full">
+        
+        <!-- Baskets Row -->
+        <div class="grid grid-cols-2 gap-4 h-1/3 min-h-[200px]">
+            <!-- Noun Basket -->
+            <div id="basket-noun" data-type="Noun" class="basket bg-blue-100 border-4 border-blue-300 rounded-3xl p-4 flex flex-col relative">
+                <div class="text-center mb-2 pointer-events-none">
+                    <span class="text-5xl block">🍎</span>
+                    <h2 class="text-2xl text-blue-600">Nouns</h2>
+                    <p class="text-xs text-blue-400 uppercase tracking-widest font-bold">Things, People, Places</p>
+                </div>
+                <!-- Drop Zone Content -->
+                <div class="flex-grow flex flex-wrap content-start gap-2 overflow-y-auto p-2 rounded-xl bg-white/30 inner-basket">
+                    <!-- Dropped items go here -->
+                </div>
+            </div>
+
+            <!-- Verb Basket -->
+            <div id="basket-verb" data-type="Verb" class="basket bg-orange-100 border-4 border-orange-300 rounded-3xl p-4 flex flex-col relative">
+                <div class="text-center mb-2 pointer-events-none">
+                    <span class="text-5xl block">🏃</span>
+                    <h2 class="text-2xl text-orange-600">Verbs</h2>
+                    <p class="text-xs text-orange-400 uppercase tracking-widest font-bold">Actions, Doing words</p>
+                </div>
+                <!-- Drop Zone Content -->
+                <div class="flex-grow flex flex-wrap content-start gap-2 overflow-y-auto p-2 rounded-xl bg-white/30 inner-basket">
+                    <!-- Dropped items go here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Word Pool (Starting Area) -->
+        <div id="word-pool" class="flex-grow bg-white border-4 border-gray-200 rounded-3xl p-6 shadow-inner relative overflow-y-auto">
+            <div class="absolute top-2 left-4 text-gray-300 font-bold uppercase tracking-widest text-sm select-none">Word Bank</div>
+            <div id="pool-container" class="flex flex-wrap justify-center content-center gap-3 h-full pt-6">
+                <!-- Words are generated here JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Control Bar -->
+    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 shadow-2xl z-20">
+        <div class="max-w-4xl mx-auto flex justify-between items-center gap-4">
+            
+            <div class="flex gap-2">
+                <button onclick="undoLastMove()" class="btn-press bg-gray-100 hover:bg-gray-200 text-gray-600 px-6 py-3 rounded-xl font-bold text-lg flex items-center gap-2 border-2 border-gray-300 transition-colors">
+                    <span>↩️</span> Undo
+                </button>
+                <button onclick="resetGame()" class="btn-press bg-red-100 hover:bg-red-200 text-red-600 px-6 py-3 rounded-xl font-bold text-lg flex items-center gap-2 border-2 border-red-200 transition-colors">
+                    <span>🗑️</span> Clear
+                </button>
+            </div>
+
+            <button onclick="checkAnswers()" class="btn-press bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-white px-8 py-3 rounded-xl font-heading text-2xl shadow-lg transform transition hover:-translate-y-1">
+                ✅ Let's Check!
+            </button>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    
+    <!-- Success Modal -->
+    <div id="modal-success" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center m-4 shadow-2xl transform scale-100 animate-bounce-in">
+            <div class="text-8xl mb-4">🏆</div>
+            <h2 class="font-heading text-4xl text-purple-600 mb-2">Great Job Ashlyn!</h2>
+            <p class="text-gray-500 text-xl mb-8">You sorted all the words correctly!</p>
+            <button onclick="closeModal('modal-success'); resetGame();" class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 rounded-2xl text-xl shadow-lg">
+                Play Again
+            </button>
+        </div>
+    </div>
+
+    <!-- Try Again Modal -->
+    <div id="modal-try-again" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center m-4 shadow-2xl">
+            <div class="text-7xl mb-4">🤔</div>
+            <h2 class="font-heading text-3xl text-orange-500 mb-2">Almost there!</h2>
+            <p class="text-gray-500 text-lg mb-6">Some words are in the wrong basket. Give it another try!</p>
+            <button onclick="closeModal('modal-try-again')" class="w-full bg-orange-400 hover:bg-orange-500 text-white font-bold py-4 rounded-2xl text-xl shadow-lg">
+                Fix it!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- Data ---
+        const wordList = [
+            { text: "Apple", type: "Noun" },
+            { text: "Fall", type: "Verb" }, // Contextual, but usually action in this list
+            { text: "Bed", type: "Noun" },
+            { text: "Snow", type: "Noun" },
+            { text: "Hit", type: "Verb" },
+            { text: "Sing", type: "Verb" },
+            { text: "Man", type: "Noun" },
+            { text: "Jump", type: "Verb" },
+            { text: "Drink", type: "Verb" },
+            { text: "Hop", type: "Verb" },
+            { text: "Write", type: "Verb" },
+            { text: "Sit", type: "Verb" },
+            { text: "Pizza", type: "Noun" },
+            { text: "Think", type: "Verb" },
+            { text: "Sleep", type: "Verb" },
+            { text: "Monkey", type: "Noun" },
+            { text: "Walk", type: "Verb" },
+            { text: "Read", type: "Verb" }
+        ];
+
+        // --- State ---
+        let moveHistory = []; // Stack for Undo: { element, oldParent }
+
+        // --- Elements ---
+        const poolContainer = document.getElementById('pool-container');
+        const nounContainer = document.querySelector('#basket-noun .inner-basket');
+        const verbContainer = document.querySelector('#basket-verb .inner-basket');
+        const baskets = document.querySelectorAll('.basket');
+
+        // --- Initialization ---
+        function initGame() {
+            poolContainer.innerHTML = '';
+            nounContainer.innerHTML = '';
+            verbContainer.innerHTML = '';
+            moveHistory = [];
+            
+            // Shuffle and create cards
+            const shuffled = [...wordList].sort(() => Math.random() - 0.5);
+            
+            shuffled.forEach(item => {
+                const card = createCard(item);
+                poolContainer.appendChild(card);
+            });
+        }
+
+        function createCard(item) {
+            const el = document.createElement('div');
+            el.className = 'word-card bg-white border-2 border-gray-300 text-gray-700 rounded-xl px-4 py-2 font-bold text-xl shadow-sm hover:shadow-md';
+            el.textContent = item.text;
+            el.dataset.type = item.type;
+            el.dataset.originalText = item.text;
+            
+            // Interaction Handlers
+            el.addEventListener('pointerdown', handlePointerDown);
+            
+            return el;
+        }
+
+        // --- Text to Speech ---
+        function speak(text) {
+            window.speechSynthesis.cancel(); // Stop previous
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.9; // Slightly slower for clarity
+            utterance.pitch = 1.1; // Slightly higher friendly pitch
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // --- Drag & Drop Logic ---
+        let draggedItem = null;
+        let originalParent = null;
+        let startX, startY, initialLeft, initialTop;
+        let clone = null; // Ghost element while dragging
+
+        function handlePointerDown(e) {
+            e.preventDefault();
+            const target = e.target;
+            
+            // Speak immediately on touch/click
+            speak(target.dataset.originalText);
+
+            draggedItem = target;
+            originalParent = target.parentElement;
+            
+            // Calculate offsets
+            const rect = target.getBoundingClientRect();
+            const offsetX = e.clientX - rect.left;
+            const offsetY = e.clientY - rect.top;
+
+            // Create a clone for visual dragging so we don't mess up the flex layout immediately
+            clone = target.cloneNode(true);
+            clone.style.position = 'absolute';
+            clone.style.width = `${rect.width}px`;
+            clone.style.height = `${rect.height}px`;
+            clone.style.left = `${rect.left}px`;
+            clone.style.top = `${rect.top}px`;
+            clone.style.zIndex = 1000;
+            clone.style.transform = 'scale(1.1)';
+            clone.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+            clone.classList.add('pointer-events-none'); // Let events pass through to check elements below
+            
+            document.body.appendChild(clone);
+            
+            // Hide original temporarily
+            target.style.opacity = '0';
+
+            function move(e) {
+                clone.style.left = `${e.clientX - offsetX}px`;
+                clone.style.top = `${e.clientY - offsetY}px`;
+
+                // Highlight baskets if hovering
+                baskets.forEach(basket => {
+                    const bRect = basket.getBoundingClientRect();
+                    if (e.clientX >= bRect.left && e.clientX <= bRect.right && 
+                        e.clientY >= bRect.top && e.clientY <= bRect.bottom) {
+                        basket.classList.add('drag-over');
+                    } else {
+                        basket.classList.remove('drag-over');
+                    }
+                });
+            }
+
+            function stop(e) {
+                document.removeEventListener('pointermove', move);
+                document.removeEventListener('pointerup', stop);
+                
+                // Identify Drop Target
+                let dropped = false;
+                
+                // Find which basket we are over
+                baskets.forEach(basket => {
+                    const bRect = basket.getBoundingClientRect();
+                    if (e.clientX >= bRect.left && e.clientX <= bRect.right && 
+                        e.clientY >= bRect.top && e.clientY <= bRect.bottom) {
+                        
+                        // Drop Logic
+                        const inner = basket.querySelector('.inner-basket');
+                        if (inner !== originalParent) {
+                            recordMove(draggedItem, originalParent); // Save for undo
+                            inner.appendChild(draggedItem);
+                        }
+                        dropped = true;
+                    }
+                    basket.classList.remove('drag-over');
+                });
+
+                // If not dropped in a basket, check if dropped back in pool? 
+                // Or if just released in middle of nowhere, return to original parent.
+                if (!dropped) {
+                    // Check if dropped in pool
+                    const pRect = document.getElementById('word-pool').getBoundingClientRect();
+                    if (e.clientX >= pRect.left && e.clientX <= pRect.right && 
+                        e.clientY >= pRect.top && e.clientY <= pRect.bottom) {
+                         if (poolContainer !== originalParent) {
+                             recordMove(draggedItem, originalParent);
+                             poolContainer.appendChild(draggedItem);
+                         }
+                    }
+                }
+
+                // Cleanup
+                draggedItem.style.opacity = '1';
+                clone.remove();
+                clone = null;
+                draggedItem = null;
+                
+                // Reset styles
+                document.querySelectorAll('.word-card').forEach(c => {
+                    c.classList.remove('wrong', 'correct');
+                });
+            }
+
+            document.addEventListener('pointermove', move);
+            document.addEventListener('pointerup', stop);
+        }
+
+        // --- Game Logic Controls ---
+
+        function recordMove(element, oldParent) {
+            moveHistory.push({
+                element: element,
+                oldParent: oldParent
+            });
+        }
+
+        function undoLastMove() {
+            if (moveHistory.length === 0) return;
+            const lastMove = moveHistory.pop();
+            lastMove.oldParent.appendChild(lastMove.element);
+            
+            // Reset styles on undo
+            lastMove.element.classList.remove('wrong', 'correct');
+        }
+
+        function resetGame() {
+            initGame();
+        }
+
+        function checkAnswers() {
+            let allCorrect = true;
+            let totalSorted = 0;
+            const nounCards = nounContainer.querySelectorAll('.word-card');
+            const verbCards = verbContainer.querySelectorAll('.word-card');
+            const poolCards = poolContainer.querySelectorAll('.word-card');
+
+            // 1. Check Noun Basket
+            nounCards.forEach(card => {
+                totalSorted++;
+                if (card.dataset.type !== 'Noun') {
+                    card.classList.add('wrong');
+                    card.classList.remove('correct');
+                    allCorrect = false;
+                } else {
+                    card.classList.add('correct');
+                    card.classList.remove('wrong');
+                }
+            });
+
+            // 2. Check Verb Basket
+            verbCards.forEach(card => {
+                totalSorted++;
+                if (card.dataset.type !== 'Verb') {
+                    card.classList.add('wrong');
+                    card.classList.remove('correct');
+                    allCorrect = false;
+                } else {
+                    card.classList.add('correct');
+                    card.classList.remove('wrong');
+                }
+            });
+
+            // 3. Logic validation
+            if (poolCards.length > 0) {
+                // Not finished
+                playSound('error');
+                showModal('modal-try-again');
+                document.querySelector('#modal-try-again h2').textContent = "Not finished yet!";
+                document.querySelector('#modal-try-again p').textContent = "There are still words in the Word Bank.";
+                return;
+            }
+
+            if (allCorrect && totalSorted === wordList.length) {
+                playSound('win');
+                showModal('modal-success');
+                celebrate();
+            } else {
+                playSound('error');
+                showModal('modal-try-again');
+                document.querySelector('#modal-try-again h2').textContent = "Almost there!";
+                document.querySelector('#modal-try-again p').textContent = "Look at the red cards. They might be in the wrong place!";
+            }
+        }
+
+        // --- Helpers ---
+
+        function showModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function playSound(type) {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (type === 'win') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.linearRampToValueAtTime(880, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.5);
+            } else {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+                osc.frequency.linearRampToValueAtTime(150, audioCtx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            }
+        }
+
+        function celebrate() {
+            const colors = ['#ec4899', '#8b5cf6', '#3b82f6', '#10b981', '#f59e0b'];
+            for (let i = 0; i < 60; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(conf);
+                setTimeout(() => conf.remove(), 4000);
+            }
+        }
+
+        // Start
+        initGame();
+
+    </script>
+</body>
+</html>
