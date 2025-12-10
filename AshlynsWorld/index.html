@@ -11,6 +11,8 @@
             --royal-purple: #9c27b0;
             --deep-purple: #4a148c;
             --sparkle-yellow: #ffd740;
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.4);
         }
 
         body {
@@ -21,9 +23,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
-            overflow-x: hidden; /* Changed to overflow-x to allow scrolling if needed */
+            overflow-x: hidden;
             color: white;
             text-align: center;
         }
@@ -35,6 +36,7 @@
             border-radius: 50%;
             opacity: 0.8;
             animation: twinkle infinite alternate;
+            z-index: -1;
         }
         
         @keyframes twinkle {
@@ -44,8 +46,9 @@
 
         h1 {
             font-family: 'Chewy', cursive;
-            font-size: 4rem;
-            margin-bottom: 10px;
+            font-size: 3.5rem;
+            margin-bottom: 5px;
+            margin-top: 10px;
             text-shadow: 4px 4px 0px var(--deep-purple);
             z-index: 10;
             animation: floatText 3s ease-in-out infinite;
@@ -58,121 +61,158 @@
         }
 
         .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
             background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
+            padding: 8px 20px;
             border-radius: 20px;
             z-index: 10;
         }
 
-        /* The Menu Grid */
-        .menu-container {
+        /* --- FOLDER / SECTION STYLES --- */
+        .folder-section {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--glass-bg);
+            border: 3px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(4px);
+            z-index: 10;
+        }
+
+        .folder-header {
+            font-family: 'Chewy', cursive;
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 0 var(--deep-purple);
+            margin-bottom: 20px;
+            text-align: left;
+            padding-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .folder-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
-            max-width: 1000px;
-            z-index: 10;
-            margin-bottom: 40px;
+            gap: 20px;
         }
 
-        /* The Adventure Cards */
+        /* --- STANDARD CARD STYLES --- */
         .adventure-card {
             background: white;
-            width: 220px;
-            height: 280px;
+            width: 180px; /* Slightly smaller for density */
+            height: 220px;
             border-radius: 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-around;
-            padding: 20px;
-            text-decoration: none; /* Remove underline from links */
-            box-shadow: 0 10px 0 rgba(0,0,0,0.2);
+            justify-content: center;
+            padding: 15px;
+            text-decoration: none;
+            box-shadow: 0 8px 0 rgba(0,0,0,0.15);
             transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
             overflow: hidden;
-            border: 5px solid white;
+            border: 4px solid white;
+            gap: 10px;
         }
 
         .adventure-card:active {
             transform: scale(0.95) translateY(5px);
-            box-shadow: 0 5px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 4px 0 rgba(0,0,0,0.15);
         }
 
-        /* Individual Card Themes */
-        
-        /* List 1: Beach */
-        .card-beach {
-            background: linear-gradient(to bottom, #fff9c4, #81d4fa);
-            border-color: #fdd835;
+        .adventure-card .icon {
+            font-size: 4rem;
+            line-height: 1;
         }
-        .card-beach h2 { color: #f57f17; }
-        .card-beach .icon { font-size: 5rem; text-shadow: 0 5px 10px rgba(0,0,0,0.1); }
-
-        /* List 2: Race */
-        .card-race {
-            background: linear-gradient(to bottom, #cfd8dc, #81c784);
-            border-color: #388e3c;
-        }
-        .card-race h2 { color: #2e7d32; }
-        .card-race .icon { font-size: 5rem; transform: skew(-10deg); }
-
-        /* List 3: Pond */
-        .card-pond {
-            background: linear-gradient(to bottom, #b3e5fc, #0288d1);
-            border-color: #01579b;
-        }
-        .card-pond h2 { color: #01579b; }
-        .card-pond .icon { font-size: 5rem; }
-
-        /* Noun Town */
-        .card-town {
-            background: linear-gradient(to bottom, #ffcc80, #ff7043);
-            border-color: #d84315;
-        }
-        .card-town h2 { color: #bf360c; }
-        .card-town .icon { font-size: 5rem; }
-
-        /* Noun Game */
-        .card-game {
-            background: linear-gradient(to bottom, #e1bee7, #ba68c8);
-            border-color: #8e24aa;
-        }
-        .card-game h2 { color: #4a148c; }
-        .card-game .icon { font-size: 5rem; }
-
-        /* Noun Sort */
-        .card-noun-sort {
-            background: linear-gradient(to bottom, #ffcdd2, #e57373);
-            border-color: #b71c1c;
-        }
-        .card-noun-sort h2 { color: #b71c1c; }
-        .card-noun-sort .icon { font-size: 5rem; }
-
-        /* Verb Sort */
-        .card-verb-sort {
-            background: linear-gradient(to bottom, #b2dfdb, #26a69a);
-            border-color: #00695c;
-        }
-        .card-verb-sort h2 { color: #004d40; }
-        .card-verb-sort .icon { font-size: 5rem; }
 
         .adventure-card h2 {
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             text-transform: uppercase;
+            color: #333;
+            line-height: 1.1;
         }
 
         .play-badge {
             background: var(--deep-purple);
             color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 1rem;
-            margin-top: 10px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.9rem;
         }
+
+        /* Card Themes */
+        .theme-beach { border-color: #fdd835; background: linear-gradient(to bottom, #fff9c4, #81d4fa); }
+        .theme-beach h2 { color: #f57f17; }
+        
+        .theme-race { border-color: #388e3c; background: linear-gradient(to bottom, #cfd8dc, #81c784); }
+        .theme-race h2 { color: #2e7d32; }
+        
+        .theme-pond { border-color: #01579b; background: linear-gradient(to bottom, #b3e5fc, #0288d1); }
+        .theme-pond h2 { color: #01579b; }
+
+        .theme-noun { border-color: #d84315; background: linear-gradient(to bottom, #ffcc80, #ff7043); }
+        .theme-noun h2 { color: #bf360c; }
+        
+        .theme-game { border-color: #8e24aa; background: linear-gradient(to bottom, #e1bee7, #ba68c8); }
+        .theme-game h2 { color: #4a148c; }
+        
+        .theme-sort { border-color: #b71c1c; background: linear-gradient(to bottom, #ffcdd2, #e57373); }
+        .theme-sort h2 { color: #b71c1c; }
+
+        .theme-verb { border-color: #00695c; background: linear-gradient(to bottom, #b2dfdb, #26a69a); }
+        .theme-verb h2 { color: #004d40; }
+
+        /* --- SPELLING CARD STYLES --- */
+        .spelling-card {
+            background: white;
+            width: 260px;
+            border-radius: 25px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 0 rgba(0,0,0,0.15);
+        }
+
+        .spelling-title {
+            font-size: 1.5rem;
+            color: var(--deep-purple);
+            margin: 5px 0;
+        }
+
+        .spelling-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: white;
+            transition: transform 0.1s;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+        }
+
+        .spelling-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.1);
+        }
+
+        .btn-listen { background: #4caf50; border-bottom: 4px solid #2e7d32; }
+        .btn-practice { background: #ff9800; border-bottom: 4px solid #e65100; }
+
 
         /* Footer */
         .footer {
@@ -187,62 +227,91 @@
 </head>
 <body>
 
-    <!-- Background Stars (Generated by JS below) -->
     <div id="star-container"></div>
 
     <h1>Ashlyn's World ✨</h1>
-    <div class="subtitle">Pick your adventure!</div>
+    <div class="subtitle">Pick a folder to start!</div>
 
-    <div class="menu-container">
-        <!-- List 1 Link -->
-        <a href="list1.html" class="adventure-card card-beach">
-            <div class="icon">🦀</div>
-            <h2>The Beach</h2>
-            <div class="play-badge">List #1</div>
-        </a>
+    <!-- Folder 1: Sight Words -->
+    <div class="folder-section">
+        <div class="folder-header">📚 Sight Words</div>
+        <div class="folder-grid">
+            <a href="list1.html" class="adventure-card theme-beach">
+                <div class="icon">🦀</div>
+                <h2>The Beach</h2>
+                <div class="play-badge">List 1</div>
+            </a>
+            <a href="list2.html" class="adventure-card theme-race">
+                <div class="icon">🏎️</div>
+                <h2>Big Race</h2>
+                <div class="play-badge">List 2</div>
+            </a>
+            <a href="list3.html" class="adventure-card theme-pond">
+                <div class="icon">🐸</div>
+                <h2>Magic Pond</h2>
+                <div class="play-badge">List 3</div>
+            </a>
+        </div>
+    </div>
 
-        <!-- List 2 Link -->
-        <a href="list2.html" class="adventure-card card-race">
-            <div class="icon">🏎️</div>
-            <h2>Big Race</h2>
-            <div class="play-badge">List #2</div>
-        </a>
+    <!-- Folder 2: Noun Town -->
+    <div class="folder-section">
+        <div class="folder-header">🏘️ Noun Town</div>
+        <div class="folder-grid">
+            <a href="nouns1.html" class="adventure-card theme-noun">
+                <div class="icon">📝</div>
+                <h2>Noun Sort</h2>
+            </a>
+            <a href="nouns2.html" class="adventure-card theme-game">
+                <div class="icon">🧩</div>
+                <h2>Noun Game</h2>
+            </a>
+            <a href="nouns3.html" class="adventure-card theme-sort">
+                <div class="icon">🧺</div>
+                <h2>Noun Baskets</h2>
+            </a>
+        </div>
+    </div>
 
-        <!-- List 3 Link -->
-        <a href="list3.html" class="adventure-card card-pond">
-            <div class="icon">🐸</div>
-            <h2>Magic Pond</h2>
-            <div class="play-badge">List #3</div>
-        </a>
+    <!-- Folder 3: Verb Vybe -->
+    <div class="folder-section">
+        <div class="folder-header">🏃‍♀️ Verb Vybe</div>
+        <div class="folder-grid">
+            <a href="verbs1.html" class="adventure-card theme-verb">
+                <div class="icon">⚡</div>
+                <h2>Verb Sort</h2>
+                <div class="play-badge">Action!</div>
+            </a>
+        </div>
+    </div>
 
-        <!-- Noun Town -->
-        <a href="nouns1.html" class="adventure-card card-town">
-            <div class="icon">🏘️</div>
-            <h2>Noun Town</h2>
-            <div class="play-badge">Sorting</div>
-        </a>
+    <!-- Folder 4: Spelling -->
+    <div class="folder-section">
+        <div class="folder-header">🔤 Spelling</div>
+        <div class="folder-grid">
+            
+            <!-- Spelling List 1 -->
+            <div class="spelling-card">
+                <div class="spelling-title">List 1</div>
+                <a href="spellinglisten1.html" class="spelling-btn btn-listen">Listen 👂</a>
+                <a href="spellingpractice1.html" class="spelling-btn btn-practice">Practice ✏️</a>
+            </div>
 
-        <!-- Noun Game -->
-        <a href="nouns2.html" class="adventure-card card-game">
-            <div class="icon">🧩</div>
-            <h2>Noun Game</h2>
-            <div class="play-badge">Grid</div>
-        </a>
+            <!-- Spelling List 2 -->
+            <div class="spelling-card">
+                <div class="spelling-title">List 2</div>
+                <a href="spellinglisten2.html" class="spelling-btn btn-listen">Listen 👂</a>
+                <a href="spellingpractice2.html" class="spelling-btn btn-practice">Practice ✏️</a>
+            </div>
 
-        <!-- Noun Sort -->
-        <a href="nouns3.html" class="adventure-card card-noun-sort">
-            <div class="icon">🧺</div>
-            <h2>Noun Sort</h2>
-            <div class="play-badge">Basket</div>
-        </a>
+            <!-- Spelling List 3 -->
+            <div class="spelling-card">
+                <div class="spelling-title">List 3</div>
+                <a href="spellinglisten3.html" class="spelling-btn btn-listen">Listen 👂</a>
+                <a href="spellingpractice3.html" class="spelling-btn btn-practice">Practice ✏️</a>
+            </div>
 
-        <!-- Verb Sort -->
-        <a href="verbs1.html" class="adventure-card card-verb-sort">
-            <div class="icon">🏃‍♀️</div>
-            <h2>Verb Sort</h2>
-            <div class="play-badge">Action</div>
-        </a>
-
+        </div>
     </div>
 
     <div class="footer">
@@ -257,16 +326,10 @@
         for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            
-            // Random position
             const x = Math.random() * 100;
             const y = Math.random() * 100;
-            
-            // Random size
-            const size = Math.random() * 4 + 2; // 2px to 6px
-            
-            // Random animation speed
-            const duration = Math.random() * 2 + 1; // 1s to 3s
+            const size = Math.random() * 4 + 2;
+            const duration = Math.random() * 2 + 1;
 
             star.style.left = x + 'vw';
             star.style.top = y + 'vh';
@@ -274,7 +337,7 @@
             star.style.height = size + 'px';
             star.style.animationDuration = duration + 's';
 
-            body.appendChild(star);
+            document.getElementById('star-container').appendChild(star);
         }
 
         // Add a gentle "Welcome" voice greeting when she taps anywhere first
