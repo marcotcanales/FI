@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Spelling Practice: List 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Fredoka One', cursive;
+            background: linear-gradient(180deg, #ffcc80 0%, #ffab91 100%); /* Sunset Gradient */
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+            touch-action: none;
+        }
+
+        /* --- BACKGROUND CLOUDS --- */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6); /* Slightly transparent for sunset */
+            border-radius: 50%;
+            z-index: 0;
+            animation: drift linear infinite;
+        }
+        .cloud::after, .cloud::before {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 50%;
+        }
+        .c1 { width: 120px; height: 50px; top: 10%; left: -20%; animation-duration: 45s; }
+        .c1::after { width: 50px; height: 50px; top: -25px; left: 20px; }
+        .c1::before { width: 60px; height: 60px; top: -30px; left: 50px; }
+
+        .c2 { width: 150px; height: 60px; top: 30%; left: -30%; animation-duration: 65s; animation-delay: 5s; }
+        .c2::after { width: 60px; height: 60px; top: -30px; left: 25px; }
+        .c2::before { width: 70px; height: 70px; top: -40px; left: 60px; }
+
+        @keyframes drift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(120vw); }
+        }
+
+        /* --- LAYOUT CONTAINERS --- */
+        .game-container {
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            align-items: center;
+        }
+
+        /* --- TOP PROGRESS LIST --- */
+        #progress-bar {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            width: 100%;
+            padding: 10px;
+            justify-content: flex-start; /* allow scroll */
+            scrollbar-width: none; /* Firefox */
+        }
+        #progress-bar::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+        .progress-item {
+            background: rgba(255, 255, 255, 0.5);
+            color: #d84315; /* Deep Orange */
+            min-width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .progress-item.active {
+            background: #fff;
+            border-color: #ff6f00; /* Amber */
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .progress-item.solved {
+            background: #fff59d; /* Warm Yellow Success */
+            color: #e65100;
+            padding-left: 15px;
+            padding-right: 15px;
+            font-size: 0.9rem;
+            border-color: #fbc02d;
+        }
+
+        /* --- MAIN CONTROLS (Play, Prev, Next) --- */
+        .controls-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        /* Updated Nav Buttons */
+        .nav-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            font-size: 1.2rem;
+            font-family: 'Fredoka One', cursive;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: #d84315; /* Deep Orange */
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 100px;
+            justify-content: center;
+        }
+        .nav-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.1); }
+
+        /* Updated Play Button (Sun Style) */
+        #play-btn {
+            width: 120px;
+            height: 120px;
+            background: #ff9800; /* Orange */
+            border-radius: 50%;
+            border: 5px solid white;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 0 #e65100;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        #play-btn span.icon { font-size: 3rem; line-height: 1; }
+        #play-btn span.text { font-size: 1.2rem; margin-top: 5px; }
+        
+        #play-btn:active { transform: scale(0.95); box-shadow: 0 3px 0 #e65100; }
+
+        /* --- WORD INPUT AREA --- */
+        #word-display {
+            display: flex;
+            gap: 8px;
+            margin: 20px 0;
+            min-height: 60px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .letter-slot {
+            width: 50px;
+            height: 60px;
+            background: white;
+            border-radius: 10px;
+            border-bottom: 4px solid #ffab91; /* Peach border */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #bf360c;
+            transition: background-color 0.3s;
+        }
+
+        /* Feedback states */
+        .slot-correct { background-color: #fff9c4 !important; border-color: #fbc02d !important; }
+        .slot-wrong { background-color: #ffccbc !important; border-color: #d84315 !important; }
+
+        /* --- KEYBOARD --- */
+        .keyboard-area {
+            margin-top: auto; /* Push to bottom */
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255,255,255,0.4);
+            padding: 10px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-bottom: 20px;
+        }
+
+        .kb-row {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .key-btn {
+            background: #fff3e0; /* Pale Orange Background */
+            border: none;
+            border-radius: 50%; /* Round keys */
+            width: 45px;
+            height: 45px; /* Circular */
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #e65100; /* Dark Orange Text */
+            box-shadow: 0 4px 0 #ffb74d; /* Orange Shadow */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .key-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,0.2); }
+
+        /* Special Keys */
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            margin-top: 5px;
+        }
+
+        .big-btn {
+            border-radius: 15px;
+            padding: 10px 20px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.2rem;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        .big-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,0.2); }
+
+        #delete-btn { background: #d84315; box-shadow: 0 4px 0 #bf360c; } /* Dark Red/Orange */
+        #check-btn { background: #ffb74d; box-shadow: 0 4px 0 #f57c00; } /* Bright Orange */
+
+        /* --- HOME BUTTON --- */
+        #home-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            background: white;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 50;
+        }
+
+        /* --- CONFETTI --- */
+        .confetti {
+            position: absolute;
+            width: 10px; height: 10px;
+            background-color: #f00;
+            animation: fall linear forwards;
+            z-index: 100;
+        }
+        @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
+
+    </style>
+</head>
+<body>
+
+    <a href="index.html" id="home-btn">🏠</a>
+
+    <!-- Clouds -->
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+
+    <div class="game-container">
+        
+        <!-- Progress Strip -->
+        <div id="progress-bar">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-area">
+            <button class="nav-btn" onclick="prevWord()">
+                <span>◀ Back</span>
+            </button>
+            <button id="play-btn" onclick="playCurrentWord()">
+                <span class="icon">🔊</span>
+                <span class="text">Play</span>
+            </button>
+            <button class="nav-btn" onclick="nextWord()">
+                <span>Next ▶</span>
+            </button>
+        </div>
+
+        <!-- Word Blanks -->
+        <div id="word-display">
+            <!-- Blanks go here -->
+        </div>
+
+        <!-- Keyboard Area -->
+        <div class="keyboard-area">
+            <div class="action-row">
+                <button id="check-btn" class="big-btn" onclick="checkSpelling()">Let's Check 🔍</button>
+                <button id="delete-btn" class="big-btn" onclick="deleteLetter()">Delete ⌫</button>
+            </div>
+            
+            <div style="height: 10px;"></div> <!-- Spacer -->
+
+            <div class="kb-row" id="row-1"></div>
+            <div class="kb-row" id="row-2"></div>
+            <div class="kb-row" id="row-3"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- DATA ---
+        const originalList = [
+            "tap", "tapping", "bag", "begged", "skip", 
+            "skipping", "drop", "dropped", "run", "running", 
+            "clapped", "tripped", "stopping"
+        ];
+        
+        let gameData = [];
+        let currentIndex = 0;
+        let currentInput = "";
+
+        // --- ELEMENTS ---
+        const progressBar = document.getElementById('progress-bar');
+        const wordDisplay = document.getElementById('word-display');
+        const playBtn = document.getElementById('play-btn');
+
+        // --- INIT ---
+        function initGame() {
+            // Shuffle and Setup Game Data
+            gameData = originalList
+                .map(word => ({ word: word, solved: false }))
+                .sort(() => Math.random() - 0.5);
+            
+            currentIndex = 0;
+            renderProgressBar();
+            loadWord();
+            setupKeyboard();
+        }
+
+        // --- RENDER FUNCTIONS ---
+        function renderProgressBar() {
+            progressBar.innerHTML = '';
+            gameData.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'progress-item';
+                if (index === currentIndex) div.classList.add('active');
+                
+                if (item.solved) {
+                    div.classList.add('solved');
+                    div.textContent = item.word;
+                } else {
+                    div.textContent = index + 1;
+                }
+                
+                // Allow clicking number to jump to word
+                div.onclick = () => {
+                    currentIndex = index;
+                    loadWord();
+                };
+
+                progressBar.appendChild(div);
+            });
+            
+            // Scroll active into view
+            const active = progressBar.querySelector('.active');
+            if (active) active.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+        }
+
+        function loadWord() {
+            currentInput = "";
+            renderProgressBar(); // Update active highlight
+            renderBlanks();
+            
+            // If already solved, fill it in
+            if (gameData[currentIndex].solved) {
+                currentInput = gameData[currentIndex].word;
+                renderBlanks();
+            }
+        }
+
+        function renderBlanks() {
+            wordDisplay.innerHTML = '';
+            const targetWord = gameData[currentIndex].word;
+            const inputLen = currentInput.length;
+
+            for (let i = 0; i < targetWord.length; i++) {
+                const slot = document.createElement('div');
+                slot.className = 'letter-slot';
+                if (i < inputLen) {
+                    slot.textContent = currentInput[i];
+                }
+                wordDisplay.appendChild(slot);
+            }
+        }
+
+        // --- GAME LOGIC ---
+        function playCurrentWord() {
+            const word = gameData[currentIndex].word;
+            speak(word);
+        }
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.9;
+            utterance.pitch = 1.1;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function typeLetter(letter) {
+            const targetWord = gameData[currentIndex].word;
+            if (gameData[currentIndex].solved) return; // Locked if done
+
+            if (currentInput.length < targetWord.length) {
+                currentInput += letter;
+                renderBlanks();
+                
+                if (currentInput.toLowerCase() === targetWord.toLowerCase()) {
+                    handleCorrect();
+                }
+            }
+        }
+
+        function deleteLetter() {
+            if (gameData[currentIndex].solved) return;
+            currentInput = currentInput.slice(0, -1);
+            renderBlanks();
+        }
+
+        function checkSpelling() {
+            if (gameData[currentIndex].solved) return;
+
+            const targetWord = gameData[currentIndex].word;
+            const slots = document.querySelectorAll('.letter-slot');
+
+            // Visual feedback loop
+            for (let i = 0; i < slots.length; i++) {
+                if (!currentInput[i]) continue; // Empty slot
+
+                if (currentInput[i] === targetWord[i]) {
+                    slots[i].classList.add('slot-correct');
+                } else {
+                    slots[i].classList.add('slot-wrong');
+                    playSound('error');
+                }
+            }
+
+            // Remove feedback after 3 seconds
+            setTimeout(() => {
+                slots.forEach(s => {
+                    s.classList.remove('slot-correct', 'slot-wrong');
+                });
+            }, 3000);
+        }
+
+        function handleCorrect() {
+            if (gameData[currentIndex].solved) return; // Prevent double trigger
+            
+            gameData[currentIndex].solved = true;
+            renderBlanks(); // Ensure text is visible
+            
+            // Success effect permanent for this session
+            const slots = document.querySelectorAll('.letter-slot');
+            slots.forEach(s => s.classList.add('slot-correct'));
+
+            playSound('success');
+            speak("Great Job!");
+            celebrate();
+            renderProgressBar();
+
+            // Auto-advance after 2.5 seconds (allowing time for celebration)
+            setTimeout(() => {
+                if (currentIndex < gameData.length - 1) {
+                    nextWord();
+                } else {
+                    // Optional: If it was the last word, celebrate completion?
+                    speak("You finished the list!");
+                }
+            }, 2500);
+        }
+
+        // --- NAVIGATION ---
+        function prevWord() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadWord();
+            }
+        }
+
+        function nextWord() {
+            if (currentIndex < gameData.length - 1) {
+                currentIndex++;
+                loadWord();
+            }
+        }
+
+        // --- KEYBOARD SETUP ---
+        function setupKeyboard() {
+            const row1 = "qwertyuiop".split('');
+            const row2 = "asdfghjkl".split('');
+            const row3 = "zxcvbnm".split('');
+
+            const r1 = document.getElementById('row-1');
+            const r2 = document.getElementById('row-2');
+            const r3 = document.getElementById('row-3');
+
+            row1.forEach(l => createKey(l, r1));
+            row2.forEach(l => createKey(l, r2));
+            row3.forEach(l => createKey(l, r3));
+        }
+
+        function createKey(letter, container) {
+            const btn = document.createElement('button');
+            btn.className = 'key-btn';
+            btn.textContent = letter;
+            btn.onclick = () => typeLetter(letter);
+            container.appendChild(btn);
+        }
+
+        // --- AUDIO & FX ---
+        function playSound(type) {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            if (type === 'success') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(500, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1000, ctx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.5);
+            } else {
+                osc.type = 'sawtooth'; // Error buzz
+                osc.frequency.setValueAtTime(150, ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(100, ctx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.3);
+            }
+        }
+
+        function celebrate() {
+            const colors = ['#f44336', '#2196f3', '#ffeb3b', '#4caf50', '#9c27b0'];
+            for (let i = 0; i < 50; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(conf);
+                setTimeout(() => conf.remove(), 4000);
+            }
+        }
+
+        // Start
+        initGame();
+
+    </script>
+</body>
+</html>
