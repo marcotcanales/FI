@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ashlyn's Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f0f4f8;
+            --card-bg: #ffffff;
+            --text-main: #2d3748;
+            
+            /* List 1: Day Theme */
+            --day-primary: #4fc3f7;
+            --day-accent: #e1f5fe;
+            --day-text: #01579b;
+            
+            /* List 2: Sunset Theme */
+            --sunset-primary: #ff8a65;
+            --sunset-accent: #fbe9e7;
+            --sunset-text: #bf360c;
+            
+            /* List 3: Night Theme */
+            --night-primary: #7e57c2;
+            --night-accent: #ede7f6;
+            --night-text: #311b92;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg-color);
+            /* Subtle lab grid pattern */
+            background-image: radial-gradient(#cbd5e0 1px, transparent 1px);
+            background-size: 20px 20px;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 3.5rem;
+            margin: 0;
+            color: #4a5568;
+            text-shadow: 2px 2px 0px white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #718096;
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        /* --- LAB GRID --- */
+        .lab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1100px;
+            margin-bottom: 40px;
+        }
+
+        /* --- MODULE CARDS --- */
+        .module-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            width: 100%;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #e2e8f0;
+            z-index: 1;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* --- THEME SPECIFICS --- */
+        
+        /* List 1: Day */
+        .card-day {
+            border-color: var(--day-primary);
+            background: linear-gradient(to bottom, #ffffff, var(--day-accent));
+        }
+        .card-day .card-header { color: var(--day-text); border-bottom-color: var(--day-primary); }
+        .btn-day { background-color: var(--day-primary); color: white; }
+        .btn-day:hover { background-color: #29b6f6; }
+
+        /* List 2: Sunset */
+        .card-sunset {
+            border-color: var(--sunset-primary);
+            background: linear-gradient(to bottom, #ffffff, var(--sunset-accent));
+        }
+        .card-sunset .card-header { color: var(--sunset-text); border-bottom-color: var(--sunset-primary); }
+        .btn-sunset { background-color: var(--sunset-primary); color: white; }
+        .btn-sunset:hover { background-color: #ff7043; }
+
+        /* List 3: Night */
+        .card-night {
+            border-color: var(--night-primary);
+            background: linear-gradient(to bottom, #ffffff, var(--night-accent));
+        }
+        .card-night .card-header { color: var(--night-text); border-bottom-color: var(--night-primary); }
+        .btn-night { background-color: var(--night-primary); color: white; }
+        .btn-night:hover { background-color: #673ab7; }
+
+
+        /* --- BUTTONS --- */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .lab-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 25px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+        }
+
+        .lab-btn:active {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        .btn-icon {
+            font-size: 1.5rem;
+        }
+
+        /* --- DECORATIONS --- */
+        /* Beaker bubbles */
+        .bubble {
+            position: absolute;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+            z-index: 0;
+            animation: rise 10s infinite ease-in;
+        }
+        @keyframes rise {
+            0% { bottom: -50px; transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { bottom: 120%; transform: translateX(-20px); opacity: 0; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            color: #a0aec0;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🧪 Ashlyn's Lab 🔬</h1>
+        <div class="subtitle">Select your experiment!</div>
+    </header>
+
+    <div class="lab-grid">
+
+        <!-- CARD 1: DAYTIME -->
+        <div class="module-card card-day">
+            <div class="card-icon">☀️</div>
+            <div class="card-header">List 1: Day</div>
+            <div class="bubble" style="width: 40px; height: 40px; left: 10%; animation-delay: 0s;"></div>
+            <div class="bubble" style="width: 20px; height: 20px; left: 80%; animation-delay: 2s;"></div>
+            
+            <div class="btn-container">
+                <a href="spellinglisten1.html" class="lab-btn btn-day">
+                    <span>Listen & Catch</span>
+                    <span class="btn-icon">🎧</span>
+                </a>
+                <a href="spellingpractice1.html" class="lab-btn btn-day">
+                    <span>Practice Test</span>
+                    <span class="btn-icon">✏️</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- CARD 2: SUNSET -->
+        <div class="module-card card-sunset">
+            <div class="card-icon">🌅</div>
+            <div class="card-header">List 2: Sunset</div>
+            <div class="bubble" style="width: 50px; height: 50px; left: 20%; animation-delay: 1s;"></div>
+            <div class="bubble" style="width: 30px; height: 30px; left: 70%; animation-delay: 3s;"></div>
+
+            <div class="btn-container">
+                <a href="spellinglisten2.html" class="lab-btn btn-sunset">
+                    <span>Listen & Catch</span>
+                    <span class="btn-icon">🎧</span>
+                </a>
+                <a href="spellingpractice2.html" class="lab-btn btn-sunset">
+                    <span>Practice Test</span>
+                    <span class="btn-icon">✏️</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- CARD 3: NIGHT -->
+        <div class="module-card card-night">
+            <div class="card-icon">🌌</div>
+            <div class="card-header">List 3: Night</div>
+            <div class="bubble" style="width: 60px; height: 60px; left: 15%; animation-delay: 0.5s;"></div>
+            <div class="bubble" style="width: 25px; height: 25px; left: 85%; animation-delay: 2.5s;"></div>
+
+            <div class="btn-container">
+                <a href="spellinglisten3.html" class="lab-btn btn-night">
+                    <span>Listen & Catch</span>
+                    <span class="btn-icon">🎧</span>
+                </a>
+                <a href="spellingpractice3.html" class="lab-btn btn-night">
+                    <span>Practice Test</span>
+                    <span class="btn-icon">✏️</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Created with ❤️ for 2nd Grade! | <a href="index.html" style="color: #a0aec0; text-decoration: none;">Back to Ashlyn's World</a>
+    </footer>
+
+</body>
+</html>
