@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Word Sorting Game</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
@@ -12,6 +12,9 @@
             background-color: #f0f9ff;
             overflow: hidden; /* Prevent scrolling while dragging */
             touch-action: none; /* Prevent browser gestures */
+            /* TABLET FIX: Use dvh for exact screen fit */
+            height: 100dvh;
+            width: 100vw;
         }
         
         h1, .font-heading {
@@ -39,6 +42,16 @@
         #word-card:active {
             cursor: grabbing;
             transform: scale(1.1);
+        }
+
+        /* Play Button specific styles */
+        #play-sound-btn {
+            cursor: pointer;
+            transition: transform 0.1s;
+            z-index: 60; /* Above the card background */
+        }
+        #play-sound-btn:active {
+            transform: scale(0.9);
         }
 
         .confetti {
@@ -78,11 +91,11 @@
         }
     </style>
 </head>
-<body class="h-screen w-screen flex flex-col items-center justify-between p-4 relative">
+<body class="flex flex-col items-center justify-between p-2 md:p-4 relative">
 
     <!-- Header -->
-    <div class="text-center mt-2">
-        <h1 class="text-3xl md:text-5xl text-blue-600 mb-2 tracking-wide">Word Sorting</h1>
+    <div class="text-center mt-2 flex-shrink-0">
+        <h1 class="text-3xl md:text-5xl text-blue-600 mb-1 tracking-wide">Word Sorting</h1>
         <div class="flex items-center justify-center gap-4 text-xl font-bold text-gray-600">
             <span>⭐ Score: <span id="score">0</span></span>
         </div>
@@ -92,14 +105,19 @@
     <div class="flex-grow flex items-center justify-center w-full relative" id="game-area">
         
         <!-- Placeholder for where the card spawns -->
-        <div id="card-spawn-point" class="w-64 h-32 border-4 border-dashed border-gray-300 rounded-2xl flex items-center justify-center">
+        <div id="card-spawn-point" class="w-64 h-40 border-4 border-dashed border-gray-300 rounded-2xl flex items-center justify-center">
             <span class="text-gray-300 font-bold text-xl">Next Word</span>
         </div>
 
-        <!-- The Draggable Card (Absolute positioned initially) -->
-        <div id="word-card" class="absolute w-64 h-32 bg-white rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.15)] border-b-8 border-blue-500 flex flex-col items-center justify-center transform hover:-translate-y-1">
-            <span id="current-word" class="font-heading text-5xl text-gray-800">Start</span>
-            <span class="text-sm text-gray-400 mt-2">Drag me to a basket!</span>
+        <!-- The Draggable Card -->
+        <div id="word-card" class="absolute w-64 h-40 bg-white rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.15)] border-b-8 border-blue-500 flex flex-col items-center justify-center transform">
+            <!-- Play Button -->
+            <button id="play-sound-btn" class="mb-2 bg-blue-100 hover:bg-blue-200 text-blue-600 w-10 h-10 rounded-full flex items-center justify-center shadow-sm">
+                🔊
+            </button>
+            
+            <span id="current-word" class="font-heading text-4xl md:text-5xl text-gray-800 text-center px-2">Start</span>
+            <span class="text-xs md:text-sm text-gray-400 mt-2">Drag me to a basket!</span>
         </div>
 
         <!-- Win Message Overlay -->
@@ -113,36 +131,34 @@
     </div>
 
     <!-- Baskets Container -->
-    <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 h-auto">
+    <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-2 md:mb-4 h-auto flex-shrink-0">
         
         <!-- Basket: Animals -->
-        <div class="basket bg-orange-100 border-4 border-orange-300 rounded-xl p-4 flex flex-col items-center justify-start h-40 md:h-48" data-category="Animals">
-            <div class="text-5xl mb-2">🐶</div>
-            <h2 class="font-heading text-xl md:text-2xl text-orange-600">Animals</h2>
+        <div class="basket bg-orange-100 border-4 border-orange-300 rounded-xl p-2 md:p-4 flex flex-col items-center justify-start h-36 md:h-48" data-category="Animals">
+            <div class="text-4xl md:text-5xl mb-2">🐶</div>
+            <h2 class="font-heading text-lg md:text-2xl text-orange-600">Animals</h2>
         </div>
 
         <!-- Basket: Places -->
-        <div class="basket bg-green-100 border-4 border-green-300 rounded-xl p-4 flex flex-col items-center justify-start h-40 md:h-48" data-category="Places">
-            <div class="text-5xl mb-2">🏠</div>
-            <h2 class="font-heading text-xl md:text-2xl text-green-600">Places</h2>
+        <div class="basket bg-green-100 border-4 border-green-300 rounded-xl p-2 md:p-4 flex flex-col items-center justify-start h-36 md:h-48" data-category="Places">
+            <div class="text-4xl md:text-5xl mb-2">🏠</div>
+            <h2 class="font-heading text-lg md:text-2xl text-green-600">Places</h2>
         </div>
 
         <!-- Basket: Persons -->
-        <div class="basket bg-purple-100 border-4 border-purple-300 rounded-xl p-4 flex flex-col items-center justify-start h-40 md:h-48" data-category="Persons">
-            <div class="text-5xl mb-2">👤</div>
-            <h2 class="font-heading text-xl md:text-2xl text-purple-600">Persons</h2>
+        <div class="basket bg-purple-100 border-4 border-purple-300 rounded-xl p-2 md:p-4 flex flex-col items-center justify-start h-36 md:h-48" data-category="Persons">
+            <div class="text-4xl md:text-5xl mb-2">👤</div>
+            <h2 class="font-heading text-lg md:text-2xl text-purple-600">Persons</h2>
         </div>
 
         <!-- Basket: Things -->
-        <div class="basket bg-blue-100 border-4 border-blue-300 rounded-xl p-4 flex flex-col items-center justify-start h-40 md:h-48" data-category="Things">
-            <div class="text-5xl mb-2">🧸</div>
-            <h2 class="font-heading text-xl md:text-2xl text-blue-600">Things</h2>
+        <div class="basket bg-blue-100 border-4 border-blue-300 rounded-xl p-2 md:p-4 flex flex-col items-center justify-start h-36 md:h-48" data-category="Things">
+            <div class="text-4xl md:text-5xl mb-2">🧸</div>
+            <h2 class="font-heading text-lg md:text-2xl text-blue-600">Things</h2>
         </div>
 
     </div>
 
-    <!-- Audio Elements (Using generated sounds via AudioContext in JS for reliability, but placeholders here for structure) -->
-    
     <script>
         // --- Game Data ---
         const wordData = [
@@ -185,6 +201,7 @@
         const baskets = document.querySelectorAll('.basket');
         const winMessage = document.getElementById('win-message');
         const spawnPoint = document.getElementById('card-spawn-point');
+        const playSoundBtn = document.getElementById('play-sound-btn');
 
         // --- Sound Effects (Simple Synths) ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -223,6 +240,15 @@
             }
         }
 
+        // --- Text to Speech ---
+        function speak(text) {
+            window.speechSynthesis.cancel(); // Stop previous
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.8; // Slowed down for clarity
+            utterance.pitch = 1.1; // Slightly higher friendly pitch
+            window.speechSynthesis.speak(utterance);
+        }
+
         // --- Game Logic ---
 
         function shuffle(array) {
@@ -254,6 +280,8 @@
             wordText.textContent = currentWordObj.text;
             resetCardPosition();
             playSound('pop');
+            // Optional: Speak word automatically on spawn?
+            // speak(currentWordObj.text);
         }
 
         function gameWin() {
@@ -265,20 +293,35 @@
         function resetCardPosition() {
             wordCard.style.display = 'flex';
             wordCard.style.transform = `translate(0px, 0px)`;
-            // Center the card over the spawn point visually
-            const rect = spawnPoint.getBoundingClientRect();
-            // Since wordCard is absolute and centered by flex in parent originally, we remove transform
-            // But let's make it actually sit on the spawn point
-            // The CSS centers the #game-area contents, so removing transform is usually enough 
-            // if the HTML structure aligns them.
-            // Let's explicitly center it.
+            
+            // Explicitly center it
             wordCard.style.left = '50%';
             wordCard.style.top = '50%';
-            wordCard.style.marginLeft = '-8rem'; // half of w-64
-            wordCard.style.marginTop = '-4rem';  // half of h-32
+            wordCard.style.marginLeft = '-8rem'; // half of w-64 (16rem/2 = 8rem)
+            wordCard.style.marginTop = '-5rem';  // half of h-40 (10rem/2 = 5rem)
+            
             wordCard.setAttribute('data-x', 0);
             wordCard.setAttribute('data-y', 0);
         }
+
+        // --- Interaction Logic (Play Button) ---
+        
+        function handlePlayClick(e) {
+            // Stop propagation so we don't trigger the drag on the card
+            e.stopPropagation();
+            if (currentWordObj) {
+                speak(currentWordObj.text);
+                
+                // Visual feedback
+                const btn = e.currentTarget;
+                btn.style.transform = "scale(0.9)";
+                setTimeout(() => btn.style.transform = "scale(1)", 150);
+            }
+        }
+
+        playSoundBtn.addEventListener('mousedown', handlePlayClick);
+        playSoundBtn.addEventListener('touchstart', handlePlayClick, { passive: false });
+
 
         // --- Drag and Drop Logic ---
 
@@ -288,6 +331,9 @@
         let currentY = 0;
 
         function handleStart(e) {
+            // If we tapped the button, do nothing (handled by handlePlayClick)
+            if (e.target.closest('#play-sound-btn')) return;
+
             if (e.type === 'touchstart') {
                 startX = e.touches[0].clientX - currentX;
                 startY = e.touches[0].clientY - currentY;
@@ -300,6 +346,9 @@
             wordCard.style.transition = 'none'; // Remove transition for instant follow
             wordCard.style.cursor = 'grabbing';
             playSound('pop');
+            
+            // Also speak when grabbing
+            speak(currentWordObj.text);
         }
 
         function handleMove(e) {
@@ -331,8 +380,6 @@
             wordCard.style.transition = 'transform 0.3s ease';
 
             // Get drop position
-            // For touch, we need the last known coordinates, usually stored or retrieved
-            // Since 'touchend' has no coordinates, we use the center of the card
             const cardRect = wordCard.getBoundingClientRect();
             const cardCenterX = cardRect.left + cardRect.width / 2;
             const cardCenterY = cardRect.top + cardRect.height / 2;
@@ -400,6 +447,7 @@
         function handleWrong() {
             playSound('wrong');
             wordCard.classList.add('shake');
+            speak("Try again!");
             
             // Return to start
             setTimeout(() => {
