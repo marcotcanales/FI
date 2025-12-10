@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Spelling Listen: List 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Fredoka One', cursive;
+            background: linear-gradient(180deg, #311b92 0%, #000000 100%); /* Deep Purple to Black */
+            overflow: hidden; /* Prevent scrolling */
+            /* TABLET FIX: Use dvh (dynamic viewport height) for Android browser bars */
+            height: 100dvh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+            touch-action: none;
+        }
+
+        /* --- BACKGROUND STARS --- */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            z-index: 0;
+            animation: twinkle infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 5px white; }
+        }
+
+        /* --- GAME AREAS --- */
+        #sky-area {
+            flex-grow: 1;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+        }
+
+        #ground-area {
+            height: 30vh;
+            min-height: 200px;
+            background: rgba(255, 255, 255, 0.15); /* Darker glass effect */
+            backdrop-filter: blur(5px);
+            border-top: 2px solid rgba(255,255,255,0.3);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            /* TABLET FIX: Add safe area padding for gesture bar */
+            padding-bottom: calc(10px + env(safe-area-inset-bottom));
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+        }
+
+        .ground-label {
+            color: #ede7f6; /* Very light purple */
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        #collected-words {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            overflow-y: auto;
+            flex-grow: 1;
+            align-content: flex-start;
+        }
+
+        /* --- WORDS --- */
+        .word-bubble {
+            background: #fff9c4; /* Pale Moon Yellow */
+            color: #311b92; /* Deep Purple Text */
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 2rem;
+            box-shadow: 0 0 15px rgba(255, 249, 196, 0.4); /* Glow */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #fff59d;
+        }
+
+        .word-bubble:active {
+            transform: scale(0.9);
+            background: #fff176;
+            box-shadow: 0 0 25px rgba(255, 249, 196, 0.8);
+        }
+
+        /* Floating State */
+        .in-sky {
+            position: absolute;
+            animation: float-around ease-in-out infinite alternate;
+        }
+
+        @keyframes float-around {
+            0% { transform: translate(0, 0) rotate(-2deg); }
+            100% { transform: translate(10px, 20px) rotate(2deg); }
+        }
+
+        /* Dropping Animation State */
+        .dropping {
+            transition: top 0.5s ease-in, left 0.5s ease-in, transform 0.5s ease-in;
+            z-index: 100;
+        }
+
+        /* Grounded State */
+        .in-ground {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            transform: none !important;
+            background: #d1c4e9; /* Light Purple */
+            color: #311b92;
+            box-shadow: none;
+            border: 3px solid #b39ddb;
+            font-size: 1.5rem;
+            animation: none;
+            margin: 5px;
+        }
+        
+        .in-ground:active {
+            transform: scale(0.95) !important;
+            background: #b39ddb;
+        }
+
+        /* --- CONTROLS --- */
+        #reset-btn {
+            background: #ffd740; /* Sparkle Yellow */
+            color: #3e2723;
+            border: none;
+            padding: 10px 30px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #ffab00;
+            transition: transform 0.1s;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        #reset-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #ffab00;
+        }
+
+        #home-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 50;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Home Link -->
+    <a href="index.html" id="home-btn">🏠</a>
+
+    <!-- Star Container (Populated by JS) -->
+    <div id="star-layer"></div>
+
+    <!-- Sky Area (Floating Words) -->
+    <div id="sky-area"></div>
+
+    <!-- Ground Area (Collected Words) -->
+    <div id="ground-area">
+        <div class="ground-label">Collected Words</div>
+        <div id="collected-words">
+            <!-- Dropped words appear here -->
+        </div>
+        <button id="reset-btn" onclick="resetGame()">Reset 🔄</button>
+    </div>
+
+    <script>
+        const wordList = [
+            "say", "made", "snake", "pain", "away", 
+            "trade", "train", "brake", "trail", "they", 
+            "raise", "plate", "scrape"
+        ];
+
+        const skyArea = document.getElementById('sky-area');
+        const collectedArea = document.getElementById('collected-words');
+        const starLayer = document.getElementById('star-layer');
+
+        // --- Star Generation ---
+        function createStars() {
+            const starCount = 60;
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const x = Math.random() * 100;
+                const y = Math.random() * 70; // Keep mostly in sky area
+                const size = Math.random() * 3 + 2; 
+                const duration = Math.random() * 2 + 1;
+                const delay = Math.random() * 2;
+
+                star.style.left = x + '%';
+                star.style.top = y + '%';
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.animationDuration = duration + 's';
+                star.style.animationDelay = delay + 's';
+
+                starLayer.appendChild(star);
+            }
+        }
+
+        // Initialize Game
+        function initGame() {
+            // Clear existing words
+            skyArea.innerHTML = '';
+            collectedArea.innerHTML = '';
+
+            // Spawn words in sky
+            wordList.forEach((word, index) => {
+                createFloatingWord(word, index);
+            });
+        }
+
+        function createFloatingWord(word, index) {
+            const el = document.createElement('div');
+            el.classList.add('word-bubble', 'in-sky');
+            el.textContent = word;
+            
+            // Random Position
+            const randomTop = Math.floor(Math.random() * 60) + 10; 
+            const randomLeft = Math.floor(Math.random() * 80) + 10; 
+            
+            // Random Animation variation
+            const animDuration = Math.random() * 3 + 3; 
+            const animDelay = Math.random() * 2; 
+
+            el.style.top = randomTop + '%';
+            el.style.left = randomLeft + '%';
+            el.style.animationDuration = animDuration + 's';
+            el.style.animationDelay = -animDelay + 's';
+
+            // Click Handler
+            el.addEventListener('click', () => handleWordClick(el, word));
+            
+            skyArea.appendChild(el);
+        }
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.7; // Slowed down for clarity
+            utterance.pitch = 1.1;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function handleWordClick(el, word) {
+            speak(word);
+
+            if (el.classList.contains('in-ground')) {
+                el.style.transform = 'scale(1.1)';
+                setTimeout(() => el.style.transform = 'none', 100);
+                return;
+            }
+
+            // Animate Drop
+            const rect = el.getBoundingClientRect();
+            
+            el.style.animation = 'none'; 
+            el.style.top = rect.top + 'px';
+            el.style.left = rect.left + 'px';
+            el.classList.add('dropping');
+
+            const dropDistance = window.innerHeight - rect.top - 100;
+            
+            setTimeout(() => {
+                el.style.transform = `translateY(${dropDistance}px) rotate(10deg)`;
+                el.style.opacity = '0';
+            }, 10);
+
+            setTimeout(() => {
+                el.remove();
+                createGroundedWord(word);
+            }, 500);
+        }
+
+        function createGroundedWord(word) {
+            const el = document.createElement('div');
+            el.classList.add('word-bubble', 'in-ground');
+            el.textContent = word;
+            
+            el.addEventListener('click', () => {
+                speak(word);
+                el.style.transform = 'scale(1.1)';
+                setTimeout(() => el.style.transform = 'none', 100);
+            });
+
+            collectedArea.appendChild(el);
+        }
+
+        function resetGame() {
+            initGame();
+        }
+
+        // Start
+        createStars();
+        initGame();
+
+    </script>
+</body>
+</html>
