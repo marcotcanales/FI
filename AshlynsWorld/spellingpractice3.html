@@ -131,8 +131,8 @@
 
         /* Play Button (Moon Style) */
         #play-btn {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             background: #fff176; /* Moon Yellow */
             border-radius: 50%;
             border: 5px solid #fff;
@@ -145,11 +145,32 @@
             cursor: pointer;
             transition: transform 0.1s;
             flex-shrink: 0;
+            position: relative;
         }
-        #play-btn span.icon { font-size: 3rem; line-height: 1; }
-        #play-btn span.text { font-size: 1.2rem; margin-top: 5px; }
-        
+        #play-btn span.icon { font-size: 2.5rem; line-height: 1; }
+        #play-btn span.text { font-size: 1rem; margin-top: 5px; }
         #play-btn:active { transform: scale(0.95); box-shadow: 0 0 10px rgba(255, 241, 118, 0.4); }
+
+        /* The New Peek Button (Telescope/Star Blue) */
+        #peek-btn {
+            width: 60px;
+            height: 60px;
+            background: #4dd0e1; /* Cyan/Teal */
+            border-radius: 50%;
+            border: 4px solid white;
+            color: #006064;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 0 15px rgba(77, 208, 225, 0.6);
+            cursor: pointer;
+            margin-left: -20px;
+            z-index: 5;
+            transition: transform 0.1s;
+        }
+        #peek-btn:active { transform: scale(0.95); box-shadow: 0 0 5px rgba(77, 208, 225, 0.6); }
+        #peek-btn.disabled { filter: grayscale(1); cursor: not-allowed; opacity: 0.6; }
 
         /* --- WORD INPUT AREA --- */
         #word-display {
@@ -179,6 +200,19 @@
         /* Feedback states */
         .slot-correct { background-color: #c8e6c9 !important; border-color: #66bb6a !important; color: #1b5e20; }
         .slot-wrong { background-color: #ffccbc !important; border-color: #ff7043 !important; color: #bf360c; }
+        
+        /* Hint State */
+        .slot-hint { color: #512da8; opacity: 0.6; }
+
+        /* SPECIAL RULE HIGHLIGHT (Space Neon) */
+        .slot-rule-highlight {
+            background-color: #00e676 !important; /* Neon Green */
+            border-color: #b9f6ca !important;      /* Pale Green */
+            color: #004d40 !important;             /* Dark Green Text */
+            transform: scale(1.1);
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.7);
+        }
 
         /* --- KEYBOARD --- */
         .keyboard-area {
@@ -249,19 +283,17 @@
 
         /* --- TABLET LANDSCAPE MODE ADJUSTMENTS --- */
         @media (max-height: 600px) {
-            #play-btn { width: 90px; height: 90px; }
-            #play-btn span.icon { font-size: 2rem; }
-            #play-btn span.text { font-size: 1rem; }
+            #play-btn { width: 80px; height: 80px; }
+            #play-btn span.icon { font-size: 1.8rem; }
+            #play-btn span.text { font-size: 0.8rem; }
+            #peek-btn { width: 50px; height: 50px; font-size: 1.5rem; }
             
             .nav-btn { padding: 8px 15px; font-size: 1rem; min-width: 80px; }
-            
             #word-display { margin: 5px 0 10px 0; min-height: 50px; }
             .letter-slot { width: 40px; height: 50px; font-size: 1.5rem; }
-            
             .keyboard-area { padding-top: 5px; gap: 4px; }
             .key-btn { width: 40px; height: 40px; font-size: 1rem; }
             .big-btn { padding: 8px 15px; font-size: 1rem; }
-            
             .controls-area { margin: 5px 0; }
         }
 
@@ -311,10 +343,17 @@
             <button class="nav-btn" onclick="prevWord()">
                 <span>◀ Back</span>
             </button>
-            <button id="play-btn" onclick="playCurrentWord()">
-                <span class="icon">🔊</span>
-                <span class="text">Play</span>
-            </button>
+            
+            <div style="display: flex; align-items: center;">
+                <button id="play-btn" onclick="playCurrentWord()">
+                    <span class="icon">🔊</span>
+                    <span class="text">Play</span>
+                </button>
+                <button id="peek-btn" onclick="peekWord()" title="Peek at the word">
+                    👁️
+                </button>
+            </div>
+
             <button class="nav-btn" onclick="nextWord()">
                 <span>Next ▶</span>
             </button>
@@ -342,21 +381,34 @@
     </div>
 
     <script>
-        // --- DATA ---
-        const originalList = [
-            "say", "made", "snake", "pain", "away", 
-            "trade", "train", "brake", "trail", "they", 
-            "raise", "plate", "scrape"
+        // --- DATA WITH RULES (Long A Sounds: ay, a_e, ai, ey) ---
+        // Indices map to the letters making the "A" sound
+        const listThreeData = [
+            { word: "say", rule: [1, 2] },         // ay
+            { word: "made", rule: [1, 3] },        // a_e (split)
+            { word: "snake", rule: [2, 4] },       // a_e (split)
+            { word: "pain", rule: [1, 2] },        // ai
+            { word: "away", rule: [2, 3] },        // ay
+            { word: "trade", rule: [2, 4] },       // a_e (split)
+            { word: "train", rule: [2, 3] },       // ai
+            { word: "brake", rule: [2, 4] },       // a_e (split)
+            { word: "trail", rule: [2, 3] },       // ai
+            { word: "they", rule: [2, 3] },        // ey
+            { word: "raise", rule: [1, 2] },       // ai
+            { word: "plate", rule: [2, 4] },       // a_e (split)
+            { word: "scrape", rule: [3, 5] }       // a_e (split)
         ];
         
         let gameData = [];
         let currentIndex = 0;
         let currentInput = "";
+        let isPeeking = false;
 
         // --- ELEMENTS ---
         const progressBar = document.getElementById('progress-bar');
         const wordDisplay = document.getElementById('word-display');
         const playBtn = document.getElementById('play-btn');
+        const peekBtn = document.getElementById('peek-btn');
         const starLayer = document.getElementById('star-layer');
 
         // --- STAR GENERATION ---
@@ -366,7 +418,7 @@
                 const star = document.createElement('div');
                 star.className = 'star';
                 const x = Math.random() * 100;
-                const y = Math.random() * 80; // Keep mostly in top 80%
+                const y = Math.random() * 80; 
                 const size = Math.random() * 3 + 2; 
                 const duration = Math.random() * 2 + 1;
                 const delay = Math.random() * 2;
@@ -387,8 +439,8 @@
             createStars();
 
             // Shuffle and Setup Game Data
-            gameData = originalList
-                .map(word => ({ word: word, solved: false }))
+            gameData = listThreeData
+                .map(item => ({ ...item, solved: false }))
                 .sort(() => Math.random() - 0.5);
             
             currentIndex = 0;
@@ -426,25 +478,38 @@
 
         function loadWord() {
             currentInput = "";
+            isPeeking = false;
+
+            // Check if solved, update Peek button status
+            if (gameData[currentIndex].solved) {
+                peekBtn.classList.add('disabled');
+            } else {
+                peekBtn.classList.remove('disabled');
+            }
+
             renderProgressBar();
             renderBlanks();
             
             if (gameData[currentIndex].solved) {
                 currentInput = gameData[currentIndex].word;
                 renderBlanks();
+                applyRuleHighlight();
             }
         }
 
         function renderBlanks() {
             wordDisplay.innerHTML = '';
             const targetWord = gameData[currentIndex].word;
-            const inputLen = currentInput.length;
+            
+            const textToShow = isPeeking ? targetWord : currentInput;
+            const inputLen = textToShow.length;
 
             for (let i = 0; i < targetWord.length; i++) {
                 const slot = document.createElement('div');
                 slot.className = 'letter-slot';
                 if (i < inputLen) {
-                    slot.textContent = currentInput[i];
+                    slot.textContent = textToShow[i];
+                    if (isPeeking) slot.classList.add('slot-hint');
                 }
                 wordDisplay.appendChild(slot);
             }
@@ -456,15 +521,29 @@
             speak(word);
         }
 
+        function peekWord() {
+            if (gameData[currentIndex].solved || isPeeking) return;
+            
+            isPeeking = true;
+            renderBlanks();
+            speak(gameData[currentIndex].word); 
+            
+            setTimeout(() => {
+                isPeeking = false;
+                renderBlanks();
+            }, 2000);
+        }
+
         function speak(text) {
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.rate = 0.7; // Slowed down
+            utterance.rate = 0.7; 
             utterance.pitch = 1.1;
             window.speechSynthesis.speak(utterance);
         }
 
         function typeLetter(letter) {
+            if (isPeeking) return;
             const targetWord = gameData[currentIndex].word;
             if (gameData[currentIndex].solved) return; 
 
@@ -479,13 +558,13 @@
         }
 
         function deleteLetter() {
-            if (gameData[currentIndex].solved) return;
+            if (gameData[currentIndex].solved || isPeeking) return;
             currentInput = currentInput.slice(0, -1);
             renderBlanks();
         }
 
         function checkSpelling() {
-            if (gameData[currentIndex].solved) return;
+            if (gameData[currentIndex].solved || isPeeking) return;
 
             const targetWord = gameData[currentIndex].word;
             const slots = document.querySelectorAll('.letter-slot');
@@ -513,9 +592,12 @@
             
             gameData[currentIndex].solved = true;
             renderBlanks(); 
+            peekBtn.classList.add('disabled');
             
             const slots = document.querySelectorAll('.letter-slot');
             slots.forEach(s => s.classList.add('slot-correct'));
+
+            applyRuleHighlight();
 
             playSound('success');
             speak("Great Job!");
@@ -529,6 +611,20 @@
                     speak("You finished the list!");
                 }
             }, 2500);
+        }
+
+        function applyRuleHighlight() {
+            if (!gameData[currentIndex].solved) return;
+
+            const ruleIndices = gameData[currentIndex].rule;
+            const slots = document.querySelectorAll('.letter-slot');
+
+            ruleIndices.forEach(idx => {
+                if (slots[idx]) {
+                    slots[idx].classList.remove('slot-correct');
+                    slots[idx].classList.add('slot-rule-highlight');
+                }
+            });
         }
 
         function prevWord() {
