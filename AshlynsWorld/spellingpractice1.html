@@ -68,11 +68,10 @@
             overflow-x: auto;
             width: 100%;
             padding: 10px;
-            /* CENTERED THE PROGRESS BAR */
             justify-content: center;
             scrollbar-width: none;
             flex-shrink: 0;
-            min-height: 60px; /* Ensure space for touch targets */
+            min-height: 60px;
         }
         #progress-bar::-webkit-scrollbar { display: none; }
 
@@ -114,7 +113,7 @@
             gap: 15px;
             margin: 10px 0;
             width: 100%;
-            flex-shrink: 1; /* Allow shrinking if needed */
+            flex-shrink: 1;
         }
 
         .nav-btn {
@@ -136,8 +135,8 @@
         .nav-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.1); }
 
         #play-btn {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             background: #4dd0e1;
             border-radius: 50%;
             border: 5px solid white;
@@ -150,10 +149,32 @@
             cursor: pointer;
             transition: transform 0.1s;
             flex-shrink: 0;
+            position: relative;
         }
-        #play-btn span.icon { font-size: 3rem; line-height: 1; }
-        #play-btn span.text { font-size: 1.2rem; margin-top: 5px; }
+        #play-btn span.icon { font-size: 2.5rem; line-height: 1; }
+        #play-btn span.text { font-size: 1rem; margin-top: 5px; }
         #play-btn:active { transform: scale(0.95); box-shadow: 0 3px 0 #0097a7; }
+
+        /* The New Peek Button */
+        #peek-btn {
+            width: 60px;
+            height: 60px;
+            background: #ffca28; /* Amber */
+            border-radius: 50%;
+            border: 4px solid white;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 0 #ff6f00;
+            cursor: pointer;
+            margin-left: -20px; /* Overlap slightly or sit close */
+            z-index: 5;
+            transition: transform 0.1s;
+        }
+        #peek-btn:active { transform: scale(0.95); box-shadow: 0 2px 0 #ff6f00; }
+        #peek-btn.disabled { filter: grayscale(1); cursor: not-allowed; }
 
         /* --- WORD INPUT AREA --- */
         #word-display {
@@ -182,10 +203,23 @@
 
         .slot-correct { background-color: #c8e6c9 !important; border-color: #81c784 !important; }
         .slot-wrong { background-color: #ffcdd2 !important; border-color: #e57373 !important; }
+        
+        /* Hint State */
+        .slot-hint { color: #0288d1; opacity: 0.7; }
+
+        /* SPECIAL RULE HIGHLIGHT */
+        .slot-rule-highlight {
+            background-color: #fff9c4 !important; /* Pale Yellow */
+            border-color: #fbc02d !important;      /* Dark Gold */
+            color: #e65100 !important;             /* Deep Orange Text */
+            transform: scale(1.1);
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
 
         /* --- KEYBOARD --- */
         .keyboard-area {
-            margin-top: auto; /* Push to bottom */
+            margin-top: auto;
             width: 100%;
             max-width: 800px;
             background: rgba(255,255,255,0.5);
@@ -194,8 +228,6 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            
-            /* TABLET FIX: Add safe area padding for gesture bar */
             padding-bottom: calc(10px + env(safe-area-inset-bottom));
         }
 
@@ -206,7 +238,7 @@
         }
 
         .key-btn {
-            background: #e1f5fe; /* Light Blue */
+            background: #e1f5fe;
             border: none;
             border-radius: 50%;
             width: 45px;
@@ -246,22 +278,18 @@
         #delete-btn { background: #ff7043; box-shadow: 0 4px 0 #d84315; }
         #check-btn { background: #66bb6a; box-shadow: 0 4px 0 #388e3c; }
 
-        /* --- TABLET LANDSCAPE MODE ADJUSTMENTS --- */
-        /* Automatically shrinks elements if height is limited (like landscape on 10.9" screen) */
         @media (max-height: 600px) {
-            #play-btn { width: 90px; height: 90px; }
-            #play-btn span.icon { font-size: 2rem; }
-            #play-btn span.text { font-size: 1rem; }
+            #play-btn { width: 80px; height: 80px; }
+            #play-btn span.icon { font-size: 1.8rem; }
+            #play-btn span.text { font-size: 0.8rem; }
+            #peek-btn { width: 50px; height: 50px; font-size: 1.5rem; }
             
             .nav-btn { padding: 8px 15px; font-size: 1rem; min-width: 80px; }
-            
             #word-display { margin: 5px 0 10px 0; min-height: 50px; }
             .letter-slot { width: 40px; height: 50px; font-size: 1.5rem; }
-            
             .keyboard-area { padding-top: 5px; gap: 4px; }
             .key-btn { width: 40px; height: 40px; font-size: 1rem; }
             .big-btn { padding: 8px 15px; font-size: 1rem; }
-            
             .controls-area { margin: 5px 0; }
         }
 
@@ -309,10 +337,17 @@
             <button class="nav-btn" onclick="prevWord()">
                 <span>◀ Back</span>
             </button>
-            <button id="play-btn" onclick="playCurrentWord()">
-                <span class="icon">🔊</span>
-                <span class="text">Play</span>
-            </button>
+            
+            <div style="display: flex; align-items: center;">
+                <button id="play-btn" onclick="playCurrentWord()">
+                    <span class="icon">🔊</span>
+                    <span class="text">Play</span>
+                </button>
+                <button id="peek-btn" onclick="peekWord()" title="Peek at the word">
+                    👁️
+                </button>
+            </div>
+
             <button class="nav-btn" onclick="nextWord()">
                 <span>Next ▶</span>
             </button>
@@ -330,7 +365,7 @@
                 <button id="delete-btn" class="big-btn" onclick="deleteLetter()">Delete ⌫</button>
             </div>
             
-            <div style="height: 10px;"></div> <!-- Spacer -->
+            <div style="height: 10px;"></div>
 
             <div class="kb-row" id="row-1"></div>
             <div class="kb-row" id="row-2"></div>
@@ -340,27 +375,42 @@
     </div>
 
     <script>
-        // --- DATA ---
-        const originalList = [
-            "rub", "bump", "come", "was", "dump", 
-            "must", "from", "dust", "tub", "some", 
-            "lunch", "stuck", "stung"
+        // --- DATA WITH RULES ---
+        // Indices are 0-based. 
+        // Example: "rub" -> u (1) is the rule
+        // "stuck" -> uck (2,3,4) is the chunk
+        const listOneData = [
+            { word: "rub", rule: [1] },         // u
+            { word: "bump", rule: [1, 2, 3] },  // ump
+            { word: "come", rule: [1, 2, 3] },  // ome (irregular)
+            { word: "was", rule: [1] },         // a (irregular)
+            { word: "dump", rule: [1, 2, 3] },  // ump
+            { word: "must", rule: [1, 2, 3] },  // ust
+            { word: "from", rule: [1, 2, 3] },  // rom (irregular)
+            { word: "dust", rule: [1, 2, 3] },  // ust
+            { word: "tub", rule: [1] },         // u
+            { word: "some", rule: [1, 2, 3] },  // ome
+            { word: "lunch", rule: [1, 2, 3, 4] }, // unch
+            { word: "stuck", rule: [2, 3, 4] }, // uck
+            { word: "stung", rule: [2, 3, 4] }  // ung
         ];
         
         let gameData = [];
         let currentIndex = 0;
         let currentInput = "";
+        let isPeeking = false;
 
         // --- ELEMENTS ---
         const progressBar = document.getElementById('progress-bar');
         const wordDisplay = document.getElementById('word-display');
         const playBtn = document.getElementById('play-btn');
+        const peekBtn = document.getElementById('peek-btn');
 
         // --- INIT ---
         function initGame() {
             // Shuffle and Setup Game Data
-            gameData = originalList
-                .map(word => ({ word: word, solved: false }))
+            gameData = listOneData
+                .map(item => ({ ...item, solved: false }))
                 .sort(() => Math.random() - 0.5);
             
             currentIndex = 0;
@@ -384,7 +434,6 @@
                     div.textContent = index + 1;
                 }
                 
-                // Allow clicking number to jump to word
                 div.onclick = () => {
                     currentIndex = index;
                     loadWord();
@@ -393,33 +442,46 @@
                 progressBar.appendChild(div);
             });
             
-            // Scroll active into view
             const active = progressBar.querySelector('.active');
             if (active) active.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
         }
 
         function loadWord() {
             currentInput = "";
+            isPeeking = false;
+            
+            // Check if solved, update Peek button status
+            if (gameData[currentIndex].solved) {
+                peekBtn.classList.add('disabled');
+            } else {
+                peekBtn.classList.remove('disabled');
+            }
+
             renderProgressBar(); 
             renderBlanks();
             
-            // If already solved, fill it in
             if (gameData[currentIndex].solved) {
                 currentInput = gameData[currentIndex].word;
                 renderBlanks();
+                applyRuleHighlight(); // Re-apply highlight if returning to solved word
             }
         }
 
         function renderBlanks() {
             wordDisplay.innerHTML = '';
             const targetWord = gameData[currentIndex].word;
-            const inputLen = currentInput.length;
+            
+            // If peeking, use target word, else use input
+            const textToShow = isPeeking ? targetWord : currentInput;
+            const inputLen = textToShow.length;
 
             for (let i = 0; i < targetWord.length; i++) {
                 const slot = document.createElement('div');
                 slot.className = 'letter-slot';
+                
                 if (i < inputLen) {
-                    slot.textContent = currentInput[i];
+                    slot.textContent = textToShow[i];
+                    if (isPeeking) slot.classList.add('slot-hint');
                 }
                 wordDisplay.appendChild(slot);
             }
@@ -431,17 +493,33 @@
             speak(word);
         }
 
+        function peekWord() {
+            if (gameData[currentIndex].solved || isPeeking) return;
+            
+            // Start Peek
+            isPeeking = true;
+            renderBlanks();
+            speak(gameData[currentIndex].word); // Speak it too
+            
+            // End Peek after 2 seconds
+            setTimeout(() => {
+                isPeeking = false;
+                renderBlanks();
+            }, 2000);
+        }
+
         function speak(text) {
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.rate = 0.7; // Slowed down for better comprehension
+            utterance.rate = 0.7; 
             utterance.pitch = 1.1;
             window.speechSynthesis.speak(utterance);
         }
 
         function typeLetter(letter) {
+            if (isPeeking) return; // Block typing while peeking
             const targetWord = gameData[currentIndex].word;
-            if (gameData[currentIndex].solved) return; // Locked if done
+            if (gameData[currentIndex].solved) return; 
 
             if (currentInput.length < targetWord.length) {
                 currentInput += letter;
@@ -454,20 +532,19 @@
         }
 
         function deleteLetter() {
-            if (gameData[currentIndex].solved) return;
+            if (gameData[currentIndex].solved || isPeeking) return;
             currentInput = currentInput.slice(0, -1);
             renderBlanks();
         }
 
         function checkSpelling() {
-            if (gameData[currentIndex].solved) return;
+            if (gameData[currentIndex].solved || isPeeking) return;
 
             const targetWord = gameData[currentIndex].word;
             const slots = document.querySelectorAll('.letter-slot');
 
-            // Visual feedback loop
             for (let i = 0; i < slots.length; i++) {
-                if (!currentInput[i]) continue; // Empty slot
+                if (!currentInput[i]) continue; 
 
                 if (currentInput[i] === targetWord[i]) {
                     slots[i].classList.add('slot-correct');
@@ -477,7 +554,6 @@
                 }
             }
 
-            // Remove feedback after 3 seconds
             setTimeout(() => {
                 slots.forEach(s => {
                     s.classList.remove('slot-correct', 'slot-wrong');
@@ -486,29 +562,46 @@
         }
 
         function handleCorrect() {
-            if (gameData[currentIndex].solved) return; // Prevent double trigger
+            if (gameData[currentIndex].solved) return; 
             
             gameData[currentIndex].solved = true;
-            renderBlanks(); // Ensure text is visible
+            renderBlanks(); 
+            peekBtn.classList.add('disabled');
             
-            // Green effect permanent for this session
+            // Basic Green for all
             const slots = document.querySelectorAll('.letter-slot');
             slots.forEach(s => s.classList.add('slot-correct'));
+
+            // Apply Special Rule Highlight
+            applyRuleHighlight();
 
             playSound('success');
             speak("Great Job!");
             celebrate();
             renderProgressBar();
 
-            // Auto-advance after 2.5 seconds (allowing time for celebration)
             setTimeout(() => {
                 if (currentIndex < gameData.length - 1) {
                     nextWord();
                 } else {
-                    // Optional: If it was the last word, celebrate completion?
                     speak("You finished the list!");
                 }
             }, 2500);
+        }
+
+        function applyRuleHighlight() {
+            if (!gameData[currentIndex].solved) return;
+
+            const ruleIndices = gameData[currentIndex].rule;
+            const slots = document.querySelectorAll('.letter-slot');
+
+            // Apply special class to specific indices
+            ruleIndices.forEach(idx => {
+                if (slots[idx]) {
+                    slots[idx].classList.remove('slot-correct'); // Remove plain green
+                    slots[idx].classList.add('slot-rule-highlight'); // Add Gold/Pop
+                }
+            });
         }
 
         // --- NAVIGATION ---
@@ -523,8 +616,6 @@
             if (currentIndex < gameData.length - 1) {
                 currentIndex++;
                 loadWord();
-                // Optional: Automatically play sound on next?
-                // playCurrentWord(); 
             }
         }
 
@@ -568,7 +659,7 @@
                 osc.start();
                 osc.stop(ctx.currentTime + 0.5);
             } else {
-                osc.type = 'sawtooth'; // Error buzz
+                osc.type = 'sawtooth'; 
                 osc.frequency.setValueAtTime(150, ctx.currentTime);
                 osc.frequency.linearRampToValueAtTime(100, ctx.currentTime + 0.2);
                 gain.gain.setValueAtTime(0.2, ctx.currentTime);
