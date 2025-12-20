@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #2e004f 0%, #0e7490 100%); /* Darker cyan at bottom for better contrast */
+            background: linear-gradient(135deg, #2e004f 0%, #0e7490 100%);
             min-height: 100vh;
             color: white;
             padding-bottom: 50px;
@@ -44,7 +44,7 @@
 
         .wiggle-me {
             animation: wiggle 2s infinite ease-in-out;
-            animation-delay: 1s; /* Randomize start slightly in JS if needed, but simple is fine */
+            animation-delay: 1s;
         }
 
         /* Scrollbar */
@@ -80,9 +80,9 @@
 </head>
 <body class="p-4 md:p-8 relative">
 
-    <!-- Language Button -->
+    <!-- Language Button (Fixed HTTPS) -->
     <div class="absolute top-4 right-4 z-50">
-        <a href="http://capexfi25-30.netlify.app/MomPhone/english.html" class="flex items-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 rounded-full text-sm font-semibold transition-all hover:scale-105 shadow-lg">
+        <a href="https://capexfi25-30.netlify.app/MomPhone/english.html" class="flex items-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 rounded-full text-sm font-semibold transition-all hover:scale-105 shadow-lg">
             <span>🇺🇸</span> English
         </a>
     </div>
@@ -90,7 +90,7 @@
     <!-- Header -->
     <header class="text-center mb-10 pt-10 md:pt-0">
         <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-300 drop-shadow-lg">
-            Celulares para Mamá
+            Celulares para mi Mom
         </h1>
         <p class="text-gray-200 mt-2 text-lg">Mejores recomendaciones basadas en simplicidad, almacenamiento y batería.</p>
     </header>
@@ -195,7 +195,7 @@
             </div>
 
             <div class="mt-6 text-center flex flex-col sm:flex-row gap-3 justify-center">
-                <a id="modal-link" href="#" target="_blank" class="px-6 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full font-bold text-white hover:shadow-lg hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="px-6 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full font-bold text-white hover:shadow-lg hover:brightness-110 transition-all flex items-center justify-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                       <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
                     </svg>
@@ -207,7 +207,7 @@
     </div>
 
     <script>
-        // Data Translated to Spanish
+        // Data with Safe Search Terms for URL Construction
         const phones = [
             {
                 id: 1, name: "Moto G84 5G", score: 90, 
@@ -215,7 +215,7 @@
                 details: { price: "~$230 - $250", storage: "256GB + MicroSD", battery: "5000 mAh" },
                 why: "Mejor Opción. Es muy ligero (fácil para la muñeca). La interfaz es muy limpia (menos 'desorden' para confundirla).",
                 highlight: "#1. Enorme almacenamiento de 256GB más ranura SD. El reverso de cuero es fácil de agarrar (evita caídas).",
-                link: "https://www.amazon.com.mx/s?k=Moto+G84+5G"
+                searchTerm: "Moto G84 5G"
             },
             {
                 id: 2, name: "Poco M6 Pro", score: 90, 
@@ -223,7 +223,7 @@
                 details: { price: "~$220", storage: "256GB/512GB + MicroSD", battery: "5000 mAh" },
                 why: "Enorme almacenamiento por el precio (a menudo 512GB por menos de $250). Probablemente nunca se quedará sin espacio para fotos.",
                 highlight: "Valor increíble. Gran almacenamiento (hasta 512GB) y gran pantalla, pero la interfaz es más 'compleja'.",
-                link: "https://www.amazon.com.mx/s?k=Poco+M6+Pro"
+                searchTerm: "Xiaomi Poco M6 Pro"
             },
             {
                 id: 3, name: "Redmi Note 13 Pro", score: 85, 
@@ -231,7 +231,7 @@
                 details: { price: "~$260 - $290", storage: "256GB/512GB + MicroSD", battery: "5000 mAh" },
                 why: "Pantalla impresionante y cámara de 200MP que toma fotos increíbles. Carga muy rápida.",
                 highlight: "Asombrosa cámara de 200MP para fotos familiares. Carga muy rápida (67W), espera menos tiempo.",
-                link: "https://www.amazon.com.mx/s?k=Redmi+Note+13+Pro"
+                searchTerm: "Xiaomi Redmi Note 13 Pro"
             },
             {
                 id: 4, name: "Samsung Galaxy A35", score: 85, 
@@ -239,7 +239,7 @@
                 details: { price: "~$300 - $325", storage: "128GB/256GB + MicroSD", battery: "5000 mAh" },
                 why: "Sensación premium, pantalla de 6.6\" muy brillante (genial para exteriores) y excelentes cámaras para videollamadas.",
                 highlight: "Opción más segura. El mejor 'Modo Fácil'. Calificado más alto por críticos y usuarios en fiabilidad.",
-                link: "https://www.amazon.com.mx/s?k=Samsung+Galaxy+A35"
+                searchTerm: "Samsung Galaxy A35"
             },
             {
                 id: 5, name: "Samsung Galaxy A25", score: 80, 
@@ -247,7 +247,7 @@
                 details: { price: "~$240 - $260", storage: "128GB + MicroSD", battery: "5000 mAh" },
                 why: "Un poco más barato que el A35 pero con una pantalla fantástica. La cámara tiene estabilización (OIS) para reducir fotos borrosas.",
                 highlight: "Gran equilibrio. Más barato que el A35 pero conserva la excelente pantalla Samsung y software simple.",
-                link: "https://www.amazon.com.mx/s?k=Samsung+Galaxy+A25"
+                searchTerm: "Samsung Galaxy A25"
             },
             {
                 id: 6, name: "Moto G Power 2024", score: 80, 
@@ -255,7 +255,7 @@
                 details: { price: "~$280", storage: "128GB + MicroSD", battery: "5000 mAh" },
                 why: "Diseñado específicamente para duración de batería. No tendrá que preocuparse por cargarlo constantemente.",
                 highlight: "Construido para la batería. Un teléfono sin preocupaciones si a menudo olvida cargarlo.",
-                link: "https://www.amazon.com.mx/s?k=Moto+G+Power+5G+2024"
+                searchTerm: "Moto G Power 5G"
             },
             {
                 id: 7, name: "Samsung Galaxy A15", score: 80, 
@@ -263,7 +263,7 @@
                 details: { price: "~$160 - $200", storage: "128GB + MicroSD", battery: "5000 mAh" },
                 why: "Para ahorrar dinero. Es básico pero confiable. La pantalla sigue siendo AMOLED (brillante/colorida).",
                 highlight: "El rey del presupuesto. Hace lo básico perfectamente por el precio más bajo, aunque las cámaras son solo 'ok'.",
-                link: "https://www.amazon.com.mx/s?k=Samsung+Galaxy+A15"
+                searchTerm: "Samsung Galaxy A15"
             },
             {
                 id: 8, name: "Redmi Note 13", score: 80, 
@@ -271,7 +271,7 @@
                 details: { price: "~$180 - $200", storage: "128GB/256GB + MicroSD", battery: "5000 mAh" },
                 why: "Muy asequible. Bordes planos y simples que lo hacen fácil de agarrar.",
                 highlight: "Muy asequible y delgado. Buen teléfono básico, pero la cámara sufre un poco con poca luz.",
-                link: "https://www.amazon.com.mx/s?k=Redmi+Note+13"
+                searchTerm: "Xiaomi Redmi Note 13"
             },
             {
                 id: 9, name: "Moto G Stylus 2024", score: 75, 
@@ -279,7 +279,7 @@
                 details: { price: "~$300", storage: "128GB/256GB + MicroSD", battery: "5000 mAh" },
                 why: "Incluye un lápiz óptico. Algunas personas mayores encuentran el lápiz más fácil que usar los dedos.",
                 highlight: "Solo comprar si le gusta usar lápiz. Si no, el Moto G84 es una mejor compra.",
-                link: "https://www.amazon.com.mx/s?k=Moto+G+Stylus+5G+2024"
+                searchTerm: "Moto G Stylus 5G"
             },
             {
                 id: 10, name: "Honor X9b", score: 65, 
@@ -287,7 +287,7 @@
                 details: { price: "~$320 - $350", storage: "256GB (Sin MicroSD)", battery: "5800 mAh" },
                 why: "La pantalla 'Ultra-Rebote Anti-Caída' es un gran punto de venta si es propensa a dejar caer cosas.",
                 highlight: "Más Duradero. Pantalla casi irrompible. Perdió puntos porque NO tiene ranura MicroSD.",
-                link: "https://www.amazon.com.mx/s?k=Honor+X9b"
+                searchTerm: "Honor X9b"
             },
             {
                 id: 11, name: "Honor 90 Lite", score: 62, 
@@ -295,7 +295,7 @@
                 details: { price: "~$220", storage: "256GB (Sin MicroSD)", battery: "4500 mAh" },
                 why: "Muy ligero y delgado. Buena cámara de 100MP para fotos nítidas de los nietos.",
                 highlight: "Ligero y barato, pero la batería es más pequeña y carece de memoria expandible.",
-                link: "https://www.amazon.com.mx/s?k=Honor+90+Lite"
+                searchTerm: "Honor 90 Lite"
             },
             {
                 id: 12, name: "Honor X8b", score: 62, 
@@ -303,7 +303,7 @@
                 details: { price: "~$200 - $230", storage: "Hasta 512GB (Sin MicroSD)", battery: "4500 mAh" },
                 why: "Se enfoca en una pantalla muy brillante (buena para ojos mayores) y notificaciones tipo 'Cápsula'.",
                 highlight: "La función de notificación 'Cápsula' es genial, pero limitada por batería más pequeña y sin ranura SD.",
-                link: "https://www.amazon.com.mx/s?k=Honor+X8b"
+                searchTerm: "Honor X8b"
             }
         ];
 
@@ -404,7 +404,10 @@
             document.getElementById('modal-storage').innerText = phone.details.storage;
             document.getElementById('modal-battery').innerText = phone.details.battery;
             document.getElementById('modal-why').innerText = phone.why;
-            document.getElementById('modal-link').href = phone.link;
+            
+            // Encode Search Link safely
+            const safeSearchTerm = encodeURIComponent(phone.searchTerm);
+            document.getElementById('modal-link').href = `https://www.amazon.com.mx/s?k=${safeSearchTerm}`;
 
             // Show Animation
             modalOverlay.classList.remove('hidden');
