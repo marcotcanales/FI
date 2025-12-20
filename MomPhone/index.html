@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #2e004f 0%, #00d4ff 100%);
+            background: linear-gradient(135deg, #2e004f 0%, #0e7490 100%); /* Darker cyan at bottom for better contrast */
             min-height: 100vh;
             color: white;
             padding-bottom: 50px;
@@ -96,7 +96,7 @@
     </header>
 
     <!-- Cards Grid -->
-    <div id="cards-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-16">
+    <div id="cards-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto mb-16">
         <!-- Cards injected by JS -->
     </div>
 
@@ -127,28 +127,28 @@
         <div id="recommendations-panel" class="hidden mt-12 grid md:grid-cols-3 gap-8 text-left">
             
             <!-- Winner 1 -->
-            <div class="glass-card p-6 rounded-2xl border-2 border-green-400/50 bg-gradient-to-b from-green-900/40 to-transparent transform hover:-translate-y-2 transition-transform">
+            <div class="glass-card p-6 rounded-2xl border-2 border-green-400/50 bg-gradient-to-b from-green-900/80 to-black/40 transform hover:-translate-y-2 transition-transform shadow-lg">
                 <div class="text-green-400 font-black tracking-wider uppercase text-sm mb-2">🏆 Pura Practicidad</div>
                 <h3 class="text-2xl font-bold text-white mb-2">Moto G84 5G</h3>
-                <p class="text-gray-200 text-sm leading-relaxed">
+                <p class="text-gray-100 text-sm leading-relaxed font-medium">
                     El ganador absoluto con puntuación perfecta (90/100). Es el "punto ideal": económico (~$240), almacenamiento masivo (256GB + Tarjeta SD) y muy cómodo de sostener gracias a su reverso de cuero vegano.
                 </p>
             </div>
 
             <!-- Winner 2 -->
-            <div class="glass-card p-6 rounded-2xl border-2 border-cyan-400/50 bg-gradient-to-b from-cyan-900/40 to-transparent transform hover:-translate-y-2 transition-transform">
+            <div class="glass-card p-6 rounded-2xl border-2 border-cyan-400/50 bg-gradient-to-b from-cyan-900/80 to-black/40 transform hover:-translate-y-2 transition-transform shadow-lg">
                 <div class="text-cyan-400 font-black tracking-wider uppercase text-sm mb-2">✨ Facilidad de Uso</div>
                 <h3 class="text-2xl font-bold text-white mb-2">Samsung Galaxy A35</h3>
-                <p class="text-gray-200 text-sm leading-relaxed">
+                <p class="text-gray-100 text-sm leading-relaxed font-medium">
                     La opción más segura. Aunque tiene un poco menos de almacenamiento base, el "Modo Fácil" de Samsung es el estándar de oro para personas mayores. Además, es resistente al agua (IP67), algo que muchos otros no tienen.
                 </p>
             </div>
 
             <!-- Winner 3 -->
-            <div class="glass-card p-6 rounded-2xl border-2 border-orange-400/50 bg-gradient-to-b from-orange-900/40 to-transparent transform hover:-translate-y-2 transition-transform">
+            <div class="glass-card p-6 rounded-2xl border-2 border-orange-400/50 bg-gradient-to-b from-orange-900/80 to-black/40 transform hover:-translate-y-2 transition-transform shadow-lg">
                 <div class="text-orange-400 font-black tracking-wider uppercase text-sm mb-2">🛡️ Durabilidad</div>
                 <h3 class="text-2xl font-bold text-white mb-2">Honor X9b</h3>
-                <p class="text-gray-200 text-sm leading-relaxed">
+                <p class="text-gray-100 text-sm leading-relaxed font-medium">
                     El especialista. Si ella suele dejar caer el teléfono, esta pantalla "Anti-Caídas" vale la pena, aunque sacrifiques la ranura de memoria. Está construido como un tanque pero luce elegante.
                 </p>
             </div>
