@@ -3,71 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados Encuesta Estructural</title>
+    <title>UNITEC | Impacto de la Evaluación</title>
     
-    <!-- 1. Cargar Tailwind CSS -->
+    <!-- 1. Fuentes: Poppins (Obligatorio por Manual de Marca) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 2. Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            blue: '#06065C',    // Federal Blue
+                            cyan: '#03AED2',    // Pacific Cyan
+                            sky: '#47C8FD',     // Vivid Sky Blue
+                            gray: '#F3F4F6',    // Fondo limpio
+                        }
+                    },
+                    boxShadow: {
+                        'precision': '0 0 0 1px #E5E7EB, 0 4px 0 0 #06065C', // Sombra sólida "tipo botón"
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
     
-    <!-- 2. Cargar React y ReactDOM -->
+    <!-- 3. React & Recharts -->
     <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-    
-    <!-- 3. Cargar Prop-types -->
     <script src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
-    
-    <!-- 4. Cargar Recharts (Fuente CDNJS más estable) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.12.7/Recharts.min.js"></script>
-    
-    <!-- 5. Cargar Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        .fade-in { animation: fadeIn 0.5s ease-in; }
-        .slide-in { animation: slideIn 0.5s ease-out; }
+        body { font-family: 'Poppins', sans-serif; background-color: #F8FAFC; }
+        .diamond-cut { clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%); }
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .slide-up { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #06065C; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #03AED2; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="text-slate-800 antialiased bg-slate-50">
     <div id="root"></div>
 
     <script type="text/babel">
-        // Acceso seguro a las variables globales
         const { useState } = React;
-        
-        // Fallback simple si Recharts falla al cargar
         const RechartsLib = window.Recharts || {};
         const { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = RechartsLib;
 
-        // --- ICONOS SVG (Simples y sin dependencias externas) ---
+        // --- ICONOS & LOGO (SVG Puro) ---
+        
+        // MODIFICADO: Logo simplificado sin el isotipo (diamante)
+        const UnitecLogo = () => (
+            <svg viewBox="0 0 200 80" className="h-10 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Texto UNITEC (Simulado con Poppins Bold) - Alineado a la izquierda */}
+                <text x="0" y="55" fontFamily="Poppins" fontWeight="800" fontSize="40" fill="#FFFFFF" letterSpacing="-1">unitec</text>
+                {/* Marca registrada */}
+                <text x="145" y="30" fontFamily="Poppins" fontWeight="400" fontSize="10" fill="#FFFFFF">®</text>
+            </svg>
+        );
+
         const IconWrapper = ({ children, className }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                 {children}
             </svg>
         );
+        // Iconos
         const BookOpen = ({ className }) => <IconWrapper className={className}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconWrapper>;
-        const PenTool = ({ className }) => <IconWrapper className={className}><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></IconWrapper>;
         const Layout = ({ className }) => <IconWrapper className={className}><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="9" y2="21"/></IconWrapper>;
+        const PenTool = ({ className }) => <IconWrapper className={className}><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></IconWrapper>;
         const Quote = ({ className }) => <IconWrapper className={className}><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/></IconWrapper>;
         const BarChart2 = ({ className }) => <IconWrapper className={className}><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></IconWrapper>;
-        const Users = ({ className }) => <IconWrapper className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></IconWrapper>;
         const AlertCircle = ({ className }) => <IconWrapper className={className}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></IconWrapper>;
         const Lightbulb = ({ className }) => <IconWrapper className={className}><line x1="9" x2="15" y1="18" y2="18"/><line x1="10" x2="14" y1="22" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 12 2a4.65 4.65 0 0 0-4.5 9.65c.76.76 1.23 1.52 1.4 2.5a2 2 0 0 0 4.19 0Z"/></IconWrapper>;
 
-
-        // --- COLORES ---
-        const COLORS = {
-            primary: '#0088FE',    // Azul
-            secondary: '#00C49F',  // Verde Azulado
-            tertiary: '#FFBB28',   // Amarillo
-            quaternary: '#FF8042', // Naranja
-            neutral: '#9ca3af',    // Gris
-            red: '#ef4444',        // Rojo
-            green: '#22c55e'       // Verde
+        // --- PALETA DE COLORES UNITEC ---
+        const UNITEC_COLORS = {
+            federalBlue: '#06065C', // Principal, Oscuro
+            pacificCyan: '#03AED2', // Acción, Vibrante
+            vividSky: '#47C8FD',    // Acento Claro
+            neutral: '#CBD5E1',     // Gris Azulado (Slate 300)
+            white: '#FFFFFF',
+            darkText: '#0F172A',
         };
-        const PIE_COLORS = [COLORS.primary, COLORS.secondary, COLORS.tertiary, COLORS.neutral];
 
-        // --- DATOS ---
+        const PIE_COLORS = [UNITEC_COLORS.federalBlue, UNITEC_COLORS.pacificCyan, UNITEC_COLORS.vividSky, UNITEC_COLORS.neutral];
+
+        // --- DATOS COMPLETOS ---
         const comparativeData = [
             { 
                 id: "L1", 
@@ -127,14 +165,11 @@
             }
         ];
 
-        // Reflexiones (OA1, OB1, OC1)
         const reflectionData = {
             A: {
                 id: "OA1",
                 label: "Trayectoria A",
                 title: "Evaluación Tradicional",
-                color: "bg-blue-100 border-blue-500",
-                textColor: "text-blue-800",
                 observation: "Las reflexiones generales de la evaluación tradicional mostraron preferencia por la metodología del segundo proyecto o mantener el formato actual. Indicaron satisfacción general con la clase.",
                 responses: [
                     "No cambiaría nada porque el desarrollo del curso estuvo bien explicado por parte del docente y despejaba cada duda que tenían los estudiantes",
@@ -146,8 +181,6 @@
                 id: "OB1",
                 label: "Trayectoria B",
                 title: "Evaluación CGS",
-                color: "bg-teal-100 border-teal-500",
-                textColor: "text-teal-800",
                 observation: "Las reflexiones generales del método CGS prefirieron la metodología aplicada en el segundo parcial y expresaron el deseo de tener más tiempo para consultas y discusión. Indicaron satisfacción con la clase.",
                 responses: [
                     "Usaría el método de los Foros, del segundo parcial, había más orden en respecto a dudas o que quería en cada avance, si se usa de nuevo para los dos proyectos, habría más orden y coordinación.",
@@ -160,8 +193,6 @@
                 id: "OC1",
                 label: "Trayectoria C",
                 title: "Evaluación Mixta",
-                color: "bg-purple-100 border-purple-500",
-                textColor: "text-purple-800",
                 observation: "Las reflexiones generales de la evaluación combinada pidieron más tiempo para las actividades e indicaron satisfacción con la clase.",
                 responses: [
                     "nada, todo me pareció bien explicado a pesar que fuera una clase bien analítica y con bastantes cálculos",
@@ -173,289 +204,382 @@
         const trajectoryData = {
             A: {
                 title: "Trayectoria A - Evaluación Tradicional",
-                icon: <BookOpen className="w-6 h-6" />,
+                icon: <BookOpen className="w-5 h-5 text-white" />,
                 description: "Estudiantes que optaron únicamente por la evaluación tradicional mediante exámenes.",
                 pieCharts: [ 
                     { 
                         title: "PA1", 
-                        question: "Siendo honesto, ¿cuál fue el factor determinante para no intentar el proyecto?",
-                        observation: "La percepción de la inversión de tiempo fue el principal disuasivo. Otros factores incluyeron la incertidumbre ante la falta de respuestas 'correctas', la presión por el rendimiento y la costumbre.",
+                        question: "Siendo honesto, ¿cuál fue el factor determinante para no intentar el proyecto?", 
+                        observation: "La percepción de la inversión de tiempo fue el principal disuasivo. Otros factores incluyeron la incertidumbre ante la falta de respuestas 'correctas', la presión por el rendimiento y la costumbre.", 
                         data: [ { name: 'Factor Tiempo', value: 66 }, { name: 'Costumbre/Examen', value: 33 } ] 
                     } 
                 ],
                 quotes: [
                     { 
                         title: "PA2", 
-                        question: "Los proyectos buscan simular la vida real de un ingeniero. ¿Sientes que al elegir el examen perdiste la oportunidad de desarrollar esas habilidades?",
-                        observation: "Los estudiantes reconocieron que el proyecto ofrecía mejores oportunidades de aprendizaje.",
+                        question: "Los proyectos buscan simular la vida real de un ingeniero. ¿Sientes que al elegir el examen perdiste la oportunidad de desarrollar esas habilidades?", 
+                        observation: "Los estudiantes reconocieron que el proyecto ofrecía mejores oportunidades de aprendizaje.", 
                         responses: [ "Al final sentí que era mejor opción el proyecto por la toma de decisiones y si volviera a haber la oportunidad escogería el proyecto", "Si, la verdad que sentí que mis compañeros que realizaron el proyecto pudieron trabajar de manera más cercana a lo que nos espera en un ambiente laboral", "Quizás sí pero el tiempo fue un factor" ] 
                     },
                     { 
                         title: "PA3", 
-                        question: "¿Sentiste que el examen evaluó tu criterio ingenieril y capacidad de modelación, o principalmente tu capacidad de cálculo numérico?",
-                        observation: "Aunque percibieron una dificultad similar, el tiempo y la retroalimentación marcaron la diferencia a favor del proyecto. Algunos consideraron que el examen no fue una forma efectiva de evaluación.",
+                        question: "¿Sentiste que el examen evaluó tu criterio ingenieril y capacidad de modelación, o principalmente tu capacidad de cálculo numérico?", 
+                        observation: "Aunque percibieron una dificultad similar, el tiempo y la retroalimentación marcaron la diferencia a favor del proyecto. Algunos consideraron que el examen no fue una forma efectiva de evaluación.", 
                         responses: [ "El examen si tenía el mismo nivel de dificultad que el proyecto pero el factor tiempo... y la facilidad de obtener una mejor nota y tener retroalimentación era mejor en el proyecto", "No", "Capacidad de modelación" ] 
                     }
                 ]
             },
             B: {
                 title: "Trayectoria B - Evaluación CGS",
-                icon: <Layout className="w-6 h-6" />,
+                icon: <Layout className="w-5 h-5 text-white" />,
                 description: "Estudiantes que realizaron proyectos individuales y grupales simulando un rol de consultor.",
                 pieCharts: [ 
                     { 
                         title: "PB1", 
-                        question: "Comparado con tus compañeros que estudiaron para exámenes, ¿cómo describirías tu carga de trabajo?",
-                        observation: "El 100% de los estudiantes bajo la metodología CGS percibió una inversión alta de tiempo (más trabajo, más aprendizaje), descartando opciones de inversión ineficiente o equilibrada.",
+                        question: "Comparado con tus compañeros que estudiaron para exámenes, ¿cómo describirías tu carga de trabajo?", 
+                        observation: "El 100% de los estudiantes bajo la metodología CGS percibió una inversión alta de tiempo (más trabajo, más aprendizaje), descartando opciones de inversión ineficiente o equilibrada.", 
                         data: [ { name: 'Inversión Alta (Más horas, más aprendizaje)', value: 100 } ] 
                     } 
                 ],
                 quotes: [
                     { 
                         title: "PB2", 
-                        question: "¿Sentiste que dejaste de actuar como 'estudiante que quiere nota' y empezaste a pensar como un 'Solucionador de Problemas Empático'?",
-                        observation: "Todos los estudiantes sintieron inmersión en sus roles profesionales, extrapolando las técnicas utilizadas a lo que esperan aplicar en la práctica real.",
+                        question: "¿Sentiste que dejaste de actuar como 'estudiante que quiere nota' y empezaste a pensar como un 'Solucionador de Problemas Empático'?", 
+                        observation: "Todos los estudiantes sintieron inmersión en sus roles profesionales, extrapolando las técnicas utilizadas a lo que esperan aplicar en la práctica real.", 
                         responses: [ "Si, sentí más que todo en el primer proyecto... hasta a otros ingenieros le preguntamos a ver su opinión.", "Sí. Con los proyectos sentí que ya no estaba pensando solo en la nota, sino en resolver un problema real.", "Si ya que realmente así es como vamos a diseñar, con los planos y la computadora, no como una evaluación", "Si, fue necesario empezar a revisar de una manera mas profunda para poder detectar si habia algun error." ] 
                     },
                     { 
                         title: "PB3", 
-                        question: "El proyecto utilizaba una metodología basada en roles. ¿Cómo afectó esto tu motivación comparado con un problema típico de libro de texto?",
-                        observation: "Los estudiantes expresaron mayor satisfacción y motivación gracias a la metodología de roles y problemas basados en la realidad.",
+                        question: "El proyecto utilizaba una metodología basada en roles. ¿Cómo afectó esto tu motivación comparado con un problema típico de libro de texto?", 
+                        observation: "Los estudiantes expresaron mayor satisfacción y motivación gracias a la metodología de roles y problemas basados en la realidad.", 
                         responses: [ "En motivación pues fue mejor... gran satisfacción cuando habían resultados viables.", "Me motivó más que un problema de libro porque se sentía real... ver la estructura en persona hizo que los planos y cálculos tuvieran sentido.", "Es una manera de ver las cosas más aplicadas.", "El hecho de que el proyecto se haya basado en una estructura que nosotros podemos ver hace que sienta mas motivación." ] 
                     }
                 ]
             },
             C: {
                 title: "Trayectoria C - Evaluación Mixta",
-                icon: <PenTool className="w-6 h-6" />,
+                icon: <PenTool className="w-5 h-5 text-white" />,
                 description: "Estudiantes que experimentaron ambos métodos de evaluación durante el curso.",
                 pieCharts: [
                     { 
                         title: "PC1", 
-                        question: "¿Cuál generó mayor ansiedad/estrés?",
-                        observation: "Hubo una mezcla de ansiedad: algunos estudiantes sintieron mayor estrés con el proyecto y otros con el examen.",
+                        question: "¿Cuál generó mayor ansiedad/estrés?", 
+                        observation: "Hubo una mezcla de ansiedad: algunos estudiantes sintieron mayor estrés con el proyecto y otros con el examen.", 
                         data: [ { name: 'El Examen', value: 50 }, { name: 'El Proyecto', value: 50 } ] 
                     },
                     { 
                         title: "PC2", 
-                        question: "¿Cuál obligó a entender realmente el comportamiento de la estructura (física) y no solo la matemática?",
-                        observation: "Todos coincidieron en que el proyecto mejoró su comprensión física de la estructura mucho más que el examen.",
+                        question: "¿Cuál obligó a entender realmente el comportamiento de la estructura (física) y no solo la matemática?", 
+                        observation: "Todos coincidieron en que el proyecto mejoró su comprensión física de la estructura mucho más que el examen.", 
                         data: [ { name: 'El Proyecto', value: 100 } ] 
                     },
                     { 
                         title: "PC3", 
-                        question: "¿Cuál te hizo sentir más orgulloso de tu resultado final?",
-                        observation: "El 100% se sintió más orgulloso del resultado de su proyecto que del examen.",
+                        question: "¿Cuál te hizo sentir más orgulloso de tu resultado final?", 
+                        observation: "El 100% se sintió más orgulloso del resultado de su proyecto que del examen.", 
                         data: [ { name: 'El Proyecto', value: 100 } ] 
                     }
                 ],
                 quotes: [
                     { 
                         title: "PC4", 
-                        question: "Decidiste cambiar de método entre la primera y la segunda evaluación. ¿Qué motivó ese cambio?",
-                        observation: "El cambio de sistema se debió a la alta inversión de tiempo y a limitaciones técnicas (computadora/software) exacerbadas por la teledocencia.",
+                        question: "Decidiste cambiar de método entre la primera y la segunda evaluación. ¿Qué motivó ese cambio?", 
+                        observation: "El cambio de sistema se debió a la alta inversión de tiempo y a limitaciones técnicas (computadora/software) exacerbadas por la teledocencia.", 
                         responses: [ "En el primero hice examen porque vi que era mucho trabajo... En el segundo hice proyecto porque ya le entendía más a la clase.", "Hice El primer proyecto pero no hice el segundo, principalmente por mi computadora." ] 
                     }
                 ]
             }
         };
 
-        const QuoteCard = ({ text }) => (
-            <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-indigo-500 mb-3 hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-2">
-                    <div className="text-indigo-300 min-w-[20px] mt-1"><Quote size={20} /></div>
-                    <p className="text-gray-700 italic text-sm md:text-base leading-relaxed">"{text}"</p>
+        // --- COMPONENTES UI UNITEC ---
+
+        const NavButton = ({ active, onClick, icon: Icon, label }) => (
+            <button 
+                onClick={onClick}
+                className={`
+                    relative px-6 py-4 font-semibold text-sm tracking-wide uppercase transition-all duration-300
+                    flex items-center gap-2 border-b-4
+                    ${active 
+                        ? 'border-unitec-cyan text-unitec-blue bg-white' 
+                        : 'border-transparent text-slate-400 hover:text-unitec-blue hover:bg-slate-100'
+                    }
+                `}
+            >
+                {Icon && <Icon className={`w-4 h-4 ${active ? 'text-unitec-cyan' : 'text-slate-400'}`} />}
+                {label}
+            </button>
+        );
+
+        const SectionTitle = ({ title, subtitle }) => (
+            <div className="mb-8 border-l-4 border-unitec-cyan pl-4">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-unitec-blue">{title}</h2>
+                {subtitle && <p className="text-slate-500 mt-1 font-medium">{subtitle}</p>}
+            </div>
+        );
+
+        const Card = ({ children, className = "" }) => (
+            <div className={`bg-white shadow-card border border-slate-200 rounded-sm overflow-hidden ${className}`}>
+                {/* Acento superior "Diamante" */}
+                <div className="h-1 w-full bg-gradient-to-r from-unitec-blue via-unitec-cyan to-unitec-vividSky"></div>
+                <div className="p-6">
+                    {children}
                 </div>
             </div>
         );
 
-        const SectionHeader = ({ title, subtitle }) => (
-            <div className="mb-6">
-                <h2 className="text-xl md:text-2xl font-bold text-gray-800">{title}</h2>
-                {subtitle && <p className="text-gray-500 mt-1">{subtitle}</p>}
-            </div>
-        );
-
+        // MODIFICADO: Eliminado el icono Lightbulb
         const ObservationBox = ({ text }) => (
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg flex items-start gap-3 border border-blue-100">
-                <div className="text-blue-600 mt-1 flex-shrink-0"><AlertCircle size={20}/></div>
+            <div className="mt-4 p-4 bg-slate-50 border-l-4 border-unitec-federalBlue flex gap-4 items-start">
+                {/* Icono eliminado */}
                 <div>
-                    <h4 className="font-semibold text-blue-900 text-sm uppercase tracking-wide">Observación Clave</h4>
-                    <p className="text-blue-800 text-sm mt-1 leading-relaxed">
-                        {text}
-                    </p>
+                    <h5 className="font-bold text-unitec-blue text-xs uppercase tracking-wider mb-1">Hallazgo Clave</h5>
+                    <p className="text-slate-700 text-sm italic">{text}</p>
                 </div>
             </div>
         );
+
+        // --- APP PRINCIPAL ---
 
         const App = () => {
             const [activeTab, setActiveTab] = useState('comparative');
             const [selectedQuestion, setSelectedQuestion] = useState(comparativeData[0].id);
 
-            // Verificación simple para renderizado condicional
-            if (!BarChart) {
-                return <div className="p-8 text-center text-red-600">Error cargando gráficos. Por favor recarga la página.</div>;
-            }
-
             const renderContent = () => {
                 if (activeTab === 'comparative') {
                     const currentQData = comparativeData.find(d => d.id === selectedQuestion);
                     return (
-                        <div className="fade-in">
-                            <SectionHeader title="Análisis Comparativo (Preguntas L)" subtitle="Comparación de percepciones entre las tres trayectorias de aprendizaje." />
-                            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-                                <div className="mb-8">
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Selecciona una métrica para comparar:</label>
-                                    <select value={selectedQuestion} onChange={(e) => setSelectedQuestion(e.target.value)} className="w-full md:w-1/2 p-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all cursor-pointer">
-                                        {comparativeData.map(q => (<option key={q.id} value={q.id}>{q.id} - {q.question}</option>))}
-                                    </select>
-                                </div>
-                                <div className="h-[400px] w-full mt-4">
-                                    <h3 className="text-center font-semibold text-gray-800 mb-2">{currentQData.question}</h3>
-                                    
-                                    <ResponsiveContainer width="100%" height="90%">
-                                        <BarChart data={currentQData.data} layout="vertical" margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                                            <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                                            <XAxis type="number" domain={[0, 100]} unit="%" />
-                                            <YAxis type="category" dataKey="name" width={100} />
-                                            <Tooltip contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', borderRadius: '8px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }} cursor={{fill: 'transparent'}}/>
-                                            <Legend wrapperStyle={{ paddingTop: '20px' }}/>
-                                            {currentQData.keys.map((key) => (
-                                                <Bar 
-                                                    key={key} 
-                                                    dataKey={key} 
-                                                    stackId="a" 
-                                                    fill={
-                                                        // Colores Específicos para L7 (Esfuerzo)
-                                                        key.includes("más esfuerzo") ? COLORS.red :        // Rojo
-                                                        key.includes("menos esfuerzo") ? COLORS.green :    // Verde
-                                                        
-                                                        // Lógica General
-                                                        key.includes("Totalmente") || key.includes("Mismo") ? COLORS.secondary : 
-                                                        key.includes("De acuerdo") || key.includes("Similar") || key.includes("similar") ? COLORS.primary : 
-                                                        key.includes("Neutro") || key.includes("Tal vez") ? COLORS.neutral : 
-                                                        COLORS.red
-                                                    } 
-                                                    animationDuration={1500} 
-                                                />
-                                            ))}
-                                        </BarChart>
-                                    </ResponsiveContainer>
-                                </div>
-                                <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                                    <p className="text-gray-700 text-sm font-medium text-center italic">"{currentQData.fullQuestion}"</p>
-                                </div>
-                                
-                                {currentQData.observation && (
-                                    <ObservationBox text={currentQData.observation} />
-                                )}
-                            </div>
-                        </div>
-                    );
-                } else if (activeTab === 'reflection') {
-                    return (
-                         <div className="fade-in">
-                            <SectionHeader 
-                                title="Reflexión sobre la Metodología" 
-                                subtitle="¿Qué cambiarías de la metodología del curso para mejorar tu aprendizaje futuro?" 
-                            />
+                        <div className="fade-in max-w-5xl mx-auto">
+                            <SectionTitle title="Análisis Comparativo (Preguntas L)" subtitle="Comparación de percepciones entre las tres trayectorias de aprendizaje." />
                             
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                {Object.values(reflectionData).map((item) => (
-                                    <div key={item.id} className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden flex flex-col">
-                                        <div className={`p-4 border-b-2 ${item.color.replace('bg-', 'border-')}`}>
-                                            <div className="flex items-center justify-between mb-1">
-                                                <span className={`text-xs font-bold px-2 py-1 rounded-full uppercase ${item.color} ${item.textColor}`}>
-                                                    {item.label}
-                                                </span>
-                                                <span className="text-gray-400 text-xs font-mono">{item.id}</span>
-                                            </div>
-                                            <h3 className="font-bold text-gray-800 text-lg">{item.title}</h3>
-                                        </div>
-                                        <div className="p-4 bg-gray-50 flex-grow space-y-3">
-                                            {item.responses.map((resp, i) => (
-                                                <div key={i} className="bg-white p-3 rounded shadow-sm border border-gray-100 text-sm text-gray-700 italic relative">
-                                                    <span className="absolute top-2 left-2 text-gray-200"><Quote size={12}/></span>
-                                                    <p className="pl-4 relative z-10">{resp}</p>
-                                                </div>
-                                            ))}
-                                        </div>
-                                         <div className="p-4 bg-white border-t border-gray-100">
-                                            <p className="text-xs text-blue-800 font-semibold uppercase mb-1 flex items-center gap-1">
-                                                <AlertCircle size={12}/> Observación:
-                                            </p>
-                                            <p className="text-xs text-gray-600 leading-relaxed">
-                                                {item.observation}
-                                            </p>
-                                        </div>
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                                {/* Panel de Control */}
+                                <div className="md:col-span-4 space-y-2">
+                                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Seleccionar Indicador</label>
+                                    <div className="flex flex-col gap-2">
+                                        {comparativeData.map(q => (
+                                            <button 
+                                                key={q.id}
+                                                onClick={() => setSelectedQuestion(q.id)}
+                                                className={`
+                                                    text-left px-4 py-3 rounded-sm border-l-4 transition-all text-sm font-medium
+                                                    ${selectedQuestion === q.id 
+                                                        ? 'border-unitec-cyan bg-white shadow-sm text-unitec-blue' 
+                                                        : 'border-transparent text-slate-500 hover:bg-slate-100 hover:text-slate-700'
+                                                    }
+                                                `}
+                                            >
+                                                <span className="font-bold mr-2 opacity-50">{q.id}</span>
+                                                {q.question}
+                                            </button>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
-                         </div>
-                    );
-                } else {
-                    const data = trajectoryData[activeTab];
-                    return (
-                        <div className="slide-in">
-                            <div className="flex items-center gap-3 mb-6 bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                                <div className="p-3 bg-indigo-100 text-indigo-600 rounded-full">{data.icon}</div>
-                                <div><h2 className="text-2xl font-bold text-gray-900">{data.title}</h2><p className="text-gray-500">{data.description}</p></div>
-                            </div>
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                                <div className="space-y-6">
-                                    {data.pieCharts.map((chart, idx) => (
-                                        <div key={idx} className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 flex flex-col">
-                                            <h3 className="font-semibold text-gray-800 flex items-center gap-2"><div className="text-indigo-500"><BarChart2 size={18}/></div>{chart.title}</h3>
-                                            <p className="text-sm text-gray-500 mt-1 mb-4 italic">{chart.question}</p>
-                                            <div className="h-[250px] mb-4">
-                                                <ResponsiveContainer width="100%" height="100%">
-                                                    <PieChart>
-                                                        <Pie data={chart.data} cx="50%" cy="50%" labelLine={false} label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`} outerRadius={80} fill="#8884d8" dataKey="value">
-                                                            {chart.data.map((entry, index) => (<Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />))}
-                                                        </Pie>
-                                                        <Tooltip /><Legend verticalAlign="bottom" height={36}/>
-                                                    </PieChart>
-                                                </ResponsiveContainer>
-                                            </div>
-                                            {chart.observation && <ObservationBox text={chart.observation} />}
-                                        </div>
-                                    ))}
                                 </div>
-                                <div className="space-y-6">
-                                    {data.quotes.map((q, idx) => (
-                                        <div key={idx} className="bg-slate-50 p-6 rounded-xl border border-slate-200">
-                                            <h3 className="font-bold text-slate-800 text-lg">{q.title}</h3>
-                                            <p className="text-sm text-slate-600 mt-1 mb-4 italic">{q.question}</p>
-                                            <div className="space-y-2 mb-4">{q.responses.map((resp, i) => (<QuoteCard key={i} text={resp} />))}</div>
-                                            {q.observation && <ObservationBox text={q.observation} />}
-                                        </div>
-                                    ))}
-                                </div>
+
+                                {/* Visualización */}
+                                <Card className="md:col-span-8">
+                                    <div className="mb-6">
+                                        <h3 className="text-lg font-bold text-unitec-blue mb-2 leading-tight">{currentQData.fullQuestion}</h3>
+                                        <div className="w-12 h-1 bg-unitec-cyan mb-4"></div>
+                                    </div>
+
+                                    <div className="h-[350px] w-full">
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <BarChart data={currentQData.data} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                                                <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#E2E8F0" />
+                                                <XAxis type="number" domain={[0, 100]} hide />
+                                                <YAxis type="category" dataKey="name" width={100} tick={{fill: '#475569', fontSize: 12, fontWeight: 600}} axisLine={false} tickLine={false} />
+                                                <Tooltip 
+                                                    cursor={{fill: '#F1F5F9'}}
+                                                    contentStyle={{ border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', borderRadius: '0px' }}
+                                                />
+                                                <Legend iconType="square" />
+                                                {currentQData.keys.map((key, index) => {
+                                                    // Lógica de color Unitec
+                                                    let fillColor = UNITEC_COLORS.neutral;
+                                                    if (key.includes("Totalmente") || key.includes("Mismo") || key.includes("Alta")) fillColor = UNITEC_COLORS.federalBlue;
+                                                    else if (key.includes("De acuerdo") || key.includes("Similar")) fillColor = UNITEC_COLORS.pacificCyan;
+                                                    else if (key.includes("Cambiaría") || key.includes("Neutro")) fillColor = UNITEC_COLORS.vividSky;
+                                                    
+                                                    // Override para L7 (Esfuerzo - semántico)
+                                                    if (key.includes("más esfuerzo")) fillColor = UNITEC_COLORS.federalBlue; 
+                                                    if (key.includes("menos esfuerzo")) fillColor = '#EF4444'; // Rojo alerta
+
+                                                    return <Bar key={key} dataKey={key} stackId="a" fill={fillColor} barSize={30} radius={[0, 4, 4, 0]} />
+                                                })}
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                    
+                                    {currentQData.observation && <ObservationBox text={currentQData.observation} />}
+                                </Card>
                             </div>
                         </div>
                     );
                 }
+
+                if (activeTab === 'reflection') {
+                    return (
+                        <div className="fade-in max-w-6xl mx-auto">
+                            <SectionTitle title="Reflexiones sobre la Metodología" subtitle="¿Qué cambiarías de la metodología del curso para mejorar tu aprendizaje futuro?" />
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                {Object.values(reflectionData).map((item, idx) => {
+                                    const borderColors = {
+                                        A: 'border-t-unitec-blue',
+                                        B: 'border-t-unitec-cyan',
+                                        C: 'border-t-slate-400'
+                                    };
+                                    return (
+                                        <Card key={item.id} className={`flex flex-col h-full border-t-4 ${borderColors[item.id.charAt(1)] || 'border-t-gray-400'}`}>
+                                            <div className="mb-4">
+                                                <span className="text-xs font-bold text-slate-400 uppercase">{item.label}</span>
+                                                <h3 className="text-xl font-extrabold text-unitec-blue mt-1">{item.title}</h3>
+                                            </div>
+                                            
+                                            <div className="flex-grow space-y-4 mb-6">
+                                                {item.responses.map((resp, i) => (
+                                                    <div key={i} className="relative pl-6">
+                                                        <span className="absolute left-0 top-0 text-3xl text-unitec-cyan font-serif leading-3 opacity-30">“</span>
+                                                        <p className="text-sm text-slate-600 italic leading-relaxed">{resp}</p>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            <div className="pt-4 border-t border-slate-100 mt-auto">
+                                                {/* MODIFICADO: Eliminado el icono AlertCircle */}
+                                                <p className="text-xs text-unitec-blue font-bold uppercase mb-1">
+                                                    Observación:
+                                                </p>
+                                                <p className="text-xs text-slate-500">{item.observation}</p>
+                                            </div>
+                                        </Card>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    );
+                }
+
+                // Trayectorias individuales
+                const data = trajectoryData[activeTab];
+                const headerColors = {
+                    A: 'bg-unitec-blue',
+                    B: 'bg-unitec-cyan',
+                    C: 'bg-slate-600'
+                };
+
+                return (
+                    <div className="slide-up max-w-6xl mx-auto">
+                        <div className={`p-8 rounded-sm text-white mb-8 shadow-md flex items-center gap-6 ${headerColors[activeTab] || 'bg-slate-700'}`}>
+                            <div className="p-4 bg-white/10 rounded-full backdrop-blur-sm">
+                                {data.icon}
+                            </div>
+                            <div>
+                                <h2 className="text-3xl font-extrabold">{data.title}</h2>
+                                <p className="text-white/80 font-medium text-lg mt-1">{data.description}</p>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div className="space-y-6">
+                                {data.pieCharts.map((chart, idx) => (
+                                    <Card key={idx}>
+                                        <div className="flex items-center gap-2 mb-2">
+                                            {/* ICONO ELIMINADO PARA REDUCIR RUIDO VISUAL */}
+                                            <h3 className="font-bold text-slate-800">{chart.title}</h3>
+                                        </div>
+                                        <p className="text-xs text-slate-500 mb-4 uppercase tracking-wide">{chart.question}</p>
+                                        
+                                        <div className="h-[200px] w-full flex items-center justify-center">
+                                            <ResponsiveContainer width="100%" height="100%">
+                                                <PieChart>
+                                                    <Pie 
+                                                        data={chart.data} 
+                                                        innerRadius={50} 
+                                                        outerRadius={70} 
+                                                        paddingAngle={5} 
+                                                        dataKey="value"
+                                                    >
+                                                        {chart.data.map((entry, index) => (
+                                                            <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} stroke="none" />
+                                                        ))}
+                                                    </Pie>
+                                                    <Tooltip contentStyle={{ borderRadius: '4px', border: 'none', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }} />
+                                                    <Legend verticalAlign="middle" align="right" layout="vertical" iconType="circle" />
+                                                </PieChart>
+                                            </ResponsiveContainer>
+                                        </div>
+                                        {chart.observation && <p className="mt-4 text-sm text-center text-unitec-blue font-medium bg-blue-50 py-2 px-3 rounded-sm">{chart.observation}</p>}
+                                    </Card>
+                                ))}
+                            </div>
+                            
+                            <div className="space-y-6">
+                                {data.quotes.map((q, idx) => (
+                                    <Card key={idx} className="border-l-4 border-l-unitec-vividSky">
+                                        <h3 className="font-bold text-slate-800 text-lg">{q.title}</h3>
+                                        <p className="text-sm text-slate-500 mb-4">{q.question}</p>
+                                        <div className="space-y-3">
+                                            {q.responses.map((resp, i) => (
+                                                <div key={i} className="flex gap-3">
+                                                    <div className="min-w-[4px] bg-slate-200 rounded-full"></div>
+                                                    <p className="text-slate-600 text-sm italic">"{resp}"</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        {q.observation && (
+                                            <div className="mt-4 pt-4 border-t border-slate-100">
+                                                {/* MODIFICADO: Eliminado el icono AlertCircle */}
+                                                <p className="text-xs text-unitec-blue font-bold uppercase mb-1">
+                                                    Observación:
+                                                </p>
+                                                <p className="text-xs text-slate-500">{q.observation}</p>
+                                            </div>
+                                        )}
+                                    </Card>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                );
             };
 
             return (
-                <div className="min-h-screen bg-gray-50 font-sans text-gray-900 pb-12">
-                    <header className="bg-indigo-700 text-white pt-10 pb-20 px-4 md:px-8 shadow-md">
-                        <div className="max-w-7xl mx-auto">
-                            <div className="flex items-center gap-3 mb-2 opacity-80"><Users size={20} /><span className="text-sm font-medium tracking-wide uppercase">Estudio de Caso Educativo</span></div>
-                            <h1 className="text-3xl md:text-5xl font-bold mb-4">Impacto de la Evaluación</h1>
-                            <p className="text-xl text-indigo-100 max-w-2xl">Comparativa de aprendizaje entre Exámenes y Proyectos.<span className="block text-sm mt-2 opacity-75">(n=9 Estudiantes)</span></p>
+                <div className="min-h-screen pb-12">
+                    {/* Header Institucional */}
+                    <header className="bg-unitec-blue text-white shadow-lg sticky top-0 z-50">
+                        <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
+                            <div className="flex items-center gap-4">
+                                <UnitecLogo />
+                                <div className="hidden md:block h-8 w-px bg-white/20"></div>
+                                <h1 className="hidden md:block text-sm font-semibold tracking-wider text-unitec-sky uppercase">Facultad de Ingeniería</h1>
+                            </div>
+                            <div className="text-right">
+                                <p className="text-xs text-slate-300 font-medium uppercase tracking-widest">Estudio 2025</p>
+                                <p className="text-sm font-bold">CIV324 Análisis Estructural</p>
+                            </div>
                         </div>
                     </header>
-                    <main className="max-w-7xl mx-auto px-4 md:px-8 -mt-10">
-                        <div className="bg-white rounded-xl shadow-lg p-2 mb-8 flex flex-wrap md:flex-nowrap gap-2 overflow-x-auto">
-                            <button onClick={() => setActiveTab('comparative')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'comparative' ? 'bg-indigo-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}><BarChart2 size={18} /> Comparativa (L)</button>
-                            <button onClick={() => setActiveTab('A')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'A' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>Trayectoria A</button>
-                            <button onClick={() => setActiveTab('B')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'B' ? 'bg-teal-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>Trayectoria B</button>
-                            <button onClick={() => setActiveTab('C')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'C' ? 'bg-purple-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>Trayectoria C</button>
-                            <button onClick={() => setActiveTab('reflection')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'reflection' ? 'bg-amber-500 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}><Lightbulb size={18} /> Reflexión</button>
+
+                    {/* Navegación Principal */}
+                    <div className="bg-white shadow-sm border-b border-slate-200 mb-8 sticky top-20 z-40">
+                        <div className="max-w-7xl mx-auto px-4 md:px-8 flex overflow-x-auto">
+                            <NavButton active={activeTab === 'comparative'} onClick={() => setActiveTab('comparative')} icon={BarChart2} label="Comparativa" />
+                            <NavButton active={activeTab === 'A'} onClick={() => setActiveTab('A')} label="Trayectoria A" />
+                            <NavButton active={activeTab === 'B'} onClick={() => setActiveTab('B')} label="Trayectoria B" />
+                            <NavButton active={activeTab === 'C'} onClick={() => setActiveTab('C')} label="Trayectoria C" />
+                            <NavButton active={activeTab === 'reflection'} onClick={() => setActiveTab('reflection')} icon={Lightbulb} label="Reflexiones" />
                         </div>
+                    </div>
+
+                    <main className="px-4 md:px-8">
                         {renderContent()}
                     </main>
+
+                    <footer className="max-w-7xl mx-auto px-8 mt-12 pt-8 border-t border-slate-200 text-center text-slate-400 text-xs">
+                        <p className="font-semibold text-slate-600 mb-2">Autor: Marco Canales, PhD</p>
+                        <p>© 2025 Universidad Tecnológica Centroamericana. Todos los derechos reservados.</p>
+                        <p className="mt-2">Uso exclusivo para fines académicos.</p>
+                    </footer>
                 </div>
             );
         };
