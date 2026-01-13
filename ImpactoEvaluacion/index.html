@@ -66,51 +66,147 @@
 
         // --- DATOS ---
         const comparativeData = [
-            { id: "L1", question: "Entendimiento profundo (más allá de fórmulas)", data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 66, 'De acuerdo': 0, 'Neutro': 33 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 100, 'Neutro': 0 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] },
-            { id: "L2", question: "Análisis como proceso de idealización vs matemático", data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 33, 'De acuerdo': 33, 'Neutro': 33 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 50, 'De acuerdo': 50, 'Neutro': 0 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] },
-            { id: "L3", question: "Capacidad de toma de decisiones (info incompleta)", data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 33, 'De acuerdo': 33, 'Neutro': 33 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 50, 'De acuerdo': 50, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 100, 'Neutro': 0 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] },
-            { id: "L4", question: "Consideración de uso real y seguridad", data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 66, 'De acuerdo': 33, 'Neutro': 0 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 0, 'Neutro': 100 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] },
-            { id: "L5", question: "Responsabilidad ética y seguridad pública", data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 50, 'De acuerdo': 50 } ], keys: ['Totalmente de acuerdo', 'De acuerdo'] },
-            { id: "L6", question: "Aplicabilidad a situaciones nuevas", data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 100 } ], keys: ['Totalmente de acuerdo', 'De acuerdo'] },
-            { id: "L7", question: "Percepción del Esfuerzo Requerido", data: [ { name: 'Trayectoria A', 'Esfuerzo similar': 100, 'Mucho más esfuerzo': 0, 'Mucho menos esfuerzo': 0 }, { name: 'Trayectoria B', 'Esfuerzo similar': 50, 'Mucho más esfuerzo': 50, 'Mucho menos esfuerzo': 0 }, { name: 'Trayectoria C', 'Esfuerzo similar': 50, 'Mucho más esfuerzo': 0, 'Mucho menos esfuerzo': 50 } ], keys: ['Mucho más esfuerzo', 'Esfuerzo similar', 'Mucho menos esfuerzo'] },
-            { id: "L8", question: "Decisión de volver a elegir el método", data: [ { name: 'Trayectoria A', 'Mismo método': 0, 'Tal vez cambiaría': 66, 'Cambiaría': 33 }, { name: 'Trayectoria B', 'Mismo método': 100, 'Tal vez cambiaría': 0, 'Cambiaría': 0 }, { name: 'Trayectoria C', 'Mismo método': 50, 'Tal vez cambiaría': 0, 'Cambiaría': 50 } ], keys: ['Mismo método', 'Tal vez cambiaría', 'Cambiaría'] }
+            { 
+                id: "L1", 
+                question: "Entendimiento Profundo", 
+                fullQuestion: "Siento que entiendo por qué las estructuras se comportan como lo hacen, más allá de simplemente saber usar las fórmulas o el software.",
+                data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 66, 'De acuerdo': 0, 'Neutro': 33 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 100, 'Neutro': 0 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] 
+            },
+            { 
+                id: "L2", 
+                question: "Idealización vs Matemáticas", 
+                fullQuestion: "La evaluación que realicé me ayudó a entender que el Análisis Estructural es un proceso de idealización (donde mi criterio define la geometría y las cargas) y no solo un proceso matemático exacto.",
+                data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 33, 'De acuerdo': 33, 'Neutro': 33 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 50, 'De acuerdo': 50, 'Neutro': 0 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] 
+            },
+            { 
+                id: "L3", 
+                question: "Toma de Decisiones", 
+                fullQuestion: "Me siento capaz de tomar decisiones de diseño (como asumir una carga viva o un tipo de apoyo) incluso cuando no tengo toda la información perfecta o completa.",
+                data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 33, 'De acuerdo': 33, 'Neutro': 33 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 50, 'De acuerdo': 50, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 100, 'Neutro': 0 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] 
+            },
+            { 
+                id: "L4", 
+                question: "Uso Real y Seguridad", 
+                fullQuestion: "Siento que la evaluación me hizo considerar el uso real, la seguridad y las necesidades de las personas que habitarán la estructura (ej. al calcular Carga de Viento o Sismo).",
+                data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 66, 'De acuerdo': 33, 'Neutro': 0 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 0, 'Neutro': 100 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] 
+            },
+            { 
+                id: "L5", 
+                question: "Responsabilidad Ética", 
+                fullQuestion: "Sentí la responsabilidad ética de que mis cálculos (o mi modelo) impactan directamente en la seguridad pública y el cumplimiento del código (CHOC).",
+                data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 50, 'De acuerdo': 50 } ], keys: ['Totalmente de acuerdo', 'De acuerdo'] 
+            },
+            { 
+                id: "L6", 
+                question: "Aplicabilidad", 
+                fullQuestion: "Siento que puedo aplicar lo aprendido en esta evaluación a situaciones completamente nuevas o a otros cursos de la carrera.",
+                data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 100 } ], keys: ['Totalmente de acuerdo', 'De acuerdo'] 
+            },
+            { 
+                id: "L7", 
+                question: "Esfuerzo Percibido", 
+                fullQuestion: "Comparado con la otra opción de evaluación disponible, siento que mi elección requirió:",
+                data: [ { name: 'Trayectoria A', 'Esfuerzo similar': 100, 'Mucho más esfuerzo': 0, 'Mucho menos esfuerzo': 0 }, { name: 'Trayectoria B', 'Esfuerzo similar': 50, 'Mucho más esfuerzo': 50, 'Mucho menos esfuerzo': 0 }, { name: 'Trayectoria C', 'Esfuerzo similar': 50, 'Mucho más esfuerzo': 0, 'Mucho menos esfuerzo': 50 } ], keys: ['Mucho más esfuerzo', 'Esfuerzo similar', 'Mucho menos esfuerzo'] 
+            },
+            { 
+                id: "L8", 
+                question: "Elección Futura", 
+                fullQuestion: "Si pudieras volver a cursar la asignatura, ¿volverías a elegir el mismo método de evaluación?",
+                data: [ { name: 'Trayectoria A', 'Mismo método': 0, 'Tal vez cambiaría': 66, 'Cambiaría': 33 }, { name: 'Trayectoria B', 'Mismo método': 100, 'Tal vez cambiaría': 0, 'Cambiaría': 0 }, { name: 'Trayectoria C', 'Mismo método': 50, 'Tal vez cambiaría': 0, 'Cambiaría': 50 } ], keys: ['Mismo método', 'Tal vez cambiaría', 'Cambiaría'] 
+            }
         ];
 
         const trajectoryData = {
             A: {
-                title: "Trayectoria A - Solo Examen",
+                title: "Trayectoria A - Evaluación Tradicional",
                 icon: <BookOpen className="w-6 h-6" />,
                 description: "Estudiantes que optaron únicamente por la evaluación tradicional mediante exámenes.",
-                pieCharts: [ { title: "PA1 - Motivo para NO intentar el proyecto", data: [ { name: 'Factor Tiempo', value: 66 }, { name: 'Costumbre/Examen', value: 33 } ] } ],
+                pieCharts: [ 
+                    { 
+                        title: "PA1", 
+                        question: "Siendo honesto, ¿cuál fue el factor determinante para no intentar el proyecto?",
+                        data: [ { name: 'Factor Tiempo', value: 66 }, { name: 'Costumbre/Examen', value: 33 } ] 
+                    } 
+                ],
                 quotes: [
-                    { question: "PA2 - ¿Sentiste que perdiste oportunidad de desarrollar habilidades 'reales'?", responses: [ "Al final sentí que era mejor opción el proyecto por la toma de decisiones y si volviera a haber la oportunidad escogería el proyecto", "Si, la verdad que sentí que mis compañeros que realizaron el proyecto pudieron trabajar de manera más cercana a lo que nos espera en un ambiente laboral", "Quizás sí pero el tiempo fue un factor" ] },
-                    { question: "PA3 - ¿El examen evaluó criterio o cálculo?", responses: [ "El examen si tenía el mismo nivel de dificultad que el proyecto pero el factor tiempo... y la facilidad de obtener una mejor nota y tener retroalimentación era mejor en el proyecto", "No", "Capacidad de modelación" ] },
-                    { question: "OA1 - Reflexión sobre cambios al curso", responses: [ "No cambiaría nada porque el desarrollo del curso estuvo bien explicado...", "Que si se da la opción de un proyecto sea como el del segundo parcial, elegir el modelo", "Creo que nada" ] }
+                    { 
+                        title: "PA2", 
+                        question: "Los proyectos buscan simular la vida real de un ingeniero. ¿Sientes que al elegir el examen perdiste la oportunidad de desarrollar esas habilidades?",
+                        responses: [ "Al final sentí que era mejor opción el proyecto por la toma de decisiones y si volviera a haber la oportunidad escogería el proyecto", "Si, la verdad que sentí que mis compañeros que realizaron el proyecto pudieron trabajar de manera más cercana a lo que nos espera en un ambiente laboral", "Quizás sí pero el tiempo fue un factor" ] 
+                    },
+                    { 
+                        title: "PA3", 
+                        question: "¿Sentiste que el examen evaluó tu criterio ingenieril y capacidad de modelación, o principalmente tu capacidad de cálculo numérico?",
+                        responses: [ "El examen si tenía el mismo nivel de dificultad que el proyecto pero el factor tiempo... y la facilidad de obtener una mejor nota y tener retroalimentación era mejor en el proyecto", "No", "Capacidad de modelación" ] 
+                    },
+                    { 
+                        title: "OA1", 
+                        question: "Reflexión sobre cambios al curso:",
+                        responses: [ "No cambiaría nada porque el desarrollo del curso estuvo bien explicado...", "Que si se da la opción de un proyecto sea como el del segundo parcial, elegir el modelo", "Creo que nada" ] 
+                    }
                 ]
             },
             B: {
-                title: "Trayectoria B - Solo Proyecto",
+                title: "Trayectoria B - Evaluación CGS",
                 icon: <Layout className="w-6 h-6" />,
                 description: "Estudiantes que realizaron proyectos individuales y grupales simulando un rol de consultor.",
-                pieCharts: [ { title: "PB1 - Carga de trabajo vs Exámenes", data: [ { name: 'Inversión Alta (Más horas, más aprendizaje)', value: 100 } ] } ],
+                pieCharts: [ 
+                    { 
+                        title: "PB1", 
+                        question: "Comparado con tus compañeros que estudiaron para exámenes, ¿cómo describirías tu carga de trabajo?",
+                        data: [ { name: 'Inversión Alta (Más horas, más aprendizaje)', value: 100 } ] 
+                    } 
+                ],
                 quotes: [
-                    { question: "PB2 - Rol de Consultor vs Estudiante", responses: [ "Si, sentí más que todo en el primer proyecto... hasta a otros ingenieros le preguntamos a ver su opinión.", "Sí. Con los proyectos sentí que ya no estaba pensando solo en la nota, sino en resolver un problema real.", "Si ya que realmente así es como vamos a diseñar, con los planos y la computadora, no como una evaluación", "Si, fue necesario empezar a revisar de una manera mas profunda para poder detectar si habia algun error." ] },
-                    { question: "PB3 - Motivación (Roles y Situaciones Reales)", responses: [ "En motivación pues fue mejor... gran satisfacción cuando habían resultados viables.", "Me motivó más que un problema de libro porque se sentía real... ver la estructura en persona hizo que los planos y cálculos tuvieran sentido.", "Es una manera de ver las cosas más aplicadas.", "El hecho de que el proyecto se haya basado en una estructura que nosotros podemos ver hace que sienta mas motivación." ] },
-                    { question: "OB1 - Cambios sugeridos a la metodología", responses: [ "Usaría el método de los Foros, del segundo parcial... había más orden y coordinación.", "Tal vez se podría incluir más tiempo para preguntas o discusión.", "La verdad que estoy muy satisfecho en cómo llevamos el curso", "Considero que fue una clase muy productiva... la combinación entre el STAAD y los calculos manuales fue excelente." ] }
+                    { 
+                        title: "PB2", 
+                        question: "¿Sentiste que dejaste de actuar como 'estudiante que quiere nota' y empezaste a pensar como un 'Solucionador de Problemas Empático'?",
+                        responses: [ "Si, sentí más que todo en el primer proyecto... hasta a otros ingenieros le preguntamos a ver su opinión.", "Sí. Con los proyectos sentí que ya no estaba pensando solo en la nota, sino en resolver un problema real.", "Si ya que realmente así es como vamos a diseñar, con los planos y la computadora, no como una evaluación", "Si, fue necesario empezar a revisar de una manera mas profunda para poder detectar si habia algun error." ] 
+                    },
+                    { 
+                        title: "PB3", 
+                        question: "El proyecto utilizaba una metodología basada en roles. ¿Cómo afectó esto tu motivación comparado con un problema típico de libro de texto?",
+                        responses: [ "En motivación pues fue mejor... gran satisfacción cuando habían resultados viables.", "Me motivó más que un problema de libro porque se sentía real... ver la estructura en persona hizo que los planos y cálculos tuvieran sentido.", "Es una manera de ver las cosas más aplicadas.", "El hecho de que el proyecto se haya basado en una estructura que nosotros podemos ver hace que sienta mas motivación." ] 
+                    },
+                    { 
+                        title: "OB1", 
+                        question: "¿Qué cambiarías de la metodología del curso para mejorar tu aprendizaje futuro?",
+                        responses: [ "Usaría el método de los Foros, del segundo parcial... había más orden y coordinación.", "Tal vez se podría incluir más tiempo para preguntas o discusión.", "La verdad que estoy muy satisfecho en cómo llevamos el curso", "Considero que fue una clase muy productiva... la combinación entre el STAAD y los calculos manuales fue excelente." ] 
+                    }
                 ]
             },
             C: {
-                title: "Trayectoria C - Mixto (Examen y Proyecto)",
+                title: "Trayectoria C - Evaluación Mixta",
                 icon: <PenTool className="w-6 h-6" />,
                 description: "Estudiantes que experimentaron ambos métodos de evaluación durante el curso.",
                 pieCharts: [
-                    { title: "PC1 - ¿Cuál generó mayor ansiedad/estrés?", data: [ { name: 'El Examen', value: 50 }, { name: 'El Proyecto', value: 50 } ] },
-                    { title: "PC2 - ¿Cuál obligó a entender la física real?", data: [ { name: 'El Proyecto', value: 100 } ] },
-                    { title: "PC3 - ¿Cuál generó más orgullo?", data: [ { name: 'El Proyecto', value: 100 } ] }
+                    { 
+                        title: "PC1", 
+                        question: "¿Cuál generó mayor ansiedad/estrés?",
+                        data: [ { name: 'El Examen', value: 50 }, { name: 'El Proyecto', value: 50 } ] 
+                    },
+                    { 
+                        title: "PC2", 
+                        question: "¿Cuál obligó a entender realmente el comportamiento de la estructura (física) y no solo la matemática?",
+                        data: [ { name: 'El Proyecto', value: 100 } ] 
+                    },
+                    { 
+                        title: "PC3", 
+                        question: "¿Cuál te hizo sentir más orgulloso de tu resultado final?",
+                        data: [ { name: 'El Proyecto', value: 100 } ] 
+                    }
                 ],
                 quotes: [
-                    { question: "PC4 - Motivo del cambio de método", responses: [ "En el primero hice examen porque vi que era mucho trabajo... En el segundo hice proyecto porque ya le entendía más a la clase.", "Hice El primer proyecto pero no hice el segundo, principalmente por mi computadora." ] },
-                    { question: "OC1 - Cambios sugeridos a la metodología", responses: [ "Nada, todo me pareció bien explicado a pesar que fuera una clase bien analítica.", "Más tiempo para hacer el primer proyecto." ] }
+                    { 
+                        title: "PC4", 
+                        question: "Decidiste cambiar de método entre la primera y la segunda evaluación. ¿Qué motivó ese cambio?",
+                        responses: [ "En el primero hice examen porque vi que era mucho trabajo... En el segundo hice proyecto porque ya le entendía más a la clase.", "Hice El primer proyecto pero no hice el segundo, principalmente por mi computadora." ] 
+                    },
+                    { 
+                        title: "OC1", 
+                        question: "¿Qué cambiarías de la metodología del curso para mejorar tu aprendizaje futuro?",
+                        responses: [ "Nada, todo me pareció bien explicado a pesar que fuera una clase bien analítica.", "Más tiempo para hacer el primer proyecto." ] 
+                    }
                 ]
             }
         };
@@ -135,7 +231,7 @@
             const [activeTab, setActiveTab] = useState('comparative');
             const [selectedQuestion, setSelectedQuestion] = useState(comparativeData[0].id);
 
-            // Verificación simple para renderizado condicional si no carga la librería
+            // Verificación simple para renderizado condicional
             if (!BarChart) {
                 return <div className="p-8 text-center text-red-600">Error cargando gráficos. Por favor recarga la página.</div>;
             }
@@ -154,14 +250,15 @@
                                     </select>
                                 </div>
                                 <div className="h-[400px] w-full mt-4">
-                                    <h3 className="text-center font-semibold text-gray-800 mb-4">{currentQData.question}</h3>
-                                    <ResponsiveContainer width="100%" height="100%">
+                                    <h3 className="text-center font-semibold text-gray-800 mb-2">{currentQData.question}</h3>
+                                    
+                                    <ResponsiveContainer width="100%" height="90%">
                                         <BarChart data={currentQData.data} layout="vertical" margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                                             <CartesianGrid strokeDasharray="3 3" horizontal={false} />
                                             <XAxis type="number" domain={[0, 100]} unit="%" />
                                             <YAxis type="category" dataKey="name" width={100} />
                                             <Tooltip contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', borderRadius: '8px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }} cursor={{fill: 'transparent'}}/>
-                                            <Legend />
+                                            <Legend wrapperStyle={{ paddingTop: '20px' }}/>
                                             {currentQData.keys.map((key) => (
                                                 <Bar 
                                                     key={key} 
@@ -171,8 +268,8 @@
                                                         key.includes("Totalmente") || key.includes("Mismo") ? COLORS.secondary : 
                                                         key.includes("De acuerdo") || key.includes("Similar") ? COLORS.primary : 
                                                         key.includes("Neutro") || key.includes("Tal vez") ? COLORS.neutral : 
-                                                        key.includes("más esfuerzo") ? COLORS.quaternary : // Nuevo color para "Mucho más esfuerzo" (Naranja)
-                                                        key.includes("menos esfuerzo") ? COLORS.secondary : // Nuevo color para "Mucho menos esfuerzo" (Verde azulado)
+                                                        key.includes("más esfuerzo") ? COLORS.quaternary :
+                                                        key.includes("menos esfuerzo") ? COLORS.secondary :
                                                         COLORS.red
                                                     } 
                                                     animationDuration={1500} 
@@ -180,6 +277,9 @@
                                             ))}
                                         </BarChart>
                                     </ResponsiveContainer>
+                                </div>
+                                <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                                    <p className="text-gray-700 text-sm font-medium text-center italic">"{currentQData.fullQuestion}"</p>
                                 </div>
                                 <div className="mt-6 p-4 bg-blue-50 rounded-lg flex items-start gap-3">
                                     <div className="text-blue-600 mt-1 flex-shrink-0"><AlertCircle size={20}/></div>
@@ -208,7 +308,8 @@
                                 <div className="space-y-6">
                                     {data.pieCharts.map((chart, idx) => (
                                         <div key={idx} className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-                                            <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2"><div className="text-indigo-500"><BarChart2 size={18}/></div>{chart.title}</h3>
+                                            <h3 className="font-semibold text-gray-800 flex items-center gap-2"><div className="text-indigo-500"><BarChart2 size={18}/></div>{chart.title}</h3>
+                                            <p className="text-sm text-gray-500 mt-1 mb-4 italic">{chart.question}</p>
                                             <div className="h-[250px]">
                                                 <ResponsiveContainer width="100%" height="100%">
                                                     <PieChart>
@@ -225,7 +326,8 @@
                                 <div className="space-y-6">
                                     {data.quotes.map((q, idx) => (
                                         <div key={idx} className="bg-slate-50 p-6 rounded-xl border border-slate-200">
-                                            <h3 className="font-bold text-slate-800 mb-4 text-lg">{q.question}</h3>
+                                            <h3 className="font-bold text-slate-800 text-lg">{q.title}</h3>
+                                            <p className="text-sm text-slate-600 mt-1 mb-4 italic">{q.question}</p>
                                             <div className="space-y-2">{q.responses.map((resp, i) => (<QuoteCard key={i} text={resp} />))}</div>
                                         </div>
                                     ))}
@@ -248,9 +350,9 @@
                     <main className="max-w-7xl mx-auto px-4 md:px-8 -mt-10">
                         <div className="bg-white rounded-xl shadow-lg p-2 mb-8 flex flex-wrap md:flex-nowrap gap-2 overflow-x-auto">
                             <button onClick={() => setActiveTab('comparative')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'comparative' ? 'bg-indigo-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}><BarChart2 size={18} /> Comparativa (L)</button>
-                            <button onClick={() => setActiveTab('A')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'A' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}><BookOpen size={18} /> Trayectoria A</button>
-                            <button onClick={() => setActiveTab('B')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'B' ? 'bg-teal-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}><Layout size={18} /> Trayectoria B</button>
-                            <button onClick={() => setActiveTab('C')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'C' ? 'bg-purple-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}><PenTool size={18} /> Trayectoria C</button>
+                            <button onClick={() => setActiveTab('A')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'A' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>Trayectoria A</button>
+                            <button onClick={() => setActiveTab('B')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'B' ? 'bg-teal-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>Trayectoria B</button>
+                            <button onClick={() => setActiveTab('C')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'C' ? 'bg-purple-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>Trayectoria C</button>
                         </div>
                         {renderContent()}
                     </main>
