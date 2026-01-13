@@ -163,7 +163,20 @@
                                             <Tooltip contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', borderRadius: '8px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }} cursor={{fill: 'transparent'}}/>
                                             <Legend />
                                             {currentQData.keys.map((key) => (
-                                                <Bar key={key} dataKey={key} stackId="a" fill={key.includes("Totalmente") || key.includes("Mismo") ? COLORS.secondary : key.includes("De acuerdo") || key.includes("Similar") ? COLORS.primary : key.includes("Neutro") || key.includes("Tal vez") ? COLORS.neutral : COLORS.red} animationDuration={1500} />
+                                                <Bar 
+                                                    key={key} 
+                                                    dataKey={key} 
+                                                    stackId="a" 
+                                                    fill={
+                                                        key.includes("Totalmente") || key.includes("Mismo") ? COLORS.secondary : 
+                                                        key.includes("De acuerdo") || key.includes("Similar") ? COLORS.primary : 
+                                                        key.includes("Neutro") || key.includes("Tal vez") ? COLORS.neutral : 
+                                                        key.includes("más esfuerzo") ? COLORS.quaternary : // Nuevo color para "Mucho más esfuerzo" (Naranja)
+                                                        key.includes("menos esfuerzo") ? COLORS.secondary : // Nuevo color para "Mucho menos esfuerzo" (Verde azulado)
+                                                        COLORS.red
+                                                    } 
+                                                    animationDuration={1500} 
+                                                />
                                             ))}
                                         </BarChart>
                                     </ResponsiveContainer>
@@ -175,7 +188,8 @@
                                         <p className="text-blue-800 text-sm">
                                             {selectedQuestion === "L1" && "La Trayectoria B (Solo Proyecto) muestra un 100% de acuerdo total en el entendimiento profundo."}
                                             {selectedQuestion === "L5" && "Ambas Trayectorias A y B muestran alta conciencia de responsabilidad ética (100%)."}
-                                            {!["L1", "L5"].includes(selectedQuestion) && "Analiza los datos para encontrar diferencias clave."}
+                                            {selectedQuestion === "L7" && "Los estudiantes de Proyecto reportaron 'Más Esfuerzo' (Naranja) significativamente más que los de Examen."}
+                                            {!["L1", "L5", "L7"].includes(selectedQuestion) && "Analiza los datos para encontrar diferencias clave."}
                                         </p>
                                     </div>
                                 </div>
