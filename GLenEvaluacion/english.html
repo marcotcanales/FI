@@ -84,6 +84,7 @@
             </svg>
         );
         // Icons
+        const FileText = ({ className }) => <IconWrapper className={className}><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></IconWrapper>;
         const BookOpen = ({ className }) => <IconWrapper className={className}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconWrapper>;
         const Layout = ({ className }) => <IconWrapper className={className}><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="9" y2="21"/></IconWrapper>;
         const PenTool = ({ className }) => <IconWrapper className={className}><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></IconWrapper>;
@@ -104,7 +105,7 @@
 
         const PIE_COLORS = [UNITEC_COLORS.federalBlue, UNITEC_COLORS.pacificCyan, UNITEC_COLORS.vividSky, UNITEC_COLORS.neutral];
 
-        // --- TRANSLATED DATA ---
+        // --- DATA (ENGLISH) ---
         const comparativeData = [
             { 
                 id: "L1", 
@@ -290,7 +291,7 @@
             }
         };
 
-        // --- UNITEC UI COMPONENTS ---
+        // --- UI COMPONENTS ---
 
         const NavButton = ({ active, onClick, icon: Icon, label }) => (
             <button 
@@ -338,10 +339,45 @@
         // --- MAIN APP ---
 
         const App = () => {
-            const [activeTab, setActiveTab] = useState('comparative');
+            const [activeTab, setActiveTab] = useState('summary');
             const [selectedQuestion, setSelectedQuestion] = useState(comparativeData[0].id);
 
             const renderContent = () => {
+                if (activeTab === 'summary') {
+                    return (
+                        <div className="fade-in max-w-5xl mx-auto">
+                            <SectionTitle title="Executive Summary" subtitle="Degrees of Freedom in Assessment: CGS System in Civil Engineering" />
+                            
+                            <Card className="mb-8">
+                                <div className="border-b border-slate-100 pb-4 mb-6">
+                                    <h1 className="text-2xl md:text-3xl font-extrabold text-unitec-blue mb-2 leading-tight">
+                                        Degrees of Freedom in Assessment: Fostering Deep Learning and Professional Ethics through the CGS System in Civil Engineering
+                                    </h1>
+                                    <div className="flex flex-col md:flex-row gap-4 mt-4 text-sm text-slate-500 font-medium">
+                                        <div className="flex items-center gap-2">
+                                            <span className="bg-unitec-cyan/10 text-unitec-cyan px-2 py-1 rounded">Author</span>
+                                            Marco Tulio Canales Chavez, PhD
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <span className="bg-unitec-blue/10 text-unitec-blue px-2 py-1 rounded">Institution</span>
+                                            Universidad Tecnológica Centroamericana
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div className="space-y-6 text-slate-700 leading-relaxed text-justify">
+                                    <p>
+                                        Between October and December 2025, an active assessment methodology based on Kevin Bartlett's Collective Growth System (CGS) was implemented in a third-year Civil Engineering course at Unitec, Tegucigalpa, Honduras. The study was designed by granting 12 students the freedom to choose their assessment modality, resulting in three distinct groups: 4 students opted exclusively for the traditional exam methodology (Trajectory A), 4 chose the CGS methodology via projects with defined roles, scenarios, and goals (Trajectory B), and 4 combined both methods (Trajectory C).
+                                    </p>
+                                    <p>
+                                        The analysis results showed that students developed a marked preference for the CGS methodology, reporting a high perception of learning compared to the traditional method. Data indicates that Trajectory B students achieved 100% satisfaction in critical areas such as deep understanding, ethical responsibility, and practical application. A fundamental finding was the perception of the cost-benefit ratio: participants recognized that CGS requires a high time investment, but that this yields a high return of significant professional learning. In contrast, resistance to adopting the methodology in the other trajectories was not due to the model's inefficacy, but was directly linked to available time and academic load management as the main barrier.
+                                    </p>
+                                </div>
+                            </Card>
+                        </div>
+                    );
+                }
+
                 if (activeTab === 'comparative') {
                     const currentQData = comparativeData.find(d => d.id === selectedQuestion);
                     return (
@@ -480,6 +516,7 @@
                                 {data.pieCharts.map((chart, idx) => (
                                     <Card key={idx}>
                                         <div className="flex items-center gap-2 mb-2">
+                                            {/* ICON ELIMINATED TO REDUCE VISUAL NOISE */}
                                             <h3 className="font-bold text-slate-800">{chart.title}</h3>
                                         </div>
                                         <p className="text-xs text-slate-500 mb-4 uppercase tracking-wide">{chart.question}</p>
@@ -557,6 +594,7 @@
                     {/* Main Navigation */}
                     <div className="bg-white shadow-sm border-b border-slate-200 mb-8 sticky top-20 z-40">
                         <div className="max-w-7xl mx-auto px-4 md:px-8 flex overflow-x-auto">
+                            <NavButton active={activeTab === 'summary'} onClick={() => setActiveTab('summary')} icon={FileText} label="Summary" />
                             <NavButton active={activeTab === 'comparative'} onClick={() => setActiveTab('comparative')} icon={BarChart2} label="Comparative" />
                             <NavButton active={activeTab === 'A'} onClick={() => setActiveTab('A')} label="Trajectory A" />
                             <NavButton active={activeTab === 'B'} onClick={() => setActiveTab('B')} label="Trajectory B" />
@@ -570,7 +608,7 @@
                     </main>
 
                     <footer className="max-w-7xl mx-auto px-8 mt-12 pt-8 border-t border-slate-200 text-center text-slate-400 text-xs">
-                        <p className="font-semibold text-slate-600 mb-2">Author: Marco Canales, PhD</p>
+                        <p className="font-semibold text-slate-600 mb-2">Author: Marco Tulio Canales Chavez, PhD</p>
                         <p>© 2025 Universidad Tecnológica Centroamericana. All rights reserved.</p>
                         <p className="mt-2">Exclusive use for academic purposes.</p>
                     </footer>
