@@ -52,15 +52,18 @@
         const BarChart2 = ({ className }) => <IconWrapper className={className}><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></IconWrapper>;
         const Users = ({ className }) => <IconWrapper className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></IconWrapper>;
         const AlertCircle = ({ className }) => <IconWrapper className={className}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></IconWrapper>;
+        const Lightbulb = ({ className }) => <IconWrapper className={className}><line x1="9" x2="15" y1="18" y2="18"/><line x1="10" x2="14" y1="22" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 12 2a4.65 4.65 0 0 0-4.5 9.65c.76.76 1.23 1.52 1.4 2.5a2 2 0 0 0 4.19 0Z"/></IconWrapper>;
+
 
         // --- COLORES ---
         const COLORS = {
-            primary: '#0088FE',
-            secondary: '#00C49F',
-            tertiary: '#FFBB28',
-            quaternary: '#FF8042',
-            neutral: '#9ca3af',
-            red: '#ef4444'
+            primary: '#0088FE',    // Azul
+            secondary: '#00C49F',  // Verde Azulado
+            tertiary: '#FFBB28',   // Amarillo
+            quaternary: '#FF8042', // Naranja
+            neutral: '#9ca3af',    // Gris
+            red: '#ef4444',        // Rojo
+            green: '#22c55e'       // Verde
         };
         const PIE_COLORS = [COLORS.primary, COLORS.secondary, COLORS.tertiary, COLORS.neutral];
 
@@ -70,51 +73,102 @@
                 id: "L1", 
                 question: "Entendimiento Profundo", 
                 fullQuestion: "Siento que entiendo por qué las estructuras se comportan como lo hacen, más allá de simplemente saber usar las fórmulas o el software.",
+                observation: "La evaluación con CGS logró una percepción del 100% en entendimiento profundo. La metodología mixta resultó ser la menos efectiva en este aspecto.",
                 data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 66, 'De acuerdo': 0, 'Neutro': 33 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 100, 'Neutro': 0 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] 
             },
             { 
                 id: "L2", 
                 question: "Idealización vs Matemáticas", 
                 fullQuestion: "La evaluación que realicé me ayudó a entender que el Análisis Estructural es un proceso de idealización (donde mi criterio define la geometría y las cargas) y no solo un proceso matemático exacto.",
+                observation: "La evaluación con CGS alcanzó un 100% de percepción respecto a la idealización de conceptos, mientras que la evaluación tradicional obtuvo los resultados más bajos.",
                 data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 33, 'De acuerdo': 33, 'Neutro': 33 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 50, 'De acuerdo': 50, 'Neutro': 0 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] 
             },
             { 
                 id: "L3", 
                 question: "Toma de Decisiones", 
                 fullQuestion: "Me siento capaz de tomar decisiones de diseño (como asumir una carga viva o un tipo de apoyo) incluso cuando no tengo toda la información perfecta o completa.",
+                observation: "La evaluación con CGS obtuvo la mejor percepción en capacidad de toma de decisiones de diseño. La metodología mixta fue la menos efectiva.",
                 data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 33, 'De acuerdo': 33, 'Neutro': 33 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 50, 'De acuerdo': 50, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 100, 'Neutro': 0 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] 
             },
             { 
                 id: "L4", 
                 question: "Uso Real y Seguridad", 
                 fullQuestion: "Siento que la evaluación me hizo considerar el uso real, la seguridad y las necesidades de las personas que habitarán la estructura (ej. al calcular Carga de Viento o Sismo).",
+                observation: "El 100% de los estudiantes evaluados con CGS percibieron que se tomaron en cuenta aspectos de seguridad y las necesidades de los futuros habitantes de la estructura.",
                 data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 66, 'De acuerdo': 33, 'Neutro': 0 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0, 'Neutro': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 0, 'Neutro': 100 } ], keys: ['Totalmente de acuerdo', 'De acuerdo', 'Neutro'] 
             },
             { 
                 id: "L5", 
                 question: "Responsabilidad Ética", 
                 fullQuestion: "Sentí la responsabilidad ética de que mis cálculos (o mi modelo) impactan directamente en la seguridad pública y el cumplimiento del código (CHOC).",
+                observation: "Tanto la evaluación con CGS como la tradicional obtuvieron un 100% en percepción de responsabilidad ética. El enfoque mixto fue el menos efectivo.",
                 data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 50, 'De acuerdo': 50 } ], keys: ['Totalmente de acuerdo', 'De acuerdo'] 
             },
             { 
                 id: "L6", 
                 question: "Aplicabilidad", 
                 fullQuestion: "Siento que puedo aplicar lo aprendido en esta evaluación a situaciones completamente nuevas o a otros cursos de la carrera.",
+                observation: "Ambas evaluaciones (CGS y tradicional) lograron un 100% en cuanto a la aplicabilidad de lo aprendido a nuevas situaciones.",
                 data: [ { name: 'Trayectoria A', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria B', 'Totalmente de acuerdo': 100, 'De acuerdo': 0 }, { name: 'Trayectoria C', 'Totalmente de acuerdo': 0, 'De acuerdo': 100 } ], keys: ['Totalmente de acuerdo', 'De acuerdo'] 
             },
             { 
                 id: "L7", 
                 question: "Esfuerzo Percibido", 
                 fullQuestion: "Comparado con la otra opción de evaluación disponible, siento que mi elección requirió:",
+                observation: "Los estudiantes del método CGS percibieron un esfuerzo significativamente mayor. En la evaluación tradicional, la percepción fue de un esfuerzo similar al de sus compañeros, mientras que en la mixta se percibió un esfuerzo similar o menor.",
                 data: [ { name: 'Trayectoria A', 'Esfuerzo similar': 100, 'Mucho más esfuerzo': 0, 'Mucho menos esfuerzo': 0 }, { name: 'Trayectoria B', 'Esfuerzo similar': 50, 'Mucho más esfuerzo': 50, 'Mucho menos esfuerzo': 0 }, { name: 'Trayectoria C', 'Esfuerzo similar': 50, 'Mucho más esfuerzo': 0, 'Mucho menos esfuerzo': 50 } ], keys: ['Mucho más esfuerzo', 'Esfuerzo similar', 'Mucho menos esfuerzo'] 
             },
             { 
                 id: "L8", 
                 question: "Elección Futura", 
                 fullQuestion: "Si pudieras volver a cursar la asignatura, ¿volverías a elegir el mismo método de evaluación?",
+                observation: "El 100% de los estudiantes del método CGS elegirían esta metodología nuevamente. En contraste, ninguno de los estudiantes de la evaluación tradicional mostró seguridad de volver a elegirla.",
                 data: [ { name: 'Trayectoria A', 'Mismo método': 0, 'Tal vez cambiaría': 66, 'Cambiaría': 33 }, { name: 'Trayectoria B', 'Mismo método': 100, 'Tal vez cambiaría': 0, 'Cambiaría': 0 }, { name: 'Trayectoria C', 'Mismo método': 50, 'Tal vez cambiaría': 0, 'Cambiaría': 50 } ], keys: ['Mismo método', 'Tal vez cambiaría', 'Cambiaría'] 
             }
         ];
+
+        // Reflexiones (OA1, OB1, OC1)
+        const reflectionData = {
+            A: {
+                id: "OA1",
+                label: "Trayectoria A",
+                title: "Evaluación Tradicional",
+                color: "bg-blue-100 border-blue-500",
+                textColor: "text-blue-800",
+                observation: "Las reflexiones generales de la evaluación tradicional mostraron preferencia por la metodología del segundo proyecto o mantener el formato actual. Indicaron satisfacción general con la clase.",
+                responses: [
+                    "No cambiaría nada porque el desarrollo del curso estuvo bien explicado por parte del docente y despejaba cada duda que tenían los estudiantes",
+                    "que si se da la opción de un proyecto sea como el del segundo parcial, elegir el modelo",
+                    "Creo que nada"
+                ]
+            },
+            B: {
+                id: "OB1",
+                label: "Trayectoria B",
+                title: "Evaluación CGS",
+                color: "bg-teal-100 border-teal-500",
+                textColor: "text-teal-800",
+                observation: "Las reflexiones generales del método CGS prefirieron la metodología aplicada en el segundo parcial y expresaron el deseo de tener más tiempo para consultas y discusión. Indicaron satisfacción con la clase.",
+                responses: [
+                    "Usaría el método de los Foros, del segundo parcial, había más orden en respecto a dudas o que quería en cada avance, si se usa de nuevo para los dos proyectos, habría más orden y coordinación.",
+                    "La metodología me pareció buena y con retroalimentación estuvo aún mejor. Tal vez se podría incluir más tiempo para preguntas o discusión, para reforzar el aprendizaje mientras avanzamos en el proyecto.",
+                    "La verdad que estoy muy satisfecho en cómo llevamos el curso",
+                    "Considero que fue una clase muy productiva. Logré aprender muchas cosas que me serán muy útiles en el futuro y la combinación que hicimos entre el STAAD y los calculos manuales fue excelente."
+                ]
+            },
+            C: {
+                id: "OC1",
+                label: "Trayectoria C",
+                title: "Evaluación Mixta",
+                color: "bg-purple-100 border-purple-500",
+                textColor: "text-purple-800",
+                observation: "Las reflexiones generales de la evaluación combinada pidieron más tiempo para las actividades e indicaron satisfacción con la clase.",
+                responses: [
+                    "nada, todo me pareció bien explicado a pesar que fuera una clase bien analítica y con bastantes cálculos",
+                    "Más tiempo para hacer el primer proyecto."
+                ]
+            }
+        };
 
         const trajectoryData = {
             A: {
@@ -125,6 +179,7 @@
                     { 
                         title: "PA1", 
                         question: "Siendo honesto, ¿cuál fue el factor determinante para no intentar el proyecto?",
+                        observation: "La percepción de la inversión de tiempo fue el principal disuasivo. Otros factores incluyeron la incertidumbre ante la falta de respuestas 'correctas', la presión por el rendimiento y la costumbre.",
                         data: [ { name: 'Factor Tiempo', value: 66 }, { name: 'Costumbre/Examen', value: 33 } ] 
                     } 
                 ],
@@ -132,17 +187,14 @@
                     { 
                         title: "PA2", 
                         question: "Los proyectos buscan simular la vida real de un ingeniero. ¿Sientes que al elegir el examen perdiste la oportunidad de desarrollar esas habilidades?",
+                        observation: "Los estudiantes reconocieron que el proyecto ofrecía mejores oportunidades de aprendizaje.",
                         responses: [ "Al final sentí que era mejor opción el proyecto por la toma de decisiones y si volviera a haber la oportunidad escogería el proyecto", "Si, la verdad que sentí que mis compañeros que realizaron el proyecto pudieron trabajar de manera más cercana a lo que nos espera en un ambiente laboral", "Quizás sí pero el tiempo fue un factor" ] 
                     },
                     { 
                         title: "PA3", 
                         question: "¿Sentiste que el examen evaluó tu criterio ingenieril y capacidad de modelación, o principalmente tu capacidad de cálculo numérico?",
+                        observation: "Aunque percibieron una dificultad similar, el tiempo y la retroalimentación marcaron la diferencia a favor del proyecto. Algunos consideraron que el examen no fue una forma efectiva de evaluación.",
                         responses: [ "El examen si tenía el mismo nivel de dificultad que el proyecto pero el factor tiempo... y la facilidad de obtener una mejor nota y tener retroalimentación era mejor en el proyecto", "No", "Capacidad de modelación" ] 
-                    },
-                    { 
-                        title: "OA1", 
-                        question: "Reflexión sobre cambios al curso:",
-                        responses: [ "No cambiaría nada porque el desarrollo del curso estuvo bien explicado...", "Que si se da la opción de un proyecto sea como el del segundo parcial, elegir el modelo", "Creo que nada" ] 
                     }
                 ]
             },
@@ -154,6 +206,7 @@
                     { 
                         title: "PB1", 
                         question: "Comparado con tus compañeros que estudiaron para exámenes, ¿cómo describirías tu carga de trabajo?",
+                        observation: "El 100% de los estudiantes bajo la metodología CGS percibió una inversión alta de tiempo (más trabajo, más aprendizaje), descartando opciones de inversión ineficiente o equilibrada.",
                         data: [ { name: 'Inversión Alta (Más horas, más aprendizaje)', value: 100 } ] 
                     } 
                 ],
@@ -161,17 +214,14 @@
                     { 
                         title: "PB2", 
                         question: "¿Sentiste que dejaste de actuar como 'estudiante que quiere nota' y empezaste a pensar como un 'Solucionador de Problemas Empático'?",
+                        observation: "Todos los estudiantes sintieron inmersión en sus roles profesionales, extrapolando las técnicas utilizadas a lo que esperan aplicar en la práctica real.",
                         responses: [ "Si, sentí más que todo en el primer proyecto... hasta a otros ingenieros le preguntamos a ver su opinión.", "Sí. Con los proyectos sentí que ya no estaba pensando solo en la nota, sino en resolver un problema real.", "Si ya que realmente así es como vamos a diseñar, con los planos y la computadora, no como una evaluación", "Si, fue necesario empezar a revisar de una manera mas profunda para poder detectar si habia algun error." ] 
                     },
                     { 
                         title: "PB3", 
                         question: "El proyecto utilizaba una metodología basada en roles. ¿Cómo afectó esto tu motivación comparado con un problema típico de libro de texto?",
+                        observation: "Los estudiantes expresaron mayor satisfacción y motivación gracias a la metodología de roles y problemas basados en la realidad.",
                         responses: [ "En motivación pues fue mejor... gran satisfacción cuando habían resultados viables.", "Me motivó más que un problema de libro porque se sentía real... ver la estructura en persona hizo que los planos y cálculos tuvieran sentido.", "Es una manera de ver las cosas más aplicadas.", "El hecho de que el proyecto se haya basado en una estructura que nosotros podemos ver hace que sienta mas motivación." ] 
-                    },
-                    { 
-                        title: "OB1", 
-                        question: "¿Qué cambiarías de la metodología del curso para mejorar tu aprendizaje futuro?",
-                        responses: [ "Usaría el método de los Foros, del segundo parcial... había más orden y coordinación.", "Tal vez se podría incluir más tiempo para preguntas o discusión.", "La verdad que estoy muy satisfecho en cómo llevamos el curso", "Considero que fue una clase muy productiva... la combinación entre el STAAD y los calculos manuales fue excelente." ] 
                     }
                 ]
             },
@@ -183,16 +233,19 @@
                     { 
                         title: "PC1", 
                         question: "¿Cuál generó mayor ansiedad/estrés?",
+                        observation: "Hubo una mezcla de ansiedad: algunos estudiantes sintieron mayor estrés con el proyecto y otros con el examen.",
                         data: [ { name: 'El Examen', value: 50 }, { name: 'El Proyecto', value: 50 } ] 
                     },
                     { 
                         title: "PC2", 
                         question: "¿Cuál obligó a entender realmente el comportamiento de la estructura (física) y no solo la matemática?",
+                        observation: "Todos coincidieron en que el proyecto mejoró su comprensión física de la estructura mucho más que el examen.",
                         data: [ { name: 'El Proyecto', value: 100 } ] 
                     },
                     { 
                         title: "PC3", 
                         question: "¿Cuál te hizo sentir más orgulloso de tu resultado final?",
+                        observation: "El 100% se sintió más orgulloso del resultado de su proyecto que del examen.",
                         data: [ { name: 'El Proyecto', value: 100 } ] 
                     }
                 ],
@@ -200,12 +253,8 @@
                     { 
                         title: "PC4", 
                         question: "Decidiste cambiar de método entre la primera y la segunda evaluación. ¿Qué motivó ese cambio?",
+                        observation: "El cambio de sistema se debió a la alta inversión de tiempo y a limitaciones técnicas (computadora/software) exacerbadas por la teledocencia.",
                         responses: [ "En el primero hice examen porque vi que era mucho trabajo... En el segundo hice proyecto porque ya le entendía más a la clase.", "Hice El primer proyecto pero no hice el segundo, principalmente por mi computadora." ] 
-                    },
-                    { 
-                        title: "OC1", 
-                        question: "¿Qué cambiarías de la metodología del curso para mejorar tu aprendizaje futuro?",
-                        responses: [ "Nada, todo me pareció bien explicado a pesar que fuera una clase bien analítica.", "Más tiempo para hacer el primer proyecto." ] 
                     }
                 ]
             }
@@ -224,6 +273,18 @@
             <div className="mb-6">
                 <h2 className="text-xl md:text-2xl font-bold text-gray-800">{title}</h2>
                 {subtitle && <p className="text-gray-500 mt-1">{subtitle}</p>}
+            </div>
+        );
+
+        const ObservationBox = ({ text }) => (
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg flex items-start gap-3 border border-blue-100">
+                <div className="text-blue-600 mt-1 flex-shrink-0"><AlertCircle size={20}/></div>
+                <div>
+                    <h4 className="font-semibold text-blue-900 text-sm uppercase tracking-wide">Observación Clave</h4>
+                    <p className="text-blue-800 text-sm mt-1 leading-relaxed">
+                        {text}
+                    </p>
+                </div>
             </div>
         );
 
@@ -265,11 +326,14 @@
                                                     dataKey={key} 
                                                     stackId="a" 
                                                     fill={
+                                                        // Colores Específicos para L7 (Esfuerzo)
+                                                        key.includes("más esfuerzo") ? COLORS.red :        // Rojo
+                                                        key.includes("menos esfuerzo") ? COLORS.green :    // Verde
+                                                        
+                                                        // Lógica General
                                                         key.includes("Totalmente") || key.includes("Mismo") ? COLORS.secondary : 
-                                                        key.includes("De acuerdo") || key.includes("Similar") ? COLORS.primary : 
+                                                        key.includes("De acuerdo") || key.includes("Similar") || key.includes("similar") ? COLORS.primary : 
                                                         key.includes("Neutro") || key.includes("Tal vez") ? COLORS.neutral : 
-                                                        key.includes("más esfuerzo") ? COLORS.quaternary :
-                                                        key.includes("menos esfuerzo") ? COLORS.secondary :
                                                         COLORS.red
                                                     } 
                                                     animationDuration={1500} 
@@ -281,20 +345,53 @@
                                 <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg">
                                     <p className="text-gray-700 text-sm font-medium text-center italic">"{currentQData.fullQuestion}"</p>
                                 </div>
-                                <div className="mt-6 p-4 bg-blue-50 rounded-lg flex items-start gap-3">
-                                    <div className="text-blue-600 mt-1 flex-shrink-0"><AlertCircle size={20}/></div>
-                                    <div>
-                                        <h4 className="font-semibold text-blue-900">Observación Clave</h4>
-                                        <p className="text-blue-800 text-sm">
-                                            {selectedQuestion === "L1" && "La Trayectoria B (Solo Proyecto) muestra un 100% de acuerdo total en el entendimiento profundo."}
-                                            {selectedQuestion === "L5" && "Ambas Trayectorias A y B muestran alta conciencia de responsabilidad ética (100%)."}
-                                            {selectedQuestion === "L7" && "Los estudiantes de Proyecto reportaron 'Más Esfuerzo' (Naranja) significativamente más que los de Examen."}
-                                            {!["L1", "L5", "L7"].includes(selectedQuestion) && "Analiza los datos para encontrar diferencias clave."}
-                                        </p>
-                                    </div>
-                                </div>
+                                
+                                {currentQData.observation && (
+                                    <ObservationBox text={currentQData.observation} />
+                                )}
                             </div>
                         </div>
+                    );
+                } else if (activeTab === 'reflection') {
+                    return (
+                         <div className="fade-in">
+                            <SectionHeader 
+                                title="Reflexión sobre la Metodología" 
+                                subtitle="¿Qué cambiarías de la metodología del curso para mejorar tu aprendizaje futuro?" 
+                            />
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                {Object.values(reflectionData).map((item) => (
+                                    <div key={item.id} className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden flex flex-col">
+                                        <div className={`p-4 border-b-2 ${item.color.replace('bg-', 'border-')}`}>
+                                            <div className="flex items-center justify-between mb-1">
+                                                <span className={`text-xs font-bold px-2 py-1 rounded-full uppercase ${item.color} ${item.textColor}`}>
+                                                    {item.label}
+                                                </span>
+                                                <span className="text-gray-400 text-xs font-mono">{item.id}</span>
+                                            </div>
+                                            <h3 className="font-bold text-gray-800 text-lg">{item.title}</h3>
+                                        </div>
+                                        <div className="p-4 bg-gray-50 flex-grow space-y-3">
+                                            {item.responses.map((resp, i) => (
+                                                <div key={i} className="bg-white p-3 rounded shadow-sm border border-gray-100 text-sm text-gray-700 italic relative">
+                                                    <span className="absolute top-2 left-2 text-gray-200"><Quote size={12}/></span>
+                                                    <p className="pl-4 relative z-10">{resp}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                         <div className="p-4 bg-white border-t border-gray-100">
+                                            <p className="text-xs text-blue-800 font-semibold uppercase mb-1 flex items-center gap-1">
+                                                <AlertCircle size={12}/> Observación:
+                                            </p>
+                                            <p className="text-xs text-gray-600 leading-relaxed">
+                                                {item.observation}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                         </div>
                     );
                 } else {
                     const data = trajectoryData[activeTab];
@@ -307,10 +404,10 @@
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div className="space-y-6">
                                     {data.pieCharts.map((chart, idx) => (
-                                        <div key={idx} className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                                        <div key={idx} className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 flex flex-col h-full">
                                             <h3 className="font-semibold text-gray-800 flex items-center gap-2"><div className="text-indigo-500"><BarChart2 size={18}/></div>{chart.title}</h3>
-                                            <p className="text-sm text-gray-500 mt-1 mb-4 italic">{chart.question}</p>
-                                            <div className="h-[250px]">
+                                            <p className="text-sm text-gray-500 mt-1 mb-4 italic flex-grow">{chart.question}</p>
+                                            <div className="h-[250px] mb-4">
                                                 <ResponsiveContainer width="100%" height="100%">
                                                     <PieChart>
                                                         <Pie data={chart.data} cx="50%" cy="50%" labelLine={false} label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`} outerRadius={80} fill="#8884d8" dataKey="value">
@@ -320,6 +417,7 @@
                                                     </PieChart>
                                                 </ResponsiveContainer>
                                             </div>
+                                            {chart.observation && <ObservationBox text={chart.observation} />}
                                         </div>
                                     ))}
                                 </div>
@@ -328,7 +426,8 @@
                                         <div key={idx} className="bg-slate-50 p-6 rounded-xl border border-slate-200">
                                             <h3 className="font-bold text-slate-800 text-lg">{q.title}</h3>
                                             <p className="text-sm text-slate-600 mt-1 mb-4 italic">{q.question}</p>
-                                            <div className="space-y-2">{q.responses.map((resp, i) => (<QuoteCard key={i} text={resp} />))}</div>
+                                            <div className="space-y-2 mb-4">{q.responses.map((resp, i) => (<QuoteCard key={i} text={resp} />))}</div>
+                                            {q.observation && <ObservationBox text={q.observation} />}
                                         </div>
                                     ))}
                                 </div>
@@ -353,6 +452,7 @@
                             <button onClick={() => setActiveTab('A')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'A' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>Trayectoria A</button>
                             <button onClick={() => setActiveTab('B')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'B' ? 'bg-teal-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>Trayectoria B</button>
                             <button onClick={() => setActiveTab('C')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'C' ? 'bg-purple-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>Trayectoria C</button>
+                            <button onClick={() => setActiveTab('reflection')} className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'reflection' ? 'bg-amber-500 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}><Lightbulb size={18} /> Reflexión</button>
                         </div>
                         {renderContent()}
                     </main>
