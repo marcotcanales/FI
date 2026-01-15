@@ -1,865 +1,920 @@
-import React, { useState } from 'react';
-import { BookOpen, Box, Brain, Cpu, Database, Layers, Layout, Users, Zap, CheckCircle, Search, Menu, X, ArrowRight, Clock, FileText, HelpCircle } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L2L: Aprender a Aprender</title>
+    
+    <!-- Tailwind CSS (Estilos) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM (Librería UI) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel (Para entender JSX en el navegador) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-// --- BASE DE CONOCIMIENTO (DATA SOURCE) ---
-// Expandida con detalles completos de los PDFs UNITEC & CONTINUUM 5
-const learningData = {
-  metadata: {
-    title: "Learning to Learn / Aprender a Aprender",
-    source: "Continuum 5 & L2L Toolkits (Full Content)",
-    version: "2.0 - Detailed",
-    language: "es",
-    description: "Marco integral para el desarrollo de la agencia del aprendizaje, incluyendo continuo detallado y guías paso a paso de las herramientas."
-  },
-  continuum: [
-    {
-      stage: "Transaccional",
-      stage_en: "Transacting",
-      mindset: "El aprendizaje como tarea a completar.",
-      description: "Los aprendices se involucran en el aprendizaje como una tarea para terminar en lugar de un proceso para entender. Dependencia total de la dirección externa.",
-      characteristics: [
-        "Completa el trabajo para cumplir requisitos sin entender el porqué.",
-        "Depende de la dirección del maestro para saber qué hacer y cómo hacerlo.",
-        "Utiliza las mismas estrategias familiares, incluso cuando son ineficaces.",
-        "Evita desafíos que se sienten difíciles o inciertos.",
-        "Responde a la retroalimentación pasivamente en lugar de aplicarla.",
-        "Monitorea el éxito a través de calificaciones, puntajes o finalización en lugar del crecimiento."
-      ]
-    },
-    {
-      stage: "Transicional",
-      stage_en: "Transitioning",
-      mindset: "Experimentación incipiente con estrategias.",
-      description: "Los aprendices comienzan a experimentar con cómo aprenden y consideran por qué sus estrategias importan.",
-      characteristics: [
-        "Prueba diferentes estrategias de aprendizaje cuando se le pide o apoya.",
-        "Hace preguntas sobre instrucciones, claridad y expectativas.",
-        "Comienza a reflexionar sobre lo que está funcionando y lo que no.",
-        "Muestra voluntad de persistir a través de dificultades leves.",
-        "Usa la retroalimentación para hacer pequeñas mejoras.",
-        "Reconoce que el esfuerzo influye en los resultados del aprendizaje."
-      ]
-    },
-    {
-      stage: "Transformacional",
-      stage_en: "Transforming",
-      mindset: "Apropiación intencional y estratégica.",
-      description: "Los aprendices toman una propiedad creciente de sus procesos de aprendizaje, adaptándose intencional y estratégicamente.",
-      characteristics: [
-        "Procesa información intencionalmente: Usa guías para organizar y resumir, pensando con la información.",
-        "Co-crea y usa rúbricas: Diseña criterios de éxito y los usa para evaluar su propio trabajo.",
-        "Reflexiona sobre el crecimiento en el tiempo: Autoevalúa su desarrollo en conceptos y carácter.",
-        "Da y recibe Feedback STAR: Ofrece retroalimentación Específica, Oportuna, Accionable y Respetuosa.",
-        "Planifica el trabajo colaborativo: Usa herramientas para roles, metas y rendición de cuentas."
-      ]
-    },
-    {
-      stage: "Trascendente",
-      stage_en: "Transcending",
-      mindset: "Capacidad humana plena y sin techos.",
-      description: "Los aprendices encarnan plenamente el 'Aprender a Aprender' como una capacidad humana de por vida, autodirigida y empoderadora.",
-      characteristics: [
-        "Emergencia plena de la capacidad humana del aprendiz.",
-        "El aprendizaje no tiene límites ni techos visibles.",
-        "Impulsado por la curiosidad radical: '¿QUÉ PASARÍA SI...?'",
-        "Autonomía total en la búsqueda y creación de conocimiento."
-      ]
-    }
-  ],
-  strands: [
-    {
-      id: 1,
-      name: "Metacognición y Autoconciencia",
-      icon: "Brain",
-      description: "Notar y nombrar hábitos de pensamiento y emociones. Entender cómo pensamos y nos gestionamos.",
-      tools: [
-        {
-          name: "El Espejo de Pensamiento (The Thinking Mirror)",
-          question: "¿Cómo puede el notar mi pensamiento ayudarme a aprender mejor?",
-          purpose: "Ayudar a los aprendices a reconocer y nombrar patrones de pensamiento durante el aprendizaje.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "El maestro modela un breve pensamiento en voz alta mientras resuelve una tarea simple, nombrando momentos como 'No estoy seguro... releeré'." },
-            { phase: "Construir (10 min)", action: "La clase construye una lista compartida de estados de pensamiento comunes (ej. atascado, inseguro, enfocado, curioso)." },
-            { phase: "Aplicar (20 min)", action: "Los aprendices completan una tarea corta y pausan 3 veces para registrar: 'Lo que noté sobre mi pensamiento...'." },
-            { phase: "Reflexionar (5 min)", action: "Compartir un hallazgo: 'Una cosa que noté sobre mi pensamiento hoy fue...'." }
-          ],
-          resources: "Prompt de tarea, hoja de reflexión, inicios de oraciones."
-        },
-        {
-          name: "Reporte del Clima de Aprendizaje",
-          question: "¿Qué cambia cómo me siento y aprendo durante el día?",
-          purpose: "Construir conciencia de los estados emocionales y su impacto en el aprendizaje.",
-          time: "35 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Lluvia de ideas: '¿En qué se parece el aprendizaje al clima?'." },
-            { phase: "Construir (10 min)", action: "Introducir 'íconos del clima' emocional (soleado, nublado, con niebla, tormentoso)." },
-            { phase: "Aplicar (15 min)", action: "Los aprendices hacen un check-in al inicio y al final de una tarea usando los íconos." },
-            { phase: "Reflexionar (5 min)", action: "¿Qué ayudó a que mi clima mejorara?" }
-          ],
-          resources: "Tabla de íconos de clima, tarjetas de seguimiento, pizarras."
-        },
-        {
-          name: "Tarjeta de Cambio de Estrategia",
-          question: "¿Qué puedo hacer cuando la forma en que estoy aprendiendo no funciona?",
-          purpose: "Ayudar a los aprendices a reconocer cuándo cambiar de estrategia independientemente.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Discutir momentos en los que 'esforzarse más' no ayudó." },
-            { phase: "Construir (15 min)", action: "Crear una lista de clase de 6-8 'opciones de cambio' (ej. releer, bosquejar, preguntar, dividir la tarea)." },
-            { phase: "Aplicar (20 min)", action: "Usar una 'Tarjeta de Cambio' durante una tarea; si se atascan, marcan qué cambio eligieron." },
-            { phase: "Reflexionar (5 min)", action: "Pase de salida: '¿Qué cambio me ayudó hoy y por qué?'." }
-          ],
-          resources: "Plantilla de tarjeta de cambio, materiales de tarea."
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: "Estrategias y Técnicas de Aprendizaje",
-      icon: "Layers",
-      description: "Seleccionar, aplicar y adaptar estrategias con propósito para apoyar diferentes tareas.",
-      tools: [
-        {
-          name: "El Menú de Estrategias",
-          question: "¿Cómo puede elegir la estrategia correcta ayudarme a aprender mejor?",
-          purpose: "Ayudar a los aprendices a seleccionar estrategias intencionalmente basadas en la tarea y el propósito.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Mostrar dos ejemplos (resolver un puzzle vs resumir texto). Preguntar: '¿Usaríamos la misma estrategia?'." },
-            { phase: "Construir (10 min)", action: "Construir un 'menú de estrategias' de la clase con 6-10 opciones (resaltar, sketchnote, dividir, enseñar a otro)." },
-            { phase: "Aplicar (20 min)", action: "Los aprendices eligen una estrategia a propósito durante una tarea y registran por qué la eligieron." },
-            { phase: "Reflexionar (10 min)", action: "Compartir: '¿Qué estrategia ayudó más y cómo lo sabes?'." }
-          ],
-          resources: "Póster de menú de estrategias, notas adhesivas."
-        },
-        {
-          name: "Círculo de 'Teach-Back' (Enseñar de vuelta)",
-          question: "¿Cómo nos ayuda explicar algo a aprenderlo?",
-          purpose: "Fortalecer la comprensión mediante el uso de la recuperación y la explicación entre pares.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Charla rápida: '¿Cuándo has entendido algo mejor después de explicarlo?'." },
-            { phase: "Construir (10 min)", action: "El maestro modela un breve teach-back usando raíces de oraciones (ej. 'Primero..., luego..., esto importa porque...')." },
-            { phase: "Aplicar (20 min)", action: "En grupos pequeños, los aprendices se turnan para explicar un concepto a sus compañeros sin mirar notas." },
-            { phase: "Reflexionar (5 min)", action: "'Una cosa que expliqué bien / una cosa que quiero revisar...'." }
-          ],
-          resources: "Raíces de oraciones, mini pizarras, temporizador."
-        },
-        {
-          name: "Sprint de Recuperación",
-          question: "¿Cómo puede el recordar sin mirar ayudar a fortalecer mi aprendizaje?",
-          purpose: "Introducir la práctica de recuperación de bajo riesgo para profundizar y retener el aprendizaje.",
-          time: "35 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Preguntar: '¿Qué pasa cuando solo repasamos releyendo?'." },
-            { phase: "Construir (10 min)", action: "El maestro modela la recuperación: cierra notas y lista lo que recuerda de ayer." },
-            { phase: "Aplicar (15 min)", action: "Los aprendices escriben o dibujan todo lo que recuerdan sobre un tema reciente sin notas, luego verifican brechas." },
-            { phase: "Reflexionar (5 min)", action: "'¿Qué recordé fácilmente? ¿Qué practicaré de nuevo?'." }
-          ],
-          resources: "Papel o pizarras, bolígrafos."
-        }
-      ]
-    },
-    {
-      id: 3,
-      name: "Pensamiento Crítico y Resolución de Problemas",
-      icon: "Zap",
-      description: "Analizar información, cuestionar suposiciones y usar evidencia para conclusiones razonadas.",
-      tools: [
-        {
-          name: "La Escalera de Razonamiento",
-          question: "¿Cómo puedo construir explicaciones más fuertes para mi pensamiento?",
-          purpose: "Ayudar a los aprendices a pasar de opiniones a razonamientos basados en evidencia.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Presentar dos respuestas: una solo opinión, una con evidencia. Preguntar cuál es más fuerte." },
-            { phase: "Construir (10 min)", action: "Introducir la Escalera: Yo pienso... porque... la evidencia muestra... entonces la mejor conclusión es..." },
-            { phase: "Aplicar (20 min)", action: "Los aprendices usan la escalera para responder una pregunta real (ej. '¿Qué diseño funciona mejor?')." },
-            { phase: "Reflexionar (10 min)", action: "'¿Cómo cambió mi pensamiento al añadir evidencia?'." }
-          ],
-          resources: "Raíces de oraciones de escalera, tarjetas de preguntas."
-        },
-        {
-          name: "La Caza de Suposiciones",
-          question: "¿Cómo puede el cuestionar suposiciones mejorar nuestro pensamiento?",
-          purpose: "Ayudar a identificar y desafiar suposiciones ocultas antes de formar conclusiones.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Compartir una suposición cotidiana (ej. 'A todos les gusta el trabajo grupal'). Preguntar: '¿Es siempre verdad?'." },
-            { phase: "Construir (10 min)", action: "Enseñar a detectar suposiciones: 'Estamos asumiendo que...' / '¿Hay otra posibilidad?'." },
-            { phase: "Aplicar (20 min)", action: "En parejas, analizar un escenario y listar suposiciones + alternativas." },
-            { phase: "Reflexionar (5 min)", action: "'Una suposición que desafiamos hoy fue...'." }
-          ],
-          resources: "Tarjetas de escenarios, prompts de suposición."
-        },
-        {
-          name: "Desafío de Pensamiento Flexible",
-          question: "¿Cómo puede ver un problema de diferentes maneras ayudarnos a resolverlo?",
-          purpose: "Fortalecer la flexibilidad cognitiva generando múltiples soluciones.",
-          time: "35 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Maestro modela dos soluciones diferentes a un problema simple." },
-            { phase: "Construir (10 min)", action: "Introducir la regla: 'Al menos tres soluciones posibles antes de elegir una'." },
-            { phase: "Aplicar (15 min)", action: "Grupos reciben un desafío y generan 3+ soluciones." },
-            { phase: "Reflexionar (5 min)", action: "'¿Qué solución parece más fuerte y por qué?'." }
-          ],
-          resources: "Tarjetas de desafío, papelógrafo."
-        }
-      ]
-    },
-    {
-      id: 4,
-      name: "Autorregulación y Planificación Reflexiva",
-      icon: "CheckCircle",
-      description: "Planificar, monitorear y ajustar procesos usando metas, feedback y reflexión.",
-      tools: [
-        {
-          name: "Ciclo Meta-Plan-Hacer-Revisar",
-          question: "¿Cómo puede planificar y revisar mi progreso ayudarme a aprender mejor?",
-          purpose: "Ayudar a establecer metas significativas, tomar acción y reflexionar sobre resultados.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Compartir escenarios: trabajar sin plan vs con plan simple." },
-            { phase: "Construir (10 min)", action: "Enseñar el ciclo: Meta (¿Qué quiero lograr?), Plan (¿Cómo?), Hacer (Intentarlo), Revisar (¿Qué funcionó?)." },
-            { phase: "Aplicar (20 min)", action: "Usar el ciclo durante una tarea actual." },
-            { phase: "Reflexionar (10 min)", action: "'¿Qué cambié después de revisar mi progreso?'." }
-          ],
-          resources: "Plantilla del ciclo, materiales de tarea."
-        },
-        {
-          name: "Estrategia Verificar-Cambiar (Check-In-Change)",
-          question: "¿Cómo sé cuándo ajustar mi enfoque mientras estoy aprendiendo?",
-          purpose: "Ayudar a monitorear el aprendizaje y hacer ajustes oportunos en lugar de esperar al final.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Preguntar: '¿Qué pasa cuando nos damos cuenta demasiado tarde de que algo no funciona?'." },
-            { phase: "Construir (10 min)", action: "Introducir dos prompts: 'Check-In: ¿Cómo va mi plan?' y 'Cambio: ¿Qué puedo ajustar ahora?'." },
-            { phase: "Aplicar (20 min)", action: "Pausar a mitad de tarea para completar un mini-reflexión Check-In-Change." },
-            { phase: "Reflexionar (5 min)", action: "'¿Qué cambié hoy que hizo una diferencia?'." }
-          ],
-          resources: "Tarjetas de mini reflexión, temporizadores."
-        },
-        {
-          name: "Co-creación de Criterios de Éxito",
-          question: "¿Cómo puede saber cómo se ve el éxito ayudarme a mejorar mi trabajo?",
-          purpose: "Ayudar a entender expectativas, monitorear calidad y tomar propiedad de la mejora.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Mostrar dos ejemplos de trabajo (fuerte y en desarrollo). Preguntar qué hace al fuerte mejor." },
-            { phase: "Construir (15 min)", action: "Como clase, co-crear 4-6 criterios de éxito en lenguaje del alumno." },
-            { phase: "Aplicar (20 min)", action: "Usar criterios para autoevaluar o evaluar pares y elegir un paso de mejora." },
-            { phase: "Reflexionar (5 min)", action: "'¿Qué criterio me ayudó a mejorar y cómo?'." }
-          ],
-          resources: "Muestras de trabajo, papelógrafo, plantilla de rúbrica."
-        }
-      ]
-    },
-    {
-      id: 5,
-      name: "Mentalidad de Crecimiento y Resiliencia",
-      icon: "TrendingUp",
-      description: "Responder al desafío con persistencia, viendo errores y feedback como parte del aprendizaje.",
-      tools: [
-        {
-          name: "Mapa de Lucha Productiva",
-          question: "¿Cómo puede la lucha ayudar a crecer a mi cerebro?",
-          purpose: "Reconocer que el desafío es una parte normal y necesaria del aprendizaje.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Historia del maestro sobre aprender algo difícil y la persistencia." },
-            { phase: "Construir (10 min)", action: "Introducir 4 etapas: Inicio (nuevo), Lucha (difícil), Estrategia (qué probaré), Fortaleza (mejoré)." },
-            { phase: "Aplicar (20 min)", action: "Completar tarea desafiante y marcar en qué etapa están en 3 puntos." },
-            { phase: "Reflexionar (5 min)", action: "'Una estrategia que me ayudó a seguir fue...'." }
-          ],
-          resources: "Plantilla de mapa, lápices."
-        },
-        {
-          name: "Transformación de Errores (Mistake Makeover)",
-          question: "¿Cómo pueden los errores ayudarme a aprender en lugar de detenerme?",
-          purpose: "Reencuadrar errores como información y construir resiliencia mediante análisis.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Mostrar respuestas a un error: rendirse vs. usarlo para mejorar." },
-            { phase: "Construir (10 min)", action: "Prompts: ¿Qué pasó? ¿Por qué pasó? ¿Qué puedo aprender? ¿Qué intentaré después?" },
-            { phase: "Aplicar (25 min)", action: "Elegir un error reciente y completar la transformación." },
-            { phase: "Reflexionar (5 min)", action: "'Mi insight más útil de este error fue...'." }
-          ],
-          resources: "Plantilla de transformación, muestras de trabajo."
-        },
-        {
-          name: "Plan de Avance con Feedback",
-          question: "¿Cómo puede el feedback ayudarme a crecer en lugar de sentirme desanimado?",
-          purpose: "Construir resiliencia convirtiendo la retroalimentación en pasos siguientes accionables.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Preguntar cómo se siente recibir feedback y qué puede cambiar ese sentimiento." },
-            { phase: "Construir (10 min)", action: "Enseñar 3 pasos: Escuchar (¿qué dice?), Elevar (¿qué fortaleza destaca?), Avanzar (¿cuál es mi paso?)." },
-            { phase: "Aplicar (20 min)", action: "Elegir UNA pieza de feedback y crear un plan de avance simple." },
-            { phase: "Reflexionar (5 min)", action: "'¿Cómo cambió mi trabajo o confianza al usar el feedback?'." }
-          ],
-          resources: "Muestras de feedback, plantilla de plan."
-        }
-      ]
-    },
-    {
-      id: 6,
-      name: "Alfabetización Informacional",
-      icon: "Search",
-      description: "Localizar, evaluar y sintetizar información con precisión, responsabilidad y discernimiento.",
-      tools: [
-        {
-          name: "Semáforo de Fuentes",
-          question: "¿Cómo sé si la información es confiable?",
-          purpose: "Evaluar fuentes rápida y responsablemente antes de usarlas.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Mostrar dos fuentes contrastantes (sitio ciencia vs blog al azar). ¿Confiamos igual?" },
-            { phase: "Construir (10 min)", action: "Semáforo: Amarillo (revisar más, autor poco claro), Verde (confiable, experto), Rojo (no confiable, sin fuente)." },
-            { phase: "Aplicar (20 min)", action: "En parejas, evaluar 3 fuentes de muestra y etiquetarlas con razones." },
-            { phase: "Reflexionar (5 min)", action: "'Una pista que me ayudó a juzgar una fuente hoy fue...'." }
-          ],
-          resources: "Textos de muestra, resaltadores, gráfico de semáforo."
-        },
-        {
-          name: "Prueba de Tri-Verificación",
-          question: "¿Por qué es importante verificar información en más de un lugar?",
-          purpose: "Construir hábitos de verificación cruzada.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Preguntar: '¿Qué pasa si creemos lo primero que escuchamos?'." },
-            { phase: "Construir (10 min)", action: "Regla Tri-Verificar: Encontrar 3 fuentes, Comparar hechos clave, Notar similitudes/diferencias." },
-            { phase: "Aplicar (25 min)", action: "Investigar una pregunta simple usando tres fuentes y registrar coincidencias." },
-            { phase: "Reflexionar (5 min)", action: "'¿Qué cambió cuando verifiqué más de una fuente?'." }
-          ],
-          resources: "Enlaces seguros o textos impresos."
-        },
-        {
-          name: "Clasificación Hecho vs. Opinión",
-          question: "¿Cómo puedo diferenciar entre un hecho y una opinión?",
-          purpose: "Separar información verificable de puntos de vista personales.",
-          time: "35 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Compartir dos declaraciones (factual vs opinión). ¿Diferencia?" },
-            { phase: "Construir (10 min)", action: "Criterios: Hecho (se puede probar/chequear) vs Opinión (lo que alguien piensa/siente)." },
-            { phase: "Aplicar (15 min)", action: "Clasificar 10-12 declaraciones de un artículo en Hecho/Opinión y justificar una." },
-            { phase: "Reflexionar (5 min)", action: "'¿Por qué importa esto al aprender o compartir info?'." }
-          ],
-          resources: "Tarjetas de declaraciones, tapetes de clasificación."
-        }
-      ]
-    },
-    {
-      id: 7,
-      name: "Colaboración y Aprendizaje entre Pares",
-      icon: "Users",
-      description: "Construir entendimiento a través del diálogo, escucha activa y resolución compartida.",
-      tools: [
-        {
-          name: "Relevo de Escucha",
-          question: "¿Cómo puedo mostrarle a alguien que realmente lo escuché?",
-          purpose: "Fortalecer la escucha activa y la creación de significado colaborativo.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Modelar escucha 'buena' vs 'pobre'. ¿Cuál se sintió mejor?" },
-            { phase: "Construir (10 min)", action: "Secuencia de relevo: Escuchar plenamente -> Añadir pregunta/idea -> Parafrasear ('Entonces dices que...')." },
-            { phase: "Aplicar (20 min)", action: "En parejas rotativas, discutir un prompt compartido usando el relevo." },
-            { phase: "Reflexionar (5 min)", action: "'Una forma en que mostré escucha hoy fue...'." }
-          ],
-          resources: "Tarjetas de prompt, temporizador."
-        },
-        {
-          name: "Cadena de Preguntas Circular",
-          question: "¿Cómo ayudan las grandes preguntas a que los grupos aprendan mejor?",
-          purpose: "Construir diálogo basado en indagación y profundizar pensamiento compartido.",
-          time: "35 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Comparar pregunta cerrada vs abierta." },
-            { phase: "Construir (10 min)", action: "Generar 6-8 preguntas abiertas con iniciadores ('¿Qué pasaría si...?', '¿Por qué creen...?')." },
-            { phase: "Aplicar (15 min)", action: "Sentarse en círculo y construir cadena: cada respuesta debe incluir una nueva pregunta." },
-            { phase: "Reflexionar (5 min)", action: "'Una pregunta que movió nuestro pensamiento hacia adelante fue...'." }
-          ],
-          resources: "Iniciadores de preguntas, papelógrafo."
-        },
-        {
-          name: "Intercambio de Feedback STAR",
-          question: "¿Cómo puede el feedback ayudarnos a mejorar nuestras ideas y trabajo juntos?",
-          purpose: "Enseñar a dar y aplicar feedback que apoye el crecimiento.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Discutir ejemplos de feedback útil vs inútil." },
-            { phase: "Construir (10 min)", action: "Enseñar STAR: Específico, Oportuno (Timely), Accionable, Respetuoso. Modelar: 'Lo que funcionó... Aún mejor si...'." },
-            { phase: "Aplicar (25 min)", action: "Pares intercambian STAR feedback sobre trabajo en progreso. Seleccionar un paso de acción." },
-            { phase: "Reflexionar (5 min)", action: "'¿Qué cambio haré basado en el feedback?'." }
-          ],
-          resources: "Iniciadores STAR, muestras de trabajo."
-        },
-        {
-          name: "Mapa de Ruta del Equipo",
-          question: "¿Cómo puede planificar juntos ayudarnos a completar un proyecto con éxito?",
-          purpose: "Ayudar a grupos a clarificar roles, responsabilidades y puntos de chequeo.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Preguntar qué pasa cuando todos creen que otro está haciendo el trabajo." },
-            { phase: "Construir (10 min)", action: "Introducir Mapa: Meta, Roles (quién hace qué), Hitos (para cuándo), Check-ins (cómo monitoreamos)." },
-            { phase: "Aplicar (25 min)", action: "Grupos completan un Mapa para una tarea próxima y comienzan el primer paso." },
-            { phase: "Reflexionar (5 min)", action: "'Una forma en que nuestro plan nos ayudó hoy fue...'." }
-          ],
-          resources: "Plantilla de Mapa, descripción de tarea."
-        }
-      ]
-    },
-    {
-      id: 8,
-      name: "Alfabetización Digital y Tecnologías",
-      icon: "Cpu",
-      description: "Usar herramientas digitales de forma segura y estratégica para acceder, crear y gestionar aprendizaje.",
-      tools: [
-        {
-          name: "El Selector Tecnológico con Propósito",
-          question: "¿Cómo puede elegir la herramienta digital correcta ayudarme a aprender mejor?",
-          purpose: "Ayudar a seleccionar tecnología intencionalmente en lugar de por hábito.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Mostrar ejemplos: dispositivo para copiar texto vs organizar ideas visualmente." },
-            { phase: "Construir (10 min)", action: "Preguntas del Selector: ¿Qué intento hacer? ¿Qué herramienta ayuda mejor? ¿Cómo sabré si ayudó?" },
-            { phase: "Aplicar (20 min)", action: "Elegir herramienta para tarea actual y justificar elección." },
-            { phase: "Reflexionar (5 min)", action: "'¿Cómo mejoró mi aprendizaje el uso de esta herramienta?'." }
-          ],
-          resources: "Acceso a dispositivos, tarjeta de prompt."
-        },
-        {
-          name: "Chequeo de Huella Digital",
-          question: "¿Cómo mis acciones en línea dan forma a cómo otros me ven?",
-          purpose: "Entender y gestionar la presencia digital responsablemente.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Preguntar: 'Si alguien solo te conociera por tu actividad online, ¿qué pensaría?'." },
-            { phase: "Construir (15 min)", action: "Enseñar 3 ideas: Visible, Permanente, Impactante." },
-            { phase: "Aplicar (20 min)", action: "Revisar perfiles ficticios e identificar elementos Seguros, Neutros y Riesgosos." },
-            { phase: "Reflexionar (5 min)", action: "'Una elección que haré diferente en línea es...'." }
-          ],
-          resources: "Perfiles ficticios impresos, tabla de clasificación."
-        },
-        {
-          name: "Configuración Organizar-y-Optimizar",
-          question: "¿Cómo puede la organización digital ayudarme a estar enfocado?",
-          purpose: "Construir hábitos que apoyen la atención y eficiencia.",
-          time: "35 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Discusión: '¿Qué pasa cuando no encontramos archivos o links?'." },
-            { phase: "Construir (10 min)", action: "Configuración en 3 pasos: Nombrarlo claro, Guardarlo con propósito, Limpiar distracciones." },
-            { phase: "Aplicar (15 min)", action: "Crear o limpiar un espacio digital (carpeta, bookmarks)." },
-            { phase: "Reflexionar (5 min)", action: "'¿Cómo cambió mi aprendizaje organizar mi espacio digital?'." }
-          ],
-          resources: "Dispositivos, guía de nomenclatura."
-        }
-      ]
-    },
-    {
-      id: 9,
-      name: "Creatividad e Innovación",
-      icon: "Layout",
-      description: "Generar ideas, explorar posibilidades y tomar riesgos reflexivos para crear resultados originales.",
-      tools: [
-        {
-          name: "Generador '¿Qué pasaría si...?'",
-          question: "¿Cómo puede hacer nuevos tipos de preguntas ayudarnos a crear nuevas ideas?",
-          purpose: "Ayudar a ir más allá del pensamiento familiar generando posibilidades imaginativas.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Mostrar objeto simple (clip). '¿Para qué más sirve?'." },
-            { phase: "Construir (10 min)", action: "Iniciadores 'What If': ¿Si cambiamos el tamaño? ¿Si no hubiera reglas? ¿Si funcionara en otro lugar?" },
-            { phase: "Aplicar (20 min)", action: "En parejas, aplicar preguntas a un tema actual para generar 5-10 posibilidades." },
-            { phase: "Reflexionar (5 min)", action: "'¿Qué idea me sorprendió y por qué?'." }
-          ],
-          resources: "Objetos cotidianos, iniciadores de oraciones."
-        },
-        {
-          name: "Ciclo Divergente-Convergente",
-          question: "¿Cómo podemos tener muchas ideas y luego elegir las mejores?",
-          purpose: "Enseñar el proceso creativo de expandir y estrechar ideas intencionalmente.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Comparar lluvia de ideas de una sola idea vs generar muchas." },
-            { phase: "Construir (10 min)", action: "Enseñar ciclo: Divergente (generar sin juzgar) -> Convergente (seleccionar con criterios)." },
-            { phase: "Aplicar (25 min)", action: "Grupos hacen lluvia de ideas para un desafío de clase, luego eligen top idea con criterios." },
-            { phase: "Reflexionar (5 min)", action: "'¿Cómo nos ayudó usar criterios a tomar una mejor decisión?'." }
-          ],
-          resources: "Notas adhesivas, marcadores."
-        },
-        {
-          name: "Bucle Prototipar y Probar",
-          question: "¿Cómo puede probar algo ayudarnos a mejorar nuestras ideas?",
-          purpose: "Ayudar a tomar riesgos creativos mediante experimentación iterativa.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Compartir ejemplo de invención que cambió muchas veces." },
-            { phase: "Construir (10 min)", action: "Pasos del Bucle: Crear (modelo rápido) -> Probar (con usuarios) -> Mejorar (cambiar una cosa)." },
-            { phase: "Aplicar (20 min)", action: "Construir prototipo simple y probar con un par usando una pregunta de feedback." },
-            { phase: "Reflexionar (5 min)", action: "'Una mejora que hice basada en la prueba fue...'." }
-          ],
-          resources: "Papel, materiales de construcción simple."
-        }
-      ]
-    },
-    {
-      id: 10,
-      name: "Salud, Bienestar y Aprendizaje Cerebro-Cuerpo",
-      icon: "Activity",
-      description: "Tomar decisiones informadas sobre bienestar físico y emocional para apoyar foco y memoria.",
-      tools: [
-        {
-          name: "Chequeo Cerebro-Cuerpo",
-          question: "¿Cómo afecta cómo me siento a qué tan bien aprendo?",
-          purpose: "Notar conexión entre estado físico/emocional y preparación para aprender.",
-          time: "35 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Preguntar: '¿Qué pasa al intentar aprender cansado o hambriento?'." },
-            { phase: "Construir (10 min)", action: "Prompts: Cuerpo (¿cómo se siente?), Cerebro (¿qué tan enfocado?), Balance (¿qué necesito?)." },
-            { phase: "Aplicar (15 min)", action: "Hacer chequeo antes de tarea y elegir una pequeña acción (agua, estiramiento, respiración)." },
-            { phase: "Reflexionar (5 min)", action: "'¿Qué cambió después de cuidar lo que necesitaba?'." }
-          ],
-          resources: "Tarjetas de chequeo, acceso a agua."
-        },
-        {
-          name: "Rutina de Enfoque y Reinicio",
-          question: "¿Qué puedo hacer cuando mi cerebro necesita ayuda para enfocarse?",
-          purpose: "Enseñar técnicas de regulación simples para la atención.",
-          time: "40 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Discusión: '¿Cómo se reinician los atletas durante un juego?'." },
-            { phase: "Construir (10 min)", action: "Rutina 3 pasos: Pausa (notar atención), Respira (3 lento, in4/ex6), Re-enfoca (elegir siguiente acción)." },
-            { phase: "Aplicar (20 min)", action: "Practicar rutina a mitad de tarea o transición." },
-            { phase: "Reflexionar (5 min)", action: "'¿Cuándo usé el reinicio hoy y cómo ayudó?'." }
-          ],
-          resources: "Tarjeta de prompt, temporizador opcional."
-        },
-        {
-          name: "Mapa de Energía para Aprender",
-          question: "¿Cuándo aprendo mejor y qué me ayuda a estar en mi zona óptima?",
-          purpose: "Rastrear patrones de energía y hábitos para decisiones intencionales.",
-          time: "45 minutos",
-          methodology: [
-            { phase: "Conectar (5 min)", action: "Preguntar: '¿Tienes horas del día donde aprender es más fácil?'." },
-            { phase: "Construir (10 min)", action: "Zonas de Energía: Alta y Lista, Baja y Lenta, Rápida y Dispersa." },
-            { phase: "Aplicar (25 min)", action: "Rastrear energía en 3 puntos y notar influencias (sueño, movimiento, emociones)." },
-            { phase: "Reflexionar (5 min)", action: "'Un hábito que me ayuda a estar en zona lista es...'." }
-          ],
-          resources: "Hoja de rastreo, lápices de colores."
-        }
-      ]
-    }
-  ]
-};
-
-// --- COMPONENTES UI ---
-
-const IconRenderer = ({ name, className }) => {
-  const icons = {
-    Brain, Layers, Zap, CheckCircle, Search, Users, Cpu, Layout, BookOpen, Database, TrendingUp: ArrowRight, Activity: Box
-  };
-  const Icon = icons[name] || Box;
-  return <Icon className={className} />;
-};
-
-const Header = ({ activeTab, setActiveTab }) => (
-  <header className="bg-indigo-900 text-white p-6 shadow-xl">
-    <div className="max-w-6xl mx-auto">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-        <div>
-          <h1 className="text-3xl font-extrabold flex items-center gap-3 tracking-tight">
-            <BookOpen className="h-8 w-8 text-indigo-300" />
-            L2L: Aprender a Aprender
-          </h1>
-          <p className="text-indigo-200 mt-2 text-sm max-w-lg">
-            Sistema de Crecimiento Colectivo: Desde el continuo de madurez hasta las herramientas prácticas de aula.
-          </p>
-        </div>
-        <div className="mt-4 md:mt-0 flex gap-3">
-           <span className="px-3 py-1 bg-indigo-800 border border-indigo-700 rounded-full text-xs font-mono text-indigo-200">v2.0 Full Content</span>
-           <span className="px-3 py-1 bg-green-900 border border-green-700 text-green-100 rounded-full text-xs font-mono flex items-center gap-1">
-             <Database className="w-3 h-3" /> IA Ready
-           </span>
-        </div>
-      </div>
-      
-      <nav className="flex flex-wrap gap-2 bg-indigo-950/50 p-2 rounded-xl border border-indigo-800/50">
-        {[
-          { id: 'continuum', label: 'El Continuo', icon: ArrowRight },
-          { id: 'tools', label: 'Herramientas (Toolkits)', icon: Layers },
-          { id: 'ai-data', label: 'Datos JSON (IA)', icon: Database },
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all font-medium text-sm ${
-              activeTab === tab.id 
-                ? 'bg-white text-indigo-900 shadow-md transform scale-105' 
-                : 'text-indigo-300 hover:bg-indigo-800 hover:text-white'
-            }`}
-          >
-            <tab.icon className="h-4 w-4" />
-            {tab.label}
-          </button>
-        ))}
-      </nav>
-    </div>
-  </header>
-);
-
-const ContinuumView = () => (
-  <div className="space-y-8 animate-fadeIn">
-    <div className="bg-white p-8 rounded-2xl shadow-sm border border-indigo-100">
-      <h2 className="text-3xl font-bold text-gray-900 mb-4">El Continuo del Aprendizaje</h2>
-      <p className="text-lg text-gray-600 max-w-4xl leading-relaxed">
-        El viaje de "Aprender a Aprender" describe la evolución del estudiante. No es lineal, pero muestra una progresión clara
-        desde la dependencia externa hacia la autonomía y la trascendencia.
-      </p>
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-      {learningData.continuum.map((stage, idx) => (
-        <div key={idx} className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col h-full">
-          <div className={`h-2 w-full ${
-            idx === 0 ? 'bg-gray-400' : idx === 1 ? 'bg-blue-400' : idx === 2 ? 'bg-indigo-500' : 'bg-purple-600'
-          }`}></div>
-          <div className="p-6 flex-grow flex flex-col">
-            <div className="mb-4">
-               <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-700 transition-colors">{stage.stage}</h3>
-               <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{stage.stage_en}</span>
-            </div>
-            
-            <div className="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-100">
-              <span className="text-xs font-bold text-gray-500 uppercase block mb-1">Mentalidad</span>
-              <p className="text-sm font-semibold text-indigo-900 italic">"{stage.mindset}"</p>
-            </div>
-
-            <p className="text-sm text-gray-600 mb-6 leading-relaxed">{stage.description}</p>
-            
-            <div className="mt-auto">
-              <span className="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-3">Características</span>
-              <ul className="space-y-3">
-                {stage.characteristics.map((char, cIdx) => (
-                  <li key={cIdx} className="flex items-start gap-3 text-sm text-gray-700">
-                    <CheckCircle className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
-                       idx === 0 ? 'text-gray-400' : idx === 1 ? 'text-blue-400' : idx === 2 ? 'text-indigo-500' : 'text-purple-600'
-                    }`} />
-                    <span className="leading-snug">{char}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-const ToolsView = () => {
-  const [selectedStrandId, setSelectedStrandId] = useState(1);
-  const activeStrand = learningData.strands.find(s => s.id === selectedStrandId);
-
-  return (
-    <div className="flex flex-col lg:flex-row gap-8 min-h-[600px] animate-fadeIn">
-      {/* Sidebar de Ejes */}
-      <div className="w-full lg:w-1/3 xl:w-1/4 space-y-2">
-        <div className="bg-indigo-50 p-4 rounded-xl border border-indigo-100 mb-4">
-           <h3 className="font-bold text-indigo-900 flex items-center gap-2">
-             <Layers className="w-5 h-5" />
-             Ejes de Aprendizaje
-           </h3>
-           <p className="text-xs text-indigo-700 mt-1">Selecciona un eje para ver sus herramientas.</p>
-        </div>
-        <div className="space-y-2 pr-2 lg:max-h-[calc(100vh-200px)] lg:overflow-y-auto custom-scrollbar">
-          {learningData.strands.map((strand) => (
-            <button
-              key={strand.id}
-              onClick={() => setSelectedStrandId(strand.id)}
-              className={`w-full text-left p-4 rounded-xl flex items-center gap-4 transition-all duration-200 border ${
-                selectedStrandId === strand.id
-                  ? 'bg-indigo-600 text-white shadow-lg border-indigo-600 transform scale-[1.02]'
-                  : 'bg-white hover:bg-gray-50 text-gray-700 border-gray-200 hover:border-indigo-200'
-              }`}
-            >
-              <div className={`p-2.5 rounded-lg flex-shrink-0 ${
-                selectedStrandId === strand.id ? 'bg-indigo-500 text-white' : 'bg-indigo-50 text-indigo-600'
-              }`}>
-                <IconRenderer name={strand.icon} className="h-5 w-5" />
-              </div>
-              <div>
-                <span className="text-sm font-bold block leading-tight">{strand.name}</span>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Detalle de Herramientas */}
-      <div className="w-full lg:w-2/3 xl:w-3/4">
-        {activeStrand && (
-          <div className="space-y-6">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -mr-8 -mt-8 z-0"></div>
-               <div className="relative z-10">
-                 <div className="flex items-center gap-4 mb-4">
-                   <div className="p-3 bg-indigo-100 rounded-xl text-indigo-700">
-                     <IconRenderer name={activeStrand.icon} className="h-8 w-8" />
-                   </div>
-                   <h2 className="text-3xl font-bold text-gray-900">{activeStrand.name}</h2>
-                 </div>
-                 <p className="text-lg text-gray-600 max-w-3xl">{activeStrand.description}</p>
-               </div>
-            </div>
-            
-            <div className="grid gap-6">
-              {activeStrand.tools.map((tool, idx) => (
-                <div key={idx} className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
-                  {/* Tool Header */}
-                  <div className="bg-gray-50 p-6 border-b border-gray-100 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                         <span className="px-2 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold uppercase rounded">Herramienta {idx + 1}</span>
-                         <div className="flex items-center gap-1 text-gray-500 text-xs font-medium">
-                           <Clock className="w-3 h-3" /> {tool.time}
-                         </div>
-                      </div>
-                      <h3 className="text-xl font-bold text-gray-800">{tool.name}</h3>
-                    </div>
-                  </div>
-
-                  <div className="p-6 space-y-6">
-                    {/* Pregunta y Propósito */}
-                    <div className="grid md:grid-cols-2 gap-6">
-                       <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100">
-                         <h4 className="flex items-center gap-2 text-sm font-bold text-blue-800 mb-2">
-                           <HelpCircle className="w-4 h-4" /> Pregunta Convincente
-                         </h4>
-                         <p className="text-gray-700 italic">"{tool.question}"</p>
-                       </div>
-                       <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
-                         <h4 className="flex items-center gap-2 text-sm font-bold text-green-800 mb-2">
-                           <Zap className="w-4 h-4" /> Propósito
-                         </h4>
-                         <p className="text-gray-700">{tool.purpose}</p>
-                       </div>
-                    </div>
-
-                    {/* Metodología */}
-                    <div>
-                      <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-4 flex items-center gap-2">
-                        <Layers className="w-4 h-4 text-gray-400" /> Metodología Paso a Paso
-                      </h4>
-                      <div className="space-y-3">
-                        {tool.methodology.map((step, sIdx) => (
-                          <div key={sIdx} className="flex gap-4 group">
-                             <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 font-bold flex items-center justify-center text-sm group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                               {sIdx + 1}
-                             </div>
-                             <div className="flex-grow pt-1">
-                               <span className="block font-bold text-gray-900 text-sm mb-1">{step.phase}</span>
-                               <p className="text-sm text-gray-600">{step.action}</p>
-                             </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Recursos */}
-                    <div className="pt-4 border-t border-gray-100 flex items-start gap-2 text-sm text-gray-500">
-                      <Box className="w-4 h-4 mt-0.5" />
-                      <p><span className="font-semibold text-gray-700">Recursos:</span> {tool.resources}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-const JsonView = () => (
-  <div className="space-y-6 animate-fadeIn">
-    <div className="bg-gradient-to-r from-slate-900 to-slate-800 p-8 rounded-2xl shadow-xl text-white">
-      <div className="flex items-start justify-between">
-        <div>
-           <h2 className="text-2xl font-bold flex items-center gap-3">
-             <Database className="h-6 w-6 text-green-400" />
-             Base de Conocimiento JSON
-           </h2>
-           <p className="text-slate-300 mt-2 max-w-2xl">
-             Este objeto contiene la totalidad del marco teórico y práctico. 
-             Ideal para alimentar agentes RAG (Retrieval-Augmented Generation) o para integraciones directas.
-           </p>
-        </div>
-        <button 
-          onClick={() => {navigator.clipboard.writeText(JSON.stringify(learningData, null, 2))}}
-          className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold shadow-lg transition-all flex items-center gap-2 transform hover:scale-105"
-        >
-          <CheckCircle className="h-5 w-5" />
-          Copiar al Portapapeles
-        </button>
-      </div>
-    </div>
-
-    <div className="relative group">
-      <div className="absolute top-4 right-4 bg-slate-800 text-slate-400 text-xs px-2 py-1 rounded font-mono">readonly</div>
-      <pre className="bg-slate-900 text-green-300 p-8 rounded-2xl overflow-x-auto text-xs font-mono shadow-inner border border-slate-700 max-h-[800px] overflow-y-auto custom-scrollbar leading-relaxed">
-        {JSON.stringify(learningData, null, 2)}
-      </pre>
-    </div>
-  </div>
-);
-
-// --- COMPONENTE PRINCIPAL ---
-
-export default function App() {
-  const [activeTab, setActiveTab] = useState('continuum');
-
-  return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 font-sans pb-12">
-      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
-      
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-        {activeTab === 'continuum' && <ContinuumView />}
-        {activeTab === 'tools' && <ToolsView />}
-        {activeTab === 'ai-data' && <JsonView />}
-      </main>
-
-      <footer className="max-w-7xl mx-auto px-4 mt-20 pt-8 border-t border-gray-200 text-center text-gray-400 text-sm mb-8">
-        <p className="font-medium">© 2024 Learning to Learn Framework</p>
-        <p className="mt-1">Basado en documentos oficiales UNITEC & Continuum L2L Toolkits</p>
-      </footer>
-
-      {/* Estilos globales inline para scrollbar */}
-      <style>{`
+    <!-- Estilos personalizados para scrollbar -->
+    <style>
         .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
-          height: 8px;
+            width: 8px;
+            height: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: #1e293b;
-          border-radius: 4px;
+            background: #1e293b;
+            border-radius: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #475569;
-          border-radius: 4px;
+            background: #475569;
+            border-radius: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #64748b;
+            background: #64748b;
         }
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .animate-fadeIn {
-          animation: fadeIn 0.4s ease-out forwards;
+            animation: fadeIn 0.4s ease-out forwards;
         }
-      `}</style>
-    </div>
-  );
-}
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // --- ICONOS (SVG Paths inline para evitar dependencias externas complejas) ---
+        const Icons = {
+            BookOpen: <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />,
+            Brain: <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" />,
+            Layers: <path d="M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5" />,
+            Zap: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />,
+            CheckCircle: <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" />,
+            Search: <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />,
+            Users: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M16 3.13a4 4 0 0 1 0 7.75 M23 21v-2a4 4 0 0 0-3-3.87" />,
+            Cpu: <path d="M5 9h14M5 15h14M9 5v14M15 5v14M4 20h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" />,
+            Layout: <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z M9 3v18" />,
+            Database: <path d="M3 5c0-1.1 4.03-2 9-2s9 .9 9 2c0 .55-.66 1.05-1.76 1.44C18.17 6.86 16.65 7 15 7c-1.65 0-3.17-.14-4.24-.56C9.66 6.05 9 5.55 9 5c0-.55.66-1.05 1.76-1.44C11.83 3.14 13.35 3 15 3s3.17.14 4.24.56C20.34 3.95 21 4.45 21 5v6c0 .55-.66 1.05-1.76 1.44C18.17 12.86 16.65 13 15 13c-1.65 0-3.17-.14-4.24-.56C9.66 12.05 9 11.55 9 11V5 M3 13c0 1.1 4.03 2 9 2s9-.9 9-2v-6 M3 19c0 1.1 4.03 2 9 2s9-.9 9-2v-6" />,
+            ArrowRight: <path d="M5 12h14 M12 5l7 7-7 7" />,
+            Activity: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
+            Clock: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />, // Using shield/clock like icon for visual
+            FileText: <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8" />,
+            HelpCircle: <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3 M12 17h.01 M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" />,
+            Box: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z M3.27 6.96L12 12.01l8.73-5.05 M12 22.08V12" />
+        };
+
+        const IconRenderer = ({ name, className }) => {
+            const svgContent = Icons[name] || Icons.Box;
+            return (
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className={className}
+                >
+                    {svgContent}
+                </svg>
+            );
+        };
+
+        // --- BASE DE CONOCIMIENTO (DATA SOURCE) ---
+        const learningData = {
+          metadata: {
+            title: "Learning to Learn / Aprender a Aprender",
+            source: "Continuum 5 & L2L Toolkits (Full Content)",
+            version: "2.0 - Detailed",
+            language: "es",
+            description: "Marco integral para el desarrollo de la agencia del aprendizaje, incluyendo continuo detallado y guías paso a paso de las herramientas."
+          },
+          continuum: [
+            {
+              stage: "Transaccional",
+              stage_en: "Transacting",
+              mindset: "El aprendizaje como tarea a completar.",
+              description: "Los aprendices se involucran en el aprendizaje como una tarea para terminar en lugar de un proceso para entender. Dependencia total de la dirección externa.",
+              characteristics: [
+                "Completa el trabajo para cumplir requisitos sin entender el porqué.",
+                "Depende de la dirección del maestro para saber qué hacer y cómo hacerlo.",
+                "Utiliza las mismas estrategias familiares, incluso cuando son ineficaces.",
+                "Evita desafíos que se sienten difíciles o inciertos.",
+                "Responde a la retroalimentación pasivamente en lugar de aplicarla.",
+                "Monitorea el éxito a través de calificaciones, puntajes o finalización en lugar del crecimiento."
+              ]
+            },
+            {
+              stage: "Transicional",
+              stage_en: "Transitioning",
+              mindset: "Experimentación incipiente con estrategias.",
+              description: "Los aprendices comienzan a experimentar con cómo aprenden y consideran por qué sus estrategias importan.",
+              characteristics: [
+                "Prueba diferentes estrategias de aprendizaje cuando se le pide o apoya.",
+                "Hace preguntas sobre instrucciones, claridad y expectativas.",
+                "Comienza a reflexionar sobre lo que está funcionando y lo que no.",
+                "Muestra voluntad de persistir a través de dificultades leves.",
+                "Usa la retroalimentación para hacer pequeñas mejoras.",
+                "Reconoce que el esfuerzo influye en los resultados del aprendizaje."
+              ]
+            },
+            {
+              stage: "Transformacional",
+              stage_en: "Transforming",
+              mindset: "Apropiación intencional y estratégica.",
+              description: "Los aprendices toman una propiedad creciente de sus procesos de aprendizaje, adaptándose intencional y estratégicamente.",
+              characteristics: [
+                "Procesa información intencionalmente: Usa guías para organizar y resumir, pensando con la información.",
+                "Co-crea y usa rúbricas: Diseña criterios de éxito y los usa para evaluar su propio trabajo.",
+                "Reflexiona sobre el crecimiento en el tiempo: Autoevalúa su desarrollo en conceptos y carácter.",
+                "Da y recibe Feedback STAR: Ofrece retroalimentación Específica, Oportuna, Accionable y Respetuosa.",
+                "Planifica el trabajo colaborativo: Usa herramientas para roles, metas y rendición de cuentas."
+              ]
+            },
+            {
+              stage: "Trascendente",
+              stage_en: "Transcending",
+              mindset: "Capacidad humana plena y sin techos.",
+              description: "Los aprendices encarnan plenamente el 'Aprender a Aprender' como una capacidad humana de por vida, autodirigida y empoderadora.",
+              characteristics: [
+                "Emergencia plena de la capacidad humana del aprendiz.",
+                "El aprendizaje no tiene límites ni techos visibles.",
+                "Impulsado por la curiosidad radical: '¿QUÉ PASARÍA SI...?'",
+                "Autonomía total en la búsqueda y creación de conocimiento."
+              ]
+            }
+          ],
+          strands: [
+            {
+              id: 1,
+              name: "Metacognición y Autoconciencia",
+              icon: "Brain",
+              description: "Notar y nombrar hábitos de pensamiento y emociones. Entender cómo pensamos y nos gestionamos.",
+              tools: [
+                {
+                  name: "El Espejo de Pensamiento (The Thinking Mirror)",
+                  question: "¿Cómo puede el notar mi pensamiento ayudarme a aprender mejor?",
+                  purpose: "Ayudar a los aprendices a reconocer y nombrar patrones de pensamiento durante el aprendizaje.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "El maestro modela un breve pensamiento en voz alta mientras resuelve una tarea simple, nombrando momentos como 'No estoy seguro... releeré'." },
+                    { phase: "Construir (10 min)", action: "La clase construye una lista compartida de estados de pensamiento comunes (ej. atascado, inseguro, enfocado, curioso)." },
+                    { phase: "Aplicar (20 min)", action: "Los aprendices completan una tarea corta y pausan 3 veces para registrar: 'Lo que noté sobre mi pensamiento...'." },
+                    { phase: "Reflexionar (5 min)", action: "Compartir un hallazgo: 'Una cosa que noté sobre mi pensamiento hoy fue...'." }
+                  ],
+                  resources: "Prompt de tarea, hoja de reflexión, inicios de oraciones."
+                },
+                {
+                  name: "Reporte del Clima de Aprendizaje",
+                  question: "¿Qué cambia cómo me siento y aprendo durante el día?",
+                  purpose: "Construir conciencia de los estados emocionales y su impacto en el aprendizaje.",
+                  time: "35 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Lluvia de ideas: '¿En qué se parece el aprendizaje al clima?'." },
+                    { phase: "Construir (10 min)", action: "Introducir 'íconos del clima' emocional (soleado, nublado, con niebla, tormentoso)." },
+                    { phase: "Aplicar (15 min)", action: "Los aprendices hacen un check-in al inicio y al final de una tarea usando los íconos." },
+                    { phase: "Reflexionar (5 min)", action: "¿Qué ayudó a que mi clima mejorara?" }
+                  ],
+                  resources: "Tabla de íconos de clima, tarjetas de seguimiento, pizarras."
+                },
+                {
+                  name: "Tarjeta de Cambio de Estrategia",
+                  question: "¿Qué puedo hacer cuando la forma en que estoy aprendiendo no funciona?",
+                  purpose: "Ayudar a los aprendices a reconocer cuándo cambiar de estrategia independientemente.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Discutir momentos en los que 'esforzarse más' no ayudó." },
+                    { phase: "Construir (15 min)", action: "Crear una lista de clase de 6-8 'opciones de cambio' (ej. releer, bosquejar, preguntar, dividir la tarea)." },
+                    { phase: "Aplicar (20 min)", action: "Usar una 'Tarjeta de Cambio' durante una tarea; si se atascan, marcan qué cambio eligieron." },
+                    { phase: "Reflexionar (5 min)", action: "Pase de salida: '¿Qué cambio me ayudó hoy y por qué?'." }
+                  ],
+                  resources: "Plantilla de tarjeta de cambio, materiales de tarea."
+                }
+              ]
+            },
+            {
+              id: 2,
+              name: "Estrategias y Técnicas de Aprendizaje",
+              icon: "Layers",
+              description: "Seleccionar, aplicar y adaptar estrategias con propósito para apoyar diferentes tareas.",
+              tools: [
+                {
+                  name: "El Menú de Estrategias",
+                  question: "¿Cómo puede elegir la estrategia correcta ayudarme a aprender mejor?",
+                  purpose: "Ayudar a los aprendices a seleccionar estrategias intencionalmente basadas en la tarea y el propósito.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Mostrar dos ejemplos (resolver un puzzle vs resumir texto). Preguntar: '¿Usaríamos la misma estrategia?'." },
+                    { phase: "Construir (10 min)", action: "Construir un 'menú de estrategias' de la clase con 6-10 opciones (resaltar, sketchnote, dividir, enseñar a otro)." },
+                    { phase: "Aplicar (20 min)", action: "Los aprendices eligen una estrategia a propósito durante una tarea y registran por qué la eligieron." },
+                    { phase: "Reflexionar (10 min)", action: "Compartir: '¿Qué estrategia ayudó más y cómo lo sabes?'." }
+                  ],
+                  resources: "Póster de menú de estrategias, notas adhesivas."
+                },
+                {
+                  name: "Círculo de 'Teach-Back' (Enseñar de vuelta)",
+                  question: "¿Cómo nos ayuda explicar algo a aprenderlo?",
+                  purpose: "Fortalecer la comprensión mediante el uso de la recuperación y la explicación entre pares.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Charla rápida: '¿Cuándo has entendido algo mejor después de explicarlo?'." },
+                    { phase: "Construir (10 min)", action: "El maestro modela un breve teach-back usando raíces de oraciones (ej. 'Primero..., luego..., esto importa porque...')." },
+                    { phase: "Aplicar (20 min)", action: "En grupos pequeños, los aprendices se turnan para explicar un concepto a sus compañeros sin mirar notas." },
+                    { phase: "Reflexionar (5 min)", action: "'Una cosa que expliqué bien / una cosa que quiero revisar...'." }
+                  ],
+                  resources: "Raíces de oraciones, mini pizarras, temporizador."
+                },
+                {
+                  name: "Sprint de Recuperación",
+                  question: "¿Cómo puede el recordar sin mirar ayudar a fortalecer mi aprendizaje?",
+                  purpose: "Introducir la práctica de recuperación de bajo riesgo para profundizar y retener el aprendizaje.",
+                  time: "35 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Preguntar: '¿Qué pasa cuando solo repasamos releyendo?'." },
+                    { phase: "Construir (10 min)", action: "El maestro modela la recuperación: cierra notas y lista lo que recuerda de ayer." },
+                    { phase: "Aplicar (15 min)", action: "Los aprendices escriben o dibujan todo lo que recuerdan sobre un tema reciente sin notas, luego verifican brechas." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Qué recordé fácilmente? ¿Qué practicaré de nuevo?'." }
+                  ],
+                  resources: "Papel o pizarras, bolígrafos."
+                }
+              ]
+            },
+            {
+              id: 3,
+              name: "Pensamiento Crítico y Resolución de Problemas",
+              icon: "Zap",
+              description: "Analizar información, cuestionar suposiciones y usar evidencia para conclusiones razonadas.",
+              tools: [
+                {
+                  name: "La Escalera de Razonamiento",
+                  question: "¿Cómo puedo construir explicaciones más fuertes para mi pensamiento?",
+                  purpose: "Ayudar a los aprendices a pasar de opiniones a razonamientos basados en evidencia.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Presentar dos respuestas: una solo opinión, una con evidencia. Preguntar cuál es más fuerte." },
+                    { phase: "Construir (10 min)", action: "Introducir la Escalera: Yo pienso... porque... la evidencia muestra... entonces la mejor conclusión es..." },
+                    { phase: "Aplicar (20 min)", action: "Los aprendices usan la escalera para responder una pregunta real (ej. '¿Qué diseño funciona mejor?')." },
+                    { phase: "Reflexionar (10 min)", action: "'¿Cómo cambió mi pensamiento al añadir evidencia?'." }
+                  ],
+                  resources: "Raíces de oraciones de escalera, tarjetas de preguntas."
+                },
+                {
+                  name: "La Caza de Suposiciones",
+                  question: "¿Cómo puede el cuestionar suposiciones mejorar nuestro pensamiento?",
+                  purpose: "Ayudar a identificar y desafiar suposiciones ocultas antes de formar conclusiones.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Compartir una suposición cotidiana (ej. 'A todos les gusta el trabajo grupal'). Preguntar: '¿Es siempre verdad?'." },
+                    { phase: "Construir (10 min)", action: "Enseñar a detectar suposiciones: 'Estamos asumiendo que...' / '¿Hay otra posibilidad?'." },
+                    { phase: "Aplicar (20 min)", action: "En parejas, analizar un escenario y listar suposiciones + alternativas." },
+                    { phase: "Reflexionar (5 min)", action: "'Una suposición que desafiamos hoy fue...'." }
+                  ],
+                  resources: "Tarjetas de escenarios, prompts de suposición."
+                },
+                {
+                  name: "Desafío de Pensamiento Flexible",
+                  question: "¿Cómo puede ver un problema de diferentes maneras ayudarnos a resolverlo?",
+                  purpose: "Fortalecer la flexibilidad cognitiva generando múltiples soluciones.",
+                  time: "35 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Maestro modela dos soluciones diferentes a un problema simple." },
+                    { phase: "Construir (10 min)", action: "Introducir la regla: 'Al menos tres soluciones posibles antes de elegir una'." },
+                    { phase: "Aplicar (15 min)", action: "Grupos reciben un desafío y generan 3+ soluciones." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Qué solución parece más fuerte y por qué?'." }
+                  ],
+                  resources: "Tarjetas de desafío, papelógrafo."
+                }
+              ]
+            },
+            {
+              id: 4,
+              name: "Autorregulación y Planificación Reflexiva",
+              icon: "CheckCircle",
+              description: "Planificar, monitorear y ajustar procesos usando metas, feedback y reflexión.",
+              tools: [
+                {
+                  name: "Ciclo Meta-Plan-Hacer-Revisar",
+                  question: "¿Cómo puede planificar y revisar mi progreso ayudarme a aprender mejor?",
+                  purpose: "Ayudar a establecer metas significativas, tomar acción y reflexionar sobre resultados.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Compartir escenarios: trabajar sin plan vs con plan simple." },
+                    { phase: "Construir (10 min)", action: "Enseñar el ciclo: Meta (¿Qué quiero lograr?), Plan (¿Cómo?), Hacer (Intentarlo), Revisar (¿Qué funcionó?)." },
+                    { phase: "Aplicar (20 min)", action: "Usar el ciclo durante una tarea actual." },
+                    { phase: "Reflexionar (10 min)", action: "'¿Qué cambié después de revisar mi progreso?'." }
+                  ],
+                  resources: "Plantilla del ciclo, materiales de tarea."
+                },
+                {
+                  name: "Estrategia Verificar-Cambiar (Check-In-Change)",
+                  question: "¿Cómo sé cuándo ajustar mi enfoque mientras estoy aprendiendo?",
+                  purpose: "Ayudar a monitorear el aprendizaje y hacer ajustes oportunos en lugar de esperar al final.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Preguntar: '¿Qué pasa cuando nos damos cuenta demasiado tarde de que algo no funciona?'." },
+                    { phase: "Construir (10 min)", action: "Introducir dos prompts: 'Check-In: ¿Cómo va mi plan?' y 'Cambio: ¿Qué puedo ajustar ahora?'." },
+                    { phase: "Aplicar (20 min)", action: "Pausar a mitad de tarea para completar un mini-reflexión Check-In-Change." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Qué cambié hoy que hizo una diferencia?'." }
+                  ],
+                  resources: "Tarjetas de mini reflexión, temporizadores."
+                },
+                {
+                  name: "Co-creación de Criterios de Éxito",
+                  question: "¿Cómo puede saber cómo se ve el éxito ayudarme a mejorar mi trabajo?",
+                  purpose: "Ayudar a entender expectativas, monitorear calidad y tomar propiedad de la mejora.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Mostrar dos ejemplos de trabajo (fuerte y en desarrollo). Preguntar qué hace al fuerte mejor." },
+                    { phase: "Construir (15 min)", action: "Como clase, co-crear 4-6 criterios de éxito en lenguaje del alumno." },
+                    { phase: "Aplicar (20 min)", action: "Usar criterios para autoevaluar o evaluar pares y elegir un paso de mejora." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Qué criterio me ayudó a mejorar y cómo?'." }
+                  ],
+                  resources: "Muestras de trabajo, papelógrafo, plantilla de rúbrica."
+                }
+              ]
+            },
+            {
+              id: 5,
+              name: "Mentalidad de Crecimiento y Resiliencia",
+              icon: "TrendingUp",
+              description: "Responder al desafío con persistencia, viendo errores y feedback como parte del aprendizaje.",
+              tools: [
+                {
+                  name: "Mapa de Lucha Productiva",
+                  question: "¿Cómo puede la lucha ayudar a crecer a mi cerebro?",
+                  purpose: "Reconocer que el desafío es una parte normal y necesaria del aprendizaje.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Historia del maestro sobre aprender algo difícil y la persistencia." },
+                    { phase: "Construir (10 min)", action: "Introducir 4 etapas: Inicio (nuevo), Lucha (difícil), Estrategia (qué probaré), Fortaleza (mejoré)." },
+                    { phase: "Aplicar (20 min)", action: "Completar tarea desafiante y marcar en qué etapa están en 3 puntos." },
+                    { phase: "Reflexionar (5 min)", action: "'Una estrategia que me ayudó a seguir fue...'." }
+                  ],
+                  resources: "Plantilla de mapa, lápices."
+                },
+                {
+                  name: "Transformación de Errores (Mistake Makeover)",
+                  question: "¿Cómo pueden los errores ayudarme a aprender en lugar de detenerme?",
+                  purpose: "Reencuadrar errores como información y construir resiliencia mediante análisis.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Mostrar respuestas a un error: rendirse vs. usarlo para mejorar." },
+                    { phase: "Construir (10 min)", action: "Prompts: ¿Qué pasó? ¿Por qué pasó? ¿Qué puedo aprender? ¿Qué intentaré después?" },
+                    { phase: "Aplicar (25 min)", action: "Elegir un error reciente y completar la transformación." },
+                    { phase: "Reflexionar (5 min)", action: "'Mi insight más útil de este error fue...'." }
+                  ],
+                  resources: "Plantilla de transformación, muestras de trabajo."
+                },
+                {
+                  name: "Plan de Avance con Feedback",
+                  question: "¿Cómo puede el feedback ayudarme a crecer en lugar de sentirme desanimado?",
+                  purpose: "Construir resiliencia convirtiendo la retroalimentación en pasos siguientes accionables.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Preguntar cómo se siente recibir feedback y qué puede cambiar ese sentimiento." },
+                    { phase: "Construir (10 min)", action: "Enseñar 3 pasos: Escuchar (¿qué dice?), Elevar (¿qué fortaleza destaca?), Avanzar (¿cuál es mi paso?)." },
+                    { phase: "Aplicar (20 min)", action: "Elegir UNA pieza de feedback y crear un plan de avance simple." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Cómo cambió mi trabajo o confianza al usar el feedback?'." }
+                  ],
+                  resources: "Muestras de feedback, plantilla de plan."
+                }
+              ]
+            },
+            {
+              id: 6,
+              name: "Alfabetización Informacional",
+              icon: "Search",
+              description: "Localizar, evaluar y sintetizar información con precisión, responsabilidad y discernimiento.",
+              tools: [
+                {
+                  name: "Semáforo de Fuentes",
+                  question: "¿Cómo sé si la información es confiable?",
+                  purpose: "Evaluar fuentes rápida y responsablemente antes de usarlas.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Mostrar dos fuentes contrastantes (sitio ciencia vs blog al azar). ¿Confiamos igual?" },
+                    { phase: "Construir (10 min)", action: "Semáforo: Amarillo (revisar más, autor poco claro), Verde (confiable, experto), Rojo (no confiable, sin fuente)." },
+                    { phase: "Aplicar (20 min)", action: "En parejas, evaluar 3 fuentes de muestra y etiquetarlas con razones." },
+                    { phase: "Reflexionar (5 min)", action: "'Una pista que me ayudó a juzgar una fuente hoy fue...'." }
+                  ],
+                  resources: "Textos de muestra, resaltadores, gráfico de semáforo."
+                },
+                {
+                  name: "Prueba de Tri-Verificación",
+                  question: "¿Por qué es importante verificar información en más de un lugar?",
+                  purpose: "Construir hábitos de verificación cruzada.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Preguntar: '¿Qué pasa si creemos lo primero que escuchamos?'." },
+                    { phase: "Construir (10 min)", action: "Regla Tri-Verificar: Encontrar 3 fuentes, Comparar hechos clave, Notar similitudes/diferencias." },
+                    { phase: "Aplicar (25 min)", action: "Investigar una pregunta simple usando tres fuentes y registrar coincidencias." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Qué cambió cuando verifiqué más de una fuente?'." }
+                  ],
+                  resources: "Enlaces seguros o textos impresos."
+                },
+                {
+                  name: "Clasificación Hecho vs. Opinión",
+                  question: "¿Cómo puedo diferenciar entre un hecho y una opinión?",
+                  purpose: "Separar información verificable de puntos de vista personales.",
+                  time: "35 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Compartir dos declaraciones (factual vs opinión). ¿Diferencia?" },
+                    { phase: "Construir (10 min)", action: "Criterios: Hecho (se puede probar/chequear) vs Opinión (lo que alguien piensa/siente)." },
+                    { phase: "Aplicar (15 min)", action: "Clasificar 10-12 declaraciones de un artículo en Hecho/Opinión y justificar una." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Por qué importa esto al aprender o compartir info?'." }
+                  ],
+                  resources: "Tarjetas de declaraciones, tapetes de clasificación."
+                }
+              ]
+            },
+            {
+              id: 7,
+              name: "Colaboración y Aprendizaje entre Pares",
+              icon: "Users",
+              description: "Construir entendimiento a través del diálogo, escucha activa y resolución compartida.",
+              tools: [
+                {
+                  name: "Relevo de Escucha",
+                  question: "¿Cómo puedo mostrarle a alguien que realmente lo escuché?",
+                  purpose: "Fortalecer la escucha activa y la creación de significado colaborativo.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Modelar escucha 'buena' vs 'pobre'. ¿Cuál se sintió mejor?" },
+                    { phase: "Construir (10 min)", action: "Secuencia de relevo: Escuchar plenamente -> Añadir pregunta/idea -> Parafrasear ('Entonces dices que...')." },
+                    { phase: "Aplicar (20 min)", action: "En parejas rotativas, discutir un prompt compartido usando el relevo." },
+                    { phase: "Reflexionar (5 min)", action: "'Una forma en que mostré escucha hoy fue...'." }
+                  ],
+                  resources: "Tarjetas de prompt, temporizador."
+                },
+                {
+                  name: "Cadena de Preguntas Circular",
+                  question: "¿Cómo ayudan las grandes preguntas a que los grupos aprendan mejor?",
+                  purpose: "Construir diálogo basado en indagación y profundizar pensamiento compartido.",
+                  time: "35 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Comparar pregunta cerrada vs abierta." },
+                    { phase: "Construir (10 min)", action: "Generar 6-8 preguntas abiertas con iniciadores ('¿Qué pasaría si...?', '¿Por qué creen...?')." },
+                    { phase: "Aplicar (15 min)", action: "Sentarse en círculo y construir cadena: cada respuesta debe incluir una nueva pregunta." },
+                    { phase: "Reflexionar (5 min)", action: "'Una pregunta que movió nuestro pensamiento hacia adelante fue...'." }
+                  ],
+                  resources: "Iniciadores de preguntas, papelógrafo."
+                },
+                {
+                  name: "Intercambio de Feedback STAR",
+                  question: "¿Cómo puede el feedback ayudarnos a mejorar nuestras ideas y trabajo juntos?",
+                  purpose: "Enseñar a dar y aplicar feedback que apoye el crecimiento.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Discutir ejemplos de feedback útil vs inútil." },
+                    { phase: "Construir (10 min)", action: "Enseñar STAR: Específico, Oportuno (Timely), Accionable, Respetuoso. Modelar: 'Lo que funcionó... Aún mejor si...'." },
+                    { phase: "Aplicar (25 min)", action: "Pares intercambian STAR feedback sobre trabajo en progreso. Seleccionar un paso de acción." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Qué cambio haré basado en el feedback?'." }
+                  ],
+                  resources: "Iniciadores STAR, muestras de trabajo."
+                },
+                {
+                  name: "Mapa de Ruta del Equipo",
+                  question: "¿Cómo puede planificar juntos ayudarnos a completar un proyecto con éxito?",
+                  purpose: "Ayudar a grupos a clarificar roles, responsabilidades y puntos de chequeo.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Preguntar qué pasa cuando todos creen que otro está haciendo el trabajo." },
+                    { phase: "Construir (10 min)", action: "Introducir Mapa: Meta, Roles (quién hace qué), Hitos (para cuándo), Check-ins (cómo monitoreamos)." },
+                    { phase: "Aplicar (25 min)", action: "Grupos completan un Mapa para una tarea próxima y comienzan el primer paso." },
+                    { phase: "Reflexionar (5 min)", action: "'Una forma en que nuestro plan nos ayudó hoy fue...'." }
+                  ],
+                  resources: "Plantilla de Mapa, descripción de tarea."
+                }
+              ]
+            },
+            {
+              id: 8,
+              name: "Alfabetización Digital y Tecnologías",
+              icon: "Cpu",
+              description: "Usar herramientas digitales de forma segura y estratégica para acceder, crear y gestionar aprendizaje.",
+              tools: [
+                {
+                  name: "El Selector Tecnológico con Propósito",
+                  question: "¿Cómo puede elegir la herramienta digital correcta ayudarme a aprender mejor?",
+                  purpose: "Ayudar a seleccionar tecnología intencionalmente en lugar de por hábito.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Mostrar ejemplos: dispositivo para copiar texto vs organizar ideas visualmente." },
+                    { phase: "Construir (10 min)", action: "Preguntas del Selector: ¿Qué intento hacer? ¿Qué herramienta ayuda mejor? ¿Cómo sabré si ayudó?" },
+                    { phase: "Aplicar (20 min)", action: "Elegir herramienta para tarea actual y justificar elección." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Cómo mejoró mi aprendizaje el uso de esta herramienta?'." }
+                  ],
+                  resources: "Acceso a dispositivos, tarjeta de prompt."
+                },
+                {
+                  name: "Chequeo de Huella Digital",
+                  question: "¿Cómo mis acciones en línea dan forma a cómo otros me ven?",
+                  purpose: "Entender y gestionar la presencia digital responsablemente.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Preguntar: 'Si alguien solo te conociera por tu actividad online, ¿qué pensaría?'." },
+                    { phase: "Construir (15 min)", action: "Enseñar 3 ideas: Visible, Permanente, Impactante." },
+                    { phase: "Aplicar (20 min)", action: "Revisar perfiles ficticios e identificar elementos Seguros, Neutros y Riesgosos." },
+                    { phase: "Reflexionar (5 min)", action: "'Una elección que haré diferente en línea es...'." }
+                  ],
+                  resources: "Perfiles ficticios impresos, tabla de clasificación."
+                },
+                {
+                  name: "Configuración Organizar-y-Optimizar",
+                  question: "¿Cómo puede la organización digital ayudarme a estar enfocado?",
+                  purpose: "Construir hábitos que apoyen la atención y eficiencia.",
+                  time: "35 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Discusión: '¿Qué pasa cuando no encontramos archivos o links?'." },
+                    { phase: "Construir (10 min)", action: "Configuración en 3 pasos: Nombrarlo claro, Guardarlo con propósito, Limpiar distracciones." },
+                    { phase: "Aplicar (15 min)", action: "Crear o limpiar un espacio digital (carpeta, bookmarks)." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Cómo cambió mi aprendizaje organizar mi espacio digital?'." }
+                  ],
+                  resources: "Dispositivos, guía de nomenclatura."
+                }
+              ]
+            },
+            {
+              id: 9,
+              name: "Creatividad e Innovación",
+              icon: "Layout",
+              description: "Generar ideas, explorar posibilidades y tomar riesgos reflexivos para crear resultados originales.",
+              tools: [
+                {
+                  name: "Generador '¿Qué pasaría si...?'",
+                  question: "¿Cómo puede hacer nuevos tipos de preguntas ayudarnos a crear nuevas ideas?",
+                  purpose: "Ayudar a ir más allá del pensamiento familiar generando posibilidades imaginativas.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Mostrar objeto simple (clip). '¿Para qué más sirve?'." },
+                    { phase: "Construir (10 min)", action: "Iniciadores 'What If': ¿Si cambiamos el tamaño? ¿Si no hubiera reglas? ¿Si funcionara en otro lugar?" },
+                    { phase: "Aplicar (20 min)", action: "En parejas, aplicar preguntas a un tema actual para generar 5-10 posibilidades." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Qué idea me sorprendió y por qué?'." }
+                  ],
+                  resources: "Objetos cotidianos, iniciadores de oraciones."
+                },
+                {
+                  name: "Ciclo Divergente-Convergente",
+                  question: "¿Cómo podemos tener muchas ideas y luego elegir las mejores?",
+                  purpose: "Enseñar el proceso creativo de expandir y estrechar ideas intencionalmente.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Comparar lluvia de ideas de una sola idea vs generar muchas." },
+                    { phase: "Construir (10 min)", action: "Enseñar ciclo: Divergente (generar sin juzgar) -> Convergente (seleccionar con criterios)." },
+                    { phase: "Aplicar (25 min)", action: "Grupos hacen lluvia de ideas para un desafío de clase, luego eligen top idea con criterios." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Cómo nos ayudó usar criterios a tomar una mejor decisión?'." }
+                  ],
+                  resources: "Notas adhesivas, marcadores."
+                },
+                {
+                  name: "Bucle Prototipar y Probar",
+                  question: "¿Cómo puede probar algo ayudarnos a mejorar nuestras ideas?",
+                  purpose: "Ayudar a tomar riesgos creativos mediante experimentación iterativa.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Compartir ejemplo de invención que cambió muchas veces." },
+                    { phase: "Construir (10 min)", action: "Pasos del Bucle: Crear (modelo rápido) -> Probar (con usuarios) -> Mejorar (cambiar una cosa)." },
+                    { phase: "Aplicar (20 min)", action: "Construir prototipo simple y probar con un par usando una pregunta de feedback." },
+                    { phase: "Reflexionar (5 min)", action: "'Una mejora que hice basada en la prueba fue...'." }
+                  ],
+                  resources: "Papel, materiales de construcción simple."
+                }
+              ]
+            },
+            {
+              id: 10,
+              name: "Salud, Bienestar y Aprendizaje Cerebro-Cuerpo",
+              icon: "Activity",
+              description: "Tomar decisiones informadas sobre bienestar físico y emocional para apoyar foco y memoria.",
+              tools: [
+                {
+                  name: "Chequeo Cerebro-Cuerpo",
+                  question: "¿Cómo afecta cómo me siento a qué tan bien aprendo?",
+                  purpose: "Notar conexión entre estado físico/emocional y preparación para aprender.",
+                  time: "35 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Preguntar: '¿Qué pasa al intentar aprender cansado o hambriento?'." },
+                    { phase: "Construir (10 min)", action: "Prompts: Cuerpo (¿cómo se siente?), Cerebro (¿qué tan enfocado?), Balance (¿qué necesito?)." },
+                    { phase: "Aplicar (15 min)", action: "Hacer chequeo antes de tarea y elegir una pequeña acción (agua, estiramiento, respiración)." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Qué cambió después de cuidar lo que necesitaba?'." }
+                  ],
+                  resources: "Tarjetas de chequeo, acceso a agua."
+                },
+                {
+                  name: "Rutina de Enfoque y Reinicio",
+                  question: "¿Qué puedo hacer cuando mi cerebro necesita ayuda para enfocarse?",
+                  purpose: "Enseñar técnicas de regulación simples para la atención.",
+                  time: "40 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Discusión: '¿Cómo se reinician los atletas durante un juego?'." },
+                    { phase: "Construir (10 min)", action: "Rutina 3 pasos: Pausa (notar atención), Respira (3 lento, in4/ex6), Re-enfoca (elegir siguiente acción)." },
+                    { phase: "Aplicar (20 min)", action: "Practicar rutina a mitad de tarea o transición." },
+                    { phase: "Reflexionar (5 min)", action: "'¿Cuándo usé el reinicio hoy y cómo ayudó?'." }
+                  ],
+                  resources: "Tarjeta de prompt, temporizador opcional."
+                },
+                {
+                  name: "Mapa de Energía para Aprender",
+                  question: "¿Cuándo aprendo mejor y qué me ayuda a estar en mi zona óptima?",
+                  purpose: "Rastrear patrones de energía y hábitos para decisiones intencionales.",
+                  time: "45 minutos",
+                  methodology: [
+                    { phase: "Conectar (5 min)", action: "Preguntar: '¿Tienes horas del día donde aprender es más fácil?'." },
+                    { phase: "Construir (10 min)", action: "Zonas de Energía: Alta y Lista, Baja y Lenta, Rápida y Dispersa." },
+                    { phase: "Aplicar (25 min)", action: "Rastrear energía en 3 puntos y notar influencias (sueño, movimiento, emociones)." },
+                    { phase: "Reflexionar (5 min)", action: "'Un hábito que me ayuda a estar en zona lista es...'." }
+                  ],
+                  resources: "Hoja de rastreo, lápices de colores."
+                }
+              ]
+            }
+          ]
+        };
+
+        // --- COMPONENTES UI ---
+
+        const Header = ({ activeTab, setActiveTab }) => (
+            <header className="bg-indigo-900 text-white p-6 shadow-xl">
+                <div className="max-w-6xl mx-auto">
+                    <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+                        <div>
+                            <h1 className="text-3xl font-extrabold flex items-center gap-3 tracking-tight">
+                                <IconRenderer name="BookOpen" className="h-8 w-8 text-indigo-300" />
+                                L2L: Aprender a Aprender
+                            </h1>
+                            <p className="text-indigo-200 mt-2 text-sm max-w-lg">
+                                Sistema de Crecimiento Colectivo: Desde el continuo de madurez hasta las herramientas prácticas de aula.
+                            </p>
+                        </div>
+                        <div className="mt-4 md:mt-0 flex gap-3">
+                            <span className="px-3 py-1 bg-indigo-800 border border-indigo-700 rounded-full text-xs font-mono text-indigo-200">v2.0 Full Content</span>
+                            <span className="px-3 py-1 bg-green-900 border border-green-700 text-green-100 rounded-full text-xs font-mono flex items-center gap-1">
+                                <IconRenderer name="Database" className="w-3 h-3" /> IA Ready
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <nav className="flex flex-wrap gap-2 bg-indigo-950/50 p-2 rounded-xl border border-indigo-800/50">
+                        {[
+                            { id: 'continuum', label: 'El Continuo', icon: 'ArrowRight' },
+                            { id: 'tools', label: 'Herramientas (Toolkits)', icon: 'Layers' },
+                            { id: 'ai-data', label: 'Datos JSON (IA)', icon: 'Database' },
+                        ].map((tab) => (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all font-medium text-sm ${
+                                    activeTab === tab.id 
+                                        ? 'bg-white text-indigo-900 shadow-md transform scale-105' 
+                                        : 'text-indigo-300 hover:bg-indigo-800 hover:text-white'
+                                }`}
+                            >
+                                <IconRenderer name={tab.icon} className="h-4 w-4" />
+                                {tab.label}
+                            </button>
+                        ))}
+                    </nav>
+                </div>
+            </header>
+        );
+
+        const ContinuumView = () => (
+            <div className="space-y-8 animate-fadeIn">
+                <div className="bg-white p-8 rounded-2xl shadow-sm border border-indigo-100">
+                    <h2 className="text-3xl font-bold text-gray-900 mb-4">El Continuo del Aprendizaje</h2>
+                    <p className="text-lg text-gray-600 max-w-4xl leading-relaxed">
+                        El viaje de "Aprender a Aprender" describe la evolución del estudiante. No es lineal, pero muestra una progresión clara
+                        desde la dependencia externa hacia la autonomía y la trascendencia.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                    {learningData.continuum.map((stage, idx) => (
+                        <div key={idx} className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col h-full">
+                            <div className={`h-2 w-full ${
+                                idx === 0 ? 'bg-gray-400' : idx === 1 ? 'bg-blue-400' : idx === 2 ? 'bg-indigo-500' : 'bg-purple-600'
+                            }`}></div>
+                            <div className="p-6 flex-grow flex flex-col">
+                                <div className="mb-4">
+                                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-700 transition-colors">{stage.stage}</h3>
+                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{stage.stage_en}</span>
+                                </div>
+                                
+                                <div className="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                    <span className="text-xs font-bold text-gray-500 uppercase block mb-1">Mentalidad</span>
+                                    <p className="text-sm font-semibold text-indigo-900 italic">"{stage.mindset}"</p>
+                                </div>
+
+                                <p className="text-sm text-gray-600 mb-6 leading-relaxed">{stage.description}</p>
+                                
+                                <div className="mt-auto">
+                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-3">Características</span>
+                                    <ul className="space-y-3">
+                                        {stage.characteristics.map((char, cIdx) => (
+                                            <li key={cIdx} className="flex items-start gap-3 text-sm text-gray-700">
+                                                <IconRenderer name="CheckCircle" className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
+                                                     idx === 0 ? 'text-gray-400' : idx === 1 ? 'text-blue-400' : idx === 2 ? 'text-indigo-500' : 'text-purple-600'
+                                                }`} />
+                                                <span className="leading-snug">{char}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+
+        const ToolsView = () => {
+            const [selectedStrandId, setSelectedStrandId] = useState(1);
+            const activeStrand = learningData.strands.find(s => s.id === selectedStrandId);
+
+            return (
+                <div className="flex flex-col lg:flex-row gap-8 min-h-[600px] animate-fadeIn">
+                    {/* Sidebar de Ejes */}
+                    <div className="w-full lg:w-1/3 xl:w-1/4 space-y-2">
+                        <div className="bg-indigo-50 p-4 rounded-xl border border-indigo-100 mb-4">
+                            <h3 className="font-bold text-indigo-900 flex items-center gap-2">
+                                <IconRenderer name="Layers" className="w-5 h-5" />
+                                Ejes de Aprendizaje
+                            </h3>
+                            <p className="text-xs text-indigo-700 mt-1">Selecciona un eje para ver sus herramientas.</p>
+                        </div>
+                        <div className="space-y-2 pr-2 lg:max-h-[calc(100vh-200px)] lg:overflow-y-auto custom-scrollbar">
+                            {learningData.strands.map((strand) => (
+                                <button
+                                    key={strand.id}
+                                    onClick={() => setSelectedStrandId(strand.id)}
+                                    className={`w-full text-left p-4 rounded-xl flex items-center gap-4 transition-all duration-200 border ${
+                                        selectedStrandId === strand.id
+                                            ? 'bg-indigo-600 text-white shadow-lg border-indigo-600 transform scale-[1.02]'
+                                            : 'bg-white hover:bg-gray-50 text-gray-700 border-gray-200 hover:border-indigo-200'
+                                    }`}
+                                >
+                                    <div className={`p-2.5 rounded-lg flex-shrink-0 ${
+                                        selectedStrandId === strand.id ? 'bg-indigo-500 text-white' : 'bg-indigo-50 text-indigo-600'
+                                    }`}>
+                                        <IconRenderer name={strand.icon} className="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                        <span className="text-sm font-bold block leading-tight">{strand.name}</span>
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Detalle de Herramientas */}
+                    <div className="w-full lg:w-2/3 xl:w-3/4">
+                        {activeStrand && (
+                            <div className="space-y-6">
+                                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -mr-8 -mt-8 z-0"></div>
+                                    <div className="relative z-10">
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <div className="p-3 bg-indigo-100 rounded-xl text-indigo-700">
+                                                <IconRenderer name={activeStrand.icon} className="h-8 w-8" />
+                                            </div>
+                                            <h2 className="text-3xl font-bold text-gray-900">{activeStrand.name}</h2>
+                                        </div>
+                                        <p className="text-lg text-gray-600 max-w-3xl">{activeStrand.description}</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="grid gap-6">
+                                    {activeStrand.tools.map((tool, idx) => (
+                                        <div key={idx} className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
+                                            {/* Tool Header */}
+                                            <div className="bg-gray-50 p-6 border-b border-gray-100 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                                                <div>
+                                                    <div className="flex items-center gap-2 mb-2">
+                                                        <span className="px-2 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold uppercase rounded">Herramienta {idx + 1}</span>
+                                                        <div className="flex items-center gap-1 text-gray-500 text-xs font-medium">
+                                                            <IconRenderer name="Clock" className="w-3 h-3" /> {tool.time}
+                                                        </div>
+                                                    </div>
+                                                    <h3 className="text-xl font-bold text-gray-800">{tool.name}</h3>
+                                                </div>
+                                            </div>
+
+                                            <div className="p-6 space-y-6">
+                                                {/* Pregunta y Propósito */}
+                                                <div className="grid md:grid-cols-2 gap-6">
+                                                    <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100">
+                                                        <h4 className="flex items-center gap-2 text-sm font-bold text-blue-800 mb-2">
+                                                            <IconRenderer name="HelpCircle" className="w-4 h-4" /> Pregunta Convincente
+                                                        </h4>
+                                                        <p className="text-gray-700 italic">"{tool.question}"</p>
+                                                    </div>
+                                                    <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
+                                                        <h4 className="flex items-center gap-2 text-sm font-bold text-green-800 mb-2">
+                                                            <IconRenderer name="Zap" className="w-4 h-4" /> Propósito
+                                                        </h4>
+                                                        <p className="text-gray-700">{tool.purpose}</p>
+                                                    </div>
+                                                </div>
+
+                                                {/* Metodología */}
+                                                <div>
+                                                    <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-4 flex items-center gap-2">
+                                                        <IconRenderer name="Layers" className="w-4 h-4 text-gray-400" /> Metodología Paso a Paso
+                                                    </h4>
+                                                    <div className="space-y-3">
+                                                        {tool.methodology.map((step, sIdx) => (
+                                                            <div key={sIdx} className="flex gap-4 group">
+                                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 font-bold flex items-center justify-center text-sm group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                                                                    {sIdx + 1}
+                                                                </div>
+                                                                <div className="flex-grow pt-1">
+                                                                    <span className="block font-bold text-gray-900 text-sm mb-1">{step.phase}</span>
+                                                                    <p className="text-sm text-gray-600">{step.action}</p>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+
+                                                {/* Recursos */}
+                                                <div className="pt-4 border-t border-gray-100 flex items-start gap-2 text-sm text-gray-500">
+                                                    <IconRenderer name="Box" className="w-4 h-4 mt-0.5" />
+                                                    <p><span className="font-semibold text-gray-700">Recursos:</span> {tool.resources}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        const JsonView = () => (
+            <div className="space-y-6 animate-fadeIn">
+                <div className="bg-gradient-to-r from-slate-900 to-slate-800 p-8 rounded-2xl shadow-xl text-white">
+                    <div className="flex items-start justify-between">
+                        <div>
+                            <h2 className="text-2xl font-bold flex items-center gap-3">
+                                <IconRenderer name="Database" className="h-6 w-6 text-green-400" />
+                                Base de Conocimiento JSON
+                            </h2>
+                            <p className="text-slate-300 mt-2 max-w-2xl">
+                                Este objeto contiene la totalidad del marco teórico y práctico. 
+                                Ideal para alimentar agentes RAG (Retrieval-Augmented Generation) o para integraciones directas.
+                            </p>
+                        </div>
+                        <button 
+                            onClick={() => {navigator.clipboard.writeText(JSON.stringify(learningData, null, 2))}}
+                            className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold shadow-lg transition-all flex items-center gap-2 transform hover:scale-105"
+                        >
+                            <IconRenderer name="CheckCircle" className="h-5 w-5" />
+                            Copiar al Portapapeles
+                        </button>
+                    </div>
+                </div>
+
+                <div className="relative group">
+                    <div className="absolute top-4 right-4 bg-slate-800 text-slate-400 text-xs px-2 py-1 rounded font-mono">readonly</div>
+                    <pre className="bg-slate-900 text-green-300 p-8 rounded-2xl overflow-x-auto text-xs font-mono shadow-inner border border-slate-700 max-h-[800px] overflow-y-auto custom-scrollbar leading-relaxed">
+                        {JSON.stringify(learningData, null, 2)}
+                    </pre>
+                </div>
+            </div>
+        );
+
+        function App() {
+            const [activeTab, setActiveTab] = useState('continuum');
+
+            return (
+                <div className="min-h-screen bg-gray-50 text-gray-800 font-sans pb-12">
+                    <Header activeTab={activeTab} setActiveTab={setActiveTab} />
+                    
+                    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+                        {activeTab === 'continuum' && <ContinuumView />}
+                        {activeTab === 'tools' && <ToolsView />}
+                        {activeTab === 'ai-data' && <JsonView />}
+                    </main>
+
+                    <footer className="max-w-7xl mx-auto px-4 mt-20 pt-8 border-t border-gray-200 text-center text-gray-400 text-sm mb-8">
+                        <p className="font-medium">© 2024 Learning to Learn Framework</p>
+                        <p className="mt-1">Basado en documentos oficiales UNITEC & Continuum L2L Toolkits</p>
+                    </footer>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
