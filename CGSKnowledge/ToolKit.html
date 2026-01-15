@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGC 3Cs Toolkit</title>
+    
+    <!-- Tailwind CSS (Estilos) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons (Iconos) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Personalización de scrollbar para la vista de código */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #64748b; 
+        }
+
+        /* Animaciones suaves */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 selection:bg-blue-200">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="bg-indigo-600 p-2 rounded-lg">
+                    <i data-lucide="book-open" class="text-white w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-slate-800">CGC 3Cs Toolkit</h1>
+                    <p class="text-xs text-slate-500">Base de Conocimiento IA & Humana</p>
+                </div>
+            </div>
+            
+            <button id="toggleViewBtn" class="flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-slate-100 text-slate-600 hover:bg-slate-200">
+                <i id="toggleIcon" data-lucide="code" class="w-4 h-4"></i>
+                <span id="toggleText">Ver Datos JSON (IA)</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        
+        <!-- Definition Hero -->
+        <div class="mb-8 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">Definición Central</h2>
+            <p id="mainDefinition" class="text-lg md:text-xl text-slate-700 leading-relaxed font-light">
+                <!-- Se llena con JS -->
+            </p>
+        </div>
+
+        <!-- VISTA HUMANA -->
+        <div id="humanView" class="fade-in">
+            <!-- Navigation Tabs -->
+            <div id="tabsContainer" class="flex flex-wrap gap-2 md:gap-4 mb-8">
+                <!-- Se generan con JS -->
+            </div>
+
+            <!-- Active Content -->
+            <div id="contentGrid" class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Sidebar Info -->
+                <div class="lg:col-span-1 space-y-4">
+                    <div id="goalBox" class="p-5 rounded-xl bg-opacity-50 border transition-colors">
+                        <h3 class="font-bold text-lg mb-2 flex items-center gap-2">
+                            <i data-lucide="lightbulb" class="w-5 h-5"></i>
+                            Meta de Aprendizaje
+                        </h3>
+                        <p id="goalText" class="italic font-serif text-lg leading-snug"></p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <h4 class="font-semibold text-slate-800 mb-2">Descripción</h4>
+                        <p id="descText" class="text-slate-600 text-sm"></p>
+                    </div>
+                </div>
+
+                <!-- Phases Columns -->
+                <div id="phasesContainer" class="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Se generan con JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA JSON (IA) - Inicialmente oculta -->
+        <div id="jsonView" class="hidden fade-in bg-slate-900 rounded-xl overflow-hidden shadow-lg">
+            <div class="bg-slate-800 px-4 py-2 border-b border-slate-700 flex justify-between items-center">
+                <span class="text-slate-400 font-mono text-xs flex items-center gap-2">
+                    <i data-lucide="database" class="w-3 h-3"></i> raw_knowledge_base.json
+                </span>
+                <button id="copyJsonBtn" class="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
+                    Copiar al portapapeles
+                </button>
+            </div>
+            <pre id="jsonContent" class="p-4 text-green-400 font-mono text-sm overflow-x-auto h-[70vh] custom-scrollbar"></pre>
+        </div>
+
+    </main>
+
+    <footer class="max-w-6xl mx-auto px-4 py-6 text-center text-slate-400 text-sm">
+        <p>© 2022-2023 Common Ground Collaborative. Licensed under CC BY-NC-ND 4.0.</p>
+        <p class="mt-1 text-xs">Esta interfaz presenta los datos en formato semántico estructurado, optimizado para RAG.</p>
+    </footer>
+
+    <!-- Lógica de la Aplicación -->
+    <script>
+        // --- DATOS ---
+        const toolkitData = {
+            metadata: {
+                title: "The 3Cs Toolkit",
+                source: "Common Ground Collaborative",
+                license: "CC BY-NC-ND 4.0",
+                definition: "El aprendizaje es un proceso que conduce a una consolidación o extensión sostenida y demostrable de la comprensión CONCEPTUAL, las COMPETENCIAS o el CARÁCTER."
+            },
+            categories: [
+                {
+                    id: "conceptual",
+                    title: "Aprendizaje Conceptual",
+                    icon: "brain",
+                    colorClass: "bg-blue-100 text-blue-800",
+                    borderClass: "border-blue-500",
+                    goalStem: "Los estudiantes entienden que...",
+                    description: "Ocurre cuando los estudiantes están construyendo y reconstruyendo teorías de cómo funcionan las cosas.",
+                    phases: [
+                        {
+                            name: "Conectar (Connecting)",
+                            description: "Conectar conocimiento nuevo y potencialmente disruptivo con la comprensión previa y conceptos importantes.",
+                            tools: ["See Think Wonder", "Chalk Talk", "Give One Take One", "Question Formulation Technique", "Question Starts"]
+                        },
+                        {
+                            name: "Construir (Constructing)",
+                            description: "Construir y reconstruir teorías de cómo funcionan las cosas y por qué son así, verificando nuevas teorías en diferentes contextos.",
+                            tools: ["Question Funnel", "Question Sorts", "Wonder Wall", "Question on the Wall", "Tug-of-War", "Carousel"]
+                        },
+                        {
+                            name: "Contribuir (Contributing)",
+                            description: "Contribuir con sus teorías/explicaciones refinadas para compartir nuevos entendimientos y practicar explicándolos.",
+                            tools: ["Brainstorm Routine", "The Story (Main, Side, Hidden)", "Sketchnoting", "Causal Interaction Map", "Hexagons Connection", "Circle Viewpoints", "Claim-Support-Question", "Module Summary Matrix", "Consensus Placemat 1-3-6", "Concept Mapping", "Bloom's Taxonomy", "Four Corners", "Experience Journal", "Reflection Conversations"]
+                        }
+                    ]
+                },
+                {
+                    id: "competency",
+                    title: "Aprendizaje de Competencias",
+                    icon: "layers",
+                    colorClass: "bg-orange-100 text-orange-800",
+                    borderClass: "border-orange-500",
+                    goalStem: "Los estudiantes son capaces de...",
+                    description: "Ocurre cuando los estudiantes deconstruyen el desempeño experto, identifican ajustes y practican habilidades.",
+                    phases: [
+                        {
+                            name: "Deconstruir (Deconstructing)",
+                            description: "Deconstruir el desempeño experto y compararlo con el propio.",
+                            tools: ["Análisis de Expertos (Under Construction)", "Modelado Inverso"]
+                        },
+                        {
+                            name: "Identificar (Identifying)",
+                            description: "Identificar los ajustes que necesitan hacer.",
+                            tools: ["My Favorite No Strategy", "Análisis de Brechas"]
+                        },
+                        {
+                            name: "Practicar (Practicing)",
+                            description: "Practicar una habilidad para refinarla y hacerla cada vez más automática.",
+                            tools: ["Práctica Deliberada (Under Construction)", "Repetición Espaciada"]
+                        }
+                    ]
+                },
+                {
+                    id: "character",
+                    title: "Aprendizaje del Carácter",
+                    icon: "heart",
+                    colorClass: "bg-green-100 text-green-800",
+                    borderClass: "border-green-500",
+                    goalStem: "Los estudiantes se vuelven más...",
+                    description: "Ocurre cuando los estudiantes consideran disposiciones, actúan en consecuencia y reflexionan sobre los efectos.",
+                    phases: [
+                        {
+                            name: "Considerar (Considering)",
+                            description: "Considerar cómo se verían disposiciones y valores particulares aplicados en contextos auténticos específicos.",
+                            tools: ["Question of Character (Para mayores)", "Idea of Character (Para menores)", "Dilemas Éticos"]
+                        },
+                        {
+                            name: "Actuar (Acting)",
+                            description: "Actuar como resultado de estas consideraciones.",
+                            tools: ["Proyectos de Servicio (Under Construction)", "Juego de Roles"]
+                        },
+                        {
+                            name: "Reflexionar (Reflecting)",
+                            description: "Reflexionar sobre los efectos de estas acciones.",
+                            tools: ["Diarios Reflexivos (Under Construction)", "Círculos de Diálogo"]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // --- ESTADO ---
+        let activeTabId = 'conceptual';
+        let isJsonView = false;
+
+        // --- DOM ELEMENTS ---
+        const mainDef = document.getElementById('mainDefinition');
+        const tabsContainer = document.getElementById('tabsContainer');
+        const goalBox = document.getElementById('goalBox');
+        const goalText = document.getElementById('goalText');
+        const descText = document.getElementById('descText');
+        const phasesContainer = document.getElementById('phasesContainer');
+        const jsonContent = document.getElementById('jsonContent');
+        
+        // Toggle Elements
+        const toggleBtn = document.getElementById('toggleViewBtn');
+        const toggleIcon = document.getElementById('toggleIcon');
+        const toggleText = document.getElementById('toggleText');
+        const humanView = document.getElementById('humanView');
+        const jsonView = document.getElementById('jsonView');
+        const copyJsonBtn = document.getElementById('copyJsonBtn');
+
+        // --- INICIALIZACIÓN ---
+        function init() {
+            mainDef.innerText = `"${toolkitData.metadata.definition}"`;
+            jsonContent.innerText = JSON.stringify(toolkitData, null, 2);
+            renderTabs();
+            renderContent();
+            lucide.createIcons();
+        }
+
+        // --- RENDERIZADO ---
+        function renderTabs() {
+            tabsContainer.innerHTML = '';
+            toolkitData.categories.forEach(cat => {
+                const isActive = cat.id === activeTabId;
+                const btn = document.createElement('button');
+                
+                // Clases base
+                let classes = "flex-1 min-w-[140px] flex items-center justify-center gap-2 p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer ";
+                
+                // Clases condicionales
+                if (isActive) {
+                    classes += `${cat.colorClass} ${cat.borderClass} shadow-sm`;
+                } else {
+                    classes += "border-transparent bg-white text-slate-500 hover:bg-slate-50 hover:text-slate-700 shadow-sm";
+                }
+                
+                btn.className = classes;
+                btn.innerHTML = `<i data-lucide="${cat.icon}" class="w-5 h-5"></i> <span class="font-semibold">${cat.title}</span>`;
+                
+                btn.onclick = () => {
+                    activeTabId = cat.id;
+                    renderTabs();
+                    renderContent();
+                    lucide.createIcons();
+                };
+                
+                tabsContainer.appendChild(btn);
+            });
+        }
+
+        function renderContent() {
+            const activeCategory = toolkitData.categories.find(c => c.id === activeTabId);
+            
+            // Actualizar Sidebar
+            goalBox.className = `p-5 rounded-xl bg-opacity-50 border transition-colors ${activeCategory.colorClass} ${activeCategory.borderClass}`;
+            goalText.innerText = `"${activeCategory.goalStem}"`;
+            descText.innerText = activeCategory.description;
+
+            // Actualizar Fases (Cards)
+            phasesContainer.innerHTML = '';
+            activeCategory.phases.forEach((phase, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow";
+                
+                // Lista de herramientas
+                const toolsHtml = phase.tools.map(tool => {
+                    let toolContent = tool;
+                    if (tool.includes("Construction")) {
+                        const cleanName = tool.replace('(Under Construction)', '');
+                        toolContent = `<span class="text-slate-400 italic flex items-center gap-1 flex-wrap">
+                                        ${cleanName} 
+                                        <span class="bg-slate-100 text-slate-400 text-[10px] px-1.5 py-0.5 rounded not-italic">En desarrollo</span>
+                                       </span>`;
+                    }
+                    return `<li class="flex items-start group">
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-indigo-400 mt-0.5 flex-shrink-0 mr-1 group-hover:translate-x-1 transition-transform"></i>
+                                <span class="text-sm text-slate-700 font-medium">${toolContent}</span>
+                            </li>`;
+                }).join('');
+
+                card.innerHTML = `
+                    <div class="p-4 bg-slate-50 border-b border-slate-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">
+                                ${idx + 1}
+                            </span>
+                            <h3 class="font-bold text-slate-800">${phase.name}</h3>
+                        </div>
+                        <p class="text-xs text-slate-500 leading-relaxed">${phase.description}</p>
+                    </div>
+                    <div class="p-4 flex-grow bg-white">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-1">
+                            <i data-lucide="pen-tool" class="w-3 h-3"></i> Herramientas
+                        </h4>
+                        <ul class="space-y-2">
+                            ${toolsHtml}
+                        </ul>
+                    </div>
+                `;
+                phasesContainer.appendChild(card);
+            });
+        }
+
+        // --- EVENTOS DE INTERFAZ ---
+        toggleBtn.addEventListener('click', () => {
+            isJsonView = !isJsonView;
+            
+            if (isJsonView) {
+                // Mostrar JSON
+                humanView.classList.add('hidden');
+                jsonView.classList.remove('hidden');
+                
+                // Actualizar botón
+                toggleBtn.className = "flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-indigo-100 text-indigo-700";
+                toggleText.innerText = "Ver Vista Humana";
+                toggleIcon.setAttribute('data-lucide', 'users');
+            } else {
+                // Mostrar Humano
+                jsonView.classList.add('hidden');
+                humanView.classList.remove('hidden');
+                
+                // Actualizar botón
+                toggleBtn.className = "flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-slate-100 text-slate-600 hover:bg-slate-200";
+                toggleText.innerText = "Ver Datos JSON (IA)";
+                toggleIcon.setAttribute('data-lucide', 'code');
+            }
+            lucide.createIcons();
+        });
+
+        copyJsonBtn.addEventListener('click', () => {
+            const text = JSON.stringify(toolkitData, null, 2);
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = copyJsonBtn.innerText;
+                copyJsonBtn.innerText = "¡Copiado!";
+                copyJsonBtn.classList.add('text-green-400');
+                setTimeout(() => {
+                    copyJsonBtn.innerText = originalText;
+                    copyJsonBtn.classList.remove('text-green-400');
+                }, 2000);
+            });
+        });
+
+        // Arrancar
+        window.onload = init;
+
+    </script>
+</body>
+</html>
