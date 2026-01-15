@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Completo de Diseño de Cursos UNITEC - CGC</title>
+    
+    <!-- 
+      SECCIÓN AVANZADA PARA AGENTES DE IA (JSON-LD)
+      Esta estructura de datos contiene ahora la totalidad del conocimiento de los manuales
+      de forma semántica, permitiendo a una IA entender la lógica pedagógica profunda,
+      no solo la estructura superficial.
+    -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Manual de Diseño de Cursos UNITEC & CGC Framework",
+      "description": "Guía exhaustiva para el diseño de módulos de aprendizaje basada en el Common Ground Collaborative (CGC) adaptado para UNITEC. Integra la planificación conceptual, competencial y de carácter.",
+      "audience": ["Diseñadores Instruccionales", "Docentes Universitarios", "Agentes de Inteligencia Artificial"],
+      "educationalLevel": "Higher Education",
+      "keywords": "CGC, UNITEC, Diseño Curricular, 3Cs, GRASPS, Aprendizaje Profundo",
+      "mainEntity": {
+        "@type": "EducationalFramework",
+        "sections": [
+          {
+            "sectionId": "1",
+            "name": "Identidad del Curso",
+            "principle": "Alineación Visible",
+            "instruction": "Hacer visible la conexión lógica: Disciplina Académica + Comunalidad Humana -> Capacidades del Retrato (Perfil de Egreso).",
+            "components": [
+              { "name": "Título", "desc": "Disciplina + Código del curso." },
+              { "name": "Comunalidad Humana Central", "examples": ["Individuos y Grupos", "Patrones y Principios", "Cambio y Continuidad", "Sistemas e Interacciones"] },
+              { "name": "Vínculos con el Retrato", "desc": "Capacidades específicas del perfil de egreso que este curso desarrolla fuertemente." }
+            ]
+          },
+          {
+            "sectionId": "2",
+            "name": "La Pregunta Atractiva (Compelling Question)",
+            "definition": "Una pregunta abierta, ingeniosa y provocadora que actúa como un titular periodístico. No tiene una única respuesta correcta. Sirve como una 'llamada a la indagación'.",
+            "criteria": ["Intrigante", "Sin jerga académica", "Relevante humanamente", "Despierta curiosidad inmediata"],
+            "designerTrigger": "¿Qué pregunta haría que un estudiante dijera 'Quiero responder eso'?"
+          },
+          {
+            "sectionId": "3",
+            "name": "La Gran Idea (The Big Idea)",
+            "definition": "Una frase conceptual que sirve de ancla para el curso. Representa una comprensión perdurable y transferible que conecta el conocimiento disciplinar con la relevancia humana.",
+            "format": "Debe comenzar con la frase 'Entender que...'",
+            "purpose": "Responder al '¿Y qué?' del módulo. Si los estudiantes olvidan los detalles, esta es la comprensión que deben llevarse para toda la vida."
+          },
+          {
+            "sectionId": "4",
+            "name": "El Porqué (The Why)",
+            "definition": "Una narrativa breve (Story) que explica el contenido ilustrativo y su importancia.",
+            "audiences": [
+              { "target": "Docente", "focus": "Explicar por qué importa para la sociedad, la industria o la profesión. Basada en investigación o contexto." },
+              { "target": "Estudiante", "focus": "Concreta, vívida e inmediata. Debe enganchar con un escenario o pregunta relevante para su vida." }
+            ],
+            "mandatoryEnding": "Todas las narrativas deben terminar con la frase: 'Por eso este módulo importa'."
+          },
+          {
+            "sectionId": "5",
+            "name": "El Qué - Metas de Aprendizaje",
+            "methodology": "Las 3Cs + L2L",
+            "goals": [
+              { 
+                "type": "Conceptual", 
+                "prompt": "Entender que...", 
+                "focus": "Conceptos, teorías y principios. Se logran mediante lecturas, discusiones y análisis." 
+              },
+              { 
+                "type": "Competencia", 
+                "prompt": "Ser capaz de...", 
+                "focus": "Habilidades y destrezas demostrables usando verbos de acción. Provienen de los programas oficiales de UNITEC." 
+              },
+              { 
+                "type": "Carácter", 
+                "prompt": "Convertirse en...", 
+                "focus": "Valores y disposiciones (ej. Integridad, Empatía, Responsabilidad). Vinculados a los rasgos del 'Winged Lion' o Retrato." 
+              },
+              { 
+                "type": "Aprender a Aprender (L2L)", 
+                "focus": "Metacognición, autorregulación, monitoreo del progreso y transferencia de estrategias." 
+              }
+            ]
+          },
+          {
+            "sectionId": "6",
+            "name": "Preguntas Marco (Framing Questions)",
+            "definition": "Preguntas abiertas que provocan pensamiento y orientan la indagación diaria. No son preguntas de examen, sino guías para el aprendizaje.",
+            "categories": ["Preguntas Conceptuales", "Preguntas de Competencia", "Preguntas de Carácter", "Preguntas de Aprender a Aprender"]
+          },
+          {
+            "sectionId": "7",
+            "name": "La Evidencia",
+            "tool": "GRASPS",
+            "components": ["Goal (Meta)", "Role (Rol)", "Audience (Audiencia)", "Situation (Situación)", "Product (Producto)", "Standards (Criterios de Éxito)"],
+            "assessmentType": "Evaluación auténtica situada en contextos del mundo real.",
+            "rubricType": "Se sugiere el uso de Rúbricas de Punto Único o analíticas claras (Emergente, En Evolución, Experto)."
+          },
+          {
+            "sectionId": "8",
+            "name": "El Cómo - Secuencias de Aprendizaje",
+            "models": [
+              {
+                "modelName": "3Cs (Para Conceptos)",
+                "phases": [
+                  { "phase": "Conectar", "desc": "Activar conocimientos previos, despertar curiosidad, conectar con la gran pregunta." },
+                  { "phase": "Construir", "desc": "Desarrollar nueva comprensión a través de exploración estructurada, práctica o indagación." },
+                  { "phase": "Contribuir", "desc": "Extender el aprendizaje hacia fuera. Aplicar la comprensión en contextos auténticos o compartirla." }
+                ]
+              },
+              {
+                "modelName": "DIP (Para Competencias)",
+                "phases": [
+                  { "phase": "Deconstruir", "desc": "Analizar un desempeño experto o modelo para identificar sus partes." },
+                  { "phase": "Identificar", "desc": "Reconocer y nombrar las habilidades, técnicas o estrategias específicas." },
+                  { "phase": "Practicar", "desc": "Aplicar habilidades en práctica guiada o independiente con retroalimentación." }
+                ]
+              },
+              {
+                "modelName": "CAR (Para Carácter)",
+                "phases": [
+                  { "phase": "Considerar", "desc": "Reflexionar sobre valores, dilemas o decisiones éticas relevantes." },
+                  { "phase": "Actuar", "desc": "Tomar decisiones y demostrar valores mediante conductas o proyectos." },
+                  { "phase": "Reflexionar", "desc": "Pensar en el crecimiento personal: '¿En quién me estoy convirtiendo?'" }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionId": "9",
+            "name": "Reflexión y Transferencia",
+            "components": [
+              { "type": "Estudiante", "questions": ["¿Qué aprendí?", "¿Cómo lo aprendí?", "¿En quién me estoy convirtiendo?", "¿Qué estrategias mantendré?", "¿Dónde más puedo aplicar esto?"] },
+              { "type": "Docente", "questions": ["¿Cómo construyó el curso las capacidades del Retrato?", "¿Dónde estuvo la evidencia del aprendizaje L2L?"] }
+            ]
+          }
+        ]
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #003366; /* UNITEC Blue */
+            --primary-light: #004d99;
+            --secondary-bg: #f4f7f6;
+            --text-color: #2c3e50;
+            --border-radius: 8px;
+            --sidebar-width: 280px;
+            
+            /* Colores Semánticos */
+            --guide-border: #2980b9;
+            --guide-bg: #eaf2f8;
+            --example-border: #f39c12;
+            --example-bg: #fef9e7;
+            --cgc-border: #27ae60;
+            --cgc-bg: #e9f7ef;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            margin: 0;
+            background-color: #eef2f5;
+        }
+
+        /* SIDEBAR */
+        nav {
+            width: var(--sidebar-width);
+            background: var(--primary-color);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 25px 15px;
+            overflow-y: auto;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        nav h1 {
+            font-size: 1.4rem;
+            margin-top: 0;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            margin-bottom: 5px;
+        }
+
+        nav a {
+            color: #bdc3c7;
+            text-decoration: none;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .ai-badge {
+            margin-top: 30px;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #bdc3c7;
+            text-align: center;
+            border: 1px dashed rgba(255,255,255,0.3);
+        }
+
+        /* MAIN CONTENT */
+        main {
+            margin-left: var(--sidebar-width);
+            padding: 40px 60px;
+            max-width: 1000px;
+        }
+
+        header.main-header {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+            border-bottom: 5px solid var(--primary-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        section {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-bottom: 50px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--primary-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        /* BOXES */
+        .box {
+            padding: 25px;
+            margin: 25px 0;
+            border-left-width: 6px;
+            border-left-style: solid;
+            border-radius: 4px;
+        }
+
+        .guide-box {
+            background-color: var(--guide-bg);
+            border-left-color: var(--guide-border);
+        }
+        .guide-box h4 { color: #154360; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+
+        .cgc-box {
+            background-color: var(--cgc-bg);
+            border-left-color: var(--cgc-border);
+        }
+        .cgc-box h4 { color: #145a32; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+
+        .example-box {
+            background-color: var(--example-bg);
+            border-left-color: var(--example-border);
+        }
+        .example-box h4 { color: #7e5109; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+
+        /* TABLES & LISTS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        th, td {
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e8e8e8;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+            margin-right: 5px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            body { display: block; }
+            nav { width: 100%; height: auto; position: relative; padding: 15px; box-sizing: border-box; }
+            main { margin-left: 0; padding: 20px; box-sizing: border-box; }
+            section { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h1>UNITEC Planner</h1>
+    <ul>
+        <li><a href="#intro">Inicio</a></li>
+        <li><a href="#sec1">1. Identidad del Curso</a></li>
+        <li><a href="#sec2">2. Pregunta Atractiva</a></li>
+        <li><a href="#sec3">3. Gran Idea</a></li>
+        <li><a href="#sec4">4. El Porqué</a></li>
+        <li><a href="#sec5">5. El Qué (Metas Completas)</a></li>
+        <li><a href="#sec6">6. Preguntas Marco</a></li>
+        <li><a href="#sec7">7. La Evidencia (GRASPS)</a></li>
+        <li><a href="#sec8">8. El Cómo (Secuencias)</a></li>
+        <li><a href="#sec9">9. Reflexión</a></li>
+    </ul>
+    <div class="ai-badge">
+        <strong>Base de Conocimiento IA</strong><br>
+        (JSON-LD Integrado v2.0)
+    </div>
+</nav>
+
+<main>
+    <header class="main-header" id="intro">
+        <h1>Manual del Diseñador de Cursos UNITEC (CGC)</h1>
+        <p>Este sitio web contiene la <strong>información completa y detallada</strong> extraída de los manuales "Unitec Planner Instructions" y "CGC Modules Explained".</p>
+        <p>Está diseñado para servir como fuente de verdad tanto para diseñadores instruccionales humanos como para agentes de Inteligencia Artificial que requieran consumir esta metodología pedagógica.</p>
+    </header>
+
+    <!-- SECCIÓN 1 -->
+    <section id="sec1">
+        <h2>Sección Uno: Identidad del Curso</h2>
+        <p>El primer paso es establecer la identidad fundamental del módulo asegurando una alineación lógica desde la disciplina hasta el perfil de egreso.</p>
+
+        <div class="guide-box">
+            <h4>Guía del Diseñador UNITEC</h4>
+            <p><strong>Instrucción Clave:</strong> Haz visible la alineación desde el inicio siguiendo esta fórmula:</p>
+            <p style="text-align:center; font-weight:bold; font-size:1.1em; padding:10px; background:rgba(255,255,255,0.5);">
+                Disciplina Académica + Comunalidad Humana Central &rarr; Capacidades del Retrato
+            </p>
+            <ul>
+                <li><strong>Título del Curso:</strong> Nombre de la disciplina + Código.</li>
+                <li><strong>Comunalidad Humana Central:</strong> El tema universal que conecta la materia (ej. Individuos y Grupos, Patrones y Principios, Cambio y Continuidad, Sistemas e Interacciones, Causa y Consecuencia).</li>
+                <li><strong>Vínculos con el Retrato:</strong> Qué capacidades específicas del perfil del egresado (Retrato) desarrolla más fuertemente este curso.</li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <h4>Ejemplo Completo: Historia de Honduras (HIS101)</h4>
+            <ul>
+                <li><strong>Curso:</strong> Historia de Honduras (HIS101)</li>
+                <li><strong>Comunalidad Humana Central:</strong> Individuos y Grupos</li>
+                <li><strong>Vínculos con el Retrato:</strong> Ciudadano Responsable, Colaborador Constructivo, Comunicador Efectivo.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2 -->
+    <section id="sec2">
+        <h2>Sección Dos: La Pregunta Atractiva (Compelling Question)</h2>
+        
+        <div class="cgc-box">
+            <h4>Explicación Profunda CGC</h4>
+            <p>Una "Compelling Question" es una llamada a la indagación. Para ser efectiva debe cumplir con criterios estrictos:</p>
+            <ul>
+                <li>Generar interés y despertar curiosidad genuina.</li>
+                <li>Capturar la atención del estudiante e inspirarlo a buscar conocimiento.</li>
+                <li><strong>Ser abierta:</strong> No debe tener una sola respuesta "correcta".</li>
+                <li>Permitir múltiples interpretaciones y opiniones fundamentadas.</li>
+            </ul>
+        </div>
+
+        <div class="guide-box">
+            <h4>Guía del Diseñador UNITEC</h4>
+            <p>Debe ser corta, ingeniosa y llamativa, como un "titular" en lenguaje estudiantil. Evita la jerga académica; mantén la pregunta viva, humana y relevante.</p>
+            <p><strong>Disparador para el diseñador:</strong> <em>¿Qué pregunta haría que un estudiante dijera "Quiero responder eso"?</em></p>
+        </div>
+
+        <div class="example-box">
+            <h4>Ejemplos por Disciplina</h4>
+            <ul>
+                <li><strong>Filosofía:</strong> ¿Vivimos para buscar la verdad... o para crearla?</li>
+                <li><strong>Sociología:</strong> ¿La sociedad nos moldea... o la moldeamos nosotros?</li>
+                <li><strong>Historia de Honduras:</strong> ¿De quién es la historia que llamamos "historia"?</li>
+                <li><strong>Álgebra:</strong> ¿Es el álgebra un lenguaje... o un código secreto?</li>
+                <li><strong>Tecnología de Oficina:</strong> ¿Controlamos la tecnología... o la tecnología nos controla?</li>
+                <li><strong>Investigación Cuantitativa:</strong> ¿Los números dicen la verdad... o solo un relato?</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3 -->
+    <section id="sec3">
+        <h2>Sección Tres: La Gran Idea (The Big Idea)</h2>
+
+        <div class="cgc-box">
+            <h4>Explicación Profunda CGC</h4>
+            <p>Es una declaración simple que aborda el concepto clave en el corazón del Módulo. Es el "¿y qué?" del módulo.</p>
+            <ul>
+                <li>Expresa una idea perdurable y transferible.</li>
+                <li>Conecta el conocimiento disciplinar con la relevancia humana o social.</li>
+                <li>Si los estudiantes olvidan los detalles, esta es la comprensión que deberían llevarse para toda la vida.</li>
+            </ul>
+        </div>
+
+        <div class="guide-box">
+            <h4>Formato Obligatorio</h4>
+            <p>La Gran Idea siempre comienza con la frase: <strong>"Entender que..."</strong> (Understanding that...). Esto señala que la declaración expresa un concepto que necesita ser comprendido e internalizado, no solo memorizado.</p>
+        </div>
+
+        <div class="example-box">
+            <h4>Ejemplos Completos</h4>
+            <ul>
+                <li><strong>Filosofía:</strong> <em>Entender que</em> la filosofía trata menos de tener respuestas y más de hacer mejores preguntas nos ayuda a navegar la ética y el propósito.</li>
+                <li><strong>Sociología:</strong> <em>Entender que</em> las estructuras sociales tanto limitan como empoderan a los individuos nos ayuda a explicar la desigualdad e imaginar el cambio.</li>
+                <li><strong>Álgebra:</strong> <em>Entender que</em> el álgebra representa patrones y relaciones nos permite modelar y resolver problemas en la ciencia, la tecnología y la vida diaria.</li>
+                <li><strong>Investigación Cuantitativa:</strong> <em>Entender que</em> los datos deben ser recolectados, analizados e interpretados de manera responsable asegura que la investigación conduzca a un conocimiento confiable y a decisiones éticas.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4 -->
+    <section id="sec4">
+        <h2>Sección Cuatro: El Porqué (The Why)</h2>
+        <p>Esta sección es una narrativa breve (Story) que justifica la existencia del módulo. Se redactan dos versiones complementarias.</p>
+
+        <div class="guide-box">
+            <h4>1. Historia dirigida al Docente</h4>
+            <p>Explica por qué este curso importa para la sociedad, la industria o la profesión. Debe estar basada en investigación o contexto real.</p>
+            
+            <h4>2. Historia dirigida al Estudiante</h4>
+            <p>Debe ser concreta, vívida e inmediata. Debe enganchar con un escenario o pregunta. <strong>Siempre debe terminar con la frase: "Por eso este módulo importa."</strong></p>
+        </div>
+
+        <div class="example-box">
+            <h4>Caso de Estudio Completo: Historia de Honduras</h4>
+            
+            <p><strong>Para Docentes:</strong><br>
+            Honduras enfrenta tensiones sociales, políticas y económicas que con frecuencia se alimentan de comprensiones limitadas o de relatos únicos del pasado. Cuando las narrativas oficiales eclipsan las voces indígenas, afrodescendientes, campesinas y de las mujeres, perdemos la complejidad que fortalece una identidad resiliente. Este curso centra un análisis multiperspectivo para que los estudiantes lean la historia como ciudadanos capaces de cuestionar fuentes, comparar narrativas y conectar el pasado con el presente para construir un futuro más justo. <em>Por eso este módulo importa.</em></p>
+            
+            <p><strong>Para Estudiantes:</strong><br>
+            Dos libros, mismo evento: en uno es un héroe; en el otro, un villano. ¿Quién tiene razón? La historia no es un relato único; es una conversación de voces. Aprenderás a identificar cuál voz es la más fuerte, cuál está ausente y por qué eso importa para Honduras hoy—y mañana. <em>Por eso este módulo importa.</em></p>
+        </div>
+
+        <div class="example-box">
+            <h4>Otros Ejemplos Rápidos (Estudiantes)</h4>
+            <ul>
+                <li><strong>Álgebra:</strong> Necesitas elegir el plan de datos más barato en un año pero la publicidad lo hace imposible de comparar. El álgebra puede despejar la confusión. <em>Por eso este módulo importa.</em></li>
+                <li><strong>Tecnología de Oficina:</strong> Tu equipo "usa tecnología", pero aun así pierde plazos y excluye a voces más calladas. Herramientas correctas, hábitos incorrectos. Vamos a arreglar eso. <em>Por eso este módulo importa.</em></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 5 -->
+    <section id="sec5">
+        <h2>Sección Cinco: El Qué - Metas de Aprendizaje (3Cs + L2L)</h2>
+        <p>Las metas definen el destino del aprendizaje. Deben ser específicas y cubrir todas las dimensiones del desarrollo.</p>
+
+        <div class="cgc-box">
+            <h3>A. Meta Conceptual (Conceptual)</h3>
+            <p><strong>Prompt:</strong> "Entender que..." (Learners understand that...)</p>
+            <p>Se centran en conceptos, teorías y principios. Se logran a través de conferencias, discusiones y lecturas.</p>
+            <p><em>Ejemplo Filosofía:</em> Las afirmaciones de conocimiento están moldeadas por supuestos y métodos.</p>
+        </div>
+
+        <div class="cgc-box">
+            <h3>B. Meta de Competencia (Competency)</h3>
+            <p><strong>Prompt:</strong> "Ser capaz de..." (Learners will be able to...)</p>
+            <p>Se enfocan en habilidades y destrezas prácticas. Deben usar verbos de acción (Bloom). Provienen específicamente de los programas de UNITEC.</p>
+            <p><em>Ejemplo Filosofía:</em> Evaluar argumentos identificando supuestos, probando la lógica y comparando marcos éticos.</p>
+        </div>
+
+        <div class="cgc-box">
+            <h3>C. Meta de Carácter (Character)</h3>
+            <p><strong>Prompt:</strong> "Convertirse en..." (We become more...)</p>
+            <p>Se enfocan en valores personales y disposiciones de aprendizaje. En CGC incluyen rasgos como: Integridad, Justicia, Empatía, Autoconocimiento, Apertura, Reflexión, Resiliencia.</p>
+            <p><em>Ejemplo Filosofía:</em> <strong>Curioso</strong> al cuestionar supuestos y buscar razones más profundas.</p>
+            <p><em>Ejemplo Sociología:</em> <strong>Compasivo</strong> al escuchar y representar a comunidades de manera ética.</p>
+        </div>
+
+        <div class="guide-box">
+            <h3>D. Metas de Aprender a Aprender (L2L)</h3>
+            <p>Es obligatorio incluir metas del mapa universitario L2L. Ejemplos textuales del manual:</p>
+            <ul>
+                <li>Los estudiantes están desarrollando la capacidad de monitorear el progreso con hitos claros y ajustar estrategias.</li>
+                <li>Los estudiantes están desarrollando la capacidad de dar/recibir retroalimentación STAR (Específica, Oportuna, Accionable, Respetuosa).</li>
+                <li>Los estudiantes están desarrollando la capacidad de transferir estrategias entre disciplinas.</li>
+                <li>Los estudiantes están desarrollando la capacidad de autorregular su tiempo, atención y flujo digital de trabajo.</li>
+                <li>Los estudiantes están desarrollando la capacidad de reflexionar sobre cómo el aprendizaje cambia su pensamiento, elecciones e identidad.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 6 -->
+    <section id="sec6">
+        <h2>Sección Seis: Las Preguntas Marco (Framing Questions)</h2>
+        
+        <div class="guide-box">
+            <h4>Definición</h4>
+            <p>Son preguntas abiertas, o grupos de preguntas, que provocan el pensamiento y orientan la indagación diaria. No se responden con un "sí" o "no". Guían las secuencias de aprendizaje.</p>
+        </div>
+
+        <table class="example-table">
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Ejemplos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Conceptuales</strong></td>
+                    <td>
+                        - Filosofía: ¿Qué hace que una razón sea buena?<br>
+                        - Sociología: ¿Cómo mantienen las normas las desigualdades?<br>
+                        - Historia: ¿Qué voces construyen la identidad nacional?
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>De Competencia</strong></td>
+                    <td>
+                        - Historia: ¿Cómo comparo dos fuentes en conflicto?<br>
+                        - Investigación: ¿Cómo selecciono un marco de muestreo de manera ética?<br>
+                        - Tecnología: ¿Cómo estructuro un documento colaborativo para evitar el caos de versiones?
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>De Carácter</strong></td>
+                    <td>
+                        - ¿En quién me estoy convirtiendo como ciudadano responsable al recontar la historia?<br>
+                        - ¿En quién me estoy convirtiendo como colaborador respetuoso en línea?
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>De Aprendizaje (L2L)</strong></td>
+                    <td>
+                        - ¿Qué estrategias me ayudaron a interpretar textos complejos y por qué?<br>
+                        - ¿Cómo cambió mi borrador gracias a la retroalimentación?
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- SECCIÓN 7 -->
+    <section id="sec7">
+        <h2>Sección Siete: La Evidencia</h2>
+        
+        <div class="cgc-box">
+            <h4>El Modelo GRASPS (UbD)</h4>
+            <p>Para la evaluación culminante, diseñamos tareas auténticas que simulan desafíos del mundo real. Usamos el acrónimo GRASPS:</p>
+            <ul>
+                <li><strong>G (Goal/Meta):</strong> El objetivo del desafío.</li>
+                <li><strong>R (Role/Rol):</strong> El rol que asume el estudiante (ej. Historiador, Consultor).</li>
+                <li><strong>A (Audience/Audiencia):</strong> A quién va dirigido el producto (ej. El consejo municipal, Lectores del periódico).</li>
+                <li><strong>S (Situation/Situación):</strong> El contexto del desafío.</li>
+                <li><strong>P (Product/Producto):</strong> Lo que el estudiante crea.</li>
+                <li><strong>S (Success Criteria/Criterios):</strong> Cómo se evaluará el éxito.</li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <h4>Ejemplo GRASPS: Historia de Honduras</h4>
+            <p><strong>Tarea:</strong> Analizar cómo diferentes narrativas históricas influyen en la identidad nacional.</p>
+            <ul>
+                <li><strong>Rol:</strong> Historiadores ciudadanos.</li>
+                <li><strong>Audiencia:</strong> Comunidad universitaria y público en general.</li>
+                <li><strong>Situación:</strong> Preparar un panel que compare distintas interpretaciones de un mismo acontecimiento (ej. la independencia).</li>
+                <li><strong>Producto:</strong> Presentación argumentada con fuentes contrastadas.</li>
+                <li><strong>Criterios:</strong> Rigor en el análisis, Diversidad de perspectivas, Claridad, Ética en la comunicación.</li>
+            </ul>
+        </div>
+
+        <div class="guide-box">
+            <h4>Rúbricas</h4>
+            <p>Se recomienda el uso de <strong>Rúbricas de Punto Único</strong> o rúbricas analíticas simples con los niveles: Emergente, En Evolución, Experto, En Expansión.</p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 8 -->
+    <section id="sec8">
+        <h2>Sección Ocho: El Cómo - Secuencias de Aprendizaje</h2>
+        <p>Esta es la "coreografía" del aprendizaje. No usamos un modelo único, sino tres modelos distintos según el tipo de meta (3Cs).</p>
+
+        <div class="box cgc-box">
+            <h3>1. Modelo Constructivista (Para Metas Conceptuales)</h3>
+            <p>Un flujo de indagación en tres fases:</p>
+            <ul>
+                <li><strong>CONECTAR (Connect):</strong> Activa conocimientos previos, despierta curiosidad y hace significativa la gran pregunta.</li>
+                <li><strong>CONSTRUIR (Construct):</strong> Desarrolla nueva comprensión a través de exploración estructurada, práctica o indagación activa.</li>
+                <li><strong>CONTRIBUIR (Contribute):</strong> Extiende el aprendizaje hacia fuera. Los estudiantes comparten, presentan o aplican su comprensión en contextos auténticos.</li>
+            </ul>
+            <p><em>Ejemplo Sociología:</em><br>
+            - Conectar: Ver fotos de espacios públicos y discutir quién se beneficia.<br>
+            - Construir: Realizar una breve observación/entrevista y codificar temas.<br>
+            - Contribuir: Presentar una recomendación al consejo barrial.</p>
+        </div>
+
+        <div class="box cgc-box">
+            <h3>2. Modelo DIP (Para Metas de Competencia)</h3>
+            <p>Un flujo para adquirir habilidades:</p>
+            <ul>
+                <li><strong>DECONSTRUIR (Deconstruct):</strong> Analizar un desempeño, producto o modelo experto para identificar sus elementos.</li>
+                <li><strong>IDENTIFICAR (Identify):</strong> Reconocer y nombrar las habilidades, técnicas o estrategias requeridas.</li>
+                <li><strong>PRACTICAR (Practice):</strong> Aplicar habilidades en práctica guiada o independiente, con retroalimentación.</li>
+            </ul>
+        </div>
+
+        <div class="box cgc-box">
+            <h3>3. Modelo CAR (Para Metas de Carácter)</h3>
+            <p>Un flujo para el desarrollo ético y personal:</p>
+            <ul>
+                <li><strong>CONSIDERAR (Consider):</strong> Reflexionar sobre valores, dilemas o decisiones relevantes al módulo.</li>
+                <li><strong>ACTUAR (Act):</strong> Tomar decisiones y demostrar valores mediante conductas, contribuciones o proyectos.</li>
+                <li><strong>REFLEXIONAR (Reflect):</strong> Pensar en resultados y crecimiento, preguntándose "¿En quién me estoy convirtiendo?".</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 9 -->
+    <section id="sec9">
+        <h2>Sección Nueve: Reflexión y Transferencia</h2>
+        <p>El cierre del módulo no es un examen, es un proceso reflexivo para consolidar el aprendizaje.</p>
+
+        <div class="guide-box">
+            <h4>Reflexión del Estudiante (Siempre incluir)</h4>
+            <ul>
+                <li>¿Qué aprendí? ¿Cómo lo aprendí?</li>
+                <li>¿En quién me estoy convirtiendo?</li>
+                <li>¿Qué estrategias mantendré (o dejaré) la próxima vez y por qué?</li>
+            </ul>
+            
+            <h4>Transferencia (Hacerlo concreto)</h4>
+            <ul>
+                <li>¿Dónde más puedo aplicar esto (otro curso, mi trabajo, mi comunidad)?</li>
+                <li>¿Cuál sería una "próxima acción" más allá de esta clase?</li>
+            </ul>
+        </div>
+
+        <div class="guide-box">
+            <h4>Reflexión del Docente (Para diseñadores)</h4>
+            <ul>
+                <li>¿Cómo construye este curso explícitamente las capacidades del Retrato y las habilidades de Aprender a Aprender nombradas al inicio?</li>
+                <li>¿Dónde en la secuencia los estudiantes las practican y dónde está la evidencia?</li>
+            </ul>
+        </div>
+    </section>
+
+</main>
+</body>
+</html>
