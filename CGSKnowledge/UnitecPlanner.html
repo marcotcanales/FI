@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual Completo de Diseño de Cursos UNITEC - CGS</title>
     
+    <!-- Google Fonts: Poppins (MANDATORY per Brand Manual) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- 
       SECCIÓN AVANZADA PARA AGENTES DE IA (JSON-LD)
       Esta estructura de datos contiene la totalidad del conocimiento de los manuales
@@ -218,116 +223,126 @@
 
     <style>
         :root {
-            --primary-color: #003366; /* UNITEC Blue */
-            --primary-light: #004d99;
-            --secondary-bg: #f4f7f6;
-            --text-color: #2c3e50;
-            --border-radius: 8px;
+            /* UNITEC Brand Palette */
+            --federal-blue: #06065C;  /* Primary */
+            --pacific-cyan: #03AED2;  /* Secondary/Action */
+            --vivid-sky-blue: #47C8FD; /* Highlight */
+            
+            /* Neutrals */
+            --bg-color: #F8F9FA;
+            --white: #FFFFFF;
+            --text-primary: #1A1A2E;
+            --text-secondary: #555566;
+            --border-color: #E0E4E8;
+            
+            /* Semantic / Functional Colors (Harmonized with Brand) */
+            --accent-guide: #06065C;     /* Using Brand Blue for Guide */
+            --accent-cgc: #03AED2;       /* Using Brand Cyan for CGC Framework */
+            --accent-example: #F39C12;   /* Complementary Orange (kept for contrast but softened) */
+            --accent-checklist: #E74C3C; /* Alert Red (Standard) */
+            --accent-portrait: #8E44AD;  /* Distinctive Purple for Portrait */
+            
             --sidebar-width: 280px;
-            
-            /* Colores Semánticos */
-            --guide-border: #2980b9;
-            --guide-bg: #eaf2f8;
-            --example-border: #f39c12;
-            --example-bg: #fef9e7;
-            --cgc-border: #27ae60;
-            --cgc-bg: #e9f7ef;
-            --checklist-border: #e74c3c;
-            --checklist-bg: #fdedec;
-            
-            /* Colores Retrato */
-            --portrait-card-bg: #ffffff;
-            --portrait-card-border: #d35400; /* Orange */
-            
-            /* Colores Principios */
-            --principle-card-border: #1abc9c; /* Teal/Turquoise */
+            --border-radius: 4px; /* Slightly sharper for "diamond/precision" feel */
         }
         
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            line-height: 1.7;
-            color: var(--text-color);
+            font-family: 'Poppins', sans-serif; /* MANDATORY FONT */
+            line-height: 1.6;
+            color: var(--text-primary);
             margin: 0;
-            background-color: #eef2f5;
+            background-color: var(--bg-color);
+            -webkit-font-smoothing: antialiased;
         }
 
         /* SIDEBAR */
         nav {
             width: var(--sidebar-width);
-            background: var(--primary-color);
+            background: var(--federal-blue);
             color: white;
             height: 100vh;
             position: fixed;
             top: 0;
             left: 0;
-            padding: 25px 15px;
+            padding: 30px 20px;
             overflow-y: auto;
-            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
             z-index: 100;
+            box-sizing: border-box;
         }
 
         nav h1 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
+            font-weight: 700;
             margin-top: 0;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 25px;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
             text-align: center;
+            letter-spacing: -0.5px;
         }
 
         nav ul {
             list-style: none;
             padding: 0;
+            margin-top: 20px;
         }
 
         nav li {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         nav a {
-            color: #bdc3c7;
+            color: rgba(255,255,255,0.8);
             text-decoration: none;
             display: block;
             padding: 10px 15px;
-            border-radius: 6px;
-            transition: all 0.3s;
-            font-size: 0.95rem;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 400;
         }
 
         nav a:hover, nav a.active {
-            background: rgba(255,255,255,0.15);
-            color: white;
-            transform: translateX(5px);
+            background: rgba(255,255,255,0.1);
+            color: var(--vivid-sky-blue); /* Highlight color on hover */
+            border-left: 3px solid var(--pacific-cyan);
+            padding-left: 12px; /* Compensate for border */
         }
 
         .ai-badge {
-            margin-top: 30px;
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 6px;
+            margin-top: 40px;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: var(--border-radius);
             font-size: 0.8rem;
-            color: #bdc3c7;
+            color: rgba(255,255,255,0.7);
             text-align: center;
-            border: 1px dashed rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .json-btn {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.5);
+            background: var(--pacific-cyan);
+            border: none;
             color: white;
-            padding: 5px 12px;
-            border-radius: 4px;
+            padding: 8px 16px;
+            border-radius: 50px; /* Modern rounded button */
             cursor: pointer;
-            font-size: 0.8rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
         .json-btn:hover {
-            background: rgba(255,255,255,0.4);
-            transform: scale(1.05);
+            background: var(--vivid-sky-blue);
+            transform: translateY(-1px);
         }
 
         /* MODAL STYLES */
@@ -338,164 +353,206 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(6, 6, 92, 0.85); /* Federal Blue tint */
             z-index: 2000;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
             background: white;
-            width: 80%;
+            width: 85%;
             max-width: 900px;
-            max-height: 85vh;
-            border-radius: 10px;
-            padding: 25px;
+            max-height: 90vh;
+            border-radius: 8px;
+            padding: 30px;
             position: relative;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
         }
 
         .modal-header h3 {
             margin: 0;
-            color: var(--primary-color);
+            color: var(--federal-blue);
+            font-weight: 600;
         }
 
         .close-btn {
-            font-size: 28px;
+            font-size: 32px;
             cursor: pointer;
-            color: #777;
+            color: var(--text-secondary);
             transition: color 0.2s;
-            line-height: 1;
+            line-height: 0.8;
         }
 
         .close-btn:hover {
-            color: var(--primary-color);
+            color: var(--pacific-cyan);
         }
 
         .json-viewer {
-            background: #282c34;
-            color: #abb2bf;
-            padding: 15px;
-            border-radius: 6px;
+            background: #F4F7F9;
+            color: #2C3E50;
+            padding: 20px;
+            border-radius: 4px;
             overflow: auto;
             font-family: 'Consolas', 'Monaco', monospace;
             font-size: 13px;
             flex-grow: 1;
             white-space: pre-wrap;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
         }
 
         /* MAIN CONTENT */
         main {
             margin-left: var(--sidebar-width);
-            padding: 40px 60px;
-            max-width: 1000px;
+            padding: 50px 80px;
+            max-width: 1100px;
         }
 
         header.main-header {
             background: white;
-            padding: 40px;
+            padding: 50px;
             border-radius: var(--border-radius);
             margin-bottom: 40px;
-            border-bottom: 5px solid var(--primary-color);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 6px solid var(--federal-blue); /* Strong brand indicator */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+        
+        header.main-header h1 {
+            color: var(--federal-blue);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
         }
 
         section {
             background: white;
-            padding: 40px;
+            padding: 50px;
             border-radius: var(--border-radius);
-            margin-bottom: 50px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.03); /* Subtle definition */
         }
 
-        section::before {
+        /* Diamond/Precision Concept: Sharp Accent Lines */
+        section::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 6px;
+            width: 4px;
             height: 100%;
-            background: var(--primary-color);
+            background: var(--border-color);
+            transition: background 0.3s;
         }
         
-        section#portrait::before { background: var(--portrait-card-border); }
-        section#principles::before { background: var(--principle-card-border); }
-        section#checklist::before { background: var(--checklist-border); }
+        section:hover::after {
+            background: var(--pacific-cyan);
+        }
+        
+        /* Section Specific Colors */
+        section#checklist::after { background: var(--accent-checklist); }
+        section#portrait::after { background: var(--accent-portrait); }
+        section#principles::after { background: var(--pacific-cyan); }
 
         h2 {
-            color: var(--primary-color);
+            color: var(--federal-blue);
             margin-top: 0;
             font-size: 1.8rem;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Diamond bullet for H2 */
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--pacific-cyan);
+            margin-right: 15px;
+            transform: rotate(45deg); /* Diamond shape */
         }
 
         h3 {
-            color: #34495e;
-            font-size: 1.3rem;
-            margin-top: 30px;
-            margin-bottom: 15px;
+            color: var(--federal-blue);
+            font-size: 1.4rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 500;
         }
 
-        /* BOXES */
-        .box {
-            padding: 25px;
-            margin: 25px 0;
-            border-left-width: 6px;
+        /* BOXES - Clean, corporate look */
+        .box, .guide-box, .cgc-box, .example-box {
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 4px 4px 0; /* Flat left for border */
+            border-left-width: 5px;
             border-left-style: solid;
-            border-radius: 4px;
+            background-color: #FAFBFC; /* Very light gray default */
         }
 
         .guide-box {
-            background-color: var(--guide-bg);
-            border-left-color: var(--guide-border);
+            background-color: #F0F4F8; /* Light blue tint */
+            border-left-color: var(--federal-blue);
         }
-        .guide-box h4 { color: #154360; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+        .guide-box h4 { color: var(--federal-blue); margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; font-weight: 700; }
 
         .cgc-box {
-            background-color: var(--cgc-bg);
-            border-left-color: var(--cgc-border);
+            background-color: #E8F6FA; /* Light cyan tint */
+            border-left-color: var(--pacific-cyan);
         }
-        .cgc-box h4 { color: #145a32; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+        .cgc-box h4 { color: #027A93; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; font-weight: 700; }
 
         .example-box {
-            background-color: var(--example-bg);
-            border-left-color: var(--example-border);
+            background-color: #FEF9E7;
+            border-left-color: var(--accent-example);
         }
-        .example-box h4 { color: #7e5109; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+        .example-box h4 { color: #D35400; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; font-weight: 700; }
 
         /* CHECKLIST STYLES */
         .checklist-group {
-            margin-bottom: 30px;
-            border: 1px solid #eee;
-            border-radius: 8px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
         
         .checklist-header {
-            background: var(--primary-color);
+            background: var(--federal-blue);
             color: white;
-            padding: 12px 20px;
-            font-weight: bold;
+            padding: 15px 25px;
+            font-weight: 600;
             font-size: 1.1rem;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .checklist-header::before {
+             content: '';
+             width: 8px;
+             height: 8px;
+             background: var(--pacific-cyan);
+             transform: rotate(45deg);
+             margin-right: 12px;
         }
 
         .checklist-items {
@@ -504,27 +561,27 @@
         }
 
         .checklist-subheader {
-            background: #f8f9fa;
-            color: #555;
-            padding: 8px 20px;
-            font-size: 0.85rem;
+            background: #F8F9FA;
+            color: var(--text-secondary);
+            padding: 12px 25px;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             font-weight: 700;
-            border-bottom: 1px solid #eee;
-            border-top: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color);
         }
 
         .check-item {
             display: flex;
             align-items: flex-start;
-            padding: 12px 20px;
+            padding: 15px 25px;
             border-bottom: 1px solid #f1f1f1;
             transition: background 0.2s;
         }
 
         .check-item:hover {
-            background: #fdfefe;
+            background: #FDFDFD;
         }
 
         .check-item:last-child {
@@ -532,113 +589,128 @@
         }
 
         .check-item input[type="checkbox"] {
-            margin-top: 5px;
-            margin-right: 15px;
-            transform: scale(1.2);
+            margin-top: 6px;
+            margin-right: 18px;
+            transform: scale(1.3);
             cursor: pointer;
-            accent-color: var(--primary-color);
+            accent-color: var(--federal-blue); /* Brand color checkbox */
             flex-shrink: 0;
         }
 
         .check-item label {
             cursor: pointer;
-            color: #444;
+            color: var(--text-primary);
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         /* CARDS GRID (Shared Layout) */
         .intro-text {
-            font-size: 1.1em;
-            margin-bottom: 30px;
-            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: var(--text-secondary);
         }
 
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         /* Generic Card Style */
         .info-card {
             background: white;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 25px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 4px solid transparent; /* Set by modifier */
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            transition: all 0.3s ease;
+            border-top: 5px solid transparent; /* Set by modifier */
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .info-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+            border-color: transparent;
         }
 
         .info-card h4 {
             margin-top: 0;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-bottom: 15px;
+            padding-bottom: 12px;
             border-bottom: 1px solid #f0f0f0;
-            padding-bottom: 10px;
+            font-weight: 600;
         }
         
         .info-card .subtitle {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
             display: block;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .info-card p {
             font-size: 0.95rem;
-            color: #666;
+            color: var(--text-secondary);
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.7;
             flex-grow: 1;
         }
 
         /* Specific Card Modifiers */
         .portrait-card {
-            border-top-color: var(--portrait-card-border);
+            border-top-color: var(--accent-portrait);
         }
         .portrait-card h4 {
-            color: var(--portrait-card-border);
+            color: var(--accent-portrait);
         }
 
         .principle-card {
-            border-top-color: var(--principle-card-border);
+            border-top-color: var(--pacific-cyan);
         }
         .principle-card h4 {
-            color: #16a085;
+            color: #028AA5;
         }
         .principle-card .subtitle {
-            color: #7f8c8d;
+            color: #999;
         }
 
         /* TABLES & LISTS */
         table {
             width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 25px 0;
             background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
         }
         
         th, td {
-            padding: 15px;
-            border: 1px solid #e0e0e0;
+            padding: 18px 25px;
+            border-bottom: 1px solid var(--border-color);
             text-align: left;
             vertical-align: top;
         }
         
         th {
-            background-color: #f8f9fa;
-            color: var(--primary-color);
+            background-color: #F8F9FA;
+            color: var(--federal-blue);
             font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
         }
 
         ul, ol {
@@ -649,24 +721,18 @@
             margin-bottom: 10px;
         }
 
-        .tag {
-            display: inline-block;
-            background: #e8e8e8;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #555;
-            margin-right: 5px;
-        }
-
         /* RESPONSIVE */
-        @media (max-width: 900px) {
+        @media (max-width: 992px) {
             body { display: block; }
-            nav { width: 100%; height: auto; position: relative; padding: 15px; box-sizing: border-box; }
-            main { margin-left: 0; padding: 20px; box-sizing: border-box; }
-            section { padding: 25px; }
-            .modal-content { width: 95%; padding: 15px; }
+            nav { 
+                width: 100%; 
+                height: auto; 
+                position: relative; 
+                padding: 20px; 
+            }
+            main { margin-left: 0; padding: 30px; }
+            section { padding: 30px; }
+            .modal-content { width: 95%; padding: 20px; }
             .card-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -686,11 +752,11 @@
         <li><a href="#sec7">7. La Evidencia (GRASPS)</a></li>
         <li><a href="#sec8">8. El Cómo (Secuencias)</a></li>
         <li><a href="#sec9">9. Reflexión</a></li>
-        <li><a href="#checklist" style="color:#e74c3c; font-weight:bold;">10. Lista de Chequeo</a></li>
+        <li><a href="#checklist" style="color:white; font-weight:600; border-left: 3px solid var(--accent-checklist); background: rgba(231, 76, 60, 0.2);">10. Lista de Chequeo</a></li>
         
-        <li style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;"><small style="color:#aaa; text-transform:uppercase; margin-left:15px;">Anexos Clave</small></li>
-        <li><a href="#principles" style="color:#1abc9c; font-weight:bold;">Anexo A: Principios</a></li>
-        <li><a href="#portrait" style="color:#f39c12; font-weight:bold;">Anexo B: Retrato</a></li>
+        <li style="margin-top:25px; border-top:1px solid rgba(255,255,255,0.1); padding-top:15px;"><small style="color:rgba(255,255,255,0.5); text-transform:uppercase; margin-left:15px; font-weight:600; letter-spacing:1px;">Anexos Clave</small></li>
+        <li><a href="#principles" style="color:var(--pacific-cyan);">Anexo A: Principios</a></li>
+        <li><a href="#portrait" style="color:#CFA1F3;">Anexo B: Retrato</a></li>
     </ul>
     <div class="ai-badge">
         <strong>Base de Conocimiento IA</strong>
@@ -706,7 +772,7 @@
             <h3>Estructura de Datos para Agentes de IA</h3>
             <span class="close-btn" onclick="closeJsonModal()">&times;</span>
         </div>
-        <p style="font-size:0.9rem; color:#666; margin-bottom:10px;">
+        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">
             Este código JSON-LD está incrustado en el sitio web y permite que las IAs comprendan la estructura pedagógica completa, incluyendo ahora la <strong>Lista de Chequeo de Calidad Completa</strong>.
         </p>
         <pre id="jsonViewer" class="json-viewer"></pre>
@@ -728,7 +794,7 @@
         <div class="guide-box">
             <h4>Guía del Diseñador UNITEC</h4>
             <p><strong>Instrucción Clave:</strong> Haz visible la alineación desde el inicio siguiendo esta fórmula:</p>
-            <p style="text-align:center; font-weight:bold; font-size:1.1em; padding:10px; background:rgba(255,255,255,0.5);">
+            <p style="text-align:center; font-weight:600; font-size:1.1em; padding:15px; background:white; border: 1px solid #dae1e7; border-radius:4px; margin: 15px 0;">
                 Disciplina Académica + Comunalidad Humana Central &rarr; Capacidades del Retrato
             </p>
             <ul>
@@ -821,7 +887,7 @@
             <h4>1. Historia dirigida al Docente</h4>
             <p>Explica por qué este curso importa para la sociedad, la industria o la profesión. Debe estar basada en investigación o contexto real.</p>
             
-            <h4>2. Historia dirigida al Estudiante</h4>
+            <h4 style="margin-top:20px;">2. Historia dirigida al Estudiante</h4>
             <p>Debe ser concreta, vívida e inmediata. Debe enganchar con un escenario o pregunta. <strong>Siempre debe terminar con la frase: "Por eso este módulo importa."</strong></p>
         </div>
 
@@ -831,7 +897,7 @@
             <p><strong>Para Docentes:</strong><br>
             Honduras enfrenta tensiones sociales, políticas y económicas que con frecuencia se alimentan de comprensiones limitadas o de relatos únicos del pasado. Cuando las narrativas oficiales eclipsan las voces indígenas, afrodescendientes, campesinas y de las mujeres, perdemos la complejidad que fortalece una identidad resiliente. Este curso centra un análisis multiperspectivo para que los estudiantes lean la historia como ciudadanos capaces de cuestionar fuentes, comparar narrativas y conectar el pasado con el presente para construir un futuro más justo. <em>Por eso este módulo importa.</em></p>
             
-            <p><strong>Para Estudiantes:</strong><br>
+            <p style="margin-top:15px;"><strong>Para Estudiantes:</strong><br>
             Dos libros, mismo evento: en uno es un héroe; en el otro, un villano. ¿Quién tiene razón? La historia no es un relato único; es una conversación de voces. Aprenderás a identificar cuál voz es la más fuerte, cuál está ausente y por qué eso importa para Honduras hoy—y mañana. <em>Por eso este módulo importa.</em></p>
         </div>
 
@@ -1023,7 +1089,7 @@
                 <li>¿Qué estrategias mantendré (o dejaré) la próxima vez y por qué?</li>
             </ul>
             
-            <h4>Transferencia (Hacerlo concreto)</h4>
+            <h4 style="margin-top:20px;">Transferencia (Hacerlo concreto)</h4>
             <ul>
                 <li>¿Dónde más puedo aplicar esto (otro curso, mi trabajo, mi comunidad)?</li>
                 <li>¿Cuál sería una "próxima acción" más allá de esta clase?</li>
@@ -1041,7 +1107,7 @@
 
     <!-- NUEVA SECCIÓN 10: LISTA DE CHEQUEO (CHECKLIST PLANNER) -->
     <section id="checklist">
-        <h2 style="color: #c0392b; border-bottom-color: #fadbd8;">Sección Diez: Lista de Chequeo de Calidad</h2>
+        <h2 style="color: var(--accent-checklist); border-bottom-color: rgba(231, 76, 60, 0.2);">Sección Diez: Lista de Chequeo de Calidad</h2>
         <p>Utiliza esta lista final para validar que tu Planner cumple con todos los estándares del sistema CGS de UNITEC antes de darlo por finalizado.</p>
 
         <!-- 1. El Porqué -->
@@ -1316,25 +1382,25 @@
                 <span class="subtitle">El Principio de</span>
                 <h4>Propósito</h4>
                 <p>En UNITEC/CEUTEC, el aprendizaje comienza con un por qué claro. Diseñamos intencionalmente experiencias para que los estudiantes comprendan el valor y la relevancia del conocimiento en sus vidas profesionales y sociales.</p>
-                <div style="margin-top:15px; font-size:0.85em; color:#16a085; font-weight:bold;">¿Por qué aprendemos?</div>
+                <div style="margin-top:15px; font-size:0.85em; color:var(--federal-blue); font-weight:700;">¿Por qué aprendemos?</div>
             </div>
             <div class="info-card principle-card">
                 <span class="subtitle">El Principio de</span>
                 <h4>Posibilidad</h4>
                 <p>Creemos en el potencial ilimitado de cada persona para desarrollar competencias a lo largo de la vida. Fomentamos una mentalidad de crecimiento, donde la determinación supera a las ideas preconcebidas de habilidad innata.</p>
-                <div style="margin-top:15px; font-size:0.85em; color:#16a085; font-weight:bold;">¿Quiénes estamos llegando a ser?</div>
+                <div style="margin-top:15px; font-size:0.85em; color:var(--federal-blue); font-weight:700;">¿Quiénes estamos llegando a ser?</div>
             </div>
             <div class="info-card principle-card">
                 <span class="subtitle">El Principio de</span>
                 <h4>Personas</h4>
                 <p>Colocamos a la humanidad en el centro. Cultivamos relaciones basadas en la confianza y el respeto para crear conexiones significativas que apoyen la motivación y el bienestar integral de toda la comunidad.</p>
-                <div style="margin-top:15px; font-size:0.85em; color:#16a085; font-weight:bold;">¿Con quién aprendemos?</div>
+                <div style="margin-top:15px; font-size:0.85em; color:var(--federal-blue); font-weight:700;">¿Con quién aprendemos?</div>
             </div>
             <div class="info-card principle-card">
                 <span class="subtitle">El Principio de</span>
                 <h4>Autonomía</h4>
                 <p>Cada estudiante debe asumir la responsabilidad de su propio aprendizaje, evolucionando de ser un receptor pasivo a un protagonista empoderado que siente que sus acciones pueden generar cambio.</p>
-                <div style="margin-top:15px; font-size:0.85em; color:#16a085; font-weight:bold;">¿Cómo asumimos la responsabilidad?</div>
+                <div style="margin-top:15px; font-size:0.85em; color:var(--federal-blue); font-weight:700;">¿Cómo asumimos la responsabilidad?</div>
             </div>
         </div>
     </section>
