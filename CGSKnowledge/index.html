@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub de Conocimiento Unitec</title>
+    
+    <!-- Google Fonts: Poppins (Única tipografía permitida) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Configuración Global */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F8F9FA; /* Gris muy claro para fondo */
+            color: #06065C; /* Federal Blue */
+        }
+
+        /* Variables de Color (Manual de Marca) */
+        :root {
+            --federal-blue: #06065C;
+            --pacific-cyan: #03AED2;
+            --vivid-sky-blue: #47C8FD;
+        }
+
+        /* Utilidades de Color Personalizadas */
+        .text-federal-blue { color: var(--federal-blue); }
+        .bg-federal-blue { background-color: var(--federal-blue); }
+        .text-pacific-cyan { color: var(--pacific-cyan); }
+        .bg-pacific-cyan { background-color: var(--pacific-cyan); }
+        .border-pacific-cyan { border-color: var(--pacific-cyan); }
+        
+        .hover-text-cyan:hover { color: var(--pacific-cyan); }
+
+        /* Estilos de Tarjetas (Cards) */
+        .hover-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .hover-card:hover {
+            border-color: var(--pacific-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Sombra muy sutil permitida en UI web */
+        }
+
+        /* Isotipo Diamante (CSS Puro) */
+        .diamond-logo {
+            width: 24px;
+            height: 24px;
+            background-color: var(--pacific-cyan);
+            transform: rotate(45deg);
+            margin-right: 12px;
+            margin-left: 6px;
+        }
+
+        /* Decoración superior de las tarjetas */
+        .card-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: #f3f4f6;
+            transition: background-color 0.3s ease;
+        }
+
+        .hover-card:hover .card-top-bar {
+            background-color: var(--pacific-cyan);
+        }
+
+        /* Icon Container Hover Effect */
+        .icon-container {
+            background-color: #eff6ff; /* blue-50 */
+            color: #1e3a8a; /* blue-900 */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .hover-card:hover .icon-container {
+            background-color: #ecfeff; /* cyan-50 */
+            color: #0891b2; /* cyan-600 */
+        }
+
+        /* Link Arrow Animation */
+        .link-arrow {
+            transition: transform 0.3s ease;
+        }
+        .hover-card:hover .link-arrow {
+            transform: translateX(4px);
+            color: #0891b2; /* cyan-600 */
+        }
+        
+        .card-link-text {
+            transition: color 0.3s ease;
+        }
+        .hover-card:hover .card-link-text {
+            color: #0891b2;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Institucional -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo Area -->
+                <div class="flex-shrink-0 flex items-center cursor-default">
+                    <div class="flex items-center">
+                        <!-- Isotipo Diamante -->
+                        <div class="diamond-logo"></div>
+                        <!-- Logotipo Texto -->
+                        <span class="text-2xl font-bold tracking-tight text-federal-blue select-none">
+                            unitec
+                        </span>
+                        <!-- Separador y Título del Hub -->
+                        <span class="ml-2 text-xs font-semibold tracking-wider text-gray-500 uppercase mt-1 border-l pl-2 border-gray-300 hidden sm:block">
+                            Hub de Conocimiento
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Navegación eliminada a petición del usuario para una landing limpia -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="flex-grow">
+        <div class="bg-white pb-12 pt-10 sm:pt-16 lg:pt-20 lg:pb-16 border-b border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h1 class="text-4xl tracking-tight font-extrabold sm:text-5xl md:text-6xl mb-6 text-federal-blue">
+                        Excelencia Académica y <span class="text-pacific-cyan">Crecimiento Colectivo</span>
+                    </h1>
+                    <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+                        Accede a las herramientas, manuales y filosofías que definen el estándar de calidad Unitec. Claridad, precisión e innovación en un solo lugar.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid de Recursos (Cards) -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1: The Book -->
+                <a href="https://capexfi25-30.netlify.app/cgsknowledge/book" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
+                    <div class="card-top-bar"></div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="p-3 rounded-lg icon-container">
+                            <i data-lucide="book-open" width="32" height="32"></i>
+                        </div>
+                        <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-2 text-federal-blue">The Book of the CGS</h3>
+                    <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Common Ground Collaborative</h4>
+                    <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
+                        El recurso fundamental para entender la filosofía colaborativa y el sistema de crecimiento colectivo.
+                    </p>
+
+                    <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
+                        Acceder al Recurso 
+                        <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
+                    </div>
+                </a>
+
+                <!-- Card 2: Toolkits -->
+                <a href="https://capexfi25-30.netlify.app/cgsknowledge/toolkit" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
+                    <div class="card-top-bar"></div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="p-3 rounded-lg icon-container">
+                            <i data-lucide="wrench" width="32" height="32"></i>
+                        </div>
+                        <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-2 text-federal-blue">CGS 3Cs Toolkits</h3>
+                    <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Herramientas Prácticas</h4>
+                    <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
+                        Kits de herramientas esenciales enfocados en las 3Cs del sistema de crecimiento colectivo.
+                    </p>
+
+                    <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
+                        Acceder al Recurso 
+                        <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
+                    </div>
+                </a>
+
+                <!-- Card 3: Learning 2 Learn -->
+                <a href="https://capexfi25-30.netlify.app/cgsknowledge/learning2learn" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
+                    <div class="card-top-bar"></div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="p-3 rounded-lg icon-container">
+                            <i data-lucide="lightbulb" width="32" height="32"></i>
+                        </div>
+                        <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-2 text-federal-blue">Learning 2 Learn</h3>
+                    <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Metodología de Aprendizaje</h4>
+                    <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
+                        Estrategias y recursos para potenciar la capacidad de aprender a aprender.
+                    </p>
+
+                    <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
+                        Acceder al Recurso 
+                        <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
+                    </div>
+                </a>
+
+                <!-- Card 4: Planner -->
+                <a href="https://capexfi25-30.netlify.app/cgsknowledge/unitecplanner" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
+                    <div class="card-top-bar"></div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="p-3 rounded-lg icon-container">
+                            <i data-lucide="calendar" width="32" height="32"></i>
+                        </div>
+                        <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-2 text-federal-blue">Unitec Planner</h3>
+                    <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Manual de Preparación</h4>
+                    <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
+                        Guía completa para la planificación académica y estructuración de cursos.
+                    </p>
+
+                    <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
+                        Acceder al Recurso 
+                        <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
+                    </div>
+                </a>
+
+                <!-- Card 5: ADN -->
+                <a href="https://capexfi25-30.netlify.app/cgsknowledge/portrait" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
+                    <div class="card-top-bar"></div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="p-3 rounded-lg icon-container">
+                            <i data-lucide="dna" width="32" height="32"></i>
+                        </div>
+                        <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-2 text-federal-blue">ADN de Unitec / Ceutec</h3>
+                    <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Identidad Institucional</h4>
+                    <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
+                        La esencia de nuestra institución. Valores, misión y la estructura de nuestra identidad.
+                    </p>
+
+                    <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
+                        Acceder al Recurso 
+                        <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Institucional -->
+    <footer class="bg-white border-t border-gray-200 mt-auto">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex justify-center md:justify-start space-x-6 md:order-2">
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Facebook</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Instagram</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772 4.902 4.902 0 011.772-1.153c.636-.247 1.363-.416 2.427-.465C9.673 2.013 10.03 2 12.48 2h.165zm-1.8 11.008c.553.774 1.446 1.282 2.454 1.282 1.684 0 3.05-1.366 3.05-3.05 0-1.008-.508-1.901-1.282-2.454.493-.11.996-.157 1.482-.157 2.196 0 4.22.88 5.72 2.32 1.5 1.44 2.38 3.464 2.38 5.66 0 4.418-3.582 8-8 8s-8-3.582-8-8c0-2.196.88-4.22 2.32-5.66 1.5-1.44 3.524-2.32 5.72-2.32.486 0 .99.047 1.482.157zM12 7c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5zm6.85-1.85c0 .469-.381.85-.85.85-.469 0-.85-.381-.85-.85 0-.469.381-.85.85-.85.469 0 .85.381.85.85z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
+                <div class="mt-8 md:mt-0 md:order-1">
+                    <div class="flex items-center justify-center md:justify-start mb-4">
+                       <div class="diamond-logo" style="width: 16px; height: 16px;"></div>
+                       <span class="text-lg font-bold text-federal-blue">unitec</span>
+                    </div>
+                    <p class="text-center md:text-left text-sm text-gray-400">
+                        &copy; <script>document.write(new Date().getFullYear())</script> Universidad Tecnológica Centroamericana. Todos los derechos reservados.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
