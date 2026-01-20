@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADN UNITEC: Retrato y Principios</title>
     
+    <!-- Importando Tipografía Oficial: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- 
       JSON-LD Específico para el Modelo Educativo
       Define claramente la filosofía institucional para agentes de IA.
+      (INFORMACIÓN PRESERVADA ÍNTEGRAMENTE)
     -->
     <script type="application/ld+json">
     {
@@ -40,197 +46,213 @@
 
     <style>
         :root {
-            /* Colores Base */
-            --bg-color: #f8f9fa;
-            --text-main: #2c3e50;
-            --text-muted: #636e72;
+            /* Colores Oficiales UNITEC - Manual de Marca */
+            --federal-blue: #06065C;  /* Color Principal */
+            --pacific-cyan: #03AED2;  /* Acento Primario */
+            --vivid-sky: #47C8FD;     /* Acento Secundario */
             
-            /* Colores Identidad */
-            --unitec-blue: #003366;
-            
-            /* Colores Retrato (Cálidos/Humanos) */
-            --portrait-accent: #e67e22;
-            --portrait-light: #fff5e6;
-            
-            /* Colores Principios (Crecimiento/Fundamentos) */
-            --principle-accent: #16a085;
-            --principle-light: #e8f8f5;
+            /* Colores Neutros de Soporte */
+            --bg-color: #FFFFFF;
+            --bg-secondary: #F4F6F9;
+            --text-main: #06065C;     /* Texto principal en Federal Blue para máxima marca */
+            --text-body: #4A4A4A;     /* Gris oscuro para lectura */
+            --border-color: #E0E0E0;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Poppins', sans-serif; /* Única tipografía permitida */
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-secondary);
+            color: var(--text-body);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* HEADER HERO */
+        /* HEADER HERO - Estilo "Safe & Corporate" */
+        /* Prohibido: Gradientes. Uso de color sólido Federal Blue */
         .hero {
-            background: linear-gradient(135deg, var(--unitec-blue) 0%, #001f3f 100%);
+            background-color: var(--federal-blue);
             color: white;
-            padding: 80px 20px;
+            padding: 100px 20px;
             text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            position: relative;
+        }
+
+        /* Elemento decorativo sutil (Diamante abstracto) */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 40px;
+            height: 40px;
+            background-color: var(--pacific-cyan);
+            z-index: 1;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem; /* Escala jerárquica clara */
             margin: 0;
-            font-weight: 800;
-            letter-spacing: -1px;
+            font-weight: 700; /* Bold */
+            letter-spacing: -0.5px;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             opacity: 0.9;
-            max-width: 600px;
+            max-width: 700px;
             margin: 20px auto 0;
-            font-weight: 300;
+            font-weight: 300; /* Light */
         }
 
         /* CONTAINER */
         .container {
-            max-width: 1200px;
+            max-width: 1140px;
             margin: 0 auto;
-            padding: 40px 20px 80px;
+            padding: 60px 20px 100px;
         }
 
         /* SECTIONS */
         .section-header {
             text-align: center;
-            margin: 60px 0 40px;
+            margin: 60px 0 50px;
         }
 
         .section-header h2 {
-            font-size: 2.2rem;
-            color: var(--unitec-blue);
-            margin-bottom: 10px;
-            display: inline-block;
+            font-size: 2.5rem;
+            color: var(--federal-blue);
+            margin-bottom: 15px;
+            font-weight: 700;
             position: relative;
+            display: inline-block;
+        }
+
+        /* Subrayado estilo "Precisión" */
+        .section-header h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--pacific-cyan);
+            margin: 10px auto 0;
         }
 
         .section-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 700px;
+            color: var(--text-body);
+            font-size: 1.125rem;
+            max-width: 750px;
             margin: 0 auto;
+            font-weight: 400;
         }
 
         /* GRID SYSTEM */
         .grid {
             display: grid;
             gap: 30px;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
         }
 
-        /* CARD DESIGN */
+        /* CARD DESIGN - "Clarity & Precision" */
+        /* Prohibido: Sombras difusas (Drop Shadows). Uso de bordes limpios. */
         .card {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color); /* Borde sutil */
+            border-top: 5px solid var(--federal-blue); /* Acento institucional */
+            padding: 40px 30px;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
+            position: relative;
+            /* Eliminamos radius excesivo para mantener la forma geométrica/diamante */
+            border-radius: 4px; 
         }
 
+        /* Interacción sobria */
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: var(--pacific-cyan);
+            transform: translateY(-5px);
         }
 
         .card h3 {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             margin-top: 0;
             margin-bottom: 15px;
-            font-weight: 700;
+            font-weight: 600; /* Semibold */
+            color: var(--federal-blue);
         }
 
         .card p {
-            color: var(--text-muted);
+            color: var(--text-body);
             font-size: 0.95rem;
             flex-grow: 1;
+            margin-bottom: 0;
         }
 
-        /* PORTRAIT SPECIFIC STYLES */
-        .portrait-section h2::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--portrait-accent);
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        .card.portrait {
-            border-top: 5px solid var(--portrait-accent);
-        }
-
-        .card.portrait h3 {
-            color: #d35400;
-        }
-
+        /* ICON BOX - Adaptación al Isotipo (Diamante) */
         .icon-box {
-            width: 50px;
-            height: 50px;
-            background: var(--portrait-light);
-            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(3, 174, 210, 0.1); /* Pacific Cyan muy suave */
+            color: var(--federal-blue);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            color: var(--portrait-accent);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            /* La forma de diamante (Rotated Square) */
+            transform: rotate(45deg); 
+            margin-left: 10px; /* Ajuste visual por la rotación */
         }
 
-        /* PRINCIPLES SPECIFIC STYLES */
-        .principles-section h2::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--principle-accent);
-            margin: 10px auto 0;
-            border-radius: 2px;
+        .icon-box span {
+            /* Contrarrotar el emoji para que se vea recto */
+            transform: rotate(-45deg);
         }
 
+        /* VARIACIONES ESPECÍFICAS PARA PRINCIPIOS */
+        /* Diferenciación sutil usando el segundo color de acento */
         .card.principle {
-            border-left: 5px solid var(--principle-accent);
-            background: linear-gradient(to right, var(--principle-light) 0%, white 20%);
+            border-top-color: var(--pacific-cyan);
         }
-
-        .card.principle h3 {
-            color: var(--principle-accent);
+        
+        .card.principle .icon-box {
+            background-color: rgba(71, 200, 253, 0.1); /* Vivid Sky Blue suave */
         }
 
         .principle-question {
-            font-family: 'Georgia', serif;
+            font-family: 'Poppins', sans-serif;
             font-style: italic;
-            color: var(--text-main);
-            font-weight: 600;
+            color: var(--pacific-cyan);
+            font-weight: 500;
+            font-size: 0.9rem;
             margin-bottom: 15px;
             display: block;
-            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* FOOTER */
         footer {
             text-align: center;
-            padding: 40px;
-            background: #fff;
-            border-top: 1px solid #eee;
-            color: var(--text-muted);
+            padding: 50px 20px;
+            background: var(--federal-blue);
+            color: white;
             font-size: 0.9rem;
+        }
+        
+        footer p {
+            opacity: 0.8;
+            margin: 5px 0;
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .section-header h2 { font-size: 2rem; }
             .grid { grid-template-columns: 1fr; }
+            .container { padding-top: 40px; }
         }
     </style>
 </head>
@@ -238,8 +260,11 @@
 
     <!-- HERO SECTION -->
     <header class="hero">
-        <h1>El ADN de UNITEC</h1>
-        <p>Dos pilares que definen nuestra identidad: Hacia dónde vamos (El Retrato) y cómo crecemos (Los Principios).</p>
+        <!-- Contenido centrado y limpio -->
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h1>El ADN de UNITEC</h1>
+            <p>Dos pilares que definen nuestra identidad: Hacia dónde vamos (El Retrato) y cómo crecemos (Los Principios).</p>
+        </div>
     </header>
 
     <div class="container">
@@ -253,42 +278,42 @@
         <div class="grid">
             <!-- Líder -->
             <div class="card portrait">
-                <div class="icon-box">🧭</div>
+                <div class="icon-box"><span>🧭</span></div>
                 <h3>Líder con Propósito</h3>
                 <p>Ha alcanzado equilibrio personal y bienestar. Se guía por la curiosidad y un compromiso con el aprendizaje a lo largo de la vida. Actúa con integridad, adaptabilidad y resiliencia, sirviendo a comunidades locales y globales.</p>
             </div>
 
             <!-- Solucionador -->
             <div class="card portrait">
-                <div class="icon-box">🧩</div>
+                <div class="icon-box"><span>🧩</span></div>
                 <h3>Solucionador de Problemas Empático</h3>
                 <p>Comprende patrones y principios. Es un pensador crítico con profundo entendimiento de la causalidad. Usa la empatía para abordar problemas complejos y encontrar soluciones sostenibles y equitativas.</p>
             </div>
 
             <!-- Innovador -->
             <div class="card portrait">
-                <div class="icon-box">💡</div>
+                <div class="icon-box"><span>💡</span></div>
                 <h3>Innovador Creativo</h3>
                 <p>Aporta originalidad y creatividad a su experiencia del mundo. Es maestro en crear artefactos únicos, soluciones tecnológicas y herramientas, enfrentando desafíos con espíritu emprendedor.</p>
             </div>
 
             <!-- Comunicador -->
             <div class="card portrait">
-                <div class="icon-box">💬</div>
+                <div class="icon-box"><span>💬</span></div>
                 <h3>Comunicador Efectivo</h3>
                 <p>Domina la comunicación oral, escrita y digital. Expresa ideas complejas de manera ética y estratégica. Utiliza su voz para defender principios y compartir ideas que importan.</p>
             </div>
 
             <!-- Ciudadano -->
             <div class="card portrait">
-                <div class="icon-box">🌍</div>
+                <div class="icon-box"><span>🌍</span></div>
                 <h3>Ciudadano Responsable</h3>
                 <p>Siente responsabilidad personal por sostener sistemas sociales saludables y ecosistemas naturales. Es proactivo y trabaja para transformar su entorno para mejorarlo.</p>
             </div>
 
             <!-- Colaborador -->
             <div class="card portrait">
-                <div class="icon-box">🤝</div>
+                <div class="icon-box"><span>🤝</span></div>
                 <h3>Colaborador Constructivo</h3>
                 <p>Busca y valora perspectivas diversas. Trabaja efectivamente en equipos, gestionando conflictos de manera constructiva y priorizando el éxito colectivo sobre el individual.</p>
             </div>
@@ -303,29 +328,31 @@
         <div class="grid">
             <!-- Propósito -->
             <div class="card principle">
-                <h3>El Principio de Propósito</h3>
+                <!-- Usamos íconos abstractos/textuales para variar si no hay emoji específico, o mantenemos consistencia -->
+                <!-- Nota: En la versión safe mantenemos consistencia visual, agregando un div vacio si no hay icono, pero aqui estilizamos el texto -->
                 <span class="principle-question">¿Por qué aprendemos?</span>
+                <h3>El Principio de Propósito</h3>
                 <p>Todo comienza con un "por qué". Diseñamos intencionalmente para que los estudiantes comprendan el valor y la relevancia del conocimiento en sus vidas, conectando siempre la teoría con la realidad.</p>
             </div>
 
             <!-- Posibilidad -->
             <div class="card principle">
-                <h3>El Principio de Posibilidad</h3>
                 <span class="principle-question">¿Quiénes estamos llegando a ser?</span>
+                <h3>El Principio de Posibilidad</h3>
                 <p>Creemos en el potencial ilimitado de cada persona. Fomentamos una mentalidad de crecimiento donde la determinación, el esfuerzo y la resiliencia superan a las ideas de habilidad innata.</p>
             </div>
 
             <!-- Personas -->
             <div class="card principle">
-                <h3>El Principio de Personas</h3>
                 <span class="principle-question">¿Con quién aprendemos?</span>
+                <h3>El Principio de Personas</h3>
                 <p>La humanidad está al centro. Cultivamos relaciones basadas en la confianza y el respeto para apoyar la motivación y el bienestar integral de toda la comunidad universitaria.</p>
             </div>
 
             <!-- Autonomía -->
             <div class="card principle">
-                <h3>El Principio de Autonomía</h3>
                 <span class="principle-question">¿Cómo asumimos la responsabilidad?</span>
+                <h3>El Principio de Autonomía</h3>
                 <p>Evolucionamos de ser receptores pasivos a protagonistas empoderados. Cada estudiante asume la responsabilidad de su propio aprendizaje y siente que sus acciones pueden generar cambio.</p>
             </div>
         </div>
@@ -334,7 +361,7 @@
 
     <footer>
         <p>© 2026 UNITEC - Dirección de Innovación Educativa & Desarrollo Docente</p>
-        <p style="font-size:0.8rem; margin-top:10px;">Basado en el marco Common Ground Collaborative (CGC)</p>
+        <p style="font-size:0.75rem;">Basado en el marco Common Ground Collaborative (CGC)</p>
     </footer>
 
 </body>
