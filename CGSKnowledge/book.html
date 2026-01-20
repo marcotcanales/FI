@@ -3,249 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Libro del CGS 2025 V5</title>
-    <!-- Tailwind CSS -->
+    <title>El Libro del CGS 2025 V5 - UNITEC Edition</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Brand Font
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', // Federal Blue
+                            cobalt: '#GF4986',  // Cobalt (Brand Palette reference)
+                            cyan: '#03AED2',    // Pacific Cyan
+                            sky: '#47C8FD',     // Vivid Sky Blue
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
         html { scroll-behavior: smooth; }
-        .active-nav { background-color: #4f46e5; color: white; }
-        .active-nav:hover { background-color: #4338ca; color: white; }
+        body { font-family: 'Poppins', sans-serif; } /* Global Font Override */
+        
+        /* Navigation Active State - Federal Blue background */
+        .active-nav { 
+            background-color: #06065C; 
+            color: white; 
+            border-left: 4px solid #03AED2;
+        }
+        .active-nav:hover { 
+            background-color: #05054a; 
+            color: white; 
+        }
+        
+        /* Custom Diamond Bullet for Lists to reflect Isotype */
+        .diamond-list li::before {
+            content: "◆";
+            color: #03AED2;
+            display: inline-block; 
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        /* Diamond shape decoration */
+        .diamond-shape {
+            width: 12px;
+            height: 12px;
+            background-color: #03AED2;
+            transform: rotate(45deg);
+            display: inline-block;
+            margin-right: 10px;
+        }
     </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-800">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-unitec-cyan selection:text-white">
 
-    <!-- Mobile Header -->
-    <header class="md:hidden bg-white shadow-sm sticky top-0 z-50 px-4 py-3 flex justify-between items-center">
-        <span class="font-bold text-indigo-700 text-lg">CGS 2025</span>
-        <button id="menu-btn" class="p-2 text-slate-600">
+    <header class="md:hidden bg-white shadow-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center border-b border-gray-100">
+        <div class="flex items-center gap-2">
+            <div class="w-3 h-3 bg-unitec-cyan transform rotate-45"></div>
+            <span class="font-bold text-unitec-federal text-xl tracking-tight">CGS 2025</span>
+        </div>
+        <button id="menu-btn" class="p-2 text-unitec-federal hover:bg-slate-100 rounded-lg transition-colors">
             <i data-lucide="menu"></i>
         </button>
     </header>
 
-    <!-- Sidebar -->
-    <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 w-64 bg-white border-r border-slate-200 transition-transform duration-300 ease-in-out z-40 overflow-y-auto">
-        <div class="p-6 border-b border-slate-100">
-            <h1 class="font-extrabold text-2xl text-indigo-800 leading-tight">CGS 2025</h1>
-            <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Sistema de Crecimiento Colectivo</p>
+    <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 w-72 bg-white border-r border-slate-200 transition-transform duration-300 ease-in-out z-40 overflow-y-auto shadow-lg">
+        <div class="p-8 border-b border-slate-100">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-4 h-4 bg-unitec-federal transform rotate-45"></div> <h1 class="font-extrabold text-2xl text-unitec-federal leading-none tracking-tight">CGS 2025</h1>
+            </div>
+            <p class="text-xs text-slate-500 font-medium uppercase tracking-widest pl-7">Sistema de Crecimiento</p>
         </div>
-        <nav class="mt-4 flex flex-col space-y-1" id="nav-links">
-            <!-- Nav links will be populated by JS or hardcoded below -->
-            <a href="#intro" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
-                <i data-lucide="book" class="w-4 h-4 mr-3"></i> Portada e Introducción
+        
+        <nav class="mt-6 flex flex-col space-y-1 px-3" id="nav-links">
+            <a href="#intro" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 rounded-lg hover:bg-slate-50 hover:text-unitec-cyan transition-all duration-200 group">
+                <i data-lucide="book" class="w-4 h-4 mr-3 group-hover:scale-110 transition-transform"></i> Portada e Introducción
             </a>
-            <a href="#why" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
-                <i data-lucide="heart" class="w-4 h-4 mr-3"></i> El Porqué
+            <a href="#why" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 rounded-lg hover:bg-slate-50 hover:text-unitec-cyan transition-all duration-200 group">
+                <i data-lucide="heart" class="w-4 h-4 mr-3 group-hover:scale-110 transition-transform"></i> El Porqué
             </a>
-            <a href="#how" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
-                <i data-lucide="lightbulb" class="w-4 h-4 mr-3"></i> El Cómo
+            <a href="#how" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 rounded-lg hover:bg-slate-50 hover:text-unitec-cyan transition-all duration-200 group">
+                <i data-lucide="lightbulb" class="w-4 h-4 mr-3 group-hover:scale-110 transition-transform"></i> El Cómo
             </a>
-            <a href="#what" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
-                <i data-lucide="users" class="w-4 h-4 mr-3"></i> El Qué: Elementos
+            <a href="#what" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 rounded-lg hover:bg-slate-50 hover:text-unitec-cyan transition-all duration-200 group">
+                <i data-lucide="users" class="w-4 h-4 mr-3 group-hover:scale-110 transition-transform"></i> El Qué: Elementos
             </a>
-            <a href="#continuums" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
-                <i data-lucide="anchor" class="w-4 h-4 mr-3"></i> Los 10 Hilos
+            <a href="#continuums" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 rounded-lg hover:bg-slate-50 hover:text-unitec-cyan transition-all duration-200 group">
+                <i data-lucide="anchor" class="w-4 h-4 mr-3 group-hover:scale-110 transition-transform"></i> Los 10 Hilos
             </a>
-            <a href="#environment" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
-                <i data-lucide="layout" class="w-4 h-4 mr-3"></i> El Tercer Maestro
+            <a href="#environment" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 rounded-lg hover:bg-slate-50 hover:text-unitec-cyan transition-all duration-200 group">
+                <i data-lucide="layout" class="w-4 h-4 mr-3 group-hover:scale-110 transition-transform"></i> El Tercer Maestro
             </a>
-            <a href="#tools" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
-                <i data-lucide="file-text" class="w-4 h-4 mr-3"></i> Herramientas
+            <a href="#tools" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 rounded-lg hover:bg-slate-50 hover:text-unitec-cyan transition-all duration-200 group">
+                <i data-lucide="file-text" class="w-4 h-4 mr-3 group-hover:scale-110 transition-transform"></i> Herramientas
             </a>
-            <a href="#conclusion" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
-                <i data-lucide="check-circle" class="w-4 h-4 mr-3"></i> Conclusión
+            <a href="#conclusion" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 rounded-lg hover:bg-slate-50 hover:text-unitec-cyan transition-all duration-200 group">
+                <i data-lucide="check-circle" class="w-4 h-4 mr-3 group-hover:scale-110 transition-transform"></i> Conclusión
             </a>
         </nav>
-        <div class="p-6 mt-auto">
-            <div class="text-xs text-slate-400">
+        
+        <div class="p-6 mt-auto border-t border-slate-100">
+            <div class="text-xs text-slate-400 font-medium">
                 Versión 2.0<br>The Common Ground Collaborative
             </div>
         </div>
     </aside>
 
-    <!-- Main Content -->
-    <main class="md:ml-64 p-6 md:p-12 max-w-5xl mx-auto">
+    <main class="md:ml-72 p-6 md:p-12 max-w-6xl mx-auto">
 
-        <!-- INTRO -->
-        <section id="intro" class="mb-16 scroll-mt-20 section-content">
-            <div class="bg-indigo-900 text-white p-8 md:p-16 rounded-2xl shadow-xl mb-12 text-center">
-                <h1 class="text-3xl md:text-5xl font-extrabold mb-4">EL LIBRO DEL CGS 2025 V5</h1>
-                <h2 class="text-xl md:text-2xl text-indigo-200 mb-6 font-light">EL SISTEMA DE CRECIMIENTO COLECTIVO</h2>
-                <p class="text-lg opacity-90">Transformando la Evaluación Docente a través de la Construcción de Cultura</p>
-                <p class="mt-8 text-sm opacity-60">(Versión 2.0 – The Common Ground Collaborative)</p>
+        <section id="intro" class="mb-20 scroll-mt-24 section-content">
+            <div class="bg-unitec-federal text-white p-10 md:p-20 rounded-3xl shadow-2xl mb-12 text-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-unitec-cyan opacity-10 transform rotate-45 translate-x-1/2 -translate-y-1/2"></div>
+                <div class="absolute bottom-0 left-0 w-40 h-40 bg-unitec-sky opacity-10 transform rotate-45 -translate-x-1/2 translate-y-1/2"></div>
+                
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight relative z-10">EL LIBRO DEL CGS 2025 V5</h1>
+                <h2 class="text-xl md:text-2xl text-unitec-sky mb-8 font-light tracking-wide relative z-10">EL SISTEMA DE CRECIMIENTO COLECTIVO</h2>
+                <div class="w-24 h-1 bg-unitec-cyan mx-auto mb-8"></div>
+                <p class="text-lg opacity-90 max-w-2xl mx-auto font-light leading-relaxed relative z-10">Transformando la Evaluación Docente a través de la Construcción de Cultura</p>
+                <p class="mt-10 text-sm opacity-60 font-medium tracking-wider relative z-10">(Versión 2.0 – The Common Ground Collaborative)</p>
             </div>
         </section>
 
-        <!-- THE WHY -->
-        <section id="why" class="mb-16 scroll-mt-20 section-content">
-            <div class="flex items-center mb-6">
-                <div class="bg-rose-100 p-3 rounded-full mr-4">
-                    <i data-lucide="heart" class="w-8 h-8 text-rose-600"></i>
+        <section id="why" class="mb-20 scroll-mt-24 section-content">
+            <div class="flex items-center mb-8 border-b-2 border-slate-100 pb-4">
+                <div class="bg-unitec-cyan/10 p-3 rounded-xl mr-5">
+                    <i data-lucide="heart" class="w-8 h-8 text-unitec-cyan"></i>
                 </div>
-                <h2 class="text-3xl font-bold text-slate-900">El Porqué</h2>
+                <h2 class="text-3xl font-bold text-unitec-federal">El Porqué</h2>
             </div>
             
-            <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed">
-                <h3 class="text-2xl font-bold text-indigo-800 mb-4">VOLVIÉNDONOS HUMANOS (BECOMING HUMAN)</h3>
+            <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed font-light">
+                <h3 class="text-2xl font-bold text-unitec-federal mb-4 flex items-center">
+                    <span class="diamond-shape"></span>VOLVIÉNDONOS HUMANOS (BECOMING HUMAN)
+                </h3>
                 <p class="mb-4">The Common Ground Collaborative (CGC) es una comunidad global de escuelas, organizaciones e individuos dedicados a apoyar a cada aprendiz, niño o adulto, en el viaje hacia alcanzar su plena capacidad como seres humanos prósperos y contribuyentes, capaces de dar sentido al mundo y ayudar a que el mundo tenga más sentido. Nuestra misión, "Volverse Humano" (Becoming Human), informa todo nuestro trabajo. Ese trabajo ha evolucionado con el tiempo a medida que hemos aprendido juntos.</p>
                 <p class="mb-6">En nuestro impulso por transformar el aprendizaje, hemos emprendido la tarea de abordar los dilemas sistémicos más obstinados que desafían a las escuelas en el camino de una relación transaccional con estudiantes, maestros y padres a una transformacional. Uno de los desafíos más difíciles, creemos, es desarrollar un enfoque de crecimiento profesional para maestros y líderes que realmente mejore el aprendizaje de los estudiantes de una manera sostenida y demostrable. Dado que nuestra misión es "Volverse Humano", tiene sentido para nosotros usar el Diseño Centrado en el Humano (HCD) como nuestra metodología para resolver el problema de los sistemas ineficaces de evaluación/supervisión docente.</p>
 
-                <h3 class="text-2xl font-bold text-indigo-800 mb-4 mt-10">DISEÑO CENTRADO EN EL HUMANO (HCD)</h3>
-                <p class="mb-6">El HCD tiene 6 fases clave: Empatizar, Definir, Idear, Prototipar, Probar, Implementar. Usamos esas etapas de diseño como nuestro marco guía como solucionadores de problemas humanos.</p>
+                <h3 class="text-2xl font-bold text-unitec-federal mb-6 mt-12 flex items-center">
+                    <span class="diamond-shape"></span>DISEÑO CENTRADO EN EL HUMANO (HCD)
+                </h3>
+                <p class="mb-8">El HCD tiene 6 fases clave: Empatizar, Definir, Idear, Prototipar, Probar, Implementar. Usamos esas etapas de diseño como nuestro marco guía como solucionadores de problemas humanos.</p>
 
-                <div class="mb-8">
-                    <h4 class="text-xl font-bold text-rose-700 mb-2">1. EMPATIZAR</h4>
+                <div class="mb-10 pl-6 border-l-4 border-unitec-cyan/30">
+                    <h4 class="text-xl font-bold text-unitec-cyan mb-3">1. EMPATIZAR</h4>
                     <p class="mb-4">Solo hay una cosa mala con los sistemas de evaluación docente "tradicionales" que dependen en gran medida de los "estándares de enseñanza" y la observación: No funcionan.</p>
                     <p class="mb-4">Quizás debería calificar esta generalización radical. No funcionan si el objetivo es mejorar el aprendizaje de los estudiantes. Sí funcionan si quieres perder tiempo/energía y aumentar el estrés. Revisa la investigación o tu propia experiencia.</p>
                     <p class="mb-4">Nuestra determinación de abordar este desperdicio inescrupuloso de capacidad humana está arraigada en un profundo sentido de empatía por los maestros y líderes que luchan bajo el peso de sistemas que, independientemente de lo que pretendamos, simplemente no tienen el impacto en el aprendizaje para justificar el gasto de energía. Este no es un problema de personas, es un problema de sistemas. En palabras de W. Edwards Deming, "Un mal sistema vencerá a una buena persona cada vez". Nuestra empatía es por esas buenas personas, y por encontrar formas de ayudarlas a hacer un buen trabajo.</p>
                 </div>
 
-                <div class="mb-8">
-                    <h4 class="text-xl font-bold text-rose-700 mb-2">2. DEFINIR</h4>
+                <div class="mb-10 pl-6 border-l-4 border-unitec-cyan/30">
+                    <h4 class="text-xl font-bold text-unitec-cyan mb-3">2. DEFINIR</h4>
                     <p class="mb-4">Entonces, ¿por qué no funcionan los sistemas de "supervisión"? Hicimos esa pregunta a un grupo de "Colaboradores de Common Ground" que se reunieron para analizar el problema de los sistemas de evaluación ineficaces. Aquí hay un resumen de nuestras conclusiones sobre las fallas de estos enfoques:</p>
-                    <ul class="list-disc pl-5 space-y-2 mb-6">
-                        <li>Empiezan desde el lugar equivocado, enfocándose primero en los comportamientos del maestro (insumos) en lugar de los comportamientos del aprendiz (impactos).</li>
-                        <li>Aunque solo podemos mejorar en algo aprendiendo a mejorar, usan una lente de evaluación, no una lente de aprendizaje.</li>
-                        <li>Ignoran el hecho de que el acto de observación cambia la naturaleza de lo que observamos y la gran dificultad de observar con la frecuencia suficiente para sacar conclusiones fiables.</li>
-                        <li>Generalmente no incorporan el trabajo preliminar fundamental de construir acuerdos culturales comunes sobre "la forma en que hacemos las cosas aquí".</li>
-                        <li>Hacen poco por la autonomía docente o la colaboración docente, ambos elementos clave en la satisfacción profesional.</li>
-                        <li>Se enfocan en demasiadas cosas a la vez.</li>
-                        <li>Rara vez incluyen enfoques sistémicos, simples y acordados para la retroalimentación.</li>
-                        <li>Rara vez proporcionan tiempo suficiente y programado para el establecimiento de metas colaborativas de alto impacto y el intercambio colaborativo de progreso y, por lo tanto, no construyen la eficacia colectiva docente.</li>
-                        <li>Digamos lo que digamos, se centran más en el factor miedo que en el factor de sentirse bien, aunque sabemos que todos queremos mejorar en nuestro trabajo y que nos sentimos bien cuando lo hacemos.</li>
+                    <ul class="list-none space-y-2 mb-6 ml-1">
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-unitec-cyan mr-2 flex-shrink-0 mt-0.5"></i> Empiezan desde el lugar equivocado, enfocándose primero en los comportamientos del maestro (insumos) en lugar de los comportamientos del aprendiz (impactos).</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-unitec-cyan mr-2 flex-shrink-0 mt-0.5"></i> Aunque solo podemos mejorar en algo aprendiendo a mejorar, usan una lente de evaluación, no una lente de aprendizaje.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-unitec-cyan mr-2 flex-shrink-0 mt-0.5"></i> Ignoran el hecho de que el acto de observación cambia la naturaleza de lo que observamos y la gran dificultad de observar con la frecuencia suficiente para sacar conclusiones fiables.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-unitec-cyan mr-2 flex-shrink-0 mt-0.5"></i> Generalmente no incorporan el trabajo preliminar fundamental de construir acuerdos culturales comunes sobre "la forma en que hacemos las cosas aquí".</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-unitec-cyan mr-2 flex-shrink-0 mt-0.5"></i> Hacen poco por la autonomía docente o la colaboración docente, ambos elementos clave en la satisfacción profesional.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-unitec-cyan mr-2 flex-shrink-0 mt-0.5"></i> Se enfocan en demasiadas cosas a la vez.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-unitec-cyan mr-2 flex-shrink-0 mt-0.5"></i> Rara vez incluyen enfoques sistémicos, simples y acordados para la retroalimentación.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-unitec-cyan mr-2 flex-shrink-0 mt-0.5"></i> Rara vez proporcionan tiempo suficiente y programado para el establecimiento de metas colaborativas de alto impacto y el intercambio colaborativo de progreso y, por lo tanto, no construyen la eficacia colectiva docente.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-unitec-cyan mr-2 flex-shrink-0 mt-0.5"></i> Digamos lo que digamos, se centran más en el factor miedo que en el factor de sentirse bien, aunque sabemos que todos queremos mejorar en nuestro trabajo y que nos sentimos bien cuando lo hacemos.</li>
                     </ul>
-                    <h5 class="font-bold text-slate-800 mb-2">¿CUÁL ES EL PROBLEMA?</h5>
+                    <h5 class="font-bold text-unitec-federal mb-2">¿CUÁL ES EL PROBLEMA?</h5>
                     <p class="mb-4">Quizás la razón más amplia/profunda es que no reconocen que las escuelas son culturas que construyen normas compartidas en contexto. Por lo tanto, los sistemas descontextualizados basados en supervisión/evaluación/observación están equivocados desde el principio. Esto se siente como el doloroso descubrimiento de lo "cegadora obviedad", pero el problema está tan normalizado que hemos perdido la capacidad de verlo.</p>
                 </div>
 
-                <div class="mb-8">
-                    <h4 class="text-xl font-bold text-rose-700 mb-2">3. IDEAR</h4>
+                <div class="mb-10 pl-6 border-l-4 border-unitec-cyan/30">
+                    <h4 class="text-xl font-bold text-unitec-cyan mb-3">3. IDEAR</h4>
                     <p class="mb-4">La crítica es fácil, pero proporcionar mejores alternativas es menos simple. Entonces, ¿dónde podríamos buscar inspiración? En el CGC, generalmente hemos encontrado que nuestras mejores ideas surgen de estar profundamente inmersos en la práctica diaria de la enseñanza y el liderazgo. Michael Fullan llama a esto convertirse en "Los Nuevos Teóricos", construyendo teorías hacia atrás desde la práctica, no creando teorías e imponiéndolas a la práctica. Él habla de alternar nuestra presencia de liderazgo, "En el balcón, en la pista de baile", participando regularmente en la práctica, luego reflexionando sobre esa práctica hasta que descubrimos qué es realmente efectivo y qué se puede replicar de manera confiable en nuevos contextos.</p>
                     <p class="mb-4">La reflexión profesional continua y la "creación de herramientas" nos han permitido conceptualizar una alternativa radical a los sistemas basados en la supervisión. Nos dimos cuenta de que necesitábamos comenzar en un lugar muy diferente. Michael Fullan nos recuerda que "El cambio es reculturización". Peter Drucker observó famosamente que "La cultura se come a la estrategia en el desayuno". Una profunda creencia en la verdad de estas observaciones nos llevó a comenzar a construir nuestro sistema alternativo de crecimiento profesional no con Estándares Docentes o discusiones sobre cuántas observaciones rápidas podríamos gestionar este año, sino con la <strong>cultura</strong>.</p>
                 </div>
 
-                <div class="mb-8 p-6 bg-slate-50 border-l-4 border-slate-300">
-                    <h4 class="text-xl font-bold text-slate-800 mb-4">LA CULTURA SE COME A LA ESTRATEGIA EN EL DESAYUNO</h4>
+                <div class="mb-10 p-8 bg-slate-50 border border-slate-200 rounded-lg shadow-sm">
+                    <h4 class="text-xl font-bold text-unitec-federal mb-4 border-b pb-2 border-slate-200">LA CULTURA SE COME A LA ESTRATEGIA EN EL DESAYUNO</h4>
                     <p class="mb-4">Construimos nuestro modelo alternativo, El Sistema de Crecimiento Colectivo, en el contexto de la construcción de culturas de aprendizaje.</p>
                     <p class="mb-4">Aquí está nuestra lógica simple y fluida:</p>
-                    <ul class="list-disc pl-5 space-y-2">
-                        <li>Las escuelas son culturas.</li>
-                        <li>"Solo es una cultura si todos la compran" (Margaret Wheatley).</li>
-                        <li>Por lo tanto, solo es una cultura verdadera si es <strong>lo que hacemos cuando nadie está mirando</strong>. Esta frase se convirtió en nuestra definición de cultura y nuestro "eslogan" para el proyecto.</li>
-                        <li>Si la cultura es lo que hacemos cuando nadie está mirando, entonces toda la noción y el lenguaje de la Supervisión es incorrecto desde el principio.</li>
-                        <li>Solo cuando cambiemos nuestra mentalidad de Supervisión a Visión Compartida comenzaremos a acercarnos al objetivo deseado de <strong>eficacia colectiva docente</strong>, identificada por John Hattie en <em>Visible Learning</em> como la práctica que tiene el mayor impacto en el aprendizaje de los estudiantes.</li>
+                    <ul class="space-y-2">
+                         <li class="flex items-start"><span class="text-unitec-cyan mr-2 font-bold">•</span> Las escuelas son culturas.</li>
+                         <li class="flex items-start"><span class="text-unitec-cyan mr-2 font-bold">•</span> "Solo es una cultura si todos la compran" (Margaret Wheatley).</li>
+                         <li class="flex items-start"><span class="text-unitec-cyan mr-2 font-bold">•</span> Por lo tanto, solo es una cultura verdadera si es <strong>lo que hacemos cuando nadie está mirando</strong>. Esta frase se convirtió en nuestra definición de cultura y nuestro "eslogan" para el proyecto.</li>
+                         <li class="flex items-start"><span class="text-unitec-cyan mr-2 font-bold">•</span> Si la cultura es lo que hacemos cuando nadie está mirando, entonces toda la noción y el lenguaje de la Supervisión es incorrecto desde el principio.</li>
+                         <li class="flex items-start"><span class="text-unitec-cyan mr-2 font-bold">•</span> Solo cuando cambiemos nuestra mentalidad de Supervisión a Visión Compartida comenzaremos a acercarnos al objetivo deseado de <strong>eficacia colectiva docente</strong>, identificada por John Hattie en <em>Visible Learning</em> como la práctica que tiene el mayor impacto en el aprendizaje de los estudiantes.</li>
                     </ul>
                 </div>
 
-                <div class="mb-8">
-                    <h4 class="text-xl font-bold text-rose-700 mb-2">4. PROTOTIPAR</h4>
+                <div class="mb-10 pl-6 border-l-4 border-unitec-cyan/30">
+                    <h4 class="text-xl font-bold text-unitec-cyan mb-3">4. PROTOTIPAR</h4>
                     <p class="mb-4">Esta publicación proporciona un prototipo de crecimiento profesional bien desarrollado que parte de esta premisa cultural. Nuestro título provisional es <strong>El Sistema de Crecimiento Colectivo</strong>.</p>
                     <p class="mb-4">Así es como funciona:</p>
                     <p class="mb-4">Trabajamos en contexto en una escuela para llevar a cabo el trabajo fundamental necesario de co-crear una cultura de aprendizaje con nuestros colegas docentes. Esa cultura incluye los elementos de cualquier cultura verdadera:</p>
-                    <ul class="list-disc pl-5 space-y-2 mb-4">
-                        <li><strong>Un lenguaje compartido:</strong> Para esto usamos la Definición de Aprendizaje de las 3 C del CGC: Aprendizaje Conceptual, de Competencia y de Carácter.</li>
-                        <li><strong>Valores compartidos:</strong> En forma de Principios de Aprendizaje.</li>
-                        <li><strong>Normas compartidas:</strong> Las Prácticas de aprendizaje sugeridas por nuestros Principios. Después de nuestro trabajo con los maestros, refinamos estas Prácticas para reflejar la investigación.</li>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start"><i data-lucide="diamond" class="w-4 h-4 text-unitec-cyan mr-2 mt-1"></i><span><strong>Un lenguaje compartido:</strong> Para esto usamos la Definición de Aprendizaje de las 3 C del CGC: Aprendizaje Conceptual, de Competencia y de Carácter.</span></li>
+                        <li class="flex items-start"><i data-lucide="diamond" class="w-4 h-4 text-unitec-cyan mr-2 mt-1"></i><span><strong>Valores compartidos:</strong> En forma de Principios de Aprendizaje.</span></li>
+                        <li class="flex items-start"><i data-lucide="diamond" class="w-4 h-4 text-unitec-cyan mr-2 mt-1"></i><span><strong>Normas compartidas:</strong> Las Prácticas de aprendizaje sugeridas por nuestros Principios. Después de nuestro trabajo con los maestros, refinamos estas Prácticas para reflejar la investigación.</span></li>
                     </ul>
                     <p class="mb-4">En nuestro prototipo, hemos tomado el Lenguaje de Aprendizaje y los Principios de Aprendizaje que hemos desarrollado, y los hemos usado para mapear <strong>10 Hilos (Strands)</strong>, continuos simples que describen lo que los <strong>aprendices</strong>, no los maestros, están haciendo en diferentes tipos de culturas de "aula". Esto es por una razón clara e importante: Si vamos a planificar el crecimiento en el aprendizaje, necesitamos planificar los <strong>impactos</strong> primero (es decir, los cambios en el comportamiento de aprendizaje que deseamos lograr en nuestros estudiantes). Los insumos (lo que hacen los maestros) influirán en los impactos, pero no son el punto principal. Es contra los impactos que necesitamos reunir evidencia; de lo contrario, ¿cuál es el punto?.</p>
                     <p class="mb-4">Nuestros continuos funcionan a través de 4 niveles de crecimiento cultural. Describimos con claridad lo que los aprendices están haciendo en culturas de aprendizaje que predominantemente <strong>TRANSACCIONAN (TRANSACT), TRANSICIONAN (TRANSITION), TRANSFORMAN (TRANSFORM) o TRASCIENDEN (TRANSCEND)</strong>.</p>
                     <p class="mb-4">En lugar del sistema disperso y de bajo impacto colectivo de tener a cada maestro desarrollando múltiples metas profesionales cada año, sugerimos que las escuelas elijan <strong>un continuo como la Meta de Impacto Colectivo para el año, para todos</strong>. Los maestros planean cómo pueden contribuir personalmente al logro colectivo de esa meta.</p>
                     
-                    <h5 class="font-bold text-slate-800 mb-2 mt-6">NO LA POLICÍA DEL APRENDIZAJE</h5>
+                    <h5 class="font-bold text-unitec-federal mb-2 mt-6">NO LA POLICÍA DEL APRENDIZAJE</h5>
                     <p class="mb-4">Sugerimos un cambio de la norma actual. La mentalidad no debería comenzar con "Quiero trabajar en...". En su lugar, sugerimos un enfoque en lo que nos gustaría ver que nuestros alumnos sean más capaces de entender, hacer, convertirse (las 3Cs) y solo entonces en cómo nosotros, como profesionales, aprenderemos a apoyar el crecimiento estudiantil deseado. Para apoyar el aprendizaje profesional, hemos añadido, para cada Hilo en el sistema, una lista práctica de estrategias de enseñanza principales y un conjunto de herramientas y plantillas prácticas.</p>
                     <p class="mb-4">Todos asumen la responsabilidad de documentar y compartir evidencia del crecimiento de sus estudiantes y el propio. Si es lo que hacemos cuando nadie está mirando, entonces, lógicamente, el énfasis en la observación debería reducirse. Hemos cambiado el "control de calidad" a maestros que proporcionan evidencia anotada del progreso del estudiante a través de una variedad de medios. Como dijo W. Edwards Deming, "La calidad es responsabilidad de todos". Los líderes ya no son "la policía del aprendizaje", pueden cumplir un papel mucho más necesario y gratificante como constructores de capacidad.</p>
                     <p class="mb-4">El propósito clave de compartir evidencia de aprendizaje estudiantil es la generación de retroalimentación. Dentro de los Sistemas de Crecimiento Colectivo, la retroalimentación entre sí utiliza el sistema <strong>S.T.A.R.</strong> del CGC:</p>
-                    <ul class="list-disc pl-5 mb-4">
-                        <li><strong>S</strong>pecific (Específica)</li>
-                        <li><strong>T</strong>imely (Oportuna)</li>
-                        <li><strong>A</strong>ctionable (Accionable)</li>
-                        <li><strong>R</strong>espectful (Respetuosa)</li>
+                    <ul class="mb-4 grid grid-cols-2 gap-2 max-w-md">
+                        <li class="bg-slate-100 p-2 rounded text-center font-medium text-unitec-federal"><strong>S</strong>pecific (Específica)</li>
+                        <li class="bg-slate-100 p-2 rounded text-center font-medium text-unitec-federal"><strong>T</strong>imely (Oportuna)</li>
+                        <li class="bg-slate-100 p-2 rounded text-center font-medium text-unitec-federal"><strong>A</strong>ctionable (Accionable)</li>
+                        <li class="bg-slate-100 p-2 rounded text-center font-medium text-unitec-federal"><strong>R</strong>espectful (Respetuosa)</li>
                     </ul>
                     <p class="mb-4">Nos enfocamos en unos pocos puntos, enmarcados por: "Lo que funcionó bien... Aún mejor si...".</p>
                     
-                    <h5 class="font-bold text-slate-800 mb-2 mt-6">LO QUE HACEMOS CUANDO NADIE ESTÁ MIRANDO</h5>
+                    <h5 class="font-bold text-unitec-federal mb-2 mt-6">LO QUE HACEMOS CUANDO NADIE ESTÁ MIRANDO</h5>
                     <p class="mb-4">Cada maestro, cada líder tiene una zona de desarrollo próximo. No debemos confundir El Sistema de Crecimiento Colectivo con sistemas de evaluación diseñados para esos pocos casos extremos donde un maestro verdaderamente no puede/no quiere aprender y está dañando el aprendizaje de los niños. En esos casos, es hora de separarse ("Intervención Temprana" según Jim Collins). Para todos los demás, necesitamos sistemas de aprendizaje profesional. Necesitamos mover nuestro marco mental de la supervisión a la visión compartida, del cumplimiento a la colaboración.</p>
                 </div>
 
-                <div class="mb-8">
-                    <h4 class="text-xl font-bold text-rose-700 mb-2">5. PROBAR E IMPLEMENTAR</h4>
+                <div class="mb-10 pl-6 border-l-4 border-unitec-cyan/30">
+                    <h4 class="text-xl font-bold text-unitec-cyan mb-3">5. PROBAR E IMPLEMENTAR</h4>
                     <p class="mb-4">Las escuelas están entrando en la fase de prueba y refinarán el modelo basándose en sus experiencias. Una vez probado en campo, las escuelas pasarán a la implementación completa.</p>
                     <p class="mb-4">El Sistema de Crecimiento Colectivo construye intencional y sistémicamente la <strong>eficacia colectiva docente</strong>. No podemos controlar a las personas hacia la calidad. Tenemos que construir Culturas de Aprendizaje en las que hagamos nuestro mejor trabajo para los estudiantes porque esa es la razón por la que nos unimos a la mejor profesión del mundo... la Profesión del Aprendizaje.</p>
                 </div>
             </div>
         </section>
 
-        <!-- THE HOW -->
-        <section id="how" class="mb-16 scroll-mt-20 section-content">
-            <div class="flex items-center mb-6">
-                <div class="bg-amber-100 p-3 rounded-full mr-4">
-                    <i data-lucide="lightbulb" class="w-8 h-8 text-amber-600"></i>
+        <section id="how" class="mb-20 scroll-mt-24 section-content">
+            <div class="flex items-center mb-8 border-b-2 border-slate-100 pb-4">
+                <div class="bg-unitec-cyan/10 p-3 rounded-xl mr-5">
+                    <i data-lucide="lightbulb" class="w-8 h-8 text-unitec-cyan"></i>
                 </div>
-                <h2 class="text-3xl font-bold text-slate-900">El Cómo</h2>
+                <h2 class="text-3xl font-bold text-unitec-federal">El Cómo</h2>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
-                <div class="bg-amber-50 p-6 border-b border-amber-100">
-                    <h3 class="font-bold text-amber-800 text-xl">GUÍA PASO A PASO PARA EL ÉXITO CON EL SISTEMA DE CRECIMIENTO COLECTIVO</h3>
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-12">
+                <div class="bg-unitec-federal p-6 border-b border-unitec-federal">
+                    <h3 class="font-bold text-white text-xl tracking-wide">GUÍA PASO A PASO PARA EL ÉXITO CON EL SISTEMA DE CRECIMIENTO COLECTIVO</h3>
                 </div>
-                <div class="p-8 space-y-8">
-                    <div>
-                        <h4 class="font-bold text-amber-600 mb-2">PASO UNO: DECONSTRUIR Y CO-CONSTRUIR LA CULTURA DE APRENDIZAJE</h4>
-                        <p class="text-slate-700">Es importante lanzar esta transición con optimismo. Abogamos por usar los talleres que CGC ha desarrollado para deconstruir la naturaleza de la cultura y luego co-construir la propia de la escuela. El producto inicial es un conjunto "crudo" de Principios/Continuos/Conceptos de Aprendizaje construidos a partir de las experiencias del personal, que luego se sintetizarán con la investigación para crear un conjunto robusto y "propio" para el sistema de la escuela.</p>
+                <div class="p-10 space-y-10">
+                    <div class="relative pl-8 border-l-2 border-slate-200">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-unitec-cyan"></div>
+                        <h4 class="font-bold text-unitec-federal text-lg mb-2">PASO UNO: DECONSTRUIR Y CO-CONSTRUIR LA CULTURA DE APRENDIZAJE</h4>
+                        <p class="text-slate-600">Es importante lanzar esta transición con optimismo. Abogamos por usar los talleres que CGC ha desarrollado para deconstruir la naturaleza de la cultura y luego co-construir la propia de la escuela. El producto inicial es un conjunto "crudo" de Principios/Continuos/Conceptos de Aprendizaje construidos a partir de las experiencias del personal, que luego se sintetizarán con la investigación para crear un conjunto robusto y "propio" para el sistema de la escuela.</p>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-amber-600 mb-2">PASO DOS: SELECCIONAR LA META DE IMPACTO COLECTIVO</h4>
-                        <p class="text-slate-700">La pregunta esencial es: "Si solo pudiéramos hacer un cambio sustancial el próximo año, ¿cuál sería el cambio que tendría el mayor impacto positivo en el aprendizaje en la mayoría de los alumnos?". La plantilla de Establecimiento de Metas de Impacto Colectivo es una herramienta útil para esto.</p>
+                    <div class="relative pl-8 border-l-2 border-slate-200">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-unitec-cyan"></div>
+                        <h4 class="font-bold text-unitec-federal text-lg mb-2">PASO DOS: SELECCIONAR LA META DE IMPACTO COLECTIVO</h4>
+                        <p class="text-slate-600">La pregunta esencial es: "Si solo pudiéramos hacer un cambio sustancial el próximo año, ¿cuál sería el cambio que tendría el mayor impacto positivo en el aprendizaje en la mayoría de los alumnos?". La plantilla de Establecimiento de Metas de Impacto Colectivo es una herramienta útil para esto.</p>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-amber-600 mb-2">PASO TRES: SELECCIONAR LA META DE IMPACTO INDIVIDUAL</h4>
-                        <p class="text-slate-700">Si una escuela decide que cada maestro también puede trabajar en una meta individual, se proporciona una plantilla. Consejo Clave: Asignar tiempo compartido significativo para este proceso (ej. un bloque de tiempo al final del año escolar) para asegurar el compromiso y formar comunidades de aprendizaje profesional (PLC) conectadas.</p>
+                    <div class="relative pl-8 border-l-2 border-slate-200">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-unitec-cyan"></div>
+                        <h4 class="font-bold text-unitec-federal text-lg mb-2">PASO TRES: SELECCIONAR LA META DE IMPACTO INDIVIDUAL</h4>
+                        <p class="text-slate-600">Si una escuela decide que cada maestro también puede trabajar en una meta individual, se proporciona una plantilla. Consejo Clave: Asignar tiempo compartido significativo para este proceso (ej. un bloque de tiempo al final del año escolar) para asegurar el compromiso y formar comunidades de aprendizaje profesional (PLC) conectadas.</p>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-amber-600 mb-2">PASO CUATRO: MANTENER EL ENFOQUE DURANTE TODO EL AÑO</h4>
-                        <p class="text-slate-700">Usar el tiempo regular de reuniones de facultad para compartir "Éxitos y Luchas", recordando a todos que compartimos una meta.</p>
+                    <div class="relative pl-8 border-l-2 border-slate-200">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-unitec-cyan"></div>
+                        <h4 class="font-bold text-unitec-federal text-lg mb-2">PASO CUATRO: MANTENER EL ENFOQUE DURANTE TODO EL AÑO</h4>
+                        <p class="text-slate-600">Usar el tiempo regular de reuniones de facultad para compartir "Éxitos y Luchas", recordando a todos que compartimos una meta.</p>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-amber-600 mb-2">PASO CINCO (CONTINUO): PROVISIÓN DE EVIDENCIA</h4>
-                        <p class="text-slate-700">La escuela decide el sistema para que los maestros proporcionen evidencia de que los alumnos están logrando la Meta de Impacto (incluyendo formas de evidencia y plataforma de portafolio docente).</p>
+                    <div class="relative pl-8 border-l-2 border-slate-200">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-unitec-cyan"></div>
+                        <h4 class="font-bold text-unitec-federal text-lg mb-2">PASO CINCO (CONTINUO): PROVISIÓN DE EVIDENCIA</h4>
+                        <p class="text-slate-600">La escuela decide el sistema para que los maestros proporcionen evidencia de que los alumnos están logrando la Meta de Impacto (incluyendo formas de evidencia y plataforma de portafolio docente).</p>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-amber-600 mb-2">PASO SEIS (CONTINUO): REFLEXIÓN Y RETROALIMENTACIÓN</h4>
-                        <p class="text-slate-700">Sostener una cultura de reflexión regular y retroalimentación STAR como característica clave de la Cultura de Aprendizaje.</p>
+                    <div class="relative pl-8 border-l-2 border-slate-200">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-unitec-cyan"></div>
+                        <h4 class="font-bold text-unitec-federal text-lg mb-2">PASO SEIS (CONTINUO): REFLEXIÓN Y RETROALIMENTACIÓN</h4>
+                        <p class="text-slate-600">Sostener una cultura de reflexión regular y retroalimentación STAR como característica clave de la Cultura de Aprendizaje.</p>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-amber-600 mb-2">PASO SIETE: CELEBRAR EL ÉXITO</h4>
-                        <p class="text-slate-700">Una CELEBRACIÓN DEL APRENDIZAJE PROFESIONAL anual, donde todos los miembros de la facultad contribuyen con ejemplos de crecimiento estudiantil y propio. No es para padres/junta directiva, sino maestros celebrando el logro de la Meta de Impacto Colectivo y proporcionando retroalimentación STAR entre pares.</p>
+                    <div class="relative pl-8 border-l-2 border-slate-200">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-unitec-cyan"></div>
+                        <h4 class="font-bold text-unitec-federal text-lg mb-2">PASO SIETE: CELEBRAR EL ÉXITO</h4>
+                        <p class="text-slate-600">Una CELEBRACIÓN DEL APRENDIZAJE PROFESIONAL anual, donde todos los miembros de la facultad contribuyen con ejemplos de crecimiento estudiantil y propio. No es para padres/junta directiva, sino maestros celebrando el logro de la Meta de Impacto Colectivo y proporcionando retroalimentación STAR entre pares.</p>
                     </div>
                 </div>
             </div>
             
-            <div class="mt-8 bg-indigo-50 p-8 rounded-lg border border-indigo-100">
-                <h4 class="font-bold text-indigo-800 mb-4 text-xl">VISIÓN INTERESANTE</h4>
-                <p class="text-indigo-900 mb-4">El CGC construye capacidad en 3 áreas: Cultura, Currículo y Comunidad. Algunas escuelas adoptan una meta para cada esfera.</p>
-                <ul class="space-y-3 text-indigo-900 list-disc pl-5">
-                    <li><strong>Cultura de Aprendizaje:</strong> Ej. Todos los alumnos serán más expertos en APRENDIZAJE COLABORATIVO.</li>
-                    <li><strong>Currículo de Aprendizaje:</strong> Ej. Cada maestro diseñará un nuevo MÓDULO DE APRENDIZAJE basado en la indagación.</li>
-                    <li><strong>Comunidad de Aprendizaje:</strong> Ej. Todos los padres estarán mejor empoderados como Aliados de Aprendizaje.</li>
+            <div class="mt-8 bg-slate-50 p-8 rounded-xl border-l-8 border-unitec-federal shadow-sm">
+                <h4 class="font-bold text-unitec-federal mb-4 text-xl flex items-center">
+                    <i data-lucide="eye" class="w-5 h-5 mr-2"></i> VISIÓN INTERESANTE
+                </h4>
+                <p class="text-slate-700 mb-4 font-medium">El CGC construye capacidad en 3 áreas: Cultura, Currículo y Comunidad. Algunas escuelas adoptan una meta para cada esfera.</p>
+                <ul class="space-y-3 text-slate-600 list-none">
+                    <li class="flex items-center"><span class="text-unitec-cyan mr-2">◆</span> <strong>Cultura de Aprendizaje:</strong> Ej. Todos los alumnos serán más expertos en APRENDIZAJE COLABORATIVO.</li>
+                    <li class="flex items-center"><span class="text-unitec-cyan mr-2">◆</span> <strong>Currículo de Aprendizaje:</strong> Ej. Cada maestro diseñará un nuevo MÓDULO DE APRENDIZAJE basado en la indagación.</li>
+                    <li class="flex items-center"><span class="text-unitec-cyan mr-2">◆</span> <strong>Comunidad de Aprendizaje:</strong> Ej. Todos los padres estarán mejor empoderados como Aliados de Aprendizaje.</li>
                 </ul>
             </div>
         </section>
 
-        <!-- EL QUE: ELEMENTO UNO -->
-        <section id="what" class="mb-16 scroll-mt-20 section-content">
-            <div class="flex items-center mb-6">
-                <div class="bg-emerald-100 p-3 rounded-full mr-4">
-                    <i data-lucide="users" class="w-8 h-8 text-emerald-600"></i>
+        <section id="what" class="mb-20 scroll-mt-24 section-content">
+            <div class="flex items-center mb-8 border-b-2 border-slate-100 pb-4">
+                <div class="bg-unitec-cyan/10 p-3 rounded-xl mr-5">
+                    <i data-lucide="users" class="w-8 h-8 text-unitec-cyan"></i>
                 </div>
-                <h2 class="text-3xl font-bold text-slate-900">El Qué: Elementos y Continuos</h2>
+                <h2 class="text-3xl font-bold text-unitec-federal">El Qué: Elementos y Continuos</h2>
             </div>
 
             <div class="mb-12 prose prose-slate max-w-none text-slate-700">
-                <h3 class="text-2xl font-bold text-emerald-800 mb-2">ELEMENTO UNO: EL PRIMER MAESTRO: NUESTROS PADRES COMO ALIADOS DE APRENDIZAJE</h3>
-                <p class="text-lg text-slate-600 mb-4">Se enfoca en mover las relaciones padres-escuela de transaccionales a transformacionales.</p>
+                <h3 class="text-2xl font-bold text-unitec-federal mb-2">ELEMENTO UNO: EL PRIMER MAESTRO: NUESTROS PADRES COMO ALIADOS DE APRENDIZAJE</h3>
+                <p class="text-lg text-slate-600 mb-6 font-light">Se enfoca en mover las relaciones padres-escuela de transaccionales a transformacionales.</p>
                 
-                <h4 class="text-xl font-bold text-slate-800">CONTINUO: APRENDIZAJE INTERGENERACIONAL</h4>
+                <h4 class="text-xl font-bold text-slate-800 border-l-4 border-unitec-cyan pl-3 mb-4">CONTINUO: APRENDIZAJE INTERGENERACIONAL</h4>
                 <p class="mb-4">Necesitamos cerrar las brechas entre la escolarización y la crianza.</p>
                 
                 <div id="table-parents"></div>
@@ -253,41 +323,42 @@
             </div>
         </section>
 
-        <!-- LOS 10 HILOS -->
-        <section id="continuums" class="mb-16 scroll-mt-20 section-content">
-            <div class="mb-10 prose prose-slate max-w-none text-slate-700">
-                <h3 class="text-2xl font-bold text-indigo-800 mb-2">ELEMENTO DOS: EL SEGUNDO MAESTRO: CONSTRUYENDO NUESTRA EFICACIA COLECTIVA</h3>
-                <p class="text-lg text-slate-600 mb-4">Se enfoca en nuestros roles transformacionales como Profesionales del Aprendizaje y proporciona <strong>diez Continuos Críticos</strong>.</p>
+        <section id="continuums" class="mb-20 scroll-mt-24 section-content">
+            <div class="mb-12 prose prose-slate max-w-none text-slate-700">
+                <h3 class="text-2xl font-bold text-unitec-federal mb-2">ELEMENTO DOS: EL SEGUNDO MAESTRO: CONSTRUYENDO NUESTRA EFICACIA COLECTIVA</h3>
+                <p class="text-lg text-slate-600 mb-6 font-light">Se enfoca en nuestros roles transformacionales como Profesionales del Aprendizaje y proporciona <strong>diez Continuos Críticos</strong>.</p>
                 
-                <h4 class="font-bold text-lg text-slate-800 mt-6">TRANSFERENCIA (TRANSFER)</h4>
-                <p class="mb-4">Necesitamos comenzar con el fin en mente: la Transferencia del Aprendizaje. No podemos transferir información factual a contextos desconocidos de manera útil. Debemos enfocarnos en construir una comprensión conceptual profunda y transferible, competencias para convertir ideas en acciones, y rasgos de carácter que nos obliguen a tomar esa acción.</p>
+                <h4 class="font-bold text-lg text-slate-800 mt-8 mb-2 border-l-4 border-unitec-cyan pl-3">TRANSFERENCIA (TRANSFER)</h4>
+                <p class="mb-6">Necesitamos comenzar con el fin en mente: la Transferencia del Aprendizaje. No podemos transferir información factual a contextos desconocidos de manera útil. Debemos enfocarnos en construir una comprensión conceptual profunda y transferible, competencias para convertir ideas en acciones, y rasgos de carácter que nos obliguen a tomar esa acción.</p>
 
-                <div class="bg-slate-800 text-white p-8 rounded-lg mb-8 mt-8">
-                    <h4 class="font-bold text-xl mb-4 border-b border-slate-600 pb-2">EL CAMBIO (THE SHIFT)</h4>
-                    <p class="mb-4 text-slate-300">En lugar de enfocarnos primero en los insumos del maestro, nos enfocamos primero en describir los impactos en el aprendiz.</p>
-                    <h5 class="font-bold text-white mb-2">TABLA GENERAL DE CAMBIO CULTURAL:</h5>
+                <div class="bg-unitec-federal text-white p-8 rounded-2xl shadow-lg mb-12 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
+                    <h4 class="font-bold text-xl mb-6 border-b border-unitec-sky/30 pb-3 flex items-center">
+                        <i data-lucide="refresh-cw" class="mr-3 opacity-80"></i> EL CAMBIO (THE SHIFT)
+                    </h4>
+                    <p class="mb-6 text-slate-200 font-light text-lg">En lugar de enfocarnos primero en los insumos del maestro, nos enfocamos primero en describir los impactos en el aprendiz.</p>
+                    <h5 class="font-bold text-unitec-cyan mb-4 uppercase tracking-wider text-sm">Tabla General de Cambio Cultural:</h5>
                     <div class="grid md:grid-cols-4 gap-6 text-sm">
-                        <div>
-                            <strong class="text-indigo-300 block mb-2 text-lg">TRANSACCIONANDO</strong>
-                            Relación transaccional. Información como moneda común. Poca agrupación con propósito. El maestro informa, el alumno recibe y devuelve en pruebas. El alumno es el <strong>objeto</strong> del proceso.
+                        <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/5">
+                            <strong class="text-unitec-sky block mb-2 text-lg">TRANSACCIONANDO</strong>
+                            <p class="opacity-80 leading-relaxed">Relación transaccional. Información como moneda común. Poca agrupación con propósito. El maestro informa, el alumno recibe y devuelve en pruebas. El alumno es el <strong>objeto</strong> del proceso.</p>
                         </div>
-                        <div>
-                            <strong class="text-indigo-300 block mb-2 text-lg">TRANSICIONANDO</strong>
-                            Cultura de indagación. Cuestionamiento abierto. Trabajo en equipo. Metacognición (aprender sobre el aprendizaje). Transicionando hacia una cultura que transforma.
+                        <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/5">
+                            <strong class="text-unitec-sky block mb-2 text-lg">TRANSICIONANDO</strong>
+                            <p class="opacity-80 leading-relaxed">Cultura de indagación. Cuestionamiento abierto. Trabajo en equipo. Metacognición (aprender sobre el aprendizaje). Transicionando hacia una cultura que transforma.</p>
                         </div>
-                        <div>
-                            <strong class="text-indigo-300 block mb-2 text-lg">TRANSFORMANDO</strong>
-                            Cultura que inspira. Comprensión conceptual profunda, alta competencia, carácter moral positivo. Los alumnos son expertos en aprendizaje, desarrollan eficacia colectiva y agencia. El alumno es el <strong>sujeto</strong> del proceso.
+                        <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/5">
+                            <strong class="text-unitec-sky block mb-2 text-lg">TRANSFORMANDO</strong>
+                            <p class="opacity-80 leading-relaxed">Cultura que inspira. Comprensión conceptual profunda, alta competencia, carácter moral positivo. Los alumnos son expertos en aprendizaje, desarrollan eficacia colectiva y agencia. El alumno es el <strong>sujeto</strong> del proceso.</p>
                         </div>
-                        <div>
-                            <strong class="text-indigo-300 block mb-2 text-lg">TRASCENDIENDO</strong>
-                            Emergencia plena de los aprendices alcanzando su capacidad humana completa. "¿QUÉ PASARÍA SI...?".
+                        <div class="bg-unitec-cyan/20 p-4 rounded-lg backdrop-blur-sm border border-unitec-cyan/30">
+                            <strong class="text-white block mb-2 text-lg">TRASCENDIENDO</strong>
+                            <p class="opacity-100 font-medium leading-relaxed">Emergencia plena de los aprendices alcanzando su capacidad humana completa. "¿QUÉ PASARÍA SI...?".</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Continuums Dynamic Insertion -->
-                <div class="space-y-12">
+                <div class="space-y-16">
                     <div id="c1"></div>
                     <div id="c2"></div>
                     <div id="c3"></div>
@@ -302,89 +373,99 @@
             </div>
         </section>
 
-        <!-- EL TERCER MAESTRO -->
-        <section id="environment" class="mb-16 scroll-mt-20 section-content">
-            <div class="flex items-center mb-6">
-                <div class="bg-cyan-100 p-3 rounded-full mr-4">
-                    <i data-lucide="layout" class="w-8 h-8 text-cyan-600"></i>
+        <section id="environment" class="mb-20 scroll-mt-24 section-content">
+            <div class="flex items-center mb-8 border-b-2 border-slate-100 pb-4">
+                <div class="bg-unitec-cyan/10 p-3 rounded-xl mr-5">
+                    <i data-lucide="layout" class="w-8 h-8 text-unitec-cyan"></i>
                 </div>
-                <h2 class="text-3xl font-bold text-slate-900">El Tercer Maestro</h2>
+                <h2 class="text-3xl font-bold text-unitec-federal">El Tercer Maestro</h2>
             </div>
             <div class="prose prose-slate max-w-none text-slate-700">
-                <h3 class="text-2xl font-bold text-cyan-800 mb-2">ELEMENTO TRES: EL TERCER MAESTRO: EL ENTORNO DE APRENDIZAJE</h3>
-                <p class="text-lg text-slate-600 mb-4">Diseño innovador y flexible de espacios.</p>
+                <h3 class="text-2xl font-bold text-unitec-federal mb-2">ELEMENTO TRES: EL TERCER MAESTRO: EL ENTORNO DE APRENDIZAJE</h3>
+                <p class="text-lg text-slate-600 mb-6 font-light">Diseño innovador y flexible de espacios.</p>
                 <div id="table-env"></div>
                 <div id="strategy-env"></div>
             </div>
         </section>
 
-        <!-- HERRAMIENTAS -->
-        <section id="tools" class="mb-16 scroll-mt-20 section-content">
-            <div class="flex items-center mb-6">
-                <div class="bg-violet-100 p-3 rounded-full mr-4">
-                    <i data-lucide="file-text" class="w-8 h-8 text-violet-600"></i>
+        <section id="tools" class="mb-20 scroll-mt-24 section-content">
+            <div class="flex items-center mb-8 border-b-2 border-slate-100 pb-4">
+                <div class="bg-unitec-cyan/10 p-3 rounded-xl mr-5">
+                    <i data-lucide="file-text" class="w-8 h-8 text-unitec-cyan"></i>
                 </div>
-                <h2 class="text-3xl font-bold text-slate-900">Herramientas y Plantillas</h2>
+                <h2 class="text-3xl font-bold text-unitec-federal">Herramientas y Plantillas</h2>
             </div>
             
             <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow border border-slate-200">
-                    <h4 class="font-bold text-violet-800 text-lg mb-4 border-b pb-2">META COLECTIVA DE LA ESCUELA (Ejemplo)</h4>
-                    <ul class="space-y-4 text-slate-700">
-                        <li><strong>Meta:</strong> Cada estudiante, maestro y líder se convertirá en experto en colaborar para lograr objetivos comunes.</li>
-                        <li><strong>Pregunta Clave:</strong> Si solo pudiéramos lograr un cambio profundo este año, ¿cuál tendría el mayor impacto positivo?</li>
-                        <li><strong>Enfoque de este año:</strong> Hilo 5: Aprendizaje Colaborativo.</li>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="flex items-center mb-4 border-b border-slate-100 pb-3">
+                        <div class="w-2 h-8 bg-unitec-federal mr-3"></div>
+                        <h4 class="font-bold text-unitec-federal text-lg">META COLECTIVA DE LA ESCUELA (Ejemplo)</h4>
+                    </div>
+                    <ul class="space-y-4 text-slate-600">
+                        <li class="flex items-start"><span class="text-unitec-cyan mr-2 mt-1">●</span> <span><strong>Meta:</strong> Cada estudiante, maestro y líder se convertirá en experto en colaborar para lograr objetivos comunes.</span></li>
+                        <li class="flex items-start"><span class="text-unitec-cyan mr-2 mt-1">●</span> <span><strong>Pregunta Clave:</strong> Si solo pudiéramos lograr un cambio profundo este año, ¿cuál tendría el mayor impacto positivo?</span></li>
+                        <li class="flex items-start"><span class="text-unitec-cyan mr-2 mt-1">●</span> <span><strong>Enfoque de este año:</strong> Hilo 5: Aprendizaje Colaborativo.</span></li>
                     </ul>
                 </div>
                 
-                <div class="bg-white p-8 rounded-lg shadow border border-slate-200">
-                    <h4 class="font-bold text-violet-800 text-lg mb-4 border-b pb-2">PLAN DE APRENDIZAJE PROFESIONAL (Ejemplo Personal)</h4>
-                    <div class="space-y-4 text-slate-700">
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="flex items-center mb-4 border-b border-slate-100 pb-3">
+                        <div class="w-2 h-8 bg-unitec-federal mr-3"></div>
+                        <h4 class="font-bold text-unitec-federal text-lg">PLAN DE APRENDIZAJE PROFESIONAL (Ejemplo Personal)</h4>
+                    </div>
+                    <div class="space-y-4 text-slate-600">
                         <div>
-                            <strong>A. Impacto en el Aprendizaje del Estudiante:</strong>
-                            <ul class="list-disc pl-5 mt-1 text-sm">
-                                <li>Entender mejor: El propósito de la colaboración (el resultado es mejor que solos).</li>
-                                <li>Ser más capaces de: Habilidades diversas y roles claros, comunicación y cooperación.</li>
-                                <li>Volverse más: Confidentes en trabajar colaborativamente.</li>
+                            <strong class="text-unitec-federal block mb-1">A. Impacto en el Aprendizaje del Estudiante:</strong>
+                            <ul class="list-none pl-2 mt-1 text-sm space-y-1">
+                                <li class="flex"><i data-lucide="check" class="w-4 h-4 text-unitec-cyan mr-2"></i> Entender mejor: El propósito de la colaboración.</li>
+                                <li class="flex"><i data-lucide="check" class="w-4 h-4 text-unitec-cyan mr-2"></i> Ser más capaces de: Habilidades diversas y roles claros.</li>
+                                <li class="flex"><i data-lucide="check" class="w-4 h-4 text-unitec-cyan mr-2"></i> Volverse más: Confidentes en trabajar colaborativamente.</li>
                             </ul>
                         </div>
                         <div>
-                            <strong>B. Metas Personales:</strong>
-                            <ul class="list-disc pl-5 mt-1 text-sm">
-                                <li>Ayudar a estudiantes a notar oportunidades de colaboración.</li>
-                                <li>Crear oportunidades para abordar problemas de la vida real.</li>
-                                <li>Usar estrategias de reflexión.</li>
+                            <strong class="text-unitec-federal block mb-1">B. Metas Personales:</strong>
+                            <ul class="list-none pl-2 mt-1 text-sm space-y-1">
+                                <li class="flex"><i data-lucide="target" class="w-4 h-4 text-unitec-cyan mr-2"></i> Ayudar a estudiantes a notar oportunidades de colaboración.</li>
+                                <li class="flex"><i data-lucide="target" class="w-4 h-4 text-unitec-cyan mr-2"></i> Crear oportunidades para abordar problemas de la vida real.</li>
+                                <li class="flex"><i data-lucide="target" class="w-4 h-4 text-unitec-cyan mr-2"></i> Usar estrategias de reflexión.</li>
                             </ul>
                         </div>
                         <div>
-                            <strong>C. Plan Personal:</strong>
-                            <ul class="list-disc pl-5 mt-1 text-sm">
-                                <li>Éxitos: Siento que tengo éxito con...</li>
-                                <li>Apoyo: Tengo preguntas sobre...</li>
-                                <li>Estrategias: Creo que podría intentar...</li>
+                            <strong class="text-unitec-federal block mb-1">C. Plan Personal:</strong>
+                            <ul class="list-none pl-2 mt-1 text-sm space-y-1">
+                                <li class="flex"><i data-lucide="arrow-right" class="w-4 h-4 text-unitec-cyan mr-2"></i> Éxitos: Siento que tengo éxito con...</li>
+                                <li class="flex"><i data-lucide="arrow-right" class="w-4 h-4 text-unitec-cyan mr-2"></i> Apoyo: Tengo preguntas sobre...</li>
+                                <li class="flex"><i data-lucide="arrow-right" class="w-4 h-4 text-unitec-cyan mr-2"></i> Estrategias: Creo que podría intentar...</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-lg shadow border border-slate-200">
-                    <h4 class="font-bold text-violet-800 text-lg mb-4 border-b pb-2">ENVÍO DE EVIDENCIA DE APRENDIZAJE (Formulario)</h4>
-                    <ul class="space-y-3 text-slate-700">
-                        <li>Contexto / Metas de Aprendizaje Demostradas.</li>
-                        <li>Grado/Clase.</li>
-                        <li>Descripción de Evidencia.</li>
-                        <li><strong>Retroalimentación S.T.A.R.:</strong> Qué funcionó bien... Aún mejor si...</li>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="flex items-center mb-4 border-b border-slate-100 pb-3">
+                        <div class="w-2 h-8 bg-unitec-federal mr-3"></div>
+                        <h4 class="font-bold text-unitec-federal text-lg">ENVÍO DE EVIDENCIA DE APRENDIZAJE</h4>
+                    </div>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-center border-b border-slate-50 pb-2"><span class="w-4 h-4 bg-slate-200 rounded-full mr-3"></span> Contexto / Metas de Aprendizaje Demostradas.</li>
+                        <li class="flex items-center border-b border-slate-50 pb-2"><span class="w-4 h-4 bg-slate-200 rounded-full mr-3"></span> Grado/Clase.</li>
+                        <li class="flex items-center border-b border-slate-50 pb-2"><span class="w-4 h-4 bg-slate-200 rounded-full mr-3"></span> Descripción de Evidencia.</li>
+                        <li class="flex items-center bg-slate-50 p-3 rounded"><strong class="text-unitec-cyan mr-2">S.T.A.R.:</strong> Qué funcionó bien... Aún mejor si...</li>
                     </ul>
                 </div>
 
-                <div class="bg-white p-8 rounded-lg shadow border border-slate-200">
-                    <h4 class="font-bold text-violet-800 text-lg mb-4 border-b pb-2">REFLEXIONES PROFESIONALES</h4>
-                    <ul class="space-y-4 text-slate-700">
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="flex items-center mb-4 border-b border-slate-100 pb-3">
+                        <div class="w-2 h-8 bg-unitec-federal mr-3"></div>
+                        <h4 class="font-bold text-unitec-federal text-lg">REFLEXIONES PROFESIONALES</h4>
+                    </div>
+                    <ul class="space-y-4 text-slate-600">
                         <li><strong>Las Metas:</strong> Conceptual (entender), Competencia (ser capaz de), Carácter (volverse más).</li>
                         <li><strong>Reflexión de Mitad de Año:</strong> En camino / Posibles ajustes / Fuera de camino.</li>
                         <li>
                             <strong>Reflexión de Fin de Año:</strong>
-                            <ul class="list-disc pl-5 mt-1">
+                            <ul class="list-disc pl-5 mt-2 text-sm space-y-1 text-slate-500">
                                 <li>¿Qué se suponía que sucedería?</li>
                                 <li>¿Qué sucedió realmente?</li>
                                 <li>¿Qué explica la diferencia?</li>
@@ -396,24 +477,27 @@
             </div>
         </section>
 
-        <!-- CONCLUSION -->
-        <section id="conclusion" class="mb-24 scroll-mt-20 section-content">
-            <div class="bg-slate-900 text-slate-300 p-10 rounded-2xl">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
-                    <i data-lucide="check-circle" class="mr-3"></i>
+        <section id="conclusion" class="mb-32 scroll-mt-24 section-content">
+            <div class="bg-unitec-federal text-white p-12 rounded-3xl shadow-xl border-t-8 border-unitec-cyan">
+                <h2 class="text-2xl font-bold text-white mb-8 flex items-center">
+                    <div class="bg-unitec-cyan p-2 rounded-full mr-3 text-unitec-federal">
+                        <i data-lucide="check-circle" class="w-6 h-6"></i>
+                    </div>
                     LA CONCLUSIÓN
                 </h2>
-                <div class="space-y-6 leading-relaxed text-lg">
+                <div class="space-y-6 leading-relaxed text-lg font-light text-slate-100">
                     <p>Dado que sabemos que son los impactos en el aprendizaje de los estudiantes los que realmente cuentan, tiene sentido enfocar nuestra atención allí, antes de considerar los insumos de los maestros.</p>
                     <p>Dado que sabemos que la observación cambia la naturaleza de lo que observamos, tiene sentido buscar evidencia de crecimiento de una variedad más amplia de fuentes.</p>
                     <p>Dado que sabemos que estamos abrumados por la complejidad, tiene sentido encontrar claridad enfocando nuestra energía en <strong>una cosa</strong>.</p>
-                    <p class="text-white font-semibold">Finalmente, dado que sabemos por extensa investigación que la <strong>eficacia colectiva docente</strong> es el factor que tiene el mayor impacto positivo en el aprendizaje, entonces es simplemente sentido común construir intencionalmente esa eficacia a través de un sistema colectivo para el aprendizaje profesional.</p>
-                    <p class="italic pt-6 border-t border-slate-700">
+                    <div class="bg-white/10 p-6 rounded-xl border-l-4 border-unitec-cyan my-6">
+                        <p class="text-white font-semibold">Finalmente, dado que sabemos por extensa investigación que la <strong>eficacia colectiva docente</strong> es el factor que tiene el mayor impacto positivo en el aprendizaje, entonces es simplemente sentido común construir intencionalmente esa eficacia a través de un sistema colectivo para el aprendizaje profesional.</p>
+                    </div>
+                    <p class="italic pt-8 border-t border-white/20 text-slate-300 text-base">
                         Creemos que hay una lógica convincente en el Diseño Centrado en el Humano del Sistema de Crecimiento Colectivo. Deseamos a todos nuestros colaboradores gran éxito en personalizar nuestro trabajo para su propio contexto, por el bien de nuestros líderes, maestros, comunidades y, ante todo, por el bien de nuestros aprendices.
                     </p>
                     <div class="pt-4 mt-4 font-bold text-white">
                         Kevin Bartlett<br>
-                        <span class="text-sm font-normal text-slate-400">Director Fundador, The Common Ground Collaborative.</span>
+                        <span class="text-sm font-normal text-unitec-cyan">Director Fundador, The Common Ground Collaborative.</span>
                     </div>
                 </div>
             </div>
@@ -421,8 +505,7 @@
 
     </main>
 
-    <!-- Scroll Top Button -->
-    <button id="scroll-top" class="fixed bottom-8 right-8 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition-colors z-50 hidden">
+    <button id="scroll-top" class="fixed bottom-8 right-8 bg-unitec-cyan text-white p-3 rounded-full shadow-lg hover:bg-unitec-federal transition-colors z-50 hidden">
         <i data-lucide="chevron-up"></i>
     </button>
 
@@ -573,32 +656,31 @@
             }
         };
 
-        // --- RENDER FUNCTIONS ---
+        // --- RENDER FUNCTIONS (REDESIGNED FOR BRAND COLORS) ---
         function renderTable(data, targetId) {
             let html = `
-            <div class="overflow-x-auto my-6 border rounded-lg shadow-sm">
-                <table class="min-w-full text-sm text-left text-gray-700">
-                    <thead class="bg-slate-100 text-slate-800 font-bold uppercase text-xs">
+            <div class="overflow-x-auto my-8 border border-slate-200 rounded-xl shadow-sm bg-white">
+                <table class="min-w-full text-sm text-left text-slate-600">
+                    <thead class="bg-unitec-federal text-white font-bold uppercase text-xs tracking-wider">
                         <tr>
-                            <th class="px-4 py-3 w-1/4 border-b-2 border-slate-200">Transaccionando</th>
-                            <th class="px-4 py-3 w-1/4 border-b-2 border-slate-200">Transicionando</th>
-                            <th class="px-4 py-3 w-1/4 border-b-2 border-slate-200">Transformando</th>
-                            <th class="px-4 py-3 w-1/4 border-b-2 border-slate-200">Trascendiendo</th>
+                            <th class="px-6 py-4 w-1/4 border-b border-unitec-federal/50">Transaccionando</th>
+                            <th class="px-6 py-4 w-1/4 border-b border-unitec-federal/50">Transicionando</th>
+                            <th class="px-6 py-4 w-1/4 border-b border-unitec-federal/50">Transformando</th>
+                            <th class="px-6 py-4 w-1/4 border-b border-unitec-federal/50 bg-unitec-cyan/20 text-white">Trascendiendo</th>
                         </tr>
                     </thead>
-                    <tbody>`;
+                    <tbody class="divide-y divide-slate-100">`;
             
             data.forEach((row, idx) => {
-                const bgClass = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50';
-                html += `<tr class="${bgClass}">`;
+                const bgClass = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50';
+                html += `<tr class="${bgClass} hover:bg-slate-50 transition-colors">`;
                 row.forEach((cell, cellIdx) => {
-                    let cellClass = "px-4 py-3 border-b border-slate-100 align-top";
+                    let cellClass = "px-6 py-4 align-top leading-relaxed";
                     let content = cell;
                     
-                    // Specific logic for the Transcendence cell (last column, first row merged visually in some designs, but here distinct)
-                    // Based on react code: if idx === 0 && row[3] display text with special style
+                    // Transcending Column Styling (Last Column)
                     if (cellIdx === 3) {
-                         cellClass += " font-medium text-indigo-700 bg-indigo-50/30";
+                         cellClass += " font-medium text-unitec-federal bg-unitec-cyan/5";
                     }
 
                     html += `<td class="${cellClass}">${content}</td>`;
@@ -612,18 +694,19 @@
 
         function renderStrategies(items, title, targetId) {
             let html = `
-            <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-100 my-6">
-                <h4 class="font-bold text-emerald-800 mb-4 flex items-center">
-                    <i data-lucide="leaf" class="w-5 h-5 mr-2"></i>
+            <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm my-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-2 h-full bg-unitec-cyan"></div>
+                <h4 class="font-bold text-unitec-federal text-lg mb-6 flex items-center tracking-tight">
+                    <i data-lucide="check-square" class="w-5 h-5 mr-3 text-unitec-cyan"></i>
                     ${title}
                 </h4>
-                <ul class="grid grid-cols-1 gap-3">`;
+                <ul class="grid md:grid-cols-2 gap-4">`;
             
             items.forEach((item, idx) => {
                 html += `
-                <li class="flex items-start text-emerald-900 text-sm">
-                    <span class="bg-emerald-200 text-emerald-800 rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">${idx + 1}</span>
-                    ${item}
+                <li class="flex items-start text-slate-700 text-sm group">
+                    <span class="bg-slate-100 text-unitec-federal font-bold rounded-lg w-6 h-6 flex items-center justify-center text-xs mr-3 flex-shrink-0 mt-0.5 group-hover:bg-unitec-cyan group-hover:text-white transition-colors">${idx + 1}</span>
+                    <span class="leading-relaxed">${item}</span>
                 </li>`;
             });
 
@@ -637,12 +720,18 @@
              
              // Create Header for Continuum
              const header = document.createElement('div');
+             header.className = "mb-6";
              header.innerHTML = `
-                <h4 class="text-2xl font-bold text-slate-800 flex items-center mb-2 mt-12">
-                  <span class="bg-slate-200 text-slate-700 px-3 py-1 rounded text-lg mr-3">${id.replace('c','')}</span>
-                  ${data.title}
-                </h4>
-                <p class="text-slate-600 mb-2 font-medium">${data.desc}</p>
+                <div class="flex items-start md:items-center flex-col md:flex-row mb-3 mt-16 pt-8 border-t border-slate-100">
+                    <span class="bg-unitec-federal text-white px-4 py-1 rounded-full text-sm font-bold tracking-widest mr-4 mb-2 md:mb-0 shadow-sm">${id.replace('c','')}</span>
+                    <h4 class="text-2xl font-bold text-unitec-federal tracking-tight">
+                        ${data.title.replace('CONTINUO '+id.replace('c','') + ': ', '')}
+                    </h4>
+                </div>
+                <p class="text-unitec-cyan font-medium text-lg flex items-center">
+                    <span class="w-8 h-px bg-unitec-cyan mr-3"></span>
+                    ${data.desc}
+                </p>
              `;
              container.appendChild(header);
 
@@ -656,7 +745,7 @@
              container.appendChild(strategyDiv);
 
              renderTable(data.table, `table-${id}`);
-             renderStrategies(data.strategies, `TOP 10 ESTRATEGIAS: ${data.title.replace('CONTINUO ','')}`, `strategy-${id}`);
+             renderStrategies(data.strategies, `ESTRATEGIAS: ${data.title.replace(/CONTINUO \d+: /, '')}`, `strategy-${id}`);
         }
 
 
@@ -664,11 +753,11 @@
         
         // 1. Render Parents Element
         renderTable(DATA.parents.table, 'table-parents');
-        renderStrategies(DATA.parents.strategies, 'TOP 10 ESTRATEGIAS PARA CONSTRUIR ASOCIACIONES', 'strategy-parents');
+        renderStrategies(DATA.parents.strategies, 'ESTRATEGIAS PARA CONSTRUIR ASOCIACIONES', 'strategy-parents');
 
         // 2. Render Environment Element
         renderTable(DATA.env.table, 'table-env');
-        renderStrategies(DATA.env.strategies, 'TOP 5 ESTRATEGIAS DE ENSEÑANZA (DISEÑO)', 'strategy-env');
+        renderStrategies(DATA.env.strategies, 'ESTRATEGIAS DE ENSEÑANZA (DISEÑO)', 'strategy-env');
 
         // 3. Render Continuums 1-10
         for(let i=1; i<=10; i++) {
