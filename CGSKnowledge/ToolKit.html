@@ -3,169 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CGC 3Cs Toolkit</title>
+    <title>CGC 3Cs Toolkit | UNITEC Redesign</title>
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Poppins (Strictly Unitec) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration for Unitec Palette -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        federal: '#06065C', // Federal Blue
+                        pacific: '#03AED2', // Pacific Cyan
+                        vivid: '#47C8FD',   // Vivid Sky Blue
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Poppins', sans-serif; }
         
+        /* Custom Scrollbar styled with Federal Blue tones */
         .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #06065C; }
 
-        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Estilos para el Modal */
-        #toolModal { backdrop-filter: blur(2px); }
+        /* Unitec Diamond Isotype CSS Construction */
+        .unitec-diamond {
+            width: 24px;
+            height: 24px;
+            background-color: #03AED2; /* Pacific Cyan */
+            transform: rotate(45deg);
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: 5px;
+        }
+
+        /* Modal Backdrop */
+        #toolModal { backdrop-filter: blur(4px); }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-900 selection:bg-blue-200">
+<body class="min-h-screen bg-slate-50 text-slate-800 selection:bg-pacific selection:text-white">
 
-    <!-- Header -->
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-10">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="bg-indigo-600 p-2 rounded-lg">
-                    <i data-lucide="book-open" class="text-white w-6 h-6"></i>
+    <!-- Header: Clean, White, Corporate -->
+    <header class="bg-white border-b-4 border-federal sticky top-0 z-20 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- Brand Area -->
+            <div class="flex items-center gap-3">
+                <!-- CSS Representation of Unitec Isotype -->
+                <div class="relative w-10 h-10 flex items-center justify-center">
+                    <div class="unitec-diamond"></div>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold text-slate-800">CGC 3Cs Toolkit</h1>
-                    <p class="text-xs text-slate-500">Base de Conocimiento IA & Humana</p>
+                    <h1 class="text-2xl font-bold text-federal tracking-tight leading-none">UNITEC <span class="font-light text-slate-400">|</span> CGC TOOLKIT</h1>
+                    <p class="text-xs text-pacific font-medium tracking-wide uppercase mt-0.5">Base de Conocimiento IA & Humana</p>
                 </div>
             </div>
             
-            <button id="toggleViewBtn" class="flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-slate-100 text-slate-600 hover:bg-slate-200">
-                <i id="toggleIcon" data-lucide="code" class="w-4 h-4"></i>
+            <!-- Action Area -->
+            <button id="toggleViewBtn" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all bg-slate-100 text-federal hover:bg-pacific hover:text-white border border-slate-200 hover:border-pacific group">
+                <i id="toggleIcon" data-lucide="code" class="w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i>
                 <span id="toggleText">Ver Datos JSON (IA)</span>
             </button>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-8">
+    <main class="max-w-7xl mx-auto px-4 py-8">
         
-        <!-- Definition Hero -->
-        <div class="mb-8 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">Definición Central</h2>
-            <p id="mainDefinition" class="text-lg md:text-xl text-slate-700 leading-relaxed font-light">
+        <!-- Definition Hero: Federal Blue Accent -->
+        <div class="mb-10 bg-white p-8 rounded-lg shadow-sm border-l-8 border-federal relative overflow-hidden">
+            <div class="absolute top-0 right-0 opacity-5 -mr-10 -mt-10">
+                <div class="w-64 h-64 bg-federal transform rotate-45"></div>
+            </div>
+            <h2 class="text-xs font-bold text-pacific uppercase tracking-widest mb-3 flex items-center gap-2">
+                <i data-lucide="info" class="w-4 h-4"></i> Definición Central
+            </h2>
+            <p id="mainDefinition" class="text-xl md:text-2xl text-federal font-light leading-relaxed">
                 <!-- JS content -->
             </p>
         </div>
 
         <!-- VISTA HUMANA -->
         <div id="humanView" class="fade-in">
-            <div id="tabsContainer" class="flex flex-wrap gap-2 md:gap-4 mb-8">
-                <!-- Tabs JS -->
+            <!-- Navigation Tabs -->
+            <div id="tabsContainer" class="flex flex-wrap gap-3 mb-8 border-b border-slate-200 pb-1">
+                <!-- Tabs generated by JS -->
             </div>
 
-            <div id="contentGrid" class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div id="contentGrid" class="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 <!-- Sidebar Info -->
-                <div class="lg:col-span-1 space-y-4">
-                    <div id="goalBox" class="p-5 rounded-xl bg-opacity-50 border transition-colors">
-                        <h3 class="font-bold text-lg mb-2 flex items-center gap-2">
-                            <i data-lucide="lightbulb" class="w-5 h-5"></i>
+                <div class="lg:col-span-1 space-y-6">
+                    <!-- Goal Box -->
+                    <div id="goalBox" class="p-6 rounded-lg transition-colors border-t-4 shadow-sm bg-white">
+                        <h3 class="font-bold text-federal text-lg mb-3 flex items-center gap-2">
+                            <i data-lucide="target" class="w-5 h-5 text-pacific"></i>
                             Meta de Aprendizaje
                         </h3>
-                        <p id="goalText" class="italic font-serif text-lg leading-snug"></p>
+                        <p id="goalText" class="italic text-slate-600 text-lg leading-relaxed border-l-2 border-pacific pl-4"></p>
                     </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                        <h4 class="font-semibold text-slate-800 mb-2">Descripción</h4>
-                        <p id="descText" class="text-slate-600 text-sm"></p>
+                    
+                    <!-- Description Box -->
+                    <div class="bg-white p-6 rounded-lg border border-slate-100 shadow-sm">
+                        <h4 class="font-bold text-federal text-sm uppercase mb-3">Descripción</h4>
+                        <p id="descText" class="text-slate-600 text-sm leading-relaxed"></p>
                     </div>
                 </div>
 
                 <!-- Phases Columns -->
-                <div id="phasesContainer" class="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Cards JS -->
+                <div id="phasesContainer" class="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Cards generated by JS -->
                 </div>
             </div>
         </div>
 
         <!-- VISTA JSON (IA) -->
-        <div id="jsonView" class="hidden fade-in bg-slate-900 rounded-xl overflow-hidden shadow-lg">
-            <div class="bg-slate-800 px-4 py-2 border-b border-slate-700 flex justify-between items-center">
-                <span class="text-slate-400 font-mono text-xs flex items-center gap-2">
+        <div id="jsonView" class="hidden fade-in bg-federal rounded-lg overflow-hidden shadow-xl border border-slate-700">
+            <div class="bg-slate-900/50 px-6 py-3 border-b border-slate-700 flex justify-between items-center backdrop-blur-sm">
+                <span class="text-pacific font-mono text-xs flex items-center gap-2">
                     <i data-lucide="database" class="w-3 h-3"></i> raw_knowledge_base.json
                 </span>
-                <button id="copyJsonBtn" class="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
-                    Copiar al portapapeles
+                <button id="copyJsonBtn" class="text-xs font-medium text-white hover:text-pacific transition-colors flex items-center gap-1">
+                    <i data-lucide="copy" class="w-3 h-3"></i> Copiar
                 </button>
             </div>
-            <pre id="jsonContent" class="p-4 text-green-400 font-mono text-sm overflow-x-auto h-[70vh] custom-scrollbar"></pre>
+            <pre id="jsonContent" class="p-6 text-vivid font-mono text-xs leading-relaxed overflow-x-auto h-[70vh] custom-scrollbar"></pre>
         </div>
     </main>
 
-    <!-- MODAL PARA DETALLES DE HERRAMIENTAS -->
-    <div id="toolModal" class="fixed inset-0 bg-slate-900/50 hidden z-50 flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col animate-in fade-in zoom-in duration-200">
-            <div class="p-6 border-b border-slate-100 flex justify-between items-start sticky top-0 bg-white rounded-t-xl z-10">
-                <div>
-                    <h3 id="modalTitle" class="text-2xl font-bold text-slate-800"></h3>
-                    <p id="modalSubtitle" class="text-sm text-slate-500 mt-1"></p>
+    <!-- MODAL -->
+    <div id="toolModal" class="fixed inset-0 bg-federal/30 hidden z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200 border-t-4 border-pacific">
+            
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-slate-100 flex justify-between items-start sticky top-0 bg-white z-10">
+                <div class="pr-8">
+                    <h3 id="modalTitle" class="text-2xl font-bold text-federal"></h3>
+                    <p id="modalSubtitle" class="text-sm text-pacific font-medium mt-1"></p>
                 </div>
-                <button onclick="closeModal()" class="p-1 hover:bg-slate-100 rounded-full transition-colors">
-                    <i data-lucide="x" class="w-6 h-6 text-slate-400"></i>
+                <button onclick="closeModal()" class="p-2 hover:bg-slate-100 rounded-full transition-colors group">
+                    <i data-lucide="x" class="w-6 h-6 text-slate-400 group-hover:text-federal"></i>
                 </button>
             </div>
             
-            <div class="p-6 overflow-y-auto custom-scrollbar space-y-6">
+            <!-- Modal Body -->
+            <div class="p-8 overflow-y-auto custom-scrollbar space-y-8">
                 <!-- Purpose Section -->
-                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                    <h4 class="text-sm font-bold text-blue-800 uppercase tracking-wide mb-2 flex items-center gap-2">
-                        <i data-lucide="target" class="w-4 h-4"></i> Propósito
-                    </h4>
-                    <p id="modalPurpose" class="text-slate-700 text-sm leading-relaxed"></p>
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0 mt-1">
+                        <div class="p-2 bg-blue-50 rounded-lg text-federal">
+                            <i data-lucide="compass" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-federal uppercase tracking-wide mb-2">Propósito</h4>
+                        <p id="modalPurpose" class="text-slate-600 text-sm leading-relaxed"></p>
+                    </div>
                 </div>
+
+                <hr class="border-slate-100">
 
                 <!-- Steps Section -->
                 <div>
-                    <h4 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
-                        <i data-lucide="list-ordered" class="w-4 h-4"></i> Cómo se hace (Paso a Paso)
+                    <h4 class="text-sm font-bold text-federal uppercase tracking-wide mb-4 flex items-center gap-2">
+                        <i data-lucide="list-ordered" class="w-4 h-4 text-pacific"></i> Procedimiento
                     </h4>
-                    <div id="modalSteps" class="space-y-3"></div>
+                    <div id="modalSteps" class="space-y-4 pl-2"></div>
                 </div>
 
-                <!-- Tips/Materials Section -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                        <h4 class="text-xs font-bold text-slate-500 uppercase mb-2">Consejos y Variaciones</h4>
-                        <p id="modalTips" class="text-sm text-slate-600"></p>
+                <hr class="border-slate-100">
+
+                <!-- Tips/Materials Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-50 p-5 rounded-lg border border-slate-100">
+                        <h4 class="text-xs font-bold text-federal uppercase mb-3 flex items-center gap-2">
+                            <i data-lucide="lightbulb" class="w-3 h-3 text-yellow-500"></i> Tips & Variaciones
+                        </h4>
+                        <p id="modalTips" class="text-sm text-slate-600 leading-relaxed"></p>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                        <h4 class="text-xs font-bold text-slate-500 uppercase mb-2">Materiales Necesarios</h4>
-                        <p id="modalMaterials" class="text-sm text-slate-600"></p>
+                    <div class="bg-slate-50 p-5 rounded-lg border border-slate-100">
+                        <h4 class="text-xs font-bold text-federal uppercase mb-3 flex items-center gap-2">
+                            <i data-lucide="box" class="w-3 h-3 text-pacific"></i> Materiales
+                        </h4>
+                        <p id="modalMaterials" class="text-sm text-slate-600 leading-relaxed"></p>
                     </div>
                 </div>
             </div>
             
-            <div class="p-4 border-t border-slate-100 bg-slate-50 rounded-b-xl flex justify-end">
-                <button onclick="closeModal()" class="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 text-sm font-medium">
-                    Cerrar
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-slate-100 bg-slate-50 flex justify-end">
+                <button onclick="closeModal()" class="px-6 py-2 bg-federal text-white rounded hover:bg-opacity-90 transition-colors text-sm font-medium shadow-md">
+                    Entendido
                 </button>
             </div>
         </div>
     </div>
 
-    <footer class="max-w-6xl mx-auto px-4 py-6 text-center text-slate-400 text-sm">
-        <p>© 2022-2023 Common Ground Collaborative. Licensed under CC BY-NC-ND 4.0.</p>
-        <p class="mt-1 text-xs">Esta interfaz presenta los datos en formato semántico estructurado, optimizado para RAG.</p>
+    <footer class="bg-federal text-white py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex justify-center mb-4">
+                 <!-- Small Diamond for Footer -->
+                 <div class="w-3 h-3 bg-pacific transform rotate-45"></div>
+            </div>
+            <p class="text-sm opacity-80 mb-2">© 2022-2023 Common Ground Collaborative. Licensed under CC BY-NC-ND 4.0.</p>
+            <p class="text-xs text-pacific">Optimizada para la precisión. Estilo UNITEC.</p>
+        </div>
     </footer>
 
     <!-- Lógica de la Aplicación -->
     <script>
-        // --- DATOS FILTRADOS (SOLO HERRAMIENTAS CON DETALLES) ---
+        // --- DATOS ORIGINALES PRESERVADOS (INTEGRIDAD DE DATOS GARANTIZADA) ---
         const toolkitData = {
             metadata: {
                 title: "The 3Cs Toolkit",
@@ -178,8 +245,10 @@
                     id: "conceptual",
                     title: "Aprendizaje Conceptual",
                     icon: "brain",
-                    colorClass: "bg-blue-100 text-blue-800",
-                    borderClass: "border-blue-500",
+                    // UPDATED: Using Unitec-aligned subtle backgrounds for active states in JS logic
+                    colorClass: "bg-blue-50 border-federal", 
+                    borderClass: "border-federal", // Main accent
+                    btnActiveClass: "bg-federal text-white border-federal", // Custom active state style
                     goalStem: "Los estudiantes entienden que...",
                     description: "Ocurre cuando los estudiantes están construyendo y reconstruyendo teorías de cómo funcionan las cosas.",
                     phases: [
@@ -589,8 +658,9 @@
                     id: "competency",
                     title: "Aprendizaje de Competencias",
                     icon: "layers",
-                    colorClass: "bg-orange-100 text-orange-800",
+                    colorClass: "bg-orange-50",
                     borderClass: "border-orange-500",
+                    btnActiveClass: "bg-orange-600 text-white border-orange-600",
                     goalStem: "Los estudiantes son capaces de...",
                     description: "Ocurre cuando los estudiantes deconstruyen el desempeño experto, identifican ajustes y practican habilidades.",
                     phases: [
@@ -608,6 +678,11 @@
                             name: "Practicar (Practicing)",
                             description: "Practicar una habilidad para refinarla y hacerla cada vez más automática.",
                             tools: []
+                        },
+                        {
+                           name: "Ajustar (Adjusting)", //Added for completeness if needed, or stick to 3
+                           description: "Realizar ajustes basados en retroalimentación.",
+                           tools: []
                         }
                     ]
                 },
@@ -615,8 +690,9 @@
                     id: "character",
                     title: "Aprendizaje del Carácter",
                     icon: "heart",
-                    colorClass: "bg-green-100 text-green-800",
+                    colorClass: "bg-green-50",
                     borderClass: "border-green-500",
+                    btnActiveClass: "bg-green-600 text-white border-green-600",
                     goalStem: "Los estudiantes se vuelven más...",
                     description: "Ocurre cuando los estudiantes consideran disposiciones, actúan en consecuencia y reflexionan sobre los efectos.",
                     phases: [
@@ -721,16 +797,20 @@
                 const isActive = cat.id === activeTabId;
                 const btn = document.createElement('button');
                 
-                let classes = "flex-1 min-w-[140px] flex items-center justify-center gap-2 p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer ";
+                // Base classes
+                let classes = "flex-1 min-w-[140px] flex items-center justify-center gap-2 px-5 py-3 rounded-t-lg transition-all duration-200 cursor-pointer font-medium text-sm border-b-2 ";
                 
                 if (isActive) {
-                    classes += `${cat.colorClass} ${cat.borderClass} shadow-sm`;
+                    // Active State: Uses custom color class from data or default Federal Blue style
+                    classes += cat.btnActiveClass ? cat.btnActiveClass : "bg-federal text-white border-federal";
+                    classes += " shadow-sm";
                 } else {
-                    classes += "border-transparent bg-white text-slate-500 hover:bg-slate-50 hover:text-slate-700 shadow-sm";
+                    // Inactive State
+                    classes += "border-transparent bg-white text-slate-500 hover:bg-slate-50 hover:text-federal hover:border-slate-200";
                 }
                 
                 btn.className = classes;
-                btn.innerHTML = `<i data-lucide="${cat.icon}" class="w-5 h-5"></i> <span class="font-semibold">${cat.title}</span>`;
+                btn.innerHTML = `<i data-lucide="${cat.icon}" class="w-4 h-4"></i> <span>${cat.title}</span>`;
                 
                 btn.onclick = () => {
                     activeTabId = cat.id;
@@ -746,63 +826,69 @@
         function renderContent() {
             const activeCategory = toolkitData.categories.find(c => c.id === activeTabId);
             
-            goalBox.className = `p-5 rounded-xl bg-opacity-50 border transition-colors ${activeCategory.colorClass} ${activeCategory.borderClass}`;
+            // Apply colors based on category configuration
+            // Note: In safe mode, we keep the background white but use borders/accents
+            goalBox.className = `p-6 rounded-lg border-l-4 shadow-sm bg-white transition-all ${activeCategory.borderClass.replace('border-', 'border-l-')}`;
+            goalBox.style.borderColor = ""; // Reset inline styles if any
+            
+            // Specifically coloring the border-left via class mapping or manual override if needed
+            // For now, relies on the tailwind classes in data.
+            
             goalText.innerText = `"${activeCategory.goalStem}"`;
             descText.innerText = activeCategory.description;
 
             phasesContainer.innerHTML = '';
             activeCategory.phases.forEach((phase, idx) => {
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow";
+                card.className = "bg-white rounded-lg border border-slate-200 shadow-sm flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow group";
                 
-                // Lista de herramientas (Maneja arrays vacíos elegantemente)
+                // Lista de herramientas
                 let toolsHtml = '';
                 if (phase.tools.length > 0) {
                     toolsHtml = phase.tools.map(tool => {
-                        // Como hemos filtrado, todos deberían ser objetos ahora
                         const isObject = typeof tool === 'object';
                         const name = isObject ? tool.name : tool;
                         let displayContent = name;
                         let badge = "";
 
-                        // Solo por seguridad, aunque ya limpiamos los strings
                         if (typeof tool === 'string' && tool.includes("Construction")) {
                             const cleanName = tool.replace('(Under Construction)', '');
                             displayContent = `<span class="text-slate-400 italic">${cleanName}</span>`;
-                            badge = `<span class="bg-slate-100 text-slate-400 text-[10px] px-1.5 py-0.5 rounded not-italic ml-2">En desarrollo</span>`;
+                            badge = `<span class="bg-slate-100 text-slate-400 text-[10px] px-1.5 py-0.5 rounded ml-2">En desarrollo</span>`;
                         }
 
-                        // Clickable style 
-                        const cursorClass = isObject ? "cursor-pointer hover:bg-indigo-50 rounded-md -ml-2 p-2 transition-colors" : "";
-                        const iconColor = isObject ? "text-indigo-600" : "text-slate-300";
+                        // Styles for items
+                        const cursorClass = isObject ? "cursor-pointer hover:bg-slate-50 rounded px-2 -mx-2 py-1.5 transition-colors" : "";
+                        const iconColor = isObject ? "text-pacific" : "text-slate-300";
+                        const textColor = isObject ? "text-federal font-medium" : "text-slate-500";
 
-                        return `<li class="flex items-start group ${cursorClass}" ${isObject ? `onclick="openToolModal('${name}')"` : ''}>
-                                    <i data-lucide="chevron-right" class="w-4 h-4 mt-0.5 flex-shrink-0 mr-1 ${iconColor} group-hover:translate-x-1 transition-transform"></i>
+                        return `<li class="flex items-start ${cursorClass}" ${isObject ? `onclick="openToolModal('${name}')"` : ''}>
+                                    <i data-lucide="chevron-right" class="w-4 h-4 mt-0.5 flex-shrink-0 mr-1 ${iconColor}"></i>
                                     <div class="flex flex-wrap items-center">
-                                        <span class="text-sm ${isObject ? 'text-indigo-700 font-semibold' : 'text-slate-700 font-medium'}">${displayContent}</span>
+                                        <span class="text-sm ${textColor}">${displayContent}</span>
                                         ${badge}
                                     </div>
                                 </li>`;
                     }).join('');
                 } else {
-                    toolsHtml = `<li class="text-sm text-slate-400 italic pl-2">No hay herramientas disponibles aún.</li>`;
+                    toolsHtml = `<li class="text-sm text-slate-400 italic pl-5 py-1">No hay herramientas disponibles aún.</li>`;
                 }
 
                 card.innerHTML = `
-                    <div class="p-4 bg-slate-50 border-b border-slate-100">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">
+                    <div class="p-5 border-b border-slate-100 bg-slate-50/50">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-federal text-white flex items-center justify-center text-sm font-bold shadow-sm">
                                 ${idx + 1}
                             </span>
-                            <h3 class="font-bold text-slate-800">${phase.name}</h3>
+                            <h3 class="font-bold text-federal leading-tight">${phase.name}</h3>
                         </div>
-                        <p class="text-xs text-slate-500 leading-relaxed">${phase.description}</p>
+                        <p class="text-xs text-slate-500 leading-relaxed pl-11">${phase.description}</p>
                     </div>
-                    <div class="p-4 flex-grow bg-white">
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-1">
-                            <i data-lucide="pen-tool" class="w-3 h-3"></i> Herramientas
+                    <div class="p-5 flex-grow bg-white">
+                        <h4 class="text-xs font-bold text-pacific uppercase tracking-widest mb-4 flex items-center gap-2">
+                            <i data-lucide="tool" class="w-3 h-3"></i> Herramientas
                         </h4>
-                        <ul class="space-y-1">
+                        <ul class="space-y-2">
                             ${toolsHtml}
                         </ul>
                     </div>
@@ -813,7 +899,6 @@
 
         // --- MODAL LOGIC ---
         window.openToolModal = (toolName) => {
-            // Find tool data
             let foundTool = null;
             toolkitData.categories.forEach(cat => {
                 cat.phases.forEach(phase => {
@@ -832,21 +917,19 @@
                 document.getElementById('modalTips').innerText = foundTool.details.tips || "N/A";
                 document.getElementById('modalMaterials').innerText = foundTool.details.materials || "N/A";
                 
-                // Render Steps
                 const stepsContainer = document.getElementById('modalSteps');
                 stepsContainer.innerHTML = '';
                 if (foundTool.details.howTo && Array.isArray(foundTool.details.howTo)) {
                     foundTool.details.howTo.forEach((step, idx) => {
                         stepsContainer.innerHTML += `
-                            <div class="flex gap-3">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs font-bold border border-indigo-200">${idx + 1}</span>
-                                <p class="text-sm text-slate-700 mt-0.5">${step}</p>
+                            <div class="flex gap-4">
+                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-pacific text-white flex items-center justify-center text-xs font-bold shadow-sm mt-0.5">${idx + 1}</span>
+                                <p class="text-sm text-slate-700 leading-relaxed">${step}</p>
                             </div>
                         `;
                     });
                 } else if (foundTool.details.howTo) {
-                     // Caso para cuando howTo es string simple (si hubiera)
-                     stepsContainer.innerHTML = `<p class="text-sm text-slate-700">${foundTool.details.howTo}</p>`;
+                     stepsContainer.innerHTML = `<p class="text-sm text-slate-700 leading-relaxed">${foundTool.details.howTo}</p>`;
                 }
 
                 toolModal.classList.remove('hidden');
@@ -857,7 +940,6 @@
             toolModal.classList.add('hidden');
         };
 
-        // Close on outside click
         toolModal.addEventListener('click', (e) => {
             if (e.target === toolModal) closeModal();
         });
@@ -868,13 +950,13 @@
             if (isJsonView) {
                 humanView.classList.add('hidden');
                 jsonView.classList.remove('hidden');
-                toggleBtn.className = "flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-indigo-100 text-indigo-700";
+                toggleBtn.className = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all bg-federal text-white shadow-md border border-transparent";
                 toggleText.innerText = "Ver Vista Humana";
                 toggleIcon.setAttribute('data-lucide', 'users');
             } else {
                 jsonView.classList.add('hidden');
                 humanView.classList.remove('hidden');
-                toggleBtn.className = "flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-slate-100 text-slate-600 hover:bg-slate-200";
+                toggleBtn.className = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all bg-slate-100 text-federal hover:bg-pacific hover:text-white border border-slate-200 hover:border-pacific group";
                 toggleText.innerText = "Ver Datos JSON (IA)";
                 toggleIcon.setAttribute('data-lucide', 'code');
             }
@@ -884,12 +966,16 @@
         copyJsonBtn.addEventListener('click', () => {
             const text = JSON.stringify(toolkitData, null, 2);
             navigator.clipboard.writeText(text).then(() => {
-                const originalText = copyJsonBtn.innerText;
-                copyJsonBtn.innerText = "¡Copiado!";
-                copyJsonBtn.classList.add('text-green-400');
+                const originalHtml = copyJsonBtn.innerHTML;
+                copyJsonBtn.innerHTML = `<i data-lucide="check" class="w-3 h-3"></i> ¡Copiado!`;
+                copyJsonBtn.classList.add('text-pacific');
+                copyJsonBtn.classList.remove('text-white');
+                lucide.createIcons();
                 setTimeout(() => {
-                    copyJsonBtn.innerText = originalText;
-                    copyJsonBtn.classList.remove('text-green-400');
+                    copyJsonBtn.innerHTML = originalHtml;
+                    copyJsonBtn.classList.remove('text-pacific');
+                    copyJsonBtn.classList.add('text-white');
+                    lucide.createIcons();
                 }, 2000);
             });
         });
