@@ -3,34 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L2L: Aprender a Aprender</title>
+    <title>L2L: Aprender a Aprender | UNITEC</title>
     
-    <!-- Tailwind CSS (Estilos) -->
+    <!-- Google Fonts: Poppins (Mandatory per Brand Guidelines) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- React & ReactDOM (Librería UI) -->
+    <!-- Configuración Tailwind personalizada para colores UNITEC -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        unitec: {
+                            blue: '#06065C', // Federal Blue
+                            cyan: '#03AED2', // Pacific Cyan
+                            sky: '#47C8FD',  // Vivid Sky Blue
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Tipografía oficial
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- Babel (Para entender JSX en el navegador) -->
+    <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- Estilos personalizados para scrollbar -->
     <style>
+        /* Scrollbar personalizado ajustado a colores Unitec */
         .custom-scrollbar::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #1e293b;
+            background: #f1f5f9;
             border-radius: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #475569;
+            background: #06065C; /* Federal Blue */
             border-radius: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #64748b;
+            background: #03AED2; /* Pacific Cyan */
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -41,14 +66,15 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
     <div id="root"></div>
 
     <script type="text/babel">
         const { useState } = React;
 
-        // --- ICONOS (SVG Paths inline para evitar dependencias externas complejas) ---
+        // --- ICONOS (SVG Paths inline) ---
         const Icons = {
+            Diamond: <path d="M12 22l-10-10L12 2l10 10L12 22z" />, // Isotipo simplificado
             BookOpen: <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />,
             Brain: <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" />,
             Layers: <path d="M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5" />,
@@ -61,7 +87,7 @@
             Database: <path d="M3 5c0-1.1 4.03-2 9-2s9 .9 9 2c0 .55-.66 1.05-1.76 1.44C18.17 6.86 16.65 7 15 7c-1.65 0-3.17-.14-4.24-.56C9.66 6.05 9 5.55 9 5c0-.55.66-1.05 1.76-1.44C11.83 3.14 13.35 3 15 3s3.17.14 4.24.56C20.34 3.95 21 4.45 21 5v6c0 .55-.66 1.05-1.76 1.44C18.17 12.86 16.65 13 15 13c-1.65 0-3.17-.14-4.24-.56C9.66 12.05 9 11.55 9 11V5 M3 13c0 1.1 4.03 2 9 2s9-.9 9-2v-6 M3 19c0 1.1 4.03 2 9 2s9-.9 9-2v-6" />,
             ArrowRight: <path d="M5 12h14 M12 5l7 7-7 7" />,
             Activity: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
-            Clock: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />, // Using shield/clock like icon for visual
+            Clock: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />,
             FileText: <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8" />,
             HelpCircle: <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3 M12 17h.01 M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" />,
             Box: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z M3.27 6.96L12 12.01l8.73-5.05 M12 22.08V12" />
@@ -87,7 +113,7 @@
             );
         };
 
-        // --- BASE DE CONOCIMIENTO (DATA SOURCE) ---
+        // --- BASE DE CONOCIMIENTO (DATA SOURCE - PRESERVADA ÍNTEGRAMENTE) ---
         const learningData = {
           metadata: {
             title: "Learning to Learn / Aprender a Aprender",
@@ -343,7 +369,7 @@
             {
               id: 5,
               name: "Mentalidad de Crecimiento y Resiliencia",
-              icon: "TrendingUp",
+              icon: "Activity",
               description: "Responder al desafío con persistencia, viendo errores y feedback como parte del aprendizaje.",
               tools: [
                 {
@@ -641,27 +667,37 @@
         // --- COMPONENTES UI ---
 
         const Header = ({ activeTab, setActiveTab }) => (
-            <header className="bg-indigo-900 text-white p-6 shadow-xl">
-                <div className="max-w-6xl mx-auto">
-                    <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-                        <div>
-                            <h1 className="text-3xl font-extrabold flex items-center gap-3 tracking-tight">
-                                <IconRenderer name="BookOpen" className="h-8 w-8 text-indigo-300" />
-                                L2L: Aprender a Aprender
-                            </h1>
-                            <p className="text-indigo-200 mt-2 text-sm max-w-lg">
-                                Sistema de Crecimiento Colectivo: Desde el continuo de madurez hasta las herramientas prácticas de aula.
-                            </p>
+            <header className="bg-unitec-blue text-white shadow-xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 opacity-10 transform translate-x-10 -translate-y-10">
+                     <IconRenderer name="Diamond" className="w-64 h-64" />
+                </div>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+                        <div className="flex items-center gap-4">
+                            {/* Logo Concept: Diamond Isotype + UNITEC Text */}
+                            <div className="flex flex-col items-center justify-center">
+                                <div className="text-unitec-cyan">
+                                     <IconRenderer name="Diamond" className="h-10 w-10 fill-current" />
+                                </div>
+                            </div>
+                            <div>
+                                <h1 className="text-3xl font-extrabold flex items-center gap-3 tracking-wide leading-none">
+                                    L2L <span className="text-unitec-cyan font-light">|</span> UNITEC
+                                </h1>
+                                <p className="text-unitec-sky mt-1 text-sm font-medium tracking-wide uppercase">
+                                    Aprender a Aprender
+                                </p>
+                            </div>
                         </div>
-                        <div className="mt-4 md:mt-0 flex gap-3">
-                            <span className="px-3 py-1 bg-indigo-800 border border-indigo-700 rounded-full text-xs font-mono text-indigo-200">v2.0 Full Content</span>
-                            <span className="px-3 py-1 bg-green-900 border border-green-700 text-green-100 rounded-full text-xs font-mono flex items-center gap-1">
+                        <div className="mt-6 md:mt-0 flex gap-3">
+                            <span className="px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-xs font-semibold text-white tracking-wider uppercase">v2.0 Full Content</span>
+                            <span className="px-4 py-1.5 bg-unitec-cyan/20 border border-unitec-cyan/50 text-unitec-cyan rounded-lg text-xs font-semibold tracking-wider flex items-center gap-2 uppercase">
                                 <IconRenderer name="Database" className="w-3 h-3" /> IA Ready
                             </span>
                         </div>
                     </div>
                     
-                    <nav className="flex flex-wrap gap-2 bg-indigo-950/50 p-2 rounded-xl border border-indigo-800/50">
+                    <nav className="flex flex-wrap gap-4 border-b border-white/10 pb-1">
                         {[
                             { id: 'continuum', label: 'El Continuo', icon: 'ArrowRight' },
                             { id: 'tools', label: 'Herramientas (Toolkits)', icon: 'Layers' },
@@ -670,10 +706,10 @@
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all font-medium text-sm ${
+                                className={`flex items-center gap-2 px-6 py-3 rounded-t-lg transition-all font-semibold text-sm relative top-1 border-t border-x ${
                                     activeTab === tab.id 
-                                        ? 'bg-white text-indigo-900 shadow-md transform scale-105' 
-                                        : 'text-indigo-300 hover:bg-indigo-800 hover:text-white'
+                                        ? 'bg-slate-50 text-unitec-blue border-transparent shadow-sm' 
+                                        : 'bg-transparent text-slate-300 border-transparent hover:text-white hover:bg-white/5'
                                 }`}
                             >
                                 <IconRenderer name={tab.icon} className="h-4 w-4" />
@@ -686,10 +722,10 @@
         );
 
         const ContinuumView = () => (
-            <div className="space-y-8 animate-fadeIn">
-                <div className="bg-white p-8 rounded-2xl shadow-sm border border-indigo-100">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4">El Continuo del Aprendizaje</h2>
-                    <p className="text-lg text-gray-600 max-w-4xl leading-relaxed">
+            <div className="space-y-10 animate-fadeIn">
+                <div className="bg-white p-10 rounded-lg shadow-sm border border-slate-200 text-center">
+                    <h2 className="text-3xl font-bold text-unitec-blue mb-4">El Continuo del Aprendizaje</h2>
+                    <p className="text-lg text-slate-600 max-w-4xl mx-auto leading-relaxed">
                         El viaje de "Aprender a Aprender" describe la evolución del estudiante. No es lineal, pero muestra una progresión clara
                         desde la dependencia externa hacia la autonomía y la trascendencia.
                     </p>
@@ -697,30 +733,38 @@
 
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                     {learningData.continuum.map((stage, idx) => (
-                        <div key={idx} className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col h-full">
-                            <div className={`h-2 w-full ${
-                                idx === 0 ? 'bg-gray-400' : idx === 1 ? 'bg-blue-400' : idx === 2 ? 'bg-indigo-500' : 'bg-purple-600'
+                        <div key={idx} className="group bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 overflow-hidden flex flex-col h-full relative">
+                            {/* Card Top Border - Gradient */}
+                            <div className={`h-1.5 w-full bg-gradient-to-r ${
+                                idx === 0 ? 'from-slate-400 to-slate-300' : 
+                                idx === 1 ? 'from-unitec-sky to-blue-300' : 
+                                idx === 2 ? 'from-unitec-cyan to-unitec-sky' : 
+                                'from-unitec-blue to-unitec-cyan'
                             }`}></div>
-                            <div className="p-6 flex-grow flex flex-col">
-                                <div className="mb-4">
-                                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-700 transition-colors">{stage.stage}</h3>
-                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{stage.stage_en}</span>
+                            
+                            <div className="p-8 flex-grow flex flex-col">
+                                <div className="mb-6 text-center">
+                                    <h3 className="text-xl font-bold text-unitec-blue mb-1">{stage.stage}</h3>
+                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{stage.stage_en}</span>
                                 </div>
                                 
-                                <div className="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                    <span className="text-xs font-bold text-gray-500 uppercase block mb-1">Mentalidad</span>
-                                    <p className="text-sm font-semibold text-indigo-900 italic">"{stage.mindset}"</p>
+                                <div className="mb-6 bg-slate-50 p-4 rounded border-l-4 border-unitec-cyan">
+                                    <span className="text-xs font-bold text-slate-500 uppercase block mb-2">Mentalidad</span>
+                                    <p className="text-sm font-medium text-unitec-blue italic">"{stage.mindset}"</p>
                                 </div>
 
-                                <p className="text-sm text-gray-600 mb-6 leading-relaxed">{stage.description}</p>
+                                <p className="text-sm text-slate-600 mb-8 leading-relaxed text-justify">{stage.description}</p>
                                 
                                 <div className="mt-auto">
-                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-3">Características</span>
-                                    <ul className="space-y-3">
+                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-4 border-b pb-2">Características</span>
+                                    <ul className="space-y-4">
                                         {stage.characteristics.map((char, cIdx) => (
-                                            <li key={cIdx} className="flex items-start gap-3 text-sm text-gray-700">
+                                            <li key={cIdx} className="flex items-start gap-3 text-sm text-slate-700">
                                                 <IconRenderer name="CheckCircle" className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
-                                                     idx === 0 ? 'text-gray-400' : idx === 1 ? 'text-blue-400' : idx === 2 ? 'text-indigo-500' : 'text-purple-600'
+                                                     idx === 0 ? 'text-slate-400' : 
+                                                     idx === 1 ? 'text-unitec-sky' : 
+                                                     idx === 2 ? 'text-unitec-cyan' : 
+                                                     'text-unitec-blue'
                                                 }`} />
                                                 <span className="leading-snug">{char}</span>
                                             </li>
@@ -741,32 +785,34 @@
             return (
                 <div className="flex flex-col lg:flex-row gap-8 min-h-[600px] animate-fadeIn">
                     {/* Sidebar de Ejes */}
-                    <div className="w-full lg:w-1/3 xl:w-1/4 space-y-2">
-                        <div className="bg-indigo-50 p-4 rounded-xl border border-indigo-100 mb-4">
-                            <h3 className="font-bold text-indigo-900 flex items-center gap-2">
-                                <IconRenderer name="Layers" className="w-5 h-5" />
+                    <div className="w-full lg:w-1/3 xl:w-1/4 space-y-4">
+                        <div className="bg-unitec-blue p-6 rounded-lg shadow-md mb-6 text-white">
+                            <h3 className="font-bold flex items-center gap-3 text-lg">
+                                <IconRenderer name="Layers" className="w-5 h-5 text-unitec-cyan" />
                                 Ejes de Aprendizaje
                             </h3>
-                            <p className="text-xs text-indigo-700 mt-1">Selecciona un eje para ver sus herramientas.</p>
+                            <p className="text-xs text-blue-200 mt-2">Selecciona un eje para ver sus herramientas.</p>
                         </div>
                         <div className="space-y-2 pr-2 lg:max-h-[calc(100vh-200px)] lg:overflow-y-auto custom-scrollbar">
                             {learningData.strands.map((strand) => (
                                 <button
                                     key={strand.id}
                                     onClick={() => setSelectedStrandId(strand.id)}
-                                    className={`w-full text-left p-4 rounded-xl flex items-center gap-4 transition-all duration-200 border ${
+                                    className={`w-full text-left p-4 rounded-lg flex items-center gap-4 transition-all duration-200 border group ${
                                         selectedStrandId === strand.id
-                                            ? 'bg-indigo-600 text-white shadow-lg border-indigo-600 transform scale-[1.02]'
-                                            : 'bg-white hover:bg-gray-50 text-gray-700 border-gray-200 hover:border-indigo-200'
+                                            ? 'bg-white border-unitec-cyan shadow-md'
+                                            : 'bg-white border-transparent hover:border-slate-300 hover:bg-slate-50'
                                     }`}
                                 >
-                                    <div className={`p-2.5 rounded-lg flex-shrink-0 ${
-                                        selectedStrandId === strand.id ? 'bg-indigo-500 text-white' : 'bg-indigo-50 text-indigo-600'
+                                    <div className={`p-2.5 rounded flex-shrink-0 transition-colors ${
+                                        selectedStrandId === strand.id ? 'bg-unitec-blue text-white' : 'bg-slate-100 text-slate-500 group-hover:bg-unitec-sky group-hover:text-white'
                                     }`}>
                                         <IconRenderer name={strand.icon} className="h-5 w-5" />
                                     </div>
                                     <div>
-                                        <span className="text-sm font-bold block leading-tight">{strand.name}</span>
+                                        <span className={`text-sm font-bold block leading-tight ${
+                                            selectedStrandId === strand.id ? 'text-unitec-blue' : 'text-slate-600'
+                                        }`}>{strand.name}</span>
                                     </div>
                                 </button>
                             ))}
@@ -776,67 +822,67 @@
                     {/* Detalle de Herramientas */}
                     <div className="w-full lg:w-2/3 xl:w-3/4">
                         {activeStrand && (
-                            <div className="space-y-6">
-                                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -mr-8 -mt-8 z-0"></div>
+                            <div className="space-y-8">
+                                <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-8 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-slate-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -mr-10 -mt-10"></div>
                                     <div className="relative z-10">
-                                        <div className="flex items-center gap-4 mb-4">
-                                            <div className="p-3 bg-indigo-100 rounded-xl text-indigo-700">
+                                        <div className="flex items-center gap-4 mb-6">
+                                            <div className="p-3 bg-unitec-blue rounded-lg text-white shadow-lg">
                                                 <IconRenderer name={activeStrand.icon} className="h-8 w-8" />
                                             </div>
-                                            <h2 className="text-3xl font-bold text-gray-900">{activeStrand.name}</h2>
+                                            <h2 className="text-3xl font-bold text-unitec-blue">{activeStrand.name}</h2>
                                         </div>
-                                        <p className="text-lg text-gray-600 max-w-3xl">{activeStrand.description}</p>
+                                        <p className="text-lg text-slate-600 max-w-4xl border-l-4 border-unitec-sky pl-4">{activeStrand.description}</p>
                                     </div>
                                 </div>
                                 
-                                <div className="grid gap-6">
+                                <div className="grid gap-8">
                                     {activeStrand.tools.map((tool, idx) => (
-                                        <div key={idx} className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
+                                        <div key={idx} className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
                                             {/* Tool Header */}
-                                            <div className="bg-gray-50 p-6 border-b border-gray-100 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                                            <div className="bg-slate-50 p-6 border-b border-slate-100 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                                                 <div>
-                                                    <div className="flex items-center gap-2 mb-2">
-                                                        <span className="px-2 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold uppercase rounded">Herramienta {idx + 1}</span>
-                                                        <div className="flex items-center gap-1 text-gray-500 text-xs font-medium">
+                                                    <div className="flex items-center gap-3 mb-3">
+                                                        <span className="px-3 py-1 bg-unitec-blue text-white text-xs font-bold uppercase rounded tracking-wider">Herramienta {idx + 1}</span>
+                                                        <div className="flex items-center gap-1 text-slate-500 text-xs font-semibold uppercase tracking-wide">
                                                             <IconRenderer name="Clock" className="w-3 h-3" /> {tool.time}
                                                         </div>
                                                     </div>
-                                                    <h3 className="text-xl font-bold text-gray-800">{tool.name}</h3>
+                                                    <h3 className="text-2xl font-bold text-slate-800">{tool.name}</h3>
                                                 </div>
                                             </div>
 
-                                            <div className="p-6 space-y-6">
+                                            <div className="p-8 space-y-8">
                                                 {/* Pregunta y Propósito */}
-                                                <div className="grid md:grid-cols-2 gap-6">
-                                                    <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100">
-                                                        <h4 className="flex items-center gap-2 text-sm font-bold text-blue-800 mb-2">
+                                                <div className="grid md:grid-cols-2 gap-8">
+                                                    <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-unitec-blue">
+                                                        <h4 className="flex items-center gap-2 text-sm font-bold text-unitec-blue uppercase tracking-wider mb-3">
                                                             <IconRenderer name="HelpCircle" className="w-4 h-4" /> Pregunta Convincente
                                                         </h4>
-                                                        <p className="text-gray-700 italic">"{tool.question}"</p>
+                                                        <p className="text-slate-700 italic font-medium">"{tool.question}"</p>
                                                     </div>
-                                                    <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
-                                                        <h4 className="flex items-center gap-2 text-sm font-bold text-green-800 mb-2">
+                                                    <div className="bg-cyan-50 p-6 rounded-lg border-l-4 border-unitec-cyan">
+                                                        <h4 className="flex items-center gap-2 text-sm font-bold text-cyan-800 uppercase tracking-wider mb-3">
                                                             <IconRenderer name="Zap" className="w-4 h-4" /> Propósito
                                                         </h4>
-                                                        <p className="text-gray-700">{tool.purpose}</p>
+                                                        <p className="text-slate-700">{tool.purpose}</p>
                                                     </div>
                                                 </div>
 
                                                 {/* Metodología */}
                                                 <div>
-                                                    <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-4 flex items-center gap-2">
-                                                        <IconRenderer name="Layers" className="w-4 h-4 text-gray-400" /> Metodología Paso a Paso
+                                                    <h4 className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-6 flex items-center gap-2 border-b pb-2">
+                                                        <IconRenderer name="Layers" className="w-4 h-4 text-slate-400" /> Metodología Paso a Paso
                                                     </h4>
-                                                    <div className="space-y-3">
+                                                    <div className="space-y-4">
                                                         {tool.methodology.map((step, sIdx) => (
-                                                            <div key={sIdx} className="flex gap-4 group">
-                                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 font-bold flex items-center justify-center text-sm group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                                                            <div key={sIdx} className="flex gap-6 group">
+                                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white border-2 border-unitec-blue text-unitec-blue font-bold flex items-center justify-center text-sm shadow-sm group-hover:bg-unitec-blue group-hover:text-white transition-all">
                                                                     {sIdx + 1}
                                                                 </div>
                                                                 <div className="flex-grow pt-1">
-                                                                    <span className="block font-bold text-gray-900 text-sm mb-1">{step.phase}</span>
-                                                                    <p className="text-sm text-gray-600">{step.action}</p>
+                                                                    <span className="block font-bold text-unitec-blue text-sm mb-1 uppercase tracking-wide">{step.phase}</span>
+                                                                    <p className="text-sm text-slate-600">{step.action}</p>
                                                                 </div>
                                                             </div>
                                                         ))}
@@ -844,9 +890,9 @@
                                                 </div>
 
                                                 {/* Recursos */}
-                                                <div className="pt-4 border-t border-gray-100 flex items-start gap-2 text-sm text-gray-500">
-                                                    <IconRenderer name="Box" className="w-4 h-4 mt-0.5" />
-                                                    <p><span className="font-semibold text-gray-700">Recursos:</span> {tool.resources}</p>
+                                                <div className="pt-4 border-t border-slate-100 flex items-start gap-3 text-sm text-slate-500">
+                                                    <IconRenderer name="Box" className="w-5 h-5 mt-0.5 text-unitec-sky" />
+                                                    <p><span className="font-bold text-slate-700">Recursos necesarios:</span> {tool.resources}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -860,32 +906,38 @@
         };
 
         const JsonView = () => (
-            <div className="space-y-6 animate-fadeIn">
-                <div className="bg-gradient-to-r from-slate-900 to-slate-800 p-8 rounded-2xl shadow-xl text-white">
-                    <div className="flex items-start justify-between">
+            <div className="space-y-8 animate-fadeIn">
+                <div className="bg-unitec-blue p-10 rounded-lg shadow-xl text-white relative overflow-hidden">
+                     <div className="absolute -right-10 -top-10 text-white/5 transform rotate-12">
+                         <IconRenderer name="Diamond" className="w-64 h-64" />
+                     </div>
+                    <div className="flex flex-col md:flex-row items-start justify-between relative z-10">
                         <div>
                             <h2 className="text-2xl font-bold flex items-center gap-3">
-                                <IconRenderer name="Database" className="h-6 w-6 text-green-400" />
+                                <IconRenderer name="Database" className="h-6 w-6 text-unitec-cyan" />
                                 Base de Conocimiento JSON
                             </h2>
-                            <p className="text-slate-300 mt-2 max-w-2xl">
+                            <p className="text-blue-200 mt-4 max-w-2xl leading-relaxed">
                                 Este objeto contiene la totalidad del marco teórico y práctico. 
                                 Ideal para alimentar agentes RAG (Retrieval-Augmented Generation) o para integraciones directas.
                             </p>
                         </div>
                         <button 
                             onClick={() => {navigator.clipboard.writeText(JSON.stringify(learningData, null, 2))}}
-                            className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold shadow-lg transition-all flex items-center gap-2 transform hover:scale-105"
+                            className="mt-6 md:mt-0 bg-unitec-cyan hover:bg-cyan-400 text-unitec-blue px-8 py-3 rounded font-bold shadow-lg transition-all flex items-center gap-2"
                         >
                             <IconRenderer name="CheckCircle" className="h-5 w-5" />
-                            Copiar al Portapapeles
+                            Copiar Datos
                         </button>
                     </div>
                 </div>
 
-                <div className="relative group">
-                    <div className="absolute top-4 right-4 bg-slate-800 text-slate-400 text-xs px-2 py-1 rounded font-mono">readonly</div>
-                    <pre className="bg-slate-900 text-green-300 p-8 rounded-2xl overflow-x-auto text-xs font-mono shadow-inner border border-slate-700 max-h-[800px] overflow-y-auto custom-scrollbar leading-relaxed">
+                <div className="relative group rounded-lg overflow-hidden border border-slate-200 shadow-sm">
+                    <div className="absolute top-0 left-0 right-0 bg-slate-100 px-4 py-2 border-b border-slate-200 flex justify-between items-center">
+                        <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">learningData.json</span>
+                        <span className="text-xs font-mono text-slate-400">readonly</span>
+                    </div>
+                    <pre className="bg-white text-slate-600 p-8 pt-14 text-xs font-mono max-h-[800px] overflow-y-auto custom-scrollbar leading-relaxed">
                         {JSON.stringify(learningData, null, 2)}
                     </pre>
                 </div>
@@ -896,18 +948,23 @@
             const [activeTab, setActiveTab] = useState('continuum');
 
             return (
-                <div className="min-h-screen bg-gray-50 text-gray-800 font-sans pb-12">
+                <div className="min-h-screen bg-slate-50 text-slate-800 font-sans pb-16">
                     <Header activeTab={activeTab} setActiveTab={setActiveTab} />
                     
-                    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+                    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
                         {activeTab === 'continuum' && <ContinuumView />}
                         {activeTab === 'tools' && <ToolsView />}
                         {activeTab === 'ai-data' && <JsonView />}
                     </main>
 
-                    <footer className="max-w-7xl mx-auto px-4 mt-20 pt-8 border-t border-gray-200 text-center text-gray-400 text-sm mb-8">
-                        <p className="font-medium">© 2024 Learning to Learn Framework</p>
-                        <p className="mt-1">Basado en documentos oficiales UNITEC & Continuum L2L Toolkits</p>
+                    <footer className="max-w-7xl mx-auto px-4 mt-24 pt-8 border-t border-slate-200 text-center text-slate-400 text-sm">
+                        <div className="flex justify-center items-center gap-2 mb-2">
+                             <div className="w-2 h-2 bg-unitec-blue rotate-45"></div>
+                             <div className="w-2 h-2 bg-unitec-cyan rotate-45"></div>
+                             <div className="w-2 h-2 bg-unitec-sky rotate-45"></div>
+                        </div>
+                        <p className="font-semibold text-unitec-blue">© 2024 Learning to Learn Framework</p>
+                        <p className="mt-2 text-xs uppercase tracking-wider">Diseñado bajo lineamientos Manual de Marca UNITEC</p>
                     </footer>
                 </div>
             );
