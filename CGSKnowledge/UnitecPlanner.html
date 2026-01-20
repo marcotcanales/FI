@@ -7,18 +7,15 @@
     
     <!-- 
       SECCIÓN AVANZADA PARA AGENTES DE IA (JSON-LD)
-      Esta estructura de datos contiene ahora la totalidad del conocimiento de los manuales
-      de forma semántica, permitiendo a una IA entender la lógica pedagógica profunda.
+      Esta estructura de datos contiene la totalidad del conocimiento de los manuales
+      y la LISTA DE CHEQUEO COMPLETA (Sin resúmenes).
     -->
     <script type="application/ld+json" id="knowledge-graph">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
       "name": "Manual de Diseño de Cursos UNITEC & CGS Framework",
-      "description": "Guía exhaustiva para el diseño de módulos de aprendizaje basada en el Common Ground Collaborative (CGC) adaptado para UNITEC. Integra la planificación conceptual, competencial y de carácter.",
-      "audience": ["Diseñadores Instruccionales", "Docentes Universitarios", "Agentes de Inteligencia Artificial"],
-      "educationalLevel": "Higher Education",
-      "keywords": "CGS, UNITEC, Diseño Curricular, 3Cs, GRASPS, Aprendizaje Profundo, Retrato del Egresado, Principios de Aprendizaje",
+      "description": "Guía exhaustiva para el diseño de módulos de aprendizaje basada en el Common Ground Collaborative (CGC) adaptado para UNITEC.",
       "mainEntity": {
         "@type": "EducationalFramework",
         "sections": [
@@ -26,137 +23,192 @@
             "sectionId": "1",
             "name": "Identidad del Curso",
             "principle": "Alineación Visible",
-            "instruction": "Hacer visible la conexión lógica: Disciplina Académica + Comunalidad Humana -> Capacidades del Retrato (Perfil de Egreso).",
-            "components": [
-              { "name": "Título", "desc": "Disciplina + Código del curso." },
-              { "name": "Comunalidad Humana Central", "examples": ["Individuos y Grupos", "Patrones y Principios", "Cambio y Continuidad", "Sistemas e Interacciones"] },
-              { "name": "Vínculos con el Retrato", "desc": "Capacidades específicas del perfil de egreso que este curso desarrolla fuertemente." }
-            ]
+            "instruction": "Hacer visible la conexión lógica: Disciplina Académica + Comunalidad Humana -> Capacidades del Retrato."
           },
           {
             "sectionId": "2",
             "name": "La Pregunta Atractiva (Compelling Question)",
-            "definition": "Una pregunta abierta, ingeniosa y provocadora que actúa como un titular periodístico. No tiene una única respuesta correcta. Sirve como una 'llamada a la indagación'.",
-            "criteria": ["Intrigante", "Sin jerga académica", "Relevante humanamente", "Despierta curiosidad inmediata"],
-            "designerTrigger": "¿Qué pregunta haría que un estudiante dijera 'Quiero responder eso'?"
+            "definition": "Una pregunta abierta, ingeniosa y provocadora. No tiene una única respuesta correcta.",
+            "criteria": ["Intrigante", "Sin jerga académica", "Relevante humanamente"]
           },
           {
             "sectionId": "3",
             "name": "La Gran Idea (The Big Idea)",
-            "definition": "Una frase conceptual que sirve de ancla para el curso. Representa una comprensión perdurable y transferible que conecta el conocimiento disciplinar con la relevancia humana.",
-            "format": "Debe comenzar con la frase 'Entender que...'",
-            "purpose": "Responder al '¿Y qué?' del módulo. Si los estudiantes olvidan los detalles, esta es la comprensión que deben llevarse para toda la vida."
+            "definition": "Comienza con 'Entender que...'. Representa una comprensión perdurable y transferible."
           },
           {
             "sectionId": "4",
             "name": "El Porqué (The Why)",
-            "definition": "Una narrativa breve (Story) que explica el contenido ilustrativo y su importancia.",
-            "audiences": [
-              { "target": "Docente", "focus": "Explicar por qué importa para la sociedad, la industria o la profesión. Basada en investigación o contexto." },
-              { "target": "Estudiante", "focus": "Concreta, vívida e inmediata. Debe enganchar con un escenario o pregunta relevante para su vida." }
-            ],
-            "mandatoryEnding": "Todas las narrativas deben terminar con la frase: 'Por eso este módulo importa'."
+            "definition": "Narrativa breve (Story). Debe terminar con: 'Por eso este módulo importa'."
           },
           {
             "sectionId": "5",
             "name": "El Qué - Metas de Aprendizaje",
             "methodology": "Las 3Cs + L2L",
-            "goals": [
-              { 
-                "type": "Conceptual", 
-                "prompt": "Entender que...", 
-                "focus": "Conceptos, teorías y principios. Se logran mediante lecturas, discusiones y análisis." 
-              },
-              { 
-                "type": "Competencia", 
-                "prompt": "Ser capaz de...", 
-                "focus": "Habilidades y destrezas demostrables usando verbos de acción. Provienen de los programas oficiales de UNITEC." 
-              },
-              { 
-                "type": "Carácter", 
-                "prompt": "Convertirse en...", 
-                "focus": "Valores y disposiciones (ej. Integridad, Empatía, Responsabilidad). Vinculados a los rasgos del 'Winged Lion' o Retrato." 
-              },
-              { 
-                "type": "Aprender a Aprender (L2L)", 
-                "focus": "Metacognición, autorregulación, monitoreo del progreso y transferencia de estrategias." 
-              }
-            ]
+            "goals": ["Conceptual (Entender que)", "Competencia (Ser capaz de)", "Carácter (Convertirse en)", "Aprender a Aprender"]
           },
           {
             "sectionId": "6",
-            "name": "Preguntas Marco (Framing Questions)",
-            "definition": "Preguntas abiertas que provocan pensamiento y orientan la indagación diaria. No son preguntas de examen, sino guías para el aprendizaje.",
-            "categories": ["Preguntas Conceptuales", "Preguntas de Competencia", "Preguntas de Carácter", "Preguntas de Aprender a Aprender"]
+            "name": "Preguntas Marco",
+            "categories": ["Conceptuales", "De Competencia", "De Carácter", "L2L"]
           },
           {
             "sectionId": "7",
             "name": "La Evidencia",
             "tool": "GRASPS",
-            "components": ["Goal (Meta)", "Role (Rol)", "Audience (Audiencia)", "Situation (Situación)", "Product (Producto)", "Standards (Criterios de Éxito)"],
-            "assessmentType": "Evaluación auténtica situada en contextos del mundo real.",
-            "rubricType": "Se sugiere el uso de Rúbricas de Punto Único o analíticas claras (Emergente, En Evolución, Experto)."
+            "components": ["Goal", "Role", "Audience", "Situation", "Product", "Standards"]
           },
           {
             "sectionId": "8",
-            "name": "El Cómo - Secuencias de Aprendizaje",
-            "models": [
-              {
-                "modelName": "3Cs (Para Conceptos)",
-                "phases": [
-                  { "phase": "Conectar", "desc": "Activar conocimientos previos, despertar curiosidad, conectar con la gran pregunta." },
-                  { "phase": "Construir", "desc": "Desarrollar nueva comprensión a través de exploración estructurada, práctica o indagación." },
-                  { "phase": "Contribuir", "desc": "Extender el aprendizaje hacia fuera. Aplicar la comprensión en contextos auténticos o compartirla." }
-                ]
-              },
-              {
-                "modelName": "DIP (Para Competencias)",
-                "phases": [
-                  { "phase": "Deconstruir", "desc": "Analizar un desempeño experto o modelo para identificar sus partes." },
-                  { "phase": "Identificar", "desc": "Reconocer y nombrar las habilidades, técnicas o estrategias específicas." },
-                  { "phase": "Practicar", "desc": "Aplicar habilidades en práctica guiada o independiente, con retroalimentación." }
-                ]
-              },
-              {
-                "modelName": "CAR (Para Carácter)",
-                "phases": [
-                  { "phase": "Considerar", "desc": "Reflexionar sobre valores, dilemas o decisiones éticas relevantes." },
-                  { "phase": "Actuar", "desc": "Tomar decisiones y demostrar valores mediante conductas o proyectos." },
-                  { "phase": "Reflexionar", "desc": "Pensar en el crecimiento personal: '¿En quién me estoy convirtiendo?'" }
-                ]
-              }
-            ]
+            "name": "El Cómo - Secuencias",
+            "models": ["3Cs (Conectar, Construir, Contribuir)", "DIP (Deconstruir, Identificar, Practicar)", "CAR (Considerar, Actuar, Reflexionar)"]
           },
           {
             "sectionId": "9",
             "name": "Reflexión y Transferencia",
-            "components": [
-              { "type": "Estudiante", "questions": ["¿Qué aprendí?", "¿Cómo lo aprendí?", "¿En quién me estoy convirtiendo?", "¿Qué estrategias mantendré?", "¿Dónde más puedo aplicar esto?"] },
-              { "type": "Docente", "questions": ["¿Cómo construyó el curso las capacidades del Retrato?", "¿Dónde estuvo la evidencia del aprendizaje L2L?"] }
-            ]
+            "focus": "Metacognición y aplicación en nuevos contextos."
           },
           {
-            "sectionId": "principles",
-            "name": "Principios de Aprendizaje UNITEC",
-            "definition": "Los pilares fundamentales sobre los que se diseña toda experiencia educativa en la institución.",
-            "list": [
-              { "name": "Propósito", "question": "¿Por qué aprendemos?", "desc": "El aprendizaje comienza con un por qué claro. Conectamos la teoría con la realidad para comprender el valor del conocimiento en la vida profesional y social." },
-              { "name": "Posibilidad", "question": "¿Quiénes estamos llegando a ser?", "desc": "Creemos en el potencial ilimitado de cada persona. Fomentamos una mentalidad de crecimiento basada en el esfuerzo y la resiliencia." },
-              { "name": "Personas", "question": "¿Con quién aprendemos?", "desc": "La humanidad está al centro. Cultivamos relaciones de confianza y respeto que apoyan la motivación y el bienestar integral." },
-              { "name": "Autonomía", "question": "¿Cómo asumimos la responsabilidad?", "desc": "Evolucionamos de receptores pasivos a protagonistas empoderados que asumen la responsabilidad de su propio aprendizaje y cambio." }
-            ]
-          },
-          {
-            "sectionId": "portrait",
-            "name": "Retrato del Egresado (Portrait of a Learner)",
-            "definition": "El perfil de salida que define las capacidades humanas, competencias y valores que todo estudiante de UNITEC debe desarrollar.",
-            "traits": [
-              { "name": "Líder con Propósito", "desc": "Equilibrio personal, curiosidad, aprendizaje de por vida, integridad y servicio." },
-              { "name": "Solucionador de Problemas Empático", "desc": "Entiende patrones y causalidad, pensamiento crítico combinado con empatía para soluciones sostenibles." },
-              { "name": "Innovador Creativo", "desc": "Originalidad, espíritu emprendedor, creación de soluciones tecnológicas y artefactos únicos." },
-              { "name": "Comunicador Efectivo", "desc": "Dominio oral, escrito y digital. Expresión ética, estratégica y defensa de principios." },
-              { "name": "Ciudadano Responsable", "desc": "Sostiene sistemas sociales y ecosistemas naturales. Actúa para transformar su entorno para mejorarlo." },
-              { "name": "Colaborador Constructivo", "desc": "Trabaja efectivamente en equipos diversos, gestiona conflictos y contribuye al éxito colectivo." }
+            "sectionId": "10",
+            "name": "Lista de Chequeo de Calidad (Quality Checklist - Full Version)",
+            "description": "Criterios obligatorios y exhaustivos para validar el diseño del módulo antes de su implementación.",
+            "checklistItems": [
+                {
+                    "category": "EL PORQUÉ (Propósito y Contexto)",
+                    "subcategories": [
+                        {
+                            "name": "La Pregunta Convincente",
+                            "criteria": [
+                                "¿Aborda un tema que realmente importa?",
+                                "¿Es una pregunta abierta, intrigante y atractiva?",
+                                "¿Funciona como un 'llamado a la investigación' sobre contenido auténtico y relevante?"
+                            ]
+                        },
+                        {
+                            "name": "La Gran Idea",
+                            "criteria": [
+                                "¿Es una declaración sencilla que aborda los conceptos clave del núcleo del módulo?",
+                                "¿Comienza con la frase inicial: 'Entender...' o 'Entender que...'?",
+                                "¿Expresa conceptos importantes que vale la pena comprender profundamente?"
+                            ]
+                        },
+                        {
+                            "name": "La Historia",
+                            "criteria": [
+                                "¿Funciona por sí sola como una narrativa estructurada y atractiva?",
+                                "¿Menciona las principales líneas de investigación y por qué es importante el módulo?",
+                                "¿Utiliza conceptos y lenguaje adecuados para el desarrollo de los estudiantes?",
+                                "¿Convence al lector de que este contenido es importante?"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "category": "EL QUÉ (Objetivos de Aprendizaje)",
+                    "subcategories": [
+                        {
+                            "name": "Objetivos Generales",
+                            "criteria": [
+                                "¿Son de una cantidad manejable?",
+                                "¿Están estrechamente alineados con las preguntas marco y las evaluaciones?",
+                                "¿Apoyan las conexiones interdisciplinarias?"
+                            ]
+                        },
+                        {
+                            "name": "Objetivos Conceptuales",
+                            "criteria": [
+                                "¿Están expresados con precisión utilizando el enunciado 'Los estudiantes comprenden que...'?",
+                                "¿Son claros, específicos y exigen un pensamiento de orden superior?",
+                                "¿Proporcionan oportunidades para la amplitud y profundidad del pensamiento?"
+                            ]
+                        },
+                        {
+                            "name": "Objetivos de Competencia",
+                            "criteria": [
+                                "¿Están expresados con precisión utilizando el enunciado 'Los estudiantes serán capaces de...'?",
+                                "¿Comienzan con un verbo de acción?",
+                                "¿Describen desempeños observables y evaluables?"
+                            ]
+                        },
+                        {
+                            "name": "Objetivos de Carácter",
+                            "criteria": [
+                                "¿Están expresados con precisión utilizando el enunciado 'Los estudiantes se vuelven más...'?",
+                                "¿Se centran en disposiciones o valores específicos (ej. empatía, integridad)?",
+                                "¿Están vinculados a las expectativas de comportamiento o al Retrato del Egresado?"
+                            ]
+                        },
+                        {
+                            "name": "Objetivos L2L",
+                            "criteria": [
+                                "¿Se enfocan en el desarrollo de habilidades metacognitivas y de autorregulación?",
+                                "¿Utilizan el enunciado 'Los estudiantes desarrollan la capacidad de...'?"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "category": "LA EVIDENCIA (Evaluación Sumativa)",
+                    "subcategories": [
+                        {
+                            "name": "Tarea de Desempeño (GRASPS)",
+                            "criteria": [
+                                "¿Permite a los estudiantes transferir su aprendizaje a un contexto del mundo real?",
+                                "¿Presenta un desafío cognitivo apropiado?",
+                                "¿Distingue claramente entre el 'producto' (qué hacen) y el 'propósito' (por qué lo hacen)?",
+                                "¿Está alineada directamente con los Objetivos de Aprendizaje?"
+                            ]
+                        },
+                        {
+                            "name": "Criterios de Evaluación",
+                            "criteria": [
+                                "¿Son claros los criterios de éxito?",
+                                "¿Se diferencian los criterios de calidad (calidad del pensamiento) de los criterios de finalización (requisitos técnicos)?",
+                                "¿Se ofrecen 2-3 opciones para que los estudiantes proporcionen evidencia de su propio aprendizaje?",
+                                "¿Incluyen evaluaciones del aprendizaje (OF), para el aprendizaje (FOR) y como aprendizaje (AS)?",
+                                "¿Siguen los principios de evaluación: Propósito, Confiabilidad, Alineación, Valor, Equidad?",
+                                "¿Ofrecen oportunidades de modificación?"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "category": "EL CÓMO (Preguntas y Secuencias)",
+                    "subcategories": [
+                        {
+                            "name": "Preguntas de Encuadre",
+                            "criteria": [
+                                "Conceptuales: ¿Son abiertas y reflejan directamente los objetivos de aprendizaje conceptual?",
+                                "Competencia: ¿Son preguntas de proceso prácticas sobre cómo abordar la investigación?",
+                                "Carácter: ¿Son provocativas, ambiguas y requieren reflexión sobre creencias y valores?",
+                                "General: ¿Son atractivas y guían las secuencias de aprendizaje?"
+                            ]
+                        },
+                        {
+                            "name": "Secuencias de Aprendizaje",
+                            "criteria": [
+                                "¿Siguen flujos constructivistas (ej. Conectar, Construir, Contribuir)?",
+                                "¿Identifican claramente actividades centradas en el alumno?",
+                                "¿Reflejan oportunidades diferenciadas para satisfacer las necesidades de los estudiantes?",
+                                "¿Utilizan tecnología para mejorar el aprendizaje?"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "category": "LA REFLEXIÓN (Cierre)",
+                    "subcategories": [
+                        {
+                            "name": "Cierre del Módulo",
+                            "criteria": [
+                                "¿Utiliza evidencia documentada para reconstruir el recorrido de aprendizaje?",
+                                "¿Sirve para consolidar los aprendizajes clave sobre dónde empezamos y dónde terminamos?",
+                                "¿Apoya el pensamiento metacognitivo sobre cómo funciona el aprendizaje?",
+                                "¿Ayuda a planificar el aprendizaje futuro basándose en 'lo que funcionó bien' y 'lo que haría diferente'?"
+                            ]
+                        }
+                    ]
+                }
             ]
           }
         ]
@@ -180,6 +232,8 @@
             --example-bg: #fef9e7;
             --cgc-border: #27ae60;
             --cgc-bg: #e9f7ef;
+            --checklist-border: #e74c3c;
+            --checklist-bg: #fdedec;
             
             /* Colores Retrato */
             --portrait-card-bg: #ffffff;
@@ -379,13 +433,9 @@
             background: var(--primary-color);
         }
         
-        /* Estilo especial para la sección de Retrato y Principios */
-        section#portrait::before {
-            background: var(--portrait-card-border);
-        }
-        section#principles::before {
-            background: var(--principle-card-border);
-        }
+        section#portrait::before { background: var(--portrait-card-border); }
+        section#principles::before { background: var(--principle-card-border); }
+        section#checklist::before { background: var(--checklist-border); }
 
         h2 {
             color: var(--primary-color);
@@ -429,6 +479,73 @@
             border-left-color: var(--example-border);
         }
         .example-box h4 { color: #7e5109; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+
+        /* CHECKLIST STYLES */
+        .checklist-group {
+            margin-bottom: 30px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        
+        .checklist-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .checklist-items {
+            padding: 0;
+            background: #fff;
+        }
+
+        .checklist-subheader {
+            background: #f8f9fa;
+            color: #555;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            border-bottom: 1px solid #eee;
+            border-top: 1px solid #eee;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 20px;
+            border-bottom: 1px solid #f1f1f1;
+            transition: background 0.2s;
+        }
+
+        .check-item:hover {
+            background: #fdfefe;
+        }
+
+        .check-item:last-child {
+            border-bottom: none;
+        }
+
+        .check-item input[type="checkbox"] {
+            margin-top: 5px;
+            margin-right: 15px;
+            transform: scale(1.2);
+            cursor: pointer;
+            accent-color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .check-item label {
+            cursor: pointer;
+            color: #444;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
 
         /* CARDS GRID (Shared Layout) */
         .intro-text {
@@ -569,13 +686,15 @@
         <li><a href="#sec7">7. La Evidencia (GRASPS)</a></li>
         <li><a href="#sec8">8. El Cómo (Secuencias)</a></li>
         <li><a href="#sec9">9. Reflexión</a></li>
+        <li><a href="#checklist" style="color:#e74c3c; font-weight:bold;">10. Lista de Chequeo</a></li>
+        
         <li style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;"><small style="color:#aaa; text-transform:uppercase; margin-left:15px;">Anexos Clave</small></li>
         <li><a href="#principles" style="color:#1abc9c; font-weight:bold;">Anexo A: Principios</a></li>
         <li><a href="#portrait" style="color:#f39c12; font-weight:bold;">Anexo B: Retrato</a></li>
     </ul>
     <div class="ai-badge">
         <strong>Base de Conocimiento IA</strong>
-        <span style="font-size:0.75rem;">(JSON-LD Integrado v2.2)</span>
+        <span style="font-size:0.75rem;">(JSON-LD Integrado v2.3 - Full Checklist)</span>
         <button class="json-btn" onclick="openJsonModal()">Ver Datos JSON</button>
     </div>
 </nav>
@@ -588,7 +707,7 @@
             <span class="close-btn" onclick="closeJsonModal()">&times;</span>
         </div>
         <p style="font-size:0.9rem; color:#666; margin-bottom:10px;">
-            Este código JSON-LD está incrustado en el sitio web y permite que las IAs comprendan la estructura pedagógica completa sin ambigüedades.
+            Este código JSON-LD está incrustado en el sitio web y permite que las IAs comprendan la estructura pedagógica completa, incluyendo ahora la <strong>Lista de Chequeo de Calidad Completa</strong>.
         </p>
         <pre id="jsonViewer" class="json-viewer"></pre>
     </div>
@@ -598,7 +717,7 @@
     <header class="main-header" id="intro">
         <h1>Manual del Diseñador de Cursos UNITEC (CGS)</h1>
         <p>Este sitio web contiene la <strong>información completa y detallada</strong> extraída de los manuales "Unitec Planner Instructions" y "CGC Modules Explained".</p>
-        <p>Está diseñado para servir como fuente de verdad tanto para diseñadores instruccionales humanos como para agentes de Inteligencia Artificial que requieran consumir esta metodología pedagógica.</p>
+        <p>Está diseñado para servir como fuente de verdad tanto para diseñadores instruccionales humanos como para agentes de Inteligencia Artificial.</p>
     </header>
 
     <!-- SECCIÓN 1 -->
@@ -917,6 +1036,273 @@
                 <li>¿Cómo construye este curso explícitamente las capacidades del Retrato y las habilidades de Aprender a Aprender nombradas al inicio?</li>
                 <li>¿Dónde en la secuencia los estudiantes las practican y dónde está la evidencia?</li>
             </ul>
+        </div>
+    </section>
+
+    <!-- NUEVA SECCIÓN 10: LISTA DE CHEQUEO (CHECKLIST PLANNER) -->
+    <section id="checklist">
+        <h2 style="color: #c0392b; border-bottom-color: #fadbd8;">Sección Diez: Lista de Chequeo de Calidad</h2>
+        <p>Utiliza esta lista final para validar que tu Planner cumple con todos los estándares del sistema CGS de UNITEC antes de darlo por finalizado.</p>
+
+        <!-- 1. El Porqué -->
+        <div class="checklist-group">
+            <div class="checklist-header">1. EL PORQUÉ (Propósito y Contexto)</div>
+            
+            <div class="checklist-subheader">La Pregunta Convincente</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk1a">
+                    <label for="chk1a">¿Aborda un tema que realmente importa?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk1b">
+                    <label for="chk1b">¿Es una pregunta abierta, intrigante y atractiva?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk1c">
+                    <label for="chk1c">¿Funciona como un "llamado a la investigación" sobre contenido auténtico y relevante?</label>
+                </div>
+            </div>
+
+            <div class="checklist-subheader">La Gran Idea</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk1d">
+                    <label for="chk1d">¿Es una declaración sencilla que aborda los conceptos clave del núcleo del módulo?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk1e">
+                    <label for="chk1e">¿Comienza con la frase inicial: "Entender..." o "Entender que..."?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk1f">
+                    <label for="chk1f">¿Expresa conceptos importantes que vale la pena comprender profundamente?</label>
+                </div>
+            </div>
+
+            <div class="checklist-subheader">La Historia (The Story)</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk1g">
+                    <label for="chk1g">¿Funciona por sí sola como una narrativa estructurada y atractiva?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk1h">
+                    <label for="chk1h">¿Menciona las principales líneas de investigación y por qué es importante el módulo?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk1i">
+                    <label for="chk1i">¿Utiliza conceptos y lenguaje adecuados para el desarrollo de los estudiantes?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk1j">
+                    <label for="chk1j">¿Convence al lector de que este contenido es importante?</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. El Qué -->
+        <div class="checklist-group">
+            <div class="checklist-header">2. EL QUÉ (Objetivos de Aprendizaje)</div>
+            
+            <div class="checklist-subheader">Objetivos Generales</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk2a">
+                    <label for="chk2a">¿Son de una cantidad manejable?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk2b">
+                    <label for="chk2b">¿Están estrechamente alineados con las preguntas marco y las evaluaciones?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk2c">
+                    <label for="chk2c">¿Apoyan las conexiones interdisciplinarias?</label>
+                </div>
+            </div>
+
+            <div class="checklist-subheader">Objetivos Conceptuales</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk2d">
+                    <label for="chk2d">¿Están expresados con precisión utilizando el enunciado "Los estudiantes comprenden que..."?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk2e">
+                    <label for="chk2e">¿Son claros, específicos y exigen un pensamiento de orden superior?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk2f">
+                    <label for="chk2f">¿Proporcionan oportunidades para la amplitud y profundidad del pensamiento?</label>
+                </div>
+            </div>
+
+            <div class="checklist-subheader">Objetivos de Competencia</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk2g">
+                    <label for="chk2g">¿Están expresados con precisión utilizando el enunciado "Los estudiantes serán capaces de..."?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk2h">
+                    <label for="chk2h">¿Comienzan con un verbo de acción?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk2i">
+                    <label for="chk2i">¿Describen desempeños observables y evaluables?</label>
+                </div>
+            </div>
+
+            <div class="checklist-subheader">Objetivos de Carácter</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk2j">
+                    <label for="chk2j">¿Están expresados con precisión utilizando el enunciado "Los estudiantes se vuelven más..."?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk2k">
+                    <label for="chk2k">¿Se centran en disposiciones o valores específicos (ej. empatía, integridad)?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk2l">
+                    <label for="chk2l">¿Están vinculados a las expectativas de comportamiento o al Retrato del Egresado?</label>
+                </div>
+            </div>
+
+             <div class="checklist-subheader">Objetivos L2L (Aprender a Aprender)</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk2m">
+                    <label for="chk2m">¿Se enfocan en el desarrollo de habilidades metacognitivas y de autorregulación?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk2n">
+                    <label for="chk2n">¿Utilizan el enunciado "Los estudiantes desarrollan la capacidad de..."?</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. La Evidencia -->
+        <div class="checklist-group">
+            <div class="checklist-header">3. LA EVIDENCIA (Evaluación Sumativa)</div>
+            
+            <div class="checklist-subheader">Tarea de Desempeño (GRASPS)</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk3a">
+                    <label for="chk3a">¿Permite a los estudiantes transferir su aprendizaje a un contexto del mundo real?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk3b">
+                    <label for="chk3b">¿Presenta un desafío cognitivo apropiado?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk3c">
+                    <label for="chk3c">¿Distingue claramente entre el "producto" (qué hacen) y el "propósito" (por qué lo hacen)?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk3d">
+                    <label for="chk3d">¿Está alineada directamente con los Objetivos de Aprendizaje?</label>
+                </div>
+            </div>
+
+            <div class="checklist-subheader">Criterios de Evaluación</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk3e">
+                    <label for="chk3e">¿Son claros los criterios de éxito?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk3f">
+                    <label for="chk3f">¿Se diferencian los criterios de calidad (calidad del pensamiento) de los criterios de finalización (requisitos técnicos)?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk3g">
+                    <label for="chk3g">¿Se ofrecen 2-3 opciones para que los estudiantes proporcionen evidencia de su propio aprendizaje?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk3h">
+                    <label for="chk3h">¿Incluyen evaluaciones del aprendizaje (OF), para el aprendizaje (FOR) y como aprendizaje (AS)?</label>
+                </div>
+                 <div class="check-item">
+                    <input type="checkbox" id="chk3i">
+                    <label for="chk3i">¿Siguen los principios de evaluación: Propósito, Confiabilidad, Alineación, Valor, Equidad?</label>
+                </div>
+                 <div class="check-item">
+                    <input type="checkbox" id="chk3j">
+                    <label for="chk3j">¿Ofrecen oportunidades de modificación?</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. El Cómo -->
+        <div class="checklist-group">
+            <div class="checklist-header">4. EL CÓMO (Preguntas y Secuencias)</div>
+            
+            <div class="checklist-subheader">Preguntas de Encuadre</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk4a">
+                    <label for="chk4a"><strong>Conceptuales:</strong> ¿Son abiertas y reflejan directamente los objetivos de aprendizaje conceptual?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk4b">
+                    <label for="chk4b"><strong>Competencia:</strong> ¿Son preguntas de proceso prácticas sobre cómo abordar la investigación?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk4c">
+                    <label for="chk4c"><strong>Carácter:</strong> ¿Son provocativas, ambiguas ("sin respuesta fácil") y requieren reflexión sobre creencias y valores?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk4d">
+                    <label for="chk4d"><strong>General:</strong> ¿Son atractivas y guían las secuencias de aprendizaje?</label>
+                </div>
+            </div>
+
+            <div class="checklist-subheader">Secuencias de Aprendizaje</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk4e">
+                    <label for="chk4e">¿Siguen flujos constructivistas (ej. Conectar, Construir, Contribuir)?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk4f">
+                    <label for="chk4f">¿Identifican claramente actividades centradas en el alumno?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk4g">
+                    <label for="chk4g">¿Reflejan oportunidades diferenciadas para satisfacer las necesidades de los estudiantes?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk4h">
+                    <label for="chk4h">¿Utilizan tecnología para mejorar el aprendizaje?</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. La Reflexión -->
+        <div class="checklist-group">
+            <div class="checklist-header">5. LA REFLEXIÓN (Cierre)</div>
+            
+            <div class="checklist-subheader">Cierre del Módulo</div>
+            <div class="checklist-items">
+                <div class="check-item">
+                    <input type="checkbox" id="chk5a">
+                    <label for="chk5a">¿Utiliza evidencia documentada para reconstruir el recorrido de aprendizaje?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk5b">
+                    <label for="chk5b">¿Sirve para consolidar los aprendizajes clave sobre dónde empezamos y dónde terminamos?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk5c">
+                    <label for="chk5c">¿Apoya el pensamiento metacognitivo sobre cómo funciona el aprendizaje?</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk5d">
+                    <label for="chk5d">¿Ayuda a planificar el aprendizaje futuro basándose en "lo que funcionó bien" y "lo que haría diferente"?</label>
+                </div>
+            </div>
         </div>
     </section>
 
