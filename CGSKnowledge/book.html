@@ -3,372 +3,747 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Book of CGS 2025: Sistema de Crecimiento Colectivo</title>
-    
-    <!-- 
-      JSON-LD AVANZADO PARA AGENTES DE IA
-      Este bloque define el marco teórico del CGS (Collective Growth System)
-      para que las IAs comprendan la metodología de evaluación y cultura.
-    -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Book",
-      "name": "The Book of the CGS 2025 V5",
-      "alternativeHeadline": "Transforming Teacher Evaluation Through Culture Building",
-      "author": {
-        "@type": "Organization",
-        "name": "The Common Ground Collaborative (CGC)"
-      },
-      "description": "Un marco metodológico para transformar la evaluación docente tradicional en un sistema de crecimiento cultural y eficacia colectiva.",
-      "mainEntity": {
-        "@type": "EducationalFramework",
-        "name": "Collective Growth System (CGS)",
-        "mission": "Becoming Human (Llegar a ser Humano)",
-        "methodology": "Human Centered Design (HCD)",
-        "keyConcepts": [
-          {
-            "@type": "Concept",
-            "name": "Eficacia Colectiva Docente",
-            "description": "El factor número uno que influye en el aprendizaje estudiantil según la investigación (Hattie). La creencia compartida de que juntos podemos lograr impacto."
-          },
-          {
-            "@type": "Concept",
-            "name": "Las 4 Ts de la Evolución",
-            "itemListElement": ["Transact (Transaccional)", "Transition (Transición)", "Transform (Transformación)", "Transcend (Trascendencia)"]
-          },
-          {
-            "@type": "Concept",
-            "name": "El Ciclo de Indagación",
-            "steps": ["¿Qué sucedió realmente?", "¿Qué explica la diferencia?", "¿Qué hemos aprendido?"]
-          }
-        ]
-      }
-    }
-    </script>
-
+    <title>El Libro del CGS 2025 V5</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root {
-            --primary-dark: #1a252f;
-            --primary-blue: #2980b9;
-            --accent-gold: #f39c12;
-            --accent-green: #27ae60;
-            --text-main: #34495e;
-            --bg-light: #ecf0f1;
-            --sidebar-width: 300px;
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            line-height: 1.8;
-            color: var(--text-main);
-            background-color: #f9f9f9;
-            margin: 0;
-            display: flex;
-        }
-
-        /* SIDEBAR NAVIGATION */
-        nav {
-            width: var(--sidebar-width);
-            background: var(--primary-dark);
-            color: white;
-            height: 100vh;
-            position: fixed;
-            overflow-y: auto;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        nav h1 {
-            font-size: 1.5rem;
-            border-bottom: 2px solid var(--accent-gold);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            color: #fff;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        nav li {
-            margin-bottom: 15px;
-        }
-
-        nav a {
-            color: #bdc3c7;
-            text-decoration: none;
-            display: block;
-            padding: 10px;
-            border-radius: 5px;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-        }
-
-        nav a:hover, nav a.active {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            padding-left: 15px;
-            border-left: 4px solid var(--accent-gold);
-        }
-
-        .ai-indicator {
-            margin-top: 40px;
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            font-size: 0.8rem;
-            color: #7f8c8d;
-            text-align: center;
-            border: 1px dashed #555;
-        }
-
-        /* MAIN CONTENT */
-        main {
-            margin-left: var(--sidebar-width);
-            padding: 60px;
-            max-width: 900px;
-            flex: 1;
-        }
-
-        header.doc-header {
-            margin-bottom: 60px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 40px;
-        }
-
-        h1.title {
-            font-size: 3rem;
-            color: var(--primary-dark);
-            margin: 0 0 10px 0;
-            line-height: 1.2;
-        }
-
-        p.subtitle {
-            font-size: 1.4rem;
-            color: var(--primary-blue);
-            font-weight: 300;
-        }
-
-        /* SECTIONS */
-        section {
-            background: white;
-            padding: 40px;
-            margin-bottom: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            color: var(--primary-dark);
-            font-size: 2rem;
-            margin-top: 0;
-            margin-bottom: 25px;
-            border-left: 6px solid var(--accent-gold);
-            padding-left: 20px;
-        }
-
-        h3 {
-            color: var(--primary-blue);
-            font-size: 1.4rem;
-            margin-top: 30px;
-        }
-
-        p {
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        /* SPECIAL BOXES */
-        .quote-box {
-            background: var(--bg-light);
-            padding: 25px;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary-dark);
-            font-style: italic;
-            margin: 30px 0;
-            font-size: 1.1rem;
-        }
-
-        .model-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .model-card {
-            padding: 20px;
-            border-radius: 8px;
-            color: white;
-            text-align: center;
-        }
-
-        .bg-transact { background-color: #7f8c8d; }
-        .bg-transition { background-color: #3498db; }
-        .bg-transform { background-color: #9b59b6; }
-        .bg-transcend { background-color: #27ae60; }
-
-        .model-card h4 { margin: 0 0 10px 0; font-size: 1.2rem; }
-        .model-card p { font-size: 0.9rem; margin: 0; color: rgba(255,255,255,0.9); text-align: center; }
-
-        /* LISTS */
-        ul {
-            padding-left: 20px;
-        }
-        
-        li {
-            margin-bottom: 10px;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 800px) {
-            body { flex-direction: column; }
-            nav { width: 100%; height: auto; position: relative; }
-            main { margin-left: 0; padding: 20px; }
-            .title { font-size: 2rem; }
-        }
+        html { scroll-behavior: smooth; }
+        .active-nav { background-color: #4f46e5; color: white; }
+        .active-nav:hover { background-color: #4338ca; color: white; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 font-sans text-slate-800">
 
-<nav>
-    <h1>CGS 2025 Manual</h1>
-    <ul>
-        <li><a href="#intro">Inicio: La Misión</a></li>
-        <li><a href="#why">El Porqué: Human Centered</a></li>
-        <li><a href="#problem">El Dilema Sistémico</a></li>
-        <li><a href="#solution">La Solución: Las 4 Ts</a></li>
-        <li><a href="#efficacy">Eficacia Colectiva</a></li>
-        <li><a href="#inquiry">El Ciclo de Indagación</a></li>
-    </ul>
-    
-    <div class="ai-indicator">
-        <strong>Base de Conocimiento IA</strong><br>
-        Optimizado para agentes.<br>
-        Contiene estructura semántica JSON-LD.
-    </div>
-</nav>
-
-<main>
-    <header class="doc-header" id="intro">
-        <h1 class="title">The Book of the CGS 2025</h1>
-        <p class="subtitle">Transformando la Evaluación Docente a través de la Construcción de Cultura</p>
-        <p><strong>Versión 5.0 | The Common Ground Collaborative</strong></p>
+    <!-- Mobile Header -->
+    <header class="md:hidden bg-white shadow-sm sticky top-0 z-50 px-4 py-3 flex justify-between items-center">
+        <span class="font-bold text-indigo-700 text-lg">CGS 2025</span>
+        <button id="menu-btn" class="p-2 text-slate-600">
+            <i data-lucide="menu"></i>
+        </button>
     </header>
 
-    <!-- SECTION 1: INTRODUCTION -->
-    <section>
-        <h2>La Misión: Becoming Human</h2>
-        <p>El Common Ground Collaborative (CGC) es una comunidad global dedicada a apoyar a cada aprendiz —niño o adulto— en el viaje hacia alcanzar su máxima capacidad como seres humanos prósperos y contribuyentes.</p>
-        <p>Nuestra misión central es <strong>"Llegar a ser Humano" (Becoming Human)</strong>. Esta misión informa todo nuestro trabajo.</p>
-        <div class="quote-box">
-            "Nuestro objetivo es ayudar a los aprendices a dar sentido al mundo y a ayudar al mundo a tener más sentido."
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 w-64 bg-white border-r border-slate-200 transition-transform duration-300 ease-in-out z-40 overflow-y-auto">
+        <div class="p-6 border-b border-slate-100">
+            <h1 class="font-extrabold text-2xl text-indigo-800 leading-tight">CGS 2025</h1>
+            <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Sistema de Crecimiento Colectivo</p>
         </div>
-        <p>En nuestro impulso por transformar el aprendizaje, hemos emprendido la tarea de abordar los dilemas sistémicos más obstinados. Uno de los desafíos más difíciles es desarrollar un enfoque para el <strong>crecimiento profesional de docentes y líderes</strong> que realmente mejore el aprendizaje de los estudiantes de manera sostenida y demostrable.</p>
-    </section>
-
-    <!-- SECTION 2: THE WHY -->
-    <section id="why">
-        <h2>El Porqué: Diseño Centrado en el Humano</h2>
-        <p>Dado que nuestra misión es "Llegar a ser Humano", tiene sentido utilizar el <strong>Diseño Centrado en el Humano (HCD - Human Centered Design)</strong> como nuestra metodología para resolver el problema de los sistemas de evaluación/supervisión docente ineficaces.</p>
-        
-        <h3>Las 6 Fases del HCD</h3>
-        <p>El proceso no es lineal, pero sigue estas fases críticas para asegurar que el sistema sirva a las personas, y no al revés:</p>
-        <ul>
-            <li><strong>Empatizar (Empathize):</strong> Comprender profundamente las necesidades y frustraciones de los docentes con los sistemas actuales.</li>
-            <li><strong>Definir (Define):</strong> Clarificar cuál es el problema real que estamos tratando de resolver (la desconexión entre evaluación y aprendizaje).</li>
-            <li><strong>Idear (Ideate):</strong> Generar múltiples soluciones posibles sin juzgar.</li>
-            <li><strong>Prototipar (Prototype):</strong> Crear versiones preliminares del nuevo sistema (CGS).</li>
-            <li><strong>Probar (Test):</strong> Implementar en contextos reales y recoger feedback.</li>
-            <li><strong>Lanzar (Launch):</strong> Desplegar el sistema refinado (Versión 5.0).</li>
-        </ul>
-    </section>
-
-    <!-- SECTION 3: THE PROBLEM -->
-    <section id="problem">
-        <h2>El Dilema Sistémico: ¿Por qué falla la evaluación tradicional?</h2>
-        <p>Tradicionalmente, la evaluación docente ha sido un proceso <strong>transaccional</strong> y, a menudo, performativo (un "espectáculo").</p>
-        <ul>
-            <li>Se centra en el <em>input</em> del docente (lo que el maestro hace frente a la clase) en lugar del <em>impacto</em> en el aprendizaje.</li>
-            <li>Es episódica (una visita al año) en lugar de continua.</li>
-            <li>Genera ansiedad y cumplimiento ("check-the-box") en lugar de curiosidad y crecimiento.</li>
-            <li>A menudo se siente como algo que se le hace <em>al</em> maestro, no algo que se hace <em>con</em> el maestro.</li>
-        </ul>
-        <div class="quote-box">
-            "Necesitamos movernos de una relación transaccional con estudiantes, docentes y padres, a una relación transformacional."
-        </div>
-    </section>
-
-    <!-- SECTION 4: THE SOLUTION -->
-    <section id="solution">
-        <h2>La Solución: El Modelo de las 4 Ts</h2>
-        <p>El CGS propone una evolución cultural en las instituciones educativas, moviéndose a través de cuatro estados:</p>
-        
-        <div class="model-grid">
-            <div class="model-card bg-transact">
-                <h4>1. TRANSACT</h4>
-                <p><strong>Transaccional</strong><br>Cumplimiento de requisitos. "Hacer lo que se pide". Evaluación burocrática.</p>
-            </div>
-            <div class="model-card bg-transition">
-                <h4>2. TRANSITION</h4>
-                <p><strong>Transición</strong><br>El despertar. Reconocer que el sistema actual no funciona y buscar alternativas.</p>
-            </div>
-            <div class="model-card bg-transform">
-                <h4>3. TRANSFORM</h4>
-                <p><strong>Transformación</strong><br>Cambio cultural. El enfoque cambia del docente al aprendizaje. Se construye confianza.</p>
-            </div>
-            <div class="model-card bg-transcend">
-                <h4>4. TRANSCEND</h4>
-                <p><strong>Trascendencia</strong><br>Eficacia colectiva automática. El crecimiento es intrínseco y colaborativo sin necesidad de supervisión externa.</p>
+        <nav class="mt-4 flex flex-col space-y-1" id="nav-links">
+            <!-- Nav links will be populated by JS or hardcoded below -->
+            <a href="#intro" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
+                <i data-lucide="book" class="w-4 h-4 mr-3"></i> Portada e Introducción
+            </a>
+            <a href="#why" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
+                <i data-lucide="heart" class="w-4 h-4 mr-3"></i> El Porqué
+            </a>
+            <a href="#how" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
+                <i data-lucide="lightbulb" class="w-4 h-4 mr-3"></i> El Cómo
+            </a>
+            <a href="#what" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
+                <i data-lucide="users" class="w-4 h-4 mr-3"></i> El Qué: Elementos
+            </a>
+            <a href="#continuums" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
+                <i data-lucide="anchor" class="w-4 h-4 mr-3"></i> Los 10 Hilos
+            </a>
+            <a href="#environment" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
+                <i data-lucide="layout" class="w-4 h-4 mr-3"></i> El Tercer Maestro
+            </a>
+            <a href="#tools" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
+                <i data-lucide="file-text" class="w-4 h-4 mr-3"></i> Herramientas
+            </a>
+            <a href="#conclusion" class="nav-item flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors">
+                <i data-lucide="check-circle" class="w-4 h-4 mr-3"></i> Conclusión
+            </a>
+        </nav>
+        <div class="p-6 mt-auto">
+            <div class="text-xs text-slate-400">
+                Versión 2.0<br>The Common Ground Collaborative
             </div>
         </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="md:ml-64 p-6 md:p-12 max-w-5xl mx-auto">
+
+        <!-- INTRO -->
+        <section id="intro" class="mb-16 scroll-mt-20 section-content">
+            <div class="bg-indigo-900 text-white p-8 md:p-16 rounded-2xl shadow-xl mb-12 text-center">
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-4">EL LIBRO DEL CGS 2025 V5</h1>
+                <h2 class="text-xl md:text-2xl text-indigo-200 mb-6 font-light">EL SISTEMA DE CRECIMIENTO COLECTIVO</h2>
+                <p class="text-lg opacity-90">Transformando la Evaluación Docente a través de la Construcción de Cultura</p>
+                <p class="mt-8 text-sm opacity-60">(Versión 2.0 – The Common Ground Collaborative)</p>
+            </div>
+        </section>
+
+        <!-- THE WHY -->
+        <section id="why" class="mb-16 scroll-mt-20 section-content">
+            <div class="flex items-center mb-6">
+                <div class="bg-rose-100 p-3 rounded-full mr-4">
+                    <i data-lucide="heart" class="w-8 h-8 text-rose-600"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">El Porqué</h2>
+            </div>
+            
+            <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed">
+                <h3 class="text-2xl font-bold text-indigo-800 mb-4">VOLVIÉNDONOS HUMANOS (BECOMING HUMAN)</h3>
+                <p class="mb-4">The Common Ground Collaborative (CGC) es una comunidad global de escuelas, organizaciones e individuos dedicados a apoyar a cada aprendiz, niño o adulto, en el viaje hacia alcanzar su plena capacidad como seres humanos prósperos y contribuyentes, capaces de dar sentido al mundo y ayudar a que el mundo tenga más sentido. Nuestra misión, "Volverse Humano" (Becoming Human), informa todo nuestro trabajo. Ese trabajo ha evolucionado con el tiempo a medida que hemos aprendido juntos.</p>
+                <p class="mb-6">En nuestro impulso por transformar el aprendizaje, hemos emprendido la tarea de abordar los dilemas sistémicos más obstinados que desafían a las escuelas en el camino de una relación transaccional con estudiantes, maestros y padres a una transformacional. Uno de los desafíos más difíciles, creemos, es desarrollar un enfoque de crecimiento profesional para maestros y líderes que realmente mejore el aprendizaje de los estudiantes de una manera sostenida y demostrable. Dado que nuestra misión es "Volverse Humano", tiene sentido para nosotros usar el Diseño Centrado en el Humano (HCD) como nuestra metodología para resolver el problema de los sistemas ineficaces de evaluación/supervisión docente.</p>
+
+                <h3 class="text-2xl font-bold text-indigo-800 mb-4 mt-10">DISEÑO CENTRADO EN EL HUMANO (HCD)</h3>
+                <p class="mb-6">El HCD tiene 6 fases clave: Empatizar, Definir, Idear, Prototipar, Probar, Implementar. Usamos esas etapas de diseño como nuestro marco guía como solucionadores de problemas humanos.</p>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-rose-700 mb-2">1. EMPATIZAR</h4>
+                    <p class="mb-4">Solo hay una cosa mala con los sistemas de evaluación docente "tradicionales" que dependen en gran medida de los "estándares de enseñanza" y la observación: No funcionan.</p>
+                    <p class="mb-4">Quizás debería calificar esta generalización radical. No funcionan si el objetivo es mejorar el aprendizaje de los estudiantes. Sí funcionan si quieres perder tiempo/energía y aumentar el estrés. Revisa la investigación o tu propia experiencia.</p>
+                    <p class="mb-4">Nuestra determinación de abordar este desperdicio inescrupuloso de capacidad humana está arraigada en un profundo sentido de empatía por los maestros y líderes que luchan bajo el peso de sistemas que, independientemente de lo que pretendamos, simplemente no tienen el impacto en el aprendizaje para justificar el gasto de energía. Este no es un problema de personas, es un problema de sistemas. En palabras de W. Edwards Deming, "Un mal sistema vencerá a una buena persona cada vez". Nuestra empatía es por esas buenas personas, y por encontrar formas de ayudarlas a hacer un buen trabajo.</p>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-rose-700 mb-2">2. DEFINIR</h4>
+                    <p class="mb-4">Entonces, ¿por qué no funcionan los sistemas de "supervisión"? Hicimos esa pregunta a un grupo de "Colaboradores de Common Ground" que se reunieron para analizar el problema de los sistemas de evaluación ineficaces. Aquí hay un resumen de nuestras conclusiones sobre las fallas de estos enfoques:</p>
+                    <ul class="list-disc pl-5 space-y-2 mb-6">
+                        <li>Empiezan desde el lugar equivocado, enfocándose primero en los comportamientos del maestro (insumos) en lugar de los comportamientos del aprendiz (impactos).</li>
+                        <li>Aunque solo podemos mejorar en algo aprendiendo a mejorar, usan una lente de evaluación, no una lente de aprendizaje.</li>
+                        <li>Ignoran el hecho de que el acto de observación cambia la naturaleza de lo que observamos y la gran dificultad de observar con la frecuencia suficiente para sacar conclusiones fiables.</li>
+                        <li>Generalmente no incorporan el trabajo preliminar fundamental de construir acuerdos culturales comunes sobre "la forma en que hacemos las cosas aquí".</li>
+                        <li>Hacen poco por la autonomía docente o la colaboración docente, ambos elementos clave en la satisfacción profesional.</li>
+                        <li>Se enfocan en demasiadas cosas a la vez.</li>
+                        <li>Rara vez incluyen enfoques sistémicos, simples y acordados para la retroalimentación.</li>
+                        <li>Rara vez proporcionan tiempo suficiente y programado para el establecimiento de metas colaborativas de alto impacto y el intercambio colaborativo de progreso y, por lo tanto, no construyen la eficacia colectiva docente.</li>
+                        <li>Digamos lo que digamos, se centran más en el factor miedo que en el factor de sentirse bien, aunque sabemos que todos queremos mejorar en nuestro trabajo y que nos sentimos bien cuando lo hacemos.</li>
+                    </ul>
+                    <h5 class="font-bold text-slate-800 mb-2">¿CUÁL ES EL PROBLEMA?</h5>
+                    <p class="mb-4">Quizás la razón más amplia/profunda es que no reconocen que las escuelas son culturas que construyen normas compartidas en contexto. Por lo tanto, los sistemas descontextualizados basados en supervisión/evaluación/observación están equivocados desde el principio. Esto se siente como el doloroso descubrimiento de lo "cegadora obviedad", pero el problema está tan normalizado que hemos perdido la capacidad de verlo.</p>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-rose-700 mb-2">3. IDEAR</h4>
+                    <p class="mb-4">La crítica es fácil, pero proporcionar mejores alternativas es menos simple. Entonces, ¿dónde podríamos buscar inspiración? En el CGC, generalmente hemos encontrado que nuestras mejores ideas surgen de estar profundamente inmersos en la práctica diaria de la enseñanza y el liderazgo. Michael Fullan llama a esto convertirse en "Los Nuevos Teóricos", construyendo teorías hacia atrás desde la práctica, no creando teorías e imponiéndolas a la práctica. Él habla de alternar nuestra presencia de liderazgo, "En el balcón, en la pista de baile", participando regularmente en la práctica, luego reflexionando sobre esa práctica hasta que descubrimos qué es realmente efectivo y qué se puede replicar de manera confiable en nuevos contextos.</p>
+                    <p class="mb-4">La reflexión profesional continua y la "creación de herramientas" nos han permitido conceptualizar una alternativa radical a los sistemas basados en la supervisión. Nos dimos cuenta de que necesitábamos comenzar en un lugar muy diferente. Michael Fullan nos recuerda que "El cambio es reculturización". Peter Drucker observó famosamente que "La cultura se come a la estrategia en el desayuno". Una profunda creencia en la verdad de estas observaciones nos llevó a comenzar a construir nuestro sistema alternativo de crecimiento profesional no con Estándares Docentes o discusiones sobre cuántas observaciones rápidas podríamos gestionar este año, sino con la <strong>cultura</strong>.</p>
+                </div>
+
+                <div class="mb-8 p-6 bg-slate-50 border-l-4 border-slate-300">
+                    <h4 class="text-xl font-bold text-slate-800 mb-4">LA CULTURA SE COME A LA ESTRATEGIA EN EL DESAYUNO</h4>
+                    <p class="mb-4">Construimos nuestro modelo alternativo, El Sistema de Crecimiento Colectivo, en el contexto de la construcción de culturas de aprendizaje.</p>
+                    <p class="mb-4">Aquí está nuestra lógica simple y fluida:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Las escuelas son culturas.</li>
+                        <li>"Solo es una cultura si todos la compran" (Margaret Wheatley).</li>
+                        <li>Por lo tanto, solo es una cultura verdadera si es <strong>lo que hacemos cuando nadie está mirando</strong>. Esta frase se convirtió en nuestra definición de cultura y nuestro "eslogan" para el proyecto.</li>
+                        <li>Si la cultura es lo que hacemos cuando nadie está mirando, entonces toda la noción y el lenguaje de la Supervisión es incorrecto desde el principio.</li>
+                        <li>Solo cuando cambiemos nuestra mentalidad de Supervisión a Visión Compartida comenzaremos a acercarnos al objetivo deseado de <strong>eficacia colectiva docente</strong>, identificada por John Hattie en <em>Visible Learning</em> como la práctica que tiene el mayor impacto en el aprendizaje de los estudiantes.</li>
+                    </ul>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-rose-700 mb-2">4. PROTOTIPAR</h4>
+                    <p class="mb-4">Esta publicación proporciona un prototipo de crecimiento profesional bien desarrollado que parte de esta premisa cultural. Nuestro título provisional es <strong>El Sistema de Crecimiento Colectivo</strong>.</p>
+                    <p class="mb-4">Así es como funciona:</p>
+                    <p class="mb-4">Trabajamos en contexto en una escuela para llevar a cabo el trabajo fundamental necesario de co-crear una cultura de aprendizaje con nuestros colegas docentes. Esa cultura incluye los elementos de cualquier cultura verdadera:</p>
+                    <ul class="list-disc pl-5 space-y-2 mb-4">
+                        <li><strong>Un lenguaje compartido:</strong> Para esto usamos la Definición de Aprendizaje de las 3 C del CGC: Aprendizaje Conceptual, de Competencia y de Carácter.</li>
+                        <li><strong>Valores compartidos:</strong> En forma de Principios de Aprendizaje.</li>
+                        <li><strong>Normas compartidas:</strong> Las Prácticas de aprendizaje sugeridas por nuestros Principios. Después de nuestro trabajo con los maestros, refinamos estas Prácticas para reflejar la investigación.</li>
+                    </ul>
+                    <p class="mb-4">En nuestro prototipo, hemos tomado el Lenguaje de Aprendizaje y los Principios de Aprendizaje que hemos desarrollado, y los hemos usado para mapear <strong>10 Hilos (Strands)</strong>, continuos simples que describen lo que los <strong>aprendices</strong>, no los maestros, están haciendo en diferentes tipos de culturas de "aula". Esto es por una razón clara e importante: Si vamos a planificar el crecimiento en el aprendizaje, necesitamos planificar los <strong>impactos</strong> primero (es decir, los cambios en el comportamiento de aprendizaje que deseamos lograr en nuestros estudiantes). Los insumos (lo que hacen los maestros) influirán en los impactos, pero no son el punto principal. Es contra los impactos que necesitamos reunir evidencia; de lo contrario, ¿cuál es el punto?.</p>
+                    <p class="mb-4">Nuestros continuos funcionan a través de 4 niveles de crecimiento cultural. Describimos con claridad lo que los aprendices están haciendo en culturas de aprendizaje que predominantemente <strong>TRANSACCIONAN (TRANSACT), TRANSICIONAN (TRANSITION), TRANSFORMAN (TRANSFORM) o TRASCIENDEN (TRANSCEND)</strong>.</p>
+                    <p class="mb-4">En lugar del sistema disperso y de bajo impacto colectivo de tener a cada maestro desarrollando múltiples metas profesionales cada año, sugerimos que las escuelas elijan <strong>un continuo como la Meta de Impacto Colectivo para el año, para todos</strong>. Los maestros planean cómo pueden contribuir personalmente al logro colectivo de esa meta.</p>
+                    
+                    <h5 class="font-bold text-slate-800 mb-2 mt-6">NO LA POLICÍA DEL APRENDIZAJE</h5>
+                    <p class="mb-4">Sugerimos un cambio de la norma actual. La mentalidad no debería comenzar con "Quiero trabajar en...". En su lugar, sugerimos un enfoque en lo que nos gustaría ver que nuestros alumnos sean más capaces de entender, hacer, convertirse (las 3Cs) y solo entonces en cómo nosotros, como profesionales, aprenderemos a apoyar el crecimiento estudiantil deseado. Para apoyar el aprendizaje profesional, hemos añadido, para cada Hilo en el sistema, una lista práctica de estrategias de enseñanza principales y un conjunto de herramientas y plantillas prácticas.</p>
+                    <p class="mb-4">Todos asumen la responsabilidad de documentar y compartir evidencia del crecimiento de sus estudiantes y el propio. Si es lo que hacemos cuando nadie está mirando, entonces, lógicamente, el énfasis en la observación debería reducirse. Hemos cambiado el "control de calidad" a maestros que proporcionan evidencia anotada del progreso del estudiante a través de una variedad de medios. Como dijo W. Edwards Deming, "La calidad es responsabilidad de todos". Los líderes ya no son "la policía del aprendizaje", pueden cumplir un papel mucho más necesario y gratificante como constructores de capacidad.</p>
+                    <p class="mb-4">El propósito clave de compartir evidencia de aprendizaje estudiantil es la generación de retroalimentación. Dentro de los Sistemas de Crecimiento Colectivo, la retroalimentación entre sí utiliza el sistema <strong>S.T.A.R.</strong> del CGC:</p>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li><strong>S</strong>pecific (Específica)</li>
+                        <li><strong>T</strong>imely (Oportuna)</li>
+                        <li><strong>A</strong>ctionable (Accionable)</li>
+                        <li><strong>R</strong>espectful (Respetuosa)</li>
+                    </ul>
+                    <p class="mb-4">Nos enfocamos en unos pocos puntos, enmarcados por: "Lo que funcionó bien... Aún mejor si...".</p>
+                    
+                    <h5 class="font-bold text-slate-800 mb-2 mt-6">LO QUE HACEMOS CUANDO NADIE ESTÁ MIRANDO</h5>
+                    <p class="mb-4">Cada maestro, cada líder tiene una zona de desarrollo próximo. No debemos confundir El Sistema de Crecimiento Colectivo con sistemas de evaluación diseñados para esos pocos casos extremos donde un maestro verdaderamente no puede/no quiere aprender y está dañando el aprendizaje de los niños. En esos casos, es hora de separarse ("Intervención Temprana" según Jim Collins). Para todos los demás, necesitamos sistemas de aprendizaje profesional. Necesitamos mover nuestro marco mental de la supervisión a la visión compartida, del cumplimiento a la colaboración.</p>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-rose-700 mb-2">5. PROBAR E IMPLEMENTAR</h4>
+                    <p class="mb-4">Las escuelas están entrando en la fase de prueba y refinarán el modelo basándose en sus experiencias. Una vez probado en campo, las escuelas pasarán a la implementación completa.</p>
+                    <p class="mb-4">El Sistema de Crecimiento Colectivo construye intencional y sistémicamente la <strong>eficacia colectiva docente</strong>. No podemos controlar a las personas hacia la calidad. Tenemos que construir Culturas de Aprendizaje en las que hagamos nuestro mejor trabajo para los estudiantes porque esa es la razón por la que nos unimos a la mejor profesión del mundo... la Profesión del Aprendizaje.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE HOW -->
+        <section id="how" class="mb-16 scroll-mt-20 section-content">
+            <div class="flex items-center mb-6">
+                <div class="bg-amber-100 p-3 rounded-full mr-4">
+                    <i data-lucide="lightbulb" class="w-8 h-8 text-amber-600"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">El Cómo</h2>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+                <div class="bg-amber-50 p-6 border-b border-amber-100">
+                    <h3 class="font-bold text-amber-800 text-xl">GUÍA PASO A PASO PARA EL ÉXITO CON EL SISTEMA DE CRECIMIENTO COLECTIVO</h3>
+                </div>
+                <div class="p-8 space-y-8">
+                    <div>
+                        <h4 class="font-bold text-amber-600 mb-2">PASO UNO: DECONSTRUIR Y CO-CONSTRUIR LA CULTURA DE APRENDIZAJE</h4>
+                        <p class="text-slate-700">Es importante lanzar esta transición con optimismo. Abogamos por usar los talleres que CGC ha desarrollado para deconstruir la naturaleza de la cultura y luego co-construir la propia de la escuela. El producto inicial es un conjunto "crudo" de Principios/Continuos/Conceptos de Aprendizaje construidos a partir de las experiencias del personal, que luego se sintetizarán con la investigación para crear un conjunto robusto y "propio" para el sistema de la escuela.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-amber-600 mb-2">PASO DOS: SELECCIONAR LA META DE IMPACTO COLECTIVO</h4>
+                        <p class="text-slate-700">La pregunta esencial es: "Si solo pudiéramos hacer un cambio sustancial el próximo año, ¿cuál sería el cambio que tendría el mayor impacto positivo en el aprendizaje en la mayoría de los alumnos?". La plantilla de Establecimiento de Metas de Impacto Colectivo es una herramienta útil para esto.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-amber-600 mb-2">PASO TRES: SELECCIONAR LA META DE IMPACTO INDIVIDUAL</h4>
+                        <p class="text-slate-700">Si una escuela decide que cada maestro también puede trabajar en una meta individual, se proporciona una plantilla. Consejo Clave: Asignar tiempo compartido significativo para este proceso (ej. un bloque de tiempo al final del año escolar) para asegurar el compromiso y formar comunidades de aprendizaje profesional (PLC) conectadas.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-amber-600 mb-2">PASO CUATRO: MANTENER EL ENFOQUE DURANTE TODO EL AÑO</h4>
+                        <p class="text-slate-700">Usar el tiempo regular de reuniones de facultad para compartir "Éxitos y Luchas", recordando a todos que compartimos una meta.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-amber-600 mb-2">PASO CINCO (CONTINUO): PROVISIÓN DE EVIDENCIA</h4>
+                        <p class="text-slate-700">La escuela decide el sistema para que los maestros proporcionen evidencia de que los alumnos están logrando la Meta de Impacto (incluyendo formas de evidencia y plataforma de portafolio docente).</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-amber-600 mb-2">PASO SEIS (CONTINUO): REFLEXIÓN Y RETROALIMENTACIÓN</h4>
+                        <p class="text-slate-700">Sostener una cultura de reflexión regular y retroalimentación STAR como característica clave de la Cultura de Aprendizaje.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-amber-600 mb-2">PASO SIETE: CELEBRAR EL ÉXITO</h4>
+                        <p class="text-slate-700">Una CELEBRACIÓN DEL APRENDIZAJE PROFESIONAL anual, donde todos los miembros de la facultad contribuyen con ejemplos de crecimiento estudiantil y propio. No es para padres/junta directiva, sino maestros celebrando el logro de la Meta de Impacto Colectivo y proporcionando retroalimentación STAR entre pares.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-indigo-50 p-8 rounded-lg border border-indigo-100">
+                <h4 class="font-bold text-indigo-800 mb-4 text-xl">VISIÓN INTERESANTE</h4>
+                <p class="text-indigo-900 mb-4">El CGC construye capacidad en 3 áreas: Cultura, Currículo y Comunidad. Algunas escuelas adoptan una meta para cada esfera.</p>
+                <ul class="space-y-3 text-indigo-900 list-disc pl-5">
+                    <li><strong>Cultura de Aprendizaje:</strong> Ej. Todos los alumnos serán más expertos en APRENDIZAJE COLABORATIVO.</li>
+                    <li><strong>Currículo de Aprendizaje:</strong> Ej. Cada maestro diseñará un nuevo MÓDULO DE APRENDIZAJE basado en la indagación.</li>
+                    <li><strong>Comunidad de Aprendizaje:</strong> Ej. Todos los padres estarán mejor empoderados como Aliados de Aprendizaje.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- EL QUE: ELEMENTO UNO -->
+        <section id="what" class="mb-16 scroll-mt-20 section-content">
+            <div class="flex items-center mb-6">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4">
+                    <i data-lucide="users" class="w-8 h-8 text-emerald-600"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">El Qué: Elementos y Continuos</h2>
+            </div>
+
+            <div class="mb-12 prose prose-slate max-w-none text-slate-700">
+                <h3 class="text-2xl font-bold text-emerald-800 mb-2">ELEMENTO UNO: EL PRIMER MAESTRO: NUESTROS PADRES COMO ALIADOS DE APRENDIZAJE</h3>
+                <p class="text-lg text-slate-600 mb-4">Se enfoca en mover las relaciones padres-escuela de transaccionales a transformacionales.</p>
+                
+                <h4 class="text-xl font-bold text-slate-800">CONTINUO: APRENDIZAJE INTERGENERACIONAL</h4>
+                <p class="mb-4">Necesitamos cerrar las brechas entre la escolarización y la crianza.</p>
+                
+                <div id="table-parents"></div>
+                <div id="strategy-parents"></div>
+            </div>
+        </section>
+
+        <!-- LOS 10 HILOS -->
+        <section id="continuums" class="mb-16 scroll-mt-20 section-content">
+            <div class="mb-10 prose prose-slate max-w-none text-slate-700">
+                <h3 class="text-2xl font-bold text-indigo-800 mb-2">ELEMENTO DOS: EL SEGUNDO MAESTRO: CONSTRUYENDO NUESTRA EFICACIA COLECTIVA</h3>
+                <p class="text-lg text-slate-600 mb-4">Se enfoca en nuestros roles transformacionales como Profesionales del Aprendizaje y proporciona <strong>diez Continuos Críticos</strong>.</p>
+                
+                <h4 class="font-bold text-lg text-slate-800 mt-6">TRANSFERENCIA (TRANSFER)</h4>
+                <p class="mb-4">Necesitamos comenzar con el fin en mente: la Transferencia del Aprendizaje. No podemos transferir información factual a contextos desconocidos de manera útil. Debemos enfocarnos en construir una comprensión conceptual profunda y transferible, competencias para convertir ideas en acciones, y rasgos de carácter que nos obliguen a tomar esa acción.</p>
+
+                <div class="bg-slate-800 text-white p-8 rounded-lg mb-8 mt-8">
+                    <h4 class="font-bold text-xl mb-4 border-b border-slate-600 pb-2">EL CAMBIO (THE SHIFT)</h4>
+                    <p class="mb-4 text-slate-300">En lugar de enfocarnos primero en los insumos del maestro, nos enfocamos primero en describir los impactos en el aprendiz.</p>
+                    <h5 class="font-bold text-white mb-2">TABLA GENERAL DE CAMBIO CULTURAL:</h5>
+                    <div class="grid md:grid-cols-4 gap-6 text-sm">
+                        <div>
+                            <strong class="text-indigo-300 block mb-2 text-lg">TRANSACCIONANDO</strong>
+                            Relación transaccional. Información como moneda común. Poca agrupación con propósito. El maestro informa, el alumno recibe y devuelve en pruebas. El alumno es el <strong>objeto</strong> del proceso.
+                        </div>
+                        <div>
+                            <strong class="text-indigo-300 block mb-2 text-lg">TRANSICIONANDO</strong>
+                            Cultura de indagación. Cuestionamiento abierto. Trabajo en equipo. Metacognición (aprender sobre el aprendizaje). Transicionando hacia una cultura que transforma.
+                        </div>
+                        <div>
+                            <strong class="text-indigo-300 block mb-2 text-lg">TRANSFORMANDO</strong>
+                            Cultura que inspira. Comprensión conceptual profunda, alta competencia, carácter moral positivo. Los alumnos son expertos en aprendizaje, desarrollan eficacia colectiva y agencia. El alumno es el <strong>sujeto</strong> del proceso.
+                        </div>
+                        <div>
+                            <strong class="text-indigo-300 block mb-2 text-lg">TRASCENDIENDO</strong>
+                            Emergencia plena de los aprendices alcanzando su capacidad humana completa. "¿QUÉ PASARÍA SI...?".
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Continuums Dynamic Insertion -->
+                <div class="space-y-12">
+                    <div id="c1"></div>
+                    <div id="c2"></div>
+                    <div id="c3"></div>
+                    <div id="c4"></div>
+                    <div id="c5"></div>
+                    <div id="c6"></div>
+                    <div id="c7"></div>
+                    <div id="c8"></div>
+                    <div id="c9"></div>
+                    <div id="c10"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EL TERCER MAESTRO -->
+        <section id="environment" class="mb-16 scroll-mt-20 section-content">
+            <div class="flex items-center mb-6">
+                <div class="bg-cyan-100 p-3 rounded-full mr-4">
+                    <i data-lucide="layout" class="w-8 h-8 text-cyan-600"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">El Tercer Maestro</h2>
+            </div>
+            <div class="prose prose-slate max-w-none text-slate-700">
+                <h3 class="text-2xl font-bold text-cyan-800 mb-2">ELEMENTO TRES: EL TERCER MAESTRO: EL ENTORNO DE APRENDIZAJE</h3>
+                <p class="text-lg text-slate-600 mb-4">Diseño innovador y flexible de espacios.</p>
+                <div id="table-env"></div>
+                <div id="strategy-env"></div>
+            </div>
+        </section>
+
+        <!-- HERRAMIENTAS -->
+        <section id="tools" class="mb-16 scroll-mt-20 section-content">
+            <div class="flex items-center mb-6">
+                <div class="bg-violet-100 p-3 rounded-full mr-4">
+                    <i data-lucide="file-text" class="w-8 h-8 text-violet-600"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">Herramientas y Plantillas</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow border border-slate-200">
+                    <h4 class="font-bold text-violet-800 text-lg mb-4 border-b pb-2">META COLECTIVA DE LA ESCUELA (Ejemplo)</h4>
+                    <ul class="space-y-4 text-slate-700">
+                        <li><strong>Meta:</strong> Cada estudiante, maestro y líder se convertirá en experto en colaborar para lograr objetivos comunes.</li>
+                        <li><strong>Pregunta Clave:</strong> Si solo pudiéramos lograr un cambio profundo este año, ¿cuál tendría el mayor impacto positivo?</li>
+                        <li><strong>Enfoque de este año:</strong> Hilo 5: Aprendizaje Colaborativo.</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow border border-slate-200">
+                    <h4 class="font-bold text-violet-800 text-lg mb-4 border-b pb-2">PLAN DE APRENDIZAJE PROFESIONAL (Ejemplo Personal)</h4>
+                    <div class="space-y-4 text-slate-700">
+                        <div>
+                            <strong>A. Impacto en el Aprendizaje del Estudiante:</strong>
+                            <ul class="list-disc pl-5 mt-1 text-sm">
+                                <li>Entender mejor: El propósito de la colaboración (el resultado es mejor que solos).</li>
+                                <li>Ser más capaces de: Habilidades diversas y roles claros, comunicación y cooperación.</li>
+                                <li>Volverse más: Confidentes en trabajar colaborativamente.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong>B. Metas Personales:</strong>
+                            <ul class="list-disc pl-5 mt-1 text-sm">
+                                <li>Ayudar a estudiantes a notar oportunidades de colaboración.</li>
+                                <li>Crear oportunidades para abordar problemas de la vida real.</li>
+                                <li>Usar estrategias de reflexión.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong>C. Plan Personal:</strong>
+                            <ul class="list-disc pl-5 mt-1 text-sm">
+                                <li>Éxitos: Siento que tengo éxito con...</li>
+                                <li>Apoyo: Tengo preguntas sobre...</li>
+                                <li>Estrategias: Creo que podría intentar...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow border border-slate-200">
+                    <h4 class="font-bold text-violet-800 text-lg mb-4 border-b pb-2">ENVÍO DE EVIDENCIA DE APRENDIZAJE (Formulario)</h4>
+                    <ul class="space-y-3 text-slate-700">
+                        <li>Contexto / Metas de Aprendizaje Demostradas.</li>
+                        <li>Grado/Clase.</li>
+                        <li>Descripción de Evidencia.</li>
+                        <li><strong>Retroalimentación S.T.A.R.:</strong> Qué funcionó bien... Aún mejor si...</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow border border-slate-200">
+                    <h4 class="font-bold text-violet-800 text-lg mb-4 border-b pb-2">REFLEXIONES PROFESIONALES</h4>
+                    <ul class="space-y-4 text-slate-700">
+                        <li><strong>Las Metas:</strong> Conceptual (entender), Competencia (ser capaz de), Carácter (volverse más).</li>
+                        <li><strong>Reflexión de Mitad de Año:</strong> En camino / Posibles ajustes / Fuera de camino.</li>
+                        <li>
+                            <strong>Reflexión de Fin de Año:</strong>
+                            <ul class="list-disc pl-5 mt-1">
+                                <li>¿Qué se suponía que sucedería?</li>
+                                <li>¿Qué sucedió realmente?</li>
+                                <li>¿Qué explica la diferencia?</li>
+                                <li>¿Qué he/hemos aprendido?</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCLUSION -->
+        <section id="conclusion" class="mb-24 scroll-mt-20 section-content">
+            <div class="bg-slate-900 text-slate-300 p-10 rounded-2xl">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                    <i data-lucide="check-circle" class="mr-3"></i>
+                    LA CONCLUSIÓN
+                </h2>
+                <div class="space-y-6 leading-relaxed text-lg">
+                    <p>Dado que sabemos que son los impactos en el aprendizaje de los estudiantes los que realmente cuentan, tiene sentido enfocar nuestra atención allí, antes de considerar los insumos de los maestros.</p>
+                    <p>Dado que sabemos que la observación cambia la naturaleza de lo que observamos, tiene sentido buscar evidencia de crecimiento de una variedad más amplia de fuentes.</p>
+                    <p>Dado que sabemos que estamos abrumados por la complejidad, tiene sentido encontrar claridad enfocando nuestra energía en <strong>una cosa</strong>.</p>
+                    <p class="text-white font-semibold">Finalmente, dado que sabemos por extensa investigación que la <strong>eficacia colectiva docente</strong> es el factor que tiene el mayor impacto positivo en el aprendizaje, entonces es simplemente sentido común construir intencionalmente esa eficacia a través de un sistema colectivo para el aprendizaje profesional.</p>
+                    <p class="italic pt-6 border-t border-slate-700">
+                        Creemos que hay una lógica convincente en el Diseño Centrado en el Humano del Sistema de Crecimiento Colectivo. Deseamos a todos nuestros colaboradores gran éxito en personalizar nuestro trabajo para su propio contexto, por el bien de nuestros líderes, maestros, comunidades y, ante todo, por el bien de nuestros aprendices.
+                    </p>
+                    <div class="pt-4 mt-4 font-bold text-white">
+                        Kevin Bartlett<br>
+                        <span class="text-sm font-normal text-slate-400">Director Fundador, The Common Ground Collaborative.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scroll Top Button -->
+    <button id="scroll-top" class="fixed bottom-8 right-8 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition-colors z-50 hidden">
+        <i data-lucide="chevron-up"></i>
+    </button>
+
+    <script>
+        // --- DATA ---
+        const FULL_TRANSCENDENCE_TEXT = "Estamos viendo la plena emergencia de nuestros aprendices alcanzando su capacidad humana completa. Su aprendizaje no tiene techos, así que solo tenemos una pregunta: ¿QUÉ PASARÍA SI...?";
+        const PARENT_TRANSCENDENCE_TEXT = "Estamos viendo la plena emergencia de nuestros padres como Aliados de Aprendizaje. Su aprendizaje no tiene techos, así que solo tenemos una pregunta: ¿QUÉ PASARÍA SI...?";
+
+        const DATA = {
+            parents: {
+                table: [
+                    ["Recepción Pasiva: Los padres reciben informes y comunicaciones de la escuela, pero a menudo encuentran la información difícil de interpretar o desconectada de las experiencias reales de sus hijos.", "Participación en Diálogo: Los padres participan en conversaciones significativas con maestros y personal escolar sobre prácticas educativas y las experiencias de aprendizaje de sus hijos.", "Comprensión Integrada: Los padres tienen una comprensión integral de los enfoques de aprendizaje de la escuela y usan activamente este conocimiento para apoyar la educación de sus hijos.", PARENT_TRANSCENDENCE_TEXT],
+                    ["Interacción Limitada: Los padres asisten a reuniones o eventos escolares como observadores en lugar de participantes activos.", "Construcción de Relaciones: Los padres participan en actividades escolares diseñadas para fomentar relaciones entre la comunidad escolar.", "Lenguaje Compartido: Los padres y maestros usan un lenguaje común para discutir metas educativas (ej. 'Las Tres C'), haciendo la comunicación más efectiva.", ""],
+                    ["Compromiso Mínimo: Los padres rara vez cuestionan o proporcionan retroalimentación sobre políticas escolares o el progreso de aprendizaje de sus hijos.", "Indagación: Los padres comienzan a hacer preguntas perspicaces sobre el currículo y el progreso de sus hijos.", "Apoyo Personalizado: Los padres saben cómo adaptar su apoyo para que coincida con los perfiles de aprendizaje de sus hijos.", ""],
+                    ["Comprensión Superficial: Los padres tienen una comprensión básica de lo que sucede en la escuela, principalmente a través de comunicación estandarizada.", "Entendiendo Procesos de Aprendizaje: Los padres obtienen conocimientos sobre cómo aprenden sus hijos y qué estrategias pueden apoyar su aprendizaje en casa.", "Planificación Co-Educativa: Los padres participan regularmente en discusiones sobre las metas y el progreso de sus hijos, contribuyendo a planes de aprendizaje personalizados.", ""],
+                    ["Orientación al Cumplimiento: Los padres siguen instrucciones y requisitos escolares sin una comprensión o participación profunda.", "Retroalimentación Colaborativa: Los padres proporcionan retroalimentación a la escuela, contribuyendo a un proceso de comunicación bidireccional.", "Aprendizaje Continuo: Los padres se ven a sí mismos como aprendices dentro de la comunidad educativa, buscando activamente conocimiento y habilidades para apoyar mejor a sus hijos.", ""]
+                ],
+                strategies: ["Comunicación Regular y Estructurada: Establecer un horario consistente que incluya recursos educativos e invitaciones a participar.", "Exhibiciones de Aprendizaje: Eventos planificados donde los estudiantes presentan su aprendizaje. Invitar a los padres usando un \"Manual para Padres\" con iniciadores de conversación.", "Talleres de Aprendizaje para Padres: Ayudar a los padres a entender filosofías educativas y cómo apoyar en casa.", "Oportunidades de Toma de Decisiones Compartida: Involucrar a los padres en comités o consejos (direcciones estratégicas, políticas).", "Aulas Abiertas: Días donde los padres pueden observar clases y ver estrategias en acción.", "Conversaciones Curadas: Reuniones de 3 vías basadas en evidencia donde los estudiantes comparten su aprendizaje con maestros y padres presentes.", "Actividades de Aprendizaje Padres-Hijos: Proyectos o eventos donde aprenden juntos para mejorar lazos familiares.", "Sistemas de Retroalimentación: Sistema claro para que los padres den retroalimentación que sea respondida y actuada.", "Eventos Culturales y Comunitarios: Celebrar la diversidad e invitar a la participación de los padres.", "Roles de Liderazgo para Padres: Animar a los padres a liderar comités u organizar eventos."]
+            },
+            c1: {
+                title: "CONTINUO 1: APRENDIZAJE CON PROPÓSITO",
+                desc: "Los humanos son más productivos cuando empiezan con el porqué.",
+                table: [
+                    ["Completar tareas sin entender: Los alumnos no ven ni cuestionan el propósito de sus asignaciones.", "Hacer preguntas de 'por qué': Los alumnos comienzan a cuestionar el propósito y relevancia de sus tareas.", "Iniciar indagaciones con propósito: Los alumnos comienzan su aprendizaje preguntando por qué el contenido es importante.", FULL_TRANSCENDENCE_TEXT],
+                    ["Pocas preguntas sobre relevancia: Los alumnos son conscientes de una falta de indagación sobre por qué están aprendiendo cierto material.", "Discusiones de propósito: Los alumnos participan en discusiones sobre las razones de las actividades.", "Entender el propósito: Los alumnos tienen una comprensión clara del propósito detrás de sus actividades de aprendizaje.", ""],
+                    ["Seguir instrucciones: Los alumnos siguen direcciones del maestro sin explorar las razones.", "Explorar razones: Los alumnos exploran y debaten las razones detrás de hechos y eventos.", "Analizar causas: Los alumnos cuestionan y analizan regularmente las causas detrás de eventos y conceptos.", ""],
+                    ["Compromiso mínimo: Bajo compromiso debido a falta de conexión con la relevancia.", "Aumento del compromiso: Los alumnos muestran mayor interés en temas que tienen importancia clara.", "Alto compromiso: Altos niveles de compromiso debido a un sentido de propósito claro y compartido.", ""],
+                    ["Enfoque en memorización: Aprendizaje a nivel superficial, recordando hechos en lugar de entender causas.", "Entender la causalidad: Los alumnos comienzan a desarrollar una comprensión más profunda de por qué suceden las cosas.", "Diferenciar causalidad: Los alumnos son expertos en distinguir entre causalidad y correlación en situaciones complejas.", ""]
+                ],
+                strategies: ["Conectar el aprendizaje con aplicaciones del mundo real.", "Fomentar la indagación impulsada por el estudiante.", "Establecer objetivos de aprendizaje claros.", "Usar el Aprendizaje Basado en Proyectos (PBL).", "Fomentar una mentalidad de crecimiento.", "Integrar la elección del estudiante.", "Cultivar un entorno de aprendizaje colaborativo.", "Proporcionar oportunidades de evaluación auténtica.", "Fomentar la reflexión y la metacognición.", "Resaltar la alegría del dominio (maestría)."]
+            },
+            c2: {
+                title: "CONTINUO 2: TRANSFERENCIA DEL APRENDIZAJE",
+                desc: "La capacidad de aplicar conocimientos y habilidades en nuevos contextos.",
+                table: [
+                  ["Tomar notas detalladas: Registro meticuloso de información provista por el maestro.", "Hacer preguntas aclaratorias: Buscar entender el 'por qué' y el 'cómo'.", "Aplicar conceptos: Usar el aprendizaje del aula para abordar desafíos de la vida real.", FULL_TRANSCENDENCE_TEXT],
+                  ["Memorizar hechos clave: Enfoque en retener información para evaluaciones.", "Participar en discusiones: Explorar y expandir el material.", "Crear proyectos: Desarrollar proyectos integrales que integran conocimiento de varias disciplinas.", ""],
+                  ["Completar hojas de trabajo: Actividades que refuerzan conocimiento factual.", "Realizar investigación: Encontrar y sintetizar información adicional.", "Innovar: Ideas y enfoques originales a problemas.", ""],
+                  ["Seguir instrucciones: Ejecutar tareas exactamente como se indica.", "Comparar puntos de vista: Analizar diferentes perspectivas.", "Reflexionar y evaluar: Evaluar continuamente el impacto y eficacia del conocimiento aplicado.", ""],
+                  ["Resumir: Condensar material para capturar información esencial.", "Reflexionar sobre el aprendizaje: Pensar críticamente sobre qué y cómo han aprendido.", "Presentaciones públicas: Compartir conocimiento y soluciones con una audiencia más amplia.", ""]
+                ],
+                strategies: ["Enfocarse en Grandes Ideas y Preguntas Esenciales.", "Usar Currículo e Instrucción Basados en Conceptos.", "Fomentar Conexiones Interdisciplinarias.", "Promover el Aprendizaje Basado en la Indagación.", "Utilizar Mapas Conceptuales.", "Incorporar Problemas y Escenarios del Mundo Real.", "Fomentar el Pensamiento Reflexivo.", "Fomentar Habilidades Metacognitivas.", "Usar Seminarios Socráticos y Discusiones.", "Proporcionar Oportunidades para la Aplicación Creativa."]
+            },
+            c3: {
+                title: "CONTINUO 3: APRENDER A APRENDER",
+                desc: "Dominar estrategias de aprendizaje conscientes.",
+                table: [
+                  ["Recepción Pasiva: Esperar información, raramente cuestionar.", "Indagación Activa: Preguntas abiertas, explorar perspectivas, desafiar suposiciones.", "Indagación Auto-dirigida: Preguntas reflexivas profundas, búsqueda independiente de información.", FULL_TRANSCENDENCE_TEXT],
+                  ["Memorización y Recuerdo: Dependencia de la memoria mecánica.", "Exploración Colaborativa: Trabajo en equipo para explorar ideas y co-crear conocimiento.", "Resolución Colaborativa de Problemas: Resolver problemas del mundo real juntos.", ""],
+                  ["Auto-Reflexión Limitada: Rara vez reflexionan sobre procesos propios.", "Creciente Auto-Conciencia: Comienzan a reflexionar sobre estrategias y resultados (metacognitivos).", "Auto-Reflexión Continua: Evaluar consistentemente métodos de aprendizaje para refinar y mejorar.", ""],
+                  ["Mentalidad Fija: Creencia en inteligencia fija, evitación de desafíos.", "Mentalidad de Crecimiento Emergente: Ver el esfuerzo como clave, abiertos a desafíos.", "Mentalidad de Crecimiento con Resiliencia: Persistir a través de contratiempos, ver desafíos como oportunidades.", ""],
+                  ["Uso Limitado de Estrategias: Dependencia de información del maestro.", "Experimentación con Estrategias: Experimentar con técnicas (toma de notas, discusiones).", "Dominio de Estrategias de Aprendizaje: Aplicar independientemente una amplia gama de estrategias basadas en evidencia.", ""]
+                ],
+                strategies: ["Metacognición y Auto-Conciencia (\"Pensar en voz alta\").", "Estrategias y Técnicas de Aprendizaje (Práctica de recuperación, mapas mentales).", "Pensamiento Crítico y Resolución de Problemas (Seminarios socráticos).", "Gestión del Tiempo y Habilidades Organizativas (Técnica Pomodoro).", "Mentalidad de Crecimiento y Resiliencia.", "Alfabetización Informacional (Método CRAAP).", "Colaboración y Aprendizaje entre Pares (\"Think-Pair-Share\").", "Alfabetización Digital y Tecnologías de Aprendizaje.", "Reflexión y Retroalimentación.", "Creatividad e Innovación en el Aprendizaje (Genius Hour)."]
+            },
+            c4: {
+                title: "CONTINUO 4: APRENDIZAJE DEL CARÁCTER",
+                desc: "El deber moral de ser buenas personas.",
+                table: [
+                  ["Completar tareas: Enfoque en trabajo académico sin desarrollo de carácter intencional.", "Participar en discusiones: Conversaciones sobre valores y ética.", "Integrar valores en proyectos: Aplicar valores personales consistentemente.", FULL_TRANSCENDENCE_TEXT],
+                  ["Seguir reglas para evitar castigo: Cumplimiento motivado por miedo.", "Reflexionar sobre acciones: Considerar el impacto del comportamiento en otros.", "Liderar iniciativas: Roles activos promoviendo valores positivos en la comunidad.", ""],
+                  ["Demostrar cumplimiento: Acciones basadas en reglas sin comprensión profunda.", "Establecer metas personales: Objetivos específicos relacionados con el carácter.", "Reflexionar profundamente: Reflexión profunda sobre el crecimiento del carácter.", ""],
+                  ["Responder a directivas: Acciones basadas en instrucciones del maestro.", "Practicar resiliencia: Actividades para construir perseverancia.", "Demostrar resiliencia: Resiliencia en contextos diversos y desafiantes.", ""],
+                  ["Exhibir bondad esporádicamente: Rasgos naturales pero no alentados sistemáticamente.", "Participar en actividades: Oportunidades específicas para practicar equidad y empatía.", "Participar en servicio comunitario: Actividades de servicio que refuerzan el desarrollo del carácter.", ""]
+                ],
+                strategies: ["Modelar Comportamiento Positivo.", "Programas de Educación del Carácter.", "Aprendizaje-Servicio.", "Reflexión y Diario (Journaling).", "Discusiones Éticas y Debates.", "Juego de Roles y Simulaciones.", "Programas de Mentoría.", "Proyectos Colaborativos.", "Establecimiento de Metas y Auto-Monitoreo.", "Celebrar el Carácter."]
+            },
+            c5: {
+                title: "CONTINUO 5: APRENDIZAJE COLABORATIVO",
+                desc: "Aprender a través de conversaciones y relaciones.",
+                table: [
+                  ["Completar asignaciones individuales: Enfoque en tareas personales sin interacción.", "Participar en proyectos grupales: Tareas de equipo ocasionales.", "Participar en proyectos interdisciplinarios: Tareas complejas con roles definidos y habilidades diversas.", FULL_TRANSCENDENCE_TEXT],
+                  ["Trabajar independientemente: Trabajo tranquilo y solitario es la norma.", "Compartir ideas y recursos: Intercambio de pensamientos y materiales.", "Demostrar comunicación y cooperación: Interacción y trabajo en equipo de alto nivel.", ""],
+                  ["Seguir instrucciones sin interacción: Actividades guiadas por el maestro, individuales.", "Participar en tareas cooperativas: Actividades colaborativas básicas.", "Resolver problemas del mundo real: Aplicar habilidades de colaboración a problemas genuinos.", ""],
+                  ["Usar materiales de estudio individuales: Recursos propios.", "Reflexionar sobre el trabajo grupal: Discusiones para apreciar diferentes puntos de vista.", "Reflexionar sobre proceso y resultados: Evaluar el trabajo en equipo para mejorar proyectos futuros.", ""],
+                  ["Evaluar a través de pruebas individuales: Evaluación individual.", "Proporcionar retroalimentación: Críticas constructivas dentro del grupo.", "Exhibir proyectos: Compartir trabajo colaborativo con audiencia amplia.", ""]
+                ],
+                strategies: ["Trabajo en Grupo Estructurado (roles claros, Jigsaw).", "Proyectos Colaborativos (largo plazo).", "Enseñanza entre Pares y Tutoría.", "Aprendizaje Basado en Discusión (Fishbowl, Think-Pair-Share).", "Proyectos Interdisciplinarios.", "Integración de Tecnología (Google Docs, wikis).", "Juego de Roles y Simulaciones.", "Prácticas Reflexivas.", "Actividades de Construcción de Equipo (Team-Building).", "Enseñanza Explícita de Habilidades de Colaboración."]
+            },
+            c6: {
+                title: "CONTINUO 6: APRENDIZAJE INCLUSIVO",
+                desc: "Ambientes donde todos los aprendices se sienten valorados.",
+                table: [
+                  ["Compromiso Pasivo: Recibir información sin participar activamente.", "Desarrollando Compromiso: Participación más activa al reconocer estilos diversos.", "Compromiso Activo y Personalizado: Aprendizaje que se adapta a estilos y necesidades individuales.", FULL_TRANSCENDENCE_TEXT],
+                  ["Estilo de Aprendizaje Uniforme: Talla única, \"alumno promedio\".", "Enfoques de Aprendizaje Ajustados: Técnicas diferenciadas para abordar necesidades variables.", "Caminos Personales: Diferenciación alta, enfoque en necesidades específicas.", ""],
+                  ["Conciencia de Diversidad Limitada: Poca consideración cultural o neurodiversidad.", "Mayor Conciencia de Diversidad: Currículo refleja gama más amplia de perspectivas.", "Integración Integral de Diversidad: Enseñanza refleja y celebra neurodiversidad y cultura consistentemente.", ""],
+                  ["Autodefensa (Self-Advocacy) Mínima: Rara vez expresan necesidades.", "Comenzando a Autodefenderse: Identificar y comunicar preferencias.", "Fuerte Autodefensa: Abogar con confianza por sus propias necesidades.", ""],
+                  ["Comprensión Superficial: Comprensión básica.", "Compromiso más Profundo: Mayor interés al ser el contenido más relevante.", "Dominio y Propiedad del Aprendizaje: Comprensión profunda y propiedad del proceso.", ""]
+                ],
+                strategies: ["Instrucción Diferenciada.", "Diseño Universal para el Aprendizaje (DUA).", "Enseñanza Culturalmente Receptiva.", "Aprendizaje Colaborativo.", "Retroalimentación y Evaluación Formativa.", "Voz y Elección del Estudiante.", "Integración del Aprendizaje Socioemocional (SEL).", "Consideraciones de Accesibilidad.", "Desarrollo Profesional sobre Inclusión.", "Compromiso Familiar y Comunitario."]
+            },
+            c7: {
+                title: "CONTINUO 7: AGENCIA DE APRENDIZAJE",
+                desc: "Control sobre la toma de decisiones, voz y elección.",
+                table: [
+                  ["Completar las mismas asignaciones: Tareas idénticas, sin diferenciación.", "Sugerir líneas de indagación adicionales: Proponer preguntas dentro de parámetros dados.", "Diseñar proyectos personalizados: Crear proyectos basados en intereses personales.", FULL_TRANSCENDENCE_TEXT],
+                  ["Seguir lecciones dirigidas por el maestro: Ritmo y actividades dictadas.", "Elegir de opciones: Seleccionar de un rango provisto por el maestro.", "Establecer y reflexionar sobre metas: Monitorear y reflexionar regularmente sobre metas propias.", ""],
+                  ["Evaluaciones estandarizadas: Pruebas uniformes.", "Formatos de demostración variados: Elegir diferentes formas de mostrar comprensión.", "Demostración creativa: Libertad para elegir método de demostración.", ""],
+                  ["Input mínimo en temas: Poca opinión en qué o cómo aprenden.", "Establecer metas personales: Comenzar a tener input en objetivos.", "Iniciar proyectos de servicio: Liderar proyectos que benefician a la comunidad.", ""],
+                  ["Depender del maestro: Esperar instrucciones y guía.", "Colaborar en enfoques: Trabajar juntos para encontrar formas de abordar tareas.", "Auto-navegación: Navegar independientemente el aprendizaje, buscando ayuda según sea necesario.", ""]
+                ],
+                strategies: ["Establecimiento de Metas y Autoevaluación.", "Elección en Actividades de Aprendizaje.", "Aprendizaje Basado en Proyectos.", "Modelo de Aula Invertida (Flipped Classroom).", "Aprendizaje Basado en la Indagación.", "Tiempo de Aprendizaje Autodirigido.", "Conferencias Dirigidas por Estudiantes.", "Enseñanza y Colaboración entre Pares.", "Uso de Tecnología y Recursos en Línea.", "Planes de Aprendizaje Personalizados."]
+            },
+            c8: {
+                title: "CONTINUO 8: APRENDIZAJE BASADO EN LA INDAGACIÓN",
+                desc: "Aprendizaje a través del juego, descubrimiento y exploración.",
+                table: [
+                  ["Escucha pasiva: Recibir información sin compromiso activo.", "Preguntas abiertas: Explorar preguntas sin respuestas predeterminadas.", "Generar preguntas: Iniciativa en formular preguntas de indagación propias.", FULL_TRANSCENDENCE_TEXT],
+                  ["Memorización mecánica: Enfocarse en hechos, no conceptos.", "Proyectos de indagación guiada: Participar en proyectos que guían el proceso.", "Indagaciones abiertas: Perseguir indagaciones con independencia significativa.", ""],
+                  ["Cuestionamiento limitado: Preguntas solo para aclarar instrucciones.", "Curiosidad y asombro: Discusiones para provocar curiosidad.", "Juego y exploración: Valorar el juego y descubrimiento.", ""],
+                  ["Procedimientos fijos: Camino estricto sin desviación.", "Experimentación flexible: Experimentar dentro de un marco estructurado.", "Habilidades de indagación avanzadas: Alta competencia en metodologías.", ""],
+                  ["Compromiso mínimo: Poca evidencia de curiosidad.", "Aprender de los errores: Errores como oportunidades valiosas.", "Sentido de asombro: Atmósfera vibrante con alegría y curiosidad.", ""]
+                ],
+                strategies: ["Fomentar un Entorno Amigable con las Preguntas.", "Usar Preguntas Abiertas.", "Proyectos Basados en la Indagación.", "Proporcionar Acceso a Recursos Diversos.", "Fomentar la Experimentación y el Juego.", "Facilitar el Aprendizaje Colaborativo.", "Modelar Procesos de Indagación.", "Crear un Espacio Seguro para los Errores.", "Integrar la Reflexión.", "Usar Tecnología para Mejorar la Indagación."]
+            },
+            c9: {
+                title: "CONTINUO 9: APRENDIZAJE NATURALISTA",
+                desc: "Conexión con la naturaleza y mayordomía del planeta.",
+                table: [
+                  ["Escuchar conferencias: Oyentes pasivos sobre temas ambientales.", "Hacer preguntas: Profundizar comprensión de temas ecológicos.", "Explorar hábitats naturales: Visitas regulares a bosques, humedales, etc.", FULL_TRANSCENDENCE_TEXT],
+                  ["Tomar notas: De libros de texto sobre el mundo natural.", "Participar en discusiones: Debates sobre problemas ambientales.", "Participar en proyectos de conservación: Restauración de hábitats, plantar árboles.", ""],
+                  ["Memorizar hechos: Datos de especies para pruebas.", "Realizar proyectos de investigación: Ecosistemas locales o problemas específicos.", "Colaborar con organizaciones ambientales: Iniciativas de sostenibilidad.", ""],
+                  ["Asignaciones de lectura: Leer sobre naturaleza.", "Actividades prácticas: Modelos de ecosistemas, experimentos simples.", "Desarrollar planes de sostenibilidad: Reducir huella ambiental escolar (reciclaje).", ""],
+                  ["Completar hojas de trabajo: Definiciones y conceptos.", "Excursiones y tours virtuales: Observar biodiversidad y esfuerzos de conservación.", "Abogar por problemas ambientales: Roles de defensa (advocacy), concientización.", ""]
+                ],
+                strategies: ["Educación al Aire Libre y Excursiones.", "Aprendizaje Basado en Proyectos (problemas locales).", "Programas de Mayordomía Ambiental (reciclaje, compostaje).", "Integración Curricular Cruzada.", "Uso de Tecnología y Experiencias Virtuales.", "Proyectos de Ciencia Ciudadana.", "Oradores Invitados y Colaboraciones.", "Prácticas Reflexivas y Diario de Naturaleza.", "Discusiones de Ética y Valores.", "Perspectivas Culturales e Indígenas."]
+            },
+            c10: {
+                title: "CONTINUO 10: EVALUACIÓN DEL APRENDIZAJE",
+                desc: "Evaluación del, para y como aprendizaje.",
+                table: [
+                  ["Cuestionarios y pruebas frecuentes: Basado en recuerdo, métodos estandarizados.", "Evaluaciones de desempeño auténticas: Tareas de aplicación del mundo real.", "Tareas de desempeño colaborativo: Desafíos complejos en equipo.", FULL_TRANSCENDENCE_TEXT],
+                  ["Recibir calificaciones: Poca retroalimentación formativa.", "Portafolios curados: Compilar evidencia de aprendizaje.", "Retroalimentación STAR regular: Intercambio constante como parte de la cultura.", ""],
+                  ["Estudiar para pruebas: Orientado a preparación de tests.", "Retroalimentación STAR: Específica, Oportuna, Accionable, Respetuosa.", "Portafolios de aprendizaje centrales: Herramienta primaria para rastrear progreso.", ""],
+                  ["Memorizar información: Aprendizaje mecánico.", "Prácticas reflexivas: Reflexionar sobre procesos y resultados.", "Elección en demostración: Autonomía en cómo mostrar comprensión.", ""],
+                  ["Evaluaciones como separadas: Distintas de actividades de aprendizaje.", "Rúbricas claras: Entender criterios a través de rúbricas transparentes.", "Evaluaciones integrales: Parte clave del proceso. Alumnos desarrollan rúbricas.", ""]
+                ],
+                strategies: ["Retroalimentación Formativa (S.T.A.R.).", "Autoevaluación.", "Evaluación entre Pares.", "Rúbricas y Ejemplares.", "Metas de Aprendizaje y Criterios de Éxito.", "Chequeos Frecuentes (Informales).", "Diarios Reflexivos.", "Evaluaciones Basadas en el Desempeño.", "Conferencias Dirigidas por Estudiantes.", "Portafolios Digitales."]
+            },
+            env: {
+                table: [
+                  ["Diseños estáticos: Centrados en el maestro, mínima oportunidad de movimiento.", "Asientos flexibles: Arreglos colaborativos para grupos pequeños.", "Espacios interconectados: Estudios, zonas maker, zonas tranquilas. Navegación confiada.", FULL_TRANSCENDENCE_TEXT],
+                  ["Asientos rígidos: Uniformes, para cumplimiento.", "Zonas distintas: Para tareas específicas, movimiento y elección temprana.", "Mobiliario modular: Diseños adaptables, dinámicos.", ""],
+                  ["Exhibiciones limitadas: Contenido instruccional, falta voz estudiantil.", "Exhibiciones evolutivas: Destacan trabajo en progreso y reflexión.", "Movimiento integral: Espacios que fomentan exploración y actividad física.", ""],
+                  ["Desconectados de la naturaleza: Espacios cerrados y uniformes.", "Elementos naturales: Se integran para fomentar curiosidad.", "Alumnos dan forma al entorno: Contribuyen a exhibiciones interactivas, toman propiedad.", ""]
+                ],
+                strategies: ["Espacios Diversos y con Propósito: Estudios, hubs colaborativos, zonas tranquilas.", "Integración Perfecta de la Naturaleza: Diseño biofílico, transiciones interior-exterior.", "Bienestar Holístico: Movimiento, ergonomía, salud emocional.", "Colaboración Comunitaria: Espacios que invitan participación local.", "Empoderar la Agencia Estudiantil: Co-diseñar y adaptar ambientes."]
+            }
+        };
+
+        // --- RENDER FUNCTIONS ---
+        function renderTable(data, targetId) {
+            let html = `
+            <div class="overflow-x-auto my-6 border rounded-lg shadow-sm">
+                <table class="min-w-full text-sm text-left text-gray-700">
+                    <thead class="bg-slate-100 text-slate-800 font-bold uppercase text-xs">
+                        <tr>
+                            <th class="px-4 py-3 w-1/4 border-b-2 border-slate-200">Transaccionando</th>
+                            <th class="px-4 py-3 w-1/4 border-b-2 border-slate-200">Transicionando</th>
+                            <th class="px-4 py-3 w-1/4 border-b-2 border-slate-200">Transformando</th>
+                            <th class="px-4 py-3 w-1/4 border-b-2 border-slate-200">Trascendiendo</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+            
+            data.forEach((row, idx) => {
+                const bgClass = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50';
+                html += `<tr class="${bgClass}">`;
+                row.forEach((cell, cellIdx) => {
+                    let cellClass = "px-4 py-3 border-b border-slate-100 align-top";
+                    let content = cell;
+                    
+                    // Specific logic for the Transcendence cell (last column, first row merged visually in some designs, but here distinct)
+                    // Based on react code: if idx === 0 && row[3] display text with special style
+                    if (cellIdx === 3) {
+                         cellClass += " font-medium text-indigo-700 bg-indigo-50/30";
+                    }
+
+                    html += `<td class="${cellClass}">${content}</td>`;
+                });
+                html += `</tr>`;
+            });
+
+            html += `</tbody></table></div>`;
+            document.getElementById(targetId).innerHTML = html;
+        }
+
+        function renderStrategies(items, title, targetId) {
+            let html = `
+            <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-100 my-6">
+                <h4 class="font-bold text-emerald-800 mb-4 flex items-center">
+                    <i data-lucide="leaf" class="w-5 h-5 mr-2"></i>
+                    ${title}
+                </h4>
+                <ul class="grid grid-cols-1 gap-3">`;
+            
+            items.forEach((item, idx) => {
+                html += `
+                <li class="flex items-start text-emerald-900 text-sm">
+                    <span class="bg-emerald-200 text-emerald-800 rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">${idx + 1}</span>
+                    ${item}
+                </li>`;
+            });
+
+            html += `</ul></div>`;
+            document.getElementById(targetId).innerHTML = html;
+        }
+
+        function renderContinuumSection(key, id) {
+             const data = DATA[key];
+             const container = document.getElementById(id);
+             
+             // Create Header for Continuum
+             const header = document.createElement('div');
+             header.innerHTML = `
+                <h4 class="text-2xl font-bold text-slate-800 flex items-center mb-2 mt-12">
+                  <span class="bg-slate-200 text-slate-700 px-3 py-1 rounded text-lg mr-3">${id.replace('c','')}</span>
+                  ${data.title}
+                </h4>
+                <p class="text-slate-600 mb-2 font-medium">${data.desc}</p>
+             `;
+             container.appendChild(header);
+
+             // Create Divs for table and strategies
+             const tableDiv = document.createElement('div');
+             tableDiv.id = `table-${id}`;
+             container.appendChild(tableDiv);
+
+             const strategyDiv = document.createElement('div');
+             strategyDiv.id = `strategy-${id}`;
+             container.appendChild(strategyDiv);
+
+             renderTable(data.table, `table-${id}`);
+             renderStrategies(data.strategies, `TOP 10 ESTRATEGIAS: ${data.title.replace('CONTINUO ','')}`, `strategy-${id}`);
+        }
+
+
+        // --- INIT ---
         
-        <h3>El Cambio de Paradigma</h3>
-        <p>El CGS cambia el enfoque de la "Evaluación del Desempeño Docente" al <strong>"Análisis del Impacto en el Aprendizaje"</strong>.</p>
-    </section>
+        // 1. Render Parents Element
+        renderTable(DATA.parents.table, 'table-parents');
+        renderStrategies(DATA.parents.strategies, 'TOP 10 ESTRATEGIAS PARA CONSTRUIR ASOCIACIONES', 'strategy-parents');
 
-    <!-- SECTION 5: COLLECTIVE EFFICACY -->
-    <section id="efficacy">
-        <h2>El Motor: Eficacia Colectiva Docente</h2>
-        <p>La investigación de John Hattie y otros ha demostrado consistentemente que la <strong>Eficacia Colectiva Docente</strong> (Collective Teacher Efficacy) es el factor número uno que influye en el aprendizaje de los estudiantes (tamaño del efecto de 1.57, muy por encima del promedio).</p>
+        // 2. Render Environment Element
+        renderTable(DATA.env.table, 'table-env');
+        renderStrategies(DATA.env.strategies, 'TOP 5 ESTRATEGIAS DE ENSEÑANZA (DISEÑO)', 'strategy-env');
+
+        // 3. Render Continuums 1-10
+        for(let i=1; i<=10; i++) {
+            renderContinuumSection(`c${i}`, `c${i}`);
+        }
+
+        // --- INTERACTION ---
         
-        <p><strong>¿Qué es?</strong><br>
-        Es la creencia compartida por un grupo de docentes de que, a través de su acción colectiva, pueden influir positivamente en el resultado de los estudiantes, superando otras influencias.</p>
-        
-        <p><strong>La Lógica del CGS:</strong></p>
-        <ol>
-            <li>Si sabemos que el impacto en el aprendizaje es lo que cuenta, debemos enfocar nuestra atención allí.</li>
-            <li>Si sabemos que la observación cambia la naturaleza de lo observado, debemos buscar evidencia de crecimiento en múltiples fuentes.</li>
-            <li>Si sabemos que la Eficacia Colectiva es el factor de mayor impacto, entonces es de sentido común construir esa eficacia intencionalmente a través de un sistema colectivo de aprendizaje profesional.</li>
-        </ol>
-    </section>
+        // Icons
+        lucide.createIcons();
 
-    <!-- SECTION 6: INQUIRY CYCLE -->
-    <section id="inquiry">
-        <h2>El Ciclo de Indagación para el Crecimiento</h2>
-        <p>En lugar de juicios y calificaciones, el CGS utiliza un ciclo de indagación colaborativa. Docentes y líderes (o pares) se reúnen para responder tres preguntas fundamentales basadas en la evidencia del aula:</p>
-        
-        <div class="quote-box">
-            <strong>1. ¿Qué sucedió realmente? (What actually happened?)</strong><br>
-            Observación libre de juicio. Basada en hechos y datos sobre el aprendizaje visible.
-        </div>
+        // Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        let isMenuOpen = false;
 
-        <div class="quote-box">
-            <strong>2. ¿Qué explica la diferencia? (What accounts for the difference?)</strong><br>
-            Análisis de causalidad. ¿Por qué algunos estudiantes aprendieron y otros no? ¿Qué estrategias funcionaron?
-        </div>
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if(isMenuOpen) {
+                sidebar.classList.remove('-translate-x-full');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+            }
+            // Toggle icon
+            menuBtn.innerHTML = isMenuOpen ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+            lucide.createIcons();
+        });
 
-        <div class="quote-box">
-            <strong>3. ¿Qué hemos aprendido? (What have we learned?)</strong><br>
-            Conclusiones para la acción futura. Transferencia del aprendizaje profesional a nuevas situaciones.
-        </div>
-        
-        <p>Este ciclo transforma la "retroalimentación" (feedback) en "avanzar juntos" (feedforward), creando una cultura donde el error es una oportunidad de aprendizaje, no un fallo de desempeño.</p>
-    </section>
+        // Close menu when clicking a link (mobile)
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', () => {
+                if(window.innerWidth < 768) {
+                    isMenuOpen = false;
+                    sidebar.classList.add('-translate-x-full');
+                    menuBtn.innerHTML = '<i data-lucide="menu"></i>';
+                    lucide.createIcons();
+                }
+            });
+        });
 
-</main>
+        // Scroll Top Logic
+        const scrollTopBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.remove('hidden');
+            } else {
+                scrollTopBtn.classList.add('hidden');
+            }
+            updateActiveNav();
+        });
 
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Active Navigation Highlight
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('.section-content');
+            const navLinks = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active-nav');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
