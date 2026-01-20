@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual Completo de Diseño de Cursos UNITEC - CGC</title>
+    <title>Manual Completo de Diseño de Cursos UNITEC - CGS</title>
     
     <!-- 
       SECCIÓN AVANZADA PARA AGENTES DE IA (JSON-LD)
       Esta estructura de datos contiene ahora la totalidad del conocimiento de los manuales
-      de forma semántica, permitiendo a una IA entender la lógica pedagógica profunda,
-      no solo la estructura superficial.
+      de forma semántica, permitiendo a una IA entender la lógica pedagógica profunda.
     -->
     <script type="application/ld+json" id="knowledge-graph">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
-      "name": "Manual de Diseño de Cursos UNITEC & CGC Framework",
+      "name": "Manual de Diseño de Cursos UNITEC & CGS Framework",
       "description": "Guía exhaustiva para el diseño de módulos de aprendizaje basada en el Common Ground Collaborative (CGC) adaptado para UNITEC. Integra la planificación conceptual, competencial y de carácter.",
       "audience": ["Diseñadores Instruccionales", "Docentes Universitarios", "Agentes de Inteligencia Artificial"],
       "educationalLevel": "Higher Education",
-      "keywords": "CGC, UNITEC, Diseño Curricular, 3Cs, GRASPS, Aprendizaje Profundo",
+      "keywords": "CGS, UNITEC, Diseño Curricular, 3Cs, GRASPS, Aprendizaje Profundo, Retrato del Egresado, Principios de Aprendizaje",
       "mainEntity": {
         "@type": "EducationalFramework",
         "sections": [
@@ -115,7 +114,7 @@
                 "phases": [
                   { "phase": "Deconstruir", "desc": "Analizar un desempeño experto o modelo para identificar sus partes." },
                   { "phase": "Identificar", "desc": "Reconocer y nombrar las habilidades, técnicas o estrategias específicas." },
-                  { "phase": "Practicar", "desc": "Aplicar habilidades en práctica guiada o independiente con retroalimentación." }
+                  { "phase": "Practicar", "desc": "Aplicar habilidades en práctica guiada o independiente, con retroalimentación." }
                 ]
               },
               {
@@ -134,6 +133,30 @@
             "components": [
               { "type": "Estudiante", "questions": ["¿Qué aprendí?", "¿Cómo lo aprendí?", "¿En quién me estoy convirtiendo?", "¿Qué estrategias mantendré?", "¿Dónde más puedo aplicar esto?"] },
               { "type": "Docente", "questions": ["¿Cómo construyó el curso las capacidades del Retrato?", "¿Dónde estuvo la evidencia del aprendizaje L2L?"] }
+            ]
+          },
+          {
+            "sectionId": "principles",
+            "name": "Principios de Aprendizaje UNITEC",
+            "definition": "Los pilares fundamentales sobre los que se diseña toda experiencia educativa en la institución.",
+            "list": [
+              { "name": "Propósito", "question": "¿Por qué aprendemos?", "desc": "El aprendizaje comienza con un por qué claro. Conectamos la teoría con la realidad para comprender el valor del conocimiento en la vida profesional y social." },
+              { "name": "Posibilidad", "question": "¿Quiénes estamos llegando a ser?", "desc": "Creemos en el potencial ilimitado de cada persona. Fomentamos una mentalidad de crecimiento basada en el esfuerzo y la resiliencia." },
+              { "name": "Personas", "question": "¿Con quién aprendemos?", "desc": "La humanidad está al centro. Cultivamos relaciones de confianza y respeto que apoyan la motivación y el bienestar integral." },
+              { "name": "Autonomía", "question": "¿Cómo asumimos la responsabilidad?", "desc": "Evolucionamos de receptores pasivos a protagonistas empoderados que asumen la responsabilidad de su propio aprendizaje y cambio." }
+            ]
+          },
+          {
+            "sectionId": "portrait",
+            "name": "Retrato del Egresado (Portrait of a Learner)",
+            "definition": "El perfil de salida que define las capacidades humanas, competencias y valores que todo estudiante de UNITEC debe desarrollar.",
+            "traits": [
+              { "name": "Líder con Propósito", "desc": "Equilibrio personal, curiosidad, aprendizaje de por vida, integridad y servicio." },
+              { "name": "Solucionador de Problemas Empático", "desc": "Entiende patrones y causalidad, pensamiento crítico combinado con empatía para soluciones sostenibles." },
+              { "name": "Innovador Creativo", "desc": "Originalidad, espíritu emprendedor, creación de soluciones tecnológicas y artefactos únicos." },
+              { "name": "Comunicador Efectivo", "desc": "Dominio oral, escrito y digital. Expresión ética, estratégica y defensa de principios." },
+              { "name": "Ciudadano Responsable", "desc": "Sostiene sistemas sociales y ecosistemas naturales. Actúa para transformar su entorno para mejorarlo." },
+              { "name": "Colaborador Constructivo", "desc": "Trabaja efectivamente en equipos diversos, gestiona conflictos y contribuye al éxito colectivo." }
             ]
           }
         ]
@@ -157,6 +180,13 @@
             --example-bg: #fef9e7;
             --cgc-border: #27ae60;
             --cgc-bg: #e9f7ef;
+            
+            /* Colores Retrato */
+            --portrait-card-bg: #ffffff;
+            --portrait-card-border: #d35400; /* Orange */
+            
+            /* Colores Principios */
+            --principle-card-border: #1abc9c; /* Teal/Turquoise */
         }
         
         body {
@@ -348,6 +378,14 @@
             height: 100%;
             background: var(--primary-color);
         }
+        
+        /* Estilo especial para la sección de Retrato y Principios */
+        section#portrait::before {
+            background: var(--portrait-card-border);
+        }
+        section#principles::before {
+            background: var(--principle-card-border);
+        }
 
         h2 {
             color: var(--primary-color);
@@ -391,6 +429,79 @@
             border-left-color: var(--example-border);
         }
         .example-box h4 { color: #7e5109; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+
+        /* CARDS GRID (Shared Layout) */
+        .intro-text {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* Generic Card Style */
+        .info-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid transparent; /* Set by modifier */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        .info-card h4 {
+            margin-top: 0;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .info-card .subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            color: #666;
+            margin: 0;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        /* Specific Card Modifiers */
+        .portrait-card {
+            border-top-color: var(--portrait-card-border);
+        }
+        .portrait-card h4 {
+            color: var(--portrait-card-border);
+        }
+
+        .principle-card {
+            border-top-color: var(--principle-card-border);
+        }
+        .principle-card h4 {
+            color: #16a085;
+        }
+        .principle-card .subtitle {
+            color: #7f8c8d;
+        }
 
         /* TABLES & LISTS */
         table {
@@ -439,6 +550,7 @@
             main { margin-left: 0; padding: 20px; box-sizing: border-box; }
             section { padding: 25px; }
             .modal-content { width: 95%; padding: 15px; }
+            .card-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -457,10 +569,13 @@
         <li><a href="#sec7">7. La Evidencia (GRASPS)</a></li>
         <li><a href="#sec8">8. El Cómo (Secuencias)</a></li>
         <li><a href="#sec9">9. Reflexión</a></li>
+        <li style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;"><small style="color:#aaa; text-transform:uppercase; margin-left:15px;">Anexos Clave</small></li>
+        <li><a href="#principles" style="color:#1abc9c; font-weight:bold;">Anexo A: Principios</a></li>
+        <li><a href="#portrait" style="color:#f39c12; font-weight:bold;">Anexo B: Retrato</a></li>
     </ul>
     <div class="ai-badge">
         <strong>Base de Conocimiento IA</strong>
-        <span style="font-size:0.75rem;">(JSON-LD Integrado v2.0)</span>
+        <span style="font-size:0.75rem;">(JSON-LD Integrado v2.2)</span>
         <button class="json-btn" onclick="openJsonModal()">Ver Datos JSON</button>
     </div>
 </nav>
@@ -481,7 +596,7 @@
 
 <main>
     <header class="main-header" id="intro">
-        <h1>Manual del Diseñador de Cursos UNITEC (CGC)</h1>
+        <h1>Manual del Diseñador de Cursos UNITEC (CGS)</h1>
         <p>Este sitio web contiene la <strong>información completa y detallada</strong> extraída de los manuales "Unitec Planner Instructions" y "CGC Modules Explained".</p>
         <p>Está diseñado para servir como fuente de verdad tanto para diseñadores instruccionales humanos como para agentes de Inteligencia Artificial que requieran consumir esta metodología pedagógica.</p>
     </header>
@@ -500,7 +615,7 @@
             <ul>
                 <li><strong>Título del Curso:</strong> Nombre de la disciplina + Código.</li>
                 <li><strong>Comunalidad Humana Central:</strong> El tema universal que conecta la materia (ej. Individuos y Grupos, Patrones y Principios, Cambio y Continuidad, Sistemas e Interacciones, Causa y Consecuencia).</li>
-                <li><strong>Vínculos con el Retrato:</strong> Qué capacidades específicas del perfil del egresado (Retrato) desarrolla más fuertemente este curso.</li>
+                <li><strong>Vínculos con el Retrato:</strong> Qué capacidades específicas del perfil de egreso que este curso desarrolla fuertemente.</li>
             </ul>
         </div>
 
@@ -802,6 +917,72 @@
                 <li>¿Cómo construye este curso explícitamente las capacidades del Retrato y las habilidades de Aprender a Aprender nombradas al inicio?</li>
                 <li>¿Dónde en la secuencia los estudiantes las practican y dónde está la evidencia?</li>
             </ul>
+        </div>
+    </section>
+
+    <!-- ANEXO A: PRINCIPIOS DE APRENDIZAJE -->
+    <section id="principles">
+        <h2>Anexo A: Principios de Aprendizaje UNITEC</h2>
+        <p class="intro-text">Estos son los 4 pilares que definen el ecosistema de aprendizaje. Cada decisión de diseño curricular debe alinearse con al menos uno de estos principios.</p>
+
+        <div class="card-grid">
+            <div class="info-card principle-card">
+                <span class="subtitle">El Principio de</span>
+                <h4>Propósito</h4>
+                <p>En UNITEC/CEUTEC, el aprendizaje comienza con un por qué claro. Diseñamos intencionalmente experiencias para que los estudiantes comprendan el valor y la relevancia del conocimiento en sus vidas profesionales y sociales.</p>
+                <div style="margin-top:15px; font-size:0.85em; color:#16a085; font-weight:bold;">¿Por qué aprendemos?</div>
+            </div>
+            <div class="info-card principle-card">
+                <span class="subtitle">El Principio de</span>
+                <h4>Posibilidad</h4>
+                <p>Creemos en el potencial ilimitado de cada persona para desarrollar competencias a lo largo de la vida. Fomentamos una mentalidad de crecimiento, donde la determinación supera a las ideas preconcebidas de habilidad innata.</p>
+                <div style="margin-top:15px; font-size:0.85em; color:#16a085; font-weight:bold;">¿Quiénes estamos llegando a ser?</div>
+            </div>
+            <div class="info-card principle-card">
+                <span class="subtitle">El Principio de</span>
+                <h4>Personas</h4>
+                <p>Colocamos a la humanidad en el centro. Cultivamos relaciones basadas en la confianza y el respeto para crear conexiones significativas que apoyen la motivación y el bienestar integral de toda la comunidad.</p>
+                <div style="margin-top:15px; font-size:0.85em; color:#16a085; font-weight:bold;">¿Con quién aprendemos?</div>
+            </div>
+            <div class="info-card principle-card">
+                <span class="subtitle">El Principio de</span>
+                <h4>Autonomía</h4>
+                <p>Cada estudiante debe asumir la responsabilidad de su propio aprendizaje, evolucionando de ser un receptor pasivo a un protagonista empoderado que siente que sus acciones pueden generar cambio.</p>
+                <div style="margin-top:15px; font-size:0.85em; color:#16a085; font-weight:bold;">¿Cómo asumimos la responsabilidad?</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANEXO B: RETRATO DEL EGRESADO -->
+    <section id="portrait">
+        <h2>Anexo B: Retrato del Egresado (Portrait of a Learner)</h2>
+        <p class="intro-text">El Retrato del Egresado es la "Estrella del Norte" de UNITEC. Define las capacidades humanas, competencias y valores que todo estudiante debe desarrollar durante su trayectoria académica.</p>
+
+        <div class="card-grid">
+            <div class="info-card portrait-card">
+                <h4>Líder con Propósito</h4>
+                <p>Ha alcanzado equilibrio personal y bienestar. Guiado por la curiosidad y un compromiso con el aprendizaje de por vida. Actúa con integridad, adaptabilidad y resiliencia en la búsqueda de metas, siempre preparado para hacer lo correcto.</p>
+            </div>
+            <div class="info-card portrait-card">
+                <h4>Solucionador de Problemas Empático</h4>
+                <p>Comprende los patrones y principios que determinan cómo funciona el mundo. Es un pensador crítico con profundo entendimiento de la causalidad, combinado con empatía para encontrar soluciones sostenibles y equitativas.</p>
+            </div>
+            <div class="info-card portrait-card">
+                <h4>Innovador Creativo</h4>
+                <p>Aporta originalidad de interpretación y creatividad de expresión a su experiencia del mundo. Maestro en crear artefactos únicos, soluciones tecnológicas y herramientas, con un espíritu emprendedor ante problemas desafiantes.</p>
+            </div>
+            <div class="info-card portrait-card">
+                <h4>Comunicador Efectivo</h4>
+                <p>Domina las habilidades de comunicación oral, escrita y digital. Expresa ideas complejas de manera efectiva, ética y estratégica. Utiliza la comunicación para defender principios y compartir ideas que importan.</p>
+            </div>
+            <div class="info-card portrait-card">
+                <h4>Ciudadano Responsable</h4>
+                <p>Siente un profundo sentido de responsabilidad por sostener sistemas sociales saludables y ecosistemas naturales. Es proactivo y trabaja para transformar su entorno para mejorarlo, comprendiendo su rol en la comunidad global.</p>
+            </div>
+            <div class="info-card portrait-card">
+                <h4>Colaborador Constructivo</h4>
+                <p>Busca y valora diversas perspectivas. Trabaja efectivamente en equipos, gestionando conflictos de manera constructiva y contribuyendo al éxito colectivo por encima del individual.</p>
+            </div>
         </div>
     </section>
 
