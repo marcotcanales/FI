@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Book of CGS 2025: Sistema de Crecimiento Colectivo</title>
+    
+    <!-- 
+      JSON-LD AVANZADO PARA AGENTES DE IA
+      Este bloque define el marco teórico del CGS (Collective Growth System)
+      para que las IAs comprendan la metodología de evaluación y cultura.
+    -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": "The Book of the CGS 2025 V5",
+      "alternativeHeadline": "Transforming Teacher Evaluation Through Culture Building",
+      "author": {
+        "@type": "Organization",
+        "name": "The Common Ground Collaborative (CGC)"
+      },
+      "description": "Un marco metodológico para transformar la evaluación docente tradicional en un sistema de crecimiento cultural y eficacia colectiva.",
+      "mainEntity": {
+        "@type": "EducationalFramework",
+        "name": "Collective Growth System (CGS)",
+        "mission": "Becoming Human (Llegar a ser Humano)",
+        "methodology": "Human Centered Design (HCD)",
+        "keyConcepts": [
+          {
+            "@type": "Concept",
+            "name": "Eficacia Colectiva Docente",
+            "description": "El factor número uno que influye en el aprendizaje estudiantil según la investigación (Hattie). La creencia compartida de que juntos podemos lograr impacto."
+          },
+          {
+            "@type": "Concept",
+            "name": "Las 4 Ts de la Evolución",
+            "itemListElement": ["Transact (Transaccional)", "Transition (Transición)", "Transform (Transformación)", "Transcend (Trascendencia)"]
+          },
+          {
+            "@type": "Concept",
+            "name": "El Ciclo de Indagación",
+            "steps": ["¿Qué sucedió realmente?", "¿Qué explica la diferencia?", "¿Qué hemos aprendido?"]
+          }
+        ]
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-dark: #1a252f;
+            --primary-blue: #2980b9;
+            --accent-gold: #f39c12;
+            --accent-green: #27ae60;
+            --text-main: #34495e;
+            --bg-light: #ecf0f1;
+            --sidebar-width: 300px;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.8;
+            color: var(--text-main);
+            background-color: #f9f9f9;
+            margin: 0;
+            display: flex;
+        }
+
+        /* SIDEBAR NAVIGATION */
+        nav {
+            width: var(--sidebar-width);
+            background: var(--primary-dark);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            margin-bottom: 15px;
+        }
+
+        nav a {
+            color: #bdc3c7;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding-left: 15px;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .ai-indicator {
+            margin-top: 40px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            text-align: center;
+            border: 1px dashed #555;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            margin-left: var(--sidebar-width);
+            padding: 60px;
+            max-width: 900px;
+            flex: 1;
+        }
+
+        header.doc-header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 40px;
+        }
+
+        h1.title {
+            font-size: 3rem;
+            color: var(--primary-dark);
+            margin: 0 0 10px 0;
+            line-height: 1.2;
+        }
+
+        p.subtitle {
+            font-size: 1.4rem;
+            color: var(--primary-blue);
+            font-weight: 300;
+        }
+
+        /* SECTIONS */
+        section {
+            background: white;
+            padding: 40px;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: var(--primary-dark);
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-left: 6px solid var(--accent-gold);
+            padding-left: 20px;
+        }
+
+        h3 {
+            color: var(--primary-blue);
+            font-size: 1.4rem;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* SPECIAL BOXES */
+        .quote-box {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-dark);
+            font-style: italic;
+            margin: 30px 0;
+            font-size: 1.1rem;
+        }
+
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .model-card {
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+        }
+
+        .bg-transact { background-color: #7f8c8d; }
+        .bg-transition { background-color: #3498db; }
+        .bg-transform { background-color: #9b59b6; }
+        .bg-transcend { background-color: #27ae60; }
+
+        .model-card h4 { margin: 0 0 10px 0; font-size: 1.2rem; }
+        .model-card p { font-size: 0.9rem; margin: 0; color: rgba(255,255,255,0.9); text-align: center; }
+
+        /* LISTS */
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
+            body { flex-direction: column; }
+            nav { width: 100%; height: auto; position: relative; }
+            main { margin-left: 0; padding: 20px; }
+            .title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h1>CGS 2025 Manual</h1>
+    <ul>
+        <li><a href="#intro">Inicio: La Misión</a></li>
+        <li><a href="#why">El Porqué: Human Centered</a></li>
+        <li><a href="#problem">El Dilema Sistémico</a></li>
+        <li><a href="#solution">La Solución: Las 4 Ts</a></li>
+        <li><a href="#efficacy">Eficacia Colectiva</a></li>
+        <li><a href="#inquiry">El Ciclo de Indagación</a></li>
+    </ul>
+    
+    <div class="ai-indicator">
+        <strong>Base de Conocimiento IA</strong><br>
+        Optimizado para agentes.<br>
+        Contiene estructura semántica JSON-LD.
+    </div>
+</nav>
+
+<main>
+    <header class="doc-header" id="intro">
+        <h1 class="title">The Book of the CGS 2025</h1>
+        <p class="subtitle">Transformando la Evaluación Docente a través de la Construcción de Cultura</p>
+        <p><strong>Versión 5.0 | The Common Ground Collaborative</strong></p>
+    </header>
+
+    <!-- SECTION 1: INTRODUCTION -->
+    <section>
+        <h2>La Misión: Becoming Human</h2>
+        <p>El Common Ground Collaborative (CGC) es una comunidad global dedicada a apoyar a cada aprendiz —niño o adulto— en el viaje hacia alcanzar su máxima capacidad como seres humanos prósperos y contribuyentes.</p>
+        <p>Nuestra misión central es <strong>"Llegar a ser Humano" (Becoming Human)</strong>. Esta misión informa todo nuestro trabajo.</p>
+        <div class="quote-box">
+            "Nuestro objetivo es ayudar a los aprendices a dar sentido al mundo y a ayudar al mundo a tener más sentido."
+        </div>
+        <p>En nuestro impulso por transformar el aprendizaje, hemos emprendido la tarea de abordar los dilemas sistémicos más obstinados. Uno de los desafíos más difíciles es desarrollar un enfoque para el <strong>crecimiento profesional de docentes y líderes</strong> que realmente mejore el aprendizaje de los estudiantes de manera sostenida y demostrable.</p>
+    </section>
+
+    <!-- SECTION 2: THE WHY -->
+    <section id="why">
+        <h2>El Porqué: Diseño Centrado en el Humano</h2>
+        <p>Dado que nuestra misión es "Llegar a ser Humano", tiene sentido utilizar el <strong>Diseño Centrado en el Humano (HCD - Human Centered Design)</strong> como nuestra metodología para resolver el problema de los sistemas de evaluación/supervisión docente ineficaces.</p>
+        
+        <h3>Las 6 Fases del HCD</h3>
+        <p>El proceso no es lineal, pero sigue estas fases críticas para asegurar que el sistema sirva a las personas, y no al revés:</p>
+        <ul>
+            <li><strong>Empatizar (Empathize):</strong> Comprender profundamente las necesidades y frustraciones de los docentes con los sistemas actuales.</li>
+            <li><strong>Definir (Define):</strong> Clarificar cuál es el problema real que estamos tratando de resolver (la desconexión entre evaluación y aprendizaje).</li>
+            <li><strong>Idear (Ideate):</strong> Generar múltiples soluciones posibles sin juzgar.</li>
+            <li><strong>Prototipar (Prototype):</strong> Crear versiones preliminares del nuevo sistema (CGS).</li>
+            <li><strong>Probar (Test):</strong> Implementar en contextos reales y recoger feedback.</li>
+            <li><strong>Lanzar (Launch):</strong> Desplegar el sistema refinado (Versión 5.0).</li>
+        </ul>
+    </section>
+
+    <!-- SECTION 3: THE PROBLEM -->
+    <section id="problem">
+        <h2>El Dilema Sistémico: ¿Por qué falla la evaluación tradicional?</h2>
+        <p>Tradicionalmente, la evaluación docente ha sido un proceso <strong>transaccional</strong> y, a menudo, performativo (un "espectáculo").</p>
+        <ul>
+            <li>Se centra en el <em>input</em> del docente (lo que el maestro hace frente a la clase) en lugar del <em>impacto</em> en el aprendizaje.</li>
+            <li>Es episódica (una visita al año) en lugar de continua.</li>
+            <li>Genera ansiedad y cumplimiento ("check-the-box") en lugar de curiosidad y crecimiento.</li>
+            <li>A menudo se siente como algo que se le hace <em>al</em> maestro, no algo que se hace <em>con</em> el maestro.</li>
+        </ul>
+        <div class="quote-box">
+            "Necesitamos movernos de una relación transaccional con estudiantes, docentes y padres, a una relación transformacional."
+        </div>
+    </section>
+
+    <!-- SECTION 4: THE SOLUTION -->
+    <section id="solution">
+        <h2>La Solución: El Modelo de las 4 Ts</h2>
+        <p>El CGS propone una evolución cultural en las instituciones educativas, moviéndose a través de cuatro estados:</p>
+        
+        <div class="model-grid">
+            <div class="model-card bg-transact">
+                <h4>1. TRANSACT</h4>
+                <p><strong>Transaccional</strong><br>Cumplimiento de requisitos. "Hacer lo que se pide". Evaluación burocrática.</p>
+            </div>
+            <div class="model-card bg-transition">
+                <h4>2. TRANSITION</h4>
+                <p><strong>Transición</strong><br>El despertar. Reconocer que el sistema actual no funciona y buscar alternativas.</p>
+            </div>
+            <div class="model-card bg-transform">
+                <h4>3. TRANSFORM</h4>
+                <p><strong>Transformación</strong><br>Cambio cultural. El enfoque cambia del docente al aprendizaje. Se construye confianza.</p>
+            </div>
+            <div class="model-card bg-transcend">
+                <h4>4. TRANSCEND</h4>
+                <p><strong>Trascendencia</strong><br>Eficacia colectiva automática. El crecimiento es intrínseco y colaborativo sin necesidad de supervisión externa.</p>
+            </div>
+        </div>
+        
+        <h3>El Cambio de Paradigma</h3>
+        <p>El CGS cambia el enfoque de la "Evaluación del Desempeño Docente" al <strong>"Análisis del Impacto en el Aprendizaje"</strong>.</p>
+    </section>
+
+    <!-- SECTION 5: COLLECTIVE EFFICACY -->
+    <section id="efficacy">
+        <h2>El Motor: Eficacia Colectiva Docente</h2>
+        <p>La investigación de John Hattie y otros ha demostrado consistentemente que la <strong>Eficacia Colectiva Docente</strong> (Collective Teacher Efficacy) es el factor número uno que influye en el aprendizaje de los estudiantes (tamaño del efecto de 1.57, muy por encima del promedio).</p>
+        
+        <p><strong>¿Qué es?</strong><br>
+        Es la creencia compartida por un grupo de docentes de que, a través de su acción colectiva, pueden influir positivamente en el resultado de los estudiantes, superando otras influencias.</p>
+        
+        <p><strong>La Lógica del CGS:</strong></p>
+        <ol>
+            <li>Si sabemos que el impacto en el aprendizaje es lo que cuenta, debemos enfocar nuestra atención allí.</li>
+            <li>Si sabemos que la observación cambia la naturaleza de lo observado, debemos buscar evidencia de crecimiento en múltiples fuentes.</li>
+            <li>Si sabemos que la Eficacia Colectiva es el factor de mayor impacto, entonces es de sentido común construir esa eficacia intencionalmente a través de un sistema colectivo de aprendizaje profesional.</li>
+        </ol>
+    </section>
+
+    <!-- SECTION 6: INQUIRY CYCLE -->
+    <section id="inquiry">
+        <h2>El Ciclo de Indagación para el Crecimiento</h2>
+        <p>En lugar de juicios y calificaciones, el CGS utiliza un ciclo de indagación colaborativa. Docentes y líderes (o pares) se reúnen para responder tres preguntas fundamentales basadas en la evidencia del aula:</p>
+        
+        <div class="quote-box">
+            <strong>1. ¿Qué sucedió realmente? (What actually happened?)</strong><br>
+            Observación libre de juicio. Basada en hechos y datos sobre el aprendizaje visible.
+        </div>
+
+        <div class="quote-box">
+            <strong>2. ¿Qué explica la diferencia? (What accounts for the difference?)</strong><br>
+            Análisis de causalidad. ¿Por qué algunos estudiantes aprendieron y otros no? ¿Qué estrategias funcionaron?
+        </div>
+
+        <div class="quote-box">
+            <strong>3. ¿Qué hemos aprendido? (What have we learned?)</strong><br>
+            Conclusiones para la acción futura. Transferencia del aprendizaje profesional a nuevas situaciones.
+        </div>
+        
+        <p>Este ciclo transforma la "retroalimentación" (feedback) en "avanzar juntos" (feedforward), creando una cultura donde el error es una oportunidad de aprendizaje, no un fallo de desempeño.</p>
+    </section>
+
+</main>
+
+</body>
+</html>
