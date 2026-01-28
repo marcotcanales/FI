@@ -643,6 +643,10 @@ Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x
                     ? team.R.map(name => `<span class="member-tag resp-tag">${name}</span>`).join('')
                     : '<span class="text-xs text-gray-400 italic">N/A</span>';
 
+                const supportHtml = team.A.length > 0 
+                    ? team.A.map(name => `<span class="member-tag support-tag">${name}</span>`).join('')
+                    : '<span class="text-xs text-gray-400 italic">N/A</span>';
+
                 card.className = `project-card bg-white p-6 rounded-xl shadow border-l-4 border-l-${statusSlug} flex flex-col justify-between`;
                 
                 card.innerHTML = `
@@ -657,9 +661,13 @@ Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x
                                 <h4 class="role-title">Líderes</h4>
                                 <div>${leadersHtml}</div>
                             </div>
-                            <div>
+                            <div class="mb-2">
                                 <h4 class="role-title">Responsables</h4>
                                 <div>${responsibleHtml}</div>
+                            </div>
+                            <div>
+                                <h4 class="role-title">Apoyo</h4>
+                                <div>${supportHtml}</div>
                             </div>
                         </div>
                     </div>
