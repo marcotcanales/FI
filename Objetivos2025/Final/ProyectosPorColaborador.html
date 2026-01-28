@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Mejora 2025 - Resultados Finales - Facultad de Ingeniería UNITEC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        :root {
+            --unitec-federal-blue: #06065C;
+            --unitec-cobalt-blue: #0F4986;
+            --unitec-pacific-cyan: #03AED2;
+            --unitec-vivid-sky-blue: #47C8FD;
+            --objective-excelencia: #16a34a; /* Green-600 */
+            --objective-visibilidad: #2563eb; /* Blue-600 */
+            --objective-eficiencia: #d97706; /* Amber-600 */
+        }
+        .bg-federal-blue { background-color: var(--unitec-federal-blue); }
+        .bg-cobalt-blue { background-color: var(--unitec-cobalt-blue); }
+        .text-pacific-cyan { color: var(--unitec-pacific-cyan); }
+        .text-vivid-sky-blue { color: var(--unitec-vivid-sky-blue); }
+        .border-pacific-cyan { border-color: var(--unitec-pacific-cyan); }
+        .border-cobalt-blue { border-color: var(--unitec-cobalt-blue); }
+        .bg-pacific-cyan-light { background-color: #e0f7fa; }
+
+        .collaborator-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .collaborator-btn.active {
+            background-color: var(--unitec-cobalt-blue);
+            color: white;
+            transform: scale(1.02);
+        }
+        .project-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 4px;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border-width: 2px;
+        }
+        .project-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .role-badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        .role-L { background-color: #16a34a; } /* Green 600 */
+        .role-R { background-color: #0284c7; } /* Sky 600 */
+        .role-A { background-color: #f59e0b; } /* Amber 500 */
+
+        /* Objective Colors */
+        .objective-excelencia { border-color: var(--objective-excelencia); }
+        .objective-visibilidad { border-color: var(--objective-visibilidad); }
+        .objective-eficiencia { border-color: var(--objective-eficiencia); }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+
+        /* Status Styles Actualizados */
+        .status-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+        .status-completo { background-color: #22c55e; } /* Green 500 */
+        .status-parcial { background-color: #f97316; } /* Orange 500 */
+        .status-pendiente { background-color: #ef4444; } /* Red 500 */
+
+        .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); padding-top: 60px; }
+        .modal-content { position: relative; background-color: #fefefe; margin: 2% auto; padding: 25px; border: 1px solid #888; width: 90%; max-width: 800px; border-radius: 12px; animation: fadeIn 0.5s; }
+        .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close-button:hover, .close-button:focus { color: black; text-decoration: none; }
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-federal-blue shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <svg class="h-12 w-12 mr-3" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 0L100 25V75L50 100L0 75V25L50 0Z" fill="#03AED2"/><path d="M50 0L0 25V75L50 100L100 75V25L50 0ZM50 6.7L93.3 28.3V71.7L50 93.3L6.7 71.7V28.3L50 6.7Z" fill="#06065C"/><path d="M50 13.4L6.7 28.3V71.7L50 86.6L93.3 71.7V28.3L50 13.4ZM50 20.1L86.6 36.7V63.3L50 79.9L13.4 63.3V36.7L50 20.1Z" fill="white"/></svg>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold text-white">Facultad de Ingeniería</h1>
+                    <p class="text-sm text-vivid-sky-blue">Resultados Plan de Mejora 2025</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        <div class="text-center mb-10 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl md:text-3xl font-bold text-cobalt-blue mb-2">Visualización de Resultados por Colaborador</h2>
+            <p class="text-gray-600 max-w-3xl mx-auto">
+                Seleccione un colaborador para visualizar los proyectos asignados, su rol, y el detalle de la evaluación y resultados obtenidos al cierre del año 2025.
+            </p>
+        </div>
+
+        <div id="collaborators-board">
+            </div>
+    </main>
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content bg-white shadow-2xl">
+            <span class="close-button">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer class="bg-federal-blue text-white text-center p-4 mt-12">
+        <p>&copy; 2025 UNITEC - Facultad de Ingeniería. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // --- DATA ACTUALIZADA CON RESULTADOS FINALES ---
+        const projectsData = [
+            {
+                title: "Completar la acreditación de Telecomunicaciones y Electrónica con ACAAI.",
+                code: "PRO1A",
+                objective: "Excelencia Académica",
+                metric: "Numero de acreditaciones completadas",
+                indicator: "Acreditacion otorgada por ACAAI",
+                status: "Parcial",
+                evaluation: 50,
+                expectedResults: "Acreditacion de Telecomunicaciones completa.",
+                midYearResults: "Se completó el autoestudio; sin embargo, con la vacante en la jefatura de Telecomunicaciones se tuvo que posponer temporalmente el proceso de acreditación.",
+                finalResults: "Se completó el autoestudio; sin embargo, con la vacante en la jefatura de Telecomunicaciones se tuvo que posponer temporalmente el proceso de acreditación. Se espera completar el proceso de revisión del Autoestudio durante Q1 2026 con el nuevo jefe de Telecomunicaciones",
+                observations: "La salida del Jefe Academico de Telecomunicaciones y Electrónica en Tegucigalpa, combinado con el nuevo manual de acreditacion han contribuido para que esta tarea tenga retraso.",
+                alignment: "Este proyecto es fundamental y responde directamente al **Criterio 2 de ABET (Program Educational Objectives)** y al **Componente 7.4 de ACAAI (Mejora Continua del programa)**."
+            },
+            {
+                title: "Alcanzar la meta de redacción de sílabos por competencias y cuadros de planificación.",
+                code: "PRO1B",
+                objective: "Excelencia Académica",
+                metric: "Porcentaje de sílabos redactados por competencias.",
+                indicator: "100% de sílabos con enfoque en competencias.",
+                status: "Parcial",
+                evaluation: 75,
+                expectedResults: "Implementación total del enfoque en competencias en la Facultad.",
+                midYearResults: "Hay programas en los cuales se ha completado este proyecto, y otros en los cuales aun se tienen muchos documentos pendientes.",
+                finalResults: "Hay programas en los cuales se ha completado este proyecto, y otros en los cuales aun se tienen muchos documentos pendientes. 72% Completados 16% en revision 12% en proceso",
+                observations: "",
+                alignment: "Este proyecto se alinea con el **Criterio 3 de ABET (Student Outcomes)** y el **Componente 2.1 de ACAAI (Documento Curricular)**."
+            },
+            {
+                title: "Completar la reforma de los programas de Mecatrónica y Biomédica.",
+                code: "PRO1C",
+                objective: "Excelencia Académica",
+                metric: "Porcentaje de avance en la reforma curricular.",
+                indicator: "Reformas completadas en Mecatrónica y Biomédica.",
+                status: "Parcial",
+                evaluation: 75,
+                expectedResults: "Planes de estudio modernizados y alineados a necesidades del sector.",
+                midYearResults: "Se seleccionaron consultores para realizar el diagnóstico y se están realizando las respectivas consultas con expertos.",
+                finalResults: "Se seleccionaron consultores para realizar el diagnóstico y se realizaron las respectivas consultas con expertos para discutir los cambios a incorporar en el plan de estudio.",
+                observations: "",
+                alignment: "Responde al **Criterio 5 de ABET (Curriculum)** y al **Componente 2.2 de ACAAI (Revisión Curricular)**."
+            },
+            {
+                title: "Diagnóstico de la población estudiantil de la Facultad de Ingeniería para la definición del Perfil del Estudiante de cada Carrera.",
+                code: "PRO1D",
+                objective: "Excelencia Académica",
+                metric: "Elaboración del Diagnóstico de Perfil del Estudiante.",
+                indicator: "Documento de perfil del estudiante por carrera.",
+                status: "Parcial",
+                evaluation: 50,
+                expectedResults: "Definición clara del perfil de ingreso, egreso, y perfil estudiantil por carrera.",
+                midYearResults: "Este proyecto se realizará haciendo uso de la información levantada en las encuestas realizadas a finales del 2024.",
+                finalResults: "Se levantó la informacion de pregrado, y de egresados para tener el diagnostico general. Sin embargo no se completó un analisis definiendo el perfil de estudiantes por carrera.",
+                observations: "",
+                alignment: "Clave para el **Criterio 1 de ABET (Students)** y el **Componente 1.4 de ACAAI (Definición de Perfiles)**."
+            },
+            {
+                title: "Revisión y actualización del modelo educativo institucional.",
+                code: "PRO1E",
+                objective: "Excelencia Académica",
+                metric: "Actualización del modelo educativo institucional.",
+                indicator: "Documento de modelo educativo actualizado.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Modelo educativo alineado con tendencias actuales de formación.",
+                midYearResults: "Se ha avanzado en la actualización del modelo educativo con socializaciones y talleres programadas durante este período académico.",
+                finalResults: "Se ha avanzado en la actualización del modelo educativo con socializaciones y talleres programadas durante Q3 y Q4. Se tienen secciones de Intro al Algebra, Ofimatica, e Ingenieria Civil participando en el piloto. Se desarrolló un agente y un repositorio de recursos para docentes.",
+                observations: "",
+                alignment: "Abarca el **Criterio 5 de ABET (Curriculum)** y el **Componente 2.3 de ACAAI (Metodología de Enseñanza-Aprendizaje)**."
+            },
+            {
+                title: "Acciones que sumen a la cultura del aprendizaje (Tutorías, Talleres, charlas, etc.) impartidas por personal de la FI.",
+                code: "PRO1F",
+                objective: "Excelencia Académica",
+                metric: "Número de tutorías y talleres realizados.",
+                indicator: "Al menos 10 tutorías/talleres al año a nivel de Facultad",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Apoyo continuo a los estudiantes en su formación.",
+                midYearResults: "Se ha tenido buena participación. Se han tenido varias iniciativas hacia Admisiones, en colaboracion con IPG, IEDD, y con Desarrollo Curricular.",
+                finalResults: "Se han tenido varias capacitaciones hacia Admisiones, tambien en colaboracion con IPG (para motivar viajes), IEDD para brindar apoyo a docentes, y con Desarrollo Curricular respecto a orientacion de programas. Se han brindado multiples talleres para desarrollo de investigación, incluyendo talleres con participacion por invitados internacionales.",
+                observations: "Guardar evidencias de las iniciativas para entrega en la evaluación final.",
+                alignment: "Apoya el **Criterio 1 de ABET (Students)** y el **Componente 6.5 de ACAAI (Consejería Estudiantil)**."
+            },
+            {
+                title: "Coordinación de visitas entre los campus para articulación de docentes y estudiantes.",
+                code: "PRO1G",
+                objective: "Excelencia Académica",
+                metric: "Número de visitas entre campus coordinadas.",
+                indicator: "Al menos 2 visitas semestrales entre campus.",
+                status: "Parcial",
+                evaluation: 80,
+                expectedResults: "Mayor articulación entre docentes y estudiantes.",
+                midYearResults: "Se ha logrado mayor integración entre los equipos en TGU y SPS alcanzando múltiples movilidades entre los campus cada período académico.",
+                finalResults: "La decanatura realizó viaje a campus SPS en 3 de los 4 períodos, exceptuando el Q4. Sin embargo, se tuvieron visitas intercampus de colaboradores de FI SPS y TGU en todos los períodos académicos, incluyendo Jefes, Coordinadores, y Docentes.",
+                observations: "",
+                alignment: "Impacta positivamente en el **Criterio 6 de ABET (Faculty)** y el **Componente 5.1 de ACAAI (Personal Académico)**."
+            },
+            {
+                title: "Mejorar la tasa de éxito en la clase Introducción al Álgebra.",
+                code: "PRO1H",
+                objective: "Excelencia Académica",
+                metric: "Tasa de aprobación en Introducción al Álgebra.",
+                indicator: "Incremento del 10% en la tasa de aprobación.",
+                status: "Parcial",
+                evaluation: 50,
+                expectedResults: "Mejora en el desempeño de los estudiantes en cursos iniciales.",
+                midYearResults: "Se han documentado numerosas iniciativas para revertir la tendencia en Introducción al Algebra (tutorias, WACOM, IA, etc).",
+                finalResults: "Se han documentado numerosas iniciativas para revertir la tendencia en Introducción al Algebra. Estas incluyen sesiones de tutorias con docente, reasignación de carga académica, mejor control en el tamaño de las secciones, utilización de herramientas tecnologicas nuevas (WACOM, IA, etc), implementación de metodologías activas, incorporación en areas transversales de la universidad mediante Ser+, contextualización de la temática, actividades varias motivando la participación activa de los estudiantes y grupos foco para conocer la perspectiva estudiantil. Se incluyeron tambien secciones en el piloto del Ecosistema de Aprendizaje para hacer mejoras dirigidas",
+                observations: "A pesar de los esfuerzos, no se ha podido percibir una reversión significativa de la tendencia.",
+                alignment: "Ejemplo de aplicación del **Criterio 4 de ABET (Continuous Improvement)** y el **Componente 7.4 de ACAAI (Mejora Continua del programa)**."
+            },
+            {
+                title: "Acciones que motiven el uso del FabLab.",
+                code: "PRO1I",
+                objective: "Excelencia Académica",
+                metric: "Numero de estudiantes participando en eventos e el FabLab",
+                indicator: "Al menos 500 estudiantes interactuado en el FabLab EN 2025",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Incremento en participación estudiantil en iniciativas innovadoras.",
+                midYearResults: "La actividad dentro del FabLab se mantiene en alza durante el período académico con proyectos extracurriculares y académicos.",
+                finalResults: "Se alcanzaron interacciones con 597 estudiantes durante el 2025. La actividad en el FabLab ha estado en constante crecimiento. Se están haciendo ajustes en el patrocineo de materiales e insumos de FabLab desde la FI a partir de Q1 2026",
+                observations: "",
+                alignment: "Se relaciona con el **Criterio 7 de ABET (Facilities)** y el **Componente 8.4 de ACAAI (Recursos Tecnológicos e Informáticos)**."
+            },
+            {
+                title: "Realización de concursos, hackathons, competencias y rallies que impulsen la innovación.",
+                code: "PRO1J",
+                objective: "Excelencia Académica",
+                metric: "Numero de eventos realizados",
+                indicator: "Al menos 3 eventos (hackathons, rallies, concursos) al año.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Incremento en la variedad de servicios ofrecidos por el FabLab",
+                midYearResults: "Se han realizado múltiples hackathon, rallies y competencias para motivar la participación estudiantil.",
+                finalResults: "Innovation Rally completo en Q1 y Q2<br>Bootcamp de Corporacion Flores organizado en Q2 (cancelado por corporacion flores)<br>Hackathon de Ethereum en Q3<br>Talleres del Club de Robotica<br>Talleres para CONESCAPAN<br>Concurso para Arquitectura<br>Actividades con las Asociaciones de Electromecánicas e Industrial",
+                observations: "",
+                alignment: "Contribuye al **Criterio 3 de ABET (Student Outcomes)** y al **Componente 6.3 de ACAAI (Formación Humanística y Ciudadana)**."
+            },
+            {
+                title: "Participacion en el Comité de Innovación Educativa",
+                code: "PRO1K",
+                objective: "Excelencia Académica",
+                metric: "Participación en el Comité de Innovación Educativa.",
+                indicator: "Presencia de representantes de la Facultad en todas las reuniones.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Facultad de Ingeniería aportando activamente a la innovación educativa.",
+                midYearResults: "Se ha tenido participación activa dentro del Comité de Innovación Educativa.",
+                finalResults: "Se ha tenido participación activa dentro del Comité de Innovación Educativa. El equipo ha contribuido información solicitada para el levantamiento correspondiente y el análisis se ha comenzado. Se ha revisado software, recursos y oportunidades para 2026. Se participará en el IFE en Monterrey para sumar iniciativas en el 2026.",
+                observations: "",
+                alignment: "Vital para la **Mejora Continua (Criterio 4 ABET, Componente 7.4 ACAAI)**."
+            },
+            {
+                title: "Transversalización de los ODS en el currículo.",
+                code: "PRO2A",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Porcentaje de cursos con ODS transversalizados.",
+                indicator: "Al menos 50% de los programas integran ODS.",
+                status: "Parcial",
+                evaluation: 50,
+                expectedResults: "Mayor impacto social de la formación académica.",
+                midYearResults: "Este proyecto ha estado pendiente y requiere de reestablecerse.",
+                finalResults: "Este proyecto tuvo rotación de la mayoria del equipo participante en Ceutec y en Unitec. Su estatus es similar al estatus a inicio de año.",
+                observations: "La salida del anterior Jefe Académico de Ciencias y Matemáticas contribuyó al retraso de este proyecto.",
+                alignment: "Crucial para cumplir con el **Criterio 3 de ABET** y el **Componente 1.1.3 de ACAAI**."
+            },
+            {
+                title: "Acciones que sumen a la visibilidad institucional.",
+                code: "PRO2B",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de eventos y proyectos realizados.",
+                indicator: "Al menos 10 eventos/proyectos estratégicos implementadosa nivel de Facultad.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Mayor posicionamiento de la Facultad.",
+                midYearResults: "Se ha mejorado sustancialmente la visibilidad (ExpoFI, Mecatón, Alumni, etc).",
+                finalResults: "Vocational trips para prospeccion = 4 ; Bootcamps = 2; Se planificó un STEM Bootcamp que no se realizó con Corporacion Flores; 4 sesiones de IAB; ExpoFIs = 3; Mecatons = 4;  Expo Ingenieria = 2; Evento Alumni de Asoc IISE; Seeds for Life de Huawei, Hackathon de Ethereum, Hackathon de USAP",
+                observations: "",
+                alignment: "Se vincula con el **Criterio 2 de ABET** y fortalece el **Componente 4 de ACAAI**."
+            },
+            {
+                title: "Formación de 4 Industry Advisory Boards y realización de 2 sesiones para cada uno.",
+                code: "PRO2C",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de Industry Advisory Boards formados.",
+                indicator: "4 IAB formados con al menos 2 sesiones cada uno.",
+                status: "Parcial",
+                evaluation: 85,
+                expectedResults: "Conexión efectiva entre academia e industria.",
+                midYearResults: "Aunque se avanzó en la definición de agendas, no se logró concretar sesiones para ninguno.",
+                finalResults: "4 IABs formados englobando los 8 programas de la Facultad. Sesion inaugural desarrollada para todos los IABs con agenda de aprobacion de PEOs. 2 Eventos por IAB agendados para 2026",
+                observations: "",
+                alignment: "Requisito explícito para la **Mejora Continua (Criterio 4 ABET)**."
+            },
+            {
+                title: "Formación de relaciones que sumen internacionalidad al currículo existente.",
+                code: "PRO2D",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de actividades de internacionalización realizadas.",
+                indicator: "Al menos 5 acciones de internacionalización a nivel de Facultad.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Mayor exposición internacional.",
+                midYearResults: "Se ha participado y apoyado iniciativas de diferentes naturalezas para impulsar las relaciones internacionales.",
+                finalResults: "Se ha participado y apoyado iniciativas de diferentes naturalezas para impulsar las relaciones internacionales de la Facultad de Ingeniería. Esto ha incluido, representacion en conferencias internacionales por los miembros de la FI, participación como anfitrión del 3er Encuentro Trinacional de universidades, apoyo y participación con invitados internacionales durante CONICIETI, conformación de agenda para delegaciones invitadas de Chile, Colombia, Guatemala, El Salvador, EEUU, Mexico, Costa Rica; se han explorado y desarrollado nuevas iniciativas de Viajes Académicos, y se continua expandiendo la oferta actual.<br><br>Reclutamos a Dr Texier, Dr Paz, para futuras Masterclasses. Se han hecho propuestas para ser hosts de una conferencia internacional (LEIRD) y de un Summit de Innovacion en Ingenieria durante la SII 2026.",
+                observations: "",
+                alignment: "Enriquece el **Currículo (Criterio 5 ABET)**."
+            },
+            {
+                title: "Propuesta en fondos externos para mejora del currículo.",
+                code: "PRO2E",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de propuestas presentadas.",
+                indicator: "Al menos 1 propuesta enviada anualmente a nivel de Facultad",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Oportunidades de financiamiento.",
+                midYearResults: "Se realizó y se presentó una propuesta Erasmus+.",
+                finalResults: "Propuesta Erasmus+ redactada y enviada, sin adjudicacion de fondos.<br>Se está trabajando en 2 propuestas Erasmus+ una como partner y una como coordinador con universidades de: Cuba, Colombia, El Salvador, Portugal, España, Latvia, Noruega, Costa Rica y Honduras",
+                observations: "Se recibió la información rechazando la propuesta en Julio 2025.",
+                alignment: "Apoya el **Criterio 8 de ABET (Institutional Support)**."
+            },
+            {
+                title: "Acciones que sumen internacionalidad al currículo existente (COIL, Viajes, etc.).",
+                code: "PRO2F",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de actividades implementadas.",
+                indicator: "Al menos 1 accion de internacionalidad por programa",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Inclusión de estrategias internacionales.",
+                midYearResults: "Participación de estudiantes en El Salvador, Guatemala, España, Bélgica y Colombia.",
+                finalResults: "Viajes concretados a Belgica, España y Colombia incluyendo estudiantes de SIS, CDIA, IND, MEC, TEL, BMD, CIV y ENE<br>Experiencias academicas internacionales cortas en El Salvador, Guatemala. Charlas internacionales con docentes invitados de El Salvador, Chile, Colombia, EEUU y Costa Rica <br>Visita de docentes de Chile, Guatemala, El Salvador, Colombia a lo largo del año por colaboraciones variadas en investigacion y en vinculacion<br>Masterclasses realizadas en la primera mitad del año con Dra Mossi, Dr Arias; reclutamos a Dr Texier (LACCEI), Dr Velasquez (Purdue), Dr Paz (PUCP), para futuras clases",
+                observations: "",
+                alignment: "Enriquece el **Currículo (Criterio 5 ABET)**."
+            },
+            {
+                title: "Implementación del programa de docentes visitantes.",
+                code: "PRO2G",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de docentes visitantes incorporados.",
+                indicator: "Al menos 3 docentes visitantes activos.",
+                status: "Parcial",
+                evaluation: 75,
+                expectedResults: "Diversificación de la oferta académica.",
+                midYearResults: "Charlas presenciales por invitados internacionales (Chile, Purdue, etc).",
+                finalResults: "Se ha tenido una variedad de participaciones por parte de docentes e invitados internacionales dentro de los programas de la FI. Estas van desde charlas presenciales por invitados internacionales de la Univ de Chile, Purdue University, New Mexico Community College, Virginia Commonwealth University, y Seattle Pacific University. Se ha planeado la incorporación al programa de Docentes Visitantes de egresados, investigadores, autoridades administrativas, y docentes de: CalTech, Purdue, FAU, PUCP, y LACCEI. Se están explorando nuevas avenidas mediante la incorporación de algunos de estos docentes a la oferta de Educación Continua.",
+                observations: "",
+                alignment: "Fortalece al **Cuerpo Docente (Criterio 6 ABET)**."
+            },
+            {
+                title: "Activación de la presencia en LinkedIn de los miembros de la Facultad.",
+                code: "PRO2H",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Porcentaje de miembros con perfil activo.",
+                indicator: "Al menos el 80% con perfil actualizado.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Mayor difusión del perfil académico.",
+                midYearResults: "Se ha mejorado la presencia en LinkedIn.",
+                finalResults: "Se ha mejorado la presencia en LinkedIn de los logros y eventos en los cuales se involucran los miembros de la Facultad de Ingeniería.",
+                observations: "",
+                alignment: "Apoya la **visibilidad y reputación del programa**."
+            },
+            {
+                title: "Conformación de un Portafolio de Proyectos de FI y publicación en un micrositio.",
+                code: "PRO2I",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Micrositio activo con proyectos publicados.",
+                indicator: "Al menos 10 proyectos publicados.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Visibilidad institucional mejorada.",
+                midYearResults: "Se han estructurado los recursos del portafolio.",
+                finalResults: "Se desarrolló un micrositio con la informacion de los proyectos que se realizan en la FI. No se ha hecho publico.",
+                observations: "",
+                alignment: "Se alinea con el **Componente 1.3 de ACAAI**."
+            },
+            {
+                title: "Conformación de una Presentación Institucional de la Facultad.",
+                code: "PRO2J",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Documento de presentación institucional elaborado.",
+                indicator: "Presentación diseñada y compartida.",
+                status: "Parcial",
+                evaluation: 75,
+                expectedResults: "Material oficial de promoción.",
+                midYearResults: "Se ha iniciado una nueva propuesta con mercadeo.",
+                finalResults: "Se tiene una presentación institucional que se ha utilizado en el pasado para la Facultad de Ingeniería basada en la presentación institucional utilizada por Rectoría desde el 2023, sin embargo se ha iniciado una nueva propuesta con mercadeo. Se ha brindado la información e insumos necesarios para su elaboración.",
+                observations: "",
+                alignment: "Herramienta clave para la **Divulgación**."
+            },
+            {
+                title: "Organización y realización de la Semana Internacional de Ingeniería 2025.",
+                code: "PRO2K",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Semana Internacional realizada con éxito.",
+                indicator: "Participación de instituciones relevantes.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Fortalecimiento de la vinculación institucional",
+                midYearResults: "La Semana Internacional de Ingeniería se realizó con éxito.",
+                finalResults: "La Semana Internacional de Ingeniería se realizó con éxito. Se logró concretar la visita presencial por una autoridad administrativa de Purdue University. Se logró triangular una reunión con Hondufuturo y Purdue para poder pensar en canalizar oportunidades para egresado de Unitec en el futuro cercano.",
+                observations: "",
+                alignment: "Contribuye a la **internacionalización**."
+            },
+            {
+                title: "Implementar herramientas para mejorar la visibilidad y seguimiento.",
+                code: "PRO3A",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Implementación de herramientas de gestión.",
+                indicator: "Herramienta operativa y utilizada.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Mejor control y seguimiento.",
+                midYearResults: "Integración de matriz en Teams y asignación de responsabilidades.",
+                finalResults: "Se ha comenzado la integración de la matriz de responsabilidades de la facultad de Ingeniería dentro del software Microsoft Teams. Se ha adelantado en la incoporacion de los proyectos y resta la asignación de responsabilidades para la entrega de evidencias. Tambien se ha hecho un esfuerzo por mejorar el avance en diferentes objetivos con el equipo de la Facultad de Ingeniería de ambos campus.",
+                observations: "",
+                alignment: "Fundamental para una gestión eficiente (**Criterio 8 ABET**)."
+            },
+            {
+                title: "Revisión de cumplimiento de normas de seguridad en laboratorios.",
+                code: "PRO3B",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Evaluación de seguridad en laboratorios.",
+                indicator: "100% de laboratorios cumplen normas.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Entorno seguro para la práctica académica.",
+                midYearResults: "No se tiene información completa sobre el avance en Q2.",
+                finalResults: "Se trabajaron y desarrollaron politicas y reglamentos para los espacios de la Facultad de Ingeniería, a nivel de Facutlad y a nivel de espacios. Se realizó entrega de toda la información al equipo de proyecto.",
+                observations: "",
+                alignment: "Responde al **Criterio 7 de ABET (Facilities)**."
+            },
+            {
+                title: "Organización de talleres técnicos para la formación docente.",
+                code: "PRO3C",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Número de talleres técnicos realizados.",
+                indicator: "Al menos 3 talleres impartidos anualmente.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Docentes capacitados.",
+                midYearResults: "Se han tenido talleres técnicos en formación docente dirigidos hacia investigación.",
+                finalResults: "Se han tenido talleres técnicos en formación docente dirigidos hacia investigación con participantes de 6 diferentes universidades, y otros esfuerzos. Se han brindado talleres de formacion en Fablab y a traves de la coordinacion de laboratorios en SPS.",
+                observations: "",
+                alignment: "Fortalece las competencias del **Cuerpo Docente**."
+            },
+            {
+                title: "Apoyo a las solicitudes de las áreas de Prospección y Admisiones.",
+                code: "PRO3D",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Número de eventos de prospección apoyados.",
+                indicator: "Participación en el 80% de los eventos.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Mayor atracción de estudiantes.",
+                midYearResults: "Se ha colaborado en todas las solicitudes (Open Campus, Science Fairs, etc).",
+                finalResults: "Se ha colaborado en todas las solicitudes de Admisiones y prospección, incluyendo apoyo a recorridos múltiples veces a la semana, así como Open Campus, Sesion de Preguntas y Respuestas, Science Fairs, Technology Day, Bootcamps, y el nuevo Vocational Trip en todos los períodos académicos. Se ha brindado apoyo a las Olimpiadas de Matematicas y jornadas de capacitacion de ABSH a cambio de espacios y oportunidades de prospeccion con las escuelas.",
+                observations: "",
+                alignment: "Apoya la sostenibilidad del programa."
+            },
+            {
+                title: "Apoyo a proyectos institucionales (1Mentor, Unitec4Life, etc).",
+                code: "PRO3E",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Número de proyectos con participación.",
+                indicator: "Involucramiento en al menos 4 proyectos.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Integración activa.",
+                midYearResults: "Apoyo a 1Mentor, Unitec4Life, EMI, Credenciales Digitales, Ser+.",
+                finalResults: "Se ha documentado el apoyo y participación de personal de la Facultad de Ingeniería en apoyo a: 1Mentor, Unitec4Life, EMI, Proyecto de Credenciales Digitales, y Ser+",
+                observations: "",
+                alignment: "Demuestra fuerte **Soporte Institucional**."
+            },
+            {
+                title: "Articulación con Formación Continua para Certificados.",
+                code: "PRO3F",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Número de certificados diseñados.",
+                indicator: "Al menos 1 certificado por campus.",
+                status: "Parcial",
+                evaluation: 50,
+                expectedResults: "Ampliación de la oferta académica.",
+                midYearResults: "Se ha incrementado el contacto y prospectado propuestas.",
+                finalResults: "Se ha incrementado el contacto con educación continua para intentar generar nuevas oportunidades de formación impartidas por docentes de la Facultad de Ingeniería. Se colabora con contactos compartidos en industria, contactos académicos internacionales, docentes de la Facultad, así como en la generación de ideas para nuevas oportunidades. Se han prospectado propuestas nuevas en bienes raices, ciberseguridad, blockchain, y avaluo de propiedades.",
+                observations: "",
+                alignment: "Se alinea con el **aprendizaje continuo**."
+            },
+            {
+                title: "Acciones que sumen transversalmente a las metas de la Facultad.",
+                code: "PRO3G",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Número de iniciativas de colaboración.",
+                indicator: "Registro de al menos 1 accion transversal por colaborador.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Mayor sinergia.",
+                midYearResults: "Integración completa de los miembros en cumplimiento transversal.",
+                finalResults: "Se ha tenido una integración completa de los miembros de la Facultad en el cumplimiento de objetivos de forma transversal.",
+                observations: "",
+                alignment: "Un equipo cohesionado es base para el **Soporte Institucional**."
+            },
+            {
+                title: "Realización del Plan de Inversión a 5 años.",
+                code: "PRO3H",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Plan de inversión elaborado.",
+                indicator: "Documento de plan validado.",
+                status: "Completo",
+                evaluation: 100,
+                expectedResults: "Plan estratégico de inversión.",
+                midYearResults: "Propuesta de Capex generada y en proceso de aprobación.",
+                finalResults: "Se contó con la participación y colaboración del equipo completo de la Facultad de Ingeniería en Campus TGU y SPS para la generación de una propuesta de Capex para los próximos 5 años. Enlace al plan: <a href='https://capexfi25-30.netlify.app/presentacioncapexwebsite/' class='text-blue-500 hover:underline' target='_blank'>Ver Plan</a>",
+                observations: "Enlace al plan disponible.",
+                alignment: "Mejora de las **Instalaciones (Criterio 7 ABET)**."
+            }
+        ];
+
+        const collaboratorsCSV = `Nombre,Area Academica,PRO1A,PRO1B,PRO1C,PRO1D,PRO1E,PRO1F,PRO1G,PRO1H,PRO1I,PRO1J,PRO1K,PRO2A,PRO2B,PRO2C,PRO2D,PRO2E,PRO2F,PRO2G,PRO2H,PRO2I,PRO2J,PRO2K,PRO3A,PRO3B,PRO3C,PRO3D,PRO3E,PRO3F,PRO3G,PRO3H
+Marco Canales,Decanatura y Direccion,A,x,A,L,L,x,L,R,x,R,L,A,A,A,L,L,L,R,R,R,R,A,L,x,x,A,R,R,R,L
+Edwin Dore,Decanatura y Direccion,A,x,A,L,R,x,A,L,x,L,A,A,A,A,L,R,L,R,R,R,L,R,R,x,x,A,R,L,R,R
+Karen Martinez,Decanatura y Direccion,A,x,x,A,x,A,x,x,A,A,x,x,x,A,x,x,x,x,x,x,A,A,R,A,x,A,x,x,R,x
+Ana Martinez,Decanatura y Direccion,A,x,x,A,x,A,x,x,x,A,x,x,x,A,x,x,x,x,x,x,A,A,R,A,x,A,x,x,R,x
+Geovanny Fortin,FabLab,x,x,x,A,x,x,x,x,L,L,A,x,R,x,x,x,R,x,R,L,A,A,x,R,L,A,x,R,R,A
+Reynod Bocanegra,Ciencias de la Computacion,x,L,x,R,A,x,R,x,A,R,A,x,A,R,R,R,R,L,A,A,A,A,x,x,x,R,R,A,R,A
+Carlos Perez,Ciencias de la Computacion,R,L,x,R,A,x,A,x,x,R,A,x,A,R,R,A,R,R,A,A,A,A,x,x,A,R,R,A,R,A
+Georgina Galeano,Industrial,x,R,x,R,A,x,A,x,A,R,A,x,A,L,R,A,R,R,A,A,A,A,x,A,x,L,R,A,R,A
+Mendel Nelson,Industrial,x,R,x,A,x,A,x,x,x,A,x,x,R,x,A,x,R,x,x,x,x,x,x,A,x,x,R,x,R,x
+Maria Elena Perdomo,Industrial,x,A,x,A,x,A,x,x,x,A,x,x,R,x,R,x,A,x,x,x,x,x,x,x,x,x,x,A,R,R
+Julio Cesar Lopez,Civil,x,R,x,R,A,x,A,x,A,R,A,x,L,R,R,A,R,R,A,A,A,A,x,x,x,R,R,A,R,A
+Hector Padilla,Civil,x,R,x,R,A,x,A,x,x,R,A,x,A,L,R,R,R,R,A,A,A,R,x,A,A,R,R,A,R,A
+Juan Carlos Reyes,Civil,x,A,x,A,x,A,x,x,R,A,x,x,R,x,x,x,A,x,x,x,x,x,x,L,R,A,R,A,R,x
+Ada Rodriguez,Civil,x,A,x,A,x,A,x,x,x,A,x,x,R,x,R,x,A,x,x,x,x,x,x,x,x,x,x,A,R,A
+Rene Leon,Mecatrónica,A,R,L,R,A,x,A,x,A,R,A,x,A,R,R,A,R,L,A,A,A,L,x,x,x,R,R,A,R,A
+Juan Miguel Mejia,Mecatrónica,A,R,R,R,A,x,A,x,x,R,A,x,R,L,R,A,R,R,A,A,A,A,x,A,A,R,R,A,R,A
+Favell Nuñez,Mecatrónica,x,A,A,A,x,A,x,x,x,A,x,x,R,x,R,x,A,x,x,x,x,x,x,x,x,x,x,A,R,A
+Jose Luis Ordoñez,Mecatrónica,x,A,A,A,x,A,x,x,x,A,x,x,R,x,R,x,A,x,x,x,x,x,x,x,x,x,x,A,R,R
+Daniel Ramos,Mecatrónica,A,A,A,A,x,A,x,x,R,A,x,x,R,A,x,x,A,x,x,x,x,x,x,R,R,A,R,A,R,x
+Fernanda Caceres,Biomédica,A,R,R,R,A,x,A,x,A,R,A,x,R,L,R,A,R,R,L,A,A,A,x,x,x,R,R,A,R,A
+Reyna Valle,Biomédica,A,R,L,R,A,x,A,x,x,R,A,x,R,R,R,A,R,R,A,A,A,L,x,x,x,R,R,A,R,A
+Yaro Caceres,Biomédica,x,R,A,A,x,A,x,x,x,A,x,x,R,x,A,A,A,x,x,x,x,x,x,x,x,x,x,x,R,x
+Manuel Gamero,Biomédica,x,R,A,A,x,A,x,x,x,A,x,x,R,x,A,A,A,x,x,x,x,x,x,x,x,x,x,x,R,x
+Vielka Barahona,Energia,x,A,x,R,A,x,A,x,x,R,A,x,L,R,R,A,R,R,A,A,A,R,x,x,x,R,R,A,R,A
+Alex Sanchez,Ciencias y Matematicas,x,A,x,R,A,L,A,R,A,R,A,L,A,x,R,A,R,R,A,A,A,A,x,x,A,R,R,A,R,A
+Julio Ramirez,Ciencias y Matematicas,x,A,x,R,A,L,A,R,x,R,A,L,A,x,R,A,R,R,A,A,A,A,x,R,R,R,R,A,R,A
+Nereyda Lainez,Ciencias y Matematicas,x,x,x,A,x,R,x,A,R,A,x,R,R,A,x,x,A,x,x,x,x,x,x,R,R,A,x,A,R,x
+Emilson Fortin,Ciencias y Matematicas,x,x,x,A,x,R,x,A,R,A,x,R,x,x,x,x,x,x,x,x,x,x,x,R,A,A,x,x,R,x
+Winder Matamoros,Decanatura y Direccion,A,x,x,A,x,A,x,x,x,A,x,x,x,x,x,x,x,x,x,x,x,x,x,L,L,A,R,x,R,x
+Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x,x,x,x,x,x,R,x`;
+
+        // --- SCRIPT LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const board = document.getElementById('collaborators-board');
+            const modal = document.getElementById('projectModal');
+            const modalBody = document.getElementById('modalBody');
+            const closeButton = document.querySelector('.close-button');
+
+            // 1. Parse CSV and build data structures
+            const lines = collaboratorsCSV.trim().split('\n');
+            const headers = lines[0].split(',');
+            const collaboratorsData = lines.slice(1).map(line => {
+                const values = line.split(',');
+                const collaborator = {
+                    name: values[0],
+                    area: values[1].replace(/ /g, ' '), // Keep spaces
+                    projects: {}
+                };
+                headers.slice(2).forEach((header, index) => {
+                    const role = values[index + 2];
+                    if (role && role.toLowerCase() !== 'x') {
+                        collaborator.projects[header] = role;
+                    }
+                });
+                return collaborator;
+            });
+
+            const collaboratorsByArea = collaboratorsData.reduce((acc, coll) => {
+                if (!acc[coll.area]) {
+                    acc[coll.area] = [];
+                }
+                acc[coll.area].push(coll);
+                return acc;
+            }, {});
+
+            const projectLeaders = projectsData.reduce((acc, proj) => {
+                acc[proj.code] = [];
+                return acc;
+            }, {});
+
+            collaboratorsData.forEach(coll => {
+                for (const projCode in coll.projects) {
+                    if (coll.projects[projCode] === 'L') {
+                        projectLeaders[projCode].push(coll.name);
+                    }
+                }
+            });
+
+            // 2. Render board
+            for (const area in collaboratorsByArea) {
+                const areaColor = getAreaColor(area);
+                const section = document.createElement('section');
+                section.className = 'mb-12';
+                section.innerHTML = `
+                    <div class="flex items-center mb-4">
+                        <div class="w-2 h-6 ${areaColor} rounded-r-full mr-3"></div>
+                        <h3 class="text-xl font-bold text-cobalt-blue">${area}</h3>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                        ${collaboratorsByArea[area].map(coll => `
+                            <button class="collaborator-btn w-full text-left p-3 bg-white rounded-lg shadow border border-gray-200 hover:bg-cobalt-blue hover:text-white hover:shadow-lg focus:outline-none" data-name="${coll.name}">
+                                ${coll.name}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="projects-for-${area.replace(/\s+/g, '-')}" class="mt-4"></div>
+                `;
+                board.appendChild(section);
+            }
+
+            // 3. Event Listeners
+            board.addEventListener('click', (e) => {
+                const collaboratorBtn = e.target.closest('.collaborator-btn');
+                const projectBtn = e.target.closest('.project-btn');
+
+                if (collaboratorBtn) {
+                    handleCollaboratorClick(collaboratorBtn);
+                }
+                if (projectBtn) {
+                    handleProjectClick(projectBtn);
+                }
+            });
+            
+            closeButton.onclick = () => { modal.style.display = "none"; };
+            window.onclick = (event) => { if (event.target == modal) { modal.style.display = "none"; } };
+
+            // --- HELPER FUNCTIONS ---
+            function handleCollaboratorClick(btn) {
+                const name = btn.dataset.name;
+                const collaborator = collaboratorsData.find(c => c.name === name);
+                const containerId = `projects-for-${collaborator.area.replace(/\s+/g, '-')}`;
+                const container = document.getElementById(containerId);
+
+                const areaContainer = btn.closest('.grid').parentElement;
+                areaContainer.querySelectorAll('.collaborator-btn.active').forEach(b => {
+                      if (b !== btn) {
+                        b.classList.remove('active');
+                        const otherContainer = document.getElementById(`projects-for-${b.closest('section').querySelector('h3').textContent.replace(/\s+/g, '-')}`);
+                        if(otherContainer) otherContainer.innerHTML = '';
+                      }
+                });
+
+
+                btn.classList.toggle('active');
+
+                if (btn.classList.contains('active')) {
+                    renderProjectsFor(collaborator, container);
+                } else {
+                    container.innerHTML = '';
+                }
+            }
+            
+            function handleProjectClick(btn) {
+                const projectCode = btn.dataset.code;
+                const project = projectsData.find(p => p.code === projectCode);
+                if (project) {
+                    showModal(project);
+                }
+            }
+
+            function renderProjectsFor(collaborator, container) {
+                const roleOrder = { 'L': 1, 'R': 2, 'A': 3 };
+                const projectEntries = Object.entries(collaborator.projects);
+                
+                projectEntries.sort(([, roleA], [, roleB]) => roleOrder[roleA] - roleOrder[roleB]);
+
+                const getObjectiveClass = (objective) => {
+                    if (!objective) return 'border-gray-300';
+                    if (objective.toLowerCase().includes('excelencia')) return 'objective-excelencia';
+                    if (objective.toLowerCase().includes('visibilidad')) return 'objective-visibilidad';
+                    if (objective.toLowerCase().includes('eficiencia')) return 'objective-eficiencia';
+                    return 'border-gray-300';
+                };
+
+                container.innerHTML = `
+                    <div class="p-4 bg-pacific-cyan-light rounded-lg border-l-4 border-cobalt-blue">
+                        <div class="flex flex-wrap justify-between items-center mb-3 gap-4">
+                            <p class="font-semibold text-cobalt-blue">Proyectos de ${collaborator.name}:</p>
+                            <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-700">
+                                <span class="font-semibold">Roles:</span>
+                                <span class="flex items-center"><span class="role-badge role-L text-xs">L</span>Líder</span>
+                                <span class="flex items-center"><span class="role-badge role-R text-xs">R</span>Responsable</span>
+                                <span class="flex items-center"><span class="role-badge role-A text-xs">A</span>Apoyo</span>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-700">
+                                <span class="font-semibold">Objetivos:</span>
+                                <span class="flex items-center"><span class="legend-dot" style="background-color: var(--objective-excelencia);"></span>Excelencia</span>
+                                <span class="flex items-center"><span class="legend-dot" style="background-color: var(--objective-visibilidad);"></span>Visibilidad</span>
+                                <span class="flex items-center"><span class="legend-dot" style="background-color: var(--objective-eficiencia);"></span>Eficiencia</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap">
+                            ${projectEntries.map(([code, role]) => {
+                                const project = projectsData.find(p => p.code === code);
+                                const objectiveClass = project ? getObjectiveClass(project.objective) : 'border-gray-300';
+                                const title = project ? project.title.split('(')[0].trim() : code; // Shorten title for button
+                                return `
+                                <div class="project-btn bg-white ${objectiveClass}" data-code="${code}">
+                                    <span class="role-badge role-${role}">${role}</span>
+                                    <span>${title}</span>
+                                </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            function showModal(project) {
+                 const leaders = projectLeaders[project.code];
+                 const leaderText = leaders && leaders.length > 0 ? leaders.join(', ') : '<span class="text-red-600 font-semibold">Temporalmente sin líder asignado</span>';
+                 const evalColor = project.evaluation === 100 ? 'text-green-600' : (project.evaluation >= 70 ? 'text-blue-600' : 'text-orange-500');
+
+                modalBody.innerHTML = `
+                    <div class="border-b-2 border-gray-200 pb-4 mb-4">
+                        <h3 class="text-2xl font-bold text-cobalt-blue">${project.title}</h3>
+                        <p class="text-sm text-gray-500">Código: ${project.code}</p>
+                    </div>
+                    <div class="space-y-4 text-gray-700">
+                        <div class="flex flex-col md:flex-row gap-4 bg-gray-50 p-4 rounded-lg">
+                            <div class="flex-1">
+                                <strong class="font-semibold text-gray-800">Líder(es):</strong> <br>${leaderText}
+                            </div>
+                            <div class="flex-1">
+                                <strong class="font-semibold text-gray-800">Estado Final:</strong> <br>
+                                <span class="inline-flex items-center mt-1 px-3 py-1 rounded text-white text-sm font-medium ${getStatusClass(project.status)}">
+                                    ${project.status}
+                                </span>
+                            </div>
+                            <div class="flex-1">
+                                <strong class="font-semibold text-gray-800">Evaluación:</strong> <br>
+                                <span class="font-bold text-2xl ${evalColor}">${project.evaluation}/100</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><strong class="font-semibold text-gray-800">Métrica:</strong><p class="text-sm">${project.metric}</p></div>
+                            <div><strong class="font-semibold text-gray-800">Indicador:</strong><p class="text-sm">${project.indicator}</p></div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4 mt-4">
+                            <div class="bg-blue-50 p-4 rounded border border-blue-100">
+                                <strong class="font-semibold text-cobalt-blue block mb-2">Comentarios Medio Año</strong>
+                                <p class="text-sm text-gray-600">${project.midYearResults}</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded border border-green-100 shadow-sm">
+                                <strong class="font-semibold text-green-700 block mb-2">Resultados Finales (Cierre 2025)</strong>
+                                <p class="text-sm text-gray-800 font-medium">${project.finalResults}</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-2"><strong class="font-semibold text-gray-800">Observaciones Generales:</strong><p class="mt-1 text-sm italic">${project.observations || 'Ninguna'}</p></div>
+                        
+                        <div class="pt-2 mt-4 bg-gray-100 p-4 rounded-lg border-l-4 border-cobalt-blue">
+                            <strong class="font-semibold text-cobalt-blue">Justificación y Alineación Estratégica:</strong>
+                            <p class="mt-1 text-sm">${project.alignment.replace(/\*\*(.*?)\*\*/g, '<strong class="text-cobalt-blue">$1</strong>')}</p>
+                        </div>
+                    </div>
+                `;
+                modal.style.display = "block";
+            }
+
+            function getStatusClass(status) {
+                if (!status) return 'bg-gray-400';
+                if (status.toLowerCase().includes('parcial')) return 'status-parcial';
+                if (status.toLowerCase().includes('completo')) return 'status-completo';
+                if (status.toLowerCase().includes('atrasos')) return 'status-pendiente';
+                return 'bg-gray-400';
+            }
+
+            function getAreaColor(area) {
+                // Simple hash function to assign a color based on area name
+                let hash = 0;
+                for (let i = 0; i < area.length; i++) {
+                    hash = area.charCodeAt(i) + ((hash << 5) - hash);
+                }
+                const colors = ['bg-cobalt-blue', 'bg-pacific-cyan', 'bg-vivid-sky-blue'];
+                return colors[Math.abs(hash) % colors.length];
+            }
+        });
+    </script>
+</body>
+</html>
