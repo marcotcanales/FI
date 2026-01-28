@@ -7,113 +7,154 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
+        /* --- BRAND FUNDAMENTALS (Consistente con archivo previo) --- */
         :root {
             --unitec-federal-blue: #06065C;
             --unitec-cobalt-blue: #0F4986;
             --unitec-pacific-cyan: #03AED2;
             --unitec-vivid-sky-blue: #47C8FD;
+            
+            /* UI Semantics */
+            --status-success: #16a34a; 
+            --status-warning: #f59e0b;
+            --status-danger: #ef4444;
+            --bg-light: #F8FAFC;
         }
-        .bg-federal-blue { background-color: var(--unitec-federal-blue); }
-        .bg-cobalt-blue { background-color: var(--unitec-cobalt-blue); }
-        .text-pacific-cyan { color: var(--unitec-pacific-cyan); }
-        .text-cobalt-blue { color: var(--unitec-cobalt-blue); }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- COMPONENTS --- */
         
+        /* Cards */
         .project-card {
-            transition: all 0.3s ease;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(6, 6, 92, 0.1), 0 4px 6px -2px rgba(6, 6, 92, 0.05);
+            border-color: var(--unitec-pacific-cyan);
         }
-        
-        /* Roles */
-        .role-title {
+
+        /* Member Tags - Brand Aligned */
+        .member-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
             font-size: 0.75rem;
+            font-weight: 500;
+            margin: 2px;
+            border: 1px solid transparent;
+        }
+        /* Leader uses Primary Brand Color */
+        .leader-tag { 
+            background-color: #EEF2FF; 
+            color: var(--unitec-federal-blue); 
+            border-color: #C7D2FE; 
+        }
+        /* Responsible uses Accent Brand Color */
+        .resp-tag { 
+            background-color: #ECFEFF; 
+            color: #0e7490; /* Darker Cyan for text readability */
+            border-color: #A5F3FC; 
+        }
+        /* Support uses Neutral */
+        .support-tag { 
+            background-color: #F1F5F9; 
+            color: #64748B; 
+            border-color: #E2E8F0; 
+        }
+
+        .role-label {
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             font-weight: 700;
-            margin-bottom: 0.25rem;
-            color: #6b7280;
+            color: #94A3B8;
+            margin-bottom: 4px;
+            display: block;
         }
-        .member-tag {
-            padding: 0.15rem 0.5rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            margin: 0.15rem;
-            display: inline-block;
-            font-weight: 500;
-        }
-        .leader-tag { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
-        .resp-tag { background-color: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
-        .support-tag { background-color: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; }
+
+        /* Status Badges */
+        .status-badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .status-completo { background-color: #DCFCE7; color: #166534; }
+        .status-parcial { background-color: #FEF3C7; color: #92400E; }
+        .status-atrasos { background-color: #FEE2E2; color: #991B1B; }
+        .status-sin-iniciar { background-color: #F3F4F6; color: #4B5563; }
+
+        /* Left Border Indicators for Cards */
+        .border-l-completo { border-left: 4px solid var(--status-success); }
+        .border-l-parcial { border-left: 4px solid var(--status-warning); }
+        .border-l-atrasos { border-left: 4px solid var(--status-danger); }
+        .border-l-sin-iniciar { border-left: 4px solid #9ca3af; }
 
         /* Modal */
-        .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); padding-top: 40px; }
-        .modal-content { position: relative; background-color: #fefefe; margin: 2% auto; padding: 25px; border: 0; width: 90%; max-width: 800px; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: slideUp 0.4s ease-out; }
-        .close-button { color: #9ca3af; float: right; font-size: 28px; font-weight: bold; cursor: pointer; transition: color 0.2s; }
-        .close-button:hover { color: #111827; }
-        @keyframes slideUp { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
+        .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(6, 6, 92, 0.7); backdrop-filter: blur(2px); padding-top: 60px; }
+        .modal-content { position: relative; background-color: #fefefe; margin: 2% auto; padding: 0; border: none; width: 90%; max-width: 800px; border-radius: 8px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; }
+        .close-button { color: white; position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; z-index: 10; transition: color 0.2s;}
+        .close-button:hover { color: var(--unitec-pacific-cyan); }
 
-        /* Status Indicators */
-        .status-badge { padding: 4px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; display: inline-flex; items-center; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
-        
-        .status-completo .dot { background-color: #22c55e; }
-        .status-completo { background-color: #dcfce7; color: #15803d; }
-        .border-l-completo { border-left-color: #22c55e; }
-
-        .status-parcial .dot { background-color: #f97316; }
-        .status-parcial { background-color: #ffedd5; color: #c2410c; }
-        .border-l-parcial { border-left-color: #f97316; }
-
-        .status-atrasos .dot { background-color: #ef4444; }
-        .status-atrasos { background-color: #fee2e2; color: #b91c1c; }
-        .border-l-atrasos { border-left-color: #ef4444; }
-
-        .status-sin-iniciar .dot { background-color: #9ca3af; }
-        .status-sin-iniciar { background-color: #f3f4f6; color: #4b5563; }
-        .border-l-sin-iniciar { border-left-color: #9ca3af; }
-
-        .score-circle {
-            width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: bold; font-size: 0.9rem; color: white;
-        }
+        @keyframes fadeIn { from {opacity: 0; transform: scale(0.98);} to {opacity: 1; transform: scale(1);} }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
 
-    <header class="bg-federal-blue shadow-lg sticky top-0 z-40">
-        <div class="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <svg class="h-10 w-10 md:h-12 md:w-12 mr-3" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Header: Solid Federal Blue for Authority (Consistente) -->
+    <header class="bg-federal-blue shadow-lg relative overflow-hidden" style="background-color: var(--unitec-federal-blue);">
+        <div class="absolute top-0 right-0 w-64 h-full bg-white opacity-5 skew-x-12 transform translate-x-10"></div>
+        
+        <div class="container mx-auto px-6 py-5 flex justify-between items-center relative z-10">
+            <div class="flex items-center gap-4">
+                <!-- Back Button -->
+                <a href="index.html" class="text-white/80 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all mr-2" title="Regresar al inicio" aria-label="Regresar">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                </a>
+
+                <!-- SVG Logo -->
+                <svg class="h-14 w-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M50 0L100 25V75L50 100L0 75V25L50 0Z" fill="#03AED2"/>
                     <path d="M50 0L0 25V75L50 100L100 75V25L50 0ZM50 6.7L93.3 28.3V71.7L50 93.3L6.7 71.7V28.3L50 6.7Z" fill="#06065C"/>
                     <path d="M50 13.4L6.7 28.3V71.7L50 86.6L93.3 71.7V28.3L50 13.4ZM50 20.1L86.6 36.7V63.3L50 79.9L13.4 63.3V36.7L50 20.1Z" fill="white"/>
                 </svg>
-                <div>
-                    <h1 class="text-lg md:text-2xl font-bold text-white leading-tight">Facultad de Ingeniería</h1>
-                    <p class="text-xs md:text-sm text-vivid-sky-blue">Evaluación Final Equipos 2025</p>
+                <div class="border-l border-white/20 pl-4">
+                    <h1 class="text-2xl font-bold text-white tracking-tight leading-none">Facultad de Ingeniería</h1>
+                    <p class="text-sm text-white/80 font-medium mt-1 tracking-wide">EVALUACIÓN EQUIPOS 2025</p>
                 </div>
             </div>
         </div>
+        <!-- Bottom Accent Line -->
+        <div class="h-1 w-full" style="background: linear-gradient(90deg, var(--unitec-pacific-cyan), var(--unitec-vivid-sky-blue));"></div>
     </header>
 
-    <main class="container mx-auto p-4 md:p-8">
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-8 text-center">
-            <h2 class="text-3xl font-bold text-cobalt-blue mb-2">Informe de Resultados y Equipos</h2>
-            <p class="text-gray-600 max-w-3xl mx-auto">
-                Resumen ejecutivo del desempeño de los equipos de proyecto. Se detalla la composición de cada célula de trabajo y la comparación entre los resultados proyectados a medio año y el cierre final 2025.
+    <main class="container mx-auto p-6 md:p-10 max-w-7xl">
+        
+        <!-- Intro Section (Consistente con Tablero) -->
+        <div class="text-center mb-12 bg-white p-8 rounded-lg border border-gray-100 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-federal-blue" style="background-color: var(--unitec-federal-blue);"></div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-3">Informe de Resultados y Equipos</h2>
+            <div class="w-16 h-1 bg-pacific-cyan mx-auto mb-4" style="background-color: var(--unitec-pacific-cyan);"></div>
+            <p class="text-gray-500 max-w-3xl mx-auto leading-relaxed">
+                Resumen ejecutivo del desempeño de las células de trabajo. Visualice la composición del equipo y el cumplimiento de objetivos estratégicos al cierre del año 2025.
             </p>
-            <div class="flex justify-center gap-4 mt-4 text-sm">
-                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-green-500 mr-2"></span>Completo</div>
-                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-orange-500 mr-2"></span>Parcial</div>
-                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>Con Atrasos</div>
+            
+            <div class="flex flex-wrap justify-center gap-4 mt-6 text-sm">
+                <span class="status-badge status-completo border border-green-200">Completo</span>
+                <span class="status-badge status-parcial border border-orange-200">Parcial</span>
+                <span class="status-badge status-atrasos border border-red-200">Con Atrasos</span>
             </div>
         </div>
 
@@ -122,15 +163,26 @@
         </div>
     </main>
 
+    <!-- Modal -->
     <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <div id="modalBody"></div>
+        <div class="modal-content shadow-2xl">
+            <!-- Modal Header -->
+            <div class="bg-federal-blue p-6 flex justify-between items-start" style="background-color: var(--unitec-federal-blue);">
+                <div class="pr-8">
+                    <h3 id="modalTitle" class="text-xl md:text-2xl font-bold text-white leading-tight"></h3>
+                    <p id="modalCode" class="text-sm text-pacific-cyan mt-1 font-mono opacity-90" style="color: var(--unitec-pacific-cyan);"></p>
+                </div>
+                <span class="close-button">&times;</span>
+            </div>
+            
+            <!-- Modal Body -->
+            <div id="modalBody" class="p-6 md:p-8 bg-gray-50"></div>
         </div>
     </div>
 
-    <footer class="bg-federal-blue text-white text-center py-6 mt-12 text-sm">
-        <p>&copy; 2025 UNITEC - Facultad de Ingeniería. Todos los derechos reservados.</p>
+    <!-- Footer (Consistente) -->
+    <footer class="bg-gray-800 text-white text-center py-6 mt-16 border-t-4" style="border-color: var(--unitec-pacific-cyan);">
+        <p class="opacity-75 text-sm">&copy; 2025 UNITEC - Facultad de Ingeniería. <br>Excelencia Académica y Mejora Continua.</p>
     </footer>
 
     <script>
@@ -596,6 +648,8 @@ Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x
             const container = document.getElementById('teams-container');
             const modal = document.getElementById('projectModal');
             const modalBody = document.getElementById('modalBody');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCode = document.getElementById('modalCode');
             const closeButton = document.querySelector('.close-button');
 
             // 1. Process Collaborator CSV
@@ -637,37 +691,37 @@ Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x
                 // Construct Leader HTML
                 const leadersHtml = team.L.length > 0 
                     ? team.L.map(name => `<span class="member-tag leader-tag">${name}</span>`).join('')
-                    : '<span class="text-xs text-red-500 italic">Sin Líder asignado</span>';
+                    : '<span class="text-xs text-red-500 italic px-1">Sin Líder asignado</span>';
 
                 const responsibleHtml = team.R.length > 0 
                     ? team.R.map(name => `<span class="member-tag resp-tag">${name}</span>`).join('')
-                    : '<span class="text-xs text-gray-400 italic">N/A</span>';
+                    : '<span class="text-xs text-gray-400 italic px-1">N/A</span>';
 
                 const supportHtml = team.A.length > 0 
                     ? team.A.map(name => `<span class="member-tag support-tag">${name}</span>`).join('')
-                    : '<span class="text-xs text-gray-400 italic">N/A</span>';
+                    : '<span class="text-xs text-gray-400 italic px-1">N/A</span>';
 
-                card.className = `project-card bg-white p-6 rounded-xl shadow border-l-4 border-l-${statusSlug} flex flex-col justify-between`;
+                card.className = `project-card p-6 border-l-4 border-l-${statusSlug} flex flex-col justify-between`;
                 
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-3">
-                            <h3 class="text-lg font-bold text-cobalt-blue leading-snug">${project.title}</h3>
-                            <span class="text-xs font-bold text-gray-400 bg-gray-100 px-2 py-1 rounded ml-2">${project.code}</span>
+                            <h3 class="text-lg font-bold text-gray-800 leading-snug pr-2">${project.title}</h3>
+                            <span class="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded ml-2 whitespace-nowrap">${project.code}</span>
                         </div>
                         
-                        <div class="mb-4">
-                            <div class="mb-2">
-                                <h4 class="role-title">Líderes</h4>
-                                <div>${leadersHtml}</div>
-                            </div>
-                            <div class="mb-2">
-                                <h4 class="role-title">Responsables</h4>
-                                <div>${responsibleHtml}</div>
+                        <div class="mb-4 space-y-3">
+                            <div>
+                                <span class="role-label">Líderes</span>
+                                <div class="flex flex-wrap -ml-1">${leadersHtml}</div>
                             </div>
                             <div>
-                                <h4 class="role-title">Apoyo</h4>
-                                <div>${supportHtml}</div>
+                                <span class="role-label">Responsables</span>
+                                <div class="flex flex-wrap -ml-1">${responsibleHtml}</div>
+                            </div>
+                            <div>
+                                <span class="role-label">Apoyo</span>
+                                <div class="flex flex-wrap -ml-1">${supportHtml}</div>
                             </div>
                         </div>
                     </div>
@@ -675,12 +729,15 @@ Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x
                     <div class="border-t border-gray-100 pt-4 mt-2">
                         <div class="flex items-center justify-between">
                             <span class="status-badge status-${statusSlug}">
-                                <span class="dot"></span>${project.status}
+                                ${project.status}
                             </span>
                             <div class="flex items-center">
-                                <span class="font-bold text-gray-700 mr-3 text-sm">Eval: ${project.evaluation}%</span>
-                                <button class="details-btn text-sm font-semibold text-pacific-cyan hover:text-cobalt-blue transition-colors" data-code="${project.code}">
-                                    Ver Detalles &rarr;
+                                <span class="font-bold text-gray-700 mr-3 text-sm">Eval: <span class="${project.evaluation >= 80 ? 'text-green-600' : 'text-orange-500'}">${project.evaluation}</span>/100</span>
+                                <button class="details-btn text-sm font-semibold text-pacific-cyan hover:text-cobalt-blue transition-colors flex items-center" data-code="${project.code}">
+                                    Ver Detalles 
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
                                 </button>
                             </div>
                         </div>
@@ -700,62 +757,74 @@ Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x
                 }
             });
 
+            // Close logic
+            closeButton.onclick = () => { modal.style.display = "none"; document.body.style.overflow = "auto"; };
+            window.onclick = (e) => { if (e.target == modal) { modal.style.display = "none"; document.body.style.overflow = "auto"; }};
+            document.addEventListener('keydown', (event) => { if (event.key === "Escape") { modal.style.display = "none"; document.body.style.overflow = "auto"; }});
+
             function showModal(project, team) {
                 const statusSlug = getStatusSlug(project.status);
                 
+                // Set Header info
+                modalTitle.textContent = project.title;
+                modalCode.textContent = `CÓDIGO: ${project.code} | OBJETIVO: ${project.objective.toUpperCase()}`;
+
                 // Team Lists for Modal
                 const l_list = team.L.length ? team.L.join(', ') : 'Pendiente';
                 const r_list = team.R.length ? team.R.join(', ') : 'Pendiente';
                 const a_list = team.A.length ? team.A.join(', ') : 'Pendiente';
 
                 modalBody.innerHTML = `
-                    <div class="border-b border-gray-200 pb-4 mb-5 flex justify-between items-start">
-                        <div class="pr-8">
-                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wide">${project.objective} &bull; ${project.code}</span>
-                            <h3 class="text-2xl font-bold text-federal-blue mt-1">${project.title}</h3>
-                        </div>
-                        <div class="score-circle ${project.evaluation === 100 ? 'bg-green-500' : 'bg-orange-400'} shadow-lg shrink-0">
-                            ${project.evaluation}
-                        </div>
-                    </div>
-
-                    <div class="grid md:grid-cols-3 gap-6">
+                    <div class="grid md:grid-cols-3 gap-8">
                         <!-- Left Column: Details & Team -->
-                        <div class="md:col-span-1 space-y-4 border-r border-gray-100 pr-4">
-                            <div>
-                                <h4 class="text-sm font-bold text-gray-900 mb-2">Integrantes del Equipo</h4>
-                                <div class="text-sm space-y-2">
-                                    <p><span class="text-xs font-semibold text-green-700 uppercase block">Líder(es)</span> ${l_list}</p>
-                                    <p><span class="text-xs font-semibold text-blue-700 uppercase block">Responsables</span> ${r_list}</p>
-                                    <p><span class="text-xs font-semibold text-gray-500 uppercase block">Apoyo</span> ${a_list}</p>
+                        <div class="md:col-span-1 space-y-6 border-r border-gray-100 pr-4">
+                            
+                            <!-- Score Card -->
+                            <div class="bg-gray-50 p-4 rounded-lg flex items-center justify-between border border-gray-100">
+                                <span class="text-sm font-bold text-gray-600 uppercase">Evaluación</span>
+                                <div class="flex items-end">
+                                    <span class="text-3xl font-bold ${project.evaluation >= 80 ? 'text-green-600' : 'text-orange-500'}">${project.evaluation}</span>
+                                    <span class="text-xs text-gray-400 mb-1 ml-1">/100</span>
                                 </div>
                             </div>
-                            <div class="pt-4 border-t border-gray-100">
-                                <h4 class="text-sm font-bold text-gray-900 mb-1">Indicadores</h4>
-                                <p class="text-xs text-gray-600 mb-2"><strong>Métrica:</strong> ${project.metric}</p>
-                                <p class="text-xs text-gray-600"><strong>Meta:</strong> ${project.indicator}</p>
+
+                            <div>
+                                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Equipo de Trabajo</h4>
+                                <div class="space-y-3 text-sm">
+                                    <div class="p-2 bg-federal-blue/5 rounded border border-federal-blue/10">
+                                        <span class="text-xs font-bold text-federal-blue block mb-1">LÍDER(ES)</span>
+                                        <span class="text-gray-800">${l_list}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs font-bold text-gray-500 block mb-1">RESPONSABLES</span>
+                                        <span class="text-gray-700">${r_list}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs font-bold text-gray-500 block mb-1">APOYO</span>
+                                        <span class="text-gray-600">${a_list}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="pt-2">
-                                <span class="status-badge status-${statusSlug} w-full justify-center">
-                                    <span class="dot"></span> Estado: ${project.status}
-                                </span>
+
+                            <div class="pt-4 border-t border-gray-100">
+                                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Indicadores</h4>
+                                <p class="text-xs text-gray-600 mb-2"><strong class="text-gray-800">Métrica:</strong><br> ${project.metric}</p>
+                                <p class="text-xs text-gray-600"><strong class="text-gray-800">Meta:</strong><br> ${project.indicator}</p>
                             </div>
                         </div>
 
                         <!-- Right Column: Results & Analysis -->
                         <div class="md:col-span-2 space-y-5">
                             <div class="grid gap-4">
-                                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                                    <h5 class="font-bold text-cobalt-blue text-sm mb-2 flex items-center">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                <div class="bg-gray-50 p-5 rounded-lg border-l-4 border-gray-300">
+                                    <h5 class="font-bold text-gray-600 text-sm mb-2 flex items-center">
                                         Resultados Medio Año (Q2)
                                     </h5>
-                                    <p class="text-sm text-gray-700">${project.midYearResults}</p>
+                                    <p class="text-sm text-gray-600 leading-relaxed">${project.midYearResults}</p>
                                 </div>
                                 
-                                <div class="bg-green-50 p-4 rounded-lg border border-green-100 shadow-sm">
+                                <div class="bg-green-50 p-5 rounded-lg border-l-4 border-green-500 shadow-sm">
                                     <h5 class="font-bold text-green-800 text-sm mb-2 flex items-center">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                         Resultados Finales (Cierre 2025)
                                     </h5>
                                     <p class="text-sm text-gray-800 font-medium leading-relaxed">${project.finalResults}</p>
@@ -763,18 +832,21 @@ Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x
                             </div>
 
                             ${project.observations ? `
-                                <div class="bg-yellow-50 p-3 rounded text-sm text-yellow-800 border border-yellow-100">
-                                    <strong>Observaciones:</strong> ${project.observations}
+                                <div class="p-4 rounded text-sm text-gray-700 bg-yellow-50 border border-yellow-100">
+                                    <strong class="text-yellow-800 block mb-1">Observaciones:</strong> 
+                                    ${project.observations}
                                 </div>
                             ` : ''}
 
-                            <div class="text-xs text-gray-500 bg-gray-50 p-3 rounded italic border border-gray-100">
-                                ${project.alignment.replace(/\*\*(.*?)\*\*/g, '<strong class="text-cobalt-blue">$1</strong>')}
+                            <div class="text-xs text-gray-500 bg-white p-4 rounded border border-gray-200">
+                                <strong class="block text-cobalt-blue mb-1">Alineación Estratégica</strong>
+                                ${project.alignment.replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-700">$1</strong>')}
                             </div>
                         </div>
                     </div>
                 `;
                 modal.style.display = "block";
+                document.body.style.overflow = "hidden";
             }
 
             function getStatusSlug(status) {
@@ -785,10 +857,6 @@ Reyna Suazo,Ciencias y Matematicas,x,A,x,A,x,R,x,A,x,A,x,A,R,x,A,A,A,x,x,x,x,x,x
                 if (s.includes('atrasos')) return 'atrasos';
                 return 'sin-iniciar';
             }
-
-            // Modal Closing Logic
-            closeButton.onclick = () => modal.style.display = "none";
-            window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
         });
     </script>
 </body>
