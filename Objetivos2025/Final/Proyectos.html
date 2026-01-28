@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Mejora 2025 - Facultad de Ingeniería UNITEC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Colores de la marca UNITEC */
+        :root {
+            --unitec-federal-blue: #06065C;
+            --unitec-cobalt-blue: #0F4986;
+            --unitec-pacific-cyan: #03AED2;
+            --unitec-vivid-sky-blue: #47C8FD;
+        }
+        .bg-federal-blue { background-color: var(--unitec-federal-blue); }
+        .bg-cobalt-blue { background-color: var(--unitec-cobalt-blue); }
+        .text-pacific-cyan { color: var(--unitec-pacific-cyan); }
+        .text-vivid-sky-blue { color: var(--unitec-vivid-sky-blue); }
+        .border-pacific-cyan { border-color: var(--unitec-pacific-cyan); }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .status-en-desarrollo { background-color: #f59e0b; } /* Amber 500 */
+        .status-con-atrasos { background-color: #ef4444; } /* Red 500 */
+        .status-sin-iniciar { background-color: #6b7280; } /* Gray 500 */
+        .status-completo { background-color: #22c55e; } /* Green 500 */
+
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            padding-top: 60px;
+        }
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 10px;
+            animation: fadeIn 0.5s;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-federal-blue shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <!-- Isotipo UNITEC (SVG) -->
+                <svg class="h-12 w-12 mr-3" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 0L100 25V75L50 100L0 75V25L50 0Z" fill="#03AED2"/>
+                    <path d="M50 0L0 25V75L50 100L100 75V25L50 0ZM50 6.7L93.3 28.3V71.7L50 93.3L6.7 71.7V28.3L50 6.7Z" fill="#06065C"/>
+                    <path d="M50 13.4L6.7 28.3V71.7L50 86.6L93.3 71.7V28.3L50 13.4ZM50 20.1L86.6 36.7V63.3L50 79.9L13.4 63.3V36.7L50 20.1Z" fill="white"/>
+                </svg>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold text-white">Facultad de Ingeniería</h1>
+                    <p class="text-sm text-vivid-sky-blue">Plan de Mejora 2025</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+        <div class="text-center mb-10 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl md:text-3xl font-bold text-cobalt-blue mb-2">Visualización de Proyectos Estratégicos 2025</h2>
+            <p class="text-gray-600 max-w-3xl mx-auto">
+                Bienvenido. Esta herramienta ha sido diseñada para facilitar la visualización y el seguimiento del avance en los objetivos del Plan de Mejora de la Facultad de Ingeniería de UNITEC para el año 2025.
+            </p>
+        </div>
+
+        <!-- Sections for each Strategic Objective -->
+        <div id="projects-board">
+            <!-- Secciones se generarán dinámicamente con JavaScript -->
+        </div>
+    </main>
+
+    <!-- Modal Structure -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content bg-white shadow-2xl">
+            <span class="close-button">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer class="bg-federal-blue text-white text-center p-4 mt-12">
+        <p>&copy; 2025 UNITEC - Facultad de Ingeniería. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        const projectsData = [
+            {
+                title: "Completar la acreditación de Telecomunicaciones y Electrónica con ACAAI.",
+                code: "PRO1A",
+                objective: "Excelencia Académica",
+                metric: "Numero de acreditaciones completadas",
+                indicator: "Acreditacion otorgada por ACAAI",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Acreditacion de Telecomunicaciones completa.",
+                midYearResults: "Se completó el autoestudio; sin embargo, con la vacante en la jefatura de Telecomunicaciones se tuvo que posponer temporalmente el proceso de acreditación. Se espera completar el proceso de revisión del Autoestudio durante Q4 con la nueva incorporación.",
+                observations: "La salida del Jefe Academico de Telecomunicaciones y Electrónica en Tegucigalpa, combinado con el nuevo manual de acreditacion han contribuido para que esta tarea tenga retraso.",
+                alignment: "Este proyecto es fundamental y responde directamente al **Criterio 2 de ABET (Program Educational Objectives)** y al **Componente 7.4 de ACAAI (Mejora Continua del programa)**. La acreditación no solo valida la calidad del programa ante organismos internacionales, sino que también nos obliga a un proceso de autoevaluación y mejora continua."
+            },
+            {
+                title: "Alcanzar la meta de redacción de sílabos por competencias y cuadros de planificación.",
+                code: "PRO1B",
+                objective: "Excelencia Académica",
+                metric: "Porcentaje de sílabos redactados por competencias.",
+                indicator: "100% de sílabos con enfoque en competencias.",
+                status: "En desarrollo, con atrasos",
+                expectedResults: "Implementación total del enfoque en competencias en la Facultad.",
+                midYearResults: "Hay programas en los cuales se ha completado este proyecto, y otros en los cuales aun se tienen muchos documentos pendientes. Es muy importante agendar espacios en agenda para completar los documentos pendientes en lo que resta del año.",
+                observations: "",
+                alignment: "Este proyecto se alinea con el **Criterio 3 de ABET (Student Outcomes)** y el **Componente 2.1 de ACAAI (Documento Curricular)**. La redacción de sílabos por competencias asegura que cada curso contribuya de manera medible al logro de los resultados del estudiante."
+            },
+            {
+                title: "Completar la reforma de los programas de Mecatrónica y Biomédica.",
+                code: "PRO1C",
+                objective: "Excelencia Académica",
+                metric: "Porcentaje de avance en la reforma curricular.",
+                indicator: "Reformas completadas en Mecatrónica y Biomédica.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Planes de estudio modernizados y alineados a necesidades del sector.",
+                midYearResults: "Se seleccionaron consultores para realizar el diagnóstico y se están realizando las respectivas consultas con expertos para discutir los cambios a incorporar en el plan de estudio. Se ha tenido buen avance en el tema.",
+                observations: "",
+                alignment: "Responde al **Criterio 5 de ABET (Curriculum)** y al **Componente 2.2 de ACAAI (Revisión Curricular)**. La reforma periódica es esencial para garantizar que el currículo se mantenga actualizado."
+            },
+            {
+                title: "Diagnóstico de la población estudiantil de la Facultad de Ingeniería para la definición del Perfil del Estudiante de cada Carrera.",
+                code: "PRO1D",
+                objective: "Excelencia Académica",
+                metric: "Elaboración del Diagnóstico de Perfil del Estudiante.",
+                indicator: "Documento de perfil del estudiante por carrera.",
+                status: "Sin iniciar",
+                expectedResults: "Definición clara del perfil de ingreso, egreso, y perfil estudiantil por carrera.",
+                midYearResults: "Este proyecto se realizará haciendo uso de la información levantada en las encuestas realizadas a finales del 2024. No todos los programas alcanzaron representatividad en la encuesta.",
+                observations: "",
+                alignment: "Clave para el **Criterio 1 de ABET (Students)** y el **Componente 1.4 de ACAAI (Definición de Perfiles)**, permitiendo monitorear el progreso del estudiante y ofrecer apoyo."
+            },
+            {
+                title: "Revisión y actualización del modelo educativo institucional.",
+                code: "PRO1E",
+                objective: "Excelencia Académica",
+                metric: "Actualización del modelo educativo institucional.",
+                indicator: "Documento de modelo educativo actualizado.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Modelo educativo alineado con tendencias actuales de formación.",
+                midYearResults: "Se ha avanzado en la actualización del modelo educativo con socializaciones y talleres programadas durante este período académico.",
+                observations: "",
+                alignment: "Abarca el **Criterio 5 de ABET (Curriculum)** y el **Componente 2.3 de ACAAI (Metodología de Enseñanza-Aprendizaje)**."
+            },
+            {
+                title: "Acciones que sumen a la cultura del aprendizaje (Tutorías, Talleres, charlas, etc.) impartidas por personal de la FI.",
+                code: "PRO1F",
+                objective: "Excelencia Académica",
+                metric: "Número de tutorías y talleres realizados.",
+                indicator: "Al menos 10 tutorías/talleres al año a nivel de Facultad",
+                status: "En desarrollo, con atrasos",
+                expectedResults: "Apoyo continuo a los estudiantes en su formación.",
+                midYearResults: "Este proyecto reune una serie de acciones que suman a la cultura de aprendizaje. En el se incluyen Talleres y cursos que son brindados por el equipo de la Facultad de Ingeniería hacia docentes y estudiantes de forma extracurricular. Se ha tenido buena participación. Se han tenido varias iniciativas hacia Admisiones, en colaboracion con IPG, IEDD, y con Desarrollo Curricular. Tambien hay iniciativas extracriculares dentro de los distintos programas. Es importante guardar evidencias de estos talleres, tutorias y charlas.",
+                observations: "Guardar evidencias de las iniciativas para entrega en la evaluación final.",
+                alignment: "Apoya el **Criterio 1 de ABET (Students)** y el **Componente 6.5 de ACAAI (Consejería Estudiantil)**."
+            },
+            {
+                title: "Coordinación de visitas entre los campus para articulación de docentes y estudiantes.",
+                code: "PRO1G",
+                objective: "Excelencia Académica",
+                metric: "Número de visitas entre campus coordinadas.",
+                indicator: "Al menos 2 visitas semestrales entre campus.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Mayor articulación entre docentes y estudiantes.",
+                midYearResults: "Se ha logrado mayor integración entre los equipos en TGU y SPS alcanzando múltiples movilidades entre los campus cada período académico.",
+                observations: "",
+                alignment: "Impacta positivamente en el **Criterio 6 de ABET (Faculty)** y el **Componente 5.1 de ACAAI (Personal Académico)**."
+            },
+            {
+                title: "Mejorar la tasa de éxito en la clase Introducción al Álgebra.",
+                code: "PRO1H",
+                objective: "Excelencia Académica",
+                metric: "Tasa de aprobación en Introducción al Álgebra.",
+                indicator: "Incremento del 10% en la tasa de aprobación.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Mejora en el desempeño de los estudiantes en cursos iniciales.",
+                midYearResults: "Se han documentado numerosas iniciativas para revertir la tendencia en Introducción al Algebra. Estas incluyen sesiones de tutorias con docente, reasignación de carga académica, mejor control en el tamaño de las secciones, utilización de herramientas tecnologicas nuevas (WACOM, IA, etc), implementación de metodologías activas, incorporación en areas transversales de la universidad mediante Ser+, contextualización de la temática, actividades varias motivando la participación activa de los estudiantes y grupos foco para conocer la perspectiva estudiantil.",
+                observations: "A pesar de los esfuerzos, no se ha podido percibir una reversión de la tendencia a finales de Q2.",
+                alignment: "Ejemplo de aplicación del **Criterio 4 de ABET (Continuous Improvement)** y el **Componente 7.4 de ACAAI (Mejora Continua del programa)**."
+            },
+            {
+                title: "Acciones que motiven el uso del FabLab.",
+                code: "PRO1I",
+                objective: "Excelencia Académica",
+                metric: "Numero de estudiantes participando en eventos e el FabLab",
+                indicator: "Al menos 500 estudiantes interactuado en el FabLab EN 2025",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Incremento en participación estudiantil en iniciativas innovadoras.",
+                midYearResults: "La actividad dentro del FabLab se mantiene en alza durante el período académico con proyectos extracurriculares y académicos. Las actividades alcanzan la capacidad operativa a partir de Semana 8.",
+                observations: "",
+                alignment: "Se relaciona con el **Criterio 7 de ABET (Facilities)** y el **Componente 8.4 de ACAAI (Recursos Tecnológicos e Informáticos)**."
+            },
+            {
+                title: "Realización de concursos, hackathons, competencias y rallies que impulsen la innovación.",
+                code: "PRO1J",
+                objective: "Excelencia Académica",
+                metric: "Numero de eventos realizados",
+                indicator: "Al menos 3 eventos (hackathons, rallies, concursos) al año.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Incremento en la variedad de servicios ofrecidos por el FabLab",
+                midYearResults: "Se han realizado múltiples hackathon, rallies y competencias para motivar la participación estudiantil. Estas han tenido duración y modalidades diferentes para permitir variedad. Existen todavia múltiples oportunidades que se pueden desarrollar en colaboración con socios externos.",
+                observations: "Se han planteado mayor variedad de servicios que se podrían ofrecer a traves del FabLab incluyendo examenes de certificación, servicios profesionales técnicos, y planteando a Unitec como proveedor de insumos para que empresas puedan realizar actividades de RSE.",
+                alignment: "Contribuye al **Criterio 3 de ABET (Student Outcomes)** y al **Componente 6.3 de ACAAI (Formación Humanística y Ciudadana)**."
+            },
+            {
+                title: "Participacion en el Comité de Innovación Educativa",
+                code: "PRO1K",
+                objective: "Excelencia Académica",
+                metric: "Participación en el Comité de Innovación Educativa.",
+                indicator: "Presencia de representantes de la Facultad en todas las reuniones.",
+                status: "En desarrollo, con atrasos",
+                expectedResults: "Facultad de Ingeniería aportando activamente a la innovación educativa.",
+                midYearResults: "Se ha tenido participación activa dentro del Comité de Innovación Educativa. El equipo ha contribuido información solicitada para el levantamiento correspondiente y el análisis se ha comenzado",
+                observations: "",
+                alignment: "Vital para la **Mejora Continua (Criterio 4 ABET, Componente 7.4 ACAAI)**."
+            },
+            {
+                title: "Transversalización de los ODS en el currículo.",
+                code: "PRO2A",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Porcentaje de cursos con ODS transversalizados.",
+                indicator: "Al menos 50% de los programas integran ODS.",
+                status: "En desarrollo, con atrasos",
+                expectedResults: "Mayor impacto social de la formación académica.",
+                midYearResults: "Este proyecto ha estado pendiente y requiere de reestablecerse.",
+                observations: "La salida del anterior Jefe Académico de Ciencias y Matemáticas contribuyó al retraso de este proyecto.",
+                alignment: "Crucial para cumplir con el **Criterio 3 de ABET** (responsabilidades éticas y profesionales) y el **Componente 1.1.3 de ACAAI** (condiciones ambientales)."
+            },
+            {
+                title: "Acciones que sumen a la visibilidad institucional (Proyectos de Vinculación, Investigación, Colaboración Industrial, Eventos Alumni, Expo FI, Mecatón, Bootcamps, etc.).",
+                code: "PRO2B",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de eventos y proyectos realizados.",
+                indicator: "Al menos 10 eventos/proyectos estratégicos implementadosa nivel de Facultad.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Mayor posicionamiento de la Facultad en el ecosistema académico e industrial.",
+                midYearResults: "Se ha mejorado sustancialmente la visibilidad de los proyectos realizados en la FI. Se han mantenido en desarrollo de forma trimestral la ExpoFI y el Mecatón. Se han sumado a estos eventos una serie de eventos, participaciones, y representaciones que permiten incrementar la visibilidad institucional. Se ha incorporado la participación de Alumni en la ceremonia de firma de acta en FI SPS, y está próximo a coordinarse de forma similar en FI TGU.",
+                observations: "",
+                alignment: "Se vincula con el **Criterio 2 de ABET (Program Educational Objectives)** y fortalece el **Componente 4 de ACAAI (Extensión y Vinculación del Programa)**."
+            },
+            {
+                title: "Formación de 4 Industry Advisory Boards y realización de 2 sesiones para cada uno.",
+                code: "PRO2C",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de Industry Advisory Boards formados.",
+                indicator: "4 IAB formados con al menos 2 sesiones cada uno.",
+                status: "En desarrollo, con atrasos",
+                expectedResults: "Conexión efectiva entre academia e industria.",
+                midYearResults: "Aunque se avanzó en la definición de agendas y listado de participantes para conformar los IAB, no se ha logrado concretar sesiones para niguno de ellos. Esta tarea es imperativa para los objetivos de la facultad, y es muy importante que se alcance a concretar al menos 1 sesión por IAB.",
+                observations: "",
+                alignment: "Requisito explícito para la **Mejora Continua (Criterio 4 ABET)** y fundamental para el **Componente 1.1 de ACAAI (Demandas del entorno)**."
+            },
+            {
+                title: "Formación de relaciones que sumen internacionalidad al currículo existente.",
+                code: "PRO2D",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de actividades de internacionalización realizadas.",
+                indicator: "Al menos 5 acciones de internacionalización a ivel de Facultad(COIL, viajes académicos, masterclass, etc.).",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Mayor exposición internacional del estudiantado y docencia.",
+                midYearResults: "Se ha participado y apoyado iniciativas de diferentes naturalezas para impulsar las relaciones internacionales de la Facultad de Ingeniería. Esto ha incluido, representacion en conferencias internacionales por los miembros de la FI, participación como anfitrión del 3er Encuentro Trinacional de universidades, apoyo y participación con invitados internacionales durante CONICIETI, conformación de agenda para delegaciones invitadas de Chile, Colombia, Guatemala, El Salvador, EEUU, Mexico, Costa Rica; se han explorado y desarrollado nuevas iniciativas de Viajes Académicos, y se continua expandiendo la oferta actual.",
+                observations: "",
+                alignment: "Enriquece el **Currículo (Criterio 5 ABET)** y ayuda a los estudiantes a comprender el **contexto global (Criterio 3 ABET)**."
+            },
+            {
+                title: "Propuesta en fondos externos para mejora del currículo (Erasmus+, o grants mediante organizaciones internacionales).",
+                code: "PRO2E",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de propuestas presentadas.",
+                indicator: "Al menos 1 propuesta enviada anualmente a nivel de Facultad",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Oportunidades de financiamiento para fortalecer programas académicos.",
+                midYearResults: "Se realizó y se presentó una propuesta Erasmus+ y se cuenta con la retroalimentación correspondiente. La oferta fue calificada positivamente pero no recibió fondos.",
+                observations: "Se recibió la información rechazando la propuesta en Julio 2025. El miembro del equipo que recibió la capacitación para la participación en propuestas de esta naturaleza ya no labora con la institución.",
+                alignment: "Apoya el **Criterio 8 de ABET (Institutional Support)** y se relaciona con el **Componente 3.4 de ACAAI (Recursos para la Investigación)**."
+            },
+            {
+                title: "Acciones que sumen internacionalidad al currículo existente (COIL, Viajes Académicos, Masterclass, etc.).",
+                code: "PRO2F",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de actividades implementadas.",
+                indicator: "Al menos 1 accion de internacionalidad implementada en cada programa de la FI",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Inclusión de estrategias internacionales en el currículo.",
+                midYearResults: "Se ha logrado la participación de estudiantes de la Facultad de Ingeniería en una variedad de participaciones internacionales. Estas incluyen experiencias internacionales cortas en El Salvador, Guatemala, Viajes académicos a España, Bélgica y Colombia. Se ha incrementado la cantidad de Master Class que se han brindado y se continuan coordinando nuevas oportuidades.",
+                observations: "",
+                alignment: "Enriquece el **Currículo (Criterio 5 ABET)** y prepara para un **contexto global (Criterio 3 ABET)**."
+            },
+            {
+                title: "Implementación del programa de docentes visitantes.",
+                code: "PRO2G",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Número de docentes visitantes incorporados.",
+                indicator: "Al menos 3 docentes visitantes activos en programas académicos.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Diversificación de la oferta académica con expertos internacionales.",
+                midYearResults: "Se ha tenido una variedad de participaciones por parte de docentes e invitados internacionales dentro de los programas de la FI. Estas van desde charlas presenciales por invitados internacionales de la Univ de Chile, Purdue University, New Mexico Community College, Virginia Commonwealth University, y Seattle Pacific University. Se ha planeado la incorporación al programa de Docentes Visitantes de egresados, investigadores, autoridades administrativas, y docentes de: CalTech, Purdue, FAU, PUCP, y LACCEI. Se están explorando nuevas avenidas mediante la incorporación de algunos de estos docentes a la oferta de Educación Continua.",
+                observations: "",
+                alignment: "Fortalece al **Cuerpo Docente (Criterio 6 ABET)** y al **Personal Académico (Componente 5.1 ACAAI)**."
+            },
+            {
+                title: "Activación de la presencia en LinkedIn de los miembros de la Facultad de Ingeniería.",
+                code: "PRO2H",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Porcentaje de miembros de la FI con perfil activo y actualizado en LinkedIn.",
+                indicator: "Al menos el 80% de los miembros de la FI con perfil actualizado y vinculado a la Facultad.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Mayor difusión del perfil académico y profesional de los docentes, fortaleciendo la red de contactos institucionales.",
+                midYearResults: "Se ha mejorado la presencia en LinkedIn de los logros y eventos en los cuales se involucran los miembros de la Facultad de Ingeniería.",
+                observations: "",
+                alignment: "Apoya la **visibilidad y reputación del programa**, impactando indirectamente en todos los criterios."
+            },
+            {
+                title: "Conformación de un Portafolio de Proyectos de FI y publicación en un micrositio.",
+                code: "PRO2I",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Micrositio activo con proyectos publicados.",
+                indicator: "Al menos 10 proyectos publicados en el micrositio.",
+                status: "En desarrollo, con atrasos",
+                expectedResults: "Visibilidad institucional mejorada.",
+                midYearResults: "Se han estructurado los recursos del portafolio pero aún no se ha incorporado en un micrositio.",
+                observations: "",
+                alignment: "Se alinea con el **Componente 1.3 de ACAAI (Divulgación y promoción del programa)**."
+            },
+            {
+                title: "Conformación de una Presentación Institucional de la Facultad de Ingeniería que contenga información relevante sobre la Facultad.",
+                code: "PRO2J",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Documento de presentación institucional elaborado y actualizado.",
+                indicator: "Presentación institucional diseñada y compartida con stakeholders clave.",
+                status: "En desarrollo, con atrasos",
+                expectedResults: "Material oficial que facilite la promoción de la Facultad ante aliados estratégicos.",
+                midYearResults: "Se tiene una presentación institucional que se ha utilizado en el pasado para la Facultad de Ingeniería basada en la presentación institucional utilizada por Rectoría desde el 2023, sin embargo se ha iniciado una nueva propuesta con mercadeo. Se ha brindado la información e insumos necesarios para su elaboración.",
+                observations: "",
+                alignment: "Herramienta clave para la **Divulgación y promoción del programa (Componente 1.3 ACAAI)**."
+            },
+            {
+                title: "Organización y realización de la Semana Internacional de Ingeniería 2025.",
+                code: "PRO2K",
+                objective: "Visibilidad e Incidencia Institucional",
+                metric: "Semana Internacional realizada con éxito.",
+                indicator: "Participación de al menos 1 institucion relevante a cada programa de la FI",
+                status: "Completo",
+                expectedResults: "Fortalecimiento de la vinculación institucional",
+                midYearResults: "La Semana Internacional de Ingeniería se realizó  con éxito. Se logró concretar la visita presencial por una autoridad administrativa de Purdue University. Se logró triangular una reunión con Hondufuturo y Purdue para poder pensar en canalizar oportunidades para egresado de Unitec en el futuro cercano.",
+                observations: "",
+                alignment: "Contribuye a la **internacionalización y enriquecimiento del currículo (Criterio 5 ABET, Componente 3.3 ACAAI)**."
+            },
+            {
+                title: "Implementar herramientas para mejorar la visibilidad y seguimiento de pendientes en la Facultad de Ingeniería.",
+                code: "PRO3A",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Implementación de herramientas de gestión y seguimiento.",
+                indicator: "Herramienta operativa y utilizada activamente.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Mejor control y seguimiento de actividades en la Facultad.",
+                midYearResults: "Se ha comenzado la integración de la matriz de responsabilidades de la facultad de Ingeniería dentro del software Microsoft Teams. Se ha adelantado en la incoporacion de los proyectos y resta la asignación de responsabilidades para la entrega de evidencias. Tambien se ha hecho un esfuerzo por mejorar el avance en diferentes objetivos con el equipo de la Facultad de Ingeniería de ambos campus.",
+                observations: "",
+                alignment: "Fundamental para una gestión eficiente, alineándose con el **Criterio 8 de ABET (Institutional Support)** y el **Componente 7 de ACAAI (Gestión Académica del Programa)**."
+            },
+            {
+                title: "Revisión de cumplimiento de normas de seguridad y señalización en laboratorios y espacios especializados.",
+                code: "PRO3B",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Evaluación de seguridad en laboratorios y espacios especializados.",
+                indicator: "100% de laboratorios cumplen normas de seguridad.",
+                status: "En desarrollo, con atrasos",
+                expectedResults: "Entorno seguro para la práctica académica.",
+                midYearResults: "No se tiene información completa sobre el avance de este objetivo.",
+                observations: "Es muy importante documentar avances.",
+                alignment: "Responde directamente al **Criterio 7 de ABET (Facilities)** y se enmarca en el **Componente 8.3 de ACAAI (Prevención, Seguridad, Riesgos y Desastres)**."
+            },
+            {
+                title: "Organización de talleres técnicos para la formación docente (FabLab, Lab. de Ing. Civil, Taller de Máquinas Herramientas, Lab. de Química, Lab. de Física, Lab. de Automatización).",
+                code: "PRO3C",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Número de talleres técnicos realizados.",
+                indicator: "Al menos 3 talleres impartidos anualmente, cubriendo las áreas mencionadas.",
+                status: "En desarrollo, con atrasos",
+                expectedResults: "Docentes capacitados en el uso de laboratorios y tecnología para mejorar la enseñanza.",
+                midYearResults: "Se han tenido talleres técnicos en formación docente dirigidos hacia investigación con participantes de 6 diferentes universidades, y otros esfuerzos. Se espera que en Q3 y Q4 se pueda tener mayor participación.",
+                observations: "Es muy importante documentar avances.",
+                alignment: "Fortalece las competencias del **Cuerpo Docente (Criterio 6 ABET)** y del **Personal Académico (Componente 5.2 ACAAI)**."
+            },
+            {
+                title: "Apoyo a las solicitudes de las áreas de Prospección y Admisiones (Science Fairs, Technology Day, Bootcamps, etc.).",
+                code: "PRO3D",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Número de eventos de prospección apoyados.",
+                indicator: "Participación de la Facultad en el 80% de los eventos solicitados.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Mayor visibilidad y atracción de estudiantes potenciales hacia las carreras de ingeniería.",
+                midYearResults: "Se ha colaborado en todas las solicitudes de Admisiones y prospección, incluyendo apoyo a recorridos múltiples veces a la semana, así como Open Campus, Sesion de Preguntas y Respuestas, Science Fairs, Technology Day, Bootcamps, y el nuevo Vocational Trip.",
+                observations: "",
+                alignment: "Apoya la sostenibilidad del programa, relacionándose con el **Criterio 8 de ABET (Institutional Support)** y el **Componente 1.3 de ACAAI (Divulgación y promoción)**."
+            },
+            {
+                title: "Apoyo a proyectos institucionales (1Mentor, Unitec4Life, EMI English Empowerment, Credenciales Digitales, Empower U, Ser+`, Direccion de Gestion Academica).",
+                code: "PRO3E",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Número de proyectos institucionales con participación de la Facultad.",
+                indicator: "Involucramiento en al menos 4 proyectos estratégicos de la institución.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Integración activa de la Facultad en iniciativas clave de la universidad.",
+                midYearResults: "Se ha documentado el apoyo y participación de personal de la Facultad de Ingeniería en apoyo a: 1Mentor, Unitec4Life, EMI, Proyecto de Credenciales Digitales, y Ser+",
+                observations: "",
+                alignment: "Demuestra fuerte **Soporte Institucional (Criterio 8 ABET)** y una **Gestión Académica (Componente 7 ACAAI)** proactiva."
+            },
+            {
+                title: "Articulación de la Facultad de Ingeniería con el área de Formación Continua para la planificación de Certificados de Formación Profesional.",
+                code: "PRO3F",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Número de certificados diseñados en colaboración con Formación Continua.",
+                indicator: "Desarrollo de al menos 1 certificado de formación profesional alineados a la industria, por campus",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Ampliación de la oferta académica con cursos que fortalezcan la empleabilidad de los egresados.",
+                midYearResults: "Se ha incrementado el contacto con educación continua para intentar generar nuevas oportunidades de formación impartidas por docentes de la Facultad de Ingeniería. Se colabora con contactos compartidos en industria, contactos académicos internacionales, docentes de la Facultad, así como en la generación de ideas para nuevas oportunidades. Se han prospectado propuestas varias que no se han concretado.",
+                observations: "",
+                alignment: "Se alinea con el **aprendizaje continuo (Criterio 3 ABET)** y fortalece la **Vinculación del programa (Componente 4.2 ACAAI)**."
+            },
+            {
+                title: "Acciones que sumen transversalmente a las metas de la Facultad de Ingeniería (Proyectos y funciones fuera del descriptor de puesto y desempeño).",
+                code: "PRO3G",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Número de iniciativas de colaboración interdisciplinaria dentro de la Facultad.",
+                indicator: "Registro de al menos 1 accion transversal por colaborador que impacte positivamente en la Facultad.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Mayor sinergia y trabajo colaborativo en iniciativas que fortalezcan el desarrollo institucional.",
+                midYearResults: "Se ha tenido una integración completa de los miembros de la Facultad en el cumplimiento de objetivos de forma transversal.",
+                observations: "",
+                alignment: "Un equipo cohesionado es la base para un **Soporte Institucional (Criterio 8 ABET)** y una **Gestión Académica (Componente 7 ACAAI)** de calidad."
+            },
+            {
+                title: "Realización del Plan de Inversión a 5 años de la Facultad de Ingeniería.",
+                code: "PRO3H",
+                objective: "Eficiencia en el uso de recursos",
+                metric: "Plan de inversión a 5 años elaborado.",
+                indicator: "Documento de plan validado y aprobado.",
+                status: "En desarrollo, a tiempo",
+                expectedResults: "Plan estratégico de inversión para optimizar recursos.",
+                midYearResults: "Se contó con la participación y colaboración del equipo completo de la Facultad de Ingeniería en Campus TGU y SPS para la generación de una propuesta de Capex para los próximos 5 años. Esta propuesta aún se encuentra en proceso de aprobación, sin embargo representa una imagen bastante completa de una ruta clara hacia metas concretas.",
+                observations: "Enlace al plan: https://capexfi25-30.netlify.app/presentacioncapexwebsite/",
+                alignment: "Materializa el compromiso con la mejora de las **Instalaciones (Criterio 7 ABET)** y los **Recursos (Componente 8 ACAAI)**."
+            }
+        ];
+
+        const objectives = [
+            { title: "Excelencia Académica", color: "bg-cobalt-blue" },
+            { title: "Visibilidad e Incidencia Institucional", color: "bg-pacific-cyan" },
+            { title: "Eficiencia en el uso de recursos", color: "bg-vivid-sky-blue" }
+        ];
+
+        const board = document.getElementById('projects-board');
+        const modal = document.getElementById('projectModal');
+        const modalBody = document.getElementById('modalBody');
+        const closeButton = document.querySelector('.close-button');
+
+        // Agrupar proyectos por objetivo
+        const projectsByObjective = projectsData.reduce((acc, project) => {
+            // Normalizar el nombre del objetivo para la clave
+            const objectiveKey = project.objective.split('. ')[1] || project.objective;
+            if (!acc[objectiveKey]) {
+                acc[objectiveKey] = [];
+            }
+            acc[objectiveKey].push(project);
+            return acc;
+        }, {});
+
+        // Función para obtener la clase de color del estado
+        const getStatusClass = (status) => {
+            if (status.toLowerCase().includes('con atrasos')) return 'status-con-atrasos';
+            if (status.toLowerCase().includes('en desarrollo')) return 'status-en-desarrollo';
+            if (status.toLowerCase().includes('sin iniciar')) return 'status-sin-iniciar';
+            if (status.toLowerCase().includes('completo')) return 'status-completo';
+            return 'bg-gray-400';
+        };
+        
+        // Renderizar el tablero de proyectos
+        objectives.forEach(obj => {
+            const objectiveProjects = projectsByObjective[obj.title] || [];
+            if (objectiveProjects.length > 0) {
+                const sectionHtml = `
+                    <section class="mb-12">
+                        <div class="flex items-center mb-6">
+                            <div class="w-3 h-8 ${obj.color} rounded-r-full mr-4"></div>
+                            <h3 class="text-2xl font-bold ${obj.title === 'Excelencia Académica' ? 'text-cobalt-blue' : obj.title === 'Visibilidad e Incidencia Institucional' ? 'text-pacific-cyan' : 'text-vivid-sky-blue' }">${obj.title}</h3>
+                        </div>
+                        <div class="card-container">
+                            ${objectiveProjects.map(project => `
+                                <div class="project-card bg-white p-5 rounded-lg shadow-md border-l-4 border-pacific-cyan cursor-pointer" data-code="${project.code}">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <h4 class="font-bold text-lg text-cobalt-blue">${project.title}</h4>
+                                        <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">${project.code}</span>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <span class="status-dot ${getStatusClass(project.status)}"></span>
+                                        <span>${project.status}</span>
+                                    </div>
+                                    <div class="mt-4 text-right">
+                                        <button class="text-sm font-semibold text-pacific-cyan hover:text-cobalt-blue" data-code="${project.code}">Ver más &rarr;</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+                board.innerHTML += sectionHtml;
+            }
+        });
+
+        // Funcionalidad del Modal
+        board.addEventListener('click', (e) => {
+            if (e.target.closest('.project-card') || e.target.tagName === 'BUTTON') {
+                const card = e.target.closest('.project-card') || document.querySelector(`.project-card[data-code="${e.target.dataset.code}"]`);
+                const projectCode = card.dataset.code;
+                const project = projectsData.find(p => p.code === projectCode);
+                if (project) {
+                    showModal(project);
+                }
+            }
+        });
+
+        function showModal(project) {
+            modalBody.innerHTML = `
+                <div class="border-b-2 border-gray-200 pb-4 mb-4">
+                    <h3 class="text-2xl font-bold text-cobalt-blue">${project.title}</h3>
+                    <p class="text-sm text-gray-500">Código: ${project.code}</p>
+                </div>
+                <div class="space-y-4 text-gray-700">
+                    <div><strong class="font-semibold text-gray-800">Estado:</strong> <span class="inline-flex items-center"><span class="status-dot ${getStatusClass(project.status)}"></span>${project.status}</span></div>
+                    <div><strong class="font-semibold text-gray-800">Métrica de Avance:</strong> ${project.metric}</div>
+                    <div><strong class="font-semibold text-gray-800">Indicador de Éxito:</strong> ${project.indicator}</div>
+                    <div class="pt-2"><strong class="font-semibold text-gray-800">Resultados Esperados:</strong><p class="mt-1">${project.expectedResults}</p></div>
+                    <div class="pt-2"><strong class="font-semibold text-gray-800">Resultados a Medio Año (Q2 2025):</strong><p class="mt-1">${project.midYearResults}</p></div>
+                    <div class="pt-2"><strong class="font-semibold text-gray-800">Observaciones:</strong><p class="mt-1">${project.observations || 'N/A'}</p></div>
+                    <div class="pt-2 mt-4 bg-blue-50 p-4 rounded-lg border-l-4 border-cobalt-blue"><strong class="font-semibold text-cobalt-blue">Justificación y Alineación Estratégica:</strong><p class="mt-1 text-sm">${project.alignment.replace(/\*\*(.*?)\*\*/g, '<strong class=\"text-cobalt-blue\">$1</strong>')}</p></div>
+                </div>
+            `;
+            modal.style.display = "block";
+        }
+
+        closeButton.onclick = () => {
+            modal.style.display = "none";
+        };
+
+        window.onclick = (event) => {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+
+    </script>
+</body>
+</html>
