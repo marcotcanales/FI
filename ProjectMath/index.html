@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNITEC | Informe Estratégico Académico</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts: Poppins ONLY -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', // Federal Blue - Primary
+                            cyan: '#03AED2',    // Pacific Cyan - Accent
+                            sky: '#47C8FD',     // Vivid Sky Blue - Light Accent
+                            cobalt: '#GF4986',  // Cobalt Blue (Reddish) - Rarely used
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #F8FAFC; }
+        
+        /* Custom Scrollbar for sleek look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Animation */
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Diamond Bullet for lists */
+        .diamond-bullet {
+            width: 8px;
+            height: 8px;
+            background-color: #03AED2;
+            transform: rotate(45deg);
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        /* Tab Logic */
+        .tab-btn {
+            position: relative;
+            color: #64748b;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background-color: #03AED2; /* Pacific Cyan underline */
+            transition: width 0.3s ease;
+        }
+        .tab-btn.active {
+            color: #06065C; /* Federal Blue */
+            font-weight: 700;
+        }
+        .tab-btn.active::after {
+            width: 100%;
+        }
+
+        /* Sidebar Button Active State */
+        .campus-btn.active-campus {
+            background-color: #06065C;
+            color: white;
+            border-left: 4px solid #03AED2;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+    <!-- Header: Federal Blue Background for Authority -->
+    <header class="bg-unitec-federal text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- Brand Identity: Isotype + Logo -->
+            <div class="flex items-center gap-4">
+                <!-- SVG Recreation of UNITEC Logo (Diamond Isotype + Text) -->
+                <div class="flex items-center gap-3 select-none">
+                    <!-- Isotype: The Diamond -->
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="50" y="5" width="64" height="64" transform="rotate(45 50 5)" fill="#03AED2"/> <!-- Pacific Cyan -->
+                        <path d="M50 5 L95 50 L50 95 L5 50 Z" fill="#03AED2"/>
+                        <path d="M50 5 L50 95" stroke="white" stroke-width="2" stroke-opacity="0.3"/> <!-- Facet Line -->
+                        <path d="M5 50 L95 50" stroke="white" stroke-width="2" stroke-opacity="0.3"/> <!-- Facet Line -->
+                    </svg>
+                    <!-- Logotype: unitec (lowercase, Poppins) -->
+                    <span class="font-bold text-3xl tracking-tight leading-none text-white">unitec</span>
+                </div>
+                
+                <div class="hidden md:block w-px h-10 bg-white/20 mx-2"></div>
+                
+                <div>
+                    <h1 class="text-lg font-semibold tracking-wide leading-tight text-unitec-sky">Vicerrectoría Académica</h1>
+                    <p class="text-xs text-white/80 font-light">Informe de Capacidad & Estrategia Docente</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <span class="bg-white/10 text-white px-4 py-1.5 rounded-md text-xs font-medium border border-white/20 backdrop-blur-sm">
+                    <i class="fas fa-clock mr-2 text-unitec-cyan"></i> Q1 2025 - Q1 2026
+                </span>
+                <div class="w-8 h-8 rounded-full bg-unitec-cyan flex items-center justify-center text-unitec-federal font-bold text-xs">
+                    VA
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10">
+
+        <!-- Navigation Tabs -->
+        <div class="flex border-b border-slate-200 mb-8 gap-8">
+            <button onclick="showSection('tarea1')" id="btn-tarea1" class="tab-btn active pb-3 px-1 text-sm focus:outline-none">
+                Tarea 1: Análisis de Demanda
+            </button>
+            <button onclick="showSection('tarea2')" id="btn-tarea2" class="tab-btn pb-3 px-1 text-sm focus:outline-none">
+                Tarea 2: Radiografía Docente
+            </button>
+        </div>
+
+        <!-- SECTION: TAREA 1 -->
+        <section id="tarea1" class="fade-in">
+            
+            <!-- Dashboard Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Left Sidebar: Controls -->
+                <div class="lg:col-span-3 space-y-6">
+                    <!-- Control Panel -->
+                    <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 bg-slate-50 border-b border-slate-200">
+                            <h4 class="font-bold text-unitec-federal text-sm uppercase tracking-wide">Selección de Sede</h4>
+                        </div>
+                        <div class="flex flex-col divide-y divide-slate-100">
+                            <!-- Unitec Section -->
+                            <div class="bg-slate-50 px-4 py-2 text-xs font-bold text-slate-400 uppercase mt-2">Campus UNITEC</div>
+                            <button onclick="loadCampusData('unitec_tgu')" class="campus-btn active-campus text-left px-4 py-3 text-sm transition-colors hover:bg-slate-50" id="btn-unitec-tgu">UNITEC TGU</button>
+                            <button onclick="loadCampusData('unitec_sps')" class="campus-btn text-left px-4 py-3 text-sm transition-colors hover:bg-slate-50" id="btn-unitec-sps">UNITEC SPS</button>
+                            
+                            <!-- Ceutec Section -->
+                            <div class="bg-slate-50 px-4 py-2 text-xs font-bold text-slate-400 uppercase">Sedes CEUTEC</div>
+                            <button onclick="loadCampusData('ceutec_tgu')" class="campus-btn text-left px-4 py-3 text-sm transition-colors hover:bg-slate-50" id="btn-ceutec-tgu">CEUTEC TGU</button>
+                            <button onclick="loadCampusData('ceutec_sps')" class="campus-btn text-left px-4 py-3 text-sm transition-colors hover:bg-slate-50" id="btn-ceutec-sps">CEUTEC SPS</button>
+                            <button onclick="loadCampusData('ceutec_lce')" class="campus-btn text-left px-4 py-3 text-sm transition-colors hover:bg-slate-50" id="btn-ceutec-lce">CEUTEC LCE</button>
+                            
+                            <!-- Totals Section -->
+                            <div class="bg-slate-50 px-4 py-2 text-xs font-bold text-slate-400 uppercase">Consolidados</div>
+                            <button onclick="loadCampusData('total_unitec')" class="campus-btn text-left px-4 py-3 text-sm font-semibold text-unitec-federal transition-colors hover:bg-slate-50" id="btn-total-unitec">TOTAL UNITEC</button>
+                            <button onclick="loadCampusData('total_ceutec')" class="campus-btn text-left px-4 py-3 text-sm font-semibold text-unitec-federal transition-colors hover:bg-slate-50" id="btn-total-ceutec">TOTAL CEUTEC</button>
+                            <button onclick="loadCampusData('grand_total')" class="campus-btn text-left px-4 py-3 text-sm font-bold text-unitec-federal transition-colors hover:bg-slate-50 border-t-2 border-slate-100" id="btn-grand-total">GRAN TOTAL</button>
+                        </div>
+                    </div>
+
+                    <!-- Methodology Summary (Compact) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-5">
+                        <h4 class="font-bold text-unitec-federal text-sm mb-4">Metodología Aplicada</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-xs text-slate-600">
+                                <span class="diamond-bullet mt-1"></span>
+                                <span>Descarga de carga histórica consolidada (Q1 2025 - Q1 2026).</span>
+                            </li>
+                            <li class="flex items-start text-xs text-slate-600">
+                                <span class="diamond-bullet mt-1"></span>
+                                <span>Tablas dinámicas por materia y tipo de sección.</span>
+                            </li>
+                            <li class="flex items-start text-xs text-slate-600">
+                                <span class="diamond-bullet mt-1"></span>
+                                <span>Análisis de máximos y promedios para estimación.</span>
+                            </li>
+                            <li class="flex items-start text-xs text-slate-600">
+                                <span class="diamond-bullet mt-1"></span>
+                                <span>Factor de ajuste por Jefaturas y áreas cruzadas.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Main Content: Data Visualization -->
+                <div class="lg:col-span-9 space-y-6">
+                    
+                    <!-- KPI Card -->
+                    <div class="bg-white rounded-lg shadow-sm border-l-4 border-unitec-cyan p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div>
+                            <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">Propuesta de Planta Docente</p>
+                            <h2 class="text-4xl font-bold text-unitec-federal" id="rec-total">Cargando...</h2>
+                            <p class="text-sm text-unitec-cyan font-medium mt-1" id="rec-detail">Seleccione una sede</p>
+                        </div>
+                        <div class="bg-slate-50 px-6 py-3 rounded border border-slate-200 text-right">
+                            <p class="text-xs text-slate-500">Nota Técnica</p>
+                            <p class="text-xs text-slate-700 max-w-xs leading-relaxed" id="campus-notes">El cálculo considera docentes con carga completa.</p>
+                        </div>
+                    </div>
+
+                    <!-- Chart Section -->
+                    <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-unitec-federal">Tendencia de Secciones (MAT/FIS)</h3>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded">Visualización Q1-Q1</span>
+                        </div>
+                        <div class="relative w-full h-[300px]">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Data Table -->
+                    <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-slate-200 bg-slate-50">
+                            <h3 class="font-bold text-unitec-federal text-sm" id="table-title">Datos Proyectados</h3>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-xs text-slate-500 bg-white border-b border-slate-100">
+                                    <tr>
+                                        <th class="px-6 py-3 font-semibold">Periodo Académico</th>
+                                        <th class="px-6 py-3 font-semibold text-center">Secciones MAT</th>
+                                        <th class="px-6 py-3 font-semibold text-center">Secciones FIS</th>
+                                        <th class="px-6 py-3 font-bold text-right text-unitec-federal">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-50" id="table-body">
+                                    <!-- Dynamic Content -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: TAREA 2 -->
+        <section id="tarea2" class="hidden fade-in">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Info Column -->
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="bg-white p-6 rounded-lg border-t-4 border-unitec-federal shadow-sm">
+                        <h3 class="text-lg font-bold text-unitec-federal mb-2">Radiografía Docente</h3>
+                        <p class="text-sm text-slate-600 mb-4">Inventario detallado de la planta docente actual basado en expedientes de RRHH y carga histórica.</p>
+                        
+                        <div class="space-y-4 mt-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded bg-green-50 flex items-center justify-center text-green-600">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-700">Candidato Óptimo</p>
+                                    <p class="text-[10px] text-slate-500">Sin plaza externa, disponibilidad total.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded bg-blue-50 flex items-center justify-center text-blue-600">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-700">Reclutable</p>
+                                    <p class="text-[10px] text-slate-500">Con plaza externa, perfil valioso.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded bg-yellow-50 flex items-center justify-center text-yellow-600">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-700">En Adaptación</p>
+                                    <p class="text-[10px] text-slate-500">Requiere alineación de horarios.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded bg-red-50 flex items-center justify-center text-red-600">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-700">Baja Alineación</p>
+                                    <p class="text-[10px] text-slate-500">No cumple requisitos actuales.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study Results -->
+                <div class="lg:col-span-8">
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-slate-200 h-full">
+                        <div class="flex justify-between items-start mb-8 border-b border-slate-100 pb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-unitec-federal">Resultados: Caso UNITEC TGU</h3>
+                                <p class="text-sm text-unitec-cyan font-medium">Análisis de Idoneidad y Reestructuración</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-4xl font-bold text-slate-800">18</span>
+                                <span class="text-xs font-semibold uppercase text-slate-400 tracking-wider">Docentes Evaluados</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Card 1 -->
+                            <div class="p-5 bg-white border border-slate-200 rounded hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h5 class="font-bold text-slate-700 text-sm">Candidatos Idóneos</h5>
+                                    <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">6</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-1.5 mb-2">
+                                    <div class="bg-green-500 h-1.5 rounded-full" style="width: 33%"></div>
+                                </div>
+                                <p class="text-xs text-slate-500">Disponibilidad inmediata para el nuevo modelo.</p>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="p-5 bg-white border border-slate-200 rounded hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h5 class="font-bold text-slate-700 text-sm">Reclutamiento Estratégico</h5>
+                                    <span class="bg-unitec-federal text-white text-xs font-bold px-2 py-1 rounded">3</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-1.5 mb-2">
+                                    <div class="bg-unitec-federal h-1.5 rounded-full" style="width: 16%"></div>
+                                </div>
+                                <p class="text-xs text-slate-500">Poseen plaza externa pero son perfiles clave.</p>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="p-5 bg-white border border-slate-200 rounded hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h5 class="font-bold text-slate-700 text-sm">En Adaptación</h5>
+                                    <span class="bg-yellow-100 text-yellow-700 text-xs font-bold px-2 py-1 rounded">5</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-1.5 mb-2">
+                                    <div class="bg-yellow-500 h-1.5 rounded-full" style="width: 27%"></div>
+                                </div>
+                                <p class="text-xs text-slate-500">Requieren seguimiento cercano.</p>
+                            </div>
+
+                            <!-- Card 4 -->
+                            <div class="p-5 bg-white border border-slate-200 rounded hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h5 class="font-bold text-slate-700 text-sm">Baja Alineación</h5>
+                                    <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded">4</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-1.5 mb-2">
+                                    <div class="bg-red-500 h-1.5 rounded-full" style="width: 22%"></div>
+                                </div>
+                                <p class="text-xs text-slate-500">No se ajustan a los requerimientos.</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 bg-slate-50 p-4 rounded border border-slate-200 flex justify-between items-center">
+                            <div>
+                                <p class="font-bold text-unitec-federal text-sm">Total Planta Objetivo: 14-15 Docentes</p>
+                                <p class="text-xs text-slate-500">Alineado con proyección de Tarea 1</p>
+                            </div>
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-white"></div>
+                                <div class="w-8 h-8 rounded-full bg-slate-400 border-2 border-white"></div>
+                                <div class="w-8 h-8 rounded-full bg-unitec-cyan border-2 border-white flex items-center justify-center text-xs text-white font-bold">+</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-xs text-slate-400">© 2025 Universidad Tecnológica Centroamericana (UNITEC). Todos los derechos reservados.</p>
+            <p class="text-[10px] text-slate-300 mt-1">Confidencial - Uso exclusivo Vicerrectoría Académica</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA LOGIC ---
+        // Same logic as before, but mapped to new UI IDs
+        const rawCampusData = {
+            'unitec_tgu': {
+                name: 'UNITEC TGU',
+                recMat: 11, recFis: 2,
+                note: 'Cálculo basado en 50-56 secciones totales por periodo.',
+                data: [
+                    { q: 'Q1 2026', mat: 50, fis: 6, total: 56 },
+                    { q: 'Q4 2025', mat: 49, fis: 6, total: 55 },
+                    { q: 'Q3 2025', mat: 47, fis: 5, total: 52 },
+                    { q: 'Q2 2025', mat: 42, fis: 6, total: 48 },
+                    { q: 'Q1 2025', mat: 44, fis: 6, total: 50 }
+                ]
+            },
+            'unitec_sps': {
+                name: 'UNITEC SPS',
+                recMat: 14, recFis: 3,
+                note: 'Mayor volumen de carga. Se requiere estructura robusta.',
+                data: [
+                    { q: 'Q1 2026', mat: 63, fis: 12, total: 75 },
+                    { q: 'Q4 2025', mat: 58, fis: 11, total: 69 },
+                    { q: 'Q3 2025', mat: 56, fis: 12, total: 68 },
+                    { q: 'Q2 2025', mat: 55, fis: 11, total: 66 },
+                    { q: 'Q1 2025', mat: 57, fis: 11, total: 68 }
+                ]
+            },
+            'ceutec_sps': {
+                name: 'CEUTEC SPS',
+                recMat: 12, recFis: 1,
+                note: 'Excedentes de secciones se pueden asignar a áreas ENE/CIV.',
+                data: [
+                    { q: 'Q1 2026', mat: 52, fis: 4, total: 56 },
+                    { q: 'Q4 2025', mat: 46, fis: 4, total: 50 },
+                    { q: 'Q3 2025', mat: 49, fis: 4, total: 53 },
+                    { q: 'Q2 2025', mat: 47, fis: 4, total: 51 },
+                    { q: 'Q1 2025', mat: 53, fis: 4, total: 57 }
+                ]
+            },
+            'ceutec_lce': {
+                name: 'CEUTEC LCE',
+                recMat: 4, recFis: 0,
+                note: 'Sede con menor carga, estructura ligera.',
+                data: [
+                    { q: 'Q1 2026', mat: 12, fis: 1, total: 13 },
+                    { q: 'Q4 2025', mat: 12, fis: 0, total: 12 },
+                    { q: 'Q3 2025', mat: 15, fis: 1, total: 16 },
+                    { q: 'Q2 2025', mat: 13, fis: 0, total: 13 },
+                    { q: 'Q1 2025', mat: 14, fis: 1, total: 15 }
+                ]
+            },
+            'ceutec_tgu': {
+                name: 'CEUTEC TGU',
+                recMat: 15, recFis: 2,
+                note: 'Alta demanda en MAT, crecimiento sostenido.',
+                data: [
+                    { q: 'Q1 2026', mat: 55, fis: 4, total: 59 },
+                    { q: 'Q4 2025', mat: 54, fis: 5, total: 59 },
+                    { q: 'Q3 2025', mat: 60, fis: 5, total: 65 },
+                    { q: 'Q2 2025', mat: 61, fis: 5, total: 66 },
+                    { q: 'Q1 2025', mat: 73, fis: 5, total: 78 }
+                ]
+            }
+        };
+
+        function aggregateData(keys, name, note) {
+            const periods = ['Q1 2026', 'Q4 2025', 'Q3 2025', 'Q2 2025', 'Q1 2025'];
+            let aggData = periods.map(p => ({ q: p, mat: 0, fis: 0, total: 0 }));
+            let totalMatRec = 0;
+            let totalFisRec = 0;
+
+            keys.forEach(key => {
+                const campus = rawCampusData[key];
+                totalMatRec += campus.recMat;
+                totalFisRec += campus.recFis;
+                
+                campus.data.forEach(d => {
+                    const target = aggData.find(ad => ad.q === d.q);
+                    if (target) {
+                        target.mat += d.mat;
+                        target.fis += d.fis;
+                        target.total += d.total;
+                    }
+                });
+            });
+
+            return {
+                name: name,
+                recMat: totalMatRec,
+                recFis: totalFisRec,
+                note: note,
+                data: aggData
+            };
+        }
+
+        const campusData = {
+            ...rawCampusData,
+            'total_unitec': aggregateData(['unitec_tgu', 'unitec_sps'], 'TOTAL UNITEC', 'Consolidado de TGU y SPS'),
+            'total_ceutec': aggregateData(['ceutec_tgu', 'ceutec_sps', 'ceutec_lce'], 'TOTAL CEUTEC', 'Consolidado de todas las sedes CEUTEC'),
+            'grand_total': aggregateData(['unitec_tgu', 'unitec_sps', 'ceutec_tgu', 'ceutec_sps', 'ceutec_lce'], 'GRAN TOTAL NACIONAL', 'Vista global de todas las operaciones.')
+        };
+
+        let trendChart = null;
+
+        function showSection(sectionId) {
+            document.getElementById('tarea1').classList.add('hidden');
+            document.getElementById('tarea2').classList.add('hidden');
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            document.getElementById('btn-tarea1').classList.remove('active');
+            document.getElementById('btn-tarea2').classList.remove('active');
+            document.getElementById('btn-' + sectionId).classList.add('active');
+        }
+
+        function loadCampusData(campusKey) {
+            const info = campusData[campusKey];
+            const totalRec = info.recMat + info.recFis;
+            const recText = `${totalRec} Docentes`;
+            const recDetailText = `${info.recMat} para MAT, ${info.recFis} para FIS`;
+
+            // UI Updates
+            document.getElementById('rec-total').textContent = recText;
+            document.getElementById('rec-detail').textContent = recDetailText;
+            document.getElementById('table-title').innerHTML = `${info.name} <span class="font-normal text-slate-400 ml-2 text-xs">| Histórico y Proyección</span>`;
+            document.getElementById('campus-notes').textContent = info.note;
+
+            // Table
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+            info.data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 font-medium text-slate-800">${row.q}</td>
+                    <td class="px-6 py-4 text-center text-slate-500">${row.mat}</td>
+                    <td class="px-6 py-4 text-center text-slate-500">${row.fis}</td>
+                    <td class="px-6 py-4 text-right font-bold text-unitec-federal">${row.total}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Sidebar Active State
+            document.querySelectorAll('.campus-btn').forEach(btn => {
+                btn.classList.remove('active-campus');
+                btn.classList.remove('text-white');
+                if(!btn.id.includes('total')) btn.classList.add('hover:bg-slate-50');
+            });
+            const activeBtn = document.getElementById('btn-' + campusKey.replace(/_/g, '-'));
+            if(activeBtn) {
+                activeBtn.classList.add('active-campus');
+            }
+
+            // Chart Update with Brand Colors
+            updateChart(info);
+        }
+
+        function updateChart(info) {
+            const ctx = document.getElementById('trendChart').getContext('2d');
+            const sortedData = [...info.data].reverse();
+
+            const labels = sortedData.map(d => d.q);
+            const dataMat = sortedData.map(d => d.mat);
+            const dataFis = sortedData.map(d => d.fis);
+            const dataTotal = sortedData.map(d => d.total);
+
+            if (trendChart) trendChart.destroy();
+
+            trendChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Total Secciones',
+                            data: dataTotal,
+                            borderColor: '#06065C', // Federal Blue
+                            backgroundColor: '#06065C',
+                            borderWidth: 2,
+                            tension: 0.2,
+                            pointBackgroundColor: '#fff',
+                            pointBorderWidth: 2,
+                            pointRadius: 4
+                        },
+                        {
+                            label: 'Secciones MAT',
+                            data: dataMat,
+                            borderColor: '#03AED2', // Pacific Cyan
+                            backgroundColor: '#03AED2',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            tension: 0.2,
+                            pointRadius: 0,
+                            pointHoverRadius: 4
+                        },
+                        {
+                            label: 'Secciones FIS',
+                            data: dataFis,
+                            borderColor: '#47C8FD', // Vivid Sky Blue
+                            backgroundColor: '#47C8FD',
+                            borderWidth: 1,
+                            tension: 0.2,
+                            pointRadius: 0,
+                            pointHoverRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            position: 'bottom',
+                            labels: {
+                                font: { family: 'Poppins', size: 11 },
+                                boxWidth: 12,
+                                usePointStyle: true,
+                                pointStyle: 'rectRot' // Diamond shape for legend
+                            }
+                        },
+                        tooltip: { 
+                            mode: 'index', 
+                            intersect: false,
+                            backgroundColor: '#06065C',
+                            titleFont: { family: 'Poppins' },
+                            bodyFont: { family: 'Poppins' },
+                            padding: 10,
+                            cornerRadius: 4
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f1f5f9', borderDash: [2, 2] },
+                            ticks: { font: { family: 'Poppins', size: 10 } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: 'Poppins', size: 10 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCampusData('unitec_tgu');
+        });
+
+    </script>
+</body>
+</html>
