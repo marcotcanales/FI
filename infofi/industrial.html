@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingeniería Industrial y de Sistemas | UNITEC - Reforma 2025</title>
+    
+    <!-- Google Fonts: Poppins (Mandatory per Brand Manual) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Unitec Brand Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        federalBlue: '#06065C',
+                        pacificCyan: '#03AED2',
+                        vividSkyBlue: '#47C8FD',
+                        lightGray: '#F3F4F6',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for nuances */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        
+        /* Diamond Isotype CSS Construction */
+        .unitec-diamond {
+            width: 30px;
+            height: 30px;
+            background-color: #06065C; /* Base */
+            position: relative;
+            transform: rotate(45deg);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .unitec-diamond::after {
+            content: '';
+            width: 60%;
+            height: 60%;
+            border: 2px solid white;
+            position: absolute;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #03AED2; /* Pacific Cyan */
+            margin-top: 8px;
+        }
+
+        /* Timeline vertical line */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #E5E7EB;
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+        }
+        
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-white smooth-scroll">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <!-- Logo Composite (CSS) -->
+                    <div class="flex items-center">
+                        <div class="unitec-diamond bg-federalBlue"></div>
+                        <span class="text-3xl font-bold text-federalBlue tracking-tight">unitec</span>
+                        <div class="hidden md:block w-px h-8 bg-gray-300 mx-4"></div>
+                        <span class="hidden md:block text-sm text-gray-500 font-medium">Admisiones: Ingeniería Industrial</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#general" class="text-gray-600 hover:text-federalBlue font-medium transition">Generalidades</a>
+                    <a href="#perfil" class="text-gray-600 hover:text-federalBlue font-medium transition">Perfil</a>
+                    <a href="#plan" class="text-gray-600 hover:text-federalBlue font-medium transition">Plan 2025</a>
+                    <a href="#labs" class="text-gray-600 hover:text-federalBlue font-medium transition">Tecnología</a>
+                </div>
+                <!-- Mobile Menu Button (Icon Only) -->
+                <div class="flex items-center md:hidden">
+                    <button class="text-federalBlue text-2xl"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden" id="home">
+        <!-- Background Image with Overlay - Industrial Context -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop" alt="Industrial Engineer in Factory" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-federalBlue/85 mix-blend-multiply"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 text-center sm:text-left sm:px-6 lg:px-8 w-full">
+            <div class="bg-white/95 backdrop-blur-sm p-8 md:p-12 max-w-2xl rounded-sm shadow-2xl border-l-8 border-pacificCyan">
+                <span class="text-pacificCyan font-bold tracking-wider uppercase text-sm mb-2 block">Reforma 2025 • Aplicación 2026</span>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-federalBlue mb-4 leading-tight">
+                    Ingeniería Industrial y de Sistemas
+                </h1>
+                <p class="text-lg text-gray-700 mb-8 font-light">
+                    Pasión por la eficiencia. Formamos líderes expertos en productividad, analítica de datos e Industria 4.0.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-check-circle text-pacificCyan text-xl"></i>
+                        <span class="text-federalBlue font-semibold">Acreditada ACAAI</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-database text-pacificCyan text-xl"></i>
+                        <span class="text-federalBlue font-semibold">Enfoque en Data</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-robot text-pacificCyan text-xl"></i>
+                        <span class="text-federalBlue font-semibold">Labs Festo & SAP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- General Data Grid -->
+    <section id="general" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-federalBlue section-title">Datos Clave del Programa</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Un plan de estudios revolucionado para la era de la información y la automatización.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-federalBlue hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-federalBlue/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="far fa-clock text-federalBlue text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-federalBlue mb-2">Duración</h3>
+                    <p class="text-gray-600">4 años y 1 periodo<br><span class="text-sm text-gray-500">(17 periodos académicos)</span></p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-pacificCyan hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-pacificCyan/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-chalkboard-teacher text-pacificCyan text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-federalBlue mb-2">Modalidad</h3>
+                    <p class="text-gray-600">Presencial<br><span class="text-sm text-gray-500">Con laboratorios prácticos</span></p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-federalBlue hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-federalBlue/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-certificate text-federalBlue text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-federalBlue mb-2">Certificaciones</h3>
+                    <p class="text-gray-600">ACAAI + Contenidos<br><span class="text-sm text-gray-500">Six Sigma & ISO 9001</span></p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-pacificCyan hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-pacificCyan/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-book text-pacificCyan text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-federalBlue mb-2">Carga</h3>
+                    <p class="text-gray-600">63 Espacios<br><span class="text-sm text-gray-500">226 Créditos (UV)</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why The Reform? (Split Layout) -->
+    <section class="py-20 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:gap-16">
+                <!-- Text Content -->
+                <div class="lg:w-1/2 mb-10 lg:mb-0">
+                    <h2 class="text-3xl font-bold text-federalBlue mb-6">¿Por qué la Reforma 2025?</h2>
+                    <p class="text-gray-600 mb-6 text-lg">
+                        La manufactura tradicional ha dado paso a la Industria 4.0. El nuevo plan responde a un mundo donde los datos y la automatización definen la competitividad.
+                    </p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-pacificCyan flex items-center justify-center mt-1 mr-3">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-federalBlue">Enfoque en Datos (Big Data)</h4>
+                                <p class="text-sm text-gray-500">Inclusión de Visualización de la Información y Minería de Datos para la toma de decisiones.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-pacificCyan flex items-center justify-center mt-1 mr-3">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-federalBlue">Modernización Tecnológica</h4>
+                                <p class="text-sm text-gray-500">Transformación Digital en Calidad y Supply Chain como ejes centrales.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-pacificCyan flex items-center justify-center mt-1 mr-3">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-federalBlue">Experiencia Temprana</h4>
+                                <p class="text-sm text-gray-500">Nueva clase de "Experiencia Profesional" (pasantía) antes de la práctica final.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Visual/Image -->
+                <div class="lg:w-1/2 relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-vividSkyBlue/20 rounded-full z-0"></div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-federalBlue/10 rounded-full z-0"></div>
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Data Analytics Dashboard" class="relative z-10 rounded-lg shadow-xl w-full object-cover h-[400px]">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Profile (3 Pillars) -->
+    <section id="perfil" class="py-20 bg-federalBlue text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-pacificCyan font-bold tracking-widest uppercase text-xs mb-2 block">Competencias de Egreso</span>
+                <h2 class="text-3xl font-bold">El Ingeniero Industrial UNITEC es...</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Column 1 -->
+                <div class="bg-white/5 p-8 rounded-lg border border-white/10 hover:bg-white/10 transition duration-300">
+                    <i class="fas fa-cogs text-4xl text-pacificCyan mb-6"></i>
+                    <h3 class="text-xl font-bold mb-4">Optimizador de Recursos</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Capaz de integrar personas, máquinas, dinero e información para que una empresa produzca más y mejor. "Hacer más con menos".
+                    </p>
+                </div>
+                <!-- Column 2 -->
+                <div class="bg-white/5 p-8 rounded-lg border border-white/10 hover:bg-white/10 transition duration-300">
+                    <i class="fas fa-clipboard-check text-4xl text-vividSkyBlue mb-6"></i>
+                    <h3 class="text-xl font-bold mb-4">Gerente de Calidad</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Sabe diseñar estrategias para que los productos salgan perfectos, gestionando certificaciones y satisfacción del cliente.
+                    </p>
+                </div>
+                <!-- Column 3 -->
+                <div class="bg-white/5 p-8 rounded-lg border border-white/10 hover:bg-white/10 transition duration-300">
+                    <i class="fas fa-lightbulb text-4xl text-pacificCyan mb-6"></i>
+                    <h3 class="text-xl font-bold mb-4">Líder de Innovación</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        No solo mejora lo existente; implementa sistemas de gestión de innovación para crear nuevos modelos de negocio.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flowchart / Timeline -->
+    <section id="plan" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-federalBlue section-title">Ruta de Formación</h2>
+                <p class="text-gray-600 mt-2">De los fundamentos a la gerencia estratégica.</p>
+            </div>
+
+            <div class="relative">
+                <!-- Vertical Line for Mobile/Desktop -->
+                <div class="timeline-line hidden md:block"></div>
+
+                <div class="space-y-12 relative">
+                    
+                    <!-- Year 1 -->
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 text-right order-1 pr-8">
+                            <h3 class="text-2xl font-bold text-federalBlue">Año 1: Fundamentos</h3>
+                            <p class="text-sm text-gray-500 font-semibold mb-2">Aterrizaje en la Ingeniería</p>
+                            <p class="text-gray-600">Matemáticas básicas, Dibujo Técnico e Introducción a la Ingeniería. Entienden el "lenguaje" industrial.</p>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-federalBlue border-4 border-white shadow-lg z-10 mx-auto md:mx-0 order-2 absolute left-4 md:left-1/2 md:-translate-x-1/2"></div>
+                        <div class="md:w-5/12 pl-12 md:pl-8 order-3 pt-2 md:pt-0"></div>
+                    </div>
+
+                    <!-- Year 2 -->
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 text-right order-1 pr-8 md:opacity-0"></div> <!-- Spacer -->
+                        <div class="w-8 h-8 rounded-full bg-pacificCyan border-4 border-white shadow-lg z-10 mx-auto md:mx-0 order-2 absolute left-4 md:left-1/2 md:-translate-x-1/2 mt-2 md:mt-0"></div>
+                        <div class="md:w-5/12 pl-12 md:pl-8 order-3 pt-2 md:pt-0">
+                            <h3 class="text-2xl font-bold text-federalBlue">Año 2: Análisis</h3>
+                            <p class="text-sm text-gray-500 font-semibold mb-2">El corazón numérico</p>
+                            <p class="text-gray-600">Estadísticas, Ingeniería de Métodos (tiempos y movimientos) y Costos. Aprenden a medir la eficiencia.</p>
+                        </div>
+                    </div>
+
+                    <!-- Year 3 -->
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 text-right order-1 pr-8">
+                            <h3 class="text-2xl font-bold text-federalBlue">Año 3: El "Core" Industrial</h3>
+                            <p class="text-sm text-gray-500 font-semibold mb-2">Gerencia y Operaciones</p>
+                            <p class="text-gray-600">Investigación de Operaciones, Logística, Calidad y Administración de Operaciones. Manejo de fábricas y servicios.</p>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-federalBlue border-4 border-white shadow-lg z-10 mx-auto md:mx-0 order-2 absolute left-4 md:left-1/2 md:-translate-x-1/2 mt-2 md:mt-0"></div>
+                        <div class="md:w-5/12 pl-12 md:pl-8 order-3 pt-2 md:pt-0"></div>
+                    </div>
+
+                    <!-- Year 4 -->
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 text-right order-1 pr-8 md:opacity-0"></div>
+                        <div class="w-8 h-8 rounded-full bg-pacificCyan border-4 border-white shadow-lg z-10 mx-auto md:mx-0 order-2 absolute left-4 md:left-1/2 md:-translate-x-1/2 mt-2 md:mt-0"></div>
+                        <div class="md:w-5/12 pl-12 md:pl-8 order-3 pt-2 md:pt-0">
+                            <h3 class="text-2xl font-bold text-federalBlue">Año 4: Especialización</h3>
+                            <p class="text-sm text-gray-500 font-semibold mb-2">Industria 4.0 y Data</p>
+                            <p class="text-gray-600">Visualización de Datos, Simulación, Automatización y Gestión de la Innovación. Se convierten en ingenieros modernos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Year 5 -->
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 text-right order-1 pr-8">
+                            <h3 class="text-2xl font-bold text-federalBlue">Año 5: Salida</h3>
+                            <p class="text-sm text-gray-500 font-semibold mb-2">Integración al Mercado</p>
+                            <p class="text-gray-600">Capstone (Proyecto de diseño), Práctica Profesional (400 horas) y Vinculación Social.</p>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-federalBlue border-4 border-white shadow-lg z-10 mx-auto md:mx-0 order-2 absolute left-4 md:left-1/2 md:-translate-x-1/2 mt-2 md:mt-0"></div>
+                        <div class="md:w-5/12 pl-12 md:pl-8 order-3 pt-2 md:pt-0"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology & Labs -->
+    <section id="labs" class="py-20 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Content -->
+                <div>
+                    <h2 class="text-3xl font-bold text-federalBlue mb-6 section-title">Tecnología y Laboratorios</h2>
+                    <p class="text-gray-600 mb-8">
+                        Acceso a infraestructura única en la región. Nuestros estudiantes entrenan con el mismo software y equipo que utiliza la industria global.
+                    </p>
+
+                    <h4 class="font-bold text-federalBlue mb-4">Software Líder</h4>
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <span class="px-4 py-2 bg-gray-100 rounded text-gray-700 font-semibold border border-gray-300">SAP (ERP)</span>
+                        <span class="px-4 py-2 bg-gray-100 rounded text-gray-700 font-semibold border border-gray-300">Minitab</span>
+                        <span class="px-4 py-2 bg-gray-100 rounded text-gray-700 font-semibold border border-gray-300">Flexim</span>
+                        <span class="px-4 py-2 bg-gray-100 rounded text-gray-700 font-semibold border border-gray-300">SolidWorks</span>
+                        <span class="px-4 py-2 bg-gray-100 rounded text-gray-700 font-semibold border border-gray-300">MS Project</span>
+                    </div>
+
+                    <h4 class="font-bold text-federalBlue mb-4">Laboratorios Equipados</h4>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
+                        <li><i class="fas fa-robot text-pacificCyan mr-2"></i> Automatización (Festo)</li>
+                        <li><i class="fas fa-flask text-pacificCyan mr-2"></i> Química y Física</li>
+                        <li><i class="fas fa-microchip text-pacificCyan mr-2"></i> Sistemas ERP</li>
+                        <li><i class="fas fa-desktop text-pacificCyan mr-2"></i> Cómputo Avanzado</li>
+                        <li><i class="fas fa-hammer text-pacificCyan mr-2"></i> Makerspaces</li>
+                    </ul>
+                </div>
+
+                <!-- Image Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="https://images.unsplash.com/photo-1565514020176-dbf22778b8a3?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-lg w-full h-48 object-cover transform translate-y-4" alt="Robotic Arm Automation">
+                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-lg w-full h-48 object-cover" alt="Industrial Planning">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparative Table -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-federalBlue text-center mb-8">Evolución: Plan 2016 vs 2025</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-federalBlue text-white">
+                            <th class="p-4 border-b border-gray-200 w-1/3">Característica</th>
+                            <th class="p-4 border-b border-gray-200 w-1/3 text-gray-300 font-normal">Plan Anterior (2016)</th>
+                            <th class="p-4 border-b border-gray-200 w-1/3 font-bold bg-federalBlue/90">Plan Reforma (2025)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 border-b border-gray-100 font-semibold text-gray-700">Enfoque Principal</td>
+                            <td class="p-4 border-b border-gray-100 text-gray-500">Manufactura Tradicional</td>
+                            <td class="p-4 border-b border-gray-100 text-federalBlue font-medium">Data, Industria 4.0 y Servicios</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 border-b border-gray-100 font-semibold text-gray-700">Nuevas Asignaturas</td>
+                            <td class="p-4 border-b border-gray-100 text-gray-500">-</td>
+                            <td class="p-4 border-b border-gray-100 text-federalBlue font-medium">Minería de Datos, Transformación Digital</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 border-b border-gray-100 font-semibold text-gray-700">Experiencia Práctica</td>
+                            <td class="p-4 border-b border-gray-100 text-gray-500">Solo Práctica Final</td>
+                            <td class="p-4 border-b border-gray-100 text-federalBlue font-medium">Experiencia Temprana + Práctica Final</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 border-b border-gray-100 font-semibold text-gray-700">Electivas</td>
+                            <td class="p-4 border-b border-gray-100 text-gray-500">Generales</td>
+                            <td class="p-4 border-b border-gray-100 text-federalBlue font-medium">Logística, Calidad o Analítica/IA</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-federalBlue text-white py-12 border-t-4 border-pacificCyan">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            
+            <div class="flex items-center mb-4 md:mb-0">
+                <div class="unitec-diamond bg-white/20"></div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold tracking-tight">unitec</span>
+                </div>
+            </div>
+
+            <div class="text-center md:text-right">
+                <p class="text-sm text-gray-400 mb-2">Herramienta de Asesoría Académica - Admisiones</p>
+                <p class="text-xs text-gray-500">© 2026 Universidad Tecnológica Centroamericana (UNITEC). Todos los derechos reservados.</p>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
