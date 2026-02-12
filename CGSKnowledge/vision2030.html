@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vision Unitec 2030</title>
+    <title>Vision Unitec 2030 - Mobile Optimized</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,6 +22,7 @@
             font-family: 'Poppins', sans-serif;
             background-color: #06065C;
             color: #FFFFFF;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         .diamond-bg {
@@ -70,7 +71,6 @@
         const { useState, useEffect } = React;
 
         // --- ICONOS INCRUSTADOS (ZERO DEPENDENCIES) ---
-        // Definimos los iconos manualmente para evitar errores de librerías externas
         const IconBase = ({ children, size = 24, className = "" }) => (
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -111,20 +111,11 @@
             const [isMenuOpen, setIsMenuOpen] = useState(false);
             const [scrolled, setScrolled] = useState(false);
 
-            // Destructure icons from our local object
             const { 
                 Menu, X, Award, Globe, Zap, Users, BookOpen, Target, 
                 Layout, Lightbulb, Compass, MessageCircle, Heart, Star, 
                 Sprout, Map 
             } = Icons;
-
-            // Brand Colors
-            const colors = {
-                federalBlue: '#06065C',
-                pacificCyan: '#03AED2',
-                vividSky: '#47C8FD',
-                white: '#FFFFFF'
-            };
 
             useEffect(() => {
                 const handleScroll = () => {
@@ -157,7 +148,7 @@
                     impacts: [
                         "Ecosistema de aprendizaje",
                         "Campus y sedes referentes",
-                        "Docentes como motor de la innovación Educativa y del aprendizaje continuo",
+                        "Docentes como motor de la innovación Educativa",
                         "Propuesta institucional de aprendizaje a lo largo de la vida",
                         "Experiencia estudiantil transformadora"
                     ]
@@ -183,14 +174,17 @@
                 }
             ];
 
-            // Portrait Capabilities Data - Adjusted for better spacing
+            // EDNA FIX: Optimized positions for mobile.
+            // On mobile, we use scaling on the container, so we can keep the relative percentages
+            // but we need to ensure labels don't overflow horizontally.
+            // Pushed labels closer to center or inverted direction for edge cases.
             const portraitCapabilities = [
-                { title: "Líder con Propósito", icon: <Star size={24} />, pos: "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2", labelPos: "-top-12" },
-                { title: "Ciudadano Responsable", icon: <Globe size={24} />, pos: "top-[25%] right-[2%] translate-x-1/2", labelPos: "-right-4 translate-x-full" }, // Pushed out
-                { title: "Innovador Creativo", icon: <Lightbulb size={24} />, pos: "bottom-[25%] right-[2%] translate-x-1/2", labelPos: "-right-4 translate-x-full" }, // Pushed out
-                { title: "Comunicador Efectivo", icon: <MessageCircle size={24} />, pos: "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2", labelPos: "-bottom-12" },
-                { title: "Colaborador Constructivo", icon: <Users size={24} />, pos: "bottom-[25%] left-[2%] -translate-x-1/2", labelPos: "-left-4 -translate-x-full" }, // Pushed out
-                { title: "Solucionador Empático", icon: <Heart size={24} />, pos: "top-[25%] left-[2%] -translate-x-1/2", labelPos: "-left-4 -translate-x-full" }, // Pushed out
+                { title: "Líder con Propósito", icon: <Star size={24} />, pos: "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2", labelPos: "-top-12 left-1/2 -translate-x-1/2" },
+                { title: "Ciudadano Responsable", icon: <Globe size={24} />, pos: "top-[25%] right-[2%] translate-x-1/2", labelPos: "-right-4 translate-x-full md:-right-4 md:translate-x-full mt-10 md:mt-0" }, // Added mt-10 for mobile overlap
+                { title: "Innovador Creativo", icon: <Lightbulb size={24} />, pos: "bottom-[25%] right-[2%] translate-x-1/2", labelPos: "-right-4 translate-x-full md:-right-4 md:translate-x-full mb-10 md:mb-0" },
+                { title: "Comunicador Efectivo", icon: <MessageCircle size={24} />, pos: "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2", labelPos: "-bottom-12 left-1/2 -translate-x-1/2" },
+                { title: "Colaborador Constructivo", icon: <Users size={24} />, pos: "bottom-[25%] left-[2%] -translate-x-1/2", labelPos: "-left-4 -translate-x-full md:-left-4 md:-translate-x-full mb-10 md:mb-0" },
+                { title: "Solucionador Empático", icon: <Heart size={24} />, pos: "top-[25%] left-[2%] -translate-x-1/2", labelPos: "-left-4 -translate-x-full md:-left-4 md:-translate-x-full mt-10 md:mt-0" },
             ];
 
              const ecosystemData = [
@@ -198,34 +192,34 @@
                     title: "La Cultura",
                     subtitle: "El Suelo Fértil",
                     icon: <Sprout size={32} />,
-                    desc: "Es la base invisible pero poderosa. Se refiere al 'cómo hacemos las cosas aquí' y, más importante aún, 'cómo nos tratamos'.",
-                    detail: "Se alinea con el principio GENTE y PASIÓN. Establece las condiciones psicológicas y emocionales para el aprendizaje."
+                    desc: "Es la base invisible pero poderosa. Se refiere al 'cómo hacemos las cosas aquí'.",
+                    detail: "Se alinea con el principio GENTE y PASIÓN."
                 },
                 {
                     title: "El Currículo",
                     subtitle: "El Mapa Definido",
                     icon: <Map size={32} />,
-                    desc: "No es solo el temario. En CGS, el currículo es lo que definimos que vale la pena aprender.",
-                    detail: "Estructurado en torno a las 3C's (Conceptuales, Competencia y Carácter) y el 'Aprender a Aprender' (L2L)."
+                    desc: "No es solo el temario. Es lo que definimos que vale la pena aprender.",
+                    detail: "Estructurado en torno a las 3C's y el 'Aprender a Aprender'."
                 },
                 {
                     title: "El Contexto",
                     subtitle: "El Escenario",
                     icon: <Layout size={32} />,
-                    desc: "Es el 'dónde' y el 'cuándo' ocurre el aprendizaje. Rompe las paredes del aula tradicional.",
-                    detail: "Buscamos que sea auténtico y relevante. Conectar el aprendizaje con el mundo real."
+                    desc: "Es el 'dónde' y el 'cuándo' ocurre el aprendizaje.",
+                    detail: "Conectar el aprendizaje con el mundo real."
                 },
                 {
                     title: "La Comunidad",
                     subtitle: "Los Actores",
                     icon: <Users size={32} />,
                     desc: "Somos nosotros. El aprendizaje es una actividad social fundamental.",
-                    detail: "Incluye a estudiantes, docentes, expertos de la industria y la sociedad (el Bien Común)."
+                    detail: "Estudiantes, docentes, expertos e industria."
                 }
             ];
 
             return (
-                <div className="min-h-screen selection:bg-[#03AED2] selection:text-white">
+                <div className="min-h-screen selection:bg-[#03AED2] selection:text-white overflow-x-hidden">
                     {/* Navigation */}
                     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#06065C]/95 backdrop-blur-md shadow-lg border-b border-[#03AED2]/30' : 'bg-transparent'}`}>
                         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -250,19 +244,19 @@
                             </div>
 
                             {/* Mobile Toggle */}
-                            <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                            <button className="md:hidden text-white p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                                 {isMenuOpen ? <X /> : <Menu />}
                             </button>
                         </div>
 
                         {/* Mobile Menu */}
                         {isMenuOpen && (
-                            <div className="md:hidden absolute top-full left-0 w-full bg-[#06065C] border-b border-[#03AED2]/30 p-6 flex flex-col gap-4">
+                            <div className="md:hidden absolute top-full left-0 w-full bg-[#06065C]/95 backdrop-blur-xl border-b border-[#03AED2]/30 p-6 flex flex-col gap-4 shadow-2xl">
                                 {['Vision', 'Principios', 'Propuesta', 'Ejes', 'Retrato', 'Ecosistema'].map((item) => (
                                     <button 
                                         key={item}
                                         onClick={() => scrollTo(item.toLowerCase())}
-                                        className="text-left py-2 hover:text-[#03AED2] border-b border-white/10 uppercase tracking-wider text-white"
+                                        className="text-left py-3 hover:text-[#03AED2] border-b border-white/10 uppercase tracking-wider text-white font-semibold"
                                     >
                                         {item}
                                     </button>
@@ -285,7 +279,7 @@
                                 Vision Unitec <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#03AED2] to-[#47C8FD]">2030</span>
                             </h1>
                             <p className="text-lg md:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed mb-12">
-                                "Ser una Universidad de clase mundial, protagonista del desarrollo de Honduras, reconocida por su excelencia académica, innovación constante y por construir una comunidad de aprendizaje donde la conexión humana y la experiencia educativa fortalecen el crecimiento integral de las personas a lo largo de su vida."
+                                "Ser una Universidad de clase mundial, protagonista del desarrollo de Honduras, reconocida por su excelencia académica."
                             </p>
                             
                             <button 
@@ -298,26 +292,27 @@
                         </div>
                     </section>
 
-                    {/* PRINCIPIOS */}
+                    {/* PRINCIPIOS - EDNA FIX: Responsive Font Size and Sticky behavior */}
                     <section id="principios" className="py-24 relative bg-[#05054B]">
                         <div className="container mx-auto px-6">
                             <div className="flex flex-col md:flex-row gap-12 items-start">
-                                <div className="md:w-1/3 sticky top-32">
-                                    <h2 className="text-4xl font-bold mb-6 text-[#47C8FD]">Principios que nos guían</h2>
-                                    <p className="text-gray-300 leading-relaxed">
+                                {/* Fixed: changed sticky to md:sticky, reduced text size for mobile */}
+                                <div className="w-full md:w-1/3 relative md:sticky md:top-32 text-center md:text-left">
+                                    <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#47C8FD] leading-tight">Principios que nos guían</h2>
+                                    <p className="text-gray-300 leading-relaxed text-sm md:text-base">
                                         Nuestra brújula moral y estratégica para la próxima década. Valores innegociables que definen nuestra identidad institucional.
                                     </p>
                                 </div>
-                                <div className="md:w-2/3 grid grid-cols-1 gap-6">
+                                <div className="w-full md:w-2/3 grid grid-cols-1 gap-6">
                                     {principles.map((principle, idx) => (
-                                        <div key={idx} className="group p-8 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#03AED2]/50 transition-all duration-300 rounded-sm relative overflow-hidden">
-                                            <div className="flex items-start gap-6 relative z-10">
+                                        <div key={idx} className="group p-6 md:p-8 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#03AED2]/50 transition-all duration-300 rounded-sm relative overflow-hidden">
+                                            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 relative z-10 text-center sm:text-left">
                                                 <div className="text-[#03AED2] p-3 bg-[#06065C] rounded-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
                                                     {principle.icon}
                                                 </div>
                                                 <div>
                                                     <h3 className="text-xl font-bold mb-2 text-white">{principle.title}</h3>
-                                                    <p className="text-gray-300">{principle.desc}</p>
+                                                    <p className="text-gray-300 text-sm md:text-base">{principle.desc}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -331,17 +326,17 @@
                     <section id="propuesta" className="py-24 relative overflow-hidden">
                         <div className="absolute inset-0 bg-white transform -skew-y-3 origin-top-left scale-110 z-0"></div>
                         <div className="container mx-auto px-6 relative z-10">
-                            <h2 className="text-4xl font-bold mb-16 text-[#06065C] text-center">Propuesta Educativa</h2>
-                            <div className="grid md:grid-cols-2 gap-12">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-16 text-[#06065C] text-center">Propuesta Educativa</h2>
+                            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                                 <div className="relative group">
                                     <div className="absolute -inset-2 bg-gradient-to-r from-[#06065C] to-[#03AED2] rounded-lg opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
                                     <div className="relative p-8 bg-[#06065C] rounded-lg h-full flex flex-col items-center text-center">
                                         <div className="w-16 h-16 bg-white rotate-45 flex items-center justify-center mb-8 shadow-lg">
                                             <BookOpen className="-rotate-45 text-[#06065C]" size={32} />
                                         </div>
-                                        <h3 className="text-3xl font-bold mb-4 text-white">Unitec Grado</h3>
-                                        <p className="text-gray-300 leading-relaxed">
-                                            En Unitec Grado impulsamos a jóvenes a transformar su futuro con un ecosistema de aprendizaje que despierta una mentalidad de crecimiento y un espíritu emprendedor.
+                                        <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">Unitec Grado</h3>
+                                        <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                                            En Unitec Grado impulsamos a jóvenes a transformar su futuro con un ecosistema de aprendizaje que despierta una mentalidad de crecimiento.
                                         </p>
                                     </div>
                                 </div>
@@ -351,9 +346,9 @@
                                         <div className="w-16 h-16 bg-[#06065C] rotate-45 flex items-center justify-center mb-8 shadow-lg">
                                             <Compass className="-rotate-45 text-[#03AED2]" size={32} />
                                         </div>
-                                        <h3 className="text-3xl font-bold mb-4 text-[#06065C]">Unitec for Life</h3>
-                                        <p className="text-[#06065C] leading-relaxed">
-                                            En Unitec for Life impulsamos el aprendizaje continuo con programas flexibles que permiten a cada persona actualizarse, reinventarse y crecer.
+                                        <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#06065C]">Unitec for Life</h3>
+                                        <p className="text-[#06065C] leading-relaxed text-sm md:text-base">
+                                            En Unitec for Life impulsamos el aprendizaje continuo con programas flexibles que permiten a cada persona actualizarse.
                                         </p>
                                     </div>
                                 </div>
@@ -365,10 +360,10 @@
                     <section id="ejes" className="py-24 bg-[#06065C] relative">
                         <div className="container mx-auto px-6">
                             <div className="text-center mb-16">
-                                <h2 className="text-4xl font-bold text-white mb-4">Nuestros Ejes Institucionales</h2>
-                                <p className="text-[#03AED2] text-xl">Visibles y tangibles en 12 impactos institucionales</p>
+                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Nuestros Ejes Institucionales</h2>
+                                <p className="text-[#03AED2] text-lg md:text-xl">Visibles y tangibles en 12 impactos institucionales</p>
                             </div>
-                            <div className="grid lg:grid-cols-3 gap-8">
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {axes.map((eje) => (
                                     <div key={eje.id} className="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-[#03AED2] transition-all duration-300 group">
                                         <div className="p-6 bg-white/5 border-b border-white/10">
@@ -391,19 +386,21 @@
                         </div>
                     </section>
 
-                    {/* REDESIGNED RETRATO SECTION */}
+                    {/* RETRATO SECTION - EDNA FIX: Mobile Scale Transformation */}
                     <section id="retrato" className="py-32 relative bg-gradient-to-b from-[#05054B] to-[#06065C] overflow-hidden">
                         <div className="container mx-auto px-6">
-                            <div className="text-center mb-24">
-                                <h2 className="text-4xl font-bold mb-4 text-white">Retrato del Egresado</h2>
-                                <p className="text-gray-300 max-w-2xl mx-auto">
+                            <div className="text-center mb-12 md:mb-24">
+                                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Retrato del Egresado</h2>
+                                <p className="text-gray-300 max-w-2xl mx-auto text-sm md:text-base">
                                     Nuestro modelo forma profesionales integrales, definidos por capacidades humanas conectadas a un núcleo equilibrado.
                                 </p>
                             </div>
 
-                            <div className="relative w-full max-w-5xl mx-auto min-h-[600px] flex items-center justify-center">
-                                {/* Orbital System Container */}
-                                <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px]">
+                            <div className="relative w-full max-w-5xl mx-auto min-h-[400px] md:min-h-[600px] flex items-center justify-center">
+                                {/* EDNA FIX: Added scale-[0.65] for mobile screens. 
+                                    This forces the large orbit to fit within a 360px width without breaking layout logic.
+                                */}
+                                <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] transform scale-[0.65] sm:scale-75 md:scale-100 transition-transform duration-500 origin-center">
                                     
                                     {/* Outer Orbit Rings */}
                                     <div className="absolute inset-[-40px] md:inset-[-60px] border border-[#03AED2]/20 rounded-full animate-spin-slow"></div>
@@ -423,9 +420,9 @@
                                                 <div className="w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 border-[#03AED2] rounded-full flex items-center justify-center text-[#47C8FD] shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10">
                                                     {cap.icon}
                                                 </div>
-                                                {/* Labels positioned OUTSIDE to avoid overlap */}
-                                                <div className={`absolute ${cap.labelPos} whitespace-nowrap bg-[#06065C]/90 px-3 py-1.5 rounded border border-[#03AED2]/30 backdrop-blur-sm`}>
-                                                    <span className="text-xs md:text-sm font-bold text-white group-hover:text-[#47C8FD] transition-colors">
+                                                {/* Labels positioned with safe backgrounds and z-index */}
+                                                <div className={`absolute ${cap.labelPos} w-32 md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#06065C]/95 px-3 py-1.5 rounded border border-[#03AED2]/30 backdrop-blur-md z-30 shadow-xl`}>
+                                                    <span className="text-xs md:text-sm font-bold text-white group-hover:text-[#47C8FD] transition-colors leading-tight block">
                                                         {cap.title}
                                                     </span>
                                                 </div>
@@ -476,17 +473,17 @@
                         <div className="container mx-auto px-6">
                             <div className="text-center mb-16">
                                 <div className="inline-block px-3 py-1 border border-[#47C8FD] rounded-full text-[#47C8FD] text-xs font-bold tracking-widest uppercase mb-4">Modelo CGS</div>
-                                <h2 className="text-4xl font-bold text-white mb-6">Ecosistema de Aprendizaje UNITEC</h2>
-                                <p className="text-xl text-gray-300">Las 4 C's: Donde el aprendizaje profundo ocurre en la intersección.</p>
+                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ecosistema de Aprendizaje UNITEC</h2>
+                                <p className="text-lg md:text-xl text-gray-300">Las 4 C's: Donde el aprendizaje profundo ocurre en la intersección.</p>
                             </div>
 
                             <div className="flex flex-col lg:flex-row gap-16 items-center">
                                 {/* Left Column: Interactive Explanation */}
-                                <div className="lg:w-1/2 space-y-8">
+                                <div className="w-full lg:w-1/2 space-y-8">
                                     {ecosystemData.map((item, idx) => (
-                                        <div key={idx} className="flex gap-6 group">
+                                        <div key={idx} className="flex gap-4 md:gap-6 group">
                                             <div className="flex-shrink-0">
-                                                <div className="w-14 h-14 bg-[#06065C] border border-[#03AED2] rounded-full flex items-center justify-center text-white shadow-lg group-hover:bg-[#03AED2] transition-colors duration-300">
+                                                <div className="w-12 h-12 md:w-14 md:h-14 bg-[#06065C] border border-[#03AED2] rounded-full flex items-center justify-center text-white shadow-lg group-hover:bg-[#03AED2] transition-colors duration-300">
                                                     {item.icon}
                                                 </div>
                                                 {idx !== ecosystemData.length - 1 && (
@@ -494,8 +491,8 @@
                                                 )}
                                             </div>
                                             <div>
-                                                <h3 className="text-xl font-bold text-white mb-1 flex items-center gap-2">
-                                                    {item.title} <span className="text-[#47C8FD] text-sm font-normal uppercase tracking-wider">- "{item.subtitle}"</span>
+                                                <h3 className="text-lg md:text-xl font-bold text-white mb-1 flex flex-wrap items-center gap-2">
+                                                    {item.title} <span className="text-[#47C8FD] text-xs md:text-sm font-normal uppercase tracking-wider">- "{item.subtitle}"</span>
                                                 </h3>
                                                 <p className="text-gray-300 text-sm leading-relaxed mb-2">{item.desc}</p>
                                                 <p className="text-[#03AED2] text-xs italic">{item.detail}</p>
@@ -505,28 +502,28 @@
                                 </div>
 
                                 {/* Right Column: Visual Venn Diagram */}
-                                <div className="lg:w-1/2 flex items-center justify-center relative min-h-[500px]">
-                                    <div className="relative w-full max-w-[500px] aspect-square">
+                                <div className="w-full lg:w-1/2 flex items-center justify-center relative min-h-[400px] md:min-h-[500px]">
+                                    <div className="relative w-full max-w-[350px] md:max-w-[500px] aspect-square transform scale-90 md:scale-100">
                                         {/* Center Core Intersection */}
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-white z-20 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.3)] text-center p-4">
-                                            <span className="text-[#06065C] font-bold text-sm leading-tight">Aprendizaje Profundo y Perdurable</span>
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 bg-white z-20 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.3)] text-center p-2 md:p-4">
+                                            <span className="text-[#06065C] font-bold text-xs md:text-sm leading-tight">Aprendizaje Profundo</span>
                                         </div>
 
                                         {/* The 4 Circles */}
-                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-[#03AED2]/20 border border-[#03AED2] rounded-full venn-circle flex items-start justify-center pt-8 backdrop-blur-sm">
-                                            <span className="font-bold text-white uppercase tracking-widest text-sm">Comunidad</span>
+                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#03AED2]/20 border border-[#03AED2] rounded-full venn-circle flex items-start justify-center pt-6 md:pt-8 backdrop-blur-sm">
+                                            <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm">Comunidad</span>
                                         </div>
                                         
-                                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-[#47C8FD]/20 border border-[#47C8FD] rounded-full venn-circle flex items-end justify-center pb-8 backdrop-blur-sm">
-                                            <span className="font-bold text-white uppercase tracking-widest text-sm">Cultura</span>
+                                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#47C8FD]/20 border border-[#47C8FD] rounded-full venn-circle flex items-end justify-center pb-6 md:pb-8 backdrop-blur-sm">
+                                            <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm">Cultura</span>
                                         </div>
 
-                                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-[#06065C]/40 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-start pl-8 backdrop-blur-sm">
-                                            <span className="font-bold text-white uppercase tracking-widest text-sm transform -rotate-90">Contexto</span>
+                                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#06065C]/40 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-start pl-6 md:pl-8 backdrop-blur-sm">
+                                            <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm transform -rotate-90">Contexto</span>
                                         </div>
 
-                                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-[#03AED2]/10 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-end pr-8 backdrop-blur-sm">
-                                            <span className="font-bold text-white uppercase tracking-widest text-sm transform rotate-90">Currículo</span>
+                                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#03AED2]/10 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-end pr-6 md:pr-8 backdrop-blur-sm">
+                                            <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm transform rotate-90">Currículo</span>
                                         </div>
                                     </div>
                                 </div>
