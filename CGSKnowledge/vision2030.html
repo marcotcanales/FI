@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Unitec 2030</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #06065C;
+            color: #FFFFFF;
+        }
+
+        .diamond-bg {
+            background-image: radial-gradient(#06065C 20%, transparent 20%),
+            radial-gradient(rgba(3, 174, 210, 0.2) 20%, transparent 20%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #06065C;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #03AED2;
+            border-radius: 4px;
+        }
+
+        .venn-circle {
+            transition: all 0.5s ease;
+        }
+        .venn-circle:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            background-color: rgba(3, 174, 210, 0.2);
+            border-color: #47C8FD;
+        }
+
+        /* Animations */
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 60s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- ICONOS INCRUSTADOS (ZERO DEPENDENCIES) ---
+        // Definimos los iconos manualmente para evitar errores de librerías externas
+        const IconBase = ({ children, size = 24, className = "" }) => (
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width={size} 
+                height={size} 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className={className}
+            >
+                {children}
+            </svg>
+        );
+
+        const Icons = {
+            Menu: (props) => <IconBase {...props}><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></IconBase>,
+            X: (props) => <IconBase {...props}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></IconBase>,
+            Award: (props) => <IconBase {...props}><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></IconBase>,
+            Globe: (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></IconBase>,
+            Zap: (props) => <IconBase {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></IconBase>,
+            Users: (props) => <IconBase {...props}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></IconBase>,
+            BookOpen: (props) => <IconBase {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase>,
+            Target: (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></IconBase>,
+            Layout: (props) => <IconBase {...props}><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="9" y2="21"/></IconBase>,
+            Lightbulb: (props) => <IconBase {...props}><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></IconBase>,
+            Compass: (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></IconBase>,
+            MessageCircle: (props) => <IconBase {...props}><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></IconBase>,
+            Heart: (props) => <IconBase {...props}><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></IconBase>,
+            Star: (props) => <IconBase {...props}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></IconBase>,
+            Sprout: (props) => <IconBase {...props}><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.2.4-4.8.4a2.5 2.5 0 0 1 0-5Z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1.7-1.3 2.9-1.3 3-1.2a3 3 0 0 0-3-3.1Z"/></IconBase>,
+            Map: (props) => <IconBase {...props}><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></IconBase>
+        };
+
+        const App = () => {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [scrolled, setScrolled] = useState(false);
+
+            // Destructure icons from our local object
+            const { 
+                Menu, X, Award, Globe, Zap, Users, BookOpen, Target, 
+                Layout, Lightbulb, Compass, MessageCircle, Heart, Star, 
+                Sprout, Map 
+            } = Icons;
+
+            // Brand Colors
+            const colors = {
+                federalBlue: '#06065C',
+                pacificCyan: '#03AED2',
+                vividSky: '#47C8FD',
+                white: '#FFFFFF'
+            };
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrolled(window.scrollY > 50);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const scrollTo = (id) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    setIsMenuOpen(false);
+                }
+            };
+
+            const principles = [
+                { title: "Honestidad y Coherencia", desc: "Actuamos con honestidad y coherencia.", icon: <Award size={32} /> },
+                { title: "Desafío como Oportunidad", desc: "Convertimos cada desafio en una oportunidad para crecer.", icon: <Zap size={32} /> },
+                { title: "Responsabilidad", desc: "Tomamos nuestras decisiones con responsabilidad para cuidar nuestro entorno y nuestra comunidad.", icon: <Globe size={32} /> },
+                { title: "Respeto y Diversidad", desc: "Creemos que cada persona merece respeto y que las diferencias nos enriquecen.", icon: <Users size={32} /> },
+                { title: "Innovación y Emprendimiento", desc: "Impulsamos la innovación y el emprendimiento como motores de cambio.", icon: <Lightbulb size={32} /> }
+            ];
+
+            const axes = [
+                {
+                    id: 1,
+                    title: "Transformación del aprendizaje",
+                    impacts: [
+                        "Ecosistema de aprendizaje",
+                        "Campus y sedes referentes",
+                        "Docentes como motor de la innovación Educativa y del aprendizaje continuo",
+                        "Propuesta institucional de aprendizaje a lo largo de la vida",
+                        "Experiencia estudiantil transformadora"
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Incidencia local y conexión global",
+                    impacts: [
+                        "Vinculación institucional estratégica",
+                        "Presencia global",
+                        "Investigación e innovación para el desarrollo"
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "Fortalecimiento Institucional",
+                    impacts: [
+                        "Cultura organizacional de alto desempeño e inclusiva",
+                        "Gobernanza institucional sostenible",
+                        "Gestión ambiental",
+                        "Capacidades tecnológicas fortalecidas"
+                    ]
+                }
+            ];
+
+            // Portrait Capabilities Data - Adjusted for better spacing
+            const portraitCapabilities = [
+                { title: "Líder con Propósito", icon: <Star size={24} />, pos: "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2", labelPos: "-top-12" },
+                { title: "Ciudadano Responsable", icon: <Globe size={24} />, pos: "top-[25%] right-[2%] translate-x-1/2", labelPos: "-right-4 translate-x-full" }, // Pushed out
+                { title: "Innovador Creativo", icon: <Lightbulb size={24} />, pos: "bottom-[25%] right-[2%] translate-x-1/2", labelPos: "-right-4 translate-x-full" }, // Pushed out
+                { title: "Comunicador Efectivo", icon: <MessageCircle size={24} />, pos: "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2", labelPos: "-bottom-12" },
+                { title: "Colaborador Constructivo", icon: <Users size={24} />, pos: "bottom-[25%] left-[2%] -translate-x-1/2", labelPos: "-left-4 -translate-x-full" }, // Pushed out
+                { title: "Solucionador Empático", icon: <Heart size={24} />, pos: "top-[25%] left-[2%] -translate-x-1/2", labelPos: "-left-4 -translate-x-full" }, // Pushed out
+            ];
+
+             const ecosystemData = [
+                {
+                    title: "La Cultura",
+                    subtitle: "El Suelo Fértil",
+                    icon: <Sprout size={32} />,
+                    desc: "Es la base invisible pero poderosa. Se refiere al 'cómo hacemos las cosas aquí' y, más importante aún, 'cómo nos tratamos'.",
+                    detail: "Se alinea con el principio GENTE y PASIÓN. Establece las condiciones psicológicas y emocionales para el aprendizaje."
+                },
+                {
+                    title: "El Currículo",
+                    subtitle: "El Mapa Definido",
+                    icon: <Map size={32} />,
+                    desc: "No es solo el temario. En CGS, el currículo es lo que definimos que vale la pena aprender.",
+                    detail: "Estructurado en torno a las 3C's (Conceptuales, Competencia y Carácter) y el 'Aprender a Aprender' (L2L)."
+                },
+                {
+                    title: "El Contexto",
+                    subtitle: "El Escenario",
+                    icon: <Layout size={32} />,
+                    desc: "Es el 'dónde' y el 'cuándo' ocurre el aprendizaje. Rompe las paredes del aula tradicional.",
+                    detail: "Buscamos que sea auténtico y relevante. Conectar el aprendizaje con el mundo real."
+                },
+                {
+                    title: "La Comunidad",
+                    subtitle: "Los Actores",
+                    icon: <Users size={32} />,
+                    desc: "Somos nosotros. El aprendizaje es una actividad social fundamental.",
+                    detail: "Incluye a estudiantes, docentes, expertos de la industria y la sociedad (el Bien Común)."
+                }
+            ];
+
+            return (
+                <div className="min-h-screen selection:bg-[#03AED2] selection:text-white">
+                    {/* Navigation */}
+                    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#06065C]/95 backdrop-blur-md shadow-lg border-b border-[#03AED2]/30' : 'bg-transparent'}`}>
+                        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+                            <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollTo('hero')}>
+                                <div className="w-8 h-8 bg-[#03AED2] rotate-45 transform flex items-center justify-center shadow-[0_0_15px_rgba(3,174,210,0.6)]">
+                                    <div className="w-4 h-4 bg-[#06065C]"></div>
+                                </div>
+                                <span className="text-2xl font-bold tracking-tight text-white">unitec<span className="text-[#03AED2]">2030</span></span>
+                            </div>
+
+                            {/* Desktop Menu */}
+                            <div className="hidden md:flex gap-6 text-sm font-medium">
+                                {['Vision', 'Principios', 'Propuesta', 'Ejes', 'Retrato', 'Ecosistema'].map((item) => (
+                                    <button 
+                                        key={item}
+                                        onClick={() => scrollTo(item.toLowerCase())}
+                                        className="hover:text-[#03AED2] transition-colors uppercase tracking-wider text-white"
+                                    >
+                                        {item}
+                                    </button>
+                                ))}
+                            </div>
+
+                            {/* Mobile Toggle */}
+                            <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                                {isMenuOpen ? <X /> : <Menu />}
+                            </button>
+                        </div>
+
+                        {/* Mobile Menu */}
+                        {isMenuOpen && (
+                            <div className="md:hidden absolute top-full left-0 w-full bg-[#06065C] border-b border-[#03AED2]/30 p-6 flex flex-col gap-4">
+                                {['Vision', 'Principios', 'Propuesta', 'Ejes', 'Retrato', 'Ecosistema'].map((item) => (
+                                    <button 
+                                        key={item}
+                                        onClick={() => scrollTo(item.toLowerCase())}
+                                        className="text-left py-2 hover:text-[#03AED2] border-b border-white/10 uppercase tracking-wider text-white"
+                                    >
+                                        {item}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </nav>
+
+                    {/* HERO SECTION */}
+                    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+                        <div className="absolute top-0 left-0 w-full h-full diamond-bg opacity-20 pointer-events-none"></div>
+                        <div className="absolute top-1/4 -right-20 w-96 h-96 bg-[#03AED2] rounded-full blur-[120px] opacity-20"></div>
+                        <div className="absolute bottom-0 -left-20 w-96 h-96 bg-[#47C8FD] rounded-full blur-[120px] opacity-20"></div>
+
+                        <div className="container mx-auto px-6 relative z-10 text-center">
+                            <div className="inline-block mb-6 px-4 py-1 border border-[#03AED2] rounded-full text-[#03AED2] text-sm font-semibold tracking-widest uppercase">
+                                Recorrido Estratégico
+                            </div>
+                            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-8">
+                                Vision Unitec <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#03AED2] to-[#47C8FD]">2030</span>
+                            </h1>
+                            <p className="text-lg md:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed mb-12">
+                                "Ser una Universidad de clase mundial, protagonista del desarrollo de Honduras, reconocida por su excelencia académica, innovación constante y por construir una comunidad de aprendizaje donde la conexión humana y la experiencia educativa fortalecen el crecimiento integral de las personas a lo largo de su vida."
+                            </p>
+                            
+                            <button 
+                                onClick={() => scrollTo('principios')}
+                                className="group relative px-8 py-3 bg-[#03AED2] text-[#06065C] font-bold rounded-sm hover:bg-white transition-all duration-300"
+                            >
+                                Descubre el Futuro
+                                <div className="absolute -inset-1 border border-[#03AED2] group-hover:border-white rounded-sm scale-105 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                            </button>
+                        </div>
+                    </section>
+
+                    {/* PRINCIPIOS */}
+                    <section id="principios" className="py-24 relative bg-[#05054B]">
+                        <div className="container mx-auto px-6">
+                            <div className="flex flex-col md:flex-row gap-12 items-start">
+                                <div className="md:w-1/3 sticky top-32">
+                                    <h2 className="text-4xl font-bold mb-6 text-[#47C8FD]">Principios que nos guían</h2>
+                                    <p className="text-gray-300 leading-relaxed">
+                                        Nuestra brújula moral y estratégica para la próxima década. Valores innegociables que definen nuestra identidad institucional.
+                                    </p>
+                                </div>
+                                <div className="md:w-2/3 grid grid-cols-1 gap-6">
+                                    {principles.map((principle, idx) => (
+                                        <div key={idx} className="group p-8 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#03AED2]/50 transition-all duration-300 rounded-sm relative overflow-hidden">
+                                            <div className="flex items-start gap-6 relative z-10">
+                                                <div className="text-[#03AED2] p-3 bg-[#06065C] rounded-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                                    {principle.icon}
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-xl font-bold mb-2 text-white">{principle.title}</h3>
+                                                    <p className="text-gray-300">{principle.desc}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* PROPUESTA EDUCATIVA */}
+                    <section id="propuesta" className="py-24 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-white transform -skew-y-3 origin-top-left scale-110 z-0"></div>
+                        <div className="container mx-auto px-6 relative z-10">
+                            <h2 className="text-4xl font-bold mb-16 text-[#06065C] text-center">Propuesta Educativa</h2>
+                            <div className="grid md:grid-cols-2 gap-12">
+                                <div className="relative group">
+                                    <div className="absolute -inset-2 bg-gradient-to-r from-[#06065C] to-[#03AED2] rounded-lg opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
+                                    <div className="relative p-8 bg-[#06065C] rounded-lg h-full flex flex-col items-center text-center">
+                                        <div className="w-16 h-16 bg-white rotate-45 flex items-center justify-center mb-8 shadow-lg">
+                                            <BookOpen className="-rotate-45 text-[#06065C]" size={32} />
+                                        </div>
+                                        <h3 className="text-3xl font-bold mb-4 text-white">Unitec Grado</h3>
+                                        <p className="text-gray-300 leading-relaxed">
+                                            En Unitec Grado impulsamos a jóvenes a transformar su futuro con un ecosistema de aprendizaje que despierta una mentalidad de crecimiento y un espíritu emprendedor.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="relative group">
+                                    <div className="absolute -inset-2 bg-gradient-to-r from-[#03AED2] to-[#47C8FD] rounded-lg opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
+                                    <div className="relative p-8 bg-[#F3F4F6] rounded-lg h-full flex flex-col items-center text-center">
+                                        <div className="w-16 h-16 bg-[#06065C] rotate-45 flex items-center justify-center mb-8 shadow-lg">
+                                            <Compass className="-rotate-45 text-[#03AED2]" size={32} />
+                                        </div>
+                                        <h3 className="text-3xl font-bold mb-4 text-[#06065C]">Unitec for Life</h3>
+                                        <p className="text-[#06065C] leading-relaxed">
+                                            En Unitec for Life impulsamos el aprendizaje continuo con programas flexibles que permiten a cada persona actualizarse, reinventarse y crecer.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* EJES */}
+                    <section id="ejes" className="py-24 bg-[#06065C] relative">
+                        <div className="container mx-auto px-6">
+                            <div className="text-center mb-16">
+                                <h2 className="text-4xl font-bold text-white mb-4">Nuestros Ejes Institucionales</h2>
+                                <p className="text-[#03AED2] text-xl">Visibles y tangibles en 12 impactos institucionales</p>
+                            </div>
+                            <div className="grid lg:grid-cols-3 gap-8">
+                                {axes.map((eje) => (
+                                    <div key={eje.id} className="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-[#03AED2] transition-all duration-300 group">
+                                        <div className="p-6 bg-white/5 border-b border-white/10">
+                                            <div className="text-5xl font-black text-[#03AED2]/20 mb-2">0{eje.id}</div>
+                                            <h3 className="text-xl font-bold text-white group-hover:text-[#47C8FD] transition-colors">{eje.title}</h3>
+                                        </div>
+                                        <div className="p-6">
+                                            <ul className="space-y-4">
+                                                {eje.impacts.map((impact, i) => (
+                                                    <li key={i} className="flex items-start gap-3 text-gray-300">
+                                                        <div className="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                                        <span className="text-sm">{impact}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* REDESIGNED RETRATO SECTION */}
+                    <section id="retrato" className="py-32 relative bg-gradient-to-b from-[#05054B] to-[#06065C] overflow-hidden">
+                        <div className="container mx-auto px-6">
+                            <div className="text-center mb-24">
+                                <h2 className="text-4xl font-bold mb-4 text-white">Retrato del Egresado</h2>
+                                <p className="text-gray-300 max-w-2xl mx-auto">
+                                    Nuestro modelo forma profesionales integrales, definidos por capacidades humanas conectadas a un núcleo equilibrado.
+                                </p>
+                            </div>
+
+                            <div className="relative w-full max-w-5xl mx-auto min-h-[600px] flex items-center justify-center">
+                                {/* Orbital System Container */}
+                                <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px]">
+                                    
+                                    {/* Outer Orbit Rings */}
+                                    <div className="absolute inset-[-40px] md:inset-[-60px] border border-[#03AED2]/20 rounded-full animate-spin-slow"></div>
+                                    <div className="absolute inset-[20px] md:inset-[30px] border border-[#47C8FD]/10 rounded-full"></div>
+                                    
+                                    {/* Radial Lines (Connecting nodes to center) */}
+                                    <div className="absolute inset-[-20px] md:inset-[-30px]">
+                                        {[0, 60, 120, 180, 240, 300].map((deg) => (
+                                            <div key={deg} className="absolute top-1/2 left-1/2 w-full h-px bg-[#03AED2]/10 -translate-y-1/2 -translate-x-1/2" style={{ transform: `translate(-50%, -50%) rotate(${deg}deg)` }}></div>
+                                        ))}
+                                    </div>
+
+                                    {/* The 6 Capabilities (Nodes) */}
+                                    {portraitCapabilities.map((cap, idx) => (
+                                        <div key={idx} className={`absolute ${cap.pos} flex flex-col items-center group z-20`}>
+                                            <div className="relative">
+                                                <div className="w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 border-[#03AED2] rounded-full flex items-center justify-center text-[#47C8FD] shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10">
+                                                    {cap.icon}
+                                                </div>
+                                                {/* Labels positioned OUTSIDE to avoid overlap */}
+                                                <div className={`absolute ${cap.labelPos} whitespace-nowrap bg-[#06065C]/90 px-3 py-1.5 rounded border border-[#03AED2]/30 backdrop-blur-sm`}>
+                                                    <span className="text-xs md:text-sm font-bold text-white group-hover:text-[#47C8FD] transition-colors">
+                                                        {cap.title}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                    {/* CENTER CORE: EQUAL WEIGHT TRIANGLE LAYOUT */}
+                                    <div className="absolute top-1/2 left-1/2 w-56 h-56 md:w-72 md:h-72 bg-[#06065C] border-4 border-[#03AED2] rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-10 shadow-[0_0_60px_rgba(3,174,210,0.4)]">
+                                        <div className="absolute inset-3 border border-[#47C8FD]/30 rounded-full"></div>
+                                        
+                                        {/* Internal Grid for 3 items */}
+                                        <div className="relative w-full h-full">
+                                            {/* Conceptos: Top Center */}
+                                            <div className="absolute top-[15%] left-1/2 -translate-x-1/2 text-center w-full">
+                                                <div className="text-[#03AED2] mb-1 flex justify-center"><BookOpen size={20} /></div>
+                                                <span className="text-sm md:text-lg font-bold text-white tracking-wider uppercase">Conceptos</span>
+                                            </div>
+
+                                            {/* Competencias: Bottom Right */}
+                                            <div className="absolute bottom-[20%] right-[10%] text-center w-[45%]">
+                                                <div className="text-[#03AED2] mb-1 flex justify-center"><Award size={20} /></div>
+                                                <span className="text-xs md:text-sm font-bold text-white tracking-wider uppercase block">Competencias</span>
+                                            </div>
+
+                                            {/* Carácter: Bottom Left */}
+                                            <div className="absolute bottom-[20%] left-[10%] text-center w-[45%]">
+                                                <div className="text-[#03AED2] mb-1 flex justify-center"><Target size={20} /></div>
+                                                <span className="text-xs md:text-sm font-bold text-white tracking-wider uppercase block">Carácter</span>
+                                            </div>
+
+                                            {/* Center Divider Visual (Y-shape) */}
+                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-20 pointer-events-none">
+                                                <div className="absolute top-1/2 left-1/2 w-px h-[40%] bg-white -translate-x-1/2 -translate-y-full"></div>
+                                                <div className="absolute top-1/2 left-1/2 w-px h-[40%] bg-white -translate-x-1/2 origin-top rotate-[120deg]"></div>
+                                                <div className="absolute top-1/2 left-1/2 w-px h-[40%] bg-white -translate-x-1/2 origin-top rotate-[-120deg]"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* ECOSISTEMA DE APRENDIZAJE */}
+                    <section id="ecosistema" className="py-24 bg-[#040435] relative">
+                        <div className="container mx-auto px-6">
+                            <div className="text-center mb-16">
+                                <div className="inline-block px-3 py-1 border border-[#47C8FD] rounded-full text-[#47C8FD] text-xs font-bold tracking-widest uppercase mb-4">Modelo CGS</div>
+                                <h2 className="text-4xl font-bold text-white mb-6">Ecosistema de Aprendizaje UNITEC</h2>
+                                <p className="text-xl text-gray-300">Las 4 C's: Donde el aprendizaje profundo ocurre en la intersección.</p>
+                            </div>
+
+                            <div className="flex flex-col lg:flex-row gap-16 items-center">
+                                {/* Left Column: Interactive Explanation */}
+                                <div className="lg:w-1/2 space-y-8">
+                                    {ecosystemData.map((item, idx) => (
+                                        <div key={idx} className="flex gap-6 group">
+                                            <div className="flex-shrink-0">
+                                                <div className="w-14 h-14 bg-[#06065C] border border-[#03AED2] rounded-full flex items-center justify-center text-white shadow-lg group-hover:bg-[#03AED2] transition-colors duration-300">
+                                                    {item.icon}
+                                                </div>
+                                                {idx !== ecosystemData.length - 1 && (
+                                                    <div className="w-px h-full bg-[#03AED2]/20 mx-auto my-2"></div>
+                                                )}
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xl font-bold text-white mb-1 flex items-center gap-2">
+                                                    {item.title} <span className="text-[#47C8FD] text-sm font-normal uppercase tracking-wider">- "{item.subtitle}"</span>
+                                                </h3>
+                                                <p className="text-gray-300 text-sm leading-relaxed mb-2">{item.desc}</p>
+                                                <p className="text-[#03AED2] text-xs italic">{item.detail}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Right Column: Visual Venn Diagram */}
+                                <div className="lg:w-1/2 flex items-center justify-center relative min-h-[500px]">
+                                    <div className="relative w-full max-w-[500px] aspect-square">
+                                        {/* Center Core Intersection */}
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-white z-20 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.3)] text-center p-4">
+                                            <span className="text-[#06065C] font-bold text-sm leading-tight">Aprendizaje Profundo y Perdurable</span>
+                                        </div>
+
+                                        {/* The 4 Circles */}
+                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-[#03AED2]/20 border border-[#03AED2] rounded-full venn-circle flex items-start justify-center pt-8 backdrop-blur-sm">
+                                            <span className="font-bold text-white uppercase tracking-widest text-sm">Comunidad</span>
+                                        </div>
+                                        
+                                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-[#47C8FD]/20 border border-[#47C8FD] rounded-full venn-circle flex items-end justify-center pb-8 backdrop-blur-sm">
+                                            <span className="font-bold text-white uppercase tracking-widest text-sm">Cultura</span>
+                                        </div>
+
+                                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-[#06065C]/40 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-start pl-8 backdrop-blur-sm">
+                                            <span className="font-bold text-white uppercase tracking-widest text-sm transform -rotate-90">Contexto</span>
+                                        </div>
+
+                                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-[#03AED2]/10 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-end pr-8 backdrop-blur-sm">
+                                            <span className="font-bold text-white uppercase tracking-widest text-sm transform rotate-90">Currículo</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* FOOTER */}
+                    <footer className="bg-[#040435] text-white py-12 border-t border-white/5">
+                        <div className="container mx-auto px-6 text-center">
+                            <div className="flex items-center justify-center gap-3 mb-8 opacity-80">
+                                <div className="w-6 h-6 bg-[#03AED2] rotate-45"></div>
+                                <span className="text-xl font-bold tracking-tight">unitec</span>
+                            </div>
+                            <p className="text-gray-400 text-sm mb-4">
+                                © 2030 Universidad Tecnológica Centroamericana. Todos los derechos reservados.
+                            </p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
