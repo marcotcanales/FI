@@ -104,6 +104,26 @@
         .hover-card:hover .card-link-text {
             color: #0891b2;
         }
+
+        /* Separadores de Sección */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .section-divider-line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: #e5e7eb;
+        }
+        .section-divider-text {
+            padding-right: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #9ca3af;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -127,8 +147,6 @@
                         </span>
                     </div>
                 </div>
-                
-                <!-- Navegación eliminada a petición del usuario para una landing limpia -->
             </div>
         </div>
     </header>
@@ -148,149 +166,166 @@
             </div>
         </div>
 
-        <!-- Grid de Recursos (Cards) -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+            
+            <!-- NIVEL 1: ESTRATEGIA E IDENTIDAD -->
+            <section>
+                <div class="section-divider">
+                    <span class="section-divider-text">Nivel 1: Estrategia Institucional</span>
+                    <div class="section-divider-line"></div>
+                </div>
                 
-                <!-- 1. Vision 2030 (NUEVO - PRIMERA POSICIÓN) -->
-                <a href="https://capexfi25-30.netlify.app/cgsknowledge/vision2030/" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
-                    <div class="card-top-bar" style="background-color: var(--pacific-cyan);"></div> <!-- Highlighted by default -->
-                    
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="p-3 rounded-lg icon-container" style="background-color: #ecfeff; color: #0891b2;">
-                            <i data-lucide="gem" width="32" height="32"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 1. Vision 2030 -->
+                    <a href="https://capexfi25-30.netlify.app/cgsknowledge/vision2030/" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
+                        <div class="card-top-bar" style="background-color: var(--pacific-cyan);"></div>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="p-3 rounded-lg icon-container" style="background-color: #ecfeff; color: #0891b2;">
+                                <i data-lucide="gem" width="32" height="32"></i>
+                            </div>
+                            <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
                         </div>
-                        <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
-                    </div>
 
-                    <h3 class="text-xl font-bold mb-2 text-federal-blue">Visión Unitec 2030</h3>
-                    <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Recorrido Estratégico</h4>
-                    <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
-                        Nuestro norte estratégico. Principios, ejes e impactos que definirán nuestra próxima década.
-                    </p>
+                        <h3 class="text-xl font-bold mb-2 text-federal-blue">Visión Unitec 2030</h3>
+                        <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Recorrido Estratégico</h4>
+                        <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
+                            Nuestro norte estratégico. Principios, ejes e impactos que definirán nuestra próxima década.
+                        </p>
 
-                    <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
-                        Explorar la Visión 
-                        <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
-                    </div>
-                </a>
-
-                <!-- 2. ADN de Unitec -->
-                <a href="https://capexfi25-30.netlify.app/cgsknowledge/portrait" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
-                    <div class="card-top-bar"></div>
-                    
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="p-3 rounded-lg icon-container">
-                            <i data-lucide="dna" width="32" height="32"></i>
+                        <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
+                            Explorar la Visión 
+                            <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
                         </div>
-                        <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
-                    </div>
+                    </a>
 
-                    <h3 class="text-xl font-bold mb-2 text-federal-blue">ADN de Unitec / Ceutec</h3>
-                    <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Identidad Institucional</h4>
-                    <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
-                        La esencia de nuestra institución. Valores, misión y la estructura de nuestra identidad.
-                    </p>
-
-                    <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
-                        Acceder al Recurso 
-                        <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
-                    </div>
-                </a>
-
-                <!-- 3. Unitec Planner -->
-                <a href="https://capexfi25-30.netlify.app/cgsknowledge/unitecplanner" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
-                    <div class="card-top-bar"></div>
-                    
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="p-3 rounded-lg icon-container">
-                            <i data-lucide="calendar" width="32" height="32"></i>
+                    <!-- 2. ADN de Unitec -->
+                    <a href="https://capexfi25-30.netlify.app/cgsknowledge/portrait" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
+                        <div class="card-top-bar"></div>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="p-3 rounded-lg icon-container">
+                                <i data-lucide="dna" width="32" height="32"></i>
+                            </div>
+                            <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
                         </div>
-                        <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
-                    </div>
 
-                    <h3 class="text-xl font-bold mb-2 text-federal-blue">Unitec Planner</h3>
-                    <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Manual de Preparación</h4>
-                    <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
-                        Guía completa para la planificación académica y estructuración de cursos.
-                    </p>
+                        <h3 class="text-xl font-bold mb-2 text-federal-blue">ADN de Unitec / Ceutec</h3>
+                        <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Identidad Institucional</h4>
+                        <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
+                            La esencia de nuestra institución. Valores, misión y la estructura de nuestra identidad.
+                        </p>
 
-                    <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
-                        Acceder al Recurso 
-                        <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
-                    </div>
-                </a>
-
-                <!-- 4. The Book of CGS -->
-                <a href="https://capexfi25-30.netlify.app/cgsknowledge/book" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
-                    <div class="card-top-bar"></div>
-                    
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="p-3 rounded-lg icon-container">
-                            <i data-lucide="book-open" width="32" height="32"></i>
+                        <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
+                            Acceder al Recurso 
+                            <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
                         </div>
-                        <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
-                    </div>
+                    </a>
 
-                    <h3 class="text-xl font-bold mb-2 text-federal-blue">The Book of the CGS</h3>
-                    <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Collective Growth System</h4>
-                    <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
-                        El recurso fundamental para entender la filosofía colaborativa y el sistema de crecimiento colectivo.
-                    </p>
-
-                    <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
-                        Acceder al Recurso 
-                        <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
-                    </div>
-                </a>
-
-                <!-- 5. CGS 3Cs Toolkit -->
-                <a href="https://capexfi25-30.netlify.app/cgsknowledge/toolkit" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
-                    <div class="card-top-bar"></div>
-                    
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="p-3 rounded-lg icon-container">
-                            <i data-lucide="wrench" width="32" height="32"></i>
+                    <!-- 3. Unitec Planner -->
+                    <a href="https://capexfi25-30.netlify.app/cgsknowledge/unitecplanner" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
+                        <div class="card-top-bar"></div>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="p-3 rounded-lg icon-container">
+                                <i data-lucide="calendar" width="32" height="32"></i>
+                            </div>
+                            <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
                         </div>
-                        <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
-                    </div>
 
-                    <h3 class="text-xl font-bold mb-2 text-federal-blue">CGS 3Cs Toolkit</h3>
-                    <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Herramientas Prácticas</h4>
-                    <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
-                        Kits de herramientas esenciales enfocados en las 3Cs del sistema de crecimiento colectivo.
-                    </p>
+                        <h3 class="text-xl font-bold mb-2 text-federal-blue">Unitec Planner</h3>
+                        <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Manual de Preparación</h4>
+                        <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
+                            Guía completa para la planificación académica y estructuración de cursos.
+                        </p>
 
-                    <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
-                        Acceder al Recurso 
-                        <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
-                    </div>
-                </a>
-
-                <!-- 6. Learning 2 Learn Toolkit -->
-                <a href="https://capexfi25-30.netlify.app/cgsknowledge/learning2learn" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
-                    <div class="card-top-bar"></div>
-                    
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="p-3 rounded-lg icon-container">
-                            <i data-lucide="lightbulb" width="32" height="32"></i>
+                        <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
+                            Acceder al Recurso 
+                            <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
                         </div>
-                        <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
-                    </div>
+                    </a>
+                </div>
+            </section>
 
-                    <h3 class="text-xl font-bold mb-2 text-federal-blue">Learning 2 Learn Toolkit</h3>
-                    <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Metodología de Aprendizaje</h4>
-                    <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
-                        Estrategias y recursos para potenciar la capacidad de aprender a aprender.
-                    </p>
+            <!-- NIVEL 2: METODOLOGÍA Y HERRAMIENTAS -->
+            <section>
+                <div class="section-divider">
+                    <span class="section-divider-text">Nivel 2: Sistema CGS y Herramientas</span>
+                    <div class="section-divider-line"></div>
+                </div>
 
-                    <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
-                        Acceder al Recurso 
-                        <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
-                    </div>
-                </a>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 4. The Book of CGS -->
+                    <a href="https://capexfi25-30.netlify.app/cgsknowledge/book" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
+                        <div class="card-top-bar"></div>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="p-3 rounded-lg icon-container">
+                                <i data-lucide="book-open" width="32" height="32"></i>
+                            </div>
+                            <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
+                        </div>
 
-            </div>
+                        <h3 class="text-xl font-bold mb-2 text-federal-blue">The Book of the CGS</h3>
+                        <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Collective Growth System</h4>
+                        <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
+                            El recurso fundamental para entender la filosofía colaborativa y el sistema de crecimiento colectivo.
+                        </p>
+
+                        <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
+                            Acceder al Recurso 
+                            <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
+                        </div>
+                    </a>
+
+                    <!-- 5. CGS 3Cs Toolkit -->
+                    <a href="https://capexfi25-30.netlify.app/cgsknowledge/toolkit" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
+                        <div class="card-top-bar"></div>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="p-3 rounded-lg icon-container">
+                                <i data-lucide="wrench" width="32" height="32"></i>
+                            </div>
+                            <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
+                        </div>
+
+                        <h3 class="text-xl font-bold mb-2 text-federal-blue">CGS 3Cs Toolkit</h3>
+                        <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Herramientas Prácticas</h4>
+                        <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
+                            Kits de herramientas esenciales enfocados en las 3Cs del sistema de crecimiento colectivo.
+                        </p>
+
+                        <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
+                            Acceder al Recurso 
+                            <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
+                        </div>
+                    </a>
+
+                    <!-- 6. Learning 2 Learn Toolkit -->
+                    <a href="https://capexfi25-30.netlify.app/cgsknowledge/learning2learn" target="_blank" rel="noopener noreferrer" class="group bg-white p-8 hover-card rounded-sm flex flex-col h-full relative overflow-hidden">
+                        <div class="card-top-bar"></div>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="p-3 rounded-lg icon-container">
+                                <i data-lucide="lightbulb" width="32" height="32"></i>
+                            </div>
+                            <i data-lucide="external-link" width="18" height="18" class="text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
+                        </div>
+
+                        <h3 class="text-xl font-bold mb-2 text-federal-blue">Learning 2 Learn Toolkit</h3>
+                        <h4 class="text-sm font-semibold uppercase tracking-wide mb-3 text-cyan-600">Metodología de Aprendizaje</h4>
+                        <p class="text-gray-500 flex-grow mb-6 text-sm leading-relaxed">
+                            Estrategias y recursos para potenciar la capacidad de aprender a aprender.
+                        </p>
+
+                        <div class="mt-auto flex items-center font-semibold text-sm card-link-text text-federal-blue">
+                            Acceder al Recurso 
+                            <i data-lucide="arrow-right" width="16" height="16" class="ml-2 link-arrow"></i>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
         </div>
     </main>
 
