@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingeniería Civil | UNITEC - Plan 2023</title>
+    
+    <!-- Google Fonts: Poppins (Mandatory per Brand Manual) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Unitec Brand Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        federalBlue: '#06065C',
+                        pacificCyan: '#03AED2',
+                        vividSkyBlue: '#47C8FD',
+                        lightGray: '#F3F4F6',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for nuances */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        
+        /* Diamond Isotype CSS Construction */
+        .unitec-diamond {
+            width: 30px;
+            height: 30px;
+            background-color: #06065C; /* Base */
+            position: relative;
+            transform: rotate(45deg);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .unitec-diamond::after {
+            content: '';
+            width: 60%;
+            height: 60%;
+            border: 2px solid white;
+            position: absolute;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #03AED2; /* Pacific Cyan */
+            margin-top: 8px;
+        }
+
+        /* Timeline vertical line */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #E5E7EB;
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+        }
+        
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-white smooth-scroll">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <!-- Logo Composite (CSS) -->
+                    <div class="flex items-center">
+                        <div class="unitec-diamond bg-federalBlue"></div>
+                        <span class="text-3xl font-bold text-federalBlue tracking-tight">unitec</span>
+                        <div class="hidden md:block w-px h-8 bg-gray-300 mx-4"></div>
+                        <span class="hidden md:block text-sm text-gray-500 font-medium">Admisiones: Ingeniería Civil</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#general" class="text-gray-600 hover:text-federalBlue font-medium transition">Generalidades</a>
+                    <a href="#perfil" class="text-gray-600 hover:text-federalBlue font-medium transition">Perfil</a>
+                    <a href="#plan" class="text-gray-600 hover:text-federalBlue font-medium transition">Plan 2023</a>
+                    <a href="#labs" class="text-gray-600 hover:text-federalBlue font-medium transition">Tecnología</a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button class="text-federalBlue text-2xl"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden" id="home">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Construction Site" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-federalBlue/80 mix-blend-multiply"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 text-center sm:text-left sm:px-6 lg:px-8 w-full">
+            <div class="bg-white/95 backdrop-blur-sm p-8 md:p-12 max-w-2xl rounded-sm shadow-2xl border-l-8 border-pacificCyan">
+                <span class="text-pacificCyan font-bold tracking-wider uppercase text-sm mb-2 block">Reforma 2023</span>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-federalBlue mb-4 leading-tight">
+                    Ingeniería Civil
+                </h1>
+                <p class="text-lg text-gray-700 mb-8 font-light">
+                    Formamos líderes capaces de concebir, diseñar y gestionar la infraestructura del futuro con tecnología BIM y enfoque sostenible.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-check-circle text-pacificCyan text-xl"></i>
+                        <span class="text-federalBlue font-semibold">Acreditada por ACAAI</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-check-circle text-pacificCyan text-xl"></i>
+                        <span class="text-federalBlue font-semibold">Enfoque BIM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- General Data Grid -->
+    <section id="general" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-federalBlue section-title">Datos Clave del Programa</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Un plan de estudios modernizado para responder a las exigencias globales de la construcción.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-federalBlue hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-federalBlue/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="far fa-clock text-federalBlue text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-federalBlue mb-2">Duración</h3>
+                    <p class="text-gray-600">4 años y 1 periodo<br><span class="text-sm text-gray-500">(17 periodos académicos)</span></p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-pacificCyan hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-pacificCyan/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-chalkboard-teacher text-pacificCyan text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-federalBlue mb-2">Modalidad</h3>
+                    <p class="text-gray-600">Presencial<br><span class="text-sm text-gray-500">Con fuerte componente práctico</span></p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-federalBlue hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-federalBlue/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-award text-federalBlue text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-federalBlue mb-2">Calidad</h3>
+                    <p class="text-gray-600">Acreditación ACAAI<br><span class="text-sm text-gray-500">Reconocimiento Regional</span></p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-pacificCyan hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-pacificCyan/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-book text-pacificCyan text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-federalBlue mb-2">Carga</h3>
+                    <p class="text-gray-600">62 Espacios<br><span class="text-sm text-gray-500">226 Unidades Valorativas</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why The Reform? (Split Layout) -->
+    <section class="py-20 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:gap-16">
+                <!-- Text Content -->
+                <div class="lg:w-1/2 mb-10 lg:mb-0">
+                    <h2 class="text-3xl font-bold text-federalBlue mb-6">¿Por qué la Reforma 2023?</h2>
+                    <p class="text-gray-600 mb-6 text-lg">
+                        La industria de la construcción ha evolucionado. El nuevo plan responde a la necesidad de ingenieros que dominen no solo el cálculo, sino la tecnología y la gestión.
+                    </p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-pacificCyan flex items-center justify-center mt-1 mr-3">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-federalBlue">Actualización Tecnológica</h4>
+                                <p class="text-sm text-gray-500">Inclusión profunda de software BIM (Revit, Civil 3D) en el currículo.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-pacificCyan flex items-center justify-center mt-1 mr-3">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-federalBlue">Gestión y Ética</h4>
+                                <p class="text-sm text-gray-500">Nuevas clases: Sistemas de Gestión, Ingeniería Ambiental y Ética Ciudadana.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-pacificCyan flex items-center justify-center mt-1 mr-3">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-federalBlue">Flexibilidad de Egreso</h4>
+                                <p class="text-sm text-gray-500">Elección clara entre Práctica Profesional (Empleabilidad) o Investigación (Posgrado).</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Visual/Image -->
+                <div class="lg:w-1/2 relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-vividSkyBlue/20 rounded-full z-0"></div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-federalBlue/10 rounded-full z-0"></div>
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2031&auto=format&fit=crop" alt="Modern Architecture" class="relative z-10 rounded-lg shadow-xl w-full object-cover h-[400px]">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Profile (3 Pillars) -->
+    <section id="perfil" class="py-20 bg-federalBlue text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-pacificCyan font-bold tracking-widest uppercase text-xs mb-2 block">Competencias de Egreso</span>
+                <h2 class="text-3xl font-bold">El Ingeniero Civil UNITEC es...</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Column 1 -->
+                <div class="bg-white/5 p-8 rounded-lg border border-white/10 hover:bg-white/10 transition duration-300">
+                    <i class="fas fa-hard-hat text-4xl text-pacificCyan mb-6"></i>
+                    <h3 class="text-xl font-bold mb-4">Constructor de Soluciones</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Capacidad para diseñar y materializar desde carreteras y puentes hasta edificios complejos y sistemas hidráulicos que mejoran la calidad de vida.
+                    </p>
+                </div>
+                <!-- Column 2 -->
+                <div class="bg-white/5 p-8 rounded-lg border border-white/10 hover:bg-white/10 transition duration-300">
+                    <i class="fas fa-chart-line text-4xl text-vividSkyBlue mb-6"></i>
+                    <h3 class="text-xl font-bold mb-4">Gestor de Proyectos</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Habilidad administrativa para manejar presupuestos, personal y tiempos de obra, asegurando eficiencia y rentabilidad.
+                    </p>
+                </div>
+                <!-- Column 3 -->
+                <div class="bg-white/5 p-8 rounded-lg border border-white/10 hover:bg-white/10 transition duration-300">
+                    <i class="fas fa-laptop-code text-4xl text-pacificCyan mb-6"></i>
+                    <h3 class="text-xl font-bold mb-4">Innovador Tecnológico</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Dominio de herramientas modernas para modelar, simular y previsualizar infraestructuras antes de colocar el primer ladrillo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flowchart / Timeline -->
+    <section id="plan" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-federalBlue section-title">Ruta de Formación</h2>
+                <p class="text-gray-600 mt-2">Un camino estructurado hacia la excelencia profesional.</p>
+            </div>
+
+            <div class="relative">
+                <!-- Vertical Line for Mobile/Desktop -->
+                <div class="timeline-line hidden md:block"></div>
+
+                <div class="space-y-12 relative">
+                    
+                    <!-- Year 1 -->
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 text-right order-1 pr-8">
+                            <h3 class="text-2xl font-bold text-federalBlue">Año 1: Cimientos</h3>
+                            <p class="text-sm text-gray-500 font-semibold mb-2">Bases Matemáticas & Introducción</p>
+                            <p class="text-gray-600">El estudiante conoce el lenguaje de la ingeniería. Primera visita técnica a proyectos reales.</p>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-federalBlue border-4 border-white shadow-lg z-10 mx-auto md:mx-0 order-2 absolute left-4 md:left-1/2 md:-translate-x-1/2"></div>
+                        <div class="md:w-5/12 pl-12 md:pl-8 order-3 pt-2 md:pt-0">
+                            <!-- Mobile content placeholder if needed, purely layout logic -->
+                        </div>
+                    </div>
+
+                    <!-- Year 2 -->
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 text-right order-1 pr-8 md:opacity-0"></div> <!-- Spacer -->
+                        <div class="w-8 h-8 rounded-full bg-pacificCyan border-4 border-white shadow-lg z-10 mx-auto md:mx-0 order-2 absolute left-4 md:left-1/2 md:-translate-x-1/2 mt-2 md:mt-0"></div>
+                        <div class="md:w-5/12 pl-12 md:pl-8 order-3 pt-2 md:pt-0">
+                            <h3 class="text-2xl font-bold text-federalBlue">Año 2: Estructura y Medición</h3>
+                            <p class="text-sm text-gray-500 font-semibold mb-2">Topografía & Mecánica de Materiales</p>
+                            <p class="text-gray-600">Aprenden a medir el terreno físico y entender el comportamiento de los materiales de construcción.</p>
+                        </div>
+                    </div>
+
+                    <!-- Year 3 -->
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 text-right order-1 pr-8">
+                            <h3 class="text-2xl font-bold text-federalBlue">Año 3: El "Core" Civil</h3>
+                            <p class="text-sm text-gray-500 font-semibold mb-2">Hidráulica, Suelos & Análisis Estructural</p>
+                            <p class="text-gray-600">El año fuerte. Aprenden sobre agua, comportamiento del suelo y soporte de cargas.</p>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-federalBlue border-4 border-white shadow-lg z-10 mx-auto md:mx-0 order-2 absolute left-4 md:left-1/2 md:-translate-x-1/2 mt-2 md:mt-0"></div>
+                        <div class="md:w-5/12 pl-12 md:pl-8 order-3 pt-2 md:pt-0"></div>
+                    </div>
+
+                    <!-- Year 4 -->
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 text-right order-1 pr-8 md:opacity-0"></div>
+                        <div class="w-8 h-8 rounded-full bg-pacificCyan border-4 border-white shadow-lg z-10 mx-auto md:mx-0 order-2 absolute left-4 md:left-1/2 md:-translate-x-1/2 mt-2 md:mt-0"></div>
+                        <div class="md:w-5/12 pl-12 md:pl-8 order-3 pt-2 md:pt-0">
+                            <h3 class="text-2xl font-bold text-federalBlue">Año 4: Diseño y Especialización</h3>
+                            <p class="text-sm text-gray-500 font-semibold mb-2">Concreto, Acero, Carreteras & Sanitaria</p>
+                            <p class="text-gray-600">Diseño real. Capacidad para proyectar edificios completos y sistemas de agua potable.</p>
+                        </div>
+                    </div>
+
+                    <!-- Year 5 -->
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 text-right order-1 pr-8">
+                            <h3 class="text-2xl font-bold text-federalBlue">Año 5: Integración y Salida</h3>
+                            <p class="text-sm text-gray-500 font-semibold mb-2">Gerencia, Puentes & Práctica</p>
+                            <p class="text-gray-600">Preparación final para dirigir obras. Elección entre Práctica Profesional o Investigación.</p>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-federalBlue border-4 border-white shadow-lg z-10 mx-auto md:mx-0 order-2 absolute left-4 md:left-1/2 md:-translate-x-1/2 mt-2 md:mt-0"></div>
+                        <div class="md:w-5/12 pl-12 md:pl-8 order-3 pt-2 md:pt-0"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology & Labs -->
+    <section id="labs" class="py-20 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Content -->
+                <div>
+                    <h2 class="text-3xl font-bold text-federalBlue mb-6 section-title">Tecnología de Vanguardia</h2>
+                    <p class="text-gray-600 mb-8">
+                        Nuestros estudiantes no solo aprenden teoría; dominan las herramientas que la industria global exige hoy en día.
+                    </p>
+
+                    <h4 class="font-bold text-federalBlue mb-4">Software Especializado</h4>
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <span class="px-4 py-2 bg-gray-100 rounded text-gray-700 font-semibold border border-gray-300">Revit (BIM)</span>
+                        <span class="px-4 py-2 bg-gray-100 rounded text-gray-700 font-semibold border border-gray-300">Civil 3D</span>
+                        <span class="px-4 py-2 bg-gray-100 rounded text-gray-700 font-semibold border border-gray-300">AutoCAD</span>
+                        <span class="px-4 py-2 bg-gray-100 rounded text-gray-700 font-semibold border border-gray-300">SolidWorks</span>
+                    </div>
+
+                    <h4 class="font-bold text-federalBlue mb-4">Laboratorios Equipados</h4>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
+                        <li><i class="fas fa-microscope text-pacificCyan mr-2"></i> Topografía</li>
+                        <li><i class="fas fa-cubes text-pacificCyan mr-2"></i> Concreto</li>
+                        <li><i class="fas fa-layer-group text-pacificCyan mr-2"></i> Mecánica de Suelos</li>
+                        <li><i class="fas fa-water text-pacificCyan mr-2"></i> Hidráulica</li>
+                        <li><i class="fas fa-tools text-pacificCyan mr-2"></i> Procedimientos</li>
+                    </ul>
+                </div>
+
+                <!-- Image Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-lg w-full h-48 object-cover transform translate-y-4" alt="Lab Work">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-lg w-full h-48 object-cover" alt="Digital Design">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparative Table (Foldable or Simple) -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-federalBlue text-center mb-8">Evolución: Plan 2015 vs 2023</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-federalBlue text-white">
+                            <th class="p-4 border-b border-gray-200 w-1/3">Característica</th>
+                            <th class="p-4 border-b border-gray-200 w-1/3 text-gray-300 font-normal">Plan Anterior (2015)</th>
+                            <th class="p-4 border-b border-gray-200 w-1/3 font-bold bg-federalBlue/90">Plan Reforma (2023)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 border-b border-gray-100 font-semibold text-gray-700">Enfoque</td>
+                            <td class="p-4 border-b border-gray-100 text-gray-500">Técnico Tradicional</td>
+                            <td class="p-4 border-b border-gray-100 text-federalBlue font-medium">BIM, Gerencia y Sostenibilidad</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 border-b border-gray-100 font-semibold text-gray-700">Asignaturas Clave</td>
+                            <td class="p-4 border-b border-gray-100 text-gray-500">Resistencia de Materiales</td>
+                            <td class="p-4 border-b border-gray-100 text-federalBlue font-medium">Ing. Ambiental, Gestión de Innovación</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 border-b border-gray-100 font-semibold text-gray-700">Tecnología</td>
+                            <td class="p-4 border-b border-gray-100 text-gray-500">CAD Básico</td>
+                            <td class="p-4 border-b border-gray-100 text-federalBlue font-medium">Revit, Civil 3D, SolidWorks</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 border-b border-gray-100 font-semibold text-gray-700">Opción de Egreso</td>
+                            <td class="p-4 border-b border-gray-100 text-gray-500">General</td>
+                            <td class="p-4 border-b border-gray-100 text-federalBlue font-medium">Práctica (Empleo) o Investigación (Posgrado)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-federalBlue text-white py-12 border-t-4 border-pacificCyan">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            
+            <div class="flex items-center mb-4 md:mb-0">
+                <div class="unitec-diamond bg-white/20"></div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold tracking-tight">unitec</span>
+                    <span class="text-xs text-gray-300">Laureate International Universities</span>
+                </div>
+            </div>
+
+            <div class="text-center md:text-right">
+                <p class="text-sm text-gray-400 mb-2">Herramienta de Asesoría Académica</p>
+                <p class="text-xs text-gray-500">© 2023 Universidad Tecnológica Centroamericana. Todos los derechos reservados.</p>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
