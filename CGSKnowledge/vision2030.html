@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vision Unitec 2030 - Mobile Optimized</title>
+    <title>Vision Unitec 2030 - Documento Oficial</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,7 +22,7 @@
             font-family: 'Poppins', sans-serif;
             background-color: #06065C;
             color: #FFFFFF;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
         }
 
         .diamond-bg {
@@ -133,6 +133,10 @@
                 }
             };
 
+            // DATA STRICTLY FROM DOCUMENT "VISION 2030"
+            
+            const visionText = "Ser una Universidad de clase mundial, protagonista del desarrollo de Honduras, reconocida por su excelencia académica, innovación constante y por construir una comunidad de aprendizaje donde la conexión humana y la experiencia educativa fortalecen el crecimiento integral de las personas a lo largo de su vida.";
+
             const principles = [
                 { title: "Honestidad y Coherencia", desc: "Actuamos con honestidad y coherencia.", icon: <Award size={32} /> },
                 { title: "Desafío como Oportunidad", desc: "Convertimos cada desafio en una oportunidad para crecer.", icon: <Zap size={32} /> },
@@ -148,7 +152,7 @@
                     impacts: [
                         "Ecosistema de aprendizaje",
                         "Campus y sedes referentes",
-                        "Docentes como motor de la innovación Educativa",
+                        "Docentes como motor de la innovación Educativa y del aprendizaje continuo",
                         "Propuesta institucional de aprendizaje a lo largo de la vida",
                         "Experiencia estudiantil transformadora"
                     ]
@@ -174,13 +178,9 @@
                 }
             ];
 
-            // EDNA FIX: Optimized positions for mobile.
-            // On mobile, we use scaling on the container, so we can keep the relative percentages
-            // but we need to ensure labels don't overflow horizontally.
-            // Pushed labels closer to center or inverted direction for edge cases.
             const portraitCapabilities = [
                 { title: "Líder con Propósito", icon: <Star size={24} />, pos: "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2", labelPos: "-top-12 left-1/2 -translate-x-1/2" },
-                { title: "Ciudadano Responsable", icon: <Globe size={24} />, pos: "top-[25%] right-[2%] translate-x-1/2", labelPos: "-right-4 translate-x-full md:-right-4 md:translate-x-full mt-10 md:mt-0" }, // Added mt-10 for mobile overlap
+                { title: "Ciudadano Responsable", icon: <Globe size={24} />, pos: "top-[25%] right-[2%] translate-x-1/2", labelPos: "-right-4 translate-x-full md:-right-4 md:translate-x-full mt-10 md:mt-0" },
                 { title: "Innovador Creativo", icon: <Lightbulb size={24} />, pos: "bottom-[25%] right-[2%] translate-x-1/2", labelPos: "-right-4 translate-x-full md:-right-4 md:translate-x-full mb-10 md:mb-0" },
                 { title: "Comunicador Efectivo", icon: <MessageCircle size={24} />, pos: "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2", labelPos: "-bottom-12 left-1/2 -translate-x-1/2" },
                 { title: "Colaborador Constructivo", icon: <Users size={24} />, pos: "bottom-[25%] left-[2%] -translate-x-1/2", labelPos: "-left-4 -translate-x-full md:-left-4 md:-translate-x-full mb-10 md:mb-0" },
@@ -193,28 +193,28 @@
                     subtitle: "El Suelo Fértil",
                     icon: <Sprout size={32} />,
                     desc: "Es la base invisible pero poderosa. Se refiere al 'cómo hacemos las cosas aquí'.",
-                    detail: "Se alinea con el principio GENTE y PASIÓN."
+                    detail: "Alineada con GENTE y PASIÓN."
                 },
                 {
                     title: "El Currículo",
                     subtitle: "El Mapa Definido",
                     icon: <Map size={32} />,
-                    desc: "No es solo el temario. Es lo que definimos que vale la pena aprender.",
-                    detail: "Estructurado en torno a las 3C's y el 'Aprender a Aprender'."
+                    desc: "Lo que definimos que vale la pena aprender.",
+                    detail: "Conceptos, Competencias y Carácter (3C's)."
                 },
                 {
                     title: "El Contexto",
                     subtitle: "El Escenario",
                     icon: <Layout size={32} />,
-                    desc: "Es el 'dónde' y el 'cuándo' ocurre el aprendizaje.",
-                    detail: "Conectar el aprendizaje con el mundo real."
+                    desc: "El 'dónde' y el 'cuándo' ocurre el aprendizaje.",
+                    detail: "Conexión auténtica con el mundo real."
                 },
                 {
                     title: "La Comunidad",
                     subtitle: "Los Actores",
                     icon: <Users size={32} />,
-                    desc: "Somos nosotros. El aprendizaje es una actividad social fundamental.",
-                    detail: "Estudiantes, docentes, expertos e industria."
+                    desc: "El aprendizaje es una actividad social fundamental.",
+                    detail: "Estudiantes, docentes, expertos y sociedad."
                 }
             ];
 
@@ -265,8 +265,8 @@
                         )}
                     </nav>
 
-                    {/* HERO SECTION */}
-                    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+                    {/* HERO SECTION WITH FULL VISION TEXT */}
+                    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12">
                         <div className="absolute top-0 left-0 w-full h-full diamond-bg opacity-20 pointer-events-none"></div>
                         <div className="absolute top-1/4 -right-20 w-96 h-96 bg-[#03AED2] rounded-full blur-[120px] opacity-20"></div>
                         <div className="absolute bottom-0 -left-20 w-96 h-96 bg-[#47C8FD] rounded-full blur-[120px] opacity-20"></div>
@@ -275,12 +275,17 @@
                             <div className="inline-block mb-6 px-4 py-1 border border-[#03AED2] rounded-full text-[#03AED2] text-sm font-semibold tracking-widest uppercase">
                                 Recorrido Estratégico
                             </div>
-                            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-8">
+                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8">
                                 Vision Unitec <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#03AED2] to-[#47C8FD]">2030</span>
                             </h1>
-                            <p className="text-lg md:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed mb-12">
-                                "Ser una Universidad de clase mundial, protagonista del desarrollo de Honduras, reconocida por su excelencia académica."
-                            </p>
+                            
+                            {/* FULL TEXT DISPLAY */}
+                            <div className="relative max-w-5xl mx-auto mb-12 group">
+                                <div className="absolute -inset-4 bg-[#03AED2]/5 rounded-xl blur-lg group-hover:bg-[#03AED2]/10 transition-all duration-500"></div>
+                                <p className="relative text-lg md:text-2xl text-gray-100 leading-relaxed font-light">
+                                    "{visionText}"
+                                </p>
+                            </div>
                             
                             <button 
                                 onClick={() => scrollTo('principios')}
@@ -292,11 +297,10 @@
                         </div>
                     </section>
 
-                    {/* PRINCIPIOS - EDNA FIX: Responsive Font Size and Sticky behavior */}
+                    {/* PRINCIPIOS */}
                     <section id="principios" className="py-24 relative bg-[#05054B]">
                         <div className="container mx-auto px-6">
                             <div className="flex flex-col md:flex-row gap-12 items-start">
-                                {/* Fixed: changed sticky to md:sticky, reduced text size for mobile */}
                                 <div className="w-full md:w-1/3 relative md:sticky md:top-32 text-center md:text-left">
                                     <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#47C8FD] leading-tight">Principios que nos guían</h2>
                                     <p className="text-gray-300 leading-relaxed text-sm md:text-base">
@@ -322,33 +326,35 @@
                         </div>
                     </section>
 
-                    {/* PROPUESTA EDUCATIVA */}
+                    {/* PROPUESTA EDUCATIVA - UPDATED WITH FULL TEXT */}
                     <section id="propuesta" className="py-24 relative overflow-hidden">
                         <div className="absolute inset-0 bg-white transform -skew-y-3 origin-top-left scale-110 z-0"></div>
                         <div className="container mx-auto px-6 relative z-10">
                             <h2 className="text-3xl md:text-4xl font-bold mb-16 text-[#06065C] text-center">Propuesta Educativa</h2>
-                            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-                                <div className="relative group">
+                            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+                                {/* Unitec Grado */}
+                                <div className="relative group flex">
                                     <div className="absolute -inset-2 bg-gradient-to-r from-[#06065C] to-[#03AED2] rounded-lg opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
-                                    <div className="relative p-8 bg-[#06065C] rounded-lg h-full flex flex-col items-center text-center">
-                                        <div className="w-16 h-16 bg-white rotate-45 flex items-center justify-center mb-8 shadow-lg">
+                                    <div className="relative p-8 bg-[#06065C] rounded-lg w-full flex flex-col items-center text-center">
+                                        <div className="w-16 h-16 bg-white rotate-45 flex items-center justify-center mb-8 shadow-lg flex-shrink-0">
                                             <BookOpen className="-rotate-45 text-[#06065C]" size={32} />
                                         </div>
                                         <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">Unitec Grado</h3>
-                                        <p className="text-gray-300 leading-relaxed text-sm md:text-base">
-                                            En Unitec Grado impulsamos a jóvenes a transformar su futuro con un ecosistema de aprendizaje que despierta una mentalidad de crecimiento.
+                                        <p className="text-gray-300 leading-relaxed text-sm md:text-base flex-grow">
+                                            En Unitec Grado impulsamos a jóvenes a transformar su futuro con un ecosistema de aprendizaje que despierta una mentalidad de crecimiento y un espíritu emprendedor para convertirse en constructores de oportunidades y alcanzar una vida plena.
                                         </p>
                                     </div>
                                 </div>
-                                <div className="relative group">
+                                {/* Unitec for Life */}
+                                <div className="relative group flex">
                                     <div className="absolute -inset-2 bg-gradient-to-r from-[#03AED2] to-[#47C8FD] rounded-lg opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
-                                    <div className="relative p-8 bg-[#F3F4F6] rounded-lg h-full flex flex-col items-center text-center">
-                                        <div className="w-16 h-16 bg-[#06065C] rotate-45 flex items-center justify-center mb-8 shadow-lg">
+                                    <div className="relative p-8 bg-[#F3F4F6] rounded-lg w-full flex flex-col items-center text-center">
+                                        <div className="w-16 h-16 bg-[#06065C] rotate-45 flex items-center justify-center mb-8 shadow-lg flex-shrink-0">
                                             <Compass className="-rotate-45 text-[#03AED2]" size={32} />
                                         </div>
                                         <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#06065C]">Unitec for Life</h3>
-                                        <p className="text-[#06065C] leading-relaxed text-sm md:text-base">
-                                            En Unitec for Life impulsamos el aprendizaje continuo con programas flexibles que permiten a cada persona actualizarse.
+                                        <p className="text-[#06065C] leading-relaxed text-sm md:text-base flex-grow">
+                                            En Unitec for Life impulsamos el aprendizaje continuo con programas flexibles, innovadores y con contenido global, que permiten a cada persona actualizarse, reinventarse y crecer en cualquier etapa de su vida.
                                         </p>
                                     </div>
                                 </div>
@@ -386,7 +392,7 @@
                         </div>
                     </section>
 
-                    {/* RETRATO SECTION - EDNA FIX: Mobile Scale Transformation */}
+                    {/* RETRATO SECTION - MOBILE OPTIMIZED */}
                     <section id="retrato" className="py-32 relative bg-gradient-to-b from-[#05054B] to-[#06065C] overflow-hidden">
                         <div className="container mx-auto px-6">
                             <div className="text-center mb-12 md:mb-24">
@@ -397,16 +403,14 @@
                             </div>
 
                             <div className="relative w-full max-w-5xl mx-auto min-h-[400px] md:min-h-[600px] flex items-center justify-center">
-                                {/* EDNA FIX: Added scale-[0.65] for mobile screens. 
-                                    This forces the large orbit to fit within a 360px width without breaking layout logic.
-                                */}
+                                {/* MOBILE SCALE FIX: scale-[0.65] to prevent cut-off */}
                                 <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] transform scale-[0.65] sm:scale-75 md:scale-100 transition-transform duration-500 origin-center">
                                     
                                     {/* Outer Orbit Rings */}
                                     <div className="absolute inset-[-40px] md:inset-[-60px] border border-[#03AED2]/20 rounded-full animate-spin-slow"></div>
                                     <div className="absolute inset-[20px] md:inset-[30px] border border-[#47C8FD]/10 rounded-full"></div>
                                     
-                                    {/* Radial Lines (Connecting nodes to center) */}
+                                    {/* Radial Lines */}
                                     <div className="absolute inset-[-20px] md:inset-[-30px]">
                                         {[0, 60, 120, 180, 240, 300].map((deg) => (
                                             <div key={deg} className="absolute top-1/2 left-1/2 w-full h-px bg-[#03AED2]/10 -translate-y-1/2 -translate-x-1/2" style={{ transform: `translate(-50%, -50%) rotate(${deg}deg)` }}></div>
@@ -420,7 +424,6 @@
                                                 <div className="w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 border-[#03AED2] rounded-full flex items-center justify-center text-[#47C8FD] shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10">
                                                     {cap.icon}
                                                 </div>
-                                                {/* Labels positioned with safe backgrounds and z-index */}
                                                 <div className={`absolute ${cap.labelPos} w-32 md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#06065C]/95 px-3 py-1.5 rounded border border-[#03AED2]/30 backdrop-blur-md z-30 shadow-xl`}>
                                                     <span className="text-xs md:text-sm font-bold text-white group-hover:text-[#47C8FD] transition-colors leading-tight block">
                                                         {cap.title}
@@ -430,31 +433,26 @@
                                         </div>
                                     ))}
 
-                                    {/* CENTER CORE: EQUAL WEIGHT TRIANGLE LAYOUT */}
+                                    {/* CENTER CORE */}
                                     <div className="absolute top-1/2 left-1/2 w-56 h-56 md:w-72 md:h-72 bg-[#06065C] border-4 border-[#03AED2] rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-10 shadow-[0_0_60px_rgba(3,174,210,0.4)]">
                                         <div className="absolute inset-3 border border-[#47C8FD]/30 rounded-full"></div>
-                                        
-                                        {/* Internal Grid for 3 items */}
                                         <div className="relative w-full h-full">
-                                            {/* Conceptos: Top Center */}
+                                            {/* Conceptos */}
                                             <div className="absolute top-[15%] left-1/2 -translate-x-1/2 text-center w-full">
                                                 <div className="text-[#03AED2] mb-1 flex justify-center"><BookOpen size={20} /></div>
                                                 <span className="text-sm md:text-lg font-bold text-white tracking-wider uppercase">Conceptos</span>
                                             </div>
-
-                                            {/* Competencias: Bottom Right */}
+                                            {/* Competencias */}
                                             <div className="absolute bottom-[20%] right-[10%] text-center w-[45%]">
                                                 <div className="text-[#03AED2] mb-1 flex justify-center"><Award size={20} /></div>
                                                 <span className="text-xs md:text-sm font-bold text-white tracking-wider uppercase block">Competencias</span>
                                             </div>
-
-                                            {/* Carácter: Bottom Left */}
+                                            {/* Carácter */}
                                             <div className="absolute bottom-[20%] left-[10%] text-center w-[45%]">
                                                 <div className="text-[#03AED2] mb-1 flex justify-center"><Target size={20} /></div>
                                                 <span className="text-xs md:text-sm font-bold text-white tracking-wider uppercase block">Carácter</span>
                                             </div>
-
-                                            {/* Center Divider Visual (Y-shape) */}
+                                            {/* Divider */}
                                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-20 pointer-events-none">
                                                 <div className="absolute top-1/2 left-1/2 w-px h-[40%] bg-white -translate-x-1/2 -translate-y-full"></div>
                                                 <div className="absolute top-1/2 left-1/2 w-px h-[40%] bg-white -translate-x-1/2 origin-top rotate-[120deg]"></div>
@@ -474,11 +472,11 @@
                             <div className="text-center mb-16">
                                 <div className="inline-block px-3 py-1 border border-[#47C8FD] rounded-full text-[#47C8FD] text-xs font-bold tracking-widest uppercase mb-4">Modelo CGS</div>
                                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ecosistema de Aprendizaje UNITEC</h2>
-                                <p className="text-lg md:text-xl text-gray-300">Las 4 C's: Donde el aprendizaje profundo ocurre en la intersección.</p>
+                                <p className="text-lg md:text-xl text-gray-300">Las 4 Dimensiones</p>
                             </div>
 
                             <div className="flex flex-col lg:flex-row gap-16 items-center">
-                                {/* Left Column: Interactive Explanation */}
+                                {/* Left Column: List */}
                                 <div className="w-full lg:w-1/2 space-y-8">
                                     {ecosystemData.map((item, idx) => (
                                         <div key={idx} className="flex gap-4 md:gap-6 group">
@@ -504,24 +502,18 @@
                                 {/* Right Column: Visual Venn Diagram */}
                                 <div className="w-full lg:w-1/2 flex items-center justify-center relative min-h-[400px] md:min-h-[500px]">
                                     <div className="relative w-full max-w-[350px] md:max-w-[500px] aspect-square transform scale-90 md:scale-100">
-                                        {/* Center Core Intersection */}
                                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 bg-white z-20 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.3)] text-center p-2 md:p-4">
                                             <span className="text-[#06065C] font-bold text-xs md:text-sm leading-tight">Aprendizaje Profundo</span>
                                         </div>
-
-                                        {/* The 4 Circles */}
                                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#03AED2]/20 border border-[#03AED2] rounded-full venn-circle flex items-start justify-center pt-6 md:pt-8 backdrop-blur-sm">
                                             <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm">Comunidad</span>
                                         </div>
-                                        
                                         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#47C8FD]/20 border border-[#47C8FD] rounded-full venn-circle flex items-end justify-center pb-6 md:pb-8 backdrop-blur-sm">
                                             <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm">Cultura</span>
                                         </div>
-
                                         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#06065C]/40 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-start pl-6 md:pl-8 backdrop-blur-sm">
                                             <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm transform -rotate-90">Contexto</span>
                                         </div>
-
                                         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#03AED2]/10 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-end pr-6 md:pr-8 backdrop-blur-sm">
                                             <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm transform rotate-90">Currículo</span>
                                         </div>
