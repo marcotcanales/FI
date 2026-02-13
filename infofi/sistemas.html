@@ -36,10 +36,10 @@
         .border-federal { border-color: var(--federal-blue); }
         
         /* Table Styling */
-        .table-custom th { background-color: var(--federal-blue); color: white; font-weight: 700; border-bottom: 3px solid #000; }
+        .table-custom th { background-color: var(--federal-blue); color: white; font-weight: 700; border-bottom: 3px solid #000; position: sticky; top: 0; z-index: 10; }
         .table-custom tr:nth-child(even) { background-color: #E5E7EB; } 
         .table-custom tr:nth-child(odd) { background-color: #FFFFFF; }
-        .table-custom td { color: #000000; font-weight: 500; border-bottom: 1px solid #D1D5DB; }
+        .table-custom td { color: #000000; font-weight: 500; border-bottom: 1px solid #D1D5DB; vertical-align: middle; }
         
         .placeholder-img {
             background-color: #E2E8F0;
@@ -51,7 +51,6 @@
             border: 2px dashed #4B5563;
         }
         
-        /* Placeholder para secciones internas */
         .placeholder-small {
             background-color: #F1F5F9;
             border: 2px dashed #94A3B8;
@@ -77,7 +76,7 @@
 </head>
 <body class="h-screen flex overflow-hidden text-gray-900 bg-gray-100">
 
-    <!-- OVERLAY MÓVIL (Fondo oscuro al abrir menú) -->
+    <!-- OVERLAY MÓVIL -->
     <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden transition-opacity duration-300" onclick="toggleSidebar()"></div>
 
     <!-- SIDEBAR NAVIGATION (RESPONSIVE) -->
@@ -91,7 +90,6 @@
                     <p class="text-xs text-gray-800 font-bold uppercase">Herramienta de Venta</p>
                 </div>
             </div>
-            <!-- Botón Cerrar (Solo Móvil) -->
             <button onclick="toggleSidebar()" class="md:hidden text-gray-500 hover:text-federal-blue focus:outline-none">
                 <i class="fas fa-times text-xl"></i>
             </button>
@@ -131,7 +129,7 @@
     <!-- MAIN CONTENT AREA -->
     <main class="flex-1 overflow-y-auto custom-scroll relative scroll-smooth bg-gray-100 w-full">
         
-        <!-- Header: Aumentado Z-Index a 40 para estar sobre el timeline -->
+        <!-- Header -->
         <header class="bg-white p-4 md:p-8 border-b-2 border-gray-300 sticky top-0 z-40 shadow-md">
             <div class="max-w-5xl mx-auto flex gap-4 items-start">
                 
@@ -528,25 +526,39 @@
                             <i class="fas fa-chevron-down"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-900 p-4 md:p-6 overflow-x-auto bg-white">
-                        <p class="text-xs md:text-sm mb-6 p-4 bg-red-50 text-red-900 border-l-8 border-red-600 rounded font-bold shadow-sm border border-red-200">
-                            <i class="fas fa-exclamation-triangle mr-2 text-red-600"></i> Clases eliminadas sin equivalencia.
+                    
+                    <div class="text-gray-900 p-4 md:p-6 bg-white">
+                        
+                        <div class="overflow-x-auto max-h-[500px] overflow-y-auto mb-6 border border-gray-200 rounded">
+                            <table class="w-full text-left text-xs md:text-sm table-custom border-collapse border border-gray-300 min-w-[600px]">
+                                <thead>
+                                    <tr>
+                                        <th class="p-3 md:p-4 border-r border-white min-w-[200px]">Plan 2016</th>
+                                        <th class="p-3 md:p-4 border-r border-white w-16 text-center">UV</th>
+                                        <th class="p-3 md:p-4 border-r border-white min-w-[200px]">Plan 2025</th>
+                                        <th class="p-3 md:p-4 w-16 text-center">Créditos</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-300">
+                                    <tr><td class="p-3 border-r border-gray-300">Introducción al Algebra</td><td class="p-3 font-bold border-r border-gray-300 text-center">4</td><td class="p-3 border-r border-gray-300">Introducción al Álgebra</td><td class="p-3 font-bold text-center">4</td></tr>
+                                    <tr><td class="p-3 border-r border-gray-300">Intro a la Computación</td><td class="p-3 font-bold border-r border-gray-300 text-center">4</td><td class="p-3 border-r border-gray-300">Intro a la Computación</td><td class="p-3 font-bold text-center">4</td></tr>
+                                    <tr><td class="p-3 border-r border-gray-300">Programación I</td><td class="p-3 font-bold border-r border-gray-300 text-center">3</td><td class="p-3 border-r border-gray-300">Programación I</td><td class="p-3 font-bold text-center">3</td></tr>
+                                    <tr><td class="p-3 border-r border-gray-300">Estructura de Datos I</td><td class="p-3 font-bold border-r border-gray-300 text-center">4</td><td class="p-3 border-r border-gray-300">Estructura de Datos I</td><td class="p-3 font-bold text-center">4</td></tr>
+                                    <tr class="bg-blue-100"><td class="p-3 font-bold text-federal-blue border-r border-gray-300">Teoría de Base de Datos I</td><td class="p-3 font-bold border-r border-gray-300 text-center">4</td><td class="p-3 font-bold text-federal-blue border-r border-gray-300">Teoría de Base de Datos I</td><td class="p-3 font-bold text-center">4</td></tr>
+                                    <tr><td class="p-3 border-r border-gray-300">Sistemas Operativos I</td><td class="p-3 font-bold border-r border-gray-300 text-center">4</td><td class="p-3 border-r border-gray-300">Sistemas Operativos I</td><td class="p-3 font-bold text-center">4</td></tr>
+                                    <tr><td class="p-3 border-r border-gray-300">Ingeniería de Software I</td><td class="p-3 font-bold border-r border-gray-300 text-center">4</td><td class="p-3 border-r border-gray-300">Proyecto de Ing. de Software I</td><td class="p-3 font-bold text-center">4</td></tr>
+                                    <tr><td class="p-3 border-r border-gray-300">Sistemas Inteligentes</td><td class="p-3 font-bold border-r border-gray-300 text-center">4</td><td class="p-3 border-r border-gray-300">Sistemas Inteligentes</td><td class="p-3 font-bold text-center">4</td></tr>
+                                    <tr><td class="p-3 border-r border-gray-300">Seguridad de Información</td><td class="p-3 font-bold border-r border-gray-300 text-center">4</td><td class="p-3 border-r border-gray-300">Seguridad de la Información</td><td class="p-3 font-bold text-center">4</td></tr>
+                                    <tr><td class="p-3 border-r border-gray-300">Inglés V</td><td class="p-3 font-bold border-r border-gray-300 text-center">3</td><td class="p-3 border-r border-gray-300">Inglés V</td><td class="p-3 font-bold text-center">3</td></tr>
+                                    <tr><td class="p-3 border-r border-gray-300">Proyecto de Graduación I</td><td class="p-3 font-bold border-r border-gray-300 text-center">4</td><td class="p-3 border-r border-gray-300">Proyecto de Graduación Fase I</td><td class="p-3 font-bold text-center">4</td></tr>
+                                    <tr><td class="p-3 border-r border-gray-300">Práctica Profesional I</td><td class="p-3 font-bold border-r border-gray-300 text-center">4</td><td class="p-3 border-r border-gray-300">Práctica Profesional Fase I</td><td class="p-3 font-bold text-center">4</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="text-xs md:text-sm p-4 bg-red-50 text-red-900 border-l-8 border-red-600 rounded font-bold shadow-sm border border-red-200">
+                            <i class="fas fa-exclamation-triangle mr-2 text-red-600"></i> Clases eliminadas sin equivalencia: Ofimática, Administración I, Protocolos de Redes y Administración de Aplicaciones de Redes.
                         </p>
-                        <table class="w-full text-left text-xs md:text-sm table-custom border-collapse border border-gray-300">
-                            <thead>
-                                <tr>
-                                    <th class="p-2 md:p-4 rounded-tl-lg border-r border-white">Plan 2016</th>
-                                    <th class="p-2 md:p-4 border-r border-white">UV</th>
-                                    <th class="p-2 md:p-4 border-r border-white">Plan 2025</th>
-                                    <th class="p-2 md:p-4 rounded-tr-lg">Créditos</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-300">
-                                <tr><td class="p-2 md:p-3 border-r border-gray-300">Intro a la Comp.</td><td class="p-2 md:p-3 font-bold border-r border-gray-300">4</td><td class="p-2 md:p-3 border-r border-gray-300">Intro a la Comp.</td><td class="p-2 md:p-3 font-bold">4</td></tr>
-                                <tr><td class="p-2 md:p-3 border-r border-gray-300">Programación I</td><td class="p-2 md:p-3 font-bold border-r border-gray-300">3</td><td class="p-2 md:p-3 border-r border-gray-300">Programación I</td><td class="p-2 md:p-3 font-bold">3</td></tr>
-                                <tr class="bg-blue-100 border-l-4 border-federal-blue"><td class="p-2 md:p-3 font-bold text-federal-blue border-r border-gray-300">Base de Datos I</td><td class="p-2 md:p-3 font-bold border-r border-gray-300">4</td><td class="p-2 md:p-3 font-bold text-federal-blue border-r border-gray-300">Base de Datos I</td><td class="p-2 md:p-3 font-bold">4</td></tr>
-                            </tbody>
-                        </table>
                     </div>
                 </details>
             </section>
@@ -560,7 +572,6 @@
         const overlay = document.getElementById('mobile-overlay');
 
         function toggleSidebar() {
-            // Toggle translate class
             if (sidebar.classList.contains('-translate-x-full')) {
                 sidebar.classList.remove('-translate-x-full');
                 overlay.classList.remove('hidden');
@@ -570,9 +581,8 @@
             }
         }
 
-        // Close when clicking a link on mobile
         function closeOnMobile() {
-            if (window.innerWidth < 768) { // md breakpoint
+            if (window.innerWidth < 768) { 
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');
             }
