@@ -157,20 +157,32 @@
 
                 <!-- Bloque Distribución -->
                 <div class="mt-6 bg-white rounded-xl shadow-md p-4 md:p-6 border-2 border-gray-200">
-                    <h3 class="font-extrabold text-gray-900 mb-4 text-sm uppercase tracking-wide">Distribución del Plan</h3>
+                    <h3 class="font-extrabold text-gray-900 mb-4 text-sm uppercase tracking-wide">Distribución del Plan de Estudios</h3>
                     <!-- Barra de progreso -->
-                    <div class="flex h-10 rounded-lg overflow-hidden mb-4 border-2 border-gray-400 text-white text-[10px] md:text-xs font-bold">
-                        <div style="width: 27%" class="bg-blue-900 flex items-center justify-center border-r border-white">27%</div>
-                        <div style="width: 21%" class="bg-blue-700 flex items-center justify-center border-r border-white">21%</div>
-                        <div style="width: 16%" class="bg-cyan-600 flex items-center justify-center border-r border-white">16%</div>
-                        <div style="width: 10%" class="bg-teal-600 flex items-center justify-center border-r border-white">10%</div>
-                        <div style="width: 26%" class="bg-gray-500 flex items-center justify-center">26%</div>
+                    <div class="flex h-12 rounded-lg overflow-hidden mb-4 border-2 border-gray-400 text-white text-[10px] md:text-xs font-bold">
+                        <div style="width: 27%" class="bg-blue-900 flex items-center justify-center border-r border-white/20" title="Formación General 27%">27%</div>
+                        <div style="width: 21%" class="bg-blue-700 flex items-center justify-center border-r border-white/20" title="Matemáticas y Físicas 21%">21%</div>
+                        <div style="width: 16%" class="bg-cyan-600 flex items-center justify-center border-r border-white/20" title="Programación 16%">16%</div>
+                        <div style="width: 10%" class="bg-teal-600 flex items-center justify-center border-r border-white/20" title="Ingeniería de Software 10%">10%</div>
+                        <!-- Segmentos menores sin texto interno para limpieza visual -->
+                        <div style="width: 7%" class="bg-indigo-600 border-r border-white/20" title="OS y Arquitectura 7%"></div>
+                        <div style="width: 7%" class="bg-blue-500 border-r border-white/20" title="Tecnologías Info 7%"></div>
+                        <div style="width: 5%" class="bg-violet-500 border-r border-white/20" title="Algoritmos 5%"></div>
+                        <div style="width: 3%" class="bg-fuchsia-600 border-r border-white/20" title="Base de Datos 3%"></div>
+                        <div style="width: 3%" class="bg-rose-500" title="Práctica/Graduación 3%"></div>
                     </div>
-                    <div class="flex flex-wrap gap-3 text-[10px] md:text-xs text-gray-900 font-bold">
-                        <span class="flex items-center gap-1 md:gap-2"><span class="w-3 h-3 md:w-4 md:h-4 bg-blue-900 rounded border border-gray-400"></span> General</span>
-                        <span class="flex items-center gap-1 md:gap-2"><span class="w-3 h-3 md:w-4 md:h-4 bg-blue-700 rounded border border-gray-400"></span> Mat/Fís</span>
-                        <span class="flex items-center gap-1 md:gap-2"><span class="w-3 h-3 md:w-4 md:h-4 bg-cyan-600 rounded border border-gray-400"></span> Progra</span>
-                        <span class="flex items-center gap-1 md:gap-2"><span class="w-3 h-3 md:w-4 md:h-4 bg-teal-600 rounded border border-gray-400"></span> Ing. Software</span>
+                    
+                    <!-- Leyenda detallada -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-[10px] md:text-xs text-gray-900 font-bold">
+                        <span class="flex items-center gap-2"><span class="w-3 h-3 bg-blue-900 rounded border border-gray-400"></span> General 27%</span>
+                        <span class="flex items-center gap-2"><span class="w-3 h-3 bg-blue-700 rounded border border-gray-400"></span> Mat/Fís 21%</span>
+                        <span class="flex items-center gap-2"><span class="w-3 h-3 bg-cyan-600 rounded border border-gray-400"></span> Programación 16%</span>
+                        <span class="flex items-center gap-2"><span class="w-3 h-3 bg-teal-600 rounded border border-gray-400"></span> Ing. Software 10%</span>
+                        <span class="flex items-center gap-2"><span class="w-3 h-3 bg-indigo-600 rounded border border-gray-400"></span> OS y Arq 7%</span>
+                        <span class="flex items-center gap-2"><span class="w-3 h-3 bg-blue-500 rounded border border-gray-400"></span> Tecnologías Info 7%</span>
+                        <span class="flex items-center gap-2"><span class="w-3 h-3 bg-violet-500 rounded border border-gray-400"></span> Algoritmos 5%</span>
+                        <span class="flex items-center gap-2"><span class="w-3 h-3 bg-fuchsia-600 rounded border border-gray-400"></span> Base de Datos 3%</span>
+                        <span class="flex items-center gap-2"><span class="w-3 h-3 bg-rose-500 rounded border border-gray-400"></span> Práctica/Grad 3%</span>
                     </div>
                 </div>
             </section>
