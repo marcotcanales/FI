@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admisiones - Mecatrónica UNITEC</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        federal: '#06065C',
+                        pacific: '#03AED2',
+                        vivid: '#47C8FD',
+                        unitecGray: '#F3F4F6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar for sleek look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #06065C; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #03AED2; 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Timeline line */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: #E5E7EB;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-unitecGray text-gray-800 font-sans h-screen flex overflow-hidden">
+
+    <!-- Mobile Overlay -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden" onclick="toggleMenu()"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-federal text-white transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col shadow-2xl border-r border-pacific/30">
+        <!-- Logo Area -->
+        <div class="p-6 border-b border-white/10 flex items-center justify-center space-x-2">
+            <!-- Representación CSS del Isotipo Diamante -->
+            <div class="w-8 h-8 bg-pacific transform rotate-45 flex items-center justify-center shadow-lg">
+                <div class="w-4 h-4 bg-white/20"></div>
+            </div>
+            <span class="text-2xl font-bold tracking-tight">unitec</span>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1">
+                <li><a href="#general" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-info-circle w-6"></i> General</a></li>
+                <li><a href="#distribucion" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-chart-pie w-6"></i> Plan de Estudios</a></li>
+                <li><a href="#perfiles" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-user-graduate w-6"></i> Perfiles</a></li>
+                <li><a href="#competencias" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-bolt w-6"></i> Competencias</a></li>
+                <li><a href="#reforma" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-sync-alt w-6"></i> Reforma 2020</a></li>
+                <li><a href="#diferenciadores" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-star w-6"></i> Diferenciadores</a></li>
+                <li><a href="#flujograma" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-road w-6"></i> Flujograma</a></li>
+                <li><a href="#padres" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-users w-6"></i> Para Padres</a></li>
+                <li><a href="#equivalencias" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-exchange-alt w-6"></i> Equivalencias</a></li>
+            </ul>
+        </nav>
+
+        <!-- Footer Sidebar -->
+        <div class="p-4 text-xs text-gray-400 border-t border-white/10 text-center">
+            &copy; 2026 UNITEC<br>Diseño Partner
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col h-screen overflow-hidden relative">
+        
+        <!-- Sticky Header -->
+        <header class="bg-white shadow-md z-40 sticky top-0 h-16 flex items-center justify-between px-6 border-b-2 border-federal">
+            <div class="flex items-center">
+                <button onclick="toggleMenu()" class="lg:hidden text-federal mr-4 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <div>
+                    <h1 class="text-xl font-bold text-federal uppercase tracking-wide hidden sm:block">Ingeniería en Mecatrónica</h1>
+                    <h1 class="text-xl font-bold text-federal uppercase tracking-wide sm:hidden">Mecatrónica</h1>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="bg-pacific text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Plan 2020</span>
+                <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-green-200">Acreditada</span>
+            </div>
+        </header>
+
+        <!-- Content Scroll Area -->
+        <main class="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth">
+            
+            <!-- 1. Datos Generales -->
+            <section id="general" class="mb-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-pacific">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-500 text-sm font-semibold uppercase">Duración</p>
+                                <h3 class="text-3xl font-bold text-federal mt-1">4.5 Años</h3>
+                            </div>
+                            <i class="fas fa-clock text-3xl text-pacific/20"></i>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-2">Reducción de 5 años (Plan 2011)</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-pacific">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-500 text-sm font-semibold uppercase">Carga Académica</p>
+                                <h3 class="text-3xl font-bold text-federal mt-1">241 Créditos</h3>
+                            </div>
+                            <i class="fas fa-book text-3xl text-pacific/20"></i>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-2">66 Espacios de Aprendizaje</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-pacific">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-500 text-sm font-semibold uppercase">Modalidad</p>
+                                <h3 class="text-3xl font-bold text-federal mt-1">Presencial</h3>
+                            </div>
+                            <i class="fas fa-university text-3xl text-pacific/20"></i>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-2">Tegucigalpa & SPS</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Distribución del Plan -->
+            <section id="distribucion" class="mb-12 bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-federal mb-6 flex items-center">
+                    <span class="w-2 h-8 bg-pacific mr-3 rounded-sm"></span>
+                    Estructura del Plan de Estudios
+                </h2>
+                
+                <div class="w-full bg-gray-200 rounded-full h-8 mb-4 overflow-hidden flex shadow-inner">
+                    <div class="bg-blue-900 h-8 flex items-center justify-center text-xs text-white font-bold transition-all hover:bg-blue-800" style="width: 27%" title="Tecnologías Aplicadas/Mecatrónica">27%</div>
+                    <div class="bg-pacific h-8 flex items-center justify-center text-xs text-white font-bold transition-all hover:brightness-110" style="width: 23%" title="Formación General">23%</div>
+                    <div class="bg-vivid h-8 flex items-center justify-center text-xs text-white font-bold transition-all hover:brightness-110" style="width: 23%" title="Ciencias Básicas">23%</div>
+                    <div class="bg-indigo-500 h-8 flex items-center justify-center text-xs text-white font-bold transition-all hover:brightness-110" style="width: 21%" title="Tecnologías Básicas">21%</div>
+                    <div class="bg-purple-600 h-8 flex items-center justify-center text-xs text-white font-bold transition-all hover:brightness-110" style="width: 6%" title="Ciencias de la Computación">6%</div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-6">
+                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-blue-900 rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Mecatrónica</span></div>
+                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-pacific rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Formación Gral</span></div>
+                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-vivid rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Ciencias Básicas</span></div>
+                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-indigo-500 rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Tec. Básicas</span></div>
+                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-purple-600 rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Computación</span></div>
+                </div>
+            </section>
+
+            <!-- 3. Perfiles -->
+            <section id="perfiles" class="mb-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Ingreso -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 group">
+                        <div class="bg-gray-100 p-4 border-b border-gray-200">
+                            <h3 class="text-xl font-bold text-federal flex items-center">
+                                <i class="fas fa-door-open mr-3 text-pacific"></i> Perfil de Ingreso
+                            </h3>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-700">Pasión por <strong>"cómo funcionan las cosas"</strong> y la tecnología.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-700">Destreza manual (armar/desarmar) y curiosidad robótica.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-700">Facilidad para matemáticas, física e innovación.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Egreso -->
+                    <div class="bg-federal rounded-xl overflow-hidden shadow-lg border border-federal group">
+                        <div class="bg-blue-900/50 p-4 border-b border-white/10">
+                            <h3 class="text-xl font-bold text-white flex items-center">
+                                <i class="fas fa-graduation-cap mr-3 text-pacific"></i> Perfil de Egreso
+                            </h3>
+                        </div>
+                        <div class="p-6 text-white/90">
+                            <p class="mb-4 text-sm font-light leading-relaxed">
+                                El ingeniero es un líder preparado para la <strong class="text-pacific">Industria 4.0</strong>, capaz de integrar computación, electrónica y mecánica.
+                            </p>
+                            <div class="space-y-3">
+                                <div class="bg-white/10 p-3 rounded-lg flex items-center">
+                                    <i class="fas fa-cogs text-pacific mr-3"></i>
+                                    <span>Diseña y construye sistemas mecatrónicos</span>
+                                </div>
+                                <div class="bg-white/10 p-3 rounded-lg flex items-center">
+                                    <i class="fas fa-industry text-pacific mr-3"></i>
+                                    <span>Automatización Industrial y Gestión</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Competencias (Venta) -->
+            <section id="competencias" class="mb-12">
+                <h2 class="text-2xl font-bold text-federal mb-6 flex items-center">
+                    <span class="w-2 h-8 bg-pacific mr-3 rounded-sm"></span>
+                    ¿Por qué estudiar esto? (Key Selling Points)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Card 1 -->
+                    <div class="bg-white p-8 rounded-xl shadow-md border-b-4 border-federal hover:-translate-y-1 transition-transform">
+                        <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-robot text-2xl text-federal"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800 mb-2">Experto en Automatización</h4>
+                        <p class="text-sm text-gray-600">Diseña sistemas que operan solos usando robots y PLCs para modernizar fábricas.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white p-8 rounded-xl shadow-md border-b-4 border-pacific hover:-translate-y-1 transition-transform">
+                        <div class="w-14 h-14 bg-cyan-50 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-microchip text-2xl text-pacific"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800 mb-2">Productos Inteligentes</h4>
+                        <p class="text-sm text-gray-600">Integra mecánica y software: desde electrodomésticos hasta equipo biomédico.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white p-8 rounded-xl shadow-md border-b-4 border-federal hover:-translate-y-1 transition-transform">
+                        <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-chart-line text-2xl text-federal"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800 mb-2">Optimizador Industrial</h4>
+                        <p class="text-sm text-gray-600">Mejora manufactura haciéndola eficiente, segura y rentable con tecnología.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. La Reforma y Diferenciadores -->
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-12">
+                <!-- Columna Izquierda: Reforma -->
+                <div id="reforma" class="xl:col-span-2 space-y-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold text-federal mb-4">La Reforma 2020: ¿Qué cambió?</h3>
+                        <p class="text-gray-600 mb-4">
+                            Responde a la <strong>Industria 4.0</strong> y a la necesidad de inserción laboral rápida.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="border border-green-200 bg-green-50 p-4 rounded-lg">
+                                <strong class="text-green-800 block mb-1">Más Rápido</strong>
+                                <span class="text-sm text-green-700">De 5 años a 4.5 años sin perder calidad.</span>
+                            </div>
+                            <div class="border border-blue-200 bg-blue-50 p-4 rounded-lg">
+                                <strong class="text-federal block mb-1">Más Práctico</strong>
+                                <span class="text-sm text-blue-800">Enfoque en programación aplicada a robótica.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-bold text-gray-800 mb-3 border-b pb-2">Nuevas Asignaturas Clave:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-gray-100 text-federal text-xs rounded-full font-medium border border-gray-300">Programación Estructurada</span>
+                                <span class="px-3 py-1 bg-gray-100 text-federal text-xs rounded-full font-medium border border-gray-300">Instalaciones Eléctricas</span>
+                                <span class="px-3 py-1 bg-gray-100 text-federal text-xs rounded-full font-medium border border-gray-300">Gestión de la Innovación</span>
+                                <span class="px-3 py-1 bg-gray-100 text-federal text-xs rounded-full font-medium border border-gray-300">Lenguajes de Programación</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Internacionalidad & Labs -->
+                    <div id="diferenciadores" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Labs Card -->
+                        <div class="bg-federal rounded-xl shadow-lg overflow-hidden text-white relative">
+                            <div class="h-32 bg-gray-800 relative flex items-center justify-center overflow-hidden">
+                                <!-- Placeholder Image -->
+                                <div class="absolute inset-0 bg-blue-900 opacity-60"></div>
+                                <i class="fas fa-microscope text-5xl text-white/20 absolute"></i>
+                                <span class="relative z-10 font-bold tracking-widest uppercase border border-white px-4 py-2">[Imagen: Lab Automatización]</span>
+                            </div>
+                            <div class="p-6">
+                                <h4 class="font-bold text-pacific text-lg mb-2">Tecnología de Punta</h4>
+                                <p class="text-xs text-gray-300 mb-3">PLCs, CNC, Impresión 3D, SolidWorks, Fusion 360, Matlab.</p>
+                                <div class="flex items-center space-x-2">
+                                    <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                                    <span class="text-xs font-semibold">Aprender Haciendo</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- International Card -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 relative">
+                            <div class="h-32 bg-gray-200 relative flex items-center justify-center overflow-hidden">
+                                <!-- Placeholder Image -->
+                                <div class="absolute inset-0 bg-pacific opacity-20"></div>
+                                <i class="fas fa-plane text-5xl text-federal/20 absolute"></i>
+                                <span class="relative z-10 font-bold text-federal tracking-widest uppercase border border-federal px-4 py-2 text-xs">[Imagen: Intercambio]</span>
+                            </div>
+                            <div class="p-6">
+                                <h4 class="font-bold text-federal text-lg mb-2">Internacionalidad</h4>
+                                <p class="text-xs text-gray-500 mb-3">Alineado a ABET. Intercambios y concursos de robótica.</p>
+                                <div class="flex items-center space-x-2">
+                                    <span class="w-2 h-2 rounded-full bg-pacific"></span>
+                                    <span class="text-xs font-semibold text-federal">Inglés Requerido</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Acreditación -->
+                <div class="xl:col-span-1">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-8 border-yellow-400 h-full flex flex-col justify-center text-center">
+                        <div class="mx-auto bg-gray-50 rounded-full w-24 h-24 flex items-center justify-center mb-4 border-2 border-gray-100">
+                            <i class="fas fa-certificate text-4xl text-yellow-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-federal mb-2">Calidad Acreditada</h3>
+                        <p class="text-sm text-gray-600 mb-6">El programa mantiene la prestigiosa acreditación <strong>ACAAI</strong> (Agencia Centroamericana de Acreditación de Programas de Arquitectura y de Ingeniería).</p>
+                        <hr class="border-gray-100 mb-6">
+                        <div class="text-left">
+                            <p class="text-xs font-bold text-gray-400 uppercase mb-2">Incluye formación en:</p>
+                            <ul class="text-sm text-gray-700 space-y-2">
+                                <li><i class="fas fa-angle-right text-pacific mr-2"></i>Generación de Empresas</li>
+                                <li><i class="fas fa-angle-right text-pacific mr-2"></i>Gestión de Proyectos</li>
+                                <li><i class="fas fa-angle-right text-pacific mr-2"></i>Contabilidad Gerencial</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Timeline / Flujograma -->
+            <section id="flujograma" class="mb-12 relative">
+                <h2 class="text-2xl font-bold text-federal mb-10 text-center">Ruta de Aprendizaje</h2>
+                
+                <div class="timeline-line relative max-w-3xl mx-auto pb-10">
+                    
+                    <!-- Año 1 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group mb-8">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-pacific text-white font-bold shrink-0 md:order-1 md:group-odd:translate-x-1/2 md:group-even:-translate-x-1/2 absolute left-1/2 transform -translate-x-1/2 z-10 shadow-md">1</div>
+                        <div class="w-[calc(50%-20px)] md:w-[calc(50%-40px)] bg-white p-5 rounded-lg shadow-md border-l-4 border-pacific md:group-odd:mr-auto md:group-even:ml-auto">
+                            <h4 class="font-bold text-federal text-lg">Fundamentos & Código</h4>
+                            <p class="text-sm text-gray-600 mt-1">Matemáticas, Introducción a Mecatrónica y <strong>Programación Estructurada</strong>. Tocar código desde el día 1.</p>
+                        </div>
+                    </div>
+
+                    <!-- Año 2 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group mb-8">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-federal text-white font-bold shrink-0 md:order-1 md:group-odd:translate-x-1/2 md:group-even:-translate-x-1/2 absolute left-1/2 transform -translate-x-1/2 z-10 shadow-md">2</div>
+                        <div class="w-[calc(50%-20px)] md:w-[calc(50%-40px)] bg-white p-5 rounded-lg shadow-md border-r-4 border-federal text-right md:text-left md:border-r-0 md:border-l-4 md:group-even:text-right md:group-even:border-l-0 md:group-even:border-r-4">
+                            <h4 class="font-bold text-federal text-lg">Ciencias & Diseño</h4>
+                            <p class="text-sm text-gray-600 mt-1">Física, <strong>Dibujo Técnico (CAD)</strong> y Circuitos. Diseñar piezas y entender la electricidad.</p>
+                        </div>
+                    </div>
+
+                    <!-- Año 3 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group mb-8">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-pacific text-white font-bold shrink-0 md:order-1 md:group-odd:translate-x-1/2 md:group-even:-translate-x-1/2 absolute left-1/2 transform -translate-x-1/2 z-10 shadow-md">3</div>
+                        <div class="w-[calc(50%-20px)] md:w-[calc(50%-40px)] bg-white p-5 rounded-lg shadow-md border-l-4 border-pacific md:group-odd:mr-auto md:group-even:ml-auto">
+                            <h4 class="font-bold text-federal text-lg">El "Core" Mecatrónico</h4>
+                            <p class="text-sm text-gray-600 mt-1">Electrónica, Mecanismos, Termodinámica y <strong>Sensores</strong>. Integración de movimiento y electrónica.</p>
+                        </div>
+                    </div>
+
+                    <!-- Año 4 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group mb-8">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-federal text-white font-bold shrink-0 md:order-1 md:group-odd:translate-x-1/2 md:group-even:-translate-x-1/2 absolute left-1/2 transform -translate-x-1/2 z-10 shadow-md">4</div>
+                        <div class="w-[calc(50%-20px)] md:w-[calc(50%-40px)] bg-white p-5 rounded-lg shadow-md border-r-4 border-federal text-right md:text-left md:border-r-0 md:border-l-4 md:group-even:text-right md:group-even:border-l-0 md:group-even:border-r-4">
+                            <h4 class="font-bold text-federal text-lg">Automatización Avanzada</h4>
+                            <p class="text-sm text-gray-600 mt-1">Robótica, <strong>PLC</strong>, Redes Industriales y Manufactura. Control total de fábricas.</p>
+                        </div>
+                    </div>
+
+                    <!-- Año 5 / Salida -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-green-500 text-white font-bold shrink-0 md:order-1 md:group-odd:translate-x-1/2 md:group-even:-translate-x-1/2 absolute left-1/2 transform -translate-x-1/2 z-10 shadow-md"><i class="fas fa-flag-checkered"></i></div>
+                        <div class="w-[calc(50%-20px)] md:w-[calc(50%-40px)] bg-white p-5 rounded-lg shadow-md border-l-4 border-green-500 md:group-odd:mr-auto md:group-even:ml-auto">
+                            <h4 class="font-bold text-green-700 text-lg">Salida Profesional</h4>
+                            <p class="text-sm text-gray-600 mt-1">Capstone, Generación de Empresas. <strong>Práctica</strong> (400 hrs) o <strong>Proyecto</strong>.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 7. Sección Padres -->
+            <section id="padres" class="mb-12">
+                <div class="bg-gray-50 border-2 border-federal rounded-xl p-8 text-center">
+                    <h2 class="text-2xl font-bold text-federal mb-2">Para el Padre de Familia</h2>
+                    <p class="text-gray-500 mb-8 max-w-2xl mx-auto">La inversión inteligente para el futuro de su hijo.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="p-4 bg-white rounded-lg shadow-sm">
+                            <i class="fas fa-rocket text-pacific text-3xl mb-3"></i>
+                            <h4 class="font-bold text-federal">Carrera del Futuro</h4>
+                            <p class="text-xs text-gray-600 mt-2">Indispensable en industrias modernas (alimentos, automotriz, energía).</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-lg shadow-sm">
+                            <i class="fas fa-shapes text-pacific text-3xl mb-3"></i>
+                            <h4 class="font-bold text-federal">Versatilidad</h4>
+                            <p class="text-xs text-gray-600 mt-2">No es solo mecánico ni electrónico. Domina ambas + informática.</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-lg shadow-sm">
+                            <i class="fas fa-piggy-bank text-pacific text-3xl mb-3"></i>
+                            <h4 class="font-bold text-federal">Eficiencia</h4>
+                            <p class="text-xs text-gray-600 mt-2">Graduación en menos tiempo (ahorro económico) con perfil gerencial.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. Tabla Equivalencias -->
+            <section id="equivalencias" class="mb-20">
+                <h2 class="text-2xl font-bold text-federal mb-6 flex items-center">
+                    <span class="w-2 h-8 bg-pacific mr-3 rounded-sm"></span>
+                    Equivalencias Clave (Plan 2011 &rarr; 2020)
+                </h2>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
+                    <div class="overflow-x-auto max-h-96">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-federal text-white sticky top-0 z-10">
+                                <tr>
+                                    <th class="p-4 font-semibold text-sm w-1/2">Plan Anterior (2011)</th>
+                                    <th class="p-4 font-semibold text-sm w-1/2 bg-blue-900"><i class="fas fa-arrow-right mr-2 text-pacific"></i> Plan Nuevo (2020)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-gray-100">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 text-gray-600">Circuitos Eléctricos I y II</td>
+                                    <td class="p-4 font-medium text-federal">Análisis de Circuitos en D.C. y A.C.</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 text-gray-600">Redes</td>
+                                    <td class="p-4 font-medium text-federal">Introducción a Redes</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 text-gray-600">Electrónica I y II</td>
+                                    <td class="p-4 font-medium text-federal">Análisis de Circuitos Electrónicos / Amplificadores</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 bg-red-50">
+                                    <td class="p-4 text-red-600 line-through">Ofimática I, II, III</td>
+                                    <td class="p-4 font-medium text-red-800">ELIMINADAS / FUSIONADAS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Alert Footer -->
+                    <div class="bg-red-50 p-4 border-l-4 border-red-500 flex items-start">
+                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
+                        <div>
+                            <strong class="text-red-700 text-sm">Atención:</strong>
+                            <p class="text-xs text-red-600 mt-1">Asignaturas nuevas como <strong>Instalaciones Eléctricas</strong> o <strong>Programación Estructurada</strong> pueden requerir cursarse si no existe equivalencia directa.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script for Interaction -->
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            
+            if (sidebar.classList.contains('-translate-x-full')) {
+                // Open
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                // Close
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
