@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admisiones | Ingeniería en Energía 2025</title>
+    
+    <!-- Google Fonts: Poppins (Strictly Enforced) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Brand Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        federal: '#06065C',     // UNITEC Federal Blue
+                        pacific: '#03AED2',     // UNITEC Pacific Cyan
+                        sky: '#47C8FD',         // UNITEC Vivid Sky Blue
+                        cobalt: '#GF4986',      // Cobalt Blue (Accent from manual)
+                        lightgray: '#F3F4F6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #06065C; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #03AED2; 
+        }
+
+        /* Utility for Sticky Table Header */
+        .sticky-th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-lightgray text-gray-900 font-sans h-screen flex overflow-hidden">
+
+    <!-- Mobile Overlay -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="bg-white w-64 h-full flex flex-col shadow-2xl fixed inset-y-0 left-0 transform -translate-x-full lg:relative lg:translate-x-0 transition-transform duration-300 z-50 border-r border-gray-200">
+        <!-- Logo Area -->
+        <div class="p-6 flex items-center justify-center border-b border-gray-100">
+            <!-- Representación CSS del Isotipo Diamante + Logo -->
+            <div class="flex flex-col items-center">
+                <div class="w-8 h-8 bg-federal rotate-45 mb-2 shadow-sm"></div>
+                <h1 class="text-2xl font-extrabold text-federal tracking-tight">unitec</h1>
+                <span class="text-xs font-medium text-pacific uppercase tracking-widest mt-1">Admisiones</span>
+            </div>
+        </div>
+
+        <!-- Menu Items -->
+        <nav class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1">
+                <li><a href="#general" class="block px-6 py-3 text-federal font-medium hover:bg-federal hover:text-white transition-colors border-l-4 border-transparent hover:border-pacific"><i class="fa-solid fa-chart-pie w-6"></i> Datos Generales</a></li>
+                <li><a href="#perfiles" class="block px-6 py-3 text-federal font-medium hover:bg-federal hover:text-white transition-colors border-l-4 border-transparent hover:border-pacific"><i class="fa-solid fa-user-graduate w-6"></i> Perfiles</a></li>
+                <li><a href="#competencias" class="block px-6 py-3 text-federal font-medium hover:bg-federal hover:text-white transition-colors border-l-4 border-transparent hover:border-pacific"><i class="fa-solid fa-bolt w-6"></i> Competencias</a></li>
+                <li><a href="#reforma" class="block px-6 py-3 text-federal font-medium hover:bg-federal hover:text-white transition-colors border-l-4 border-transparent hover:border-pacific"><i class="fa-solid fa-sync w-6"></i> La Reforma 2025</a></li>
+                <li><a href="#flujograma" class="block px-6 py-3 text-federal font-medium hover:bg-federal hover:text-white transition-colors border-l-4 border-transparent hover:border-pacific"><i class="fa-solid fa-road w-6"></i> Ruta Académica</a></li>
+                <li><a href="#padres" class="block px-6 py-3 text-federal font-medium hover:bg-federal hover:text-white transition-colors border-l-4 border-transparent hover:border-pacific"><i class="fa-solid fa-users w-6"></i> Para Padres</a></li>
+                <li><a href="#equivalencias" class="block px-6 py-3 text-federal font-medium hover:bg-federal hover:text-white transition-colors border-l-4 border-transparent hover:border-pacific"><i class="fa-solid fa-table w-6"></i> Equivalencias</a></li>
+            </ul>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="p-4 bg-federal text-white text-xs text-center">
+            <p>Herramienta de Soporte</p>
+            <p class="opacity-75">Versión Reforma 2025</p>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden relative">
+        
+        <!-- Sticky Header -->
+        <header class="bg-white h-16 shadow-md flex items-center justify-between px-6 z-40 relative">
+            <div class="flex items-center">
+                <button onclick="toggleSidebar()" class="lg:hidden text-federal text-2xl mr-4 focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div>
+                    <h2 class="text-xl font-bold text-federal leading-tight">Ingeniería en Energía</h2>
+                    <span class="text-xs font-semibold bg-pacific text-white px-2 py-0.5 rounded-full">Plan Reformado 2025</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="bg-federal hover:bg-blue-900 text-white px-4 py-2 rounded-lg font-medium text-sm transition shadow-lg flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> <span class="hidden sm:inline">Descargar Brochure</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Scrollable Content -->
+        <main class="flex-1 overflow-y-auto overflow-x-hidden p-6 scroll-smooth">
+            
+            <!-- 1. Datos Generales -->
+            <section id="general" class="mb-10">
+                <h3 class="text-2xl font-bold text-federal mb-6 flex items-center">
+                    <span class="w-2 h-8 bg-pacific mr-3 rounded-sm"></span> Datos Generales
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- Card 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-federal hover:shadow-md transition">
+                        <p class="text-sm text-gray-500 font-medium uppercase">Duración</p>
+                        <p class="text-2xl font-bold text-federal mt-1">4 Años</p>
+                        <p class="text-sm text-pacific font-semibold">+ 2 Periodos</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-pacific hover:shadow-md transition">
+                        <p class="text-sm text-gray-500 font-medium uppercase">Carga Académica</p>
+                        <p class="text-2xl font-bold text-federal mt-1">64 Clases</p>
+                        <p class="text-sm text-gray-600">221 Créditos (UV)</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-federal hover:shadow-md transition">
+                        <p class="text-sm text-gray-500 font-medium uppercase">Modalidad</p>
+                        <p class="text-2xl font-bold text-federal mt-1">Presencial</p>
+                        <p class="text-sm text-gray-600">Campus Tegucigalpa/SPS</p>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-pacific hover:shadow-md transition">
+                        <p class="text-sm text-gray-500 font-medium uppercase">Certificaciones</p>
+                        <p class="text-xl font-bold text-federal mt-1">ISO 50001</p>
+                        <p class="text-sm text-gray-600">Eficiencia Energética</p>
+                    </div>
+                </div>
+
+                <!-- Plan Distribution Bar -->
+                <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
+                    <h4 class="text-federal font-semibold mb-4">Distribución del Plan de Estudios</h4>
+                    <div class="w-full h-8 rounded-full flex overflow-hidden text-xs font-bold text-white mb-4">
+                        <div style="width: 28%" class="bg-federal flex items-center justify-center relative group">
+                            28%
+                            <div class="absolute bottom-full mb-2 bg-gray-800 text-white text-xs p-2 rounded hidden group-hover:block">Formación General</div>
+                        </div>
+                        <div style="width: 25%" class="bg-pacific flex items-center justify-center relative group">
+                            25%
+                            <div class="absolute bottom-full mb-2 bg-gray-800 text-white text-xs p-2 rounded hidden group-hover:block">Ciencias Básicas</div>
+                        </div>
+                        <div style="width: 12%" class="bg-sky flex items-center justify-center relative group">
+                            12%
+                            <div class="absolute bottom-full mb-2 bg-gray-800 text-white text-xs p-2 rounded hidden group-hover:block">Tecnologías Básicas</div>
+                        </div>
+                        <div style="width: 28%" class="bg-federal opacity-90 flex items-center justify-center relative group">
+                            28%
+                            <div class="absolute bottom-full mb-2 bg-gray-800 text-white text-xs p-2 rounded hidden group-hover:block">Tecnologías Aplicadas (Especialidad)</div>
+                        </div>
+                        <div style="width: 7%" class="bg-cobalt flex items-center justify-center relative group">
+                            7%
+                            <div class="absolute bottom-full mb-2 bg-gray-800 text-white text-xs p-2 rounded hidden group-hover:block">Integradora</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 text-xs text-gray-600 justify-center">
+                        <div class="flex items-center"><span class="w-3 h-3 bg-federal rounded-full mr-1"></span> F. General (28%)</div>
+                        <div class="flex items-center"><span class="w-3 h-3 bg-pacific rounded-full mr-1"></span> C. Básicas (25%)</div>
+                        <div class="flex items-center"><span class="w-3 h-3 bg-sky rounded-full mr-1"></span> Tec. Básicas (12%)</div>
+                        <div class="flex items-center"><span class="w-3 h-3 bg-federal opacity-90 rounded-full mr-1"></span> Aplicadas (28%)</div>
+                        <div class="flex items-center"><span class="w-3 h-3 bg-cobalt rounded-full mr-1"></span> Integradora (7%)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Perfiles -->
+            <section id="perfiles" class="mb-12">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Ingreso -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                        <div class="bg-federal p-4">
+                            <h4 class="text-white font-bold text-lg"><i class="fa-solid fa-door-open mr-2"></i> Perfil de Ingreso</h4>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4 font-light">
+                                Ideal para jóvenes con pasión por el <strong class="text-pacific">medio ambiente y la tecnología</strong>. Curiosos sobre cómo se genera la electricidad y dispuestos a liderar el cambio climático.
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-check text-pacific mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-700">Gusto por Matemáticas, Física y Química.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-check text-pacific mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-700">Interés en sostenibilidad.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-check text-pacific mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-700">Protagonista de la transición energética.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Egreso -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                        <div class="bg-pacific p-4">
+                            <h4 class="text-white font-bold text-lg"><i class="fa-solid fa-graduation-cap mr-2"></i> Perfil de Egreso</h4>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4 font-light">
+                                Un profesional líder en la <strong class="text-federal">gestión y optimización de recursos</strong>. Domina desde biocombustibles hasta Smart Grids.
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-star text-federal mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-700">Diseña sistemas de generación (Solar, Eólica, etc.).</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-star text-federal mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-700">Enfoque ético y de responsabilidad social.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-star text-federal mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-700">Gestión financiera de proyectos energéticos.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Competencias (Venta) -->
+            <section id="competencias" class="mb-12">
+                <h3 class="text-2xl font-bold text-federal mb-6 flex items-center">
+                    <span class="w-2 h-8 bg-pacific mr-3 rounded-sm"></span> ¿Por qué estudiar esto? (Competencias)
+                </h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Comp 1 -->
+                    <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-federal hover:-translate-y-1 transition duration-300">
+                        <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-4 text-federal text-2xl">
+                            <i class="fa-solid fa-solar-panel"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-federal mb-2">Experto en Renovables</h4>
+                        <p class="text-sm text-gray-600">Diseña y gestiona proyectos de energía solar, eólica, biomasa e <span class="font-bold text-pacific">Hidrógeno Verde</span>.</p>
+                    </div>
+                    <!-- Comp 2 -->
+                    <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-pacific hover:-translate-y-1 transition duration-300">
+                        <div class="w-14 h-14 bg-cyan-50 rounded-full flex items-center justify-center mb-4 text-pacific text-2xl">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-federal mb-2">Auditor de Eficiencia</h4>
+                        <p class="text-sm text-gray-600">Ahorra dinero en industrias y edificios mediante auditorías y normas como la ISO 50001.</p>
+                    </div>
+                    <!-- Comp 3 -->
+                    <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-federal hover:-translate-y-1 transition duration-300">
+                        <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-4 text-federal text-2xl">
+                            <i class="fa-solid fa-sack-dollar"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-federal mb-2">Gestor de Mercados</h4>
+                        <p class="text-sm text-gray-600">Compra y vende energía en el mercado regional (MER). Gestiona la rentabilidad legal y financiera.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. La Reforma y Diferenciadores -->
+            <section id="reforma" class="mb-12">
+                <div class="bg-federal rounded-2xl shadow-xl overflow-hidden text-white relative">
+                    <!-- Decorative element -->
+                    <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-pacific opacity-20 rounded-full blur-3xl"></div>
+                    
+                    <div class="p-8 md:p-12 relative z-10">
+                        <div class="md:flex justify-between items-start">
+                            <div class="md:w-1/2 pr-8">
+                                <h3 class="text-3xl font-bold mb-4">La Reforma 2025</h3>
+                                <p class="text-blue-100 mb-6 leading-relaxed">
+                                    Esta reforma responde a la necesidad mundial de <strong class="text-pacific">descarbonización, electromovilidad y digitalización</strong>. No es solo electricidad; es el futuro de la energía integrada.
+                                </p>
+                                <h5 class="font-bold text-pacific mb-3 uppercase text-sm tracking-wide">Nuevas Asignaturas Clave:</h5>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div class="flex items-center bg-white/10 px-3 py-2 rounded-lg backdrop-blur-sm">
+                                        <i class="fa-solid fa-car-battery text-pacific mr-2"></i> Hidrógeno y Electromovilidad
+                                    </div>
+                                    <div class="flex items-center bg-white/10 px-3 py-2 rounded-lg backdrop-blur-sm">
+                                        <i class="fa-solid fa-network-wired text-pacific mr-2"></i> Smartgrids (Redes Inteligentes)
+                                    </div>
+                                    <div class="flex items-center bg-white/10 px-3 py-2 rounded-lg backdrop-blur-sm">
+                                        <i class="fa-solid fa-server text-pacific mr-2"></i> Servidores y Centros de Datos
+                                    </div>
+                                    <div class="flex items-center bg-white/10 px-3 py-2 rounded-lg backdrop-blur-sm">
+                                        <i class="fa-solid fa-leaf text-pacific mr-2"></i> Biocombustibles
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Image/Differentiators Grid -->
+                            <div class="md:w-1/2 mt-8 md:mt-0">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <!-- Internacionalidad -->
+                                    <div class="bg-white text-federal p-4 rounded-xl shadow-lg transform rotate-1 hover:rotate-0 transition duration-300">
+                                        <div class="h-32 bg-gray-200 rounded-lg mb-3 overflow-hidden relative">
+                                            <!-- Placeholder Img -->
+                                            <div class="absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-400 text-xs text-center p-2">
+                                                [Imagen: Estudiante Intercambio]
+                                            </div>
+                                        </div>
+                                        <h5 class="font-bold text-sm">Internacionalidad</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Intercambios y doble titulación. Inglés como requisito clave.</p>
+                                    </div>
+                                    <!-- Laboratorios -->
+                                    <div class="bg-white text-federal p-4 rounded-xl shadow-lg transform -rotate-1 hover:rotate-0 transition duration-300 mt-6">
+                                        <div class="h-32 bg-gray-200 rounded-lg mb-3 overflow-hidden relative">
+                                            <!-- Placeholder Img -->
+                                            <div class="absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-400 text-xs text-center p-2">
+                                                [Imagen: Lab Solar/Eólico]
+                                            </div>
+                                        </div>
+                                        <h5 class="font-bold text-sm">Tecnología de Punta</h5>
+                                        <p class="text-xs text-gray-600 mt-1">Labs de Solar, Eólica y Drones para termografía.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Flujograma (Timeline) -->
+            <section id="flujograma" class="mb-12">
+                <h3 class="text-2xl font-bold text-federal mb-8 flex items-center">
+                    <span class="w-2 h-8 bg-pacific mr-3 rounded-sm"></span> Ruta Académica (Flujograma)
+                </h3>
+                <div class="relative border-l-4 border-gray-200 ml-4 space-y-12">
+                    
+                    <!-- Año 1 -->
+                    <div class="relative pl-8">
+                        <div class="absolute -left-3.5 top-0 w-8 h-8 bg-federal text-white rounded-full flex items-center justify-center font-bold border-4 border-white shadow-md">1</div>
+                        <h4 class="text-xl font-bold text-federal">Año 1: Fundamentos y Visión</h4>
+                        <p class="text-gray-600 mt-2 text-sm bg-white p-4 rounded-lg shadow-sm border border-gray-100 inline-block max-w-2xl">
+                            Matemáticas e Introducción a la Ingeniería. Entendiendo el panorama global desde el día uno.
+                        </p>
+                    </div>
+
+                    <!-- Año 2 -->
+                    <div class="relative pl-8">
+                        <div class="absolute -left-3.5 top-0 w-8 h-8 bg-pacific text-white rounded-full flex items-center justify-center font-bold border-4 border-white shadow-md">2</div>
+                        <h4 class="text-xl font-bold text-federal">Año 2: Ciencias y Materia</h4>
+                        <p class="text-gray-600 mt-2 text-sm bg-white p-4 rounded-lg shadow-sm border border-gray-100 inline-block max-w-2xl">
+                            Física, Química y Energía de Biomasa. Transformación de materia orgánica y principios físicos.
+                        </p>
+                    </div>
+
+                    <!-- Año 3 -->
+                    <div class="relative pl-8">
+                        <div class="absolute -left-3.5 top-0 w-8 h-8 bg-federal text-white rounded-full flex items-center justify-center font-bold border-4 border-white shadow-md">3</div>
+                        <h4 class="text-xl font-bold text-federal">Año 3: El "Core" Eléctrico</h4>
+                        <p class="text-gray-600 mt-2 text-sm bg-white p-4 rounded-lg shadow-sm border border-gray-100 inline-block max-w-2xl">
+                            Circuitos, Máquinas Eléctricas, Energía Solar, Hidroeléctrica y Eólica. Generación pura.
+                        </p>
+                    </div>
+
+                    <!-- Año 4 -->
+                    <div class="relative pl-8">
+                        <div class="absolute -left-3.5 top-0 w-8 h-8 bg-pacific text-white rounded-full flex items-center justify-center font-bold border-4 border-white shadow-md">4</div>
+                        <h4 class="text-xl font-bold text-federal">Año 4: Tendencias y Gestión</h4>
+                        <p class="text-gray-600 mt-2 text-sm bg-white p-4 rounded-lg shadow-sm border border-gray-100 inline-block max-w-2xl">
+                            Hidrógeno, Electromovilidad, Smartgrids y Mercados Energéticos. Gestión del futuro.
+                        </p>
+                    </div>
+
+                    <!-- Año 5 -->
+                    <div class="relative pl-8">
+                        <div class="absolute -left-3.5 top-0 w-8 h-8 bg-cobalt text-white rounded-full flex items-center justify-center font-bold border-4 border-white shadow-md">5</div>
+                        <h4 class="text-xl font-bold text-federal">Año 5: Salida al Mercado</h4>
+                        <div class="mt-2 grid md:grid-cols-2 gap-4 max-w-3xl">
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-l-4 border-l-cobalt">
+                                <h6 class="font-bold text-federal">Opción A: Práctica Profesional</h6>
+                                <p class="text-xs text-gray-500">400 Horas supervisadas. Inserción laboral directa.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-l-4 border-l-cobalt">
+                                <h6 class="font-bold text-federal">Opción B: Proyecto Graduación</h6>
+                                <p class="text-xs text-gray-500">Fase II. Investigación profunda para resolver problemas complejos.</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2 ml-1 italic">*Incluye Capstone y Generación de Empresas.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Para Padres -->
+            <section id="padres" class="mb-12">
+                <div class="bg-cyan-50 border-2 border-pacific rounded-2xl p-8 shadow-sm">
+                    <h3 class="text-2xl font-bold text-federal mb-2 text-center">Para el Padre de Familia</h3>
+                    <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Argumentos sólidos sobre inversión educativa, seguridad y futuro.</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3 text-pacific text-xl shadow-sm font-bold">1</div>
+                            <h5 class="font-bold text-federal mb-2">Carrera Única</h5>
+                            <p class="text-sm text-gray-600">Único programa en el país que combina Renovables + Gestión + Mercados. Sector en plena inversión.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3 text-pacific text-xl shadow-sm font-bold">2</div>
+                            <h5 class="font-bold text-federal mb-2">Alta Empleabilidad</h5>
+                            <p class="text-sm text-gray-600">No solo en plantas eléctricas: Bancos (evaluación de proyectos), Industria (ahorro), Gobierno y Consultoría.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3 text-pacific text-xl shadow-sm font-bold">3</div>
+                            <h5 class="font-bold text-federal mb-2">Formación de Negocios</h5>
+                            <p class="text-sm text-gray-600">Aprende finanzas y economía. Sube a puestos gerenciales rápidamente.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Equivalencias -->
+            <section id="equivalencias" class="mb-20">
+                <h3 class="text-2xl font-bold text-federal mb-6 flex items-center">
+                    <span class="w-2 h-8 bg-pacific mr-3 rounded-sm"></span> Tabla de Equivalencias (Plan 2014 vs 2025)
+                </h3>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+                    <div class="overflow-x-auto max-h-96">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-federal text-white sticky-th">
+                                <tr>
+                                    <th class="p-4 font-semibold w-1/2">Plan Viejo (2014)</th>
+                                    <th class="p-4 font-semibold bg-pacific w-1/2">Plan Nuevo (2025)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <!-- Row 1 -->
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 text-gray-700">Química General</td>
+                                    <td class="p-4 text-federal font-medium"><i class="fa-solid fa-arrow-right text-pacific mr-2"></i> Química Orgánica e Inorgánica</td>
+                                </tr>
+                                <!-- Row 2 -->
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 text-gray-700">Energía Termosolar y Fotovoltaica</td>
+                                    <td class="p-4 text-federal font-medium"><i class="fa-solid fa-arrow-right text-pacific mr-2"></i> Energía Solar</td>
+                                </tr>
+                                <!-- Row 3 -->
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 text-gray-700">Energía de Biomasa y Biocombustibles</td>
+                                    <td class="p-4 text-federal font-medium"><i class="fa-solid fa-arrow-right text-pacific mr-2"></i> (Se divide en 2 clases separadas)</td>
+                                </tr>
+                                <!-- Row 4 -->
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 text-gray-700">Máquinas Térmicas</td>
+                                    <td class="p-4 text-federal font-medium"><i class="fa-solid fa-arrow-right text-pacific mr-2"></i> Centrales de Generación Térmica</td>
+                                </tr>
+                                <!-- Row 5 -->
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-4 text-gray-700">Instrumentación y Control</td>
+                                    <td class="p-4 text-federal font-medium"><i class="fa-solid fa-arrow-right text-pacific mr-2"></i> Sistemas de Control</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Alert Footer -->
+                    <div class="bg-red-50 border-t-2 border-red-400 p-4 flex items-start">
+                        <i class="fa-solid fa-triangle-exclamation text-red-500 mt-1 mr-3 text-lg"></i>
+                        <div>
+                            <h6 class="font-bold text-red-800 text-sm">Atención: Nuevas Clases sin Equivalencia Directa</h6>
+                            <p class="text-xs text-red-700 mt-1">Estudiantes en transición podrían requerir cursar: Hidrógeno y Electromovilidad, Planificación Energética y Smartgrids.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script for Interaction -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
