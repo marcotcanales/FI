@@ -25,7 +25,7 @@
                         'federal-blue': '#06065C',
                         'pacific-cyan': '#03AED2',
                         'vivid-sky': '#47C8FD',
-                        'cobalt': '#GF4986', // Nota: Hex corregido a formato válido si fuera necesario, usaremos los principales
+                        'cobalt': '#GF4986', 
                         'light-gray': '#F3F4F6',
                     },
                     fontFamily: {
@@ -61,6 +61,17 @@
         /* Utility for sticky header shadow */
         .sticky-header-shadow {
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Image hover effects */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom {
+            transition: transform 0.5s ease;
+        }
+        .img-zoom-container:hover .img-zoom {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -112,6 +123,10 @@
                 </a>
                 <a href="#equivalencias" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg hover:bg-white/10 transition-colors group">
                     <i class="fas fa-exchange-alt text-pacific-cyan group-hover:text-white"></i> Equivalencias
+                </a>
+                <!-- New Link for Gallery -->
+                <a href="#galeria" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg hover:bg-white/10 transition-colors group">
+                    <i class="fas fa-images text-pacific-cyan group-hover:text-white"></i> Galería de Campo
                 </a>
                 <a href="#padres" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg hover:bg-white/10 transition-colors group">
                     <i class="fas fa-user-friends text-pacific-cyan group-hover:text-white"></i> Para Padres
@@ -264,7 +279,7 @@
                     </div>
                 </section>
 
-                <!-- 3. La Reforma y Diferenciadores -->
+                <!-- 3. La Reforma y Diferenciadores (UPDATED IMAGES) -->
                 <section id="reforma" class="bg-white p-8 rounded-xl shadow-sm">
                     <div class="flex flex-col lg:flex-row gap-10">
                         <div class="lg:w-1/2">
@@ -288,18 +303,18 @@
                             </ul>
                         </div>
                         <div class="lg:w-1/2 grid grid-cols-2 gap-4">
-                            <!-- Diferenciador: Internacionalidad -->
-                            <div class="col-span-1 group relative overflow-hidden rounded-lg cursor-pointer">
-                                <img src="https://placehold.co/600x400/06065C/FFFFFF?text=Convenios+Internacionales" alt="Intercambio" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform">
+                            <!-- Diferenciador: Internacionalidad (IMAGEN REAL) -->
+                            <div class="col-span-1 group relative overflow-hidden rounded-lg cursor-pointer img-zoom-container h-40 md:h-auto">
+                                <img src="BMD/Visita Hospital El Salvador TGU.jpg" alt="Visita Hospital El Salvador" class="w-full h-full object-cover img-zoom">
                                 <div class="absolute bottom-0 left-0 w-full p-2 bg-gradient-to-t from-black to-transparent text-white text-xs font-bold">
-                                    Benchmarking: MIT, Tec Monterrey
+                                    Gira Académica: El Salvador
                                 </div>
                             </div>
-                            <!-- Diferenciador: Labs -->
-                            <div class="col-span-1 group relative overflow-hidden rounded-lg cursor-pointer">
-                                <img src="https://placehold.co/600x400/03AED2/FFFFFF?text=Laboratorios+High+Tech" alt="Laboratorios" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform">
+                            <!-- Diferenciador: Labs (IMAGEN REAL) -->
+                            <div class="col-span-1 group relative overflow-hidden rounded-lg cursor-pointer img-zoom-container h-40 md:h-auto">
+                                <img src="BMD/Visita Quirofano TGU.jpg" alt="Laboratorios" class="w-full h-full object-cover img-zoom">
                                 <div class="absolute bottom-0 left-0 w-full p-2 bg-gradient-to-t from-black to-transparent text-white text-xs font-bold">
-                                    Simuladores & Matlab
+                                    Tecnología en Quirófano
                                 </div>
                             </div>
                             <!-- Badge ACAAI -->
@@ -434,6 +449,62 @@
                                 <p class="text-xs text-red-600">Clases como "Gestión Hospitalaria" o "Electromecánica" han sido eliminadas y no tienen equivalencia directa.</p>
                             </div>
                         </div>
+                    </div>
+                </section>
+
+                <!-- NEW SECTION: Galería de Experiencias -->
+                <section id="galeria" class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-2xl font-bold text-federal-blue">Aprendizaje en Campo</h2>
+                        <span class="text-sm font-medium text-pacific-cyan hidden sm:inline-block">1,585 Horas Prácticas</span>
+                    </div>
+                    
+                    <!-- Mosaic Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[200px]">
+                        
+                        <!-- Large Item -->
+                        <div class="md:col-span-2 md:row-span-2 relative rounded-xl overflow-hidden group img-zoom-container">
+                            <img src="BMD/Visita Empresa TGU.jpg" alt="Visita Empresa" class="w-full h-full object-cover img-zoom">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
+                            <div class="absolute bottom-0 left-0 p-6 text-white">
+                                <span class="bg-pacific-cyan text-[10px] font-bold px-2 py-1 rounded mb-2 inline-block uppercase">Vinculación Empresarial</span>
+                                <h3 class="text-xl font-bold">Prácticas en la Industria Real</h3>
+                                <p class="text-xs text-gray-200 mt-1 hidden md:block">Conexión directa con empleadores potenciales.</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="relative rounded-xl overflow-hidden group img-zoom-container">
+                            <img src="BMD/Visita Hospital TGU.jpg" alt="Visita Hospital" class="w-full h-full object-cover img-zoom">
+                            <div class="absolute bottom-0 left-0 w-full p-3 bg-black/60 text-white">
+                                <p class="text-xs font-bold">Visitas Hospitalarias</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="relative rounded-xl overflow-hidden group img-zoom-container">
+                            <img src="BMD/Visita Clinica TGU.jpg" alt="Entorno Clínico" class="w-full h-full object-cover img-zoom">
+                            <div class="absolute bottom-0 left-0 w-full p-3 bg-black/60 text-white">
+                                <p class="text-xs font-bold">Entorno Clínico</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="relative rounded-xl overflow-hidden group img-zoom-container">
+                            <img src="BMD/Visita Quirofano TGU 2.jpg" alt="Quirofano 2" class="w-full h-full object-cover img-zoom">
+                            <div class="absolute bottom-0 left-0 w-full p-3 bg-black/60 text-white">
+                                <p class="text-xs font-bold">Práctica en Quirófano</p>
+                            </div>
+                        </div>
+
+                         <!-- Item 5 -->
+                         <div class="relative rounded-xl overflow-hidden group img-zoom-container">
+                            <img src="BMD/Visita Clinica TGU 2.jpg" alt="Clinica 2" class="w-full h-full object-cover img-zoom">
+                            <div class="absolute bottom-0 left-0 w-full p-3 bg-black/60 text-white">
+                                <p class="text-xs font-bold">Trabajo en Equipo</p>
+                            </div>
+                        </div>
+
                     </div>
                 </section>
 
