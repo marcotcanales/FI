@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions Dashboard - Ing. Telecomunicaciones y Redes | UNITEC</title>
+    
+    <!-- Google Fonts: Poppins (Strictly Enforced) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config for UNITEC Brand Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        federal: '#06065C',
+                        pacific: '#03AED2',
+                        sky: '#47C8FD',
+                        light: '#F3F4F6',
+                        dark: '#111827'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar for sleek look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #03AED2; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06065C; 
+        }
+        
+        /* Diamond Bullet Points */
+        .diamond-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .diamond-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.4rem;
+            width: 8px;
+            height: 8px;
+            background-color: #03AED2;
+            transform: rotate(45deg);
+        }
+
+        /* Isotype CSS Representation for Logo Integrity */
+        .unitec-diamond {
+            width: 24px;
+            height: 24px;
+            background-color: #03AED2; /* Pacific Cyan represents clarity */
+            transform: rotate(45deg);
+            margin-right: 12px;
+            margin-left: 6px;
+        }
+        
+        .nav-active {
+            border-right: 4px solid #03AED2;
+            background-color: rgba(255,255,255,0.05);
+            color: #47C8FD !important;
+        }
+    </style>
+</head>
+<body class="bg-light text-gray-900 font-sans antialiased overflow-x-hidden">
+
+    <!-- Mobile Overlay -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="fixed top-0 left-0 z-50 h-screen w-64 bg-federal text-white transition-transform transform -translate-x-full lg:translate-x-0 shadow-xl flex flex-col justify-between">
+        <div>
+            <!-- Branding Area -->
+            <div class="h-20 flex items-center px-6 border-b border-gray-700 bg-opacity-50">
+                <div class="flex items-center">
+                    <!-- CSS Diamond Isotype -->
+                    <div class="unitec-diamond"></div>
+                    <span class="text-2xl font-bold tracking-tight">unitec</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="mt-6 px-4 space-y-2">
+                <a href="#general" class="nav-item flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+                    <i class="fa-solid fa-chart-pie w-6"></i> Datos Generales
+                </a>
+                <a href="#competencias" class="nav-item flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+                    <i class="fa-solid fa-bolt w-6"></i> Competencias
+                </a>
+                <a href="#reforma" class="nav-item flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+                    <i class="fa-solid fa-sync w-6"></i> La Reforma
+                </a>
+                <a href="#diferenciadores" class="nav-item flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+                    <i class="fa-solid fa-globe w-6"></i> Diferenciadores
+                </a>
+                <a href="#flujograma" class="nav-item flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+                    <i class="fa-solid fa-road w-6"></i> Flujograma
+                </a>
+                <a href="#padres" class="nav-item flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+                    <i class="fa-solid fa-user-shield w-6"></i> Para Padres
+                </a>
+                <a href="#equivalencias" class="nav-item flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+                    <i class="fa-solid fa-table-list w-6"></i> Equivalencias
+                </a>
+            </nav>
+        </div>
+        
+        <!-- Footer Info -->
+        <div class="p-6 border-t border-gray-700">
+            <p class="text-xs text-gray-400">Admissions Dashboard v1.0</p>
+            <p class="text-xs text-pacific mt-1">Plan 2025 Reformado</p>
+        </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="lg:ml-64 flex flex-col min-h-screen">
+
+        <!-- Sticky Header -->
+        <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm h-20 flex items-center justify-between px-6 lg:px-10">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="lg:hidden text-federal focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+                <div>
+                    <h1 class="text-lg lg:text-2xl font-bold text-federal leading-tight">
+                        Ingeniería en Telecomunicaciones y Redes
+                    </h1>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="hidden md:inline-block text-sm text-gray-500 font-medium">Código: ITR-25</span>
+                <span class="bg-pacific text-white text-xs lg:text-sm font-bold px-4 py-1.5 rounded-full shadow-sm">
+                    NUEVO PLAN 2025
+                </span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10 space-y-12">
+
+            <!-- 1. Datos Generales & Distribución -->
+            <section id="general" class="scroll-mt-24">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- KPI Cards -->
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-federal shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium uppercase">Duración</p>
+                                <h3 class="text-3xl font-bold text-federal mt-1">4.3 <span class="text-lg font-normal text-gray-600">Años</span></h3>
+                            </div>
+                            <div class="bg-blue-50 p-3 rounded-full text-federal"><i class="fa-regular fa-clock text-xl"></i></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">4 años + 1 periodo (17 periodos)</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-pacific shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium uppercase">Carga Académica</p>
+                                <h3 class="text-3xl font-bold text-federal mt-1">62 <span class="text-lg font-normal text-gray-600">Clases</span></h3>
+                            </div>
+                            <div class="bg-cyan-50 p-3 rounded-full text-pacific"><i class="fa-solid fa-book-open text-xl"></i></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">223 Créditos Académicos (UV)</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-sky shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium uppercase">Modalidad</p>
+                                <h3 class="text-2xl font-bold text-federal mt-1">Presencial</h3>
+                            </div>
+                            <div class="bg-sky-50 p-3 rounded-full text-sky"><i class="fa-solid fa-building-columns text-xl"></i></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Campus Tegucigalpa / SPS</p>
+                    </div>
+                </div>
+
+                <!-- Distribución Visual del Plan -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-bold text-federal mb-4">Balance del Plan de Estudios</h3>
+                    <div class="w-full h-6 bg-gray-100 rounded-full flex overflow-hidden mb-4">
+                        <div class="bg-gray-400 h-full flex items-center justify-center text-[10px] text-white font-bold" style="width: 27%">27%</div>
+                        <div class="bg-federal h-full flex items-center justify-center text-[10px] text-white font-bold" style="width: 25%">25%</div>
+                        <div class="bg-sky h-full flex items-center justify-center text-[10px] text-white font-bold" style="width: 16%">16%</div>
+                        <div class="bg-pacific h-full flex items-center justify-center text-[10px] text-white font-bold" style="width: 14%">14%</div>
+                        <div class="bg-indigo-900 h-full flex items-center justify-center text-[10px] text-white font-bold" style="width: 11%">11%</div>
+                        <div class="bg-gray-300 h-full flex items-center justify-center text-[10px] text-white font-bold" style="width: 7%">7%</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-y-2 text-xs">
+                        <div class="flex items-center"><span class="w-3 h-3 bg-gray-400 rounded-sm mr-2"></span> Formación General (60 UV)</div>
+                        <div class="flex items-center"><span class="w-3 h-3 bg-federal rounded-sm mr-2"></span> Ciencias Básicas (56 UV)</div>
+                        <div class="flex items-center"><span class="w-3 h-3 bg-sky rounded-sm mr-2"></span> Telecomunicaciones (35 UV)</div>
+                        <div class="flex items-center"><span class="w-3 h-3 bg-pacific rounded-sm mr-2"></span> Redes (32 UV)</div>
+                        <div class="flex items-center"><span class="w-3 h-3 bg-indigo-900 rounded-sm mr-2"></span> Electrónica (24 UV)</div>
+                        <div class="flex items-center"><span class="w-3 h-3 bg-gray-300 rounded-sm mr-2"></span> Otros (16 UV)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Perfiles (Ingreso/Egreso) -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Ingreso -->
+                <div class="bg-white p-8 rounded-xl shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gray-100 rounded-bl-full -mr-4 -mt-4 transition-all group-hover:bg-gray-200"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-gray-200 flex items-center justify-center text-gray-600">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-federal">Perfil de Ingreso</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Buscamos jóvenes con pasión por la conectividad. Gusto por las matemáticas y la física, curiosidad por el funcionamiento de internet y disposición al autoaprendizaje.
+                        </p>
+                        <ul class="diamond-list text-sm text-gray-700 space-y-2">
+                            <li>Título de educación media.</li>
+                            <li>Aprobar proceso de admisión.</li>
+                            <li>Interés en tecnología 5G, Satelital y Fibra.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Egreso -->
+                <div class="bg-federal p-8 rounded-xl shadow-lg relative overflow-hidden group text-white">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-pacific opacity-10 rounded-bl-full -mr-4 -mt-4"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-pacific flex items-center justify-center text-white">
+                                <i class="fa-solid fa-user-graduate"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Perfil de Egreso</h3>
+                        </div>
+                        <p class="text-gray-200 text-sm mb-4 leading-relaxed">
+                            Líder capaz de diseñar y operar infraestructuras críticas. Domina la transmisión de datos, gestión de data centers y seguridad informática.
+                        </p>
+                        <ul class="text-sm text-gray-100 space-y-2">
+                            <li class="flex items-start"><i class="fa-solid fa-check text-pacific mt-1 mr-2"></i> Diseña redes modernas.</li>
+                            <li class="flex items-start"><i class="fa-solid fa-check text-pacific mt-1 mr-2"></i> Implementa ciberseguridad.</li>
+                            <li class="flex items-start"><i class="fa-solid fa-check text-pacific mt-1 mr-2"></i> Propone soluciones sostenibles.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Competencias (Sales Pitch) -->
+            <section id="competencias" class="scroll-mt-24">
+                <div class="flex items-center mb-6">
+                    <div class="h-8 w-1 bg-pacific mr-3 rounded-full"></div>
+                    <h2 class="text-2xl font-bold text-federal">Competencias Clave (Argumentos de Venta)</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Card 1 -->
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-pacific p-6 text-center">
+                        <div class="w-16 h-16 mx-auto bg-blue-50 rounded-full flex items-center justify-center text-pacific mb-4 text-2xl">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-federal mb-2">Arquitecto de Conectividad</h4>
+                        <p class="text-sm text-gray-600">Diseña redes de fibra óptica, satelitales y móviles (5G) que mueven al mundo.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-federal p-6 text-center">
+                        <div class="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center text-federal mb-4 text-2xl">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-federal mb-2">Guardián Digital</h4>
+                        <p class="text-sm text-gray-600">Implementa estrategias de Ciberseguridad para proteger la infraestructura crítica empresarial.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-sky p-6 text-center">
+                        <div class="w-16 h-16 mx-auto bg-sky-50 rounded-full flex items-center justify-center text-sky mb-4 text-2xl">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-federal mb-2">Innovador Tecnológico</h4>
+                        <p class="text-sm text-gray-600">Integra soluciones IoT, IA y Big Data para optimizar servicios de telecomunicaciones.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. La Reforma y Diferenciadores -->
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                
+                <!-- La Reforma -->
+                <section id="reforma" class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 scroll-mt-24">
+                    <h3 class="text-xl font-bold text-federal mb-4 border-b pb-2">¿Por qué el cambio de Plan?</h3>
+                    <p class="text-gray-600 text-sm mb-6">
+                        La industria cambió. Nos alejamos del enfoque puramente electrónico para responder a la demanda masiva de expertos en <strong class="text-federal">Datos, Cloud y Ciberseguridad</strong>.
+                    </p>
+                    
+                    <h4 class="font-bold text-federal text-sm mb-3">Nuevas Asignaturas Estratégicas:</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+                            <i class="fa-solid fa-lock text-pacific mr-3"></i>
+                            <span class="text-sm font-medium text-gray-700">Seguridad de Redes</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+                            <i class="fa-solid fa-cloud text-pacific mr-3"></i>
+                            <span class="text-sm font-medium text-gray-700">Infraestructura Digital</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+                            <i class="fa-brands fa-python text-pacific mr-3"></i>
+                            <span class="text-sm font-medium text-gray-700">Python para Redes</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+                            <i class="fa-solid fa-database text-pacific mr-3"></i>
+                            <span class="text-sm font-medium text-gray-700">Big Data & IA</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Diferenciadores -->
+                <section id="diferenciadores" class="space-y-6 scroll-mt-24">
+                    <!-- Acreditacion -->
+                    <div class="bg-federal text-white p-6 rounded-xl flex items-center justify-between shadow-md">
+                        <div>
+                            <h4 class="font-bold text-lg">Calidad Acreditada</h4>
+                            <p class="text-sm text-gray-300">Programa certificado por ACAAI.</p>
+                        </div>
+                        <div class="bg-white text-federal font-bold px-4 py-2 rounded text-sm">ACAAI</div>
+                    </div>
+
+                    <!-- Placeholders Grid -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="relative rounded-xl overflow-hidden h-32 bg-gray-200 group">
+                            <img src="https://placehold.co/400x300/03AED2/FFFFFF?text=Intercambio" alt="Estudiante en intercambio" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+                                <span class="text-white text-xs font-bold">Internacionalidad</span>
+                            </div>
+                        </div>
+                        <div class="relative rounded-xl overflow-hidden h-32 bg-gray-200 group">
+                            <img src="https://placehold.co/400x300/06065C/FFFFFF?text=Laboratorios" alt="Laboratorio Especializado" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+                                <span class="text-white text-xs font-bold">Labs Cisco/Huawei</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 5. Flujograma (Timeline Vertical) -->
+            <section id="flujograma" class="scroll-mt-24">
+                <div class="flex items-center mb-8">
+                    <div class="h-8 w-1 bg-pacific mr-3 rounded-full"></div>
+                    <h2 class="text-2xl font-bold text-federal">Ruta del Estudiante (Años 1-5)</h2>
+                </div>
+
+                <div class="relative border-l-4 border-gray-200 ml-4 md:ml-6 space-y-10">
+                    
+                    <!-- Año 1 -->
+                    <div class="relative pl-8 md:pl-12">
+                        <div class="absolute -left-[14px] top-0 bg-federal text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center border-4 border-white shadow-sm z-10">1</div>
+                        <h4 class="text-lg font-bold text-federal">Fundamentos y Conexión</h4>
+                        <p class="text-sm text-gray-600 mb-2">Matemáticas, Intro a Telecom y Fundamentos de Redes.</p>
+                        <span class="inline-block px-3 py-1 bg-blue-50 text-federal text-xs rounded-full font-medium">Configuración inicial</span>
+                    </div>
+
+                    <!-- Año 2 -->
+                    <div class="relative pl-8 md:pl-12">
+                        <div class="absolute -left-[14px] top-0 bg-federal text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center border-4 border-white shadow-sm z-10">2</div>
+                        <h4 class="text-lg font-bold text-federal">Estructura y Seguridad</h4>
+                        <p class="text-sm text-gray-600 mb-2">Arquitectura LAN y Seguridad de Redes.</p>
+                        <span class="inline-block px-3 py-1 bg-blue-50 text-federal text-xs rounded-full font-medium">Protección empresarial</span>
+                    </div>
+
+                    <!-- Año 3 -->
+                    <div class="relative pl-8 md:pl-12">
+                        <div class="absolute -left-[14px] top-0 bg-federal text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center border-4 border-white shadow-sm z-10">3</div>
+                        <h4 class="text-lg font-bold text-federal">Tecnologías de Transmisión</h4>
+                        <p class="text-sm text-gray-600 mb-2">Propagación, Antenas, Microondas y Fibra Óptica.</p>
+                        <span class="inline-block px-3 py-1 bg-blue-50 text-federal text-xs rounded-full font-medium">Física de la red</span>
+                    </div>
+
+                    <!-- Año 4 -->
+                    <div class="relative pl-8 md:pl-12">
+                        <div class="absolute -left-[14px] top-0 bg-pacific text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center border-4 border-white shadow-sm z-10">4</div>
+                        <h4 class="text-lg font-bold text-federal">Vanguardia y Gestión</h4>
+                        <p class="text-sm text-gray-600 mb-2">Ciberseguridad Avanzada, Big Data, Cloud Computing y Redes WAN.</p>
+                        <span class="inline-block px-3 py-1 bg-cyan-50 text-pacific text-xs rounded-full font-medium">Gestión compleja</span>
+                    </div>
+
+                    <!-- Año 5 -->
+                    <div class="relative pl-8 md:pl-12">
+                        <div class="absolute -left-[14px] top-0 bg-sky text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center border-4 border-white shadow-sm z-10">5</div>
+                        <h4 class="text-lg font-bold text-federal">Salida Profesional</h4>
+                        <p class="text-sm text-gray-600 mb-2">Capstone Project y Práctica Profesional.</p>
+                        <div class="flex gap-2 mt-2">
+                            <span class="inline-block px-3 py-1 bg-green-50 text-green-700 text-xs rounded-full font-medium border border-green-200">Práctica (400h)</span>
+                            <span class="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full font-medium border border-gray-200">Experiencia (135h)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Para Padres (Trust Section) -->
+            <section id="padres" class="bg-gray-50 border-2 border-gray-200 rounded-xl p-8 scroll-mt-24">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-federal">¿Por qué es una inversión segura?</h2>
+                    <p class="text-gray-500 text-sm mt-2">Información clave para padres de familia</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-5 rounded-lg shadow-sm text-center">
+                        <i class="fa-solid fa-briefcase text-3xl text-federal mb-3"></i>
+                        <h4 class="font-bold text-gray-900 mb-2">Alta Empleabilidad</h4>
+                        <p class="text-xs text-gray-600">Mundo hiperconectado: Bancos y Telefónicas necesitan estos perfiles urgentemente.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm text-center">
+                        <i class="fa-solid fa-money-bill-trend-up text-3xl text-federal mb-3"></i>
+                        <h4 class="font-bold text-gray-900 mb-2">Retorno de Inversión</h4>
+                        <p class="text-xs text-gray-600">Es una de las ingenierías mejor remuneradas por su especialización técnica.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm text-center">
+                        <i class="fa-solid fa-certificate text-3xl text-federal mb-3"></i>
+                        <h4 class="font-bold text-gray-900 mb-2">Calidad Global</h4>
+                        <p class="text-xs text-gray-600">Respaldo ACAAI y certificaciones de industria (Cisco/Huawei).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Tabla de Equivalencias -->
+            <section id="equivalencias" class="scroll-mt-24 mb-10">
+                 <div class="flex items-center mb-6">
+                    <div class="h-8 w-1 bg-pacific mr-3 rounded-full"></div>
+                    <h2 class="text-2xl font-bold text-federal">Equivalencias Clave (Plan 2018 vs 2025)</h2>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-left">
+                            <thead class="bg-federal text-white">
+                                <tr>
+                                    <th class="px-6 py-4 font-semibold whitespace-nowrap sticky top-0">Asignatura Plan 2018</th>
+                                    <th class="px-6 py-4 font-semibold whitespace-nowrap text-center sticky top-0"><i class="fa-solid fa-arrow-right"></i></th>
+                                    <th class="px-6 py-4 font-semibold whitespace-nowrap sticky top-0">Nueva Asignatura 2025</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-3 text-gray-700">Routers y Switchs</td>
+                                    <td class="px-6 py-3 text-center text-gray-400"><i class="fa-solid fa-arrow-right-long"></i></td>
+                                    <td class="px-6 py-3 font-medium text-federal">Arquitectura de Redes LAN</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-3 text-gray-700">Seguridad Perimetral</td>
+                                    <td class="px-6 py-3 text-center text-gray-400"><i class="fa-solid fa-arrow-right-long"></i></td>
+                                    <td class="px-6 py-3 font-medium text-federal">Seguridad de Redes</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-3 text-gray-700">Sistemas Inalámbricos</td>
+                                    <td class="px-6 py-3 text-center text-gray-400"><i class="fa-solid fa-arrow-right-long"></i></td>
+                                    <td class="px-6 py-3 font-medium text-federal">Propagación y Antenas</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-3 text-gray-700">Fibra Óptica</td>
+                                    <td class="px-6 py-3 text-center text-gray-400"><i class="fa-solid fa-arrow-right-long"></i></td>
+                                    <td class="px-6 py-3 font-medium text-federal">Redes Ópticas</td>
+                                </tr>
+                                 <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-3 text-gray-700">Telefonía Fija/Móvil</td>
+                                    <td class="px-6 py-3 text-center text-gray-400"><i class="fa-solid fa-arrow-right-long"></i></td>
+                                    <td class="px-6 py-3 font-medium text-federal">Redes de Acceso Fijo, VoIP, Móvil</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Advertencia -->
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                        <div class="flex items-start">
+                            <i class="fa-solid fa-triangle-exclamation text-red-500 mt-0.5 mr-3"></i>
+                            <p class="text-xs text-red-700 font-medium">
+                                Atención: Clases como "Ofimática Avanzada" o "Dibujo Asistido" han sido eliminadas y no tienen equivalencia directa en el nuevo plan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script for Interactivity -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // Active State on Scroll (Intersection Observer)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-item');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('nav-active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('nav-active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
