@@ -8,7 +8,7 @@
     <!-- Google Fonts: Poppins (Strictly Enforced) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -49,7 +49,12 @@
         .sticky-th { position: sticky; top: 0; z-index: 10; }
 
         /* Image hover effect */
+        .hover-zoom { overflow: hidden; }
+        .hover-zoom img { transition: transform 0.5s ease; }
         .hover-zoom:hover img { transform: scale(1.05); }
+
+        /* Custom flag icons using font-awesome combined with text colors or simple shapes */
+        .flag-icon { display: inline-block; width: 24px; text-align: center; border-radius: 4px; }
     </style>
 </head>
 <body class="bg-lightgray text-gray-900 font-sans h-screen flex overflow-hidden">
@@ -73,7 +78,7 @@
         <div class="p-6 flex items-center justify-center border-b border-gray-100 bg-federal">
             <div class="flex flex-col items-center">
                 <div class="w-8 h-8 bg-white rotate-45 mb-3 shadow-md"></div>
-                <h1 class="text-3xl font-extrabold text-white tracking-tight leading-none">unitec</h1>
+                <h1 class="text-3xl font-black text-white tracking-tight leading-none">unitec</h1>
                 <span class="text-[10px] font-bold text-pacific uppercase tracking-widest mt-2 bg-white/10 px-3 py-1 rounded-full">Soporte a Ventas</span>
             </div>
         </div>
@@ -109,7 +114,7 @@
                 </div>
             </div>
             <div class="hidden sm:flex items-center space-x-3 text-sm text-gray-500 font-medium">
-                <i class="fa-solid fa-circle-info text-pacific"></i> Herramienta para uso exclusivo de Asesores de Admisión
+                <i class="fa-solid fa-circle-info text-pacific"></i> Herramienta para uso de Asesores de Admisión
             </div>
         </header>
 
@@ -124,7 +129,6 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <!-- Cards with high contrast and Poppins typography -->
                     <div class="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-federal hover:shadow-lg transition duration-300">
                         <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Duración Total</p>
                         <p class="text-3xl font-extrabold text-federal">4 Años</p>
@@ -201,15 +205,15 @@
                             Busca al joven apasionado por rescatar el planeta a través de la tecnología. No le asustan los números; le intriga saber <strong class="text-pacific">cómo se mueve el mundo</strong> y quiere ser protagonista en la lucha contra el cambio climático.
                         </p>
                         <ul class="space-y-4">
-                            <li class="flex items-start bg-gray-50 p-3 rounded-lg">
+                            <li class="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
                                 <i class="fa-solid fa-square-check text-pacific mt-1 mr-3 text-lg"></i>
                                 <span class="text-sm text-gray-800 font-medium">Afinidad por Matemáticas, Física y Química.</span>
                             </li>
-                            <li class="flex items-start bg-gray-50 p-3 rounded-lg">
+                            <li class="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
                                 <i class="fa-solid fa-square-check text-pacific mt-1 mr-3 text-lg"></i>
                                 <span class="text-sm text-gray-800 font-medium">Mentalidad orientada a la sostenibilidad y energías limpias.</span>
                             </li>
-                            <li class="flex items-start bg-gray-50 p-3 rounded-lg">
+                            <li class="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
                                 <i class="fa-solid fa-square-check text-pacific mt-1 mr-3 text-lg"></i>
                                 <span class="text-sm text-gray-800 font-medium">Dispuesto a liderar la transición energética nacional e internacional.</span>
                             </li>
@@ -291,19 +295,19 @@
                             <div class="space-y-3 mb-8">
                                 <div class="flex items-center bg-white p-3 rounded-lg shadow-sm border-l-4 border-pacific">
                                     <i class="fa-solid fa-car-battery text-pacific text-xl w-8"></i>
-                                    <span class="font-semibold text-gray-800 text-sm">Hidrógeno y Electromovilidad</span>
+                                    <span class="font-semibold text-gray-800 text-sm ml-3">Hidrógeno y Electromovilidad</span>
                                 </div>
                                 <div class="flex items-center bg-white p-3 rounded-lg shadow-sm border-l-4 border-federal">
                                     <i class="fa-solid fa-network-wired text-federal text-xl w-8"></i>
-                                    <span class="font-semibold text-gray-800 text-sm">Planificación Energética y Smartgrids</span>
+                                    <span class="font-semibold text-gray-800 text-sm ml-3">Planificación Energética y Smartgrids</span>
                                 </div>
                                 <div class="flex items-center bg-white p-3 rounded-lg shadow-sm border-l-4 border-sky">
                                     <i class="fa-solid fa-server text-sky text-xl w-8"></i>
-                                    <span class="font-semibold text-gray-800 text-sm">Servidores y Centros de Datos</span>
+                                    <span class="font-semibold text-gray-800 text-sm ml-3">Servidores y Centros de Datos</span>
                                 </div>
                                 <div class="flex items-center bg-white p-3 rounded-lg shadow-sm border-l-4 border-pacific">
                                     <i class="fa-solid fa-vial-circle-check text-pacific text-xl w-8"></i>
-                                    <span class="font-semibold text-gray-800 text-sm">Biocombustibles y Logística separadas a profundidad</span>
+                                    <span class="font-semibold text-gray-800 text-sm ml-3">Biocombustibles y Logística profundizada</span>
                                 </div>
                             </div>
                         </div>
@@ -315,21 +319,21 @@
                                 <div class="w-64 h-64 bg-white rotate-45"></div>
                             </div>
 
-                            <h4 class="text-2xl font-bold mb-6 relative z-10"><i class="fa-solid fa-flask text-pacific mr-2"></i> Infraestructura y Laboratorios</h4>
+                            <h4 class="text-2xl font-bold mb-6 relative z-10"><i class="fa-solid fa-flask text-pacific mr-2"></i> Infraestructura de Laboratorios</h4>
                             <p class="text-blue-100 mb-8 text-sm leading-relaxed relative z-10">
-                                Acceso a tecnología real. Contamos con simuladores y equipo especializado en <strong class="text-white">Energía Solar, Eólica, Biomasa y Termodinámica</strong>. Utilizamos drones para termografía en líneas de transmisión.
+                                Acceso a tecnología real y simuladores de potencia. Laboratorios de <strong class="text-white">Energía Solar, Eólica, Biomasa, Máquinas Eléctricas y Termodinámica</strong>.
                             </p>
 
                             <!-- Collage Labs -->
                             <div class="grid grid-cols-2 gap-4 relative z-10">
-                                <div class="h-40 rounded-xl overflow-hidden hover-zoom cursor-pointer border-2 border-transparent hover:border-pacific transition-all" onclick="openModal('ENE/Lab Energia TGU.jpeg')">
-                                    <img src="ENE/Lab Energia TGU.jpeg" alt="Laboratorio de Energía" class="w-full h-full object-cover transition duration-500">
+                                <div class="h-40 rounded-xl hover-zoom cursor-pointer shadow-lg bg-white/10 p-1" onclick="openModal('ENE/Lab Energia TGU.jpeg')">
+                                    <img src="ENE/Lab Energia TGU.jpeg" alt="Laboratorio de Energía" class="w-full h-full object-cover rounded-lg">
                                 </div>
-                                <div class="h-40 rounded-xl overflow-hidden hover-zoom cursor-pointer border-2 border-transparent hover:border-pacific transition-all" onclick="openModal('ENE/Lab Energia TGU 3.jpeg')">
-                                    <img src="ENE/Lab Energia TGU 3.jpeg" alt="Equipamiento Especializado" class="w-full h-full object-cover transition duration-500">
+                                <div class="h-40 rounded-xl hover-zoom cursor-pointer shadow-lg bg-white/10 p-1" onclick="openModal('ENE/Lab Energia TGU 3.jpeg')">
+                                    <img src="ENE/Lab Energia TGU 3.jpeg" alt="Equipamiento Especializado" class="w-full h-full object-cover rounded-lg">
                                 </div>
-                                <div class="col-span-2 h-40 rounded-xl overflow-hidden hover-zoom cursor-pointer border-2 border-transparent hover:border-pacific transition-all" onclick="openModal('ENE/Lab Energia TGU 2.jpeg')">
-                                    <img src="ENE/Lab Energia TGU 2.jpeg" alt="Prácticas en Laboratorio" class="w-full h-full object-cover transition duration-500" style="object-position: center 20%;">
+                                <div class="col-span-2 h-48 rounded-xl hover-zoom cursor-pointer shadow-lg bg-white/10 p-1" onclick="openModal('ENE/Lab Energia TGU 2.jpeg')">
+                                    <img src="ENE/Lab Energia TGU 2.jpeg" alt="Prácticas en Laboratorio" class="w-full h-full object-cover object-center rounded-lg">
                                 </div>
                             </div>
                         </div>
@@ -337,154 +341,233 @@
                 </div>
             </section>
 
-            <!-- 5. Internacionalidad (NUEVA SECCIÓN AMPLIA) -->
-            <section id="internacionalidad" class="mb-16">
+            <!-- 5. Internacionalidad (GLOBAL ENGAGEMENT REFINADO) -->
+            <section id="internacionalidad" class="mb-20">
                 <div class="flex items-center mb-6">
-                    <div class="w-12 h-12 bg-federal text-white rounded-lg flex items-center justify-center text-xl shadow-lg mr-4"><i class="fa-solid fa-globe"></i></div>
+                    <div class="w-12 h-12 bg-federal text-white rounded-lg flex items-center justify-center text-xl shadow-lg mr-4"><i class="fa-solid fa-earth-americas"></i></div>
                     <h3 class="text-3xl font-bold text-federal">Global Engagement: Una Prioridad</h3>
                 </div>
                 
-                <p class="text-gray-700 text-lg mb-8 max-w-4xl leading-relaxed">
-                    Argumento clave: <strong class="text-federal">El Global Engagement no es un lujo en Ingeniería en Energía, es una necesidad imperativa.</strong> 
-                    Nuestros estudiantes validan su preparación bajo estándares internacionales, lo que asegura que su educación no solo responde a problemas locales, sino que los prepara para competir en un mercado laboral globalizado y de rápida evolución tecnológica.
+                <p class="text-gray-700 text-lg mb-10 max-w-4xl leading-relaxed">
+                    Argumento clave: <strong class="text-federal">El Global Engagement no es un lujo, es una necesidad imperativa.</strong> 
+                    Nuestros estudiantes validan su preparación bajo estándares internacionales, preparándolos para competir en un mercado globalizado y de rápida evolución tecnológica.
                 </p>
 
-                <div class="grid lg:grid-cols-2 gap-10">
-                    <!-- Text blocks -->
-                    <div class="space-y-6">
-                        <!-- España y Colombia -->
-                        <div class="bg-white p-6 rounded-xl border-l-4 border-pacific shadow-sm">
-                            <h4 class="text-lg font-bold text-federal mb-2"><i class="fa-solid fa-plane-departure text-pacific mr-2"></i> Intercambios de Alto Nivel</h4>
-                            <p class="text-sm text-gray-600">
-                                Movilidad académica a instituciones de gran prestigio como la <strong class="text-federal">Universidad Politécnica de Valencia (España)</strong> y la <strong class="text-federal">Universidad Tecnológica de Bolívar (Colombia)</strong>. Validando la calidad de nuestro plan a nivel intercontinental.
-                            </p>
+                <!-- Cards Layout -->
+                <div class="space-y-10">
+                    
+                    <!-- Card 1: Intercambios de Alto Nivel -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-pacific">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="md:w-1/3">
+                                <h4 class="text-2xl font-bold text-federal mb-4"><i class="fa-solid fa-plane-departure text-pacific mr-2"></i> Intercambios de Alto Nivel</h4>
+                                <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                                    Movilidad académica a instituciones de gran prestigio, validando la calidad de nuestro plan a nivel intercontinental.
+                                </p>
+                                <ul class="space-y-3">
+                                    <li class="flex items-center bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                        <span class="text-2xl mr-3">🇪🇸</span>
+                                        <span class="text-sm text-gray-800"><strong class="text-federal">España:</strong> Universidad Politécnica de Valencia</span>
+                                    </li>
+                                    <li class="flex items-center bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                        <span class="text-2xl mr-3">🇨🇴</span>
+                                        <span class="text-sm text-gray-800"><strong class="text-federal">Colombia:</strong> Universidad Tecnológica de Bolívar</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-lg border border-gray-200 aspect-video" onclick="openModal('ENE/Viaje Valencia 1.jpeg')">
+                                    <img src="ENE/Viaje Valencia 1.jpeg" class="w-full h-full object-cover" alt="Intercambio Valencia">
+                                </div>
+                                <div class="rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-lg border border-gray-200 aspect-video" onclick="openModal('ENE/Viaje Colombia 2.jpeg')">
+                                    <img src="ENE/Viaje Colombia 2.jpeg" class="w-full h-full object-cover" alt="Intercambio Colombia">
+                                </div>
+                            </div>
                         </div>
-                        
-                        <!-- Huawei -->
-                        <div class="bg-white p-6 rounded-xl border-l-4 border-federal shadow-sm">
-                            <h4 class="text-lg font-bold text-federal mb-2"><i class="fa-brands fa-huawei text-federal mr-2"></i> Huawei Seeds for the Future</h4>
-                            <p class="text-sm text-gray-600">
-                                Nuestros estudiantes han sido seleccionados ininterrumpidamente desde 2023 para este programa de élite, participando en inmersiones tecnológicas y viajes a <strong class="text-federal">Costa Rica, El Salvador y China</strong>.
-                            </p>
-                        </div>
+                    </div>
 
-                        <!-- Convocatorias y Publicaciones -->
-                        <div class="bg-white p-6 rounded-xl border-l-4 border-sky shadow-sm">
-                            <h4 class="text-lg font-bold text-federal mb-2"><i class="fa-solid fa-medal text-sky mr-2"></i> Convocatorias y Ciencia</h4>
-                            <p class="text-sm text-gray-600">
-                                Participación en conferencias internacionales con publicaciones científicas junto a nuestros investigadores. Destaca su participación en la <strong class="text-federal">Convocatoria Regional H2 Verde LATAM</strong>, presentando propuestas ganadoras en la Universidad Federal de Rio de Janeiro (Brasil).
-                            </p>
+                    <!-- Card 2: Huawei Seeds -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-federal">
+                        <div class="flex flex-col md:flex-row-reverse gap-8 items-center">
+                            <div class="md:w-1/2">
+                                <h4 class="text-2xl font-bold text-federal mb-4"><i class="fa-brands fa-huawei text-red-600 mr-2"></i> Huawei Seeds for the Future</h4>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                                    Nuestros estudiantes han sido seleccionados ininterrumpidamente desde 2023 para este programa tecnológico de élite mundial.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-gray-100 text-gray-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-location-dot text-pacific mr-1"></i> Costa Rica</span>
+                                    <span class="bg-gray-100 text-gray-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-location-dot text-pacific mr-1"></i> El Salvador</span>
+                                    <span class="bg-gray-100 text-gray-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-location-dot text-pacific mr-1"></i> China</span>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2">
+                                <div class="rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-lg border border-gray-200 aspect-video" onclick="openModal('ENE/Huawei Seeds for the Future 3.jpeg')">
+                                    <img src="ENE/Huawei Seeds for the Future 3.jpeg" class="w-full h-full object-cover" alt="Huawei Seeds">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Gallery Grid specific to Internationality -->
-                    <div class="grid grid-cols-2 grid-rows-3 gap-3">
-                        <div class="row-span-2 rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-md" onclick="openModal('ENE/Viaje Valencia 1.jpeg')">
-                            <img src="ENE/Viaje Valencia 1.jpeg" class="w-full h-full object-cover">
-                        </div>
-                        <div class="rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-md" onclick="openModal('ENE/Viaje Sao Paolo 1.jpeg')">
-                            <img src="ENE/Viaje Sao Paolo 1.jpeg" class="w-full h-full object-cover">
-                        </div>
-                        <div class="rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-md" onclick="openModal('ENE/Viaje Valencia 3.jpeg')">
-                            <img src="ENE/Viaje Valencia 3.jpeg" class="w-full h-full object-cover">
-                        </div>
-                        <div class="rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-md" onclick="openModal('ENE/Viaje internacional 1.jpeg')">
-                            <img src="ENE/Viaje internacional 1.jpeg" class="w-full h-full object-cover">
-                        </div>
-                        <div class="rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-md" onclick="openModal('ENE/Viaje Colombia 2.jpeg')">
-                            <img src="ENE/Viaje Colombia 2.jpeg" class="w-full h-full object-cover">
-                        </div>
-                        <div class="col-span-2 h-40 rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-md" onclick="openModal('ENE/Viaje Sao Paolo 2.jpeg')">
-                            <img src="ENE/Viaje Sao Paolo 2.jpeg" class="w-full h-full object-cover object-top">
+                    <!-- Card 3: Convocatorias y Ciencia -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-sky">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="md:w-1/3">
+                                <h4 class="text-2xl font-bold text-federal mb-4"><i class="fa-solid fa-flask-vial text-sky mr-2"></i> Convocatorias y Ciencia</h4>
+                                <p class="text-sm text-gray-600 leading-relaxed">
+                                    Participación en conferencias internacionales con publicaciones científicas. Destaca la presentación de innovaciones ganadoras en la <strong class="text-federal">Convocatoria Regional H2 Verde LATAM</strong> en la Universidad Federal de Río de Janeiro (Brasil).
+                                </p>
+                            </div>
+                            <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-lg border border-gray-200 aspect-video relative group" onclick="openModal('ENE/CONGRESO ICFEE 2025.jpeg')">
+                                    <img src="ENE/CONGRESO ICFEE 2025.jpeg" class="w-full h-full object-cover" alt="Congreso ICFEE">
+                                    <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[10px] p-2 text-center opacity-0 group-hover:opacity-100 transition-opacity">CONGRESO ICFEE 2025</div>
+                                </div>
+                                <div class="rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-lg border border-gray-200 aspect-video relative group" onclick="openModal('ENE/Viaje Sao Paolo 3.jpeg')">
+                                    <img src="ENE/Viaje Sao Paolo 3.jpeg" class="w-full h-full object-cover object-top" alt="H2 Verde Latam">
+                                    <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[10px] p-2 text-center opacity-0 group-hover:opacity-100 transition-opacity">H2 VERDE LATAM (BRASIL)</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </section>
 
-            <!-- 6. Flujograma (Timeline) -->
-            <section id="flujograma" class="mb-16">
-                <div class="flex items-center mb-10">
-                    <div class="w-12 h-12 bg-federal text-white rounded-lg flex items-center justify-center text-xl shadow-lg mr-4"><i class="fa-solid fa-road"></i></div>
+            <!-- 6. Flujograma (Timeline ZIG-ZAG Centrado) -->
+            <section id="flujograma" class="mb-20">
+                <div class="flex items-center justify-center mb-12">
+                    <div class="w-12 h-12 bg-federal text-white rounded-lg flex items-center justify-center text-xl shadow-lg mr-4"><i class="fa-solid fa-route"></i></div>
                     <h3 class="text-3xl font-bold text-federal">El Viaje del Estudiante (Ruta Académica)</h3>
                 </div>
                 
-                <div class="relative border-l-4 border-pacific ml-6 space-y-12">
+                <!-- Timeline Container -->
+                <div class="relative max-w-5xl mx-auto px-4 sm:px-0">
                     
-                    <!-- Año 1 -->
-                    <div class="relative pl-10 group">
-                        <div class="absolute -left-5 top-0 w-10 h-10 bg-white text-federal border-4 border-pacific rounded-full flex items-center justify-center font-black shadow-md transition-transform group-hover:scale-110">1</div>
-                        <h4 class="text-xl font-bold text-federal uppercase tracking-wide">Fundamentos y Visión</h4>
-                        <div class="mt-3 bg-white p-5 rounded-xl shadow-sm border border-gray-100 max-w-3xl">
-                            <p class="text-gray-700 text-sm leading-relaxed">
-                                <strong class="text-pacific">Materias clave:</strong> Matemáticas e Introducción a la Ingeniería en Energía.<br>
-                                Entiende el panorama global, geopolítico y la urgencia energética mundial desde el primer día de clases.
-                            </p>
-                        </div>
-                    </div>
+                    <!-- Center Line (Desktop) -->
+                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1.5 h-full bg-gray-200 rounded-full"></div>
+                    <!-- Left Line (Mobile) -->
+                    <div class="md:hidden absolute left-[31px] top-4 w-1.5 h-full bg-gray-200 rounded-full"></div>
 
-                    <!-- Año 2 -->
-                    <div class="relative pl-10 group">
-                        <div class="absolute -left-5 top-0 w-10 h-10 bg-federal text-white border-4 border-federal rounded-full flex items-center justify-center font-black shadow-md transition-transform group-hover:scale-110">2</div>
-                        <h4 class="text-xl font-bold text-federal uppercase tracking-wide">Ciencias y Transformación</h4>
-                        <div class="mt-3 bg-white p-5 rounded-xl shadow-sm border border-gray-100 max-w-3xl">
-                            <p class="text-gray-700 text-sm leading-relaxed">
-                                <strong class="text-pacific">Materias clave:</strong> Física, Química, Energía de Biomasa.<br>
-                                Dominan los principios físicos y aprenden cómo transformar desde la materia orgánica (desechos) hasta convertirlos en recursos energéticos útiles.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Año 3 -->
-                    <div class="relative pl-10 group">
-                        <div class="absolute -left-5 top-0 w-10 h-10 bg-white text-federal border-4 border-pacific rounded-full flex items-center justify-center font-black shadow-md transition-transform group-hover:scale-110">3</div>
-                        <h4 class="text-xl font-bold text-federal uppercase tracking-wide">El "Core" Eléctrico y Renovables</h4>
-                        <div class="mt-3 bg-white p-5 rounded-xl shadow-sm border border-gray-100 max-w-3xl">
-                            <p class="text-gray-700 text-sm leading-relaxed">
-                                <strong class="text-pacific">Materias clave:</strong> Circuitos, Máquinas Eléctricas, Energía Solar, Hidroeléctrica/Eólica.<br>
-                                Generación pura. Aprenden la tecnología detrás de extraer electricidad del sol, el agua y el viento.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Año 4 -->
-                    <div class="relative pl-10 group">
-                        <div class="absolute -left-5 top-0 w-10 h-10 bg-federal text-white border-4 border-federal rounded-full flex items-center justify-center font-black shadow-md transition-transform group-hover:scale-110">4</div>
-                        <h4 class="text-xl font-bold text-federal uppercase tracking-wide">Tendencias, Mercado y Gestión</h4>
-                        <div class="mt-3 bg-white p-5 rounded-xl shadow-sm border border-gray-100 max-w-3xl">
-                            <p class="text-gray-700 text-sm leading-relaxed">
-                                <strong class="text-pacific">Materias clave:</strong> Hidrógeno y Electromovilidad, Smartgrids, Mercados, Auditoría.<br>
-                                Entran a las tendencias de punta. Pasan de técnicos a gestores de negocio energético del futuro.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Año 5 -->
-                    <div class="relative pl-10 group">
-                        <div class="absolute -left-5 top-0 w-10 h-10 bg-white text-federal border-4 border-pacific rounded-full flex items-center justify-center font-black shadow-md transition-transform group-hover:scale-110">5</div>
-                        <h4 class="text-xl font-bold text-federal uppercase tracking-wide">Inmersión al Mercado Laboral</h4>
-                        <div class="mt-3 bg-white p-5 rounded-xl shadow-sm border border-gray-100 max-w-4xl grid md:grid-cols-2 gap-6">
-                            <div class="border-l-4 border-pacific pl-4">
-                                <h6 class="font-bold text-federal text-sm mb-1"><i class="fa-solid fa-briefcase text-pacific mr-1"></i> Opción A: Práctica Profesional</h6>
-                                <p class="text-xs text-gray-600">400 Horas de trabajo real supervisado en empresas del sector. Inserción laboral inmediata.</p>
-                            </div>
-                            <div class="border-l-4 border-federal pl-4">
-                                <h6 class="font-bold text-federal text-sm mb-1"><i class="fa-solid fa-microscope text-federal mr-1"></i> Opción B: Proyecto Graduación</h6>
-                                <p class="text-xs text-gray-600">Fase II. Investigación aplicada profunda, resolviendo un problema industrial de alta complejidad.</p>
+                    <!-- Año 1 (Left Desktop / Right Mobile) -->
+                    <div class="relative mb-12 flex flex-col md:flex-row justify-between items-center w-full group">
+                        <!-- Mobile Node -->
+                        <div class="md:hidden absolute left-4 w-10 h-10 bg-white text-federal border-4 border-pacific rounded-full flex items-center justify-center font-black shadow-lg z-10">1</div>
+                        
+                        <!-- Left Content (Visible Desk, Full Mob) -->
+                        <div class="md:w-[45%] w-full pl-16 md:pl-0 md:pr-8 text-left md:text-right">
+                            <h4 class="text-xl font-bold text-federal uppercase tracking-wide">Fundamentos y Visión</h4>
+                            <div class="mt-3 bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:border-pacific transition-colors">
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <strong class="text-pacific block mb-1">Materias clave:</strong> Matemáticas e Introducción a la Ingeniería en Energía.<br>
+                                    Entiende el panorama geopolítico y la urgencia energética mundial desde el primer día.
+                                </p>
                             </div>
                         </div>
-                        <p class="text-xs font-semibold text-pacific mt-3 bg-cyan-50 inline-block px-3 py-1 rounded-full"><i class="fa-solid fa-star mr-1"></i> Bonus: Más de 2,045 horas de práctica total (41% del plan) incluyendo Pasantía Temprana (135h).</p>
+                        
+                        <!-- Desktop Node -->
+                        <div class="hidden md:flex w-[10%] justify-center relative">
+                            <div class="w-12 h-12 bg-white text-federal border-4 border-pacific rounded-full flex items-center justify-center font-black text-xl shadow-lg z-10 transition-transform group-hover:scale-110 group-hover:bg-pacific group-hover:text-white">1</div>
+                        </div>
+                        
+                        <!-- Right Space -->
+                        <div class="hidden md:block md:w-[45%]"></div>
                     </div>
+
+                    <!-- Año 2 (Right Desktop / Right Mobile) -->
+                    <div class="relative mb-12 flex flex-col md:flex-row justify-between items-center w-full group">
+                        <div class="md:hidden absolute left-4 w-10 h-10 bg-federal text-white border-4 border-federal rounded-full flex items-center justify-center font-black shadow-lg z-10">2</div>
+                        
+                        <div class="hidden md:block md:w-[45%]"></div>
+                        
+                        <div class="hidden md:flex w-[10%] justify-center relative">
+                            <div class="w-12 h-12 bg-federal text-white border-4 border-federal rounded-full flex items-center justify-center font-black text-xl shadow-lg z-10 transition-transform group-hover:scale-110 group-hover:bg-pacific">2</div>
+                        </div>
+                        
+                        <div class="md:w-[45%] w-full pl-16 md:pl-8 text-left">
+                            <h4 class="text-xl font-bold text-federal uppercase tracking-wide">Ciencias y Transformación</h4>
+                            <div class="mt-3 bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:border-federal transition-colors">
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <strong class="text-pacific block mb-1">Materias clave:</strong> Física, Química, Energía de Biomasa.<br>
+                                    Dominan principios físicos y transforman materia orgánica en recursos útiles.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Año 3 (Left Desktop / Right Mobile) -->
+                    <div class="relative mb-12 flex flex-col md:flex-row justify-between items-center w-full group">
+                        <div class="md:hidden absolute left-4 w-10 h-10 bg-white text-federal border-4 border-pacific rounded-full flex items-center justify-center font-black shadow-lg z-10">3</div>
+                        
+                        <div class="md:w-[45%] w-full pl-16 md:pl-0 md:pr-8 text-left md:text-right">
+                            <h4 class="text-xl font-bold text-federal uppercase tracking-wide">El "Core" Eléctrico</h4>
+                            <div class="mt-3 bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:border-pacific transition-colors">
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <strong class="text-pacific block mb-1">Materias clave:</strong> Circuitos, Máquinas, Energía Solar, Hidroeléctrica/Eólica.<br>
+                                    Generación pura. Extraer electricidad del sol, el agua y el viento.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="hidden md:flex w-[10%] justify-center relative">
+                            <div class="w-12 h-12 bg-white text-federal border-4 border-pacific rounded-full flex items-center justify-center font-black text-xl shadow-lg z-10 transition-transform group-hover:scale-110 group-hover:bg-pacific group-hover:text-white">3</div>
+                        </div>
+                        
+                        <div class="hidden md:block md:w-[45%]"></div>
+                    </div>
+
+                    <!-- Año 4 (Right Desktop / Right Mobile) -->
+                    <div class="relative mb-12 flex flex-col md:flex-row justify-between items-center w-full group">
+                        <div class="md:hidden absolute left-4 w-10 h-10 bg-federal text-white border-4 border-federal rounded-full flex items-center justify-center font-black shadow-lg z-10">4</div>
+                        
+                        <div class="hidden md:block md:w-[45%]"></div>
+                        
+                        <div class="hidden md:flex w-[10%] justify-center relative">
+                            <div class="w-12 h-12 bg-federal text-white border-4 border-federal rounded-full flex items-center justify-center font-black text-xl shadow-lg z-10 transition-transform group-hover:scale-110 group-hover:bg-pacific">4</div>
+                        </div>
+                        
+                        <div class="md:w-[45%] w-full pl-16 md:pl-8 text-left">
+                            <h4 class="text-xl font-bold text-federal uppercase tracking-wide">Tendencias y Mercado</h4>
+                            <div class="mt-3 bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:border-federal transition-colors">
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    <strong class="text-pacific block mb-1">Materias clave:</strong> Hidrógeno, Smartgrids, Mercados, Auditoría.<br>
+                                    Pasan de técnicos a estrategas y gestores del negocio energético.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Año 5 (Center Finale) -->
+                    <div class="relative flex flex-col items-center w-full mt-16 group">
+                        <!-- Connecting line to center finale -->
+                        <div class="hidden md:block absolute -top-16 w-1.5 h-16 bg-gradient-to-b from-gray-200 to-pacific rounded-full"></div>
+                        
+                        <div class="w-14 h-14 bg-pacific text-white border-4 border-white rounded-full flex items-center justify-center font-black text-2xl shadow-xl z-10 mb-6 transition-transform group-hover:scale-110">5</div>
+                        
+                        <div class="bg-white p-8 rounded-3xl shadow-lg border-t-8 border-pacific text-center w-full max-w-2xl">
+                            <h4 class="text-2xl font-black text-federal uppercase tracking-wide mb-6">Inmersión al Mercado</h4>
+                            <div class="grid sm:grid-cols-2 gap-6 text-left">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h6 class="font-bold text-federal text-sm mb-2"><i class="fa-solid fa-briefcase text-pacific mr-2"></i> Práctica Profesional</h6>
+                                    <p class="text-xs text-gray-600">400 Horas de trabajo real en empresas del sector. Inserción directa.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h6 class="font-bold text-federal text-sm mb-2"><i class="fa-solid fa-microscope text-federal mr-2"></i> Proyecto Graduación</h6>
+                                    <p class="text-xs text-gray-600">Investigación aplicada para resolver un problema industrial de alta complejidad.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
             <!-- 7. Para Padres -->
             <section id="padres" class="mb-16">
                 <div class="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-3xl p-10 shadow-lg relative overflow-hidden">
-                    <!-- Diamond decorative -->
                     <div class="absolute -right-20 -top-20 w-64 h-64 border-[30px] border-pacific opacity-10 rotate-45 pointer-events-none"></div>
                     
                     <div class="text-center mb-10 relative z-10">
-                        <h3 class="text-3xl font-extrabold text-federal mb-3">Pitch Exclusivo: Hablando con el Padre de Familia</h3>
+                        <h3 class="text-3xl font-extrabold text-federal mb-3">Pitch Exclusivo: Hablando con Padres</h3>
                         <p class="text-gray-600 max-w-2xl mx-auto font-medium">El padre busca seguridad, retorno de inversión y prestigio. Usa estos 3 argumentos infalibles para cerrar la venta.</p>
                     </div>
                     
@@ -494,23 +577,21 @@
                                 <i class="fa-solid fa-gem -rotate-3"></i>
                             </div>
                             <h5 class="font-bold text-federal text-lg mb-2">Una Carrera Vital y Única</h5>
-                            <p class="text-sm text-gray-600">No hay competencia real. Es un programa exclusivo en el país para un sector en absoluta transformación multimillonaria. Sin energía, ninguna otra industria opera.</p>
+                            <p class="text-sm text-gray-600">Programa exclusivo en el país para un sector en transformación multimillonaria. Sin energía, ninguna industria opera.</p>
                         </div>
-                        
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:-translate-y-2 transition duration-300">
                             <div class="w-16 h-16 bg-pacific text-white rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl -rotate-3 shadow-md">
                                 <i class="fa-solid fa-user-tie rotate-3"></i>
                             </div>
                             <h5 class="font-bold text-federal text-lg mb-2">Empleabilidad Todoterreno</h5>
-                            <p class="text-sm text-gray-600">No están confinados a una planta eléctrica. Los contratan bancos (para evaluar riesgos de proyectos verdes), industrias (para ahorrar costos), multinacionales y ONGs.</p>
+                            <p class="text-sm text-gray-600">Los contratan bancos (para evaluar riesgos de proyectos), industrias (para ahorrar costos), multinacionales y el gobierno.</p>
                         </div>
-                        
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:-translate-y-2 transition duration-300">
                             <div class="w-16 h-16 bg-federal text-white rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl rotate-3 shadow-md">
                                 <i class="fa-solid fa-chart-pie -rotate-3"></i>
                             </div>
-                            <h5 class="font-bold text-federal text-lg mb-2">Visión Gerencial, no Técnica</h5>
-                            <p class="text-sm text-gray-600">El hijo no será un obrero técnico; aprenderá finanzas, economía y gerencia de proyectos. Entrará al mercado preparado para ser el Jefe de Proyectos u Oficial de Sostenibilidad.</p>
+                            <h5 class="font-bold text-federal text-lg mb-2">Visión Gerencial</h5>
+                            <p class="text-sm text-gray-600">Aprenderá finanzas, economía y gerencia. Entrará al mercado preparado para ser Jefe de Proyectos u Oficial de Sostenibilidad.</p>
                         </div>
                     </div>
                 </div>
@@ -546,7 +627,7 @@
                                 </tr>
                                 <tr class="hover:bg-cyan-50 transition-colors">
                                     <td class="p-4 text-gray-600">Energía de Biomasa y Biocombustibles</td>
-                                    <td class="p-4 text-federal"><i class="fa-solid fa-arrow-right text-pacific mr-2"></i> Se divide en 2 clases separadas (Revisar caso)</td>
+                                    <td class="p-4 text-federal"><i class="fa-solid fa-arrow-right text-pacific mr-2"></i> Se divide en 2 clases separadas</td>
                                 </tr>
                                 <tr class="hover:bg-cyan-50 transition-colors">
                                     <td class="p-4 text-gray-600">Máquinas Térmicas</td>
@@ -560,129 +641,121 @@
                         </table>
                     </div>
                     
-                    <!-- Alert Footer -->
                     <div class="bg-red-50 p-5 flex items-start border-t border-red-100">
-                        <div class="bg-white p-2 rounded-full shadow-sm mr-4">
-                            <i class="fa-solid fa-triangle-exclamation text-red-500 text-xl"></i>
-                        </div>
+                        <div class="bg-white p-2 rounded-full shadow-sm mr-4"><i class="fa-solid fa-triangle-exclamation text-red-500 text-xl"></i></div>
                         <div>
                             <h6 class="font-bold text-red-800 text-sm uppercase tracking-wide">Alerta para el Asesor</h6>
-                            <p class="text-sm text-red-700 mt-1">Los estudiantes en transición deberán llevar las clases nuevas y exclusivas si no tienen equivalencia directa en su historial. Ejemplo: <strong class="font-bold">Hidrógeno y Electromovilidad</strong> y <strong class="font-bold">Planificación Energética y Smartgrids</strong>.</p>
+                            <p class="text-sm text-red-700 mt-1">Los estudiantes en transición deberán cursar clases exclusivas del nuevo plan si no tienen equivalencia, como: <strong class="font-bold">Hidrógeno y Electromovilidad</strong> y <strong class="font-bold">Planificación Energética y Smartgrids</strong>.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 9. Galería de Prácticas (Full Repository) -->
+            <!-- 9. Galería de Prácticas SEGMENTADA -->
             <section id="galeria" class="mb-10">
                 <div class="flex items-center mb-2">
-                    <div class="w-12 h-12 bg-federal text-white rounded-lg flex items-center justify-center text-xl shadow-lg mr-4"><i class="fa-solid fa-camera"></i></div>
+                    <div class="w-12 h-12 bg-federal text-white rounded-lg flex items-center justify-center text-xl shadow-lg mr-4"><i class="fa-solid fa-images"></i></div>
                     <h3 class="text-3xl font-bold text-federal">Galería de Impacto Estudiantil</h3>
                 </div>
-                <p class="text-gray-500 mb-8 ml-16 text-sm">Haz clic en cualquier imagen para expandirla. Úsalas como prueba visual con tus prospectos.</p>
+                <p class="text-gray-500 mb-10 text-sm">Pruebas visuales categorizadas para respaldar tus argumentos frente a los prospectos.</p>
                 
-                <!-- Masonry-style Grid using Tailwind Columns -->
-                <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
-                    
-                    <!-- Visitas Nacionales e Internacionales -->
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Visita Utila.JPG')">
-                        <img src="ENE/Visita Utila.JPG" class="w-full rounded-lg object-cover" alt="Visita Utila">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Visita Técnica</p>
+                <!-- Category 1: Visitas Nacionales e Industria -->
+                <div class="mb-10">
+                    <h4 class="text-xl font-bold text-federal border-b-2 border-gray-200 pb-2 mb-6"><i class="fa-solid fa-hard-hat text-pacific mr-2"></i> Visitas de Campo e Industria Nacional</h4>
+                    <div class="columns-2 md:columns-3 gap-4 space-y-4">
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Visita Utila.JPG')">
+                            <img src="ENE/Visita Utila.JPG" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Visita Útila</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/VISITA PLANTA GREEN VALLEY.jpeg')">
+                            <img src="ENE/VISITA PLANTA GREEN VALLEY.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Green Valley</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/VISITA MPP.png')">
+                            <img src="ENE/VISITA MPP.png" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Práctica MPP</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Viaje Roatan.jpeg')">
+                            <img src="ENE/Viaje Roatan.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Roatán - Gen. Insular</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Viaje Roatan 2.jpeg')">
+                            <img src="ENE/Viaje Roatan 2.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Roatán - Operaciones</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Planta Termica Villanueva.png')">
+                            <img src="ENE/Planta Termica Villanueva.png" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Planta Térmica Villanueva</p>
+                        </div>
                     </div>
-
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/VISITA PLANTA GREEN VALLEY.jpeg')">
-                        <img src="ENE/VISITA PLANTA GREEN VALLEY.jpeg" class="w-full rounded-lg object-cover" alt="Planta Green Valley">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Instalaciones Industriales</p>
-                    </div>
-
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/VISITA MPP.png')">
-                        <img src="ENE/VISITA MPP.png" class="w-full rounded-lg object-cover" alt="Visita MPP">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Práctica de Campo</p>
-                    </div>
-
-                    <!-- Viajes España (Restantes) -->
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Viaje Valencia 4.jpeg')">
-                        <img src="ENE/Viaje Valencia 4.jpeg" class="w-full rounded-lg object-cover" alt="Viaje Valencia 4">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Intercambio España</p>
-                    </div>
-
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Viaje Valencia 2.jpeg')">
-                        <img src="ENE/Viaje Valencia 2.jpeg" class="w-full rounded-lg object-cover" alt="Viaje Valencia 2">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Intercambio España</p>
-                    </div>
-
-                    <!-- Viajes Brasil (Restantes) -->
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Viaje Sao Paolo 3.jpeg')">
-                        <img src="ENE/Viaje Sao Paolo 3.jpeg" class="w-full rounded-lg object-cover" alt="Sao Paolo 3">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Competencia H2 LATAM</p>
-                    </div>
-
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/3iaje Sao Paolo 2.jpeg')">
-                        <img src="ENE/3iaje Sao Paolo 2.jpeg" class="w-full rounded-lg object-cover" alt="Sao Paolo Extra">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Competencia H2 LATAM</p>
-                    </div>
-
-                    <!-- Viajes Nacionales (Roatan / Villanueva) -->
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Viaje Roatan.jpeg')">
-                        <img src="ENE/Viaje Roatan.jpeg" class="w-full rounded-lg object-cover" alt="Viaje Roatan">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Generación Insular</p>
-                    </div>
-
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Viaje Roatan 2.jpeg')">
-                        <img src="ENE/Viaje Roatan 2.jpeg" class="w-full rounded-lg object-cover" alt="Viaje Roatan 2">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Generación Insular</p>
-                    </div>
-
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Planta Termica Villanueva.png')">
-                        <img src="ENE/Planta Termica Villanueva.png" class="w-full rounded-lg object-cover" alt="Termica Villanueva">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Planta Térmica Nacional</p>
-                    </div>
-
-                    <!-- Viajes Colombia (Restantes) -->
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Viaje Colombia 1.jpeg')">
-                        <img src="ENE/Viaje Colombia 1.jpeg" class="w-full rounded-lg object-cover" alt="Viaje Colombia 1">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Intercambio Colombia</p>
-                    </div>
-
-                    <!-- Huawei Seeds for the Future -->
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Huawei Seeds for the Future 1.jpeg')">
-                        <img src="ENE/Huawei Seeds for the Future 1.jpeg" class="w-full rounded-lg object-cover" alt="Huawei 1">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Huawei Seeds</p>
-                    </div>
-
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Huawei Seeds for the Future 2.jpeg')">
-                        <img src="ENE/Huawei Seeds for the Future 2.jpeg" class="w-full rounded-lg object-cover" alt="Huawei 2">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Huawei Seeds</p>
-                    </div>
-
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Huawei Seeds for the Future 3.jpeg')">
-                        <img src="ENE/Huawei Seeds for the Future 3.jpeg" class="w-full rounded-lg object-cover" alt="Huawei 3">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Huawei Seeds</p>
-                    </div>
-
-                    <!-- Congresos / Conferencias -->
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/CONGRESO ICFEE 2025.jpeg')">
-                        <img src="ENE/CONGRESO ICFEE 2025.jpeg" class="w-full rounded-lg object-cover" alt="Congreso ICFEE">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Congreso Internacional</p>
-                    </div>
-
-                    <div class="break-inside-avoid rounded-xl overflow-hidden hover-zoom cursor-pointer shadow-sm border border-gray-100 bg-white p-2" onclick="openModal('ENE/Conferencia Internacional 1.jpeg')">
-                        <img src="ENE/Conferencia Internacional 1.jpeg" class="w-full rounded-lg object-cover" alt="Conferencia">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-2 text-center">Divulgación Científica</p>
-                    </div>
-
                 </div>
+
+                <!-- Category 2: Movilidad e Intercambios -->
+                <div class="mb-10">
+                    <h4 class="text-xl font-bold text-federal border-b-2 border-gray-200 pb-2 mb-6"><i class="fa-solid fa-passport text-pacific mr-2"></i> Movilidad y Viajes Académicos</h4>
+                    <div class="columns-2 md:columns-3 gap-4 space-y-4">
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Viaje Valencia 2.jpeg')">
+                            <img src="ENE/Viaje Valencia 2.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Valencia, España</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Viaje Valencia 3.jpeg')">
+                            <img src="ENE/Viaje Valencia 3.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Valencia, España</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Viaje Valencia 4.jpeg')">
+                            <img src="ENE/Viaje Valencia 4.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Valencia, España</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Viaje Colombia 1.jpeg')">
+                            <img src="ENE/Viaje Colombia 1.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Colombia</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Viaje Internacional 1.jpeg')">
+                            <img src="ENE/Viaje Internacional 1.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Delegación Internacional</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 3: Competencias y Divulgación -->
+                <div class="mb-10">
+                    <h4 class="text-xl font-bold text-federal border-b-2 border-gray-200 pb-2 mb-6"><i class="fa-solid fa-trophy text-pacific mr-2"></i> Competencias Internacionales y Divulgación</h4>
+                    <div class="columns-2 md:columns-3 gap-4 space-y-4">
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Viaje Sao Paolo 1.jpeg')">
+                            <img src="ENE/Viaje Sao Paolo 1.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">H2 LATAM - Brasil</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Viaje Sao Paolo 2.jpeg')">
+                            <img src="ENE/Viaje Sao Paolo 2.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">H2 LATAM - Brasil</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/3iaje Sao Paolo 2.jpeg')">
+                            <img src="ENE/3iaje Sao Paolo 2.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">H2 LATAM - Premiación</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Huawei Seeds for the Future 1.jpeg')">
+                            <img src="ENE/Huawei Seeds for the Future 1.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Huawei Seeds</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Huawei Seeds for the Future 2.jpeg')">
+                            <img src="ENE/Huawei Seeds for the Future 2.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Huawei Seeds</p>
+                        </div>
+                        <div class="break-inside-avoid rounded-xl hover-zoom cursor-pointer shadow-sm border border-gray-200 bg-white p-2" onclick="openModal('ENE/Conferencia Internacional 1.jpeg')">
+                            <img src="ENE/Conferencia Internacional 1.jpeg" class="w-full rounded-lg object-cover">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mt-2 text-center">Divulgación Científica</p>
+                        </div>
+                    </div>
+                </div>
+
             </section>
             
-            <!-- Bottom spacing -->
             <div class="h-10"></div>
-
         </main>
     </div>
 
     <!-- Scripts for Interaction -->
     <script>
-        // Sidebar Toggle for Mobile
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobile-overlay');
@@ -701,16 +774,10 @@
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             
-            // Set source and remove hidden class
             lightboxImg.src = imageSrc;
             lightbox.classList.remove('hidden');
             
-            // Add a small delay for opacity transition to work smoothly
-            setTimeout(() => {
-                lightbox.classList.remove('opacity-0');
-            }, 10);
-            
-            // Prevent body scroll when modal is open
+            setTimeout(() => { lightbox.classList.remove('opacity-0'); }, 10);
             document.body.style.overflow = 'hidden';
         }
 
@@ -718,23 +785,13 @@
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             
-            // Add hidden class to fade out or instantly hide depending on transition
             lightbox.classList.add('hidden');
-            
-            // Clear source to stop holding old image in memory
-            setTimeout(() => {
-                lightboxImg.src = '';
-            }, 300);
-            
-            // Restore body scroll
+            setTimeout(() => { lightboxImg.src = ''; }, 300);
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal on Escape key press
         document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") {
-                closeModal();
-            }
+            if (event.key === "Escape") closeModal();
         });
     </script>
 </body>
