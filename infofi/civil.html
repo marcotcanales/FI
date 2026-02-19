@@ -82,6 +82,14 @@
             background-color: #06065C;
             color: white;
         }
+
+        /* Lightbox Image Hover */
+        .img-hover-zoom {
+            transition: transform 0.3s ease;
+        }
+        .img-hover-zoom:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -108,6 +116,7 @@
                     <li><a href="#perfil" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-user-graduate w-6"></i> Perfil & Skills</a></li>
                     <li><a href="#reforma" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-sync-alt w-6"></i> La Reforma 2023</a></li>
                     <li><a href="#diferenciadores" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-star w-6"></i> Diferenciadores</a></li>
+                    <li><a href="#galeria" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-images w-6"></i> Galería Visual</a></li>
                     <li><a href="#timeline" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-stream w-6"></i> Flujograma</a></li>
                     <li><a href="#padres" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-users w-6"></i> Para Padres</a></li>
                     <li><a href="#equivalencias" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-exchange-alt w-6"></i> Equivalencias</a></li>
@@ -147,7 +156,6 @@
             <section id="general" class="scroll-mt-24">
                 <h2 class="text-lg font-bold text-federal border-l-4 border-pacific pl-3 mb-4 uppercase tracking-wide">Ficha Técnica</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Card 1 -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-federal hover:shadow-md transition-shadow">
                         <div class="flex justify-between items-start">
                             <div>
@@ -156,9 +164,8 @@
                             </div>
                             <div class="text-pacific text-3xl"><i class="fas fa-clock"></i></div>
                         </div>
-                        <p class="text-xs text-gray-400 mt-2">17 Periodos académicos</p>
+                        <p class="text-xs text-gray-400 mt-2">17 Periodos académicos (4,495 hrs totales)</p>
                     </div>
-                    <!-- Card 2 -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-pacific hover:shadow-md transition-shadow">
                         <div class="flex justify-between items-start">
                             <div>
@@ -169,7 +176,6 @@
                         </div>
                         <p class="text-xs text-gray-400 mt-2">226 Unidades Valorativas (Créditos)</p>
                     </div>
-                    <!-- Card 3 -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-sky hover:shadow-md transition-shadow">
                         <div class="flex justify-between items-start">
                             <div>
@@ -245,7 +251,6 @@
                 <h2 class="text-2xl font-bold mb-6 relative z-10 text-center">Competencias Profesionales (The Hook)</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-                    <!-- Skill 1 -->
                     <div class="bg-white text-federal p-6 rounded-lg text-center transform hover:scale-105 transition-transform duration-300">
                         <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-pacific text-2xl">
                             <i class="fas fa-hard-hat"></i>
@@ -253,7 +258,6 @@
                         <h3 class="font-bold text-lg mb-2">Constructor de Soluciones</h3>
                         <p class="text-xs text-gray-600">Diseña desde carreteras y puentes hasta edificios y sistemas hidráulicos que mejoran la calidad de vida.</p>
                     </div>
-                    <!-- Skill 2 -->
                     <div class="bg-white text-federal p-6 rounded-lg text-center transform hover:scale-105 transition-transform duration-300 ring-4 ring-pacific/50">
                         <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-federal text-2xl">
                             <i class="fas fa-tasks"></i>
@@ -261,7 +265,6 @@
                         <h3 class="font-bold text-lg mb-2">Gestor de Proyectos</h3>
                         <p class="text-xs text-gray-600">Administra obras, presupuestos y personal. Asegura que los proyectos terminen a tiempo y con calidad.</p>
                     </div>
-                    <!-- Skill 3 -->
                     <div class="bg-white text-federal p-6 rounded-lg text-center transform hover:scale-105 transition-transform duration-300">
                         <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-pacific text-2xl">
                             <i class="fas fa-laptop-code"></i>
@@ -278,14 +281,14 @@
                     <div class="md:w-1/3">
                         <h2 class="text-lg font-bold text-federal border-l-4 border-pacific pl-3 mb-4 uppercase">¿Por qué el cambio?</h2>
                         <p class="text-sm text-gray-700 mb-4 text-justify">
-                            La reforma responde a la necesidad urgente de <strong>actualización tecnológica</strong> (Software BIM, Civil 3D), sostenibilidad ambiental y una gestión moderna de proyectos que la industria actual exige.
+                            La reforma responde a la necesidad urgente de <strong>actualización tecnológica</strong> (Software BIM, Civil 3D), sostenibilidad ambiental y una gestión moderna de proyectos que la industria actual exige, manteniéndonos a la vanguardia sobre el mercado local.
                         </p>
                         <div class="bg-pacific/10 p-4 rounded-lg border border-pacific/20">
                             <h4 class="font-bold text-federal text-sm mb-2">Enfoque:</h4>
                             <div class="flex flex-wrap gap-2">
                                 <span class="text-xs bg-white text-federal px-2 py-1 rounded border border-gray-200 shadow-sm">BIM</span>
                                 <span class="text-xs bg-white text-federal px-2 py-1 rounded border border-gray-200 shadow-sm">Sostenibilidad</span>
-                                <span class="text-xs bg-white text-federal px-2 py-1 rounded border border-gray-200 shadow-sm">Gestión</span>
+                                <span class="text-xs bg-white text-federal px-2 py-1 rounded border border-gray-200 shadow-sm">Gestión Operativa</span>
                             </div>
                         </div>
                     </div>
@@ -313,7 +316,7 @@
                 </div>
             </section>
 
-            <!-- 6. Diferenciadores -->
+            <!-- 6. Diferenciadores Ampliados -->
             <section id="diferenciadores" class="scroll-mt-24 space-y-6">
                 <!-- Acreditación Banner -->
                 <div class="bg-white border-2 border-federal rounded-xl p-4 flex flex-col md:flex-row items-center justify-between shadow-md">
@@ -332,32 +335,109 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <!-- Internationality -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm">
-                        <h3 class="font-bold text-federal mb-4"><i class="fas fa-globe-americas text-pacific mr-2"></i> Internacionalidad</h3>
-                        <p class="text-sm text-gray-600 mb-4">Movilidad estudiantil, intercambios y dobles titulaciones alineadas con estándares globales.</p>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="bg-gray-200 rounded h-24 overflow-hidden relative group">
-                                <img src="https://placehold.co/300x200?text=Estudiante+Intercambio" alt="Intercambio" class="object-cover w-full h-full group-hover:scale-110 transition-transform">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-federal text-lg mb-3"><i class="fas fa-globe-americas text-pacific mr-2"></i> Un Perfil Global (Internacionalidad)</h3>
+                        <p class="text-sm text-gray-600 mb-4 text-justify">
+                            Nuestros estudiantes se forman con estándares globales. Impulsamos la <strong>internacionalidad en casa</strong> a través de metodologías COIL (Collaborative Online International Learning) con instituciones como la Pontificia Universidad Católica de Ecuador.
+                            <br><br>
+                            Además, ofrecemos viajes académicos enriquecedores a destinos como la <strong>Universidad Politécnica de Valencia (España)</strong> y la Universidad Tecnológica de Bolívar (Colombia). Fomentamos experiencias inmersivas con visitas al Instituto Salvadoreño del Cemento y el Concreto (ISYC).
+                            <br><br>
+                            Los estudiantes con visión de trascender pueden optar por una Doble Titulación con <strong>Tompkins Cortland Community College</strong> o realizar un Semester Abroad en el prestigioso <strong>Tec de Monterrey</strong>.
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 mt-4">
+                            <div class="bg-gray-200 rounded-lg overflow-hidden relative group cursor-pointer shadow-sm" onclick="openModal('CIV/Viaje UPV 4.jpeg', 'Estudiantes en la Universidad Politécnica de Valencia')">
+                                <img src="CIV/Viaje UPV 4.jpeg" alt="Viaje UPV" class="object-cover w-full h-32 img-hover-zoom">
+                                <div class="absolute bottom-0 inset-x-0 bg-federal/80 text-white text-[10px] p-1 text-center">Viaje UPV España</div>
                             </div>
-                            <div class="bg-gray-200 rounded h-24 overflow-hidden relative group">
-                                <img src="https://placehold.co/300x200?text=Firma+Convenio" alt="Convenios" class="object-cover w-full h-full group-hover:scale-110 transition-transform">
+                            <div class="bg-gray-200 rounded-lg overflow-hidden relative group cursor-pointer shadow-sm" onclick="openModal('CIV/Viaje UPV 2.jpeg', 'Experiencia Académica Internacional en Valencia')">
+                                <img src="CIV/Viaje UPV 2.jpeg" alt="Convenios UPV" class="object-cover w-full h-32 img-hover-zoom">
+                                <div class="absolute bottom-0 inset-x-0 bg-federal/80 text-white text-[10px] p-1 text-center">Intercambio de Saberes</div>
                             </div>
                         </div>
                     </div>
+                    
                     <!-- Tech & Labs -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm">
-                        <h3 class="font-bold text-federal mb-4"><i class="fas fa-microchip text-pacific mr-2"></i> Tecnología y Laboratorios</h3>
-                        <p class="text-sm text-gray-600 mb-4">Topografía, Suelos, Hidráulica. Software: AutoCAD, Civil 3D, Revit (BIM), SolidWorks.</p>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="bg-gray-200 rounded h-24 overflow-hidden relative group">
-                                <img src="https://placehold.co/300x200?text=Lab+Hidraulica" alt="Laboratorio" class="object-cover w-full h-full group-hover:scale-110 transition-transform">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-federal text-lg mb-3"><i class="fas fa-microchip text-pacific mr-2"></i> Práctica Real: Laboratorios Especializados</h3>
+                        <p class="text-sm text-gray-600 mb-4 text-justify">
+                            La ingeniería se aprende haciendo. Contamos con instalaciones técnicas de primer nivel en Campus San Pedro Sula y Tegucigalpa.
+                            <br><br>
+                            Nuestros laboratorios están equipados para: <strong>levantamientos topográficos, muestreo SPT, análisis granulométrico, corte directo en suelos, análisis en muestras de pavimentos y pruebas de compresión de materiales</strong>. Poseemos bancos hidráulicos para prácticas con tuberías y principios hidráulicos, además de áreas de preparación de concreto.
+                            <br><br>
+                            Integramos el software líder de la industria (AutoCAD, Civil 3D, Revit para metodologías BIM, SolidWorks). Todo esto se potencia mediante el <strong>FabLab UNITEC</strong> (Tegucigalpa), donde los estudiantes incorporan innovación y prototipado rápido a sus investigaciones estructurales.
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 mt-4">
+                            <div class="bg-gray-200 rounded-lg overflow-hidden relative group cursor-pointer shadow-sm" onclick="openModal('CIV/Lab CIV SPS.jpeg', 'Equipamiento Técnico en Laboratorio Campus SPS')">
+                                <img src="CIV/Lab CIV SPS.jpeg" alt="Laboratorio SPS" class="object-cover w-full h-32 img-hover-zoom">
+                                <div class="absolute bottom-0 inset-x-0 bg-federal/80 text-white text-[10px] p-1 text-center">Laboratorios SPS</div>
                             </div>
-                            <div class="bg-gray-200 rounded h-24 overflow-hidden relative group">
-                                <img src="https://placehold.co/300x200?text=Uso+de+Revit" alt="Software" class="object-cover w-full h-full group-hover:scale-110 transition-transform">
+                            <div class="bg-gray-200 rounded-lg overflow-hidden relative group cursor-pointer shadow-sm" onclick="openModal('CIV/Lab CIV TGU 2.jpeg', 'Prácticas de Ensayo de Materiales en Campus TGU')">
+                                <img src="CIV/Lab CIV TGU 2.jpeg" alt="Laboratorio TGU" class="object-cover w-full h-32 img-hover-zoom">
+                                <div class="absolute bottom-0 inset-x-0 bg-federal/80 text-white text-[10px] p-1 text-center">Prácticas Especializadas TGU</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Nueva Sección: Galería de Prácticas de Campo -->
+            <section id="galeria" class="scroll-mt-24 bg-white border border-gray-100 p-6 rounded-xl shadow-sm">
+                <h2 class="text-lg font-bold text-federal border-l-4 border-pacific pl-3 mb-2 uppercase tracking-wide">Galería Visual del Estudiante</h2>
+                <p class="text-sm text-gray-600 mb-6">Un vistazo a nuestras visitas técnicas locales, laboratorios en campus, vinculación laboral en Expo Civil y experiencias académicas internacionales. <span class="text-pacific font-semibold">(Haz clic en la imagen para ampliar)</span></p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <!-- Eventos / Vinculación -->
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Expo Civil Ingeniería 2025 -1.jpg', 'Expo Civil 2025: Vinculación con Empleadores')">
+                        <img src="CIV/Expo Civil Ingeniería 2025 -1.jpg" alt="Expo Civil 1" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-sky text-white text-[10px] font-bold px-2 py-1 rounded shadow">Eventos</div>
+                    </div>
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Expo Civil Ingeniería 2025 -2.jpg', 'Expo Civil 2025: Presentación de Proyectos')">
+                        <img src="CIV/Expo Civil Ingeniería 2025 -2.jpg" alt="Expo Civil 2" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-sky text-white text-[10px] font-bold px-2 py-1 rounded shadow">Eventos</div>
+                    </div>
+                    
+                    <!-- Internacionalidad COIL / Viajes -->
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/COIL CIV.jpeg', 'Sesión COIL: Aprendizaje Internacional Colaborativo en Línea')">
+                        <img src="CIV/COIL CIV.jpeg" alt="COIL" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-pacific text-white text-[10px] font-bold px-2 py-1 rounded shadow">Internacional</div>
+                    </div>
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Viaje UPV 1.jpeg', 'Visita Técnica durante Viaje Académico a UPV, España')">
+                        <img src="CIV/Viaje UPV 1.jpeg" alt="Viaje UPV 1" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-pacific text-white text-[10px] font-bold px-2 py-1 rounded shadow">Internacional</div>
+                    </div>
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Viaje UPV 3.jpeg', 'Estudiantes en Viaje Académico Internacional (UPV)')">
+                        <img src="CIV/Viaje UPV 3.jpeg" alt="Viaje UPV 3" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-pacific text-white text-[10px] font-bold px-2 py-1 rounded shadow">Internacional</div>
+                    </div>
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Visitas Técnicas en Valencia España.jpeg', 'Recorriendo Obras e Infraestructura en Valencia, España')">
+                        <img src="CIV/Visitas Técnicas en Valencia España.jpeg" alt="Visitas Técnicas Valencia" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-pacific text-white text-[10px] font-bold px-2 py-1 rounded shadow">Internacional</div>
+                    </div>
+
+                    <!-- Visitas Locales / Pasantias -->
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Visita Técnica Torres Platino Ing. Civil .jpeg', 'Visita Técnica a Proyecto Constructivo: Torres Platino')">
+                        <img src="CIV/Visita Técnica Torres Platino Ing. Civil .jpeg" alt="Visita Torres Platino" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-federal text-white text-[10px] font-bold px-2 py-1 rounded shadow">Práctica de Campo</div>
+                    </div>
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Pasantias CIV.jpeg', 'Estudiante realizando su Práctica Profesional en Empresa Constructora')">
+                        <img src="CIV/Pasantias CIV.jpeg" alt="Pasantías" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-federal text-white text-[10px] font-bold px-2 py-1 rounded shadow">Inserción Laboral</div>
+                    </div>
+
+                    <!-- Laboratorios -->
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Lab CIV TGU.jpeg', 'Pruebas y Análisis en Laboratorio TGU')">
+                        <img src="CIV/Lab CIV TGU.jpeg" alt="Lab TGU 1" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-gray-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow">Laboratorios</div>
+                    </div>
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Lab CIV TGU 3.jpeg', 'Equipamiento de Ensayo de Suelos y Materiales')">
+                        <img src="CIV/Lab CIV TGU 3.jpeg" alt="Lab TGU 3" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-gray-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow">Laboratorios</div>
+                    </div>
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Lab CIV TGU 4.jpeg', 'Equipos especializados en Mecánica de Suelos')">
+                        <img src="CIV/Lab CIV TGU 4.jpeg" alt="Lab TGU 4" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-gray-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow">Laboratorios</div>
                     </div>
                 </div>
             </section>
@@ -368,49 +448,44 @@
                 
                 <div class="relative border-l-4 border-pacific/30 ml-4 space-y-12 pb-4">
                     
-                    <!-- Year 1 -->
                     <div class="relative pl-8">
                         <div class="absolute -left-3.5 top-0 w-6 h-6 bg-white border-4 border-federal rounded-full z-10"></div>
                         <h3 class="font-bold text-federal text-lg">Año 1: Cimientos</h3>
-                        <p class="text-sm text-gray-600 mt-1">Bases matemáticas e Introducción a la Ingeniería. Primeras visitas a proyectos.</p>
+                        <p class="text-sm text-gray-600 mt-1">Bases matemáticas e Introducción a la Ingeniería. Primeras visitas técnicas a proyectos de edificación.</p>
                     </div>
 
-                    <!-- Year 2 -->
                     <div class="relative pl-8">
                         <div class="absolute -left-3.5 top-0 w-6 h-6 bg-white border-4 border-pacific rounded-full z-10"></div>
                         <h3 class="font-bold text-federal text-lg">Año 2: Estructura y Medición</h3>
-                        <p class="text-sm text-gray-600 mt-1">Topografía y Mecánica de Materiales. Aprenden a medir el mundo físico y comportamiento de materiales.</p>
+                        <p class="text-sm text-gray-600 mt-1">Topografía y Mecánica de Materiales. Aprenden a medir el mundo físico y el comportamiento de los insumos en nuestros laboratorios.</p>
                     </div>
 
-                    <!-- Year 3 -->
                     <div class="relative pl-8">
                         <div class="absolute -left-3.5 top-0 w-6 h-6 bg-white border-4 border-sky rounded-full z-10"></div>
                         <h3 class="font-bold text-federal text-lg">Año 3: El "Core" Civil</h3>
-                        <p class="text-sm text-gray-600 mt-1">Hidráulica, Mecánica de Suelos y Análisis Estructural. El año fuerte de ingeniería pura.</p>
+                        <p class="text-sm text-gray-600 mt-1">Hidráulica, Mecánica de Suelos y Análisis Estructural. El año formativo fuerte con alta carga en laboratorios.</p>
                     </div>
 
-                    <!-- Year 4 -->
                     <div class="relative pl-8">
                         <div class="absolute -left-3.5 top-0 w-6 h-6 bg-white border-4 border-federal rounded-full z-10"></div>
                         <h3 class="font-bold text-federal text-lg">Año 4: Diseño y Especialización</h3>
-                        <p class="text-sm text-gray-600 mt-1">Concreto Reforzado, Acero, Carreteras, Ingeniería Sanitaria. Diseño real de edificios y sistemas.</p>
+                        <p class="text-sm text-gray-600 mt-1">Concreto Reforzado, Acero, Carreteras, Ingeniería Sanitaria. Diseño real de edificios y sistemas de agua usando tecnología BIM.</p>
                     </div>
 
-                    <!-- Year 5 -->
                     <div class="relative pl-8">
                         <div class="absolute -left-3.5 top-0 w-6 h-6 bg-federal rounded-full z-10 shadow-lg shadow-pacific/50"></div>
                         <h3 class="font-bold text-federal text-lg">Año 5: Integración y Salida</h3>
-                        <p class="text-sm text-gray-600 mt-1">Puentes, Administración y la elección final.</p>
+                        <p class="text-sm text-gray-600 mt-1">Proyecto Integrador, Puentes, Administración de la Construcción y la elección de la modalidad de salida.</p>
                         
                         <!-- Exit Options Box -->
                         <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="bg-white p-4 border-l-4 border-pacific shadow-sm rounded-r-lg">
                                 <h4 class="font-bold text-federal text-sm">Opción A: Práctica Profesional</h4>
-                                <p class="text-xs text-gray-500">400 horas supervisadas. Ideal para empleo inmediato.</p>
+                                <p class="text-xs text-gray-500">400 horas de inserción laboral real en constructoras o empresas consultoras. Ideal para empleo inmediato.</p>
                             </div>
                             <div class="bg-white p-4 border-l-4 border-federal shadow-sm rounded-r-lg">
                                 <h4 class="font-bold text-federal text-sm">Opción B: Investigación</h4>
-                                <p class="text-xs text-gray-500">Proyecto de Graduación. Ideal para posgrados y especialización.</p>
+                                <p class="text-xs text-gray-500">Proyecto de Graduación resolviendo problemas complejos. Excelente vía para seguir estudios de posgrado.</p>
                             </div>
                         </div>
                     </div>
@@ -427,17 +502,17 @@
                     <div class="text-center p-4">
                         <i class="fas fa-chart-line text-pacific text-3xl mb-3"></i>
                         <h4 class="font-bold text-federal mb-2">Impacto y Demanda</h4>
-                        <p class="text-sm text-gray-600">Carrera indispensable para el desarrollo del país, garantizando demanda laboral constante.</p>
+                        <p class="text-sm text-gray-600">Carrera indispensable para el desarrollo socioeconómico del país (infraestructura), lo que garantiza una demanda laboral constante a futuro.</p>
                     </div>
                     <div class="text-center p-4 border-l border-r border-gray-100">
                         <i class="fas fa-award text-federal text-3xl mb-3"></i>
                         <h4 class="font-bold text-federal mb-2">Prestigio Acreditado</h4>
-                        <p class="text-sm text-gray-600">Acreditación internacional ACAAI asegura estándares de calidad rigurosos.</p>
+                        <p class="text-sm text-gray-600">Nuestra acreditación internacional ACAAI (desde 2010) asegura que su inversión está respaldada por estándares de calidad rigurosos y probados.</p>
                     </div>
                     <div class="text-center p-4">
                         <i class="fas fa-briefcase text-pacific text-3xl mb-3"></i>
-                        <h4 class="font-bold text-federal mb-2">Formación Gerencial</h4>
-                        <p class="text-sm text-gray-600">Clases de administración, finanzas y ética. Preparados para ser dueños o gerentes.</p>
+                        <h4 class="font-bold text-federal mb-2">Formación Gerencial Ética</h4>
+                        <p class="text-sm text-gray-600">No formamos solo técnicos; impartimos clases de administración, finanzas y ética. Están preparados para gerenciar proyectos o fundar sus propias constructoras.</p>
                     </div>
                 </div>
             </section>
@@ -500,8 +575,16 @@
         </main>
     </div>
 
+    <!-- Image Modal / Lightbox Overlay -->
+    <div id="image-modal" class="fixed inset-0 bg-black/90 z-[60] hidden flex flex-col items-center justify-center p-4 transition-opacity" onclick="closeModal()">
+        <button class="absolute top-6 right-6 text-white text-3xl hover:text-sky focus:outline-none" onclick="closeModal()"><i class="fas fa-times"></i></button>
+        <img id="modal-img" src="" alt="Vista Previa" class="max-h-[85vh] max-w-full rounded shadow-2xl object-contain mb-4" onclick="event.stopPropagation()">
+        <p id="modal-caption" class="text-white text-lg font-medium tracking-wide text-center bg-federal/50 px-6 py-2 rounded-full backdrop-blur-sm"></p>
+    </div>
+
     <!-- Scripts -->
     <script>
+        // Sidebar Toggle for Mobile
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobile-overlay');
@@ -514,6 +597,32 @@
                 overlay.classList.add('hidden');
             }
         }
+
+        // Lightbox Modal Functions
+        function openModal(imgSrc, captionText) {
+            const modal = document.getElementById('image-modal');
+            const img = document.getElementById('modal-img');
+            const caption = document.getElementById('modal-caption');
+            
+            img.src = imgSrc;
+            caption.innerText = captionText;
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Evita que se haga scroll atrás
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Restaura el scroll
+        }
+
+        // Close Modal with Escape Key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
