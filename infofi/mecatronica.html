@@ -55,24 +55,52 @@
             backdrop-filter: blur(10px);
         }
         
-        /* Timeline line */
+        /* Timeline line responsive */
         .timeline-line::before {
             content: '';
             position: absolute;
             top: 0;
             bottom: 0;
-            left: 50%;
             width: 4px;
             background: #E5E7EB;
-            transform: translateX(-50%);
             z-index: 0;
+        }
+        @media (min-width: 768px) {
+            .timeline-line::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        @media (max-width: 767px) {
+            .timeline-line::before {
+                left: 2rem; /* 32px to align with markers on mobile */
+            }
+        }
+
+        /* Lightbox Image Styles */
+        .img-zoom {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .img-zoom:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(6, 6, 92, 0.3);
         }
     </style>
 </head>
 <body class="bg-unitecGray text-gray-800 font-sans h-screen flex overflow-hidden">
 
-    <!-- Mobile Overlay -->
+    <!-- Mobile Overlay for Sidebar -->
     <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden" onclick="toggleMenu()"></div>
+
+    <!-- Lightbox Overlay -->
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-[100] hidden flex-col items-center justify-center p-4 opacity-0 transition-opacity duration-300" onclick="closeLightbox(event)">
+        <button class="absolute top-6 right-8 text-white hover:text-pacific text-4xl focus:outline-none transition-colors" onclick="closeLightbox(event)">
+            &times;
+        </button>
+        <img id="lightbox-img" src="" alt="Ampliación" class="max-h-[85vh] max-w-full rounded-lg shadow-2xl border-4 border-federal object-contain" onclick="event.stopPropagation()">
+        <p id="lightbox-caption" class="text-white mt-4 text-lg font-medium tracking-wide"></p>
+    </div>
 
     <!-- Sidebar Navigation -->
     <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-federal text-white transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col shadow-2xl border-r border-pacific/30">
@@ -92,10 +120,10 @@
                 <li><a href="#distribucion" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-chart-pie w-6"></i> Plan de Estudios</a></li>
                 <li><a href="#perfiles" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-user-graduate w-6"></i> Perfiles</a></li>
                 <li><a href="#competencias" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-bolt w-6"></i> Competencias</a></li>
-                <li><a href="#reforma" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-sync-alt w-6"></i> Reforma 2020</a></li>
-                <li><a href="#diferenciadores" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-star w-6"></i> Diferenciadores</a></li>
-                <li><a href="#flujograma" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-road w-6"></i> Flujograma</a></li>
+                <li><a href="#diferenciadores" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-microchip w-6"></i> Labs & Global</a></li>
+                <li><a href="#flujograma" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-route w-6"></i> Ruta de Aprendizaje</a></li>
                 <li><a href="#padres" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-users w-6"></i> Para Padres</a></li>
+                <li><a href="#galeria" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-images w-6"></i> Galería de Impacto</a></li>
                 <li><a href="#equivalencias" onclick="toggleMenu()" class="block py-3 px-6 hover:bg-white/10 border-l-4 border-transparent hover:border-pacific transition-all"><i class="fas fa-exchange-alt w-6"></i> Equivalencias</a></li>
             </ul>
         </nav>
@@ -122,7 +150,7 @@
             </div>
             <div class="flex items-center space-x-3">
                 <span class="bg-pacific text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Plan 2020</span>
-                <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-green-200">Acreditada</span>
+                <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-green-200">ACAAI</span>
             </div>
         </header>
 
@@ -136,11 +164,11 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-gray-500 text-sm font-semibold uppercase">Duración</p>
-                                <h3 class="text-3xl font-bold text-federal mt-1">4.5 Años</h3>
+                                <h3 class="text-3xl font-bold text-federal mt-1">4 Años<br><span class="text-xl">+ 2 periodos</span></h3>
                             </div>
                             <i class="fas fa-clock text-3xl text-pacific/20"></i>
                         </div>
-                        <p class="text-sm text-gray-400 mt-2">Reducción de 5 años (Plan 2011)</p>
+                        <p class="text-sm text-gray-400 mt-2">Reducción estratégica de 1 periodo vs Plan 2011</p>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-pacific">
@@ -151,7 +179,7 @@
                             </div>
                             <i class="fas fa-book text-3xl text-pacific/20"></i>
                         </div>
-                        <p class="text-sm text-gray-400 mt-2">66 Espacios de Aprendizaje</p>
+                        <p class="text-sm text-gray-400 mt-2">66 Espacios de Aprendizaje intensivos</p>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-pacific">
@@ -162,17 +190,18 @@
                             </div>
                             <i class="fas fa-university text-3xl text-pacific/20"></i>
                         </div>
-                        <p class="text-sm text-gray-400 mt-2">Tegucigalpa & SPS</p>
+                        <p class="text-sm text-gray-400 mt-2">Disponible en Tegucigalpa & SPS</p>
                     </div>
                 </div>
             </section>
 
             <!-- 2. Distribución del Plan -->
             <section id="distribucion" class="mb-12 bg-white p-6 md:p-8 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold text-federal mb-6 flex items-center">
+                <h2 class="text-2xl font-bold text-federal mb-4 flex items-center">
                     <span class="w-2 h-8 bg-pacific mr-3 rounded-sm"></span>
                     Estructura del Plan de Estudios
                 </h2>
+                <p class="text-gray-600 text-sm mb-6">El currículo está estratégicamente balanceado para formar líderes con bases sólidas en ciencias puras y altísima especialización tecnológica.</p>
                 
                 <div class="w-full bg-gray-200 rounded-full h-8 mb-4 overflow-hidden flex shadow-inner">
                     <div class="bg-blue-900 h-8 flex items-center justify-center text-xs text-white font-bold transition-all hover:bg-blue-800" style="width: 27%" title="Tecnologías Aplicadas/Mecatrónica">27%</div>
@@ -183,10 +212,10 @@
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-6">
-                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-blue-900 rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Mecatrónica</span></div>
-                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-pacific rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Formación Gral</span></div>
+                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-blue-900 rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Tec. Aplicada/Mecatrónica</span></div>
+                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-pacific rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Formación General</span></div>
                     <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-vivid rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Ciencias Básicas</span></div>
-                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-indigo-500 rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Tec. Básicas</span></div>
+                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-indigo-500 rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Tecnologías Básicas</span></div>
                     <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-purple-600 rounded-sm"></div><span class="text-xs text-gray-600 font-medium">Computación</span></div>
                 </div>
             </section>
@@ -196,24 +225,25 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Ingreso -->
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 group">
-                        <div class="bg-gray-100 p-4 border-b border-gray-200">
+                        <div class="bg-gray-100 p-5 border-b border-gray-200">
                             <h3 class="text-xl font-bold text-federal flex items-center">
-                                <i class="fas fa-door-open mr-3 text-pacific"></i> Perfil de Ingreso
+                                <i class="fas fa-door-open mr-3 text-pacific"></i> El Candidato Ideal (Ingreso)
                             </h3>
                         </div>
                         <div class="p-6">
+                            <p class="text-sm text-gray-500 mb-4 italic">"Buscamos mentes curiosas, jóvenes que desarmen el control remoto solo para ver qué hay adentro."</p>
                             <ul class="space-y-4">
                                 <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                                    <span class="text-gray-700">Pasión por <strong>"cómo funcionan las cosas"</strong> y la tecnología.</span>
+                                    <i class="fas fa-check text-pacific mt-1 mr-3"></i>
+                                    <span class="text-gray-700"><strong>Pasión innata</strong> por "cómo funcionan las cosas" y el mundo de la tecnología.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                                    <span class="text-gray-700">Destreza manual (armar/desarmar) y curiosidad robótica.</span>
+                                    <i class="fas fa-check text-pacific mt-1 mr-3"></i>
+                                    <span class="text-gray-700"><strong>Destreza y curiosidad:</strong> Gusto por armar/desarmar piezas e interés real en la robótica, electrónica y mecánica.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                                    <span class="text-gray-700">Facilidad para matemáticas, física e innovación.</span>
+                                    <i class="fas fa-check text-pacific mt-1 mr-3"></i>
+                                    <span class="text-gray-700"><strong>Facilidad numérica:</strong> Afinidad por las matemáticas y la física, con una mentalidad fuertemente orientada a la innovación.</span>
                                 </li>
                             </ul>
                         </div>
@@ -221,23 +251,27 @@
 
                     <!-- Egreso -->
                     <div class="bg-federal rounded-xl overflow-hidden shadow-lg border border-federal group">
-                        <div class="bg-blue-900/50 p-4 border-b border-white/10">
+                        <div class="bg-blue-900/50 p-5 border-b border-white/10">
                             <h3 class="text-xl font-bold text-white flex items-center">
-                                <i class="fas fa-graduation-cap mr-3 text-pacific"></i> Perfil de Egreso
+                                <i class="fas fa-graduation-cap mr-3 text-pacific"></i> El Profesional (Egreso)
                             </h3>
                         </div>
                         <div class="p-6 text-white/90">
-                            <p class="mb-4 text-sm font-light leading-relaxed">
-                                El ingeniero es un líder preparado para la <strong class="text-pacific">Industria 4.0</strong>, capaz de integrar computación, electrónica y mecánica.
+                            <p class="mb-5 text-sm font-light leading-relaxed">
+                                Formamos líderes multidisciplinarios preparados para la <strong class="text-pacific">Industria 4.0</strong>, capaces de resolver problemas complejos en maquilas, industria alimentaria, automotriz y energética.
                             </p>
                             <div class="space-y-3">
                                 <div class="bg-white/10 p-3 rounded-lg flex items-center">
-                                    <i class="fas fa-cogs text-pacific mr-3"></i>
-                                    <span>Diseña y construye sistemas mecatrónicos</span>
+                                    <i class="fas fa-cogs text-vivid mr-3 text-xl w-6"></i>
+                                    <span class="text-sm">Diseña, construye y mantiene sistemas mecatrónicos completos.</span>
                                 </div>
                                 <div class="bg-white/10 p-3 rounded-lg flex items-center">
-                                    <i class="fas fa-industry text-pacific mr-3"></i>
-                                    <span>Automatización Industrial y Gestión</span>
+                                    <i class="fas fa-network-wired text-vivid mr-3 text-xl w-6"></i>
+                                    <span class="text-sm">Integra fluidamente computación, electrónica y mecánica.</span>
+                                </div>
+                                <div class="bg-white/10 p-3 rounded-lg flex items-center">
+                                    <i class="fas fa-users-cog text-vivid mr-3 text-xl w-6"></i>
+                                    <span class="text-sm">Pensamiento crítico y liderazgo en equipos multidisciplinarios.</span>
                                 </div>
                             </div>
                         </div>
@@ -247,180 +281,221 @@
 
             <!-- 4. Competencias (Venta) -->
             <section id="competencias" class="mb-12">
-                <h2 class="text-2xl font-bold text-federal mb-6 flex items-center">
+                <h2 class="text-2xl font-bold text-federal mb-2 flex items-center">
                     <span class="w-2 h-8 bg-pacific mr-3 rounded-sm"></span>
-                    ¿Por qué estudiar esto? (Key Selling Points)
+                    ¿Por qué estudiar Mecatrónica en UNITEC?
                 </h2>
+                <p class="text-gray-600 text-sm mb-6 ml-5">Argumentos de alto impacto para presentar la carrera al prospecto.</p>
+                
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Card 1 -->
                     <div class="bg-white p-8 rounded-xl shadow-md border-b-4 border-federal hover:-translate-y-1 transition-transform">
-                        <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-4">
+                        <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-5 border border-blue-100">
                             <i class="fas fa-robot text-2xl text-federal"></i>
                         </div>
-                        <h4 class="text-lg font-bold text-gray-800 mb-2">Experto en Automatización</h4>
-                        <p class="text-sm text-gray-600">Diseña sistemas que operan solos usando robots y PLCs para modernizar fábricas.</p>
+                        <h4 class="text-lg font-bold text-gray-800 mb-3">Experto en Automatización</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">No es un simple operador; es capaz de diseñar sistemas que operan por sí solos, utilizando robots y controladores lógicos (PLC) para llevar a las fábricas hacia la modernización total.</p>
                     </div>
 
                     <!-- Card 2 -->
                     <div class="bg-white p-8 rounded-xl shadow-md border-b-4 border-pacific hover:-translate-y-1 transition-transform">
-                        <div class="w-14 h-14 bg-cyan-50 rounded-full flex items-center justify-center mb-4">
+                        <div class="w-14 h-14 bg-cyan-50 rounded-full flex items-center justify-center mb-5 border border-cyan-100">
                             <i class="fas fa-microchip text-2xl text-pacific"></i>
                         </div>
-                        <h4 class="text-lg font-bold text-gray-800 mb-2">Productos Inteligentes</h4>
-                        <p class="text-sm text-gray-600">Integra mecánica y software: desde electrodomésticos hasta equipo biomédico.</p>
+                        <h4 class="text-lg font-bold text-gray-800 mb-3">Diseñador de Productos Inteligentes</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">Integra la mecánica con la electrónica y el software avanzado. Su capacidad va desde conceptualizar electrodomésticos inteligentes hasta desarrollar compleja maquinaria automática industrial.</p>
                     </div>
 
                     <!-- Card 3 -->
                     <div class="bg-white p-8 rounded-xl shadow-md border-b-4 border-federal hover:-translate-y-1 transition-transform">
-                        <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-4">
+                        <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-5 border border-blue-100">
                             <i class="fas fa-chart-line text-2xl text-federal"></i>
                         </div>
-                        <h4 class="text-lg font-bold text-gray-800 mb-2">Optimizador Industrial</h4>
-                        <p class="text-sm text-gray-600">Mejora manufactura haciéndola eficiente, segura y rentable con tecnología.</p>
+                        <h4 class="text-lg font-bold text-gray-800 mb-3">Optimizador Industrial</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">Convierte el conocimiento en rentabilidad. Mejora dramáticamente los procesos de manufactura, volviéndolos más eficientes, radicalmente seguros y financieramente rentables mediante tecnología.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- 5. La Reforma y Diferenciadores -->
-            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-12">
-                <!-- Columna Izquierda: Reforma -->
-                <div id="reforma" class="xl:col-span-2 space-y-8">
-                    <div class="bg-white p-8 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-bold text-federal mb-4">La Reforma 2020: ¿Qué cambió?</h3>
-                        <p class="text-gray-600 mb-4">
-                            Responde a la <strong>Industria 4.0</strong> y a la necesidad de inserción laboral rápida.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="border border-green-200 bg-green-50 p-4 rounded-lg">
-                                <strong class="text-green-800 block mb-1">Más Rápido</strong>
-                                <span class="text-sm text-green-700">De 5 años a 4.5 años sin perder calidad.</span>
+            <!-- 5. Diferenciadores: Labs & Global Engagement -->
+            <section id="diferenciadores" class="mb-16">
+                
+                <!-- Tecnología y Laboratorios -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-10 border border-gray-100">
+                    <div class="bg-federal p-6 flex items-center justify-between">
+                        <h2 class="text-2xl font-bold text-white flex items-center">
+                            <i class="fas fa-microchip text-pacific mr-3"></i> Tecnología y Laboratorios
+                        </h2>
+                        <span class="bg-pacific text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider hidden sm:block">Aprender Haciendo</span>
+                    </div>
+                    <div class="p-8">
+                        <p class="text-gray-600 mb-6 leading-relaxed">Garantizamos el "aprender haciendo" mediante acceso a una infraestructura robusta. Nuestros estudiantes experimentan de primera mano con equipos de grado industrial, asegurando una transición fluida al entorno profesional real.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div class="border-l-4 border-pacific pl-4">
+                                <h4 class="font-bold text-federal mb-3 text-lg"><i class="fas fa-industry text-pacific mr-2"></i>Laboratorios Equipados</h4>
+                                <ul class="text-sm text-gray-600 space-y-3">
+                                    <li><strong class="text-gray-800">Mecatrónica:</strong> Bancos de prueba avanzados.</li>
+                                    <li><strong class="text-gray-800">Automatización:</strong> Control con PLC, sensores y actuadores.</li>
+                                    <li><strong class="text-gray-800">Manufactura:</strong> Máquinas CNC e Impresión 3D.</li>
+                                    <li><strong class="text-gray-800">Sistemas y Cómputo:</strong> Centros especializados para diseño e integración electrónica.</li>
+                                </ul>
                             </div>
-                            <div class="border border-blue-200 bg-blue-50 p-4 rounded-lg">
-                                <strong class="text-federal block mb-1">Más Práctico</strong>
-                                <span class="text-sm text-blue-800">Enfoque en programación aplicada a robótica.</span>
+                            <div class="border-l-4 border-vivid pl-4">
+                                <h4 class="font-bold text-federal mb-3 text-lg"><i class="fas fa-laptop-code text-pacific mr-2"></i>Software Élite</h4>
+                                <ul class="text-sm text-gray-600 space-y-3">
+                                    <li><strong class="text-gray-800">CAD, CAE y CAM:</strong> Dominio de herramientas líderes mundiales como SolidWorks y Fusion 360.</li>
+                                    <li><strong class="text-gray-800">Controladores:</strong> Softwares de PLC y arquitectura de sistemas de automatización.</li>
+                                    <li><strong class="text-gray-800">Electrónica e Integración:</strong> NI Elvis para estaciones de electrónica avanzada.</li>
+                                    <li><strong class="text-gray-800">Programación Robótica:</strong> Matlab, Simulink y plataformas de simulación de vanguardia.</li>
+                                </ul>
                             </div>
+                        </div>
+
+                        <!-- Fotos de Labs -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="relative group overflow-hidden rounded-lg shadow-md aspect-video bg-gray-200">
+                                <img src="MEC/Estaciones de Automatización y Sensores.jpeg" alt="Estaciones de Automatización y Sensores" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 pointer-events-none">
+                                    <p class="text-white text-sm font-medium">Estaciones de Automatización</p>
+                                </div>
+                            </div>
+                            <div class="relative group overflow-hidden rounded-lg shadow-md aspect-video bg-gray-200">
+                                <img src="MEC/Maquinaría Laser CNC.jpeg" alt="Maquinaria Laser CNC" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 pointer-events-none">
+                                    <p class="text-white text-sm font-medium">Maquinaria Láser CNC</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Global Engagement -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                    <div class="bg-pacific p-6 flex items-center justify-between">
+                        <h2 class="text-2xl font-bold text-federal flex items-center">
+                            <i class="fas fa-globe-americas text-white mr-3"></i> Global Engagement
+                        </h2>
+                        <span class="bg-white text-federal text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider hidden sm:block">Visión Mundial</span>
+                    </div>
+                    <div class="p-8">
+                        <p class="text-gray-600 mb-6 leading-relaxed">Formamos ciudadanos del mundo. Diseñamos experiencias globales exclusivas para que nuestros estudiantes conecten con contextos internacionales aplicados a la Ingeniería Mecatrónica, validando sus habilidades en el escenario global.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div class="border-l-4 border-federal pl-4">
+                                <h4 class="font-bold text-federal mb-3 text-lg"><i class="fas fa-plane-departure text-pacific mr-2"></i>Viajes y Misiones Académicas</h4>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-3">Validan lo aprendido en aulas de excelencia interactuando con expertos de todo el mundo mediante cursos intensivos. Hemos consolidado viajes académicos de altísimo nivel a:</p>
+                                <ul class="text-sm text-gray-700 font-medium space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-map-marker-alt text-pacific mr-2"></i> Universidad Politécnica de Valencia (España)</li>
+                                    <li class="flex items-center"><i class="fas fa-map-marker-alt text-pacific mr-2"></i> Universidad Tecnológica de Bolívar (Colombia)</li>
+                                </ul>
+                            </div>
+                            <div class="border-l-4 border-vivid pl-4">
+                                <h4 class="font-bold text-federal mb-3 text-lg"><i class="fas fa-briefcase text-pacific mr-2"></i>Prácticas en el Extranjero</h4>
+                                <p class="text-sm text-gray-600 leading-relaxed">Las barreras no existen. Nuestros estudiantes más destacados han logrado realizar su práctica profesional en el extranjero integrándose a empresas de manufactura y tecnología de primer nivel en <strong>Estados Unidos y Canadá</strong> gracias a convenios como <strong>TOP (The Ohio Program)</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- Fotos de Global Engagement -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="relative group overflow-hidden rounded-lg shadow-md aspect-video bg-gray-200">
+                                <img src="MEC/Viaje UPV 4.jpeg" alt="Viaje académico a la Universidad Politécnica de Valencia, España" class="w-full h-full object-cover img-zoom object-top" onclick="openLightbox(this.src, this.alt)">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 pointer-events-none">
+                                    <p class="text-white text-sm font-medium">UPV - España</p>
+                                </div>
+                            </div>
+                            <div class="relative group overflow-hidden rounded-lg shadow-md aspect-video bg-gray-200">
+                                <img src="MEC/Viaje Colombia 2.jpeg" alt="Experiencia global en la Universidad Tecnológica de Bolívar, Colombia" class="w-full h-full object-cover img-zoom object-center" onclick="openLightbox(this.src, this.alt)">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 pointer-events-none">
+                                    <p class="text-white text-sm font-medium">UTB - Colombia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Timeline / Ruta Académica (Alternando) -->
+            <section id="flujograma" class="mb-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-federal mb-3"><i class="fas fa-route text-pacific mr-2"></i> Ruta de Aprendizaje</h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto">El desarrollo estratégico desde los conceptos básicos hasta el control total de una fábrica automatizada.</p>
+                </div>
+                
+                <div class="relative max-w-5xl mx-auto pb-10 timeline-line pl-4 md:pl-0">
+                    
+                    <!-- Año 1 - Izquierda en Escritorio -->
+                    <div class="relative flex items-center justify-between md:justify-normal w-full mb-12 group">
+                        <!-- Marcador: En móvil pegado a la izquierda, en PC en el centro -->
+                        <div class="absolute left-8 md:left-1/2 flex items-center justify-center w-12 h-12 rounded-full border-4 border-unitecGray bg-pacific text-white font-bold transform -translate-x-1/2 z-10 shadow-lg">1</div>
+                        
+                        <!-- Contenido -->
+                        <div class="w-full ml-16 md:ml-0 md:w-1/2 md:pr-12 text-left md:text-right">
+                            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 md:border-l-0 md:border-r-4 border-pacific hover:shadow-xl transition-transform hover:-translate-y-1 inline-block w-full">
+                                <h4 class="font-bold text-federal text-xl mb-1">Fundamentos & Código</h4>
+                                <h5 class="text-xs font-semibold text-pacific uppercase tracking-wider mb-3">Año 1</h5>
+                                <p class="text-sm text-gray-600 leading-relaxed">Inmersión inmediata. Ven Matemáticas, Introducción a Mecatrónica y <strong>Programación Estructurada</strong>. Desde el día 1, interactúan con código y conceptos de ingeniería real.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Año 2 - Derecha en Escritorio -->
+                    <div class="relative flex items-center justify-between md:justify-normal w-full mb-12 group">
+                        <div class="absolute left-8 md:left-1/2 flex items-center justify-center w-12 h-12 rounded-full border-4 border-unitecGray bg-federal text-white font-bold transform -translate-x-1/2 z-10 shadow-lg">2</div>
+                        
+                        <div class="w-full ml-16 md:ml-0 md:w-1/2 md:ml-auto md:pl-12 text-left">
+                            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-federal hover:shadow-xl transition-transform hover:-translate-y-1 inline-block w-full">
+                                <h4 class="font-bold text-federal text-xl mb-1">Ciencias & Diseño Tridimensional</h4>
+                                <h5 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Año 2</h5>
+                                <p class="text-sm text-gray-600 leading-relaxed">Aprenden Física, <strong>Dibujo Técnico (CAD)</strong> y Circuitos Eléctricos. Aprenden a diseñar sus propias piezas tridimensionales y a comprender el comportamiento del flujo eléctrico.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Año 3 - Izquierda en Escritorio -->
+                    <div class="relative flex items-center justify-between md:justify-normal w-full mb-12 group">
+                        <div class="absolute left-8 md:left-1/2 flex items-center justify-center w-12 h-12 rounded-full border-4 border-unitecGray bg-pacific text-white font-bold transform -translate-x-1/2 z-10 shadow-lg">3</div>
+                        
+                        <div class="w-full ml-16 md:ml-0 md:w-1/2 md:pr-12 text-left md:text-right">
+                            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 md:border-l-0 md:border-r-4 border-pacific hover:shadow-xl transition-transform hover:-translate-y-1 inline-block w-full">
+                                <h4 class="font-bold text-federal text-xl mb-1">El "Core" Mecatrónico</h4>
+                                <h5 class="text-xs font-semibold text-pacific uppercase tracking-wider mb-3">Año 3</h5>
+                                <p class="text-sm text-gray-600 leading-relaxed">Aquí ocurre la magia. Electrónica Analógica y Digital, Termodinámica y <strong>Sensores y Actuadores</strong>. Es el momento en que aprenden a traducir el movimiento físico en señales electrónicas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Año 4 - Derecha en Escritorio -->
+                    <div class="relative flex items-center justify-between md:justify-normal w-full mb-12 group">
+                        <div class="absolute left-8 md:left-1/2 flex items-center justify-center w-12 h-12 rounded-full border-4 border-unitecGray bg-federal text-white font-bold transform -translate-x-1/2 z-10 shadow-lg">4</div>
+                        
+                        <div class="w-full ml-16 md:ml-0 md:w-1/2 md:ml-auto md:pl-12 text-left">
+                            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-federal hover:shadow-xl transition-transform hover:-translate-y-1 inline-block w-full">
+                                <h4 class="font-bold text-federal text-xl mb-1">Automatización de Nivel Industrial</h4>
+                                <h5 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Año 4</h5>
+                                <p class="text-sm text-gray-600 leading-relaxed">El nivel de maestría tecnológica. Ingresan de lleno a Robótica, <strong>Controladores Lógicos (PLC)</strong>, Redes Industriales y Manufactura Automatizada (CNC). Ya pueden dominar fábricas completas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Año 5 / Salida - Izquierda en Escritorio -->
+                    <div class="relative flex items-center justify-between md:justify-normal w-full group">
+                        <div class="absolute left-8 md:left-1/2 flex items-center justify-center w-12 h-12 rounded-full border-4 border-unitecGray bg-green-500 text-white font-bold transform -translate-x-1/2 z-10 shadow-lg shadow-green-500/40">
+                            <i class="fas fa-rocket text-xl"></i>
                         </div>
                         
-                        <div class="mt-6">
-                            <h4 class="font-bold text-gray-800 mb-3 border-b pb-2">Nuevas Asignaturas Clave:</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="px-3 py-1 bg-gray-100 text-federal text-xs rounded-full font-medium border border-gray-300">Programación Estructurada</span>
-                                <span class="px-3 py-1 bg-gray-100 text-federal text-xs rounded-full font-medium border border-gray-300">Instalaciones Eléctricas</span>
-                                <span class="px-3 py-1 bg-gray-100 text-federal text-xs rounded-full font-medium border border-gray-300">Gestión de la Innovación</span>
-                                <span class="px-3 py-1 bg-gray-100 text-federal text-xs rounded-full font-medium border border-gray-300">Lenguajes de Programación</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Internacionalidad & Labs -->
-                    <div id="diferenciadores" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Labs Card -->
-                        <div class="bg-federal rounded-xl shadow-lg overflow-hidden text-white relative">
-                            <div class="h-32 bg-gray-800 relative flex items-center justify-center overflow-hidden">
-                                <!-- Placeholder Image -->
-                                <div class="absolute inset-0 bg-blue-900 opacity-60"></div>
-                                <i class="fas fa-microscope text-5xl text-white/20 absolute"></i>
-                                <span class="relative z-10 font-bold tracking-widest uppercase border border-white px-4 py-2">[Imagen: Lab Automatización]</span>
-                            </div>
-                            <div class="p-6">
-                                <h4 class="font-bold text-pacific text-lg mb-2">Tecnología de Punta</h4>
-                                <p class="text-xs text-gray-300 mb-3">PLCs, CNC, Impresión 3D, SolidWorks, Fusion 360, Matlab.</p>
-                                <div class="flex items-center space-x-2">
-                                    <span class="w-2 h-2 rounded-full bg-green-400"></span>
-                                    <span class="text-xs font-semibold">Aprender Haciendo</span>
+                        <div class="w-full ml-16 md:ml-0 md:w-1/2 md:pr-12 text-left md:text-right">
+                            <div class="bg-gradient-to-br from-green-50 to-white p-6 rounded-xl shadow-md border border-green-200 hover:shadow-xl transition-transform hover:-translate-y-1 inline-block w-full text-left">
+                                <h4 class="font-bold text-green-700 text-xl mb-1 text-left md:text-right">Salida Profesional y Graduación</h4>
+                                <h5 class="text-xs font-semibold text-green-600 uppercase tracking-wider mb-3 text-left md:text-right">Año 5</h5>
+                                <p class="text-sm text-gray-700 leading-relaxed mb-4 text-left md:text-right">Se preparan para impactar el mercado laboral con clases como Generación de Empresas. Culminan su proceso formativo con un doble reto práctico de 400 horas:</p>
+                                <div class="bg-white p-3 rounded border border-green-100 block">
+                                    <ul class="text-xs text-gray-600 font-medium space-y-2 text-left">
+                                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i><strong>Proyecto Multidisciplinario (Capstone)</strong></li>
+                                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i><strong>Práctica Profesional</strong> o Proyecto de Prototipo Investigativo</li>
+                                    </ul>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- International Card -->
-                        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 relative">
-                            <div class="h-32 bg-gray-200 relative flex items-center justify-center overflow-hidden">
-                                <!-- Placeholder Image -->
-                                <div class="absolute inset-0 bg-pacific opacity-20"></div>
-                                <i class="fas fa-plane text-5xl text-federal/20 absolute"></i>
-                                <span class="relative z-10 font-bold text-federal tracking-widest uppercase border border-federal px-4 py-2 text-xs">[Imagen: Intercambio]</span>
-                            </div>
-                            <div class="p-6">
-                                <h4 class="font-bold text-federal text-lg mb-2">Internacionalidad</h4>
-                                <p class="text-xs text-gray-500 mb-3">Alineado a ABET. Intercambios y concursos de robótica.</p>
-                                <div class="flex items-center space-x-2">
-                                    <span class="w-2 h-2 rounded-full bg-pacific"></span>
-                                    <span class="text-xs font-semibold text-federal">Inglés Requerido</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Columna Derecha: Acreditación -->
-                <div class="xl:col-span-1">
-                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-8 border-yellow-400 h-full flex flex-col justify-center text-center">
-                        <div class="mx-auto bg-gray-50 rounded-full w-24 h-24 flex items-center justify-center mb-4 border-2 border-gray-100">
-                            <i class="fas fa-certificate text-4xl text-yellow-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-federal mb-2">Calidad Acreditada</h3>
-                        <p class="text-sm text-gray-600 mb-6">El programa mantiene la prestigiosa acreditación <strong>ACAAI</strong> (Agencia Centroamericana de Acreditación de Programas de Arquitectura y de Ingeniería).</p>
-                        <hr class="border-gray-100 mb-6">
-                        <div class="text-left">
-                            <p class="text-xs font-bold text-gray-400 uppercase mb-2">Incluye formación en:</p>
-                            <ul class="text-sm text-gray-700 space-y-2">
-                                <li><i class="fas fa-angle-right text-pacific mr-2"></i>Generación de Empresas</li>
-                                <li><i class="fas fa-angle-right text-pacific mr-2"></i>Gestión de Proyectos</li>
-                                <li><i class="fas fa-angle-right text-pacific mr-2"></i>Contabilidad Gerencial</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 6. Timeline / Flujograma -->
-            <section id="flujograma" class="mb-12 relative">
-                <h2 class="text-2xl font-bold text-federal mb-10 text-center">Ruta de Aprendizaje</h2>
-                
-                <div class="timeline-line relative max-w-3xl mx-auto pb-10">
-                    
-                    <!-- Año 1 -->
-                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group mb-8">
-                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-pacific text-white font-bold shrink-0 md:order-1 md:group-odd:translate-x-1/2 md:group-even:-translate-x-1/2 absolute left-1/2 transform -translate-x-1/2 z-10 shadow-md">1</div>
-                        <div class="w-[calc(50%-20px)] md:w-[calc(50%-40px)] bg-white p-5 rounded-lg shadow-md border-l-4 border-pacific md:group-odd:mr-auto md:group-even:ml-auto">
-                            <h4 class="font-bold text-federal text-lg">Fundamentos & Código</h4>
-                            <p class="text-sm text-gray-600 mt-1">Matemáticas, Introducción a Mecatrónica y <strong>Programación Estructurada</strong>. Tocar código desde el día 1.</p>
-                        </div>
-                    </div>
-
-                    <!-- Año 2 -->
-                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group mb-8">
-                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-federal text-white font-bold shrink-0 md:order-1 md:group-odd:translate-x-1/2 md:group-even:-translate-x-1/2 absolute left-1/2 transform -translate-x-1/2 z-10 shadow-md">2</div>
-                        <div class="w-[calc(50%-20px)] md:w-[calc(50%-40px)] bg-white p-5 rounded-lg shadow-md border-r-4 border-federal text-right md:text-left md:border-r-0 md:border-l-4 md:group-even:text-right md:group-even:border-l-0 md:group-even:border-r-4">
-                            <h4 class="font-bold text-federal text-lg">Ciencias & Diseño</h4>
-                            <p class="text-sm text-gray-600 mt-1">Física, <strong>Dibujo Técnico (CAD)</strong> y Circuitos. Diseñar piezas y entender la electricidad.</p>
-                        </div>
-                    </div>
-
-                    <!-- Año 3 -->
-                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group mb-8">
-                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-pacific text-white font-bold shrink-0 md:order-1 md:group-odd:translate-x-1/2 md:group-even:-translate-x-1/2 absolute left-1/2 transform -translate-x-1/2 z-10 shadow-md">3</div>
-                        <div class="w-[calc(50%-20px)] md:w-[calc(50%-40px)] bg-white p-5 rounded-lg shadow-md border-l-4 border-pacific md:group-odd:mr-auto md:group-even:ml-auto">
-                            <h4 class="font-bold text-federal text-lg">El "Core" Mecatrónico</h4>
-                            <p class="text-sm text-gray-600 mt-1">Electrónica, Mecanismos, Termodinámica y <strong>Sensores</strong>. Integración de movimiento y electrónica.</p>
-                        </div>
-                    </div>
-
-                    <!-- Año 4 -->
-                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group mb-8">
-                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-federal text-white font-bold shrink-0 md:order-1 md:group-odd:translate-x-1/2 md:group-even:-translate-x-1/2 absolute left-1/2 transform -translate-x-1/2 z-10 shadow-md">4</div>
-                        <div class="w-[calc(50%-20px)] md:w-[calc(50%-40px)] bg-white p-5 rounded-lg shadow-md border-r-4 border-federal text-right md:text-left md:border-r-0 md:border-l-4 md:group-even:text-right md:group-even:border-l-0 md:group-even:border-r-4">
-                            <h4 class="font-bold text-federal text-lg">Automatización Avanzada</h4>
-                            <p class="text-sm text-gray-600 mt-1">Robótica, <strong>PLC</strong>, Redes Industriales y Manufactura. Control total de fábricas.</p>
-                        </div>
-                    </div>
-
-                    <!-- Año 5 / Salida -->
-                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-green-500 text-white font-bold shrink-0 md:order-1 md:group-odd:translate-x-1/2 md:group-even:-translate-x-1/2 absolute left-1/2 transform -translate-x-1/2 z-10 shadow-md"><i class="fas fa-flag-checkered"></i></div>
-                        <div class="w-[calc(50%-20px)] md:w-[calc(50%-40px)] bg-white p-5 rounded-lg shadow-md border-l-4 border-green-500 md:group-odd:mr-auto md:group-even:ml-auto">
-                            <h4 class="font-bold text-green-700 text-lg">Salida Profesional</h4>
-                            <p class="text-sm text-gray-600 mt-1">Capstone, Generación de Empresas. <strong>Práctica</strong> (400 hrs) o <strong>Proyecto</strong>.</p>
                         </div>
                     </div>
 
@@ -428,74 +503,155 @@
             </section>
 
             <!-- 7. Sección Padres -->
-            <section id="padres" class="mb-12">
-                <div class="bg-gray-50 border-2 border-federal rounded-xl p-8 text-center">
-                    <h2 class="text-2xl font-bold text-federal mb-2">Para el Padre de Familia</h2>
-                    <p class="text-gray-500 mb-8 max-w-2xl mx-auto">La inversión inteligente para el futuro de su hijo.</p>
+            <section id="padres" class="mb-16">
+                <div class="bg-white border-2 border-federal rounded-2xl p-8 md:p-10 shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-pacific/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="text-center mb-10">
+                            <h2 class="text-3xl font-bold text-federal mb-3"><i class="fas fa-user-tie text-pacific mr-3"></i>Razones para el Padre de Familia</h2>
+                            <p class="text-gray-600 max-w-2xl mx-auto">Comprendemos que la educación de sus hijos es la inversión más importante. Estos son los respaldos que aseguran el retorno de esa inversión.</p>
+                        </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="p-4 bg-white rounded-lg shadow-sm">
-                            <i class="fas fa-rocket text-pacific text-3xl mb-3"></i>
-                            <h4 class="font-bold text-federal">Carrera del Futuro</h4>
-                            <p class="text-xs text-gray-600 mt-2">Indispensable en industrias modernas (alimentos, automotriz, energía).</p>
-                        </div>
-                        <div class="p-4 bg-white rounded-lg shadow-sm">
-                            <i class="fas fa-shapes text-pacific text-3xl mb-3"></i>
-                            <h4 class="font-bold text-federal">Versatilidad</h4>
-                            <p class="text-xs text-gray-600 mt-2">No es solo mecánico ni electrónico. Domina ambas + informática.</p>
-                        </div>
-                        <div class="p-4 bg-white rounded-lg shadow-sm">
-                            <i class="fas fa-piggy-bank text-pacific text-3xl mb-3"></i>
-                            <h4 class="font-bold text-federal">Eficiencia</h4>
-                            <p class="text-xs text-gray-600 mt-2">Graduación en menos tiempo (ahorro económico) con perfil gerencial.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:bg-white hover:shadow-lg transition-all">
+                                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                    <i class="fas fa-robot text-federal text-2xl"></i>
+                                </div>
+                                <h4 class="font-bold text-federal text-center mb-3">La Carrera del Futuro</h4>
+                                <p class="text-sm text-gray-600 text-center leading-relaxed">La automatización industrial es imparable. Un ingeniero mecatrónico es el profesional más solicitado e indispensable en la industria moderna, desde la manufactura de alimentos hasta el sector automotriz.</p>
+                            </div>
+
+                            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:bg-white hover:shadow-lg transition-all">
+                                <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                    <i class="fas fa-layer-group text-pacific text-2xl"></i>
+                                </div>
+                                <h4 class="font-bold text-federal text-center mb-3">Versatilidad Laboral Única</h4>
+                                <p class="text-sm text-gray-600 text-center leading-relaxed">Su hijo no será solo un mecánico, ni solo un electrónico. Al dominar ambas áreas más la informática, multiplica dramáticamente sus opciones de empleo en comparación con carreras tradicionales.</p>
+                            </div>
+
+                            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:bg-white hover:shadow-lg transition-all">
+                                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                    <i class="fas fa-chart-pie text-federal text-2xl"></i>
+                                </div>
+                                <h4 class="font-bold text-federal text-center mb-3">Perfil Gerencial & Eficiencia</h4>
+                                <p class="text-sm text-gray-600 text-center leading-relaxed">Se gradúa en menos tiempo (ahorrando inversión educativa) pero con una robusta formación en gestión de proyectos y finanzas, preparado no solo para operar máquinas, sino para liderar empresas.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 8. Tabla Equivalencias -->
+            <!-- 8. Galería de Impacto (Fotos Exclusivas) -->
+            <section id="galeria" class="mb-20">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-federal mb-3"><i class="fas fa-camera-retro text-pacific mr-3"></i>Galería de Impacto</h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto">Capacitaciones, proyectos de innovación, vida estudiantil y visitas técnicas que transforman a nuestros estudiantes.</p>
+                </div>
+
+                <!-- Grid de Fotos -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    
+                    <!-- 1 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group">
+                        <img src="MEC/Capacitación Automatización Industrial Internacional.jpeg" alt="Capacitación Automatización Industrial Internacional" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 2 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group">
+                        <img src="MEC/Impresión 3D.jpg" alt="Manufactura con Impresión 3D" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 3 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group">
+                        <img src="MEC/MECATON SPS.jpg" alt="Evento MECATON SPS" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 4 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group md:row-span-2">
+                        <img src="MEC/Proyecto de Investigación  IA-Robótica SPS.jpg" alt="Proyecto de Investigación IA-Robótica SPS" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 5 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group">
+                        <img src="MEC/Proyecto Estudiantil Mecatronica 1.jpeg" alt="Proyecto Estudiantil Mecatrónica" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 6 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group">
+                        <img src="MEC/Proyecto Estudiantil Mecatronica 2.jpeg" alt="Integración de componentes electrónicos" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 7 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group">
+                        <img src="MEC/Proyecto Estudiantil Mecatronica 3.jpeg" alt="Desarrollo de prototipo estudiantil" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 8 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group">
+                        <img src="MEC/Proyecto Estudiantil Mecatronica 4.jpeg" alt="Innovación en mecatrónica estudiantil" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 9 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group">
+                        <img src="MEC/Robótica IA Proyecto de Investigación SPS.jpg" alt="Robótica IA Proyecto de Investigación" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 10 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group">
+                        <img src="MEC/Robótica Industrial.jpg" alt="Prácticas en Robótica Industrial" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 11 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group md:col-span-2">
+                        <img src="MEC/Talleres Impartidos por Empresas SPS.jpeg" alt="Talleres Impartidos por Empresas Aliadas SPS" class="w-full h-full object-cover img-zoom object-top" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 12 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group">
+                        <img src="MEC/Visita Técnica Centro de Mecanizado CNC SPS.jpeg" alt="Visita Técnica Centro de Mecanizado CNC" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <!-- 13 -->
+                    <div class="relative overflow-hidden rounded-lg shadow-sm bg-gray-200 aspect-square group">
+                        <img src="MEC/Visita Ténica Central Hidroeléctrica El Cajón.jpeg" alt="Visita Técnica Central Hidroeléctrica El Cajón" class="w-full h-full object-cover img-zoom" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 9. Tabla Equivalencias -->
             <section id="equivalencias" class="mb-20">
                 <h2 class="text-2xl font-bold text-federal mb-6 flex items-center">
                     <span class="w-2 h-8 bg-pacific mr-3 rounded-sm"></span>
-                    Equivalencias Clave (Plan 2011 &rarr; 2020)
+                    Transición: Plan 2011 al Plan 2020
                 </h2>
+                <p class="text-gray-600 text-sm mb-6">Guía rápida de equivalencias para estudiantes que realizan cambio de plan. Se reconocen automáticamente asignaturas con igual código y nombre.</p>
 
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
                     <div class="overflow-x-auto max-h-96">
                         <table class="w-full text-left border-collapse">
-                            <thead class="bg-federal text-white sticky top-0 z-10">
+                            <thead class="bg-federal text-white sticky top-0 z-10 shadow">
                                 <tr>
-                                    <th class="p-4 font-semibold text-sm w-1/2">Plan Anterior (2011)</th>
-                                    <th class="p-4 font-semibold text-sm w-1/2 bg-blue-900"><i class="fas fa-arrow-right mr-2 text-pacific"></i> Plan Nuevo (2020)</th>
+                                    <th class="p-4 font-semibold text-sm w-1/2">Asignatura en Plan Anterior (2011)</th>
+                                    <th class="p-4 font-semibold text-sm w-1/2 bg-blue-900"><i class="fas fa-arrow-right mr-2 text-pacific"></i> Nueva Asignatura (Plan 2020)</th>
                                 </tr>
                             </thead>
                             <tbody class="text-sm divide-y divide-gray-100">
                                 <tr class="hover:bg-gray-50">
-                                    <td class="p-4 text-gray-600">Circuitos Eléctricos I y II</td>
-                                    <td class="p-4 font-medium text-federal">Análisis de Circuitos en D.C. y A.C.</td>
+                                    <td class="p-4 text-gray-600 font-medium">Circuitos Eléctricos I y II</td>
+                                    <td class="p-4 font-bold text-federal">Análisis de Circuitos en D.C. y A.C.</td>
                                 </tr>
                                 <tr class="hover:bg-gray-50">
-                                    <td class="p-4 text-gray-600">Redes</td>
-                                    <td class="p-4 font-medium text-federal">Introducción a Redes</td>
+                                    <td class="p-4 text-gray-600 font-medium">Redes</td>
+                                    <td class="p-4 font-bold text-federal">Introducción a Redes</td>
                                 </tr>
                                 <tr class="hover:bg-gray-50">
-                                    <td class="p-4 text-gray-600">Electrónica I y II</td>
-                                    <td class="p-4 font-medium text-federal">Análisis de Circuitos Electrónicos / Amplificadores</td>
+                                    <td class="p-4 text-gray-600 font-medium">Electrónica I y II</td>
+                                    <td class="p-4 font-bold text-federal">Análisis de Circuitos Electrónicos / Amplificadores</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50 bg-red-50">
+                                <tr class="hover:bg-red-50 bg-red-50/50">
                                     <td class="p-4 text-red-600 line-through">Ofimática I, II, III</td>
-                                    <td class="p-4 font-medium text-red-800">ELIMINADAS / FUSIONADAS</td>
+                                    <td class="p-4 font-bold text-red-800"><i class="fas fa-times-circle mr-1"></i> ELIMINADAS / FUSIONADAS</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     
                     <!-- Alert Footer -->
-                    <div class="bg-red-50 p-4 border-l-4 border-red-500 flex items-start">
-                        <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
+                    <div class="bg-red-50 p-5 border-l-4 border-red-500 flex items-start">
+                        <i class="fas fa-exclamation-triangle text-red-500 mt-0.5 mr-4 text-xl"></i>
                         <div>
-                            <strong class="text-red-700 text-sm">Atención:</strong>
-                            <p class="text-xs text-red-600 mt-1">Asignaturas nuevas como <strong>Instalaciones Eléctricas</strong> o <strong>Programación Estructurada</strong> pueden requerir cursarse si no existe equivalencia directa.</p>
+                            <strong class="text-red-800 text-sm block mb-1">Punto Crítico de Asesoría:</strong>
+                            <p class="text-sm text-red-700 leading-relaxed">Nuevas clases introducidas por la reforma, como <strong>Instalaciones Eléctricas</strong> o <strong>Programación Estructurada</strong>, son requisitos ineludibles y deberán cursarse si el estudiante no posee una equivalencia directa aprobada.</p>
                         </div>
                     </div>
                 </div>
@@ -506,19 +662,50 @@
 
     <!-- Script for Interaction -->
     <script>
+        // Sidebar Toggle Logic
         function toggleMenu() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobile-overlay');
             
             if (sidebar.classList.contains('-translate-x-full')) {
-                // Open
                 sidebar.classList.remove('-translate-x-full');
                 overlay.classList.remove('hidden');
             } else {
-                // Close
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');
             }
+        }
+
+        // Lightbox Logic (Edna's Touch)
+        function openLightbox(src, alt) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            // Set data
+            lightboxImg.src = src;
+            lightboxCaption.innerText = alt;
+            
+            // Show lightbox
+            lightbox.classList.remove('hidden');
+            
+            // Trigger animation
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+            }, 10);
+        }
+
+        function closeLightbox(e) {
+            const lightbox = document.getElementById('lightbox');
+            
+            // Hide animation
+            lightbox.classList.add('opacity-0');
+            
+            // Remove completely after transition
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                document.getElementById('lightbox-img').src = ''; // Clear source
+            }, 300);
         }
     </script>
 </body>
