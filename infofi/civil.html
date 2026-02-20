@@ -118,6 +118,7 @@
                     <li><a href="#diferenciadores" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-star w-6"></i> Diferenciadores</a></li>
                     <li><a href="#galeria" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-images w-6"></i> Galería Visual</a></li>
                     <li><a href="#timeline" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-stream w-6"></i> Flujograma</a></li>
+                    <li><a href="#liderazgo" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-flag w-6"></i> Líderes Estudiantiles</a></li>
                     <li><a href="#padres" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-users w-6"></i> Para Padres</a></li>
                     <li><a href="#equivalencias" class="flex items-center p-3 rounded-lg text-federal hover:bg-pacific/10 hover:text-pacific transition-colors font-medium"><i class="fas fa-exchange-alt w-6"></i> Equivalencias</a></li>
                 </ul>
@@ -426,6 +427,16 @@
                         <div class="absolute top-2 left-2 bg-federal text-white text-[10px] font-bold px-2 py-1 rounded shadow">Inserción Laboral</div>
                     </div>
 
+                    <!-- Liderazgo Estudiantil (Nuevas Fotos) -->
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Asociacion Estudiantil 2.jpg', 'Nuestra Asociación Estudiantil en Acción')">
+                        <img src="CIV/Asociacion Estudiantil 2.jpg" alt="Asociacion Estudiantil 2" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-[#0a0a85] text-white text-[10px] font-bold px-2 py-1 rounded shadow">Liderazgo</div>
+                    </div>
+                    <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Asociacion Estudiantil 3.jpg', 'Generaciones de Líderes: Asociación Estudiantil de Ingeniería Civil')">
+                        <img src="CIV/Asociacion Estudiantil 3.jpg" alt="Asociacion Estudiantil 3" class="object-cover w-full h-full img-hover-zoom">
+                        <div class="absolute top-2 left-2 bg-[#0a0a85] text-white text-[10px] font-bold px-2 py-1 rounded shadow">Liderazgo</div>
+                    </div>
+
                     <!-- Laboratorios -->
                     <div class="rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-square" onclick="openModal('CIV/Lab CIV TGU.jpeg', 'Pruebas y Análisis en Laboratorio TGU')">
                         <img src="CIV/Lab CIV TGU.jpeg" alt="Lab TGU 1" class="object-cover w-full h-full img-hover-zoom">
@@ -472,7 +483,7 @@
                         <p class="text-sm text-gray-600 mt-1">Concreto Reforzado, Acero, Carreteras, Ingeniería Sanitaria. Diseño real de edificios y sistemas de agua usando tecnología BIM.</p>
                     </div>
 
-                    <!-- Modificado: Integración y Salida (Sin "Año 5") -->
+                    <!-- Integración y Salida -->
                     <div class="relative pl-8">
                         <div class="absolute -left-3.5 top-0 w-6 h-6 bg-federal rounded-full z-10 shadow-lg shadow-pacific/50"></div>
                         <h3 class="font-bold text-federal text-lg">Integración y Salida</h3>
@@ -501,7 +512,38 @@
                 </div>
             </section>
 
-            <!-- 8. Para Padres -->
+            <!-- 8. Liderazgo con Propósito (NUEVA SECCIÓN ASCE) -->
+            <section id="liderazgo" class="scroll-mt-24 bg-white border-t-4 border-federal rounded-xl p-8 shadow-sm">
+                <div class="flex flex-col lg:flex-row gap-8 items-center">
+                    <div class="lg:w-1/2">
+                        <h2 class="text-2xl font-bold text-federal mb-4 flex items-center">
+                            <i class="fas fa-flag text-pacific mr-3"></i> Líderes con Propósito
+                        </h2>
+                        <p class="text-sm text-gray-700 leading-relaxed mb-4 text-justify">
+                            En UNITEC no solo formamos ingenieros técnicos; forjamos <strong>líderes con una verdadera mentalidad global</strong>. Nuestro plan de estudios está diseñado para que cada solución de infraestructura propuesta considere el impacto global, cultural, ambiental y económico, potenciado por un inquebrantable Pensamiento Crítico y Adaptación al Cambio.
+                            <br><br>
+                            El mayor testimonio de este liderazgo es nuestra propia comunidad: la <strong>Asociación Estudiantil de Ingeniería Civil de UNITEC</strong> hizo historia al fundar el primer capítulo estudiantil de la prestigiosa <em>American Society of Civil Engineers (ASCE)</em> en toda Honduras.
+                            <br><br>
+                            Al elegir UNITEC, su hijo no solo accederá a laboratorios de punta y un currículo de clase mundial, sino que se integrará a una red de élite de futuros profesionales que ya están elevando los estándares de la ingeniería nacional e internacional.
+                        </p>
+                        <div class="inline-block bg-federal text-white px-4 py-2 rounded font-bold text-xs uppercase tracking-wide shadow-md">
+                            <i class="fas fa-star text-pacific mr-1"></i> Primer Capítulo ASCE en Honduras
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                        <div class="bg-gray-200 rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-video md:aspect-auto md:h-full" onclick="openModal('CIV/Asociacion Estudiantil 1.jpg', 'Miembros de la Asociación Estudiantil en Visita Técnica ASCE')">
+                            <img src="CIV/Asociacion Estudiantil 1.jpg" alt="Visita Técnica ASCE" class="object-cover w-full h-full img-hover-zoom">
+                            <div class="absolute bottom-0 inset-x-0 bg-federal/90 backdrop-blur-sm text-white text-[10px] p-2 text-center font-medium">Asociación Estudiantil en Acción</div>
+                        </div>
+                        <div class="bg-gray-200 rounded-lg overflow-hidden relative group cursor-pointer shadow-md aspect-video md:aspect-auto md:h-full" onclick="openModal('CIV/ASCE charter recognition.jpeg', 'Reconocimiento Oficial (Charter) de ASCE a UNITEC')">
+                            <img src="CIV/ASCE charter recognition.jpeg" alt="ASCE Charter" class="object-cover w-full h-full img-hover-zoom">
+                            <div class="absolute bottom-0 inset-x-0 bg-federal/90 backdrop-blur-sm text-white text-[10px] p-2 text-center font-medium">Reconocimiento Oficial ASCE</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. Para Padres -->
             <section id="padres" class="scroll-mt-24 bg-white border border-gray-200 rounded-xl p-8 shadow-md">
                 <h2 class="text-xl font-bold text-federal mb-6 flex items-center">
                     <span class="bg-federal text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-sm"><i class="fas fa-users"></i></span>
@@ -526,7 +568,7 @@
                 </div>
             </section>
 
-            <!-- 9. Tabla de Equivalencias -->
+            <!-- 10. Tabla de Equivalencias -->
             <section id="equivalencias" class="scroll-mt-24 mb-12">
                 <h2 class="text-lg font-bold text-federal border-l-4 border-red-500 pl-3 mb-4 uppercase tracking-wide">Equivalencias (Plan 2015 a 2023)</h2>
                 
@@ -635,3 +677,4 @@
     </script>
 </body>
 </html>
+```
