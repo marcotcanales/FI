@@ -62,6 +62,15 @@
         .animate-spin-slow {
             animation: spin-slow 60s linear infinite;
         }
+
+        /* Modal specific animations */
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
 </head>
 <body>
@@ -110,6 +119,7 @@
         const App = () => {
             const [isMenuOpen, setIsMenuOpen] = useState(false);
             const [scrolled, setScrolled] = useState(false);
+            const [selectedCapability, setSelectedCapability] = useState(null); // Estado para el modal de Capacidad
 
             const { 
                 Menu, X, Award, Globe, Zap, Users, BookOpen, Target, 
@@ -125,6 +135,15 @@
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
+            // Lock body scroll when modal is open
+            useEffect(() => {
+                if (selectedCapability) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = 'auto';
+                }
+            }, [selectedCapability]);
+
             const scrollTo = (id) => {
                 const element = document.getElementById(id);
                 if (element) {
@@ -134,7 +153,6 @@
             };
 
             // DATA STRICTLY FROM DOCUMENT "VISION 2030"
-            
             const visionText = "Ser una Universidad de clase mundial, protagonista del desarrollo de Honduras, reconocida por su excelencia académica, innovación constante y por construir una comunidad de aprendizaje donde la conexión humana y la experiencia educativa fortalecen el crecimiento integral de las personas a lo largo de su vida.";
 
             const principles = [
@@ -178,13 +196,50 @@
                 }
             ];
 
+            // Retrato del Egresado con textos extraídos del PDF proporcionado
             const portraitCapabilities = [
-                { title: "Líder con Propósito", icon: <Star size={24} />, pos: "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2", labelPos: "-top-12 left-1/2 -translate-x-1/2" },
-                { title: "Ciudadano Responsable", icon: <Globe size={24} />, pos: "top-[25%] right-[2%] translate-x-1/2", labelPos: "-right-4 translate-x-full md:-right-4 md:translate-x-full mt-10 md:mt-0" },
-                { title: "Innovador Creativo", icon: <Lightbulb size={24} />, pos: "bottom-[25%] right-[2%] translate-x-1/2", labelPos: "-right-4 translate-x-full md:-right-4 md:translate-x-full mb-10 md:mb-0" },
-                { title: "Comunicador Efectivo", icon: <MessageCircle size={24} />, pos: "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2", labelPos: "-bottom-12 left-1/2 -translate-x-1/2" },
-                { title: "Colaborador Constructivo", icon: <Users size={24} />, pos: "bottom-[25%] left-[2%] -translate-x-1/2", labelPos: "-left-4 -translate-x-full md:-left-4 md:-translate-x-full mb-10 md:mb-0" },
-                { title: "Solucionador Empático", icon: <Heart size={24} />, pos: "top-[25%] left-[2%] -translate-x-1/2", labelPos: "-left-4 -translate-x-full md:-left-4 md:-translate-x-full mt-10 md:mt-0" },
+                { 
+                    title: "Líder con Propósito", 
+                    icon: <Star size={24} />, 
+                    pos: "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2", 
+                    labelPos: "-top-12 left-1/2 -translate-x-1/2",
+                    desc: "Un egresado de UNITEC ha alcanzado equilibrio personal y bienestar. Se guía por la curiosidad y un compromiso con el aprendizaje a lo largo de la vida. Tiene un fuerte sentido de propósito y es adaptable y resiliente en la búsqueda de sus metas. Actúa con integridad y sirve tanto a comunidades locales como globales, siempre preparado para hacer lo correcto."
+                },
+                { 
+                    title: "Ciudadano Responsable", 
+                    icon: <Globe size={24} />, 
+                    pos: "top-[25%] right-[2%] translate-x-1/2", 
+                    labelPos: "-right-4 translate-x-full md:-right-4 md:translate-x-full mt-10 md:mt-0",
+                    desc: "Un egresado de UNITEC siente un sentido de responsabilidad personal por sostener sistemas sociales saludables y ecosistemas naturales, y actúa para transformar su entorno para mejorarlo."
+                },
+                { 
+                    title: "Innovador Creativo", 
+                    icon: <Lightbulb size={24} />, 
+                    pos: "bottom-[25%] right-[2%] translate-x-1/2", 
+                    labelPos: "-right-4 translate-x-full md:-right-4 md:translate-x-full mb-10 md:mb-0",
+                    desc: "Un egresado de UNITEC aporta originalidad de Interpretación y creatividad de expresión a su experiencia del mundo. Crea nuevos artefactos, tecnologias y herramientas, llevando un espiritu emprendedor a la solución de problemas."
+                },
+                { 
+                    title: "Comunicador Efectivo", 
+                    icon: <MessageCircle size={24} />, 
+                    pos: "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2", 
+                    labelPos: "-bottom-12 left-1/2 -translate-x-1/2",
+                    desc: "Un egresado de UNITEC domina las habilidades de comunicación oral, escrita y digital. Expresa ideas complejas de manera efectiva, ética y estratégica, utilizando la comunicación para defender principios y compartir ideas que importan."
+                },
+                { 
+                    title: "Colaborador Constructivo", 
+                    icon: <Users size={24} />, 
+                    pos: "bottom-[25%] left-[2%] -translate-x-1/2", 
+                    labelPos: "-left-4 -translate-x-full md:-left-4 md:-translate-x-full mb-10 md:mb-0",
+                    desc: "Un egresado de UNITEC trabaja eficazmente con personas de distintos orígenes, disciplinas y culturas. Construye relaciones respetuosas para alcanzar metas comunes con apertura, empatia y respeto."
+                },
+                { 
+                    title: "Solucionador Empático", 
+                    icon: <Heart size={24} />, 
+                    pos: "top-[25%] left-[2%] -translate-x-1/2", 
+                    labelPos: "-left-4 -translate-x-full md:-left-4 md:-translate-x-full mt-10 md:mt-0",
+                    desc: "Un egresado de UNITEC trabaja para comprender los patrones y principios que determinan cómo funciona el mundo. Es un pensador critico con un profundo entendimiento de la causalidad, y combina esto con empatia para abordar problemas complejos y crear soluciones sostenibles y equitativas."
+                },
             ];
 
              const ecosystemData = [
@@ -392,13 +447,16 @@
                         </div>
                     </section>
 
-                    {/* RETRATO SECTION - MOBILE OPTIMIZED */}
+                    {/* RETRATO SECTION - MODIFIED FOR INTERACTIVITY */}
                     <section id="retrato" className="py-32 relative bg-gradient-to-b from-[#05054B] to-[#06065C] overflow-hidden">
-                        <div className="container mx-auto px-6">
+                        <div className="container mx-auto px-6 relative z-10">
                             <div className="text-center mb-12 md:mb-24">
                                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Retrato del Egresado</h2>
-                                <p className="text-gray-300 max-w-2xl mx-auto text-sm md:text-base">
+                                <p className="text-gray-300 max-w-2xl mx-auto text-sm md:text-base mb-2">
                                     Nuestro modelo forma profesionales integrales, definidos por capacidades humanas conectadas a un núcleo equilibrado.
+                                </p>
+                                <p className="text-[#47C8FD] font-semibold text-sm">
+                                    Haz clic en cada capacidad para conocer su definición.
                                 </p>
                             </div>
 
@@ -417,15 +475,21 @@
                                         ))}
                                     </div>
 
-                                    {/* The 6 Capabilities (Nodes) */}
+                                    {/* The 6 Capabilities (Nodes) - Clickable */}
                                     {portraitCapabilities.map((cap, idx) => (
-                                        <div key={idx} className={`absolute ${cap.pos} flex flex-col items-center group z-20`}>
+                                        <div 
+                                            key={idx} 
+                                            className={`absolute ${cap.pos} flex flex-col items-center group z-20 cursor-pointer`}
+                                            onClick={() => setSelectedCapability(cap)}
+                                            role="button"
+                                            tabIndex="0"
+                                        >
                                             <div className="relative">
-                                                <div className="w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 border-[#03AED2] rounded-full flex items-center justify-center text-[#47C8FD] shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10">
+                                                <div className={`w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 ${selectedCapability?.title === cap.title ? 'border-white bg-[#03AED2] text-white' : 'border-[#03AED2] text-[#47C8FD]'} rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10`}>
                                                     {cap.icon}
                                                 </div>
-                                                <div className={`absolute ${cap.labelPos} w-32 md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#06065C]/95 px-3 py-1.5 rounded border border-[#03AED2]/30 backdrop-blur-md z-30 shadow-xl`}>
-                                                    <span className="text-xs md:text-sm font-bold text-white group-hover:text-[#47C8FD] transition-colors leading-tight block">
+                                                <div className={`absolute ${cap.labelPos} w-32 md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#06065C]/95 px-3 py-1.5 rounded border ${selectedCapability?.title === cap.title ? 'border-white' : 'border-[#03AED2]/30'} backdrop-blur-md z-30 shadow-xl`}>
+                                                    <span className={`text-xs md:text-sm font-bold ${selectedCapability?.title === cap.title ? 'text-[#47C8FD]' : 'text-white'} group-hover:text-[#47C8FD] transition-colors leading-tight block`}>
                                                         {cap.title}
                                                     </span>
                                                 </div>
@@ -434,7 +498,7 @@
                                     ))}
 
                                     {/* CENTER CORE */}
-                                    <div className="absolute top-1/2 left-1/2 w-56 h-56 md:w-72 md:h-72 bg-[#06065C] border-4 border-[#03AED2] rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-10 shadow-[0_0_60px_rgba(3,174,210,0.4)]">
+                                    <div className="absolute top-1/2 left-1/2 w-56 h-56 md:w-72 md:h-72 bg-[#06065C] border-4 border-[#03AED2] rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-10 shadow-[0_0_60px_rgba(3,174,210,0.4)] pointer-events-none">
                                         <div className="absolute inset-3 border border-[#47C8FD]/30 rounded-full"></div>
                                         <div className="relative w-full h-full">
                                             {/* Conceptos */}
@@ -464,6 +528,54 @@
                                 </div>
                             </div>
                         </div>
+
+                        {/* MODAL / PANEL DE DEFINICIÓN (Opción A: Seguro y Clásico) */}
+                        {selectedCapability && (
+                            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                                {/* Backdrop */}
+                                <div 
+                                    className="absolute inset-0 bg-[#040435]/80 backdrop-blur-sm cursor-pointer transition-opacity"
+                                    onClick={() => setSelectedCapability(null)}
+                                ></div>
+                                
+                                {/* Modal Content - Diamond precise cuts inspired */}
+                                <div className="relative bg-[#06065C] border border-[#03AED2] p-8 md:p-10 max-w-2xl w-full shadow-[0_0_50px_rgba(3,174,210,0.2)] animate-fade-in-up z-10">
+                                    {/* Esquinas decorativas estilo diamante */}
+                                    <div className="absolute -top-1 -left-1 w-6 h-6 border-t-2 border-l-2 border-[#47C8FD]"></div>
+                                    <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-2 border-r-2 border-[#47C8FD]"></div>
+                                    
+                                    <button 
+                                        className="absolute top-4 right-4 text-[#03AED2] hover:text-white transition-colors"
+                                        onClick={() => setSelectedCapability(null)}
+                                        aria-label="Cerrar"
+                                    >
+                                        <X size={28} />
+                                    </button>
+
+                                    <div className="flex items-center gap-4 mb-6 pb-6 border-b border-[#03AED2]/20">
+                                        <div className="p-3 bg-[#03AED2]/10 rounded-sm text-[#47C8FD]">
+                                            {selectedCapability.icon}
+                                        </div>
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">
+                                            {selectedCapability.title}
+                                        </h3>
+                                    </div>
+                                    
+                                    <p className="text-gray-200 font-light leading-relaxed text-base md:text-lg">
+                                        {selectedCapability.desc}
+                                    </p>
+
+                                    <div className="mt-8 flex justify-end">
+                                         <button 
+                                            onClick={() => setSelectedCapability(null)}
+                                            className="px-6 py-2 bg-transparent border border-[#03AED2] text-[#47C8FD] hover:bg-[#03AED2] hover:text-[#06065C] font-semibold transition-all duration-300 text-sm tracking-wider uppercase"
+                                        >
+                                            Entendido
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </section>
 
                     {/* ECOSISTEMA DE APRENDIZAJE */}
