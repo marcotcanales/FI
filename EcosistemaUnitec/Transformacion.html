@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformación Pedagógica CGS | Caso UNITEC</title>
+    
+    <!-- Tipografía Institucional: Poppins Estricto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Configuración de Colores de Marca y Tipografía -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            federal: '#06065C', /* Federal Blue */
+                            cyan: '#03AED2',    /* Pacific Cyan */
+                            sky: '#47C8FD',     /* Vivid Sky Blue */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Cortes geométricos del diamante - CERO BORDES REDONDEADOS */
+        .diamond-cut {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
+        }
+        .diamond-cut-reverse {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 85%);
+        }
+        .diamond-shape {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        
+        /* Cero sombras, cero degradados. Desplazamientos sólidos. */
+        .hover-solid-shift {
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .hover-solid-shift:hover {
+            transform: translate(-8px, -8px);
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: #06065C;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-sky selection:text-brand-federal leading-relaxed">
+
+    <!-- Navegación Corporativa Estricta -->
+    <nav class="w-full bg-brand-federal border-b-4 border-brand-cyan py-6 px-8 flex justify-between items-center z-50 sticky top-0">
+        <div class="flex items-center gap-3">
+            <svg width="40" height="40" viewBox="0 0 100 100" class="fill-current text-brand-sky">
+                <polygon points="50,0 100,50 50,100 0,50" />
+            </svg>
+            <span class="text-4xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
+        </div>
+        <div class="hidden md:block text-brand-sky font-semibold tracking-widest uppercase text-xs mt-2">
+            Transformación Pedagógica
+        </div>
+    </nav>
+
+    <!-- Header Section (Sin gradientes, cortes geométricos) -->
+    <header class="bg-brand-federal text-white py-20 px-6 relative overflow-hidden border-b-8 border-brand-cyan">
+        <div class="absolute top-0 right-0 w-80 h-80 bg-brand-sky opacity-10 diamond-shape translate-x-1/4 -translate-y-1/4 animate-pulse"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="flex flex-wrap items-center gap-4 mb-8">
+                <span class="bg-brand-cyan text-white font-black px-4 py-1.5 text-xs tracking-widest uppercase diamond-cut">Collective Growth System</span>
+                <span class="border-2 border-brand-sky text-brand-sky font-black px-4 py-1 text-xs tracking-widest uppercase diamond-cut">Visión 2030</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight uppercase tracking-tight">De la Evaluación Transaccional <br><span class="text-brand-cyan">al Desempeño Auténtico</span></h1>
+            <p class="text-xl md:text-2xl font-medium text-brand-sky max-w-3xl mb-10 border-l-4 border-brand-cyan pl-4">Caso de estudio: CIV414 - Diseño Estructural en Concreto. Una guía de transferencia pedagógica para todas las facultades de UNITEC.</p>
+            
+            <!-- Tags de Facultades con cortes rectos -->
+            <div class="flex flex-wrap gap-3 text-xs font-bold uppercase tracking-widest">
+                <span class="border border-white/30 text-white px-4 py-2 flex items-center gap-2 hover:bg-white hover:text-brand-federal transition-colors"><i data-lucide="hard-hat" class="w-4 h-4 text-brand-cyan"></i> Ingeniería</span>
+                <span class="border border-white/30 text-white px-4 py-2 flex items-center gap-2 hover:bg-white hover:text-brand-federal transition-colors"><i data-lucide="briefcase" class="w-4 h-4 text-brand-cyan"></i> C. Administrativas</span>
+                <span class="border border-white/30 text-white px-4 py-2 flex items-center gap-2 hover:bg-white hover:text-brand-federal transition-colors"><i data-lucide="palette" class="w-4 h-4 text-brand-cyan"></i> Arte y Diseño</span>
+                <span class="border border-white/30 text-white px-4 py-2 flex items-center gap-2 hover:bg-white hover:text-brand-federal transition-colors"><i data-lucide="graduation-cap" class="w-4 h-4 text-brand-cyan"></i> Postgrado</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-20 space-y-24">
+
+        <!-- PARTE 1 -->
+        <div class="text-center mb-16">
+            <h2 class="text-sm font-black tracking-[0.2em] text-gray-400 uppercase mb-4">Primera Parte</h2>
+            <div class="w-24 h-2 bg-brand-cyan mx-auto diamond-cut"></div>
+        </div>
+
+        <!-- 1. El Porqué -->
+        <section id="el-porque" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div class="lg:col-span-1">
+                <div class="sticky top-32">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-brand-cyan diamond-shape flex items-center justify-center text-white font-black text-2xl shrink-0">1</div>
+                        <h2 class="text-3xl font-black text-brand-federal uppercase tracking-tight">El Porqué</h2>
+                    </div>
+                    <p class="text-gray-700 font-medium text-lg leading-relaxed border-l-4 border-gray-200 pl-4">Propósito de la asignatura y su alineación con el <strong class="text-brand-federal font-black">Retrato del Egresado</strong>. Abandonamos la memorización para enfocarnos en la formación del carácter.</p>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-2 space-y-8">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-federal diamond-cut mt-3 ml-3"></div>
+                    <div class="relative bg-white p-10 diamond-cut border border-gray-100 z-10 hover-solid-shift flex flex-col h-full">
+                        <h3 class="text-2xl font-black text-brand-federal mb-4 flex items-center gap-3 uppercase"><i data-lucide="target" class="text-brand-cyan w-8 h-8"></i> El Caso CIV414</h3>
+                        <p class="text-gray-700 leading-relaxed mb-8 font-medium">El rediseño de la clase de Diseño Estructural abandonó la memorización mecánica de fórmulas. Ahora se enfoca en la <strong class="text-brand-federal font-black">gestión de la incertidumbre</strong> y el desarrollo del criterio profesional del ingeniero.</p>
+                        
+                        <div class="bg-gray-50 p-8 border-l-8 border-brand-cyan diamond-cut">
+                            <h4 class="font-black text-brand-federal mb-6 flex items-center gap-2 uppercase tracking-tight"><i data-lucide="user-check" class="text-brand-cyan"></i> Conexión con el Retrato del Egresado</h4>
+                            <ul class="space-y-6">
+                                <li class="flex items-start gap-4">
+                                    <div class="bg-brand-federal p-3 diamond-shape shrink-0"><i data-lucide="heart-handshake" class="w-5 h-5 text-brand-sky"></i></div>
+                                    <div>
+                                        <strong class="text-brand-federal font-black block uppercase mb-1">Solucionador de Problemas Empático</strong>
+                                        <span class="text-gray-700 text-sm font-medium">Los estudiantes asumen que no solo calculan números abstractos, sino que sus decisiones protegen vidas humanas reales.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <div class="bg-brand-cyan p-3 diamond-shape shrink-0"><i data-lucide="message-square" class="w-5 h-5 text-white"></i></div>
+                                    <div>
+                                        <strong class="text-brand-federal font-black block uppercase mb-1">Comunicador Efectivo</strong>
+                                        <span class="text-gray-700 text-sm font-medium">Aprenden a justificar conceptos técnicos ante audiencias no técnicas (ej. explicar a un inversionista por qué una obra debe detenerse por seguridad).</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transfer Lens Box -->
+                <div class="bg-brand-federal text-white p-8 diamond-cut border-l-8 border-brand-sky">
+                    <h4 class="font-black text-brand-sky mb-4 flex items-center gap-3 uppercase"><i data-lucide="eye" class="w-6 h-6 text-white"></i> La Lente de Transferencia (Todas las Facultades)</h4>
+                    <p class="text-gray-200 text-sm leading-relaxed font-medium">
+                        La transformación comienza cambiando la pregunta de <em>"¿Qué deben memorizar para el examen?"</em> a <strong class="text-white font-bold">"¿Para qué sirve esto en el mundo real?"</strong>. En Ciencias Administrativas puede ser la empatía hacia el consumidor; en Arte, el impacto social del diseño; y en Postgrado, la ética en la toma de decisiones directivas.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. El Qué -->
+        <section id="el-que" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div class="lg:col-span-1">
+                <div class="sticky top-32">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-brand-sky diamond-shape flex items-center justify-center text-brand-federal font-black text-2xl shrink-0">2</div>
+                        <h2 class="text-3xl font-black text-brand-federal uppercase tracking-tight">El Qué</h2>
+                    </div>
+                    <p class="text-gray-700 font-medium text-lg leading-relaxed border-l-4 border-gray-200 pl-4">La <strong class="text-brand-federal font-black">Gran Idea</strong> y los Objetivos Conceptuales. Qué es aquello que los estudiantes deben llevarse para toda la vida.</p>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-2">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-cyan diamond-cut mt-3 ml-3"></div>
+                    <div class="relative bg-white p-10 diamond-cut border border-gray-100 z-10 hover-solid-shift flex flex-col h-full">
+                        
+                        <!-- La Gran Idea -->
+                        <div class="mb-10 text-center p-8 bg-brand-federal text-white diamond-cut border-b-4 border-brand-sky">
+                            <p class="text-xs font-black text-brand-sky uppercase tracking-[0.2em] mb-4">La Gran Idea</p>
+                            <p class="text-xl md:text-2xl font-bold italic leading-relaxed">"Entender que una estructura de concreto no es una colección de elementos aislados, sino un <strong class="text-brand-cyan font-black">sistema interdependiente</strong> donde la seguridad global depende del flujo de cargas."</p>
+                        </div>
+
+                        <h4 class="font-black text-brand-federal mb-6 flex items-center gap-3 uppercase"><i data-lucide="lightbulb" class="text-brand-cyan w-6 h-6"></i> Preguntas Orientadoras (Framing Questions)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-6 border-2 border-gray-100 diamond-cut hover:border-brand-federal transition-colors bg-gray-50">
+                                <span class="text-xs font-black text-brand-cyan uppercase tracking-widest mb-2 block border-b-2 border-brand-cyan pb-1 w-max">Conceptual</span>
+                                <p class="text-gray-700 text-sm font-medium">¿Qué tan "real" es un modelo estructural frente a la física real de un edificio?</p>
+                            </div>
+                            <div class="p-6 border-2 border-gray-100 diamond-cut hover:border-brand-cyan transition-colors bg-gray-50">
+                                <span class="text-xs font-black text-brand-federal uppercase tracking-widest mb-2 block border-b-2 border-brand-federal pb-1 w-max">Carácter</span>
+                                <p class="text-gray-700 text-sm font-medium">¿Cómo utiliza el ingeniero su criterio para transformar la incertidumbre en un riesgo calculado y ético?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO SECTION 1 -->
+        <section class="py-12 relative border-y-4 border-brand-cyan bg-white">
+            <div class="max-w-4xl mx-auto text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-black text-brand-federal uppercase tracking-tight mb-4">La Aplicación Práctica en Acción</h2>
+                <span class="text-sm font-bold text-brand-cyan uppercase tracking-widest">(Parte 1)</span>
+                <p class="text-gray-600 font-medium mt-6 max-w-2xl mx-auto">Observa cómo los principios del Collective Growth System cobran vida en el aula, estableciendo el propósito y la Gran Idea.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto px-6">
+                <!-- Contenedor de video estricto -->
+                <div class="relative p-2 bg-brand-cyan diamond-cut-reverse inline-block w-full">
+                    <div class="w-full bg-brand-federal diamond-cut-reverse overflow-hidden relative group cursor-pointer">
+                        <div id="videoOverlayCIV1" class="absolute inset-0 bg-brand-federal flex flex-col items-center justify-center z-20 group-hover:bg-opacity-90 transition duration-300">
+                             <div class="w-24 h-24 bg-brand-sky diamond-shape flex items-center justify-center mb-6 transition-transform group-hover:scale-110">
+                                <i data-lucide="play" class="w-10 h-10 text-brand-federal ml-2"></i>
+                             </div>
+                             <span class="bg-brand-cyan text-white text-xs font-black px-3 py-1 uppercase tracking-widest mb-2 diamond-cut">Parte 1</span>
+                             <p class="text-white font-bold tracking-widest uppercase text-sm">El Porqué y El Qué</p>
+                        </div>
+                        <video id="brandVideoCIV1" class="w-full h-auto aspect-video opacity-50 mix-blend-luminosity transition-all duration-500" poster="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80">
+                            <source src="VID/Guia_de_Transformacion_pt1.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTE 2 -->
+        <div class="text-center mb-16 mt-24">
+            <h2 class="text-sm font-black tracking-[0.2em] text-gray-400 uppercase mb-4">Segunda Parte</h2>
+            <div class="w-24 h-2 bg-brand-federal mx-auto diamond-cut"></div>
+        </div>
+
+        <!-- 3. La Evidencia -->
+        <section id="la-evidencia" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div class="lg:col-span-1">
+                <div class="sticky top-32">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-brand-federal diamond-shape flex items-center justify-center text-brand-sky font-black text-2xl shrink-0">3</div>
+                        <h2 class="text-3xl font-black text-brand-federal uppercase tracking-tight">La Evidencia</h2>
+                    </div>
+                    <p class="text-gray-700 font-medium text-lg leading-relaxed border-l-4 border-gray-200 pl-4">¿Cómo sabemos que han aprendido? Transición del examen tradicional de papel hacia <strong class="text-brand-federal font-black">Tareas de Desempeño Auténtico (GRASPS)</strong> y evaluación continua.</p>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-2 space-y-10">
+                <!-- Tarea de desempeño -->
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-sky diamond-cut mt-3 ml-3"></div>
+                    <div class="relative bg-white p-10 diamond-cut border border-gray-100 z-10 hover-solid-shift">
+                        <h3 class="text-2xl font-black text-brand-federal mb-4 flex items-center gap-3 uppercase"><i data-lucide="clipboard-check" class="text-brand-cyan w-8 h-8"></i> Proyecto de Modelación</h3>
+                        <p class="text-gray-700 mb-8 font-medium">Este proyecto reemplaza una evaluación mecánica. Los alumnos aplican sus conocimientos en un entorno simulado de alta exigencia profesional.</p>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse border-t-4 border-brand-federal">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="py-4 px-6 font-black text-brand-federal uppercase tracking-widest text-xs border-b border-gray-200">Elemento (GRASPS)</th>
+                                        <th class="py-4 px-6 font-black text-brand-federal uppercase tracking-widest text-xs border-b border-gray-200">Descripción Aplicada al Caso</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 px-6 font-bold text-brand-cyan">Goal (Meta)</td>
+                                        <td class="py-4 px-6 text-gray-700 font-medium text-sm">Modelar rigurosamente los esquemas de carga para un techo de gran claro.</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 px-6 font-bold text-brand-cyan">Role (Rol)</td>
+                                        <td class="py-4 px-6 text-gray-700 font-medium text-sm">Ingeniero Consultor Junior validando modelos matemáticos.</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 px-6 font-bold text-brand-cyan">Audience (Audiencia)</td>
+                                        <td class="py-4 px-6 text-gray-700 font-medium text-sm">Comité Técnico de la Universidad (Pares y Docente).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feedback STAR (Estilo Diamante) -->
+                <div class="bg-brand-federal text-white p-10 diamond-cut relative overflow-hidden">
+                    <div class="absolute right-0 bottom-0 opacity-10 transform translate-x-1/4 translate-y-1/4">
+                        <i data-lucide="star" class="w-64 h-64 text-brand-sky"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4 relative z-10 uppercase tracking-tight text-brand-sky border-b-2 border-brand-cyan pb-2 inline-block">Herramienta CGS: Feedback S.T.A.R.</h3>
+                    <p class="text-gray-200 mb-8 relative z-10 text-sm font-medium leading-relaxed max-w-2xl">Para cultivar la competencia metacognitiva ("Aprender a Aprender") y el Carácter Colaborativo, utilizamos la matriz S.T.A.R. en revisiones de pares.</p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
+                        <div class="bg-brand-cyan/20 p-6 diamond-cut border border-brand-cyan text-center">
+                            <strong class="block text-4xl font-black text-white mb-2">S</strong>
+                            <span class="text-xs font-bold text-brand-sky uppercase tracking-widest block">Specific</span>
+                            <p class="text-xs mt-2 text-white font-medium">(Específico)</p>
+                        </div>
+                        <div class="bg-brand-cyan/20 p-6 diamond-cut border border-brand-cyan text-center">
+                            <strong class="block text-4xl font-black text-white mb-2">T</strong>
+                            <span class="text-xs font-bold text-brand-sky uppercase tracking-widest block">Timely</span>
+                            <p class="text-xs mt-2 text-white font-medium">(Oportuno)</p>
+                        </div>
+                        <div class="bg-brand-cyan/20 p-6 diamond-cut border border-brand-cyan text-center">
+                            <strong class="block text-4xl font-black text-white mb-2">A</strong>
+                            <span class="text-xs font-bold text-brand-sky uppercase tracking-widest block">Actionable</span>
+                            <p class="text-xs mt-2 text-white font-medium">(Accionable)</p>
+                        </div>
+                        <div class="bg-brand-cyan/20 p-6 diamond-cut border border-brand-cyan text-center">
+                            <strong class="block text-4xl font-black text-white mb-2">R</strong>
+                            <span class="text-xs font-bold text-brand-sky uppercase tracking-widest block">Respectful</span>
+                            <p class="text-xs mt-2 text-white font-medium">(Respetuoso)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. El Cómo -->
+        <section id="el-como" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div class="lg:col-span-1">
+                <div class="sticky top-32">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-brand-cyan diamond-shape flex items-center justify-center text-white font-black text-2xl shrink-0">4</div>
+                        <h2 class="text-3xl font-black text-brand-federal uppercase tracking-tight">El Cómo</h2>
+                    </div>
+                    <p class="text-gray-700 font-medium text-lg leading-relaxed border-l-4 border-gray-200 pl-4">El diseño de las experiencias en el aula bajo la metodología de las <strong class="text-brand-federal font-black">3Cs del CGS</strong>.</p>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-2">
+                <!-- Línea de tiempo estructurada con cortes de diamante -->
+                <div class="space-y-12 relative before:absolute before:inset-0 before:ml-5 md:before:mx-auto md:before:translate-x-0 before:h-full before:w-1 before:bg-brand-cyan before:opacity-30">
+                    
+                    <!-- Item 1 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-12 h-12 diamond-shape bg-brand-federal text-brand-sky shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 border-4 border-white">
+                            <i data-lucide="link" class="w-5 h-5"></i>
+                        </div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-8 diamond-cut border border-gray-200">
+                            <h3 class="font-black text-xl text-brand-federal mb-2 uppercase tracking-tight">Conectar <span class="text-brand-cyan font-bold lowercase tracking-normal text-sm md:text-base ml-1">(Connect)</span></h3>
+                            <span class="text-xs font-bold text-brand-sky uppercase tracking-widest block mb-4 border-b border-gray-100 pb-2">Enganchar con el problema real</span>
+                            <p class="text-gray-700 text-sm font-medium leading-relaxed"><strong class="text-brand-federal font-black block mb-1">Dinámica "El Pre-Mortem":</strong> Simulan que un edificio colapsó en 2030 e intentan predecir qué falló en el análisis inicial. Traslada la atención de "resolver una fórmula" a "evitar un desastre".</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-12 h-12 diamond-shape bg-brand-cyan text-white shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 border-4 border-white">
+                            <i data-lucide="hammer" class="w-5 h-5"></i>
+                        </div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-8 diamond-cut border border-gray-200">
+                            <h3 class="font-black text-xl text-brand-federal mb-2 uppercase tracking-tight">Construir <span class="text-brand-cyan font-bold lowercase tracking-normal text-sm md:text-base ml-1">(Construct)</span></h3>
+                            <span class="text-xs font-bold text-brand-sky uppercase tracking-widest block mb-4 border-b border-gray-100 pb-2">Andamiaje de habilidades</span>
+                            <p class="text-gray-700 text-sm font-medium leading-relaxed"><strong class="text-brand-federal font-black block mb-1">Debate "Tira y Afloja":</strong> Sesiones donde se balancean variables técnicas vs. financieras. Andamiaje que requiere aplicar pensamiento de orden superior y argumentación.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-12 h-12 diamond-shape bg-brand-sky text-brand-federal shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 border-4 border-white">
+                            <i data-lucide="users" class="w-5 h-5"></i>
+                        </div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-8 diamond-cut border border-gray-200">
+                            <h3 class="font-black text-xl text-brand-federal mb-2 uppercase tracking-tight">Contribuir <span class="text-brand-cyan font-bold lowercase tracking-normal text-sm md:text-base ml-1">(Contribute)</span></h3>
+                            <span class="text-xs font-bold text-brand-sky uppercase tracking-widest block mb-4 border-b border-gray-100 pb-2">Pasar del aislamiento a la comunidad</span>
+                            <p class="text-gray-700 text-sm font-medium leading-relaxed">Los alumnos aplican la herramienta <strong class="text-brand-federal font-black">Feedback S.T.A.R.</strong> para auditar los cálculos de sus compañeros antes de la entrega final. Crean un ambiente de Crecimiento Colectivo.</p>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Transfer Lens Box -->
+                <div class="bg-brand-cyan text-brand-federal p-8 diamond-cut border-l-8 border-brand-federal mt-16">
+                    <h4 class="font-black text-brand-federal mb-4 flex items-center gap-3 uppercase"><i data-lucide="repeat" class="w-6 h-6 text-brand-federal"></i> Lente de Transferencia a Otras Disciplinas</h4>
+                    <p class="text-brand-federal font-medium text-sm leading-relaxed">
+                        Cualquier asignatura puede replicar esto. <strong class="font-black text-white">Conectar:</strong> Análisis de un caso de fracaso empresarial (Administración) o una campaña publicitaria desastrosa (Diseño). <strong class="font-black text-white">Construir:</strong> Talleres, uso crítico de IA. <strong class="font-black text-white">Contribuir:</strong> Revisiones de portafolios o defensas de tesis de maestría evaluadas con S.T.A.R.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VIDEO SECTION 2 -->
+        <section class="py-12 relative border-y-4 border-brand-federal bg-white">
+            <div class="max-w-4xl mx-auto text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-black text-brand-federal uppercase tracking-tight mb-4">La Aplicación Práctica en Acción</h2>
+                <span class="text-sm font-bold text-brand-cyan uppercase tracking-widest">(Parte 2)</span>
+                <p class="text-gray-600 font-medium mt-6 max-w-2xl mx-auto">Observa cómo culmina la experiencia en el aula con la evaluación auténtica y la metodología de las 3Cs.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto px-6">
+                <!-- Contenedor de video estricto -->
+                <div class="relative p-2 bg-brand-sky diamond-cut-reverse inline-block w-full">
+                    <div class="w-full bg-brand-federal diamond-cut-reverse overflow-hidden relative group cursor-pointer">
+                        <div id="videoOverlayCIV2" class="absolute inset-0 bg-brand-federal flex flex-col items-center justify-center z-20 group-hover:bg-opacity-90 transition duration-300">
+                             <div class="w-24 h-24 bg-brand-cyan diamond-shape flex items-center justify-center mb-6 transition-transform group-hover:scale-110">
+                                <i data-lucide="play" class="w-10 h-10 text-white ml-2"></i>
+                             </div>
+                             <span class="bg-brand-sky text-brand-federal text-xs font-black px-3 py-1 uppercase tracking-widest mb-2 diamond-cut">Parte 2</span>
+                             <p class="text-white font-bold tracking-widest uppercase text-sm">La Evidencia y El Cómo</p>
+                        </div>
+                        <video id="brandVideoCIV2" class="w-full h-auto aspect-video opacity-50 mix-blend-luminosity transition-all duration-500" poster="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80">
+                            <source src="VID/Guia_de_Transformacion_pt2.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Institucional -->
+    <footer class="bg-brand-federal text-gray-400 py-16 text-center border-t-8 border-brand-cyan relative overflow-hidden">
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-brand-sky opacity-10 diamond-shape -translate-x-1/2 translate-y-1/2"></div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <i data-lucide="quote" class="w-10 h-10 mx-auto mb-6 text-brand-sky opacity-50"></i>
+            <p class="text-xl md:text-2xl font-bold italic mb-8 text-white leading-relaxed">"Con este diseño pedagógico, cualquier asignatura evoluciona de generar receptores pasivos de información a formar protagonistas empoderados. El aprendizaje deja de ser un trámite académico para convertirse en un ensayo de la vida real."</p>
+            <div class="w-32 h-1 bg-brand-cyan mx-auto mb-8 diamond-cut"></div>
+            <p class="font-black text-brand-sky uppercase tracking-widest text-sm mb-2">Diseñado para el fortalecimiento de capacidades docentes.</p>
+            <p class="text-xs font-medium text-gray-400 uppercase tracking-widest">Consultoría Pedagógica CGS | UNITEC Visión 2030</p>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+
+        // Lógica consistente para activar los videos de la marca
+        function setupBrandVideo(overlayId, videoId) {
+            const overlay = document.getElementById(overlayId);
+            const video = document.getElementById(videoId);
+
+            if (overlay && video) {
+                overlay.addEventListener('click', () => {
+                    overlay.classList.add('hidden');
+                    video.classList.remove('opacity-50', 'mix-blend-luminosity');
+                    video.setAttribute('controls', 'true');
+                    video.play();
+                });
+            }
+        }
+
+        // Activar ambos videos del Caso CIV414
+        setupBrandVideo('videoOverlayCIV1', 'brandVideoCIV1');
+        setupBrandVideo('videoOverlayCIV2', 'brandVideoCIV2');
+    </script>
+</body>
+</html>
