@@ -205,16 +205,17 @@
             <!-- Contenedor de video estricto: sin sombras, con cortes y bordes sólidos -->
             <div class="relative p-2 bg-brand-cyan diamond-cut-reverse inline-block w-full">
                 <div class="w-full bg-brand-federal diamond-cut-reverse overflow-hidden relative group cursor-pointer">
-                    <!-- Placeholder de imagen estilo audaz -->
-                    <div class="absolute inset-0 bg-brand-federal flex flex-col items-center justify-center z-20 group-hover:bg-opacity-90 transition duration-300">
+                    <!-- Placeholder de imagen interactiva -->
+                    <div id="videoOverlay" class="absolute inset-0 bg-brand-federal flex flex-col items-center justify-center z-20 group-hover:bg-opacity-90 transition duration-300">
                          <div class="w-24 h-24 bg-brand-sky diamond-shape flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
                             <i data-lucide="play" class="w-10 h-10 text-brand-federal ml-2"></i>
                          </div>
                          <p class="text-white font-bold tracking-widest uppercase">Reproducir Video</p>
                     </div>
-                    <!-- El video real -->
-                    <video class="w-full h-auto aspect-video opacity-50 mix-blend-luminosity" poster="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80">
+                    <!-- El video real con identificador -->
+                    <video id="brandVideo" class="w-full h-auto aspect-video opacity-50 mix-blend-luminosity transition-all duration-500" poster="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80">
                         <source src="VID/Redefiniendo_el_Aprendizaje.mp4" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
                     </video>
                 </div>
             </div>
@@ -238,9 +239,29 @@
         </div>
     </footer>
 
-    <!-- Inicialización de íconos -->
+    <!-- Inicialización de íconos y Lógica del Video -->
     <script>
         lucide.createIcons();
+
+        // Lógica de interacción audaz para el video del diamante
+        const videoOverlay = document.getElementById('videoOverlay');
+        const brandVideo = document.getElementById('brandVideo');
+
+        if (videoOverlay && brandVideo) {
+            videoOverlay.addEventListener('click', () => {
+                // Escondemos la cubierta elegantemente
+                videoOverlay.classList.add('hidden');
+                
+                // Le quitamos la opacidad y los filtros al video para darle claridad (como el diamante)
+                brandVideo.classList.remove('opacity-50', 'mix-blend-luminosity');
+                
+                // Agregamos los controles nativos para que el usuario tome el mando
+                brandVideo.setAttribute('controls', 'true');
+                
+                // ¡Acción!
+                brandVideo.play();
+            });
+        }
     </script>
 </body>
 </html>
