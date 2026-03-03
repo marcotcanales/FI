@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Transición de Modelos y Metacognición | UNITEC CGS</title>
+    
+    <!-- Tipografía Institucional: Poppins Estricto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de Colores de Marca y Tipografía -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            federal: '#06065C', /* Federal Blue */
+                            cyan: '#03AED2',    /* Pacific Cyan */
+                            sky: '#47C8FD',     /* Vivid Sky Blue */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Cortes geométricos del diamante - CERO BORDES REDONDEADOS */
+        .diamond-cut {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
+        }
+        .diamond-cut-reverse {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 85%);
+        }
+        .diamond-shape {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        
+        /* Cero sombras, cero degradados. Desplazamientos sólidos. */
+        .hover-solid-shift {
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .hover-solid-shift:hover {
+            transform: translate(-8px, -8px);
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: #06065C;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-sky selection:text-brand-federal leading-relaxed">
+
+    <!-- Navegación Corporativa Estricta -->
+    <nav class="w-full bg-brand-federal border-b-4 border-brand-cyan py-6 px-8 flex justify-between items-center z-50 sticky top-0">
+        <div class="flex items-center gap-3">
+            <svg width="40" height="40" viewBox="0 0 100 100" class="fill-current text-brand-sky">
+                <polygon points="50,0 100,50 50,100 0,50" />
+            </svg>
+            <span class="text-4xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
+        </div>
+        <div class="hidden md:flex space-x-8 text-brand-sky font-bold tracking-widest uppercase text-xs mt-2">
+            <a href="#transicion" class="hover:text-white transition duration-300">La Transición</a>
+            <a href="#metacognicion" class="hover:text-white transition duration-300">Metacognición</a>
+        </div>
+    </nav>
+
+    <!-- Encabezado Audaz (Sin Gradientes) -->
+    <header class="bg-brand-federal text-white pt-24 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-64 h-64 bg-brand-cyan opacity-20 diamond-shape -translate-y-1/2 -translate-x-1/4 animate-pulse"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-sky opacity-10 diamond-shape translate-y-1/3 translate-x-1/3"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight uppercase">Hacia el Ecosistema <br><span class="text-brand-cyan">de Aprendizaje</span></h1>
+            <p class="text-lg md:text-xl text-brand-sky font-medium max-w-2xl mx-auto border-t-2 border-brand-cyan pt-6">
+                Comprendiendo el paso definitivo hacia el desarrollo de capacidades humanas y la metacognición profesional.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-5xl mx-auto px-6 py-20 space-y-32">
+
+        <!-- SECTION 1: La Transición -->
+        <section id="transicion" class="scroll-mt-32">
+            <div class="flex items-center space-x-4 mb-10">
+                <div class="bg-brand-federal text-brand-sky p-4 diamond-shape">
+                    <i data-lucide="layers" class="w-8 h-8"></i>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-black text-brand-federal uppercase">Del Silo al Ecosistema</h2>
+            </div>
+            
+            <div class="relative mb-16">
+                <div class="absolute inset-0 bg-brand-cyan diamond-cut mt-4 ml-4"></div>
+                <div class="relative bg-white p-10 md:p-14 diamond-cut z-10 border border-gray-100">
+                    <p class="text-lg text-gray-700 leading-relaxed font-medium mb-10">
+                        El sistema tradicional se ha caracterizado por estar fragmentado en <strong class="text-brand-federal font-black">"silos"</strong> (departamentos aislados, montañas de estándares inconexos y evaluaciones estandarizadas) que generan una brecha entre lo que se enseña en el aula y lo que los estudiantes necesitan para prosperar en la vida real.
+                    </p>
+
+                    <!-- DESTACADO 1: Frase de transición (Sólida, con cortes rectos) -->
+                    <div class="bg-brand-federal text-white p-8 mb-12 border-l-8 border-brand-sky">
+                        <h3 class="text-xl md:text-2xl font-bold tracking-wide leading-snug uppercase">
+                            La transición hacia el Ecosistema de Aprendizaje del CGS 
+                            <span class="block text-brand-cyan text-sm md:text-lg mt-2 font-medium tracking-widest">(Common Ground Collaborative) en UNITEC significa:</span>
+                        </h3>
+                    </div>
+
+                    <div class="space-y-12">
+                        <!-- Punto 1 -->
+                        <div class="pl-6 border-l-4 border-brand-cyan">
+                            <h4 class="text-2xl font-black text-brand-federal mb-4 uppercase">
+                                Pasar de lo Transaccional a lo Transformacional
+                            </h4>
+                            <p class="text-gray-700 text-lg mb-6 leading-relaxed font-medium">
+                                Dejar de ver la educación como una mera entrega de información donde el alumno es el "objeto" pasivo del proceso, para convertirlo en el "sujeto" activo de su propio aprendizaje. Esto implica cambiar el enfoque de los <em>"inputs"</em> (los comportamientos y entregas del docente) hacia los <em>"impactos"</em> (los cambios observables en el comportamiento, aprendizaje y mentalidad del alumno). 
+                            </p>
+                            
+                            <!-- DESTACADO 2: Modelo 3C -->
+                            <div class="inline-flex flex-col md:flex-row md:items-center bg-gray-50 border border-gray-200 p-4 mb-6 group border-l-8 border-brand-federal">
+                                <span class="bg-brand-federal text-white text-xs font-bold uppercase tracking-wider py-2 px-4 mr-4 mb-2 md:mb-0 text-center">Es elevar el enfoque mediante el:</span>
+                                <span class="text-brand-federal font-black text-lg tracking-tight uppercase">Modelo de las 3C <span class="font-bold text-brand-cyan tracking-normal lowercase block md:inline md:ml-2">(conceptual, competencia y carácter)</span></span>
+                            </div>
+
+                            <p class="text-gray-700 text-lg leading-relaxed font-medium">
+                                Buscando formar seres humanos que sean "buenos con las ideas, buenos con las habilidades y buenas personas". Al colocar a la humanidad en el centro del aprendizaje, se desarrollan intencionalmente capacidades del Retrato del Egresado que preparan al alumno para alcanzar su máximo potencial en la Visión 2030.
+                            </p>
+                        </div>
+
+                        <!-- Punto 2 -->
+                        <div class="pl-6 border-l-4 border-brand-sky">
+                            <h4 class="text-2xl font-black text-brand-federal mb-4 uppercase">
+                                Cambiar la Evaluación
+                            </h4>
+                            <p class="text-gray-700 text-lg mb-6 leading-relaxed font-medium">
+                                Movernos de una cultura transaccional de "calificar para castigar o premiar" (evaluación del aprendizaje basada en la memorización) hacia una evaluación formativa y colaborativa que fomente el crecimiento genuino.
+                            </p>
+
+                            <!-- DESTACADO 3: Frase de valor sostenible -->
+                            <blockquote class="bg-gray-50 border-l-8 border-brand-federal p-6 md:p-8 mt-4 relative">
+                                <div class="absolute top-4 right-4 text-brand-cyan opacity-20">
+                                    <i data-lucide="quote" class="w-12 h-12"></i>
+                                </div>
+                                <p class="text-xl md:text-2xl font-black text-brand-federal leading-snug uppercase relative z-10">
+                                    "Del simple cumplimiento de metas numéricas a la creación de valor sostenible y comprensión profunda."
+                                </p>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Section 1 (Adaptado al sistema de diamantes) -->
+            <div class="mt-16 text-center">
+                <div class="inline-flex items-center gap-4 mb-6">
+                    <span class="h-px w-12 bg-brand-cyan block"></span>
+                    <h3 class="text-sm font-bold text-brand-federal uppercase tracking-widest">Material Audiovisual 1</h3>
+                    <span class="h-px w-12 bg-brand-cyan block"></span>
+                </div>
+                
+                <div class="relative p-2 bg-brand-cyan diamond-cut-reverse inline-block w-full max-w-4xl">
+                    <div class="w-full bg-brand-federal diamond-cut-reverse overflow-hidden relative group cursor-pointer">
+                        <div id="videoOverlayPt1" class="absolute inset-0 bg-brand-federal flex flex-col items-center justify-center z-20 group-hover:bg-opacity-90 transition duration-300">
+                             <div class="w-20 h-20 bg-brand-sky diamond-shape flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                                <i data-lucide="play" class="w-8 h-8 text-brand-federal ml-1"></i>
+                             </div>
+                             <p class="text-white font-bold tracking-widest uppercase text-sm">Transición de Modelos</p>
+                        </div>
+                        <video id="brandVideoPt1" class="w-full h-auto aspect-video opacity-50 mix-blend-luminosity transition-all duration-500" poster="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80">
+                            <source src="VID/Transicion_modelos_pt1.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 2: Metacognición -->
+        <section id="metacognicion" class="scroll-mt-32">
+            <div class="flex items-center space-x-4 mb-10">
+                <div class="bg-brand-cyan text-white p-4 diamond-shape">
+                    <i data-lucide="brain-circuit" class="w-8 h-8"></i>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-black text-brand-federal uppercase">La Metacognición <span class="block text-xl font-bold text-brand-cyan tracking-widest mt-2">(Learning to Learn)</span></h2>
+            </div>
+
+            <div class="bg-brand-federal text-white p-10 diamond-cut border-l-8 border-brand-sky mb-16">
+                <p class="text-xl leading-relaxed font-medium">
+                    Para verdaderamente preparar a los estudiantes como aprendices de por vida, el ecosistema exige que el aprendizaje sea visible y reflexivo. <strong class="text-brand-sky font-black uppercase">"Aprender a aprender"</strong> es la capacidad central que permite al estudiante monitorear, evaluar y ajustar sus propios procesos cognitivos.
+                </p>
+            </div>
+
+            <!-- Grid de los 4 Enfoques usando Tarjetas de Diamante Sólidas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-8">
+                
+                <!-- Card 1: Ingeniería y Modelación -->
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-federal diamond-cut mt-3 ml-3"></div>
+                    <div class="relative bg-white p-8 diamond-cut hover-solid-shift z-10 h-full flex flex-col border border-gray-100">
+                        <div class="w-14 h-14 bg-brand-federal diamond-shape flex items-center justify-center mb-6 text-brand-sky">
+                            <i data-lucide="calculator" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-2 border-b-2 border-brand-cyan pb-1 inline-block w-max">1. Ingeniería</span>
+                        <h3 class="text-xl font-black text-brand-federal mb-4 uppercase">Iteración Consciente y Validación</h3>
+                        <p class="text-gray-700 font-medium text-sm md:text-base leading-relaxed flex-grow">
+                            En las disciplinas de ingeniería, "aprender a aprender" significa ir más allá de la ejecución mecánica de algoritmos. La metacognición ocurre cuando el estudiante analiza su propio proceso de modelación y utiliza el <strong class="text-brand-federal font-black">S.T.A.R. Feedback</strong> no como una crítica a su capacidad matemática, sino como datos vitales para la mejora continua, conectando el cálculo numérico con la seguridad humana final.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Negocios y Administración -->
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-cyan diamond-cut mt-3 ml-3"></div>
+                    <div class="relative bg-white p-8 diamond-cut hover-solid-shift z-10 h-full flex flex-col border border-gray-100">
+                        <div class="w-14 h-14 bg-brand-cyan diamond-shape flex items-center justify-center mb-6 text-white">
+                            <i data-lucide="briefcase" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-2 border-b-2 border-brand-cyan pb-1 inline-block w-max">2. Ciencias Admon. y Sociales</span>
+                        <h3 class="text-xl font-black text-brand-federal mb-4 uppercase">Del Rendimiento al Valor Sostenible</h3>
+                        <p class="text-gray-700 font-medium text-sm md:text-base leading-relaxed flex-grow">
+                            En las ciencias administrativas, aprender a aprender implica evaluar el impacto sistémico de las decisiones financieras. La metacognición permite al estudiante trascender el corto plazo, cuestionando sus propias asunciones de mercado para diseñar modelos de negocio que no solo generen métricas positivas, sino que aporten un valor real, ético y perdurable a la sociedad y al medio ambiente.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Arte y Diseño -->
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-sky diamond-cut mt-3 ml-3"></div>
+                    <div class="relative bg-white p-8 diamond-cut hover-solid-shift z-10 h-full flex flex-col border border-gray-100">
+                        <div class="w-14 h-14 bg-brand-sky diamond-shape flex items-center justify-center mb-6 text-brand-federal">
+                            <i data-lucide="palette" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-2 border-b-2 border-brand-cyan pb-1 inline-block w-max">3. Arte y Diseño</span>
+                        <h3 class="text-xl font-black text-brand-federal mb-4 uppercase">Iteración Consciente y Empatía Creativa</h3>
+                        <p class="text-gray-700 font-medium text-sm md:text-base leading-relaxed flex-grow">
+                            En las disciplinas creativas, "aprender a aprender" significa separar el ego del producto final. La metacognición ocurre cuando el estudiante analiza su propio proceso creativo y utiliza el S.T.A.R. Feedback como datos para la mejora continua. Al reflexionar sobre <em class="text-brand-federal font-bold">"¿Para quién estoy diseñando realmente?"</em>, se convierte en un Comunicador Efectivo y un Innovador Creativo que mejora la experiencia humana.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4: Postgrado -->
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-federal diamond-cut mt-3 ml-3"></div>
+                    <div class="relative bg-white p-8 diamond-cut hover-solid-shift z-10 h-full flex flex-col border border-gray-100">
+                        <div class="w-14 h-14 bg-brand-federal diamond-shape flex items-center justify-center mb-6 text-brand-cyan">
+                            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-2 border-b-2 border-brand-cyan pb-1 inline-block w-max">4. Postgrado</span>
+                        <h3 class="text-xl font-black text-brand-federal mb-4 uppercase">Desaprendizaje y Liderazgo Sistémico</h3>
+                        <p class="text-gray-700 font-medium text-sm md:text-base leading-relaxed flex-grow">
+                            Para profesionales en maestría, la metacognición requiere la capacidad de desaprender prácticas obsoletas o silos corporativos tradicionales. Al enfrentarse a problemas complejos, utiliza la metacognición para evaluar cómo su liderazgo afecta la resiliencia de su organización, consolidándose como un <strong class="text-brand-federal font-black">Líder con Propósito</strong> que fomenta el crecimiento colectivo.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Video Section 2 -->
+            <div class="mt-20 text-center">
+                <div class="inline-flex items-center gap-4 mb-6">
+                    <span class="h-px w-12 bg-brand-cyan block"></span>
+                    <h3 class="text-sm font-bold text-brand-federal uppercase tracking-widest">Material Audiovisual 2</h3>
+                    <span class="h-px w-12 bg-brand-cyan block"></span>
+                </div>
+                
+                <div class="relative p-2 bg-brand-sky diamond-cut-reverse inline-block w-full max-w-4xl">
+                    <div class="w-full bg-brand-federal diamond-cut-reverse overflow-hidden relative group cursor-pointer">
+                        <div id="videoOverlayPt2" class="absolute inset-0 bg-brand-federal flex flex-col items-center justify-center z-20 group-hover:bg-opacity-90 transition duration-300">
+                             <div class="w-20 h-20 bg-brand-cyan diamond-shape flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                                <i data-lucide="play" class="w-8 h-8 text-white ml-1"></i>
+                             </div>
+                             <p class="text-white font-bold tracking-widest uppercase text-sm">Metacognición y Learning</p>
+                        </div>
+                        <video id="brandVideoPt2" class="w-full h-auto aspect-video opacity-50 mix-blend-luminosity transition-all duration-500" poster="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80">
+                            <source src="VID/Transicion_modelos_pt2.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de página Institucional -->
+    <footer class="bg-brand-federal border-t-8 border-brand-sky py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <svg width="28" height="28" viewBox="0 0 100 100" class="fill-current text-brand-cyan">
+                    <polygon points="50,0 100,50 50,100 0,50" />
+                </svg>
+                <span class="text-2xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
+            </div>
+            <p class="text-sm font-medium text-brand-sky uppercase tracking-widest text-center md:text-right">
+                Diseñado en alineación con el <span class="text-white font-bold">Collective Growth System</span><br>
+                y la Visión UNITEC 2030.<br>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Inicialización de íconos y Lógica de Videos -->
+    <script>
+        lucide.createIcons();
+
+        // Función reutilizable para activar los videos de la marca
+        function setupBrandVideo(overlayId, videoId) {
+            const overlay = document.getElementById(overlayId);
+            const video = document.getElementById(videoId);
+
+            if (overlay && video) {
+                overlay.addEventListener('click', () => {
+                    overlay.classList.add('hidden');
+                    video.classList.remove('opacity-50', 'mix-blend-luminosity');
+                    video.setAttribute('controls', 'true');
+                    video.play();
+                });
+            }
+        }
+
+        // Activamos ambos videos
+        setupBrandVideo('videoOverlayPt1', 'brandVideoPt1');
+        setupBrandVideo('videoOverlayPt2', 'brandVideoPt2');
+    </script>
+</body>
+</html>
