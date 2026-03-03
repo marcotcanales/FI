@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train the Trainers | Sesión 1 - UNITEC CGS</title>
+    
+    <!-- Tipografía Institucional: Poppins Estricto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Configuración de Colores de Marca y Tipografía -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            federal: '#06065C', /* Federal Blue */
+                            cyan: '#03AED2',    /* Pacific Cyan */
+                            sky: '#47C8FD',     /* Vivid Sky Blue */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Cortes geométricos del diamante - CERO BORDES REDONDEADOS */
+        .diamond-cut {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
+        }
+        .diamond-cut-reverse {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 85%);
+        }
+        .diamond-shape {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        
+        /* Cero sombras, cero degradados. Desplazamientos sólidos. */
+        .hover-solid-shift {
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .hover-solid-shift:hover {
+            transform: translate(-6px, -6px);
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: #06065C;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-sky selection:text-brand-federal leading-relaxed">
+
+    <!-- Navegación Corporativa Estricta -->
+    <nav class="w-full bg-brand-federal border-b-4 border-brand-cyan py-6 px-6 md:px-8 flex justify-between items-center z-50 sticky top-0">
+        <div class="flex items-center gap-3">
+            <svg width="32" height="32" md:width="40" md:height="40" viewBox="0 0 100 100" class="fill-current text-brand-sky">
+                <polygon points="50,0 100,50 50,100 0,50" />
+            </svg>
+            <span class="text-3xl md:text-4xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
+        </div>
+        <div class="hidden md:block text-brand-sky font-semibold tracking-widest uppercase text-xs mt-2">
+            Collective Growth System
+        </div>
+    </nav>
+
+    <!-- Header Section (Sin gradientes, cortes geométricos) -->
+    <header class="bg-brand-federal text-white py-16 md:py-24 px-6 relative overflow-hidden border-b-8 border-brand-cyan">
+        <!-- Decoración de diamante de fondo -->
+        <div class="absolute top-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-brand-sky opacity-10 diamond-shape translate-x-1/4 -translate-y-1/4"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-brand-cyan opacity-10 diamond-shape -translate-x-1/2 translate-y-1/2"></div>
+        
+        <div class="max-w-5xl mx-auto relative z-10 text-center md:text-left">
+            <div class="inline-flex flex-wrap justify-center md:justify-start items-center gap-4 mb-8">
+                <span class="bg-brand-sky text-brand-federal font-black px-4 py-1.5 text-xs tracking-widest uppercase diamond-cut">Programa de Capacitación</span>
+                <span class="border-2 border-brand-cyan text-brand-cyan font-black px-4 py-1 text-xs tracking-widest uppercase diamond-cut">Sesión 1</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-black mb-4 leading-none uppercase tracking-tight">Train the <br class="hidden md:block"><span class="text-brand-cyan">Trainers</span></h1>
+            <h2 class="text-xl md:text-3xl font-bold text-white tracking-widest uppercase mb-10 border-b-4 border-brand-sky inline-block pb-2">Ecosistema de Aprendizaje UNITEC</h2>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-16 md:py-20 space-y-20">
+
+        <!-- OBJETIVOS SECTION -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <!-- Objetivo General -->
+            <div class="relative group">
+                <div class="absolute inset-0 bg-brand-federal diamond-cut mt-3 ml-3"></div>
+                <div class="relative bg-brand-cyan p-8 md:p-10 diamond-cut z-10 h-full flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-white diamond-shape flex items-center justify-center text-brand-cyan shrink-0">
+                            <i data-lucide="crosshair" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-brand-federal uppercase tracking-tight">Objetivo General</h3>
+                    </div>
+                    <p class="text-brand-federal font-medium text-lg leading-relaxed border-l-4 border-white pl-4">
+                        Dotar a Jefes y Coordinadores Académicos de UNITEC/CEUTEC de las herramientas necesarias para liderar talleres de co-diseño con los docentes de sus respectivos equipos.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Objetivo Específico Sesión 1 -->
+            <div class="relative group">
+                <div class="absolute inset-0 bg-brand-cyan diamond-cut mt-3 ml-3"></div>
+                <div class="relative bg-white p-8 md:p-10 diamond-cut border-2 border-brand-federal z-10 h-full flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-brand-federal diamond-shape flex items-center justify-center text-brand-sky shrink-0">
+                            <i data-lucide="target" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-brand-federal uppercase tracking-tight">Objetivo de la Sesión</h3>
+                    </div>
+                    <p class="text-gray-700 font-medium text-lg leading-relaxed border-l-4 border-brand-cyan pl-4">
+                        Comprender la filosofía del CGS, interiorizar el Retrato del Aprendiz y contrastar el modelo tradicional con el nuevo ecosistema, utilizando la metacognición <strong class="text-brand-federal font-black">(Learning to Learn)</strong> y un caso de éxito en Ingeniería Civil.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MATERIALES Y RECURSOS -->
+        <section>
+            <div class="text-center md:text-left flex flex-col md:flex-row items-center gap-6 mb-12 border-b-2 border-gray-200 pb-6">
+                <div class="w-16 h-16 bg-brand-federal diamond-shape flex items-center justify-center text-white shrink-0">
+                    <i data-lucide="layers" class="w-8 h-8"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-black text-brand-federal uppercase tracking-tight">Recursos de la Sesión 1</h2>
+                    <p class="text-brand-cyan font-bold tracking-widest uppercase text-sm mt-1">Módulos Interactivos y Documentación</p>
+                </div>
+            </div>
+
+            <!-- Grid de Recursos (Tarjetas Clickables) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                
+                <!-- Recurso 1 -->
+                <a href="definicionaprendizaje.html" class="relative group block">
+                    <div class="absolute inset-0 bg-brand-cyan diamond-cut mt-3 ml-3 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                    <div class="relative bg-white p-8 diamond-cut border border-gray-200 z-10 hover-solid-shift flex flex-col h-full">
+                        <span class="text-brand-cyan font-black text-4xl opacity-20 absolute top-6 right-8">01</span>
+                        <div class="text-brand-federal mb-6">
+                            <i data-lucide="book-open" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-brand-federal mb-3 uppercase leading-snug">Definición del Aprendizaje</h3>
+                        <p class="text-gray-600 text-sm font-medium flex-grow">Exploración profunda de cómo el CGS redefine el acto de aprender más allá de lo transaccional.</p>
+                        <div class="mt-6 font-bold text-brand-cyan text-xs uppercase tracking-widest flex items-center gap-2">
+                            Ingresar al Módulo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Recurso 2 -->
+                <a href="retratounitec.html" class="relative group block">
+                    <div class="absolute inset-0 bg-brand-federal diamond-cut mt-3 ml-3 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                    <div class="relative bg-white p-8 diamond-cut border border-gray-200 z-10 hover-solid-shift flex flex-col h-full">
+                        <span class="text-brand-federal font-black text-4xl opacity-10 absolute top-6 right-8">02</span>
+                        <div class="text-brand-cyan mb-6">
+                            <i data-lucide="users" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-brand-federal mb-3 uppercase leading-snug">Retrato de UNITEC y Principios</h3>
+                        <p class="text-gray-600 text-sm font-medium flex-grow">Las 6 capacidades humanas que buscamos formar en nuestros estudiantes y la cultura del aula.</p>
+                        <div class="mt-6 font-bold text-brand-federal text-xs uppercase tracking-widest flex items-center gap-2">
+                            Ingresar al Módulo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Recurso 3 -->
+                <a href="transicion.html" class="relative group block">
+                    <div class="absolute inset-0 bg-brand-sky diamond-cut mt-3 ml-3 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                    <div class="relative bg-white p-8 diamond-cut border border-gray-200 z-10 hover-solid-shift flex flex-col h-full">
+                        <span class="text-brand-sky font-black text-4xl opacity-30 absolute top-6 right-8">03</span>
+                        <div class="text-brand-federal mb-6">
+                            <i data-lucide="arrow-right-left" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-brand-federal mb-3 uppercase leading-snug">Transición y Metacognición</h3>
+                        <p class="text-gray-600 text-sm font-medium flex-grow">El paso del silo tradicional al ecosistema, centrado en la capacidad de "Learning to Learn".</p>
+                        <div class="mt-6 font-bold text-brand-sky text-xs uppercase tracking-widest flex items-center gap-2">
+                            Ingresar al Módulo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Recurso 4 -->
+                <a href="transformacion.html" class="relative group block">
+                    <div class="absolute inset-0 bg-brand-cyan diamond-cut mt-3 ml-3 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                    <div class="relative bg-white p-8 diamond-cut border border-gray-200 z-10 hover-solid-shift flex flex-col h-full">
+                        <span class="text-brand-cyan font-black text-4xl opacity-20 absolute top-6 right-8">04</span>
+                        <div class="text-brand-federal mb-6">
+                            <i data-lucide="hammer" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-brand-federal mb-3 uppercase leading-snug">Ejemplo de Transformación</h3>
+                        <p class="text-gray-600 text-sm font-medium flex-grow">Caso de estudio CIV414: De la evaluación memorística al desempeño auténtico (GRASPS).</p>
+                        <div class="mt-6 font-bold text-brand-cyan text-xs uppercase tracking-widest flex items-center gap-2">
+                            Ingresar al Módulo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Recurso 5 -->
+                <a href="piloto.html" class="relative group block">
+                    <div class="absolute inset-0 bg-brand-federal diamond-cut mt-3 ml-3 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                    <div class="relative bg-white p-8 diamond-cut border border-gray-200 z-10 hover-solid-shift flex flex-col h-full">
+                        <span class="text-brand-federal font-black text-4xl opacity-10 absolute top-6 right-8">05</span>
+                        <div class="text-brand-cyan mb-6">
+                            <i data-lucide="rocket" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-brand-federal mb-3 uppercase leading-snug">Micropiloto de Implementación</h3>
+                        <p class="text-gray-600 text-sm font-medium flex-grow">Guía estratégica para iniciar pruebas controladas de esta metodología en el aula.</p>
+                        <div class="mt-6 font-bold text-brand-federal text-xs uppercase tracking-widest flex items-center gap-2">
+                            Ingresar al Módulo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Recurso 6 -->
+                <a href="herramientas.html" class="relative group block">
+                    <div class="absolute inset-0 bg-brand-sky diamond-cut mt-3 ml-3 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                    <div class="relative bg-white p-8 diamond-cut border border-gray-200 z-10 hover-solid-shift flex flex-col h-full">
+                        <span class="text-brand-sky font-black text-4xl opacity-30 absolute top-6 right-8">06</span>
+                        <div class="text-brand-federal mb-6">
+                            <i data-lucide="wrench" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-brand-federal mb-3 uppercase leading-snug">Herramientas Disponibles</h3>
+                        <p class="text-gray-600 text-sm font-medium flex-grow">Formatos, rúbricas y plantillas S.T.A.R. listas para descargar y usar con tu equipo docente.</p>
+                        <div class="mt-6 font-bold text-brand-sky text-xs uppercase tracking-widest flex items-center gap-2">
+                            Ingresar al Módulo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Institucional -->
+    <footer class="bg-brand-federal text-gray-400 py-12 px-6 border-t-8 border-brand-cyan relative overflow-hidden mt-12">
+        <div class="absolute bottom-0 right-0 w-64 h-64 bg-brand-sky opacity-10 diamond-shape translate-x-1/4 translate-y-1/4"></div>
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+            <div class="flex items-center gap-3">
+                <svg width="28" height="28" viewBox="0 0 100 100" class="fill-current text-brand-cyan">
+                    <polygon points="50,0 100,50 50,100 0,50" />
+                </svg>
+                <span class="text-2xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
+            </div>
+            <div class="text-center md:text-right">
+                <p class="text-sm font-bold text-white uppercase tracking-widest mb-1">
+                    Train the Trainers
+                </p>
+                <p class="text-xs font-medium text-brand-sky uppercase tracking-widest">
+                    Visión UNITEC 2030 | Collective Growth System
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+    </script>
+</body>
+</html>
