@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Definición del Aprendizaje - UNITEC CGS</title>
+    
+    <!-- Tipografía Institucional: Poppins Estricto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de Colores de Marca y Tipografía -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            federal: '#06065C',
+                            cyan: '#03AED2',
+                            sky: '#47C8FD',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Cortes geométricos inspirados en el isotipo del diamante */
+        .diamond-cut {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
+        }
+        .diamond-cut-reverse {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 85%);
+        }
+        .diamond-shape {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        
+        /* Cero sombras, cero degradados. Solo color sólido y transiciones agudas. */
+        .hover-solid-shift {
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .hover-solid-shift:hover {
+            transform: translate(-8px, -8px);
+        }
+        .solid-border-bg {
+            background-color: #03AED2; /* Cyan base para el efecto de desplazamiento */
+        }
+        
+        body {
+            background-color: #06065C; /* Federal Blue Dominante */
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-sky selection:text-brand-federal">
+
+    <!-- Navegación Corporativa -->
+    <nav class="w-full bg-brand-federal border-b-4 border-brand-cyan py-6 px-8 flex justify-between items-center">
+        <!-- Logotipo compuesto obligatorio (Isotipo + Texto) -->
+        <div class="flex items-center gap-3">
+            <svg width="40" height="40" viewBox="0 0 100 100" class="fill-current text-brand-sky">
+                <polygon points="50,0 100,50 50,100 0,50" />
+            </svg>
+            <span class="text-4xl font-bold tracking-tighter text-white mt-1">unitec</span>
+        </div>
+        <div class="hidden md:block text-brand-sky font-semibold tracking-widest uppercase text-sm">
+            Collective Growth System
+        </div>
+    </nav>
+
+    <!-- Encabezado Audaz -->
+    <header class="relative pt-24 pb-20 px-6 max-w-6xl mx-auto">
+        <!-- Elemento decorativo geométrico -->
+        <div class="absolute top-10 right-10 w-32 h-32 bg-brand-cyan opacity-20 diamond-shape animate-pulse"></div>
+        
+        <div class="relative z-10">
+            <h2 class="text-brand-sky font-bold tracking-[0.2em] uppercase mb-4 text-sm md:text-base border-l-4 border-brand-sky pl-4">El Modelo de las 3 Cs</h2>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-none tracking-tight text-white uppercase">
+                La Definición <br>
+                <span class="text-brand-cyan">Del Aprendizaje</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-medium text-gray-300 max-w-2xl mt-8 border-l-4 border-brand-cyan pl-6">
+                Para iniciar el cambio de paradigma, debemos redefinir qué significa "aprender". El aprendizaje profundo ocurre en la intersección de <span class="text-brand-sky font-bold">tres dimensiones inseparables</span>.
+            </p>
+        </div>
+    </header>
+
+    <!-- Sección de las 3 Cs (Diseño Geométrico) -->
+    <main class="max-w-7xl mx-auto px-6 pb-24">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 mt-12">
+            
+            <!-- Bloque 1: Conceptual -->
+            <div class="relative">
+                <div class="absolute inset-0 solid-border-bg diamond-cut mt-4 ml-4"></div>
+                <div class="relative bg-white text-brand-federal p-10 diamond-cut hover-solid-shift z-10 h-full flex flex-col">
+                    <div class="w-20 h-20 bg-brand-federal diamond-shape flex items-center justify-center mb-8">
+                        <i data-lucide="lightbulb" class="w-10 h-10 text-brand-sky"></i>
+                    </div>
+                    <h2 class="text-3xl font-black mb-1 uppercase">Conceptual</h2>
+                    <h3 class="text-sm font-bold text-brand-cyan mb-6 uppercase tracking-widest">Entender que...</h3>
+                    <p class="font-medium text-gray-700 mb-8 flex-grow">
+                        Se enfoca en la comprensión profunda de <span class="font-black text-brand-federal">"La Gran Idea"</span> y los principios que rigen el mundo, más allá de la memorización de datos.
+                    </p>
+                    <div class="mt-auto p-5 bg-gray-100 border-l-8 border-brand-federal">
+                        <p class="text-sm">
+                            <span class="font-black block mb-1">En Ingeniería:</span> 
+                            Comprender la causalidad y el comportamiento físico de los materiales, no solo aplicar fórmulas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloque 2: Competencias -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-brand-sky diamond-cut mt-4 ml-4"></div>
+                <div class="relative bg-white text-brand-federal p-10 diamond-cut hover-solid-shift z-10 h-full flex flex-col">
+                    <div class="w-20 h-20 bg-brand-cyan diamond-shape flex items-center justify-center mb-8">
+                        <i data-lucide="cog" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h2 class="text-3xl font-black mb-1 uppercase">Competencias</h2>
+                    <h3 class="text-sm font-bold text-brand-cyan mb-6 uppercase tracking-widest">Ser capaz de...</h3>
+                    <p class="font-medium text-gray-700 mb-8 flex-grow">
+                        Es el desarrollo de habilidades y destrezas observables, utilizando la taxonomía de Bloom adaptada con estricta precisión por UNITEC.
+                    </p>
+                    <div class="mt-auto p-5 bg-gray-100 border-l-8 border-brand-cyan">
+                        <p class="text-sm">
+                            <span class="font-black block mb-1">En Ingeniería:</span> 
+                            Analizar, diseñar, evaluar y crear en contextos auténticos y exigentes del mundo real.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloque 3: Carácter -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-white diamond-cut mt-4 ml-4 opacity-20"></div>
+                <div class="relative bg-brand-cyan text-brand-federal p-10 diamond-cut hover-solid-shift z-10 h-full flex flex-col">
+                    <div class="w-20 h-20 bg-white diamond-shape flex items-center justify-center mb-8">
+                        <i data-lucide="shield-check" class="w-10 h-10 text-brand-federal"></i>
+                    </div>
+                    <h2 class="text-3xl font-black mb-1 uppercase text-white">Carácter</h2>
+                    <h3 class="text-sm font-bold text-brand-federal mb-6 uppercase tracking-widest">Convertirse en...</h3>
+                    <p class="font-medium text-brand-federal mb-8 flex-grow">
+                        El pilar de nuestra misión de <span class="font-black">Becoming Human</span>. Consiste en desarrollar valores inquebrantables, ética profesional y compromiso.
+                    </p>
+                    <div class="mt-auto p-5 bg-brand-federal text-white border-l-8 border-brand-sky">
+                        <p class="text-sm">
+                            <span class="font-black text-brand-sky block mb-1">En Ingeniería:</span> 
+                            Un ingeniero competente pero sin carácter ético es un riesgo inaceptable para la sociedad.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Sección de Video Audaz -->
+    <section class="bg-white text-brand-federal py-24 relative overflow-hidden">
+        <!-- Decoración geométrica -->
+        <div class="absolute -top-32 -left-32 w-64 h-64 bg-brand-sky diamond-shape opacity-20"></div>
+        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-brand-cyan diamond-shape opacity-10"></div>
+
+        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+            <h2 class="text-4xl md:text-5xl font-black mb-12 uppercase tracking-tight">Profundiza en el <span class="text-brand-cyan">Paradigma</span></h2>
+            
+            <!-- Contenedor de video sin sombras, con cortes y bordes sólidos -->
+            <div class="relative p-2 bg-brand-cyan diamond-cut-reverse inline-block w-full">
+                <div class="w-full bg-brand-federal diamond-cut-reverse overflow-hidden relative group cursor-pointer">
+                    <!-- Placeholder de imagen estilo audaz -->
+                    <div class="absolute inset-0 bg-brand-federal flex flex-col items-center justify-center z-20 group-hover:bg-opacity-90 transition duration-300">
+                         <div class="w-24 h-24 bg-brand-sky diamond-shape flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                            <i data-lucide="play" class="w-10 h-10 text-brand-federal ml-2"></i>
+                         </div>
+                         <p class="text-white font-bold tracking-widest uppercase">Reproducir Video</p>
+                    </div>
+                    <!-- El video real -->
+                    <video class="w-full h-auto aspect-video opacity-50 mix-blend-luminosity" poster="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80">
+                        <source src="VID/Redefiniendo_el_Aprendizaje.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página Institucional -->
+    <footer class="bg-brand-federal border-t-8 border-brand-sky py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <svg width="24" height="24" viewBox="0 0 100 100" class="fill-current text-brand-cyan">
+                    <polygon points="50,0 100,50 50,100 0,50" />
+                </svg>
+                <span class="text-2xl font-bold tracking-tighter text-white">unitec</span>
+            </div>
+            <p class="text-sm font-medium text-brand-sky uppercase tracking-widest text-center md:text-right">
+                Alineado con <span class="text-white font-bold">Collective Growth System</span><br>
+                y la Visión UNITEC 2030.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Inicialización de íconos -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
