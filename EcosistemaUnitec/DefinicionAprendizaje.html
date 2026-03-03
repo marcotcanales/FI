@@ -20,13 +20,13 @@
                 extend: {
                     colors: {
                         brand: {
-                            federal: '#06065C',
-                            cyan: '#03AED2',
-                            sky: '#47C8FD',
+                            federal: '#06065C', /* Federal Blue - Dominante y corporativo */
+                            cyan: '#03AED2',    /* Pacific Cyan - Acentos y energía */
+                            sky: '#47C8FD',     /* Vivid Sky Blue - Detalles y luz */
                         }
                     },
                     fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
+                        sans: ['Poppins', 'sans-serif'], /* Única fuente permitida */
                     }
                 }
             }
@@ -37,7 +37,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* Cortes geométricos inspirados en el isotipo del diamante */
+        /* Cortes geométricos inspirados en el isotipo del diamante (Claridad y Precisión) */
         .diamond-cut {
             clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
         }
@@ -48,7 +48,7 @@
             clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
         }
         
-        /* Cero sombras, cero degradados. Solo color sólido y transiciones agudas. */
+        /* Regla de Oro del Manual: Cero sombras, cero degradados. Solo color sólido y transiciones agudas. */
         .hover-solid-shift {
             transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
@@ -56,11 +56,11 @@
             transform: translate(-8px, -8px);
         }
         .solid-border-bg {
-            background-color: #03AED2; /* Cyan base para el efecto de desplazamiento */
+            background-color: #03AED2; /* Cyan base para el efecto de desplazamiento sólido */
         }
         
         body {
-            background-color: #06065C; /* Federal Blue Dominante */
+            background-color: #06065C; /* Federal Blue Dominante en el lienzo */
             color: #ffffff;
             overflow-x: hidden;
         }
@@ -68,21 +68,21 @@
 </head>
 <body class="antialiased selection:bg-brand-sky selection:text-brand-federal">
 
-    <!-- Navegación Corporativa -->
+    <!-- Navegación Corporativa - Aplicación estricta del Imagotipo Horizontal -->
     <nav class="w-full bg-brand-federal border-b-4 border-brand-cyan py-6 px-8 flex justify-between items-center">
-        <!-- Logotipo compuesto obligatorio (Isotipo + Texto) -->
+        <!-- Logotipo compuesto obligatorio (Isotipo + Texto) - NUNCA SEPARADOS -->
         <div class="flex items-center gap-3">
             <svg width="40" height="40" viewBox="0 0 100 100" class="fill-current text-brand-sky">
                 <polygon points="50,0 100,50 50,100 0,50" />
             </svg>
-            <span class="text-4xl font-bold tracking-tighter text-white mt-1">unitec</span>
+            <span class="text-4xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
         </div>
         <div class="hidden md:block text-brand-sky font-semibold tracking-widest uppercase text-sm">
             Collective Growth System
         </div>
     </nav>
 
-    <!-- Encabezado Audaz -->
+    <!-- Encabezado Audaz - "Deliberadamente claro y audaz" según el manual -->
     <header class="relative pt-24 pb-20 px-6 max-w-6xl mx-auto">
         <!-- Elemento decorativo geométrico -->
         <div class="absolute top-10 right-10 w-32 h-32 bg-brand-cyan opacity-20 diamond-shape animate-pulse"></div>
@@ -99,7 +99,7 @@
         </div>
     </header>
 
-    <!-- Sección de las 3 Cs (Diseño Geométrico) -->
+    <!-- Sección de las 3 Cs (Diseño Geométrico, Equilibrio y Armonía) -->
     <main class="max-w-7xl mx-auto px-6 pb-24">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 mt-12">
             
@@ -115,10 +115,18 @@
                     <p class="font-medium text-gray-700 mb-8 flex-grow">
                         Se enfoca en la comprensión profunda de <span class="font-black text-brand-federal">"La Gran Idea"</span> y los principios que rigen el mundo, más allá de la memorización de datos.
                     </p>
-                    <div class="mt-auto p-5 bg-gray-100 border-l-8 border-brand-federal">
+                    <div class="mt-auto p-5 bg-gray-100 border-l-8 border-brand-federal flex flex-col gap-3">
                         <p class="text-sm">
                             <span class="font-black block mb-1">En Ingeniería:</span> 
                             Comprender la causalidad y el comportamiento físico de los materiales, no solo aplicar fórmulas.
+                        </p>
+                        <p class="text-sm border-t border-gray-300 pt-3">
+                            <span class="font-black block mb-1">En Arte y Diseño:</span> 
+                            Entender que el diseño trasciende la estética; es un sistema de comunicación y resolución de problemas que interactúa con la psicología y cultura humana.
+                        </p>
+                        <p class="text-sm border-t border-gray-300 pt-3">
+                            <span class="font-black block mb-1">En Ciencias Admon. y Sociales:</span> 
+                            Entender que una organización es un ecosistema vivo donde las decisiones legales, financieras o de mercado impactan directamente en la sociedad.
                         </p>
                     </div>
                 </div>
@@ -136,10 +144,18 @@
                     <p class="font-medium text-gray-700 mb-8 flex-grow">
                         Es el desarrollo de habilidades y destrezas observables, utilizando la taxonomía de Bloom adaptada con estricta precisión por UNITEC.
                     </p>
-                    <div class="mt-auto p-5 bg-gray-100 border-l-8 border-brand-cyan">
+                    <div class="mt-auto p-5 bg-gray-100 border-l-8 border-brand-cyan flex flex-col gap-3">
                         <p class="text-sm">
                             <span class="font-black block mb-1">En Ingeniería:</span> 
                             Analizar, diseñar, evaluar y crear en contextos auténticos y exigentes del mundo real.
+                        </p>
+                        <p class="text-sm border-t border-gray-300 pt-3">
+                            <span class="font-black block mb-1">En Arte y Diseño:</span> 
+                            Conceptualizar ideas complejas, bocetar, prototipar y materializar experiencias (espacios, platillos, identidades visuales) centradas en el usuario.
+                        </p>
+                        <p class="text-sm border-t border-gray-300 pt-3">
+                            <span class="font-black block mb-1">En Ciencias Admon. y Sociales:</span> 
+                            Investigar tendencias, interpretar datos complejos, argumentar jurídicamente y estructurar planes estratégicos viables.
                         </p>
                     </div>
                 </div>
@@ -157,10 +173,18 @@
                     <p class="font-medium text-brand-federal mb-8 flex-grow">
                         El pilar de nuestra misión de <span class="font-black">Becoming Human</span>. Consiste en desarrollar valores inquebrantables, ética profesional y compromiso.
                     </p>
-                    <div class="mt-auto p-5 bg-brand-federal text-white border-l-8 border-brand-sky">
+                    <div class="mt-auto p-5 bg-brand-federal text-white border-l-8 border-brand-sky flex flex-col gap-3">
                         <p class="text-sm">
                             <span class="font-black text-brand-sky block mb-1">En Ingeniería:</span> 
                             Un ingeniero competente pero sin carácter ético es un riesgo inaceptable para la sociedad.
+                        </p>
+                        <p class="text-sm border-t border-white/20 pt-3">
+                            <span class="font-black text-brand-sky block mb-1">En Arte y Diseño:</span> 
+                            Un artista y diseñador reconoce el impacto cultural e inclusivo de su obra, diseñando con responsabilidad humana.
+                        </p>
+                        <p class="text-sm border-t border-white/20 pt-3">
+                            <span class="font-black text-brand-sky block mb-1">En Ciencias Admon. y Sociales:</span> 
+                            Un gerente o abogado no solo busca la rentabilidad o ganar casos, sino promover la justicia y equidad.
                         </p>
                     </div>
                 </div>
@@ -169,7 +193,7 @@
         </div>
     </main>
 
-    <!-- Sección de Video Audaz -->
+    <!-- Sección de Video Audaz - Enfoque en cortes de diamante, sin viñetas suaves -->
     <section class="bg-white text-brand-federal py-24 relative overflow-hidden">
         <!-- Decoración geométrica -->
         <div class="absolute -top-32 -left-32 w-64 h-64 bg-brand-sky diamond-shape opacity-20"></div>
@@ -178,7 +202,7 @@
         <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
             <h2 class="text-4xl md:text-5xl font-black mb-12 uppercase tracking-tight">Profundiza en el <span class="text-brand-cyan">Paradigma</span></h2>
             
-            <!-- Contenedor de video sin sombras, con cortes y bordes sólidos -->
+            <!-- Contenedor de video estricto: sin sombras, con cortes y bordes sólidos -->
             <div class="relative p-2 bg-brand-cyan diamond-cut-reverse inline-block w-full">
                 <div class="w-full bg-brand-federal diamond-cut-reverse overflow-hidden relative group cursor-pointer">
                     <!-- Placeholder de imagen estilo audaz -->
@@ -200,11 +224,12 @@
     <!-- Pie de página Institucional -->
     <footer class="bg-brand-federal border-t-8 border-brand-sky py-12 px-6">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2">
-                <svg width="24" height="24" viewBox="0 0 100 100" class="fill-current text-brand-cyan">
+            <!-- Imagotipo Horizontal -->
+            <div class="flex items-center gap-3">
+                <svg width="28" height="28" viewBox="0 0 100 100" class="fill-current text-brand-cyan">
                     <polygon points="50,0 100,50 50,100 0,50" />
                 </svg>
-                <span class="text-2xl font-bold tracking-tighter text-white">unitec</span>
+                <span class="text-2xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
             </div>
             <p class="text-sm font-medium text-brand-sky uppercase tracking-widest text-center md:text-right">
                 Alineado con <span class="text-white font-bold">Collective Growth System</span><br>
