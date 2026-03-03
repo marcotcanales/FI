@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capacidades Humanas y Principios - UNITEC CGS</title>
+    
+    <!-- Tipografía Institucional: Poppins Estricto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de Colores de Marca y Tipografía -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            federal: '#06065C', /* Federal Blue */
+                            cyan: '#03AED2',    /* Pacific Cyan */
+                            sky: '#47C8FD',     /* Vivid Sky Blue */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Cortes geométricos del diamante - CERO BORDES REDONDEADOS */
+        .diamond-cut {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
+        }
+        .diamond-cut-reverse {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 85%);
+        }
+        .diamond-shape {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        
+        /* Cero sombras, cero degradados. Desplazamientos sólidos. */
+        .hover-solid-shift {
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .hover-solid-shift:hover {
+            transform: translate(-8px, -8px);
+        }
+        
+        body {
+            background-color: #f8fafc; /* Fondo limpio para contrastar el Federal Blue */
+            color: #06065C;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-sky selection:text-brand-federal">
+
+    <!-- Navegación Corporativa Estricta -->
+    <nav class="w-full bg-brand-federal border-b-4 border-brand-cyan py-6 px-8 flex justify-between items-center z-50 relative">
+        <div class="flex items-center gap-3">
+            <svg width="40" height="40" viewBox="0 0 100 100" class="fill-current text-brand-sky">
+                <polygon points="50,0 100,50 50,100 0,50" />
+            </svg>
+            <span class="text-4xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
+        </div>
+        <div class="hidden md:block text-brand-sky font-semibold tracking-widest uppercase text-sm">
+            Collective Growth System
+        </div>
+    </nav>
+
+    <!-- Encabezado Audaz (Sin Gradientes) -->
+    <header class="bg-brand-federal text-white pt-24 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-cyan opacity-20 diamond-shape -translate-y-1/2 translate-x-1/4"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight uppercase">El Ecosistema <br><span class="text-brand-cyan">de Aprendizaje</span></h1>
+            <p class="text-xl md:text-2xl font-bold text-brand-sky mb-6 tracking-widest uppercase">Capacidades Humanas y Principios del CGS</p>
+            <p class="text-md font-medium text-gray-300 max-w-2xl mx-auto border-t-2 border-brand-cyan pt-6">
+                Una guía para docentes de Ingeniería, Arte y Diseño, Ciencias Administrativas y Sociales, y Postgrado de UNITEC.
+            </p>
+        </div>
+    </header>
+
+    <!-- Sección: El Retrato del Aprendiz (Tarjetas de Diamante sin sombras) -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="text-center mb-16 relative">
+            <h2 class="text-3xl md:text-5xl font-black text-brand-federal mb-4 uppercase">El Retrato del Aprendiz</h2>
+            <h3 class="text-xl font-bold text-brand-cyan tracking-[0.2em] uppercase mb-6">(Las 6 Capacidades)</h3>
+            <p class="text-lg font-medium text-gray-600 max-w-3xl mx-auto border-l-4 border-brand-federal pl-4 text-left md:text-center md:border-l-0">
+                El Retrato del Aprendiz (<em>Portrait of a Learner</em>) es nuestra estrella polar; define los atributos holísticos que todo egresado de UNITEC debe poseer, independientemente de su disciplina profesional.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-8">
+            
+            <!-- Capacidad 1 -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-brand-cyan diamond-cut mt-3 ml-3"></div>
+                <div class="relative bg-white p-8 diamond-cut hover-solid-shift z-10 h-full flex flex-col border border-gray-100">
+                    <div class="w-16 h-16 bg-brand-federal diamond-shape flex items-center justify-center mb-6">
+                        <i data-lucide="compass" class="w-8 h-8 text-brand-sky"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-brand-federal uppercase">Un Líder con Propósito</h3>
+                    <p class="text-gray-700 font-medium text-sm leading-relaxed flex-grow">
+                        Un egresado de UNITEC ha alcanzado equilibrio personal y bienestar. Se guía por la curiosidad y un compromiso con el aprendizaje a lo largo de la vida. Tiene un fuerte sentido de propósito y es adaptable y resiliente en la búsqueda de sus metas. Actúa con integridad y sirve tanto a comunidades locales como globales, siempre preparado para hacer lo correcto.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Capacidad 2 -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-brand-sky diamond-cut mt-3 ml-3"></div>
+                <div class="relative bg-white p-8 diamond-cut hover-solid-shift z-10 h-full flex flex-col border border-gray-100">
+                    <div class="w-16 h-16 bg-brand-cyan diamond-shape flex items-center justify-center mb-6">
+                        <i data-lucide="puzzle" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-brand-federal uppercase">Un Solucionador de Problemas Empático</h3>
+                    <p class="text-gray-700 font-medium text-sm leading-relaxed flex-grow">
+                        Un egresado de UNITEC trabaja para comprender los patrones y principios que determinan cómo funciona el mundo. Es un pensador crítico con un profundo entendimiento de la causalidad, y combina esto con empatía para abordar problemas complejos y crear soluciones sostenibles y equitativas.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Capacidad 3 -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-brand-federal diamond-cut mt-3 ml-3"></div>
+                <div class="relative bg-white p-8 diamond-cut hover-solid-shift z-10 h-full flex flex-col border border-gray-100">
+                    <div class="w-16 h-16 bg-brand-sky diamond-shape flex items-center justify-center mb-6">
+                        <i data-lucide="users" class="w-8 h-8 text-brand-federal"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-brand-federal uppercase">Un Colaborador Constructivo</h3>
+                    <p class="text-gray-700 font-medium text-sm leading-relaxed flex-grow">
+                        Un egresado de UNITEC trabaja eficazmente con personas de distintos orígenes, disciplinas y culturas. Construye relaciones respetuosas para alcanzar metas comunes con apertura, empatía y respeto.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Capacidad 4 -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-brand-cyan diamond-cut mt-3 ml-3"></div>
+                <div class="relative bg-white p-8 diamond-cut hover-solid-shift z-10 h-full flex flex-col border border-gray-100">
+                    <div class="w-16 h-16 bg-brand-federal diamond-shape flex items-center justify-center mb-6">
+                        <i data-lucide="globe-2" class="w-8 h-8 text-brand-cyan"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-brand-federal uppercase">Un Ciudadano Responsable</h3>
+                    <p class="text-gray-700 font-medium text-sm leading-relaxed flex-grow">
+                        Un egresado de UNITEC siente un sentido de responsabilidad personal por sostener sistemas sociales saludables y ecosistemas naturales, y actúa para transformar su entorno para mejorarlo.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Capacidad 5 -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-brand-sky diamond-cut mt-3 ml-3"></div>
+                <div class="relative bg-white p-8 diamond-cut hover-solid-shift z-10 h-full flex flex-col border border-gray-100">
+                    <div class="w-16 h-16 bg-brand-cyan diamond-shape flex items-center justify-center mb-6">
+                        <i data-lucide="lightbulb" class="w-8 h-8 text-brand-federal"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-brand-federal uppercase">Un Innovador Creativo</h3>
+                    <p class="text-gray-700 font-medium text-sm leading-relaxed flex-grow">
+                        Un egresado de UNITEC aporta originalidad de interpretación y creatividad de expresión a su experiencia del mundo. Crea nuevos artefactos, tecnologías y herramientas, llevando un espíritu emprendedor a la solución de problemas.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Capacidad 6 -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-brand-federal diamond-cut mt-3 ml-3"></div>
+                <div class="relative bg-white p-8 diamond-cut hover-solid-shift z-10 h-full flex flex-col border border-gray-100">
+                    <div class="w-16 h-16 bg-brand-sky diamond-shape flex items-center justify-center mb-6">
+                        <i data-lucide="message-square" class="w-8 h-8 text-brand-federal"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-brand-federal uppercase">Un Comunicador Efectivo</h3>
+                    <p class="text-gray-700 font-medium text-sm leading-relaxed flex-grow">
+                        Un egresado de UNITEC domina las habilidades de comunicación oral, escrita y digital. Expresa ideas complejas de manera efectiva, ética y estratégica, utilizando la comunicación para defender principios y compartir ideas que importan.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección: Los Principios de Aprendizaje (Líneas puras, sin fondos difusos) -->
+    <section class="bg-gray-100 py-20 px-6 border-y-8 border-brand-cyan">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-black text-brand-federal mb-4 uppercase">Los Principios de Aprendizaje</h2>
+                <p class="text-lg font-medium text-gray-600 max-w-3xl mx-auto">
+                    El CGS establece que para que el aprendizaje florezca de manera transversal, la cultura del aula debe basarse en principios claros y compartidos por todos los docentes.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Principio 1 -->
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-federal diamond-cut mt-2 ml-2 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                    <div class="relative bg-white diamond-cut p-8 flex items-start gap-6 z-10 border-l-8 border-brand-cyan h-full">
+                        <div class="bg-brand-federal p-4 diamond-shape text-brand-sky shrink-0">
+                            <i data-lucide="target" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-black text-brand-federal mb-2 uppercase">Propósito</h4>
+                            <p class="text-gray-700 font-medium text-sm">El aprendizaje debe tener un "Porqué" claro y relevante. Los estudiantes deben sentir que lo que aprenden contribuye a resolver problemas reales.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Principio 2 -->
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-federal diamond-cut mt-2 ml-2 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                    <div class="relative bg-white diamond-cut p-8 flex items-start gap-6 z-10 border-l-8 border-brand-sky h-full">
+                        <div class="bg-brand-cyan p-4 diamond-shape text-white shrink-0">
+                            <i data-lucide="unlock" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-black text-brand-federal mb-2 uppercase">Posibilidad</h4>
+                            <p class="text-gray-700 font-medium text-sm">Todos los estudiantes tienen la capacidad innata de aprender a niveles profundos si se les brindan las herramientas y el entorno adecuado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Principio 3 -->
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-federal diamond-cut mt-2 ml-2 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                    <div class="relative bg-white diamond-cut p-8 flex items-start gap-6 z-10 border-l-8 border-brand-cyan h-full">
+                        <div class="bg-brand-federal p-4 diamond-shape text-brand-sky shrink-0">
+                            <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-black text-brand-federal mb-2 uppercase">Personas</h4>
+                            <p class="text-gray-700 font-medium text-sm">El aprendizaje es un acto social. Se fomenta a través de la colaboración constructiva, la diversidad y las relaciones basadas en el respeto mutuo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Principio 4 -->
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-federal diamond-cut mt-2 ml-2 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                    <div class="relative bg-white diamond-cut p-8 flex items-start gap-6 z-10 border-l-8 border-brand-sky h-full">
+                        <div class="bg-brand-cyan p-4 diamond-shape text-white shrink-0">
+                            <i data-lucide="user-cog" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-black text-brand-federal mb-2 uppercase">Autonomía</h4>
+                            <p class="text-gray-700 font-medium text-sm">Los estudiantes deben ser dueños de su proceso (<em>Ownership</em>), desarrollando agencia para dirigir, monitorear y evaluar su propio aprendizaje.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Video Audaz (Replicando el estilo exitoso previo) -->
+    <section class="bg-white py-24 px-6 relative overflow-hidden">
+        <div class="absolute -top-10 -left-10 w-48 h-48 bg-brand-sky diamond-shape opacity-20"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-black mb-12 text-brand-federal uppercase tracking-tight">Conoce más sobre <span class="text-brand-cyan">nuestra visión</span></h2>
+            
+            <div class="relative p-2 bg-brand-cyan diamond-cut-reverse inline-block w-full">
+                <div class="w-full bg-brand-federal diamond-cut-reverse overflow-hidden relative group cursor-pointer">
+                    <!-- Placeholder de imagen interactiva -->
+                    <div id="videoOverlayCapacidades" class="absolute inset-0 bg-brand-federal flex flex-col items-center justify-center z-20 group-hover:bg-opacity-90 transition duration-300">
+                         <div class="w-24 h-24 bg-brand-sky diamond-shape flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                            <i data-lucide="play" class="w-10 h-10 text-brand-federal ml-2"></i>
+                         </div>
+                         <p class="text-white font-bold tracking-widest uppercase">Reproducir Video</p>
+                    </div>
+                    <!-- El video real con identificador -->
+                    <video id="brandVideoCapacidades" class="w-full h-auto aspect-video opacity-50 mix-blend-luminosity transition-all duration-500" poster="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80">
+                        <source src="VID/Capacidades_humanas.mp4" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                </div>
+            </div>
+            <p class="mt-8 font-bold text-sm text-brand-cyan tracking-widest uppercase border-b-2 border-brand-cyan inline-block pb-1">
+                Exploración visual de las capacidades humanas y los principios de aprendizaje en UNITEC.
+            </p>
+        </div>
+    </section>
+
+    <!-- Call to Action / Ejercicio de Reflexión Docente (Sólido y contundente) -->
+    <section class="bg-brand-federal text-white py-20 px-6 relative">
+        <div class="max-w-5xl mx-auto">
+            <div class="relative">
+                <div class="absolute inset-0 bg-brand-cyan diamond-cut mt-4 ml-4"></div>
+                <div class="relative bg-white text-brand-federal diamond-cut p-10 md:p-14 z-10 flex flex-col md:flex-row items-center gap-10 hover-solid-shift">
+                    <div class="w-32 h-32 bg-brand-sky diamond-shape flex items-center justify-center shrink-0">
+                        <i data-lucide="messages-square" class="w-14 h-14 text-brand-federal"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-black mb-4 uppercase">Reflexión en Acción</h2>
+                        <p class="text-gray-700 font-medium text-lg mb-8 leading-relaxed">
+                            El verdadero cambio cultural ocurre cuando dialogamos. Te invitamos a sentarte con un colega que brinde clases en tu mismo programa académico, elijan <strong class="text-brand-federal font-black">una</strong> capacidad del Retrato del Aprendiz y respondan juntos estas dos preguntas:
+                        </p>
+                        
+                        <div class="space-y-6 bg-gray-50 p-8 border-l-8 border-brand-cyan">
+                            <p class="text-xl font-bold text-brand-federal">
+                                <span class="text-brand-cyan mr-2">1.</span> "¿Cómo se ve esa capacidad en un estudiante de mi carrera?"
+                            </p>
+                            <p class="text-xl font-bold text-brand-federal border-t border-gray-200 pt-6">
+                                <span class="text-brand-cyan mr-2">2.</span> "¿Qué evidencia observable me convencería de que está creciendo en esa área?"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página Institucional -->
+    <footer class="bg-brand-federal border-t-8 border-brand-sky py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <!-- Imagotipo Horizontal -->
+            <div class="flex items-center gap-3">
+                <svg width="28" height="28" viewBox="0 0 100 100" class="fill-current text-brand-cyan">
+                    <polygon points="50,0 100,50 50,100 0,50" />
+                </svg>
+                <span class="text-2xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
+            </div>
+            <p class="text-sm font-medium text-brand-sky uppercase tracking-widest text-center md:text-right">
+                Diseñado en alineación con el <span class="text-white font-bold">Collective Growth System</span><br>
+                y la Visión UNITEC 2030.<br>
+                <span class="text-xs text-brand-cyan opacity-80 mt-2 block lowercase tracking-normal">*verificar redacción final de las capacidades en el manual oficial.</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Inicialización de íconos y Lógica del Video -->
+    <script>
+        lucide.createIcons();
+
+        // Lógica de interacción audaz para el video de capacidades
+        const videoOverlay = document.getElementById('videoOverlayCapacidades');
+        const brandVideo = document.getElementById('brandVideoCapacidades');
+
+        if (videoOverlay && brandVideo) {
+            videoOverlay.addEventListener('click', () => {
+                videoOverlay.classList.add('hidden');
+                brandVideo.classList.remove('opacity-50', 'mix-blend-luminosity');
+                brandVideo.setAttribute('controls', 'true');
+                brandVideo.play();
+            });
+        }
+    </script>
+</body>
+</html>
