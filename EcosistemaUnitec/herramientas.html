@@ -314,7 +314,7 @@
                                 </div>
                             </div>
 
-                            {/* RECURSO 4: TAXONOMÍA DE BLOOM (NUEVA SECCIÓN OPCIÓN A) */}
+                            {/* RECURSO 4: TAXONOMÍA DE BLOOM */}
                             <div className="relative group lg:col-span-2">
                                 <div className="absolute inset-0 bg-unitec-cyan diamond-cut mt-3 ml-3"></div>
                                 <div className="relative bg-white p-8 md:p-10 diamond-cut border border-gray-200 z-10 hover-solid-shift flex flex-col md:flex-row gap-8 items-center h-full">
@@ -372,7 +372,7 @@
                         <div className="bg-unitec-blue p-10 md:p-12 text-white diamond-cut border-l-8 border-unitec-cyan flex flex-col md:flex-row items-center justify-between gap-10 mt-16 relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-unitec-sky opacity-10 diamond-shape translate-x-1/3 -translate-y-1/3"></div>
                             
-                            <div className="flex items-start md:items-center gap-6 relative z-10">
+                            <div className="flex items-start md:items-center gap-6 relative z-10 flex-1">
                                 <div className="bg-unitec-cyan p-4 diamond-shape flex-shrink-0">
                                     <Calendar className="w-8 h-8 text-white" />
                                 </div>
@@ -382,8 +382,33 @@
                                     <p className="text-gray-200 text-base font-medium max-w-2xl leading-relaxed">
                                         En la Sesión 2 estaremos abarcando el diseño del <strong className="text-white font-black">Planner de UNITEC</strong>, el cual es una herramienta clave para la implementación del Ecosistema de Aprendizaje.
                                     </p>
+                                    
+                                    {/* Bloque agregado: Requisitos del Taller */}
+                                    <div className="mt-5 bg-white/5 border-l-4 border-unitec-cyan p-5">
+                                        <p className="text-unitec-sky font-bold text-sm uppercase tracking-wide mb-3">
+                                            Requisitos para este Taller de Co-diseño:
+                                        </p>
+                                        <ul className="text-sm text-gray-200 space-y-2 list-none">
+                                            <li className="flex items-center gap-2">
+                                                <CheckCircle className="w-4 h-4 text-unitec-cyan flex-shrink-0" /> 
+                                                <span>Seleccionar una <strong>asignatura</strong> que desees impactar.</span>
+                                            </li>
+                                            <li className="flex items-center gap-2">
+                                                <CheckCircle className="w-4 h-4 text-unitec-cyan flex-shrink-0" /> 
+                                                <span>Traer el <strong>sílabo</strong> actualizado de la clase.</span>
+                                            </li>
+                                            <li className="flex items-center gap-2">
+                                                <CheckCircle className="w-4 h-4 text-unitec-cyan flex-shrink-0" /> 
+                                                <span>Traer el <strong>cuadro de planificación</strong> (si lo tienes disponible).</span>
+                                            </li>
+                                        </ul>
+                                        <p className="text-xs text-gray-400 mt-4 italic">
+                                            * Es importante tener claro el contenido y las competencias para trabajar efectivamente durante la sesión.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
+                            
                             <div className="bg-white/10 p-6 diamond-cut border border-white/20 text-center md:text-left flex-shrink-0 max-w-sm relative z-10">
                                 <p className="text-sm text-white font-medium leading-relaxed italic">
                                     El Agente de IA "Rosalila" es una forma muy práctica de poderse familiarizar con los materiales, así como de poder rediseñar actividades y generar nuevas herramientas antes de nuestra próxima sesión.
