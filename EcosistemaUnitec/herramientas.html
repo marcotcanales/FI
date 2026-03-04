@@ -89,6 +89,7 @@
         const Layout = ({ className }) => <IconWrapper className={className}><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="9" y2="21"/></IconWrapper>;
         const Lightbulb = ({ className }) => <IconWrapper className={className}><line x1="9" x2="15" y1="18" y2="18"/><line x1="10" x2="14" y1="22" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 12 2a4.65 4.65 0 0 0-4.5 9.65c.76.76 1.23 1.52 1.4 2.5a2 2 0 0 0 4.19 0Z"/></IconWrapper>;
         const MessageCircle = ({ className }) => <IconWrapper className={className}><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></IconWrapper>;
+        const Target = ({ className }) => <IconWrapper className={className}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></IconWrapper>;
 
         // --- COMPONENTE PRINCIPAL ---
         const App = () => {
@@ -170,10 +171,10 @@
 
                             {/* RECURSO 2: PODCAST (Estilo Diamante) */}
                             <div className="relative group">
-                                <div className="absolute inset-0 bg-unitec-federal diamond-cut mt-3 ml-3"></div>
+                                <div className="absolute inset-0 bg-unitec-blue diamond-cut mt-3 ml-3"></div>
                                 <div className="relative bg-white p-8 md:p-10 diamond-cut border border-gray-200 z-10 hover-solid-shift flex flex-col h-full">
                                     <div className="flex items-center gap-4 mb-6">
-                                        <div className="w-14 h-14 bg-unitec-federal diamond-shape flex items-center justify-center text-unitec-sky shrink-0">
+                                        <div className="w-14 h-14 bg-unitec-blue diamond-shape flex items-center justify-center text-unitec-sky shrink-0">
                                             <Headphones className="w-6 h-6" />
                                         </div>
                                         <div>
@@ -202,7 +203,7 @@
                                         {/* Audio 2 */}
                                         <div className="bg-gray-50 border-2 border-gray-100 p-4 diamond-cut hover:border-unitec-blue transition-colors">
                                             <div className="flex items-center gap-3 mb-3">
-                                                <span className="bg-unitec-federal text-unitec-sky text-xs font-black px-2 py-1 uppercase tracking-widest diamond-cut">Parte 2</span>
+                                                <span className="bg-unitec-blue text-unitec-sky text-xs font-black px-2 py-1 uppercase tracking-widest diamond-cut">Parte 2</span>
                                                 <h4 className="font-bold text-unitec-blue text-sm uppercase">Implicaciones y hallazgos</h4>
                                             </div>
                                             <audio controls className="w-full h-10 outline-none">
@@ -214,105 +215,157 @@
                                 </div>
                             </div>
 
-                        </div>
-
-                        {/* RECURSO 3: AGENTE DE IA ROSALILA (Limpiado del morado) */}
-                        <div className="relative group lg:col-span-2">
-                            <div className="absolute inset-0 bg-unitec-sky diamond-cut mt-3 ml-3"></div>
-                            <div className="relative bg-white p-8 md:p-12 diamond-cut border border-gray-200 z-10 hover-solid-shift flex flex-col h-full">
-                                
-                                {/* Etiqueta de Licencia */}
-                                <div className="absolute top-6 right-6 bg-gray-100 text-unitec-blue border border-gray-200 text-xs font-bold px-4 py-2 diamond-cut flex items-center gap-2 uppercase tracking-widest">
-                                    <Cpu className="w-4 h-4 text-unitec-cyan" />
-                                    Licencia Institucional
-                                </div>
-
-                                <div className="flex flex-col md:flex-row gap-12 items-start mt-8 md:mt-0">
-                                    <div className="flex-1">
-                                        <div className="flex items-center gap-4 mb-6">
-                                            <div className="w-16 h-16 bg-unitec-blue diamond-shape flex items-center justify-center text-white shrink-0">
-                                                <Cpu className="w-8 h-8" />
-                                            </div>
-                                            <div>
-                                                <h3 className="text-3xl font-black text-unitec-blue leading-tight uppercase">IA "Rosalila"</h3>
-                                                <p className="text-sm font-bold text-unitec-cyan uppercase tracking-widest mt-1">Consultor Pedagógico Copilot</p>
-                                            </div>
-                                        </div>
-                                        
-                                        <p className="text-gray-700 font-medium text-lg mb-8">
-                                            Asistente inteligente diseñado específicamente para guiar a los docentes en la adopción del CGS, co-diseñar actividades y transformar la planificación educativa.
-                                        </p>
-
-                                        {/* Advertencia / Regla Crítica (Cortada en diamante, colores semánticos firmes) */}
-                                        <div className="bg-amber-50 border-l-8 border-amber-500 p-6 mb-10 diamond-cut">
-                                            <div className="flex items-start gap-4">
-                                                <div className="bg-amber-500 w-10 h-10 diamond-shape flex items-center justify-center text-white shrink-0 mt-1">
-                                                    <AlertTriangle className="w-5 h-5" />
-                                                </div>
-                                                <div>
-                                                    <h4 className="font-black text-amber-900 mb-2 text-lg uppercase">Regla Crítica de Operación</h4>
-                                                    <p className="text-amber-800 text-sm font-medium leading-relaxed">
-                                                        Rosalila <strong className="font-black">NO es completamente autónoma</strong>. Está diseñada para el trabajo colaborativo (co-diseño) junto a ti. Para que sus propuestas sean válidas, <strong className="underline decoration-2">es indispensable proporcionarle el contexto académico (Sílabo o Planner previo)</strong> al iniciar la conversación.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <a 
-                                            href="https://m365.cloud.microsoft:443/chat/?titleId=T_a1694e40-3c6c-c50a-0108-8f62706c0e3e&source=embedded-builder" 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center justify-center gap-3 bg-unitec-cyan hover:bg-unitec-blue text-white transition-colors px-8 py-5 diamond-cut font-black text-sm uppercase tracking-widest"
-                                        >
-                                            Abrir Rosalila en Microsoft Copilot
-                                            <ExternalLink className="w-5 h-5" />
-                                        </a>
+                            {/* RECURSO 3: AGENTE DE IA ROSALILA */}
+                            <div className="relative group lg:col-span-2">
+                                <div className="absolute inset-0 bg-unitec-sky diamond-cut mt-3 ml-3"></div>
+                                <div className="relative bg-white p-8 md:p-12 diamond-cut border border-gray-200 z-10 hover-solid-shift flex flex-col h-full">
+                                    
+                                    {/* Etiqueta de Licencia */}
+                                    <div className="absolute top-6 right-6 bg-gray-100 text-unitec-blue border border-gray-200 text-xs font-bold px-4 py-2 diamond-cut flex items-center gap-2 uppercase tracking-widest">
+                                        <Cpu className="w-4 h-4 text-unitec-cyan" />
+                                        Licencia Institucional
                                     </div>
 
-                                    {/* Funciones del Agente */}
-                                    <div className="flex-1 w-full bg-gray-50 p-8 diamond-cut border border-gray-200">
-                                        <h4 className="font-black text-unitec-blue mb-8 text-xl uppercase border-b-2 border-unitec-cyan inline-block pb-2">¿En qué te ayuda Rosalila?</h4>
-                                        
-                                        <div className="space-y-8">
-                                            <div className="flex gap-4">
-                                                <div className="bg-white border-2 border-unitec-cyan diamond-shape w-12 h-12 flex items-center justify-center flex-shrink-0 text-unitec-federal">
-                                                    <Layout className="w-5 h-5" />
+                                    <div className="flex flex-col md:flex-row gap-12 items-start mt-8 md:mt-0">
+                                        <div className="flex-1">
+                                            <div className="flex items-center gap-4 mb-6">
+                                                <div className="w-16 h-16 bg-unitec-blue diamond-shape flex items-center justify-center text-white shrink-0">
+                                                    <Cpu className="w-8 h-8" />
                                                 </div>
                                                 <div>
-                                                    <h5 className="font-black text-unitec-blue text-base uppercase">A. Diseño del Planner</h5>
-                                                    <p className="text-sm font-medium text-gray-700 mt-2 leading-relaxed">
-                                                        Te guía paso a paso en la creación del <em>UNITEC Planner</em>. Asegura que los propósitos, narrativas y rúbricas se alineen con las capacidades humanas.
-                                                    </p>
+                                                    <h3 className="text-3xl font-black text-unitec-blue leading-tight uppercase">IA "Rosalila"</h3>
+                                                    <p className="text-sm font-bold text-unitec-cyan uppercase tracking-widest mt-1">Consultor Pedagógico Copilot</p>
                                                 </div>
                                             </div>
                                             
-                                            <div className="flex gap-4">
-                                                <div className="bg-white border-2 border-unitec-sky diamond-shape w-12 h-12 flex items-center justify-center flex-shrink-0 text-unitec-federal">
-                                                    <Lightbulb className="w-5 h-5" />
-                                                </div>
-                                                <div>
-                                                    <h5 className="font-black text-unitec-blue text-base uppercase">B. Co-Diseño de Actividades</h5>
-                                                    <p className="text-sm font-medium text-gray-700 mt-2 leading-relaxed">
-                                                        Ayuda a estructurar actividades recomendando herramientas exactas del <em>CGS Toolkit</em> y estrategias de <em>Learning to Learn (L2L)</em> contextualizadas a tu clase.
-                                                    </p>
+                                            <p className="text-gray-700 font-medium text-lg mb-8">
+                                                Asistente inteligente diseñado específicamente para guiar a los docentes en la adopción del CGS, co-diseñar actividades y transformar la planificación educativa.
+                                            </p>
+
+                                            {/* Advertencia / Regla Crítica */}
+                                            <div className="bg-amber-50 border-l-8 border-amber-500 p-6 mb-10 diamond-cut">
+                                                <div className="flex items-start gap-4">
+                                                    <div className="bg-amber-500 w-10 h-10 diamond-shape flex items-center justify-center text-white shrink-0 mt-1">
+                                                        <AlertTriangle className="w-5 h-5" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-black text-amber-900 mb-2 text-lg uppercase">Regla Crítica de Operación</h4>
+                                                        <p className="text-amber-800 text-sm font-medium leading-relaxed">
+                                                            Rosalila <strong className="font-black">NO es completamente autónoma</strong>. Está diseñada para el trabajo colaborativo (co-diseño) junto a ti. Para que sus propuestas sean válidas, <strong className="underline decoration-2">es indispensable proporcionarle el contexto académico (Sílabo o Planner previo)</strong> al iniciar la conversación.
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div className="flex gap-4">
-                                                <div className="bg-white border-2 border-unitec-federal diamond-shape w-12 h-12 flex items-center justify-center flex-shrink-0 text-unitec-cyan">
-                                                    <MessageCircle className="w-5 h-5" />
+                                            <a 
+                                                href="https://m365.cloud.microsoft:443/chat/?titleId=T_a1694e40-3c6c-c50a-0108-8f62706c0e3e&source=embedded-builder" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center justify-center gap-3 bg-unitec-cyan hover:bg-unitec-blue text-white transition-colors px-8 py-5 diamond-cut font-black text-sm uppercase tracking-widest"
+                                            >
+                                                Abrir Rosalila en Copilot
+                                                <ExternalLink className="w-5 h-5" />
+                                            </a>
+                                        </div>
+
+                                        {/* Funciones del Agente */}
+                                        <div className="flex-1 w-full bg-gray-50 p-8 diamond-cut border border-gray-200">
+                                            <h4 className="font-black text-unitec-blue mb-8 text-xl uppercase border-b-2 border-unitec-cyan inline-block pb-2">¿En qué te ayuda Rosalila?</h4>
+                                            
+                                            <div className="space-y-8">
+                                                <div className="flex gap-4">
+                                                    <div className="bg-white border-2 border-unitec-cyan diamond-shape w-12 h-12 flex items-center justify-center flex-shrink-0 text-unitec-blue">
+                                                        <Layout className="w-5 h-5" />
+                                                    </div>
+                                                    <div>
+                                                        <h5 className="font-black text-unitec-blue text-base uppercase">A. Diseño del Planner</h5>
+                                                        <p className="text-sm font-medium text-gray-700 mt-2 leading-relaxed">
+                                                            Te guía paso a paso en la creación del <em>UNITEC Planner</em>. Asegura que los propósitos, narrativas y rúbricas se alineen con las capacidades humanas.
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <h5 className="font-black text-unitec-blue text-base uppercase">C. Consultoría Metodológica</h5>
-                                                    <p className="text-sm font-medium text-gray-700 mt-2 leading-relaxed">
-                                                        Modo experto (Q&A) para resolver dudas conceptuales. Pregúntale <em>"¿Qué es el Learning Pit?"</em> o <em>"¿Cómo evalúo formativamente?"</em> y te citará fuentes oficiales.
-                                                    </p>
+                                                
+                                                <div className="flex gap-4">
+                                                    <div className="bg-white border-2 border-unitec-sky diamond-shape w-12 h-12 flex items-center justify-center flex-shrink-0 text-unitec-blue">
+                                                        <Lightbulb className="w-5 h-5" />
+                                                    </div>
+                                                    <div>
+                                                        <h5 className="font-black text-unitec-blue text-base uppercase">B. Co-Diseño de Actividades</h5>
+                                                        <p className="text-sm font-medium text-gray-700 mt-2 leading-relaxed">
+                                                            Ayuda a estructurar actividades recomendando herramientas exactas del <em>CGS Toolkit</em> y estrategias de <em>Learning to Learn (L2L)</em> contextualizadas a tu clase.
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex gap-4">
+                                                    <div className="bg-white border-2 border-unitec-blue diamond-shape w-12 h-12 flex items-center justify-center flex-shrink-0 text-unitec-cyan">
+                                                        <MessageCircle className="w-5 h-5" />
+                                                    </div>
+                                                    <div>
+                                                        <h5 className="font-black text-unitec-blue text-base uppercase">C. Consultoría Metodológica</h5>
+                                                        <p className="text-sm font-medium text-gray-700 mt-2 leading-relaxed">
+                                                            Modo experto (Q&A) para resolver dudas conceptuales. Pregúntale <em>"¿Qué es el Learning Pit?"</em> o <em>"¿Cómo evalúo formativamente?"</em> y te citará fuentes oficiales.
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            {/* RECURSO 4: TAXONOMÍA DE BLOOM (NUEVA SECCIÓN OPCIÓN A) */}
+                            <div className="relative group lg:col-span-2">
+                                <div className="absolute inset-0 bg-unitec-cyan diamond-cut mt-3 ml-3"></div>
+                                <div className="relative bg-white p-8 md:p-10 diamond-cut border border-gray-200 z-10 hover-solid-shift flex flex-col md:flex-row gap-8 items-center h-full">
+                                    
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <div className="w-14 h-14 bg-unitec-blue diamond-shape flex items-center justify-center text-unitec-sky shrink-0">
+                                                <Target className="w-6 h-6" />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-2xl font-black text-unitec-blue uppercase leading-tight">Taxonomía de Bloom</h3>
+                                                <p className="text-xs font-bold text-unitec-cyan uppercase tracking-widest mt-1">Constructor de Metas de Aprendizaje</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <p className="text-gray-700 text-sm font-medium mb-6">
+                                            Herramienta interactiva diseñada para facilitar la construcción de metas de aprendizaje, perfectamente contextualizada a las tres dimensiones de la definición de aprendizaje UNITEC.
+                                        </p>
+
+                                        {/* Etiquetas de Dimensiones */}
+                                        <div className="flex gap-3 flex-wrap">
+                                            <span className="bg-gray-100 text-unitec-blue text-xs font-bold px-3 py-1 uppercase tracking-widest diamond-cut border border-gray-200 flex items-center gap-2">
+                                                <span className="w-2 h-2 bg-unitec-blue rounded-none diamond-shape inline-block"></span>
+                                                Concepto
+                                            </span>
+                                            <span className="bg-gray-100 text-unitec-blue text-xs font-bold px-3 py-1 uppercase tracking-widest diamond-cut border border-gray-200 flex items-center gap-2">
+                                                <span className="w-2 h-2 bg-unitec-cyan rounded-none diamond-shape inline-block"></span>
+                                                Competencia
+                                            </span>
+                                            <span className="bg-gray-100 text-unitec-blue text-xs font-bold px-3 py-1 uppercase tracking-widest diamond-cut border border-gray-200 flex items-center gap-2">
+                                                <span className="w-2 h-2 bg-unitec-sky rounded-none diamond-shape inline-block"></span>
+                                                Carácter
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="w-full md:w-auto flex-shrink-0 mt-6 md:mt-0">
+                                        <a 
+                                            href="https://capexfi25-30.netlify.app/ecosistemaunitec/taxonomia" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center justify-center gap-3 w-full md:w-72 bg-unitec-blue text-white hover:bg-unitec-cyan transition-colors py-5 px-6 diamond-cut font-black text-sm uppercase tracking-widest text-center"
+                                        >
+                                            Consultar Taxonomía
+                                            <ExternalLink className="w-5 h-5" />
+                                        </a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
                         </div>
 
                         {/* BANNER SESIÓN 2 (Diamante Sólido) */}
