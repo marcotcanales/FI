@@ -5,20 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunalidades Humanas | CGS UNITEC</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Tipografía Institucional Única: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Poppins', 'sans-serif'],
                     },
                     colors: {
                         unitec: {
-                            blue: '#003865',
-                            red: '#E01A22',
-                            light: '#F0F4F8',
-                            dark: '#001F3F'
+                            federal: '#06065C',
+                            cyan: '#03AED2',
+                            sky: '#47C8FD',
+                            light: '#F8FAFC',
+                            slate: '#334155'
                         }
                     }
                 }
@@ -26,12 +28,14 @@
         }
     </script>
     <style>
+        /* REGLA DE MARCA: NUNCA AGREGAR SOMBRAS */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #E2E8F0; /* slate-200 */
+        }
         .card-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-        }
-        .transition-all-custom {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-color: #03AED2; /* Pacific Cyan en hover */
         }
         .accordion-content {
             max-height: 0;
@@ -39,159 +43,164 @@
             transition: max-height 0.3s ease-out;
         }
         .accordion-content.open {
-            max-height: 500px; /* Adjust as needed */
+            max-height: 600px;
             transition: max-height 0.5s ease-in;
         }
     </style>
 </head>
-<body class="bg-unitec-light text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-unitec-light text-unitec-slate font-sans antialiased min-h-screen flex flex-col">
 
-    <!-- Header Section -->
-    <header class="bg-unitec-blue text-white py-16 px-6 relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full opacity-10">
-            <!-- Decorative background pattern -->
-            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1"/>
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
+    <!-- Header Section - Federal Blue -->
+    <header class="bg-unitec-federal text-white py-16 px-6 relative overflow-hidden">
+        <!-- Imagotipo Horizontal UNITEC -->
+        <div class="max-w-6xl mx-auto relative z-10 mb-12">
+            <div class="flex items-center justify-center md:justify-start gap-3">
+                <!-- Isotipo de Diamante (Geométrico, sin sombras ni gradientes) -->
+                <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 2L30 16L16 30L2 16L16 2Z" fill="#03AED2"/>
+                    <path d="M16 2L16 30" stroke="#06065C" stroke-width="1.5"/>
+                    <path d="M2 16L30 16" stroke="#06065C" stroke-width="1.5"/>
+                    <path d="M9 9L23 23" stroke="#06065C" stroke-width="1"/>
+                    <path d="M23 9L9 23" stroke="#06065C" stroke-width="1"/>
+                </svg>
+                <!-- Logotipo -->
+                <span class="font-bold text-3xl tracking-tight text-white lowercase">unitec</span>
+            </div>
         </div>
-        <div class="max-w-6xl mx-auto relative z-10 text-center">
-            <span class="text-unitec-red font-bold tracking-wider uppercase text-sm mb-4 block">Collective Growth System (CGS)</span>
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">Las Comunalidades Humanas</h1>
-            <p class="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto">
-                Lentes conceptuales universales que trascienden las disciplinas individuales, conectándonos con la experiencia humana compartida para lograr la <strong>transferencia del aprendizaje</strong>.
+
+        <div class="max-w-6xl mx-auto relative z-10 text-center md:text-left flex flex-col md:items-start">
+            <span class="text-unitec-sky font-bold tracking-widest uppercase text-sm mb-4 block">Collective Growth System (CGS)</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">Las Comunalidades Humanas</h1>
+            <p class="text-lg md:text-xl text-blue-100 max-w-3xl leading-relaxed">
+                Lentes conceptuales universales que trascienden las disciplinas individuales, conectándonos con la experiencia humana compartida para lograr la <strong class="text-unitec-cyan">transferencia del aprendizaje</strong>.
             </p>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow max-w-6xl mx-auto px-6 py-12">
+    <main class="flex-grow max-w-6xl mx-auto px-6 py-12 w-full">
         
-        <!-- Intro Section -->
-        <section class="bg-white rounded-2xl shadow-sm p-8 mb-12 border-l-4 border-unitec-red">
-            <h2 class="text-2xl font-bold text-unitec-dark mb-4">¿Por qué son importantes en UNITEC?</h2>
-            <p class="text-slate-600 leading-relaxed mb-4">
-                En lugar de que los estudiantes memoricen datos aislados en "silos" de materias, estas comunalidades les permiten entender el <em>panorama general</em>. Al centrar un <strong>Unitec Planner</strong> en una comunalidad, garantizamos que el conocimiento sea profundo, relevante y aplicable a problemas complejos del mundo real, alineándose con nuestro retrato de egresado como <strong>Solucionador de Problemas Empático</strong> y <strong>Ciudadano Responsable</strong>.
+        <!-- Intro Section (Solid borders, no shadows) -->
+        <section class="bg-white rounded-none p-8 mb-12 border-l-8 border-unitec-cyan border-y-2 border-r-2 border-y-slate-200 border-r-slate-200">
+            <h2 class="text-2xl font-bold text-unitec-federal mb-4">¿Por qué son importantes en UNITEC?</h2>
+            <p class="leading-relaxed mb-4">
+                En lugar de que los estudiantes memoricen datos aislados en "silos" de materias, estas comunalidades les permiten entender el <em class="font-medium text-unitec-cyan">panorama general</em>. Al centrar un <strong class="text-unitec-federal">Unitec Planner</strong> en una comunalidad, garantizamos que el conocimiento sea profundo, relevante y aplicable a problemas complejos del mundo real, alineándose con nuestro retrato de egresado como <strong>Solucionador de Problemas Empático</strong> y <strong>Ciudadano Responsable</strong>.
             </p>
         </section>
 
         <!-- Commonalities Grid -->
-        <h2 class="text-3xl font-bold text-center text-unitec-dark mb-10">Las 5 Comunalidades Centrales</h2>
+        <h2 class="text-3xl font-extrabold text-center text-unitec-federal mb-10">Las 5 Comunalidades Centrales</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             <!-- Card 1 -->
-            <article class="bg-white rounded-2xl shadow-sm p-6 card-hover transition-all-custom border border-slate-100 flex flex-col h-full">
-                <div class="w-12 h-12 bg-blue-50 text-unitec-blue rounded-full flex items-center justify-center mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <article class="bg-white p-6 card-hover flex flex-col h-full bg-white">
+                <div class="w-12 h-12 bg-unitec-federal text-unitec-sky rounded-sm flex items-center justify-center mb-6 transform rotate-45">
+                    <svg class="w-6 h-6 -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                 </div>
-                <h3 class="text-xl font-bold text-unitec-dark mb-3">1. Individuos y Grupos</h3>
-                <p class="text-slate-600 text-sm flex-grow mb-4">Explora cómo nos identificamos, nos organizamos e interactuamos. Analiza las tensiones y armonías entre los derechos individuales y las responsabilidades colectivas.</p>
-                <div class="bg-slate-50 p-4 rounded-lg mt-auto border-l-2 border-unitec-blue">
-                    <h4 class="text-xs font-bold uppercase text-unitec-blue mb-1">Enfoque de Aprendizaje</h4>
-                    <p class="text-xs text-slate-700">Vital para desarrollar liderazgo, empatía y habilidades de colaboración en equipos multidisciplinarios de ingeniería.</p>
+                <h3 class="text-xl font-bold text-unitec-federal mb-3">1. Individuos y Grupos</h3>
+                <p class="text-sm flex-grow mb-4">Explora cómo nos identificamos, nos organizamos e interactuamos. Analiza las tensiones y armonías entre los derechos individuales y las responsabilidades colectivas.</p>
+                <div class="bg-slate-50 p-4 mt-auto border-t-2 border-unitec-sky">
+                    <h4 class="text-xs font-bold uppercase text-unitec-federal mb-1">Enfoque de Aprendizaje</h4>
+                    <p class="text-xs">Vital para desarrollar liderazgo, empatía y habilidades de colaboración en equipos multidisciplinarios de ingeniería.</p>
                 </div>
             </article>
 
             <!-- Card 2 -->
-            <article class="bg-white rounded-2xl shadow-sm p-6 card-hover transition-all-custom border border-slate-100 flex flex-col h-full">
-                <div class="w-12 h-12 bg-blue-50 text-unitec-blue rounded-full flex items-center justify-center mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+            <article class="bg-white p-6 card-hover flex flex-col h-full bg-white">
+                <div class="w-12 h-12 bg-unitec-federal text-unitec-sky rounded-sm flex items-center justify-center mb-6 transform rotate-45">
+                    <svg class="w-6 h-6 -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
                 </div>
-                <h3 class="text-xl font-bold text-unitec-dark mb-3">2. Patrones y Principios</h3>
-                <p class="text-slate-600 text-sm flex-grow mb-4">Se centra en descubrir las reglas subyacentes, las repeticiones y las leyes que rigen el comportamiento, desde los fenómenos físicos hasta las dinámicas sociales.</p>
-                <div class="bg-slate-50 p-4 rounded-lg mt-auto border-l-2 border-unitec-blue">
-                    <h4 class="text-xs font-bold uppercase text-unitec-blue mb-1">Enfoque de Aprendizaje</h4>
-                    <p class="text-xs text-slate-700">Permite a los estudiantes abstraer modelos matemáticos y científicos para predecir comportamientos en diseños tecnológicos.</p>
+                <h3 class="text-xl font-bold text-unitec-federal mb-3">2. Patrones y Principios</h3>
+                <p class="text-sm flex-grow mb-4">Se centra en descubrir las reglas subyacentes, las repeticiones y las leyes que rigen el comportamiento, desde los fenómenos físicos hasta las dinámicas sociales.</p>
+                <div class="bg-slate-50 p-4 mt-auto border-t-2 border-unitec-sky">
+                    <h4 class="text-xs font-bold uppercase text-unitec-federal mb-1">Enfoque de Aprendizaje</h4>
+                    <p class="text-xs">Permite a los estudiantes abstraer modelos matemáticos y científicos para predecir comportamientos en diseños tecnológicos.</p>
                 </div>
             </article>
 
             <!-- Card 3 -->
-            <article class="bg-white rounded-2xl shadow-sm p-6 card-hover transition-all-custom border border-slate-100 flex flex-col h-full">
-                <div class="w-12 h-12 bg-blue-50 text-unitec-blue rounded-full flex items-center justify-center mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <article class="bg-white p-6 card-hover flex flex-col h-full bg-white">
+                <div class="w-12 h-12 bg-unitec-federal text-unitec-sky rounded-sm flex items-center justify-center mb-6 transform rotate-45">
+                    <svg class="w-6 h-6 -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
-                <h3 class="text-xl font-bold text-unitec-dark mb-3">3. Continuidad y Cambio</h3>
-                <p class="text-slate-600 text-sm flex-grow mb-4">Examina qué aspectos de nuestra vida, tecnología o sociedad permanecen constantes con el tiempo y cuáles experimentan evolución e innovación.</p>
-                <div class="bg-slate-50 p-4 rounded-lg mt-auto border-l-2 border-unitec-blue">
-                    <h4 class="text-xs font-bold uppercase text-unitec-blue mb-1">Enfoque de Aprendizaje</h4>
-                    <p class="text-xs text-slate-700">Apreciar el contexto histórico de su profesión, comprender la obsolescencia y anticipar futuras innovaciones tecnológicas.</p>
+                <h3 class="text-xl font-bold text-unitec-federal mb-3">3. Continuidad y Cambio</h3>
+                <p class="text-sm flex-grow mb-4">Examina qué aspectos de nuestra vida, tecnología o sociedad permanecen constantes con el tiempo y cuáles experimentan evolución e innovación.</p>
+                <div class="bg-slate-50 p-4 mt-auto border-t-2 border-unitec-sky">
+                    <h4 class="text-xs font-bold uppercase text-unitec-federal mb-1">Enfoque de Aprendizaje</h4>
+                    <p class="text-xs">Apreciar el contexto histórico de su profesión, comprender la obsolescencia y anticipar futuras innovaciones tecnológicas.</p>
                 </div>
             </article>
 
             <!-- Card 4 (Highlighted for Engineering) -->
-            <article class="bg-white rounded-2xl shadow-lg p-6 card-hover transition-all-custom border-2 border-unitec-blue flex flex-col h-full relative overflow-hidden lg:col-span-2">
-                <div class="absolute top-0 right-0 bg-unitec-blue text-white text-xs font-bold px-3 py-1 rounded-bl-lg">Ejemplo Aplicado</div>
-                <div class="flex items-start gap-4 mb-4">
-                    <div class="w-12 h-12 flex-shrink-0 bg-unitec-blue text-white rounded-full flex items-center justify-center">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+            <article class="bg-white p-6 card-hover border-2 border-unitec-federal flex flex-col h-full relative overflow-hidden lg:col-span-2">
+                <div class="absolute top-0 right-0 bg-unitec-federal text-white text-xs font-bold px-4 py-2 uppercase tracking-wide">Ejemplo Aplicado</div>
+                <div class="flex items-start gap-4 mb-4 mt-4">
+                    <div class="w-14 h-14 flex-shrink-0 bg-unitec-cyan text-white rounded-none flex items-center justify-center transform rotate-45">
+                        <svg class="w-7 h-7 -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-unitec-dark">4. Sistemas e Interacciones</h3>
-                        <p class="text-slate-500 text-sm">Aborda el mundo como una red de partes interconectadas donde cada elemento afecta al todo.</p>
+                        <h3 class="text-xl font-bold text-unitec-federal">4. Sistemas e Interacciones</h3>
+                        <p class="text-sm mt-1">Aborda el mundo como una red de partes interconectadas donde cada elemento afecta al todo.</p>
                     </div>
                 </div>
                 
-                <div class="grid md:grid-cols-2 gap-4 mt-2">
-                    <div class="bg-slate-50 p-4 rounded-lg border-l-2 border-unitec-red">
-                        <h4 class="text-sm font-bold text-unitec-dark mb-2">Contexto en Ingeniería</h4>
-                        <p class="text-sm text-slate-700">En <strong>Diseño Estructural en Concreto (CIV414)</strong>, una estructura no es una colección de elementos aislados, sino un sistema interdependiente. La seguridad global depende de la continuidad en el flujo de cargas.</p>
+                <div class="grid md:grid-cols-2 gap-4 mt-4">
+                    <div class="bg-slate-50 p-4 border-l-4 border-unitec-cyan">
+                        <h4 class="text-sm font-bold text-unitec-federal mb-2">Contexto en Ingeniería</h4>
+                        <p class="text-sm">En <strong>Diseño Estructural en Concreto (CIV414)</strong>, una estructura no es una colección de elementos aislados, sino un sistema interdependiente. La seguridad global depende de la continuidad en el flujo de cargas.</p>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-lg border-l-2 border-unitec-blue">
-                        <h4 class="text-sm font-bold text-unitec-dark mb-2">Meta de Aprendizaje (3Cs)</h4>
-                        <p class="text-sm text-slate-700">Desarrolla el <em>Pensamiento Sistémico (Systems Thinking)</em>. El ingeniero evalúa cómo un cambio en un nodo o material afecta la resiliencia y seguridad de todo el proyecto.</p>
+                    <div class="bg-slate-50 p-4 border-l-4 border-unitec-sky">
+                        <h4 class="text-sm font-bold text-unitec-federal mb-2">Meta de Aprendizaje (3Cs)</h4>
+                        <p class="text-sm">Desarrolla el <em>Pensamiento Sistémico (Systems Thinking)</em>. El ingeniero evalúa cómo un cambio en un nodo o material afecta la resiliencia y seguridad de todo el proyecto.</p>
                     </div>
                 </div>
             </article>
 
             <!-- Card 5 -->
-            <article class="bg-white rounded-2xl shadow-sm p-6 card-hover transition-all-custom border border-slate-100 flex flex-col h-full">
-                <div class="w-12 h-12 bg-blue-50 text-unitec-blue rounded-full flex items-center justify-center mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <article class="bg-white p-6 card-hover flex flex-col h-full bg-white">
+                <div class="w-12 h-12 bg-unitec-federal text-unitec-sky rounded-sm flex items-center justify-center mb-6 transform rotate-45">
+                    <svg class="w-6 h-6 -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                 </div>
-                <h3 class="text-xl font-bold text-unitec-dark mb-3">5. Causa y Consecuencia</h3>
-                <p class="text-slate-600 text-sm flex-grow mb-4">Analiza la lógica detrás de las acciones. Reconoce que los eventos no ocurren en el vacío; son moldeados por múltiples factores y generan impactos en cadena.</p>
-                <div class="bg-slate-50 p-4 rounded-lg mt-auto border-l-2 border-unitec-blue">
-                    <h4 class="text-xs font-bold uppercase text-unitec-blue mb-1">Enfoque de Aprendizaje</h4>
-                    <p class="text-xs text-slate-700">Fomenta la responsabilidad ética: cada decisión técnica o económica que toma un egresado tiene un impacto directo en la sociedad y el medio ambiente.</p>
+                <h3 class="text-xl font-bold text-unitec-federal mb-3">5. Causa y Consecuencia</h3>
+                <p class="text-sm flex-grow mb-4">Analiza la lógica detrás de las acciones. Reconoce que los eventos no ocurren en el vacío; son moldeados por múltiples factores y generan impactos en cadena.</p>
+                <div class="bg-slate-50 p-4 mt-auto border-t-2 border-unitec-sky">
+                    <h4 class="text-xs font-bold uppercase text-unitec-federal mb-1">Enfoque de Aprendizaje</h4>
+                    <p class="text-xs">Fomenta la responsabilidad ética: cada decisión técnica o económica que toma un egresado tiene un impacto directo en la sociedad y el medio ambiente.</p>
                 </div>
             </article>
 
         </div>
 
         <!-- Application Section (Accordion) -->
-        <section class="mt-16 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <section class="mt-16 bg-white border-2 border-slate-200">
             <button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none hover:bg-slate-50 transition-colors" onclick="toggleAccordion('app-section')">
-                <h2 class="text-2xl font-bold text-unitec-dark">¿Cómo aplicar esto en el aula (Learning to Learn)?</h2>
-                <svg id="icon-app-section" class="w-6 h-6 text-unitec-red transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <h2 class="text-2xl font-bold text-unitec-federal">¿Cómo aplicar esto en el aula (Learning to Learn)?</h2>
+                <svg id="icon-app-section" class="w-6 h-6 text-unitec-cyan transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
             <div id="app-section" class="accordion-content px-8 pb-6 bg-white">
-                <div class="border-t border-slate-100 pt-6">
-                    <p class="text-slate-600 mb-6">Como docentes, debemos transicionar de entregar contenido a diseñar experiencias. Aquí te mostramos cómo usar las comunalidades como andamiaje metacognitivo:</p>
-                    <ul class="space-y-4">
+                <div class="border-t-2 border-slate-100 pt-6">
+                    <p class="mb-6">Como docentes, debemos transicionar de entregar contenido a diseñar experiencias. Aquí te mostramos cómo usar las comunalidades como andamiaje metacognitivo:</p>
+                    <ul class="space-y-6">
                         <li class="flex items-start">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-unitec-red text-white flex items-center justify-center font-bold mr-4">1</span>
+                            <span class="flex-shrink-0 w-8 h-8 rounded-none bg-unitec-federal text-white flex items-center justify-center font-bold mr-4 transform rotate-45"><span class="-rotate-45 block">1</span></span>
                             <div>
-                                <strong class="text-unitec-dark block">En el Planteamiento (El Porqué):</strong>
-                                <span class="text-slate-600 text-sm">Usa la comunalidad para formular la <em>Pregunta Convincente (Compelling Question)</em> en tu Unitec Planner. Ej: "¿Cómo se transfiere la carga en un sistema para evitar el colapso?"</span>
+                                <strong class="text-unitec-federal block text-lg mb-1">En el Planteamiento (El Porqué):</strong>
+                                <span class="text-sm block">Usa la comunalidad para formular la <em>Pregunta Convincente (Compelling Question)</em> en tu Unitec Planner. Ej: "¿Cómo se transfiere la carga en un sistema para evitar el colapso?"</span>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-unitec-red text-white flex items-center justify-center font-bold mr-4">2</span>
+                            <span class="flex-shrink-0 w-8 h-8 rounded-none bg-unitec-cyan text-white flex items-center justify-center font-bold mr-4 transform rotate-45"><span class="-rotate-45 block">2</span></span>
                             <div>
-                                <strong class="text-unitec-dark block">En la Indagación (El Cómo):</strong>
-                                <span class="text-slate-600 text-sm">Pide a los estudiantes que usen la lente de "Causa y Consecuencia" antes de ejecutar un cálculo. "¿Qué pasaría si reducimos la resistencia de este material en un 10%?"</span>
+                                <strong class="text-unitec-federal block text-lg mb-1">En la Indagación (El Cómo):</strong>
+                                <span class="text-sm block">Pide a los estudiantes que usen la lente de "Causa y Consecuencia" antes de ejecutar un cálculo. "¿Qué pasaría si reducimos la resistencia de este material en un 10%?"</span>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-unitec-red text-white flex items-center justify-center font-bold mr-4">3</span>
+                            <span class="flex-shrink-0 w-8 h-8 rounded-none bg-unitec-sky text-white flex items-center justify-center font-bold mr-4 transform rotate-45"><span class="-rotate-45 block">3</span></span>
                             <div>
-                                <strong class="text-unitec-dark block">En la Metacognición (La Reflexión):</strong>
-                                <span class="text-slate-600 text-sm">Cierra el módulo pidiendo a los estudiantes que conecten lo aprendido con otra asignatura mediante la misma comunalidad. Esto consolida la red neuronal del aprendizaje.</span>
+                                <strong class="text-unitec-federal block text-lg mb-1">En la Metacognición (La Reflexión):</strong>
+                                <span class="text-sm block">Cierra el módulo pidiendo a los estudiantes que conecten lo aprendido con otra asignatura mediante la misma comunalidad. Esto consolida la red neuronal del aprendizaje.</span>
                             </div>
                         </li>
                     </ul>
@@ -202,10 +211,10 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-8 text-center mt-auto">
+    <footer class="bg-unitec-federal text-white py-8 text-center mt-auto border-t-4 border-unitec-cyan">
         <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-            <p class="mb-4 md:mb-0">&copy; 2026 UNITEC - Diseño guiado por el Collective Growth System.</p>
-            <p class="text-sm">Creado por <span class="text-white font-semibold">Evinkay</span>, Consultor Pedagógico</p>
+            <p class="mb-4 md:mb-0 text-sm opacity-90">&copy; 2026 UNITEC - Diseño guiado por el Collective Growth System.</p>
+            <p class="text-sm opacity-90">Creado por <span class="font-bold text-unitec-sky">Evinkay</span>, Consultor Pedagógico</p>
         </div>
     </footer>
 
