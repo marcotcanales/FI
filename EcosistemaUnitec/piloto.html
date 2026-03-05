@@ -26,11 +26,8 @@
                             sky: '#47C8FD',     // Vivid Sky Blue
                             gray: '#F3F4F6',    // Fondo limpio
                         }
-                    },
-                    boxShadow: {
-                        'precision': '0 0 0 1px #E5E7EB, 0 4px 0 0 #06065C', // Sombra sólida "tipo botón"
-                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
                     }
+                    // Sombras ELIMINADAS. Prohibido por Manual de Marca.
                 }
             }
         }
@@ -52,15 +49,11 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
-        /* Scrollbar personalizado */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        /* Scrollbar vertical limpio */
+        ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #06065C; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #06065C; }
         ::-webkit-scrollbar-thumb:hover { background: #03AED2; }
-        
-        /* Ocultar barra de scroll en navegación pero permitir scroll horizontal */
-        .custom-scrollbar::-webkit-scrollbar { height: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
     </style>
 </head>
 <body class="text-slate-800 antialiased bg-slate-50">
@@ -72,11 +65,14 @@
         const { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = RechartsLib;
 
         // --- ICONOS & LOGO (SVG Puro) ---
-        
+        // EDNA MODE FIX: El logotipo SIEMPRE debe ir acompañado del isotipo (Diamante). 
         const UnitecLogo = () => (
-            <svg viewBox="0 0 200 80" className="h-10 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="55" fontFamily="Poppins" fontWeight="800" fontSize="40" fill="#FFFFFF" letterSpacing="-1">unitec</text>
-                <text x="145" y="30" fontFamily="Poppins" fontWeight="400" fontSize="10" fill="#FFFFFF">®</text>
+            <svg viewBox="0 0 240 80" className="h-10 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Isotipo Diamante UNITEC */}
+                <polygon points="25,15 50,40 25,65 0,40" fill="#03AED2" />
+                {/* Logotipo UNITEC */}
+                <text x="60" y="55" fontFamily="Poppins" fontWeight="800" fontSize="40" fill="#FFFFFF" letterSpacing="-1">unitec</text>
+                <text x="205" y="30" fontFamily="Poppins" fontWeight="400" fontSize="10" fill="#FFFFFF">®</text>
             </svg>
         );
 
@@ -157,35 +153,37 @@
             }
         };
 
-        // --- COMPONENTES UI UNITEC ---
+        // --- COMPONENTES UI UNITEC EDNA MODE FIXES ---
 
+        // FIX: Botones como bloques sólidos, sin borde inferior escondido, sin scroll
         const NavButton = ({ active, onClick, icon: Icon, label }) => (
             <button 
                 onClick={onClick}
                 className={`
-                    flex-shrink-0 relative px-5 py-4 font-semibold text-sm tracking-wide uppercase transition-all duration-300
-                    flex items-center gap-2 border-b-4
+                    flex items-center justify-center gap-2 px-3 py-3 text-xs md:text-sm font-semibold tracking-wide transition-all duration-200 
+                    w-full sm:w-auto sm:flex-1 md:flex-none border-2 rounded-sm
                     ${active 
-                        ? 'border-unitec-cyan text-unitec-blue bg-white' 
-                        : 'border-transparent text-slate-400 hover:text-unitec-blue hover:bg-slate-100'
+                        ? 'bg-unitec-blue text-white border-unitec-blue' 
+                        : 'bg-white text-slate-600 border-slate-200 hover:border-unitec-cyan hover:text-unitec-blue'
                     }
                 `}
             >
-                {Icon && <Icon className={`w-4 h-4 ${active ? 'text-unitec-cyan' : 'text-slate-400'}`} />}
+                {Icon && <Icon className={`w-4 h-4 ${active ? 'text-white' : 'text-slate-400'}`} />}
                 {label}
             </button>
         );
 
         const SectionTitle = ({ title, subtitle }) => (
-            <div className="mb-8 border-l-4 border-unitec-cyan pl-4">
-                <h2 className="text-2xl md:text-3xl font-extrabold text-unitec-blue">{title}</h2>
-                {subtitle && <p className="text-slate-500 mt-1 font-medium">{subtitle}</p>}
+            <div className="mb-8 border-l-[6px] border-unitec-cyan pl-4 py-1">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-unitec-blue uppercase tracking-tight">{title}</h2>
+                {subtitle && <p className="text-slate-500 mt-1 font-medium text-sm md:text-base">{subtitle}</p>}
             </div>
         );
 
+        // FIX: Cero gradientes, cero sombras. Solo colores y líneas limpias.
         const Card = ({ children, className = "" }) => (
-            <div className={`bg-white shadow-card border border-slate-200 rounded-sm overflow-hidden ${className}`}>
-                <div className="h-1 w-full bg-gradient-to-r from-unitec-blue via-unitec-cyan to-unitec-vividSky"></div>
+            <div className={`bg-white border-2 border-slate-200 rounded-sm overflow-hidden ${className}`}>
+                <div className="h-[6px] w-full bg-unitec-cyan"></div>
                 <div className="p-6">
                     {children}
                 </div>
@@ -193,7 +191,7 @@
         );
 
         const ObservationBox = ({ text }) => (
-            <div className="mt-4 p-4 bg-slate-50 border-l-4 border-unitec-federalBlue flex gap-4 items-start">
+            <div className="mt-4 p-4 bg-slate-50 border-l-4 border-unitec-blue flex gap-4 items-start">
                 <div>
                     <h5 className="font-bold text-unitec-blue text-xs uppercase tracking-wider mb-1">Hallazgo Clave</h5>
                     <p className="text-slate-700 text-sm italic">{text}</p>
@@ -214,17 +212,17 @@
                         <div className="fade-in max-w-5xl mx-auto">
                             <SectionTitle title="Resumen Ejecutivo" subtitle="Transición del modelo de competencias a la formación de capacidades humanas." />
                             <Card className="mb-8">
-                                <div className="border-b border-slate-100 pb-4 mb-6">
+                                <div className="border-b border-slate-200 pb-4 mb-6">
                                     <h1 className="text-2xl md:text-3xl font-extrabold text-unitec-blue mb-2 leading-tight">
                                         Piloto de Implementación del Collective Growth System (CGS) en Ingeniería
                                     </h1>
-                                    <div className="flex flex-col md:flex-row gap-4 mt-4 text-sm text-slate-500 font-medium">
+                                    <div className="flex flex-col md:flex-row gap-4 mt-4 text-sm text-slate-600 font-medium">
                                         <div className="flex items-center gap-2">
-                                            <span className="bg-unitec-cyan/10 text-unitec-cyan px-2 py-1 rounded">Autor</span>
+                                            <span className="bg-unitec-cyan text-white px-2 py-1 rounded-sm text-xs font-bold uppercase tracking-wider">Autor</span>
                                             Marco Tulio Canales Chavez, PhD
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <span className="bg-unitec-blue/10 text-unitec-blue px-2 py-1 rounded">Institución</span>
+                                            <span className="bg-unitec-blue text-white px-2 py-1 rounded-sm text-xs font-bold uppercase tracking-wider">Institución</span>
                                             Universidad Tecnológica Centroamericana (UNITEC)
                                         </div>
                                     </div>
@@ -236,7 +234,7 @@
                                     <p>
                                         Los resultados validan que la inmersión en contextos simulados y roles profesionales cataliza la transición del cálculo mecánico al criterio ingenieril, superando las limitaciones del modelo tradicional en la toma de decisiones bajo incertidumbre.
                                     </p>
-                                    <div className="bg-unitec-gray p-5 rounded-md border-l-4 border-unitec-sky font-semibold italic text-unitec-blue">
+                                    <div className="bg-slate-50 p-5 border-l-4 border-unitec-sky font-semibold italic text-unitec-blue text-lg leading-snug">
                                         "Significativamente, los hallazgos desafían la noción de la resistencia académica: los estudiantes demostraron disposición a asumir una carga cognitiva y temporal superior cuando perciben un retorno de valor en su formación profesional."
                                     </div>
                                     <p>
@@ -254,44 +252,44 @@
                         <div className="fade-in max-w-5xl mx-auto">
                             <SectionTitle title="Introducción y Metodología" subtitle="Contexto Pedagógico y Diseño del Estudio" />
                             <Card className="mb-8 space-y-6 text-slate-700 leading-relaxed text-justify">
-                                <h3 className="text-xl font-bold text-unitec-blue border-b pb-2">De la Transacción a la Transformación</h3>
+                                <h3 className="text-xl font-bold text-unitec-blue border-b-2 border-slate-100 pb-2">De la Transacción a la Transformación</h3>
                                 <p>
                                     Históricamente, la educación en ingeniería ha estado fuertemente anclada a la adquisición de competencias duras (resolución matemática, uso de normativas y software). Sin embargo, organismos como ABET y las tendencias pedagógicas actuales señalan que este enfoque puede degenerar en un aprendizaje transaccional: el alumno busca la "respuesta correcta" exclusivamente para obtener una calificación.
                                 </p>
                                 <p>
-                                    En respuesta a esto, UNITEC ha adoptado el **Collective Growth System (CGS)**, diseñado para trascender la enseñanza procedimental y enfocarse en la formación de *Capacidades Humanas* (Becoming Human).
+                                    En respuesta a esto, UNITEC ha adoptado el <strong className="text-unitec-blue">Collective Growth System (CGS)</strong>, diseñado para trascender la enseñanza procedimental y enfocarse en la formación de <em>Capacidades Humanas</em> (Becoming Human).
                                 </p>
                                 
-                                <h3 className="text-xl font-bold text-unitec-blue mt-8 border-b pb-2">El Reto del Análisis Estructural</h3>
+                                <h3 className="text-xl font-bold text-unitec-blue mt-8 border-b-2 border-slate-100 pb-2">El Reto del Análisis Estructural</h3>
                                 <p>
-                                    En la clase de Análisis Estructural, la principal barrera cognitiva no es la matemática, sino la *incertidumbre de la idealización*. Un ingeniero en la vida real rara vez tiene condiciones de frontera perfectas; debe asumir cargas, idealizar apoyos y tomar decisiones seguras basadas en información incompleta. El modelo tradicional de exámenes penaliza la incertidumbre, mientras que el modelo CGS, a través de simulaciones tipo *Capstone Project*, entrena al estudiante para abrazarla.
+                                    En la clase de Análisis Estructural, la principal barrera cognitiva no es la matemática, sino la <em>incertidumbre de la idealización</em>. Un ingeniero en la vida real rara vez tiene condiciones de frontera perfectas; debe asumir cargas, idealizar apoyos y tomar decisiones seguras basadas en información incompleta. El modelo tradicional de exámenes penaliza la incertidumbre, mientras que el modelo CGS, a través de simulaciones tipo <em>Capstone Project</em>, entrena al estudiante para abrazarla.
                                 </p>
                                 
-                                <h3 className="text-xl font-bold text-unitec-blue mt-8 border-b pb-2">Metodología de Implementación</h3>
+                                <h3 className="text-xl font-bold text-unitec-blue mt-8 border-b-2 border-slate-100 pb-2">Metodología de Implementación</h3>
                                 <p>
                                     El estudio se implementó mediante un diseño de investigación comparativo y cuasi-experimental con un grupo focal de 12 estudiantes matriculados en la asignatura Análisis Estructural (CIV324). Para analizar el impacto del sistema, a los alumnos se les otorgó la libertad de elegir su metodología de evaluación, lo que naturalmente derivó en tres trayectorias:
                                 </p>
-                                <ul className="list-none space-y-3 mt-4">
-                                    <li className="flex gap-3">
-                                        <div className="bg-unitec-blue text-white font-bold w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">A</div>
+                                <ul className="list-none space-y-4 mt-4">
+                                    <li className="flex gap-4 items-start">
+                                        <div className="bg-unitec-blue text-white font-bold w-10 h-10 rounded-sm flex items-center justify-center flex-shrink-0 text-lg">A</div>
                                         <div>
-                                            <strong>Trayectoria Tradicional (4 estudiantes):</strong> Optaron exclusivamente por evaluaciones sumativas (exámenes) enfocados en el dominio mecánico y algorítmico del cálculo estructural.
+                                            <strong className="text-unitec-blue text-lg">Trayectoria Tradicional (4 estudiantes):</strong> <br/> Optaron exclusivamente por evaluaciones sumativas (exámenes) enfocados en el dominio mecánico y algorítmico del cálculo estructural.
                                         </div>
                                     </li>
-                                    <li className="flex gap-3">
-                                        <div className="bg-unitec-cyan text-white font-bold w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">B</div>
+                                    <li className="flex gap-4 items-start">
+                                        <div className="bg-unitec-cyan text-white font-bold w-10 h-10 rounded-sm flex items-center justify-center flex-shrink-0 text-lg">B</div>
                                         <div>
-                                            <strong>Trayectoria CGS (4 estudiantes):</strong> Ejecutaron un proyecto integrador (Capstone) donde asumieron el rol de Consultores Estructurales. Modelaron un caso real (el techo del Polideportivo UNITEC) considerando cargas vivas, muertas, de sismo y viento, y utilizaron la técnica de *STAR Feedback* para co-evaluarse.
+                                            <strong className="text-unitec-cyan text-lg">Trayectoria CGS (4 estudiantes):</strong> <br/> Ejecutaron un proyecto integrador (Capstone) donde asumieron el rol de Consultores Estructurales. Modelaron un caso real (el techo del Polideportivo UNITEC) considerando cargas vivas, muertas, de sismo y viento, y utilizaron la técnica de <em>STAR Feedback</em> para co-evaluarse.
                                         </div>
                                     </li>
-                                    <li className="flex gap-3">
-                                        <div className="bg-slate-400 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">C</div>
+                                    <li className="flex gap-4 items-start">
+                                        <div className="bg-slate-500 text-white font-bold w-10 h-10 rounded-sm flex items-center justify-center flex-shrink-0 text-lg">C</div>
                                         <div>
-                                            <strong>Trayectoria Mixta (4 estudiantes):</strong> Experimentaron una combinación de ambos métodos durante el periodo académico, permitiendo comparar los picos de ansiedad, motivación y sentido de logro generados por cada enfoque.
+                                            <strong className="text-slate-600 text-lg">Trayectoria Mixta (4 estudiantes):</strong> <br/> Experimentaron una combinación de ambos métodos durante el periodo académico, permitiendo comparar los picos de ansiedad, motivación y sentido de logro generados por cada enfoque.
                                         </div>
                                     </li>
                                 </ul>
-                                <p className="mt-4">
+                                <p className="mt-4 border-t-2 border-slate-100 pt-4">
                                     Los resultados fueron medidos a través de encuestas con escala de Likert y reflexiones cualitativas para determinar la efectividad en la transición hacia un pensamiento ingenieril ético e independiente.
                                 </p>
                             </Card>
@@ -306,8 +304,8 @@
                             <SectionTitle title="Discusión de Resultados" subtitle="Análisis de los Hallazgos a la luz del CGS" />
                             <div className="space-y-6">
                                 <Card>
-                                    <h3 className="text-lg font-bold text-unitec-blue mb-3 flex items-center gap-2">
-                                        <span className="bg-unitec-cyan text-white w-6 h-6 flex items-center justify-center rounded-full text-sm">1</span>
+                                    <h3 className="text-lg font-bold text-unitec-blue mb-3 flex items-center gap-3">
+                                        <span className="bg-unitec-cyan text-white w-8 h-8 flex items-center justify-center rounded-sm font-bold">1</span>
                                         El Factor Tiempo vs. Retorno de Valor
                                     </h3>
                                     <p className="text-slate-700 text-justify mb-4">
@@ -316,22 +314,22 @@
                                 </Card>
 
                                 <Card>
-                                    <h3 className="text-lg font-bold text-unitec-blue mb-3 flex items-center gap-2">
-                                        <span className="bg-unitec-cyan text-white w-6 h-6 flex items-center justify-center rounded-full text-sm">2</span>
+                                    <h3 className="text-lg font-bold text-unitec-blue mb-3 flex items-center gap-3">
+                                        <span className="bg-unitec-cyan text-white w-8 h-8 flex items-center justify-center rounded-sm font-bold">2</span>
                                         Del Cálculo Aislado a la Responsabilidad Ética
                                     </h3>
                                     <p className="text-slate-700 text-justify mb-4">
-                                        Alineado con el perfil de "Solucionador de Problemas Empático", la evaluación CGS forzó a los estudiantes a vincular los números con la realidad física y humana. Al simular el modelado de un polideportivo real, entendieron que un fallo de cálculo por carga de viento no es un punto menos en un examen, sino un riesgo para vidas humanas. La evaluación formativa activó su *Propósito* y *Responsabilidad*.
+                                        Alineado con el perfil de "Solucionador de Problemas Empático", la evaluación CGS forzó a los estudiantes a vincular los números con la realidad física y humana. Al simular el modelado de un polideportivo real, entendieron que un fallo de cálculo por carga de viento no es un punto menos en un examen, sino un riesgo para vidas humanas. La evaluación formativa activó su <em>Propósito</em> y <em>Responsabilidad</em>.
                                     </p>
                                 </Card>
 
                                 <Card>
-                                    <h3 className="text-lg font-bold text-unitec-blue mb-3 flex items-center gap-2">
-                                        <span className="bg-unitec-cyan text-white w-6 h-6 flex items-center justify-center rounded-full text-sm">3</span>
+                                    <h3 className="text-lg font-bold text-unitec-blue mb-3 flex items-center gap-3">
+                                        <span className="bg-unitec-cyan text-white w-8 h-8 flex items-center justify-center rounded-sm font-bold">3</span>
                                         Seguridad Cognitiva en la Incertidumbre
                                     </h3>
                                     <p className="text-slate-700 text-justify mb-4">
-                                        El modelo CGS empoderó a los estudiantes (100% en Trayectoria B) a sentirse seguros tomando decisiones de diseño con información incompleta. Pasaron de depender de una "fórmula dada por el maestro" a defender su propio "criterio ingenieril" y asumir el rol de *Colaboradores Constructivos* durante las sesiones de retroalimentación de pares.
+                                        El modelo CGS empoderó a los estudiantes (100% en Trayectoria B) a sentirse seguros tomando decisiones de diseño con información incompleta. Pasaron de depender de una "fórmula dada por el maestro" a defender su propio "criterio ingenieril" y asumir el rol de <em>Colaboradores Constructivos</em> durante las sesiones de retroalimentación de pares.
                                     </p>
                                 </Card>
                             </div>
@@ -343,27 +341,27 @@
                 if (activeTab === 'conclusion') {
                     return (
                         <div className="fade-in max-w-5xl mx-auto">
-                            <SectionTitle title="Conclusiones" subtitle="Implicaciones para el Diseño Pedagógico en UNITEC" />
-                            <Card className="border-t-4 border-unitec-blue">
+                            <SectionTitle title="Conclusiones Generales" subtitle="Implicaciones para el Diseño Pedagógico en UNITEC" />
+                            <Card className="border-t-[8px] border-t-unitec-blue">
                                 <ul className="space-y-8 text-slate-700 text-justify text-lg">
-                                    <li className="flex gap-4">
-                                        <CheckCircle className="w-8 h-8 text-unitec-cyan flex-shrink-0 mt-1" />
+                                    <li className="flex gap-4 bg-slate-50 p-6 border border-slate-200">
+                                        <CheckCircle className="w-10 h-10 text-unitec-cyan flex-shrink-0" />
                                         <div>
-                                            <strong className="text-unitec-blue block text-xl mb-1">Efectividad del Modelo CGS en Ingeniería:</strong>
+                                            <strong className="text-unitec-blue block text-xl mb-2 font-extrabold uppercase tracking-tight">Efectividad del Modelo CGS en Ingeniería</strong>
                                             El sistema es claramente superior al modelo tradicional para activar la responsabilidad ética intrínseca y la seguridad cognitiva en los estudiantes. Demuestra que enseñar capacidades humanas no resta rigor técnico; al contrario, le da contexto y lo refuerza profundamente.
                                         </div>
                                     </li>
-                                    <li className="flex gap-4">
-                                        <CheckCircle className="w-8 h-8 text-unitec-cyan flex-shrink-0 mt-1" />
+                                    <li className="flex gap-4 bg-slate-50 p-6 border border-slate-200">
+                                        <CheckCircle className="w-10 h-10 text-unitec-cyan flex-shrink-0" />
                                         <div>
-                                            <strong className="text-unitec-blue block text-xl mb-1">Redefinición de la Resistencia Académica:</strong>
+                                            <strong className="text-unitec-blue block text-xl mb-2 font-extrabold uppercase tracking-tight">Redefinición de la Resistencia Académica</strong>
                                             Los estudiantes de ingeniería están completamente dispuestos a asumir un alto grado de rigor y una mayor inversión de horas de trabajo si la actividad es auténtica, simula la vida real (roles de consultoría) y perciben un claro retorno de valor para su carrera.
                                         </div>
                                     </li>
-                                    <li className="flex gap-4">
-                                        <CheckCircle className="w-8 h-8 text-unitec-cyan flex-shrink-0 mt-1" />
+                                    <li className="flex gap-4 bg-slate-50 p-6 border border-slate-200">
+                                        <CheckCircle className="w-10 h-10 text-unitec-cyan flex-shrink-0" />
                                         <div>
-                                            <strong className="text-unitec-blue block text-xl mb-1">Recomendaciones Estructurales:</strong>
+                                            <strong className="text-unitec-blue block text-xl mb-2 font-extrabold uppercase tracking-tight">Recomendaciones Estructurales</strong>
                                             Para escalar con éxito las metodologías basadas en el CGS, UNITEC debe contemplar la gestión del volumen de trabajo en los sílabos/planners. Las metodologías híbridas o mixtas (Trayectoria C) pueden sobrecargar cognitivamente al estudiante y generar ansiedad, siendo preferible la inmersión total apoyada en andamiajes formativos (Scaffolding).
                                         </div>
                                     </li>
@@ -382,21 +380,21 @@
                             
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                                 <div className="md:col-span-4 space-y-2">
-                                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Seleccionar Indicador</label>
+                                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 border-b-2 border-slate-200 pb-2">Seleccionar Indicador</label>
                                     <div className="flex flex-col gap-2 h-[450px] overflow-y-auto pr-2 custom-scrollbar">
                                         {comparativeData.map(q => (
                                             <button 
                                                 key={q.id}
                                                 onClick={() => setSelectedQuestion(q.id)}
                                                 className={`
-                                                    text-left px-4 py-3 rounded-sm border-l-4 transition-all text-sm font-medium
+                                                    text-left px-4 py-3 border-2 transition-all text-sm font-semibold
                                                     ${selectedQuestion === q.id 
-                                                        ? 'border-unitec-cyan bg-white shadow-sm text-unitec-blue' 
-                                                        : 'border-transparent text-slate-500 hover:bg-slate-100 hover:text-slate-700'
+                                                        ? 'border-unitec-cyan bg-unitec-blue text-white' 
+                                                        : 'border-slate-200 bg-white text-slate-600 hover:border-unitec-cyan hover:text-unitec-blue'
                                                     }
                                                 `}
                                             >
-                                                <span className="font-bold mr-2 opacity-50">{q.id}</span>
+                                                <span className={`font-bold mr-2 ${selectedQuestion === q.id ? 'text-unitec-cyan' : 'text-slate-400'}`}>{q.id}</span>
                                                 {q.question}
                                             </button>
                                         ))}
@@ -406,7 +404,7 @@
                                 <Card className="md:col-span-8">
                                     <div className="mb-6">
                                         <h3 className="text-lg font-bold text-unitec-blue mb-2 leading-tight">{currentQData.fullQuestion}</h3>
-                                        <div className="w-12 h-1 bg-unitec-cyan mb-4"></div>
+                                        <div className="w-12 h-2 bg-unitec-cyan mb-4"></div>
                                     </div>
 
                                     <div className="h-[300px] w-full">
@@ -415,11 +413,12 @@
                                                 <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#E2E8F0" />
                                                 <XAxis type="number" domain={[0, 100]} hide />
                                                 <YAxis type="category" dataKey="name" width={100} tick={{fill: '#475569', fontSize: 12, fontWeight: 600}} axisLine={false} tickLine={false} />
+                                                {/* FIX EDNA: Removida la sombra del Tooltip. Usamos borde sólido. */}
                                                 <Tooltip 
                                                     cursor={{fill: '#F1F5F9'}}
-                                                    contentStyle={{ border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', borderRadius: '0px' }}
+                                                    contentStyle={{ border: '2px solid #06065C', boxShadow: 'none', borderRadius: '0px', fontFamily: 'Poppins' }}
                                                 />
-                                                <Legend iconType="square" />
+                                                <Legend iconType="square" wrapperStyle={{ fontFamily: 'Poppins', fontWeight: 600, fontSize: '12px' }} />
                                                 {currentQData.keys.map((key, index) => {
                                                     let fillColor = UNITEC_COLORS.neutral;
                                                     if (key.includes("Totalmente") || key.includes("Mismo") || key.includes("Alta")) fillColor = UNITEC_COLORS.federalBlue;
@@ -429,7 +428,7 @@
                                                     if (key.includes("más esfuerzo")) fillColor = UNITEC_COLORS.federalBlue; 
                                                     if (key.includes("menos esfuerzo")) fillColor = '#EF4444'; 
 
-                                                    return <Bar key={key} dataKey={key} stackId="a" fill={fillColor} barSize={30} radius={[0, 4, 4, 0]} />
+                                                    return <Bar key={key} dataKey={key} stackId="a" fill={fillColor} barSize={30} />
                                                 })}
                                             </BarChart>
                                         </ResponsiveContainer>
@@ -447,28 +446,37 @@
                     return (
                         <div className="fade-in max-w-6xl mx-auto">
                             <SectionTitle title="Reflexiones Metacognitivas" subtitle="Retroalimentación estudiantil sobre la experiencia de aprendizaje" />
+                            
+                            {/* EDNA MODE FIX: Recuadro de Pregunta Central (Opción A - Clásico) */}
+                            <div className="bg-slate-50 border-l-[6px] border-l-unitec-blue border-y border-r border-slate-200 p-6 mb-8 max-w-3xl">
+                                <p className="text-xs font-extrabold text-slate-500 uppercase tracking-widest mb-2">Pregunta Detonante</p>
+                                <p className="text-lg md:text-xl font-medium text-slate-700 italic leading-snug">
+                                    "¿Qué cambiarías de la metodología del curso para mejorar tu aprendizaje futuro?"
+                                </p>
+                            </div>
+
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {Object.values(reflectionData).map((item, idx) => {
-                                    const borderColors = { A: 'border-t-unitec-blue', B: 'border-t-unitec-cyan', C: 'border-t-slate-400' };
+                                    const borderColors = { A: 'border-t-unitec-blue', B: 'border-t-unitec-cyan', C: 'border-t-slate-500' };
                                     return (
-                                        <Card key={item.id} className={`flex flex-col h-full border-t-4 ${borderColors[item.id.charAt(1)] || 'border-t-gray-400'}`}>
+                                        <Card key={item.id} className={`flex flex-col h-full border-t-[8px] ${borderColors[item.id.charAt(1)] || 'border-t-gray-400'}`}>
                                             <div className="mb-4">
-                                                <span className="text-xs font-bold text-slate-400 uppercase">{item.label}</span>
-                                                <h3 className="text-xl font-extrabold text-unitec-blue mt-1">{item.title}</h3>
+                                                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">{item.label}</span>
+                                                <h3 className="text-xl font-extrabold text-unitec-blue mt-1 leading-tight">{item.title}</h3>
                                             </div>
                                             
-                                            <div className="flex-grow space-y-4 mb-6">
+                                            <div className="flex-grow space-y-4 mb-6 mt-4">
                                                 {item.responses.map((resp, i) => (
                                                     <div key={i} className="relative pl-6">
-                                                        <span className="absolute left-0 top-0 text-3xl text-unitec-cyan font-serif leading-3 opacity-30">“</span>
-                                                        <p className="text-sm text-slate-600 italic leading-relaxed">{resp}</p>
+                                                        <span className="absolute left-0 top-0 text-3xl text-unitec-cyan font-serif leading-3 opacity-50 font-bold">"</span>
+                                                        <p className="text-sm text-slate-600 font-medium italic leading-relaxed">{resp}</p>
                                                     </div>
                                                 ))}
                                             </div>
 
-                                            <div className="pt-4 border-t border-slate-100 mt-auto">
-                                                <p className="text-xs text-unitec-blue font-bold uppercase mb-1">Análisis CGS:</p>
-                                                <p className="text-xs text-slate-500">{item.observation}</p>
+                                            <div className="pt-4 border-t-2 border-slate-100 mt-auto">
+                                                <p className="text-xs text-unitec-blue font-extrabold uppercase mb-1 tracking-wider">Análisis CGS:</p>
+                                                <p className="text-xs text-slate-500 font-medium">{item.observation}</p>
                                             </div>
                                         </Card>
                                     );
@@ -481,16 +489,16 @@
                 // 7,8,9. Trayectorias A, B, C
                 const data = trajectoryData[activeTab];
                 if (data) {
-                    const headerColors = { A: 'bg-unitec-blue', B: 'bg-unitec-cyan', C: 'bg-slate-600' };
+                    const headerColors = { A: 'bg-unitec-blue', B: 'bg-unitec-cyan', C: 'bg-slate-700' };
                     return (
                         <div className="slide-up max-w-6xl mx-auto">
-                            <div className={`p-8 rounded-sm text-white mb-8 shadow-md flex items-center gap-6 ${headerColors[activeTab] || 'bg-slate-700'}`}>
-                                <div className="p-4 bg-white/10 rounded-full backdrop-blur-sm">
+                            <div className={`p-8 rounded-sm text-white mb-8 border-b-4 border-slate-900/20 flex flex-col md:flex-row items-center gap-6 ${headerColors[activeTab] || 'bg-slate-700'}`}>
+                                <div className="p-4 bg-white/20 rounded-sm">
                                     {data.icon}
                                 </div>
-                                <div>
-                                    <h2 className="text-3xl font-extrabold">{data.title}</h2>
-                                    <p className="text-white/80 font-medium text-lg mt-1">{data.description}</p>
+                                <div className="text-center md:text-left">
+                                    <h2 className="text-3xl font-extrabold uppercase tracking-tight">{data.title}</h2>
+                                    <p className="text-white/90 font-medium text-lg mt-2">{data.description}</p>
                                 </div>
                             </div>
 
@@ -498,45 +506,45 @@
                                 <div className="space-y-6">
                                     {data.pieCharts.map((chart, idx) => (
                                         <Card key={idx}>
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <h3 className="font-bold text-slate-800">{chart.title}: {chart.question}</h3>
+                                            <div className="flex items-center gap-2 mb-2 border-b-2 border-slate-100 pb-2">
+                                                <h3 className="font-bold text-unitec-blue">{chart.title}: {chart.question}</h3>
                                             </div>
                                             
                                             <div className="h-[200px] w-full flex items-center justify-center my-4">
                                                 <ResponsiveContainer width="100%" height="100%">
                                                     <PieChart>
-                                                        <Pie data={chart.data} innerRadius={50} outerRadius={70} paddingAngle={5} dataKey="value">
+                                                        <Pie data={chart.data} innerRadius={50} outerRadius={70} paddingAngle={2} dataKey="value">
                                                             {chart.data.map((entry, index) => (
                                                                 <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} stroke="none" />
                                                             ))}
                                                         </Pie>
-                                                        <Tooltip contentStyle={{ borderRadius: '4px', border: 'none', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }} />
-                                                        <Legend verticalAlign="middle" align="right" layout="vertical" iconType="circle" />
+                                                        <Tooltip contentStyle={{ borderRadius: '0px', border: '2px solid #06065C', boxShadow: 'none', fontFamily: 'Poppins' }} />
+                                                        <Legend verticalAlign="middle" align="right" layout="vertical" iconType="square" wrapperStyle={{fontFamily: 'Poppins', fontWeight: 600, fontSize: '12px'}} />
                                                     </PieChart>
                                                 </ResponsiveContainer>
                                             </div>
-                                            {chart.observation && <p className="mt-4 text-sm text-center text-unitec-blue font-medium bg-blue-50 py-2 px-3 rounded-sm">{chart.observation}</p>}
+                                            {chart.observation && <p className="mt-4 text-sm text-center text-unitec-blue font-semibold bg-slate-50 py-3 px-4 border border-slate-200">{chart.observation}</p>}
                                         </Card>
                                     ))}
                                 </div>
                                 
                                 <div className="space-y-6">
                                     {data.quotes.map((q, idx) => (
-                                        <Card key={idx} className="border-l-4 border-l-unitec-vividSky">
-                                            <h3 className="font-bold text-slate-800 text-lg">{q.title}</h3>
-                                            <p className="text-sm text-slate-500 mb-4">{q.question}</p>
-                                            <div className="space-y-3">
+                                        <Card key={idx} className="border-l-[6px] border-l-unitec-cyan">
+                                            <h3 className="font-extrabold text-unitec-blue text-lg uppercase">{q.title}</h3>
+                                            <p className="text-sm font-semibold text-slate-500 mb-4">{q.question}</p>
+                                            <div className="space-y-4">
                                                 {q.responses.map((resp, i) => (
-                                                    <div key={i} className="flex gap-3">
-                                                        <div className="min-w-[4px] bg-slate-200 rounded-full"></div>
-                                                        <p className="text-slate-600 text-sm italic">"{resp}"</p>
+                                                    <div key={i} className="flex gap-3 bg-slate-50 p-3 border border-slate-100">
+                                                        <div className="min-w-[4px] bg-unitec-blue"></div>
+                                                        <p className="text-slate-700 text-sm italic font-medium">"{resp}"</p>
                                                     </div>
                                                 ))}
                                             </div>
                                             {q.observation && (
-                                                <div className="mt-4 pt-4 border-t border-slate-100">
-                                                    <p className="text-xs text-unitec-blue font-bold uppercase mb-1">Conexión CGS:</p>
-                                                    <p className="text-xs text-slate-500">{q.observation}</p>
+                                                <div className="mt-6 pt-4 border-t-2 border-slate-100">
+                                                    <p className="text-xs text-unitec-blue font-extrabold uppercase mb-1 tracking-wider">Conexión CGS:</p>
+                                                    <p className="text-xs text-slate-600 font-medium">{q.observation}</p>
                                                 </div>
                                             )}
                                         </Card>
@@ -551,64 +559,73 @@
             };
 
             return (
-                <div className="min-h-screen pb-12 flex flex-col">
-                    {/* Header Institucional */}
-                    <header className="bg-unitec-blue text-white shadow-lg sticky top-0 z-50">
-                        <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
-                            <div className="flex items-center gap-4">
-                                <UnitecLogo />
-                                <div className="hidden md:block h-8 w-px bg-white/20"></div>
-                                <h1 className="hidden md:block text-sm font-semibold tracking-wider text-unitec-sky uppercase">Facultad de Ingeniería</h1>
-                            </div>
-                            <div className="text-right">
-                                <p className="text-xs text-slate-300 font-medium uppercase tracking-widest">Estudio 2025</p>
-                                <p className="text-sm font-bold">CIV324 Análisis Estructural</p>
-                            </div>
-                        </div>
-                    </header>
-                    
-                    {/* Reproductor de Audio / Podcast */}
-                    <div className="bg-white border-b border-slate-200 py-3 px-4 md:px-8 relative z-40">
-                        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                            <div className="flex items-center gap-3">
-                                <div className="bg-unitec-cyan/10 p-2 rounded-full">
-                                    <Headphones className="w-5 h-5 text-unitec-cyan" />
+                <div className="min-h-screen pb-12 flex flex-col bg-slate-50">
+                    {/* EDNA MODE FIX: Contenedor Maestro Pegajoso (Opción A) */}
+                    <div className="sticky top-0 z-50 w-full flex flex-col shadow-none">
+                        
+                        {/* Header Institucional - Color sólido sin sombras de CSS no estándar */}
+                        <header className="bg-unitec-blue text-white border-b-4 border-unitec-cyan">
+                            <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
+                                <div className="flex items-center gap-4">
+                                    <UnitecLogo />
+                                    <div className="hidden md:block h-8 w-px bg-white/20"></div>
+                                    <h1 className="hidden md:block text-sm font-bold tracking-widest text-unitec-sky uppercase">Facultad de Ingeniería</h1>
                                 </div>
-                                <div>
-                                    <span className="text-sm font-bold text-unitec-blue block">Podcast del Estudio</span>
-                                    <span className="text-xs text-slate-500 font-medium">Comentarios sobre la implementación</span>
+                                <div className="text-right">
+                                    <p className="text-xs text-unitec-sky font-extrabold uppercase tracking-widest">Estudio 2025</p>
+                                    <p className="text-sm font-bold">CIV324 Análisis Estructural</p>
                                 </div>
                             </div>
-                            <audio controls className="h-10 w-full md:w-96 rounded-full outline-none shadow-sm">
-                                <source src="AUD/Comentario_Piloto_de_Implementacion_CIV324.mp3" type="audio/mpeg" />
-                                Tu navegador no soporta el elemento de audio.
-                            </audio>
+                        </header>
+                        
+                        {/* Reproductor de Audio / Podcast */}
+                        <div className="bg-white border-b-2 border-slate-200 py-4 px-4 md:px-8">
+                            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                                <div className="flex items-center gap-3">
+                                    <div className="bg-unitec-blue p-2 rounded-sm">
+                                        <Headphones className="w-5 h-5 text-white" />
+                                    </div>
+                                    <div>
+                                        <span className="text-sm font-bold text-unitec-blue uppercase tracking-wide block">Podcast del Estudio</span>
+                                        <span className="text-xs text-slate-500 font-medium">Comentarios sobre la implementación</span>
+                                    </div>
+                                </div>
+                                <audio controls className="h-10 w-full md:w-96 outline-none bg-slate-50 border border-slate-200">
+                                    <source src="AUD/Comentario_Piloto_de_Implementacion_CIV324.mp3" type="audio/mpeg" />
+                                    Tu navegador no soporta el elemento de audio.
+                                </audio>
+                            </div>
                         </div>
+
+                        {/* EDNA MODE FIX: Navegación Principal (Grid/Flex Responsivo, SIN scroll horizontal) */}
+                        <div className="bg-white border-b-2 border-slate-200">
+                            <div className="max-w-7xl mx-auto px-4 py-4">
+                                {/* Flex contenedor que envuelve los elementos si no caben, asegurando visibilidad total */}
+                                <div className="flex flex-wrap justify-center gap-2">
+                                    <NavButton active={activeTab === 'summary'} onClick={() => setActiveTab('summary')} icon={FileText} label="Resumen" />
+                                    <NavButton active={activeTab === 'intro'} onClick={() => setActiveTab('intro')} icon={Compass} label="Introducción" />
+                                    <NavButton active={activeTab === 'comparative'} onClick={() => setActiveTab('comparative')} icon={BarChart2} label="Comparativa" />
+                                    <NavButton active={activeTab === 'A'} onClick={() => setActiveTab('A')} label="Trayectoria A" />
+                                    <NavButton active={activeTab === 'B'} onClick={() => setActiveTab('B')} label="Trayectoria B" />
+                                    <NavButton active={activeTab === 'C'} onClick={() => setActiveTab('C')} label="Trayectoria C" />
+                                    <NavButton active={activeTab === 'reflection'} onClick={() => setActiveTab('reflection')} icon={Lightbulb} label="Reflexiones" />
+                                    <NavButton active={activeTab === 'discussion'} onClick={() => setActiveTab('discussion')} icon={MessageSquare} label="Discusión" />
+                                    <NavButton active={activeTab === 'conclusion'} onClick={() => setActiveTab('conclusion')} icon={CheckCircle} label="Conclusiones" />
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
 
-                    {/* Navegación Principal (Scroll Horizontal) */}
-                    <div className="bg-white shadow-sm border-b border-slate-200 mb-8 sticky top-20 z-30">
-                        <div className="max-w-7xl mx-auto px-4 md:px-8 flex overflow-x-auto custom-scrollbar">
-                            <NavButton active={activeTab === 'summary'} onClick={() => setActiveTab('summary')} icon={FileText} label="Resumen" />
-                            <NavButton active={activeTab === 'intro'} onClick={() => setActiveTab('intro')} icon={Compass} label="Introducción" />
-                            <NavButton active={activeTab === 'comparative'} onClick={() => setActiveTab('comparative')} icon={BarChart2} label="Comparativa" />
-                            <NavButton active={activeTab === 'A'} onClick={() => setActiveTab('A')} label="Trayectoria A" />
-                            <NavButton active={activeTab === 'B'} onClick={() => setActiveTab('B')} label="Trayectoria B" />
-                            <NavButton active={activeTab === 'C'} onClick={() => setActiveTab('C')} label="Trayectoria C" />
-                            <NavButton active={activeTab === 'reflection'} onClick={() => setActiveTab('reflection')} icon={Lightbulb} label="Reflexiones" />
-                            <NavButton active={activeTab === 'discussion'} onClick={() => setActiveTab('discussion')} icon={MessageSquare} label="Discusión" />
-                            <NavButton active={activeTab === 'conclusion'} onClick={() => setActiveTab('conclusion')} icon={CheckCircle} label="Conclusiones" />
-                        </div>
-                    </div>
-
-                    <main className="px-4 md:px-8 flex-grow">
+                    {/* EDNA MODE FIX: Margen top añadido para compensar el bloque pegajoso */}
+                    <main className="px-4 md:px-8 flex-grow mt-8">
                         {renderContent()}
                     </main>
 
-                    <footer className="max-w-7xl mx-auto px-8 mt-12 pt-8 border-t border-slate-200 text-center text-slate-400 text-xs">
-                        <p className="font-semibold text-slate-600 mb-2">Autor: Marco Tulio Canales Chavez, PhD</p>
+                    <footer className="max-w-7xl mx-auto px-8 mt-12 pt-8 border-t-2 border-slate-200 text-center text-slate-500 text-xs font-medium">
+                        <p className="font-extrabold text-unitec-blue uppercase tracking-wider mb-2">Autor: Marco Tulio Canales Chavez, PhD</p>
                         <p>© 2025 Universidad Tecnológica Centroamericana (UNITEC). Todos los derechos reservados.</p>
-                        <p className="mt-2">Diseñado bajo los principios del Collective Growth System (CGS).</p>
+                        <p className="mt-2 text-unitec-cyan font-bold">Diseñado bajo los principios del Collective Growth System (CGS).</p>
                     </footer>
                 </div>
             );
