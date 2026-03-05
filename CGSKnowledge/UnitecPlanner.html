@@ -464,6 +464,7 @@
         }
         
         /* Section Specific Colors */
+        section#comunalidades::after { background: var(--vivid-sky-blue); }
         section#checklist::after { background: var(--accent-checklist); }
         section#portrait::after { background: var(--accent-portrait); }
         section#principles::after { background: var(--pacific-cyan); }
@@ -663,6 +664,16 @@
         }
 
         /* Specific Card Modifiers */
+        .comunalidad-card {
+            border-top-color: var(--vivid-sky-blue);
+        }
+        .comunalidad-card h4 {
+            color: #038099;
+        }
+        .comunalidad-card .subtitle {
+            color: var(--vivid-sky-blue);
+        }
+
         .portrait-card {
             border-top-color: var(--accent-portrait);
         }
@@ -743,6 +754,8 @@
     <h1>UNITEC Planner</h1>
     <ul>
         <li><a href="#intro">Inicio</a></li>
+        <!-- NUEVA SECCIÓN AGREGADA AL MENÚ -->
+        <li><a href="#comunalidades" style="color:var(--vivid-sky-blue); font-weight: 500;">Fundamento: Comunalidades</a></li>
         <li><a href="#sec1">1. Identidad del Curso</a></li>
         <li><a href="#sec2">2. Pregunta Atractiva</a></li>
         <li><a href="#sec3">3. Gran Idea</a></li>
@@ -785,6 +798,66 @@
         <p>Este sitio web contiene la <strong>información completa y detallada</strong> extraída de los manuales "Unitec Planner Instructions" y "CGC Modules Explained".</p>
         <p>Está diseñado para servir como fuente de verdad tanto para diseñadores instruccionales humanos como para agentes de Inteligencia Artificial.</p>
     </header>
+
+    <!-- NUEVA SECCIÓN DE COMUNALIDADES HUMANAS CENTRALES -->
+    <section id="comunalidades">
+        <h2>Fundamento: Comunalidades Humanas Centrales</h2>
+        <p class="intro-text">
+            En el <strong>Collective Growth System (CGS)</strong>, las Comunalidades Humanas son lentes conceptuales universales que trascienden las disciplinas individuales (los tradicionales "silos" de materias) y nos conectan con la experiencia humana compartida.
+        </p>
+
+        <div class="cgc-box" style="margin-top: 0; margin-bottom: 30px;">
+            <h4>El Propósito Fundamental</h4>
+            <p>Lograr la <strong>transferencia del aprendizaje</strong>. En lugar de que los estudiantes memoricen datos aislados, estas comunalidades les permiten entender el "panorama general" y hacer conexiones a través de diferentes áreas. Al centrar una clase en una comunalidad, garantizamos que el conocimiento sea profundo, relevante y aplicable a problemas complejos del mundo real.</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="info-card comunalidad-card">
+                <span class="subtitle">Comunalidad 01</span>
+                <h4>Individuos y Grupos</h4>
+                <p>Explora cómo nos identificamos, nos organizamos y cómo interactuamos dentro de la sociedad. Analiza las tensiones y armonías entre los derechos individuales y las responsabilidades colectivas.</p>
+                <div style="margin-top:15px; font-size:0.85em; color:var(--text-secondary); border-top: 1px dashed var(--border-color); padding-top: 10px;">
+                    <strong>Enfoque de Aprendizaje:</strong> Ayuda a comprender que las comunidades funcionan mejor cuando todos participan activamente. Vital para desarrollar liderazgo, empatía y habilidades de colaboración.
+                </div>
+            </div>
+
+            <div class="info-card comunalidad-card">
+                <span class="subtitle">Comunalidad 02</span>
+                <h4>Patrones y Principios</h4>
+                <p>Se centra en descubrir las reglas subyacentes, las repeticiones y las leyes que rigen el comportamiento, ya sea en la naturaleza, las matemáticas o el comportamiento de los materiales.</p>
+                <div style="margin-top:15px; font-size:0.85em; color:var(--text-secondary); border-top: 1px dashed var(--border-color); padding-top: 10px;">
+                    <strong>Enfoque de Aprendizaje:</strong> Permite a los estudiantes predecir resultados y modelar escenarios (ej. en ingenierías), fundamentando sus decisiones en principios invariables.
+                </div>
+            </div>
+
+            <div class="info-card comunalidad-card">
+                <span class="subtitle">Comunalidad 03</span>
+                <h4>Orientación en el Tiempo</h4>
+                <p>Explora la evolución y la innovación a través del tiempo. Examina qué aspectos de nuestra vida, tecnología o sociedad permanecen constantes y cuáles se transforman.</p>
+                <div style="margin-top:15px; font-size:0.85em; color:var(--text-secondary); border-top: 1px dashed var(--border-color); padding-top: 10px;">
+                    <strong>Enfoque de Aprendizaje:</strong> Ayuda a entender que las disciplinas evolucionan. Permite apreciar el contexto histórico de la profesión y anticipar innovaciones futuras.
+                </div>
+            </div>
+
+            <div class="info-card comunalidad-card">
+                <span class="subtitle">Comunalidad 04</span>
+                <h4>Sistemas e Interacciones</h4>
+                <p>Aborda el mundo como una red de partes interconectadas donde cada elemento afecta al todo. Enfatiza que ninguna pieza o fenómeno existe de forma aislada.</p>
+                <div style="margin-top:15px; font-size:0.85em; color:var(--text-secondary); border-top: 1px dashed var(--border-color); padding-top: 10px;">
+                    <strong>Enfoque de Aprendizaje:</strong> Desarrolla el <em>Pensamiento Sistémico</em> vital para resolver problemas. Ej: En ingeniería, una estructura de concreto es un sistema interdependiente, no piezas aisladas.
+                </div>
+            </div>
+
+            <div class="info-card comunalidad-card">
+                <span class="subtitle">Comunalidad 05</span>
+                <h4>Causa y Consecuencia</h4>
+                <p>Analiza la lógica detrás de las acciones y sus resultados. Reconoce que los eventos no ocurren en el vacío, sino que son moldeados por múltiples factores y generan impactos en cadena.</p>
+                <div style="margin-top:15px; font-size:0.85em; color:var(--text-secondary); border-top: 1px dashed var(--border-color); padding-top: 10px;">
+                    <strong>Enfoque de Aprendizaje:</strong> Fomenta la <em>responsabilidad ética</em>. Enseña que cada decisión técnica, económica o de salud que toma un egresado tiene un impacto directo en la sociedad.
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- SECCIÓN 1 -->
     <section id="sec1">
@@ -1105,7 +1178,7 @@
         </div>
     </section>
 
-    <!-- NUEVA SECCIÓN 10: LISTA DE CHEQUEO (CHECKLIST PLANNER) -->
+    <!-- SECCIÓN 10: LISTA DE CHEQUEO (CHECKLIST PLANNER) -->
     <section id="checklist">
         <h2 style="color: var(--accent-checklist); border-bottom-color: rgba(231, 76, 60, 0.2);">Sección Diez: Lista de Chequeo de Calidad</h2>
         <p>Utiliza esta lista final para validar que tu Planner cumple con todos los estándares del sistema CGS de UNITEC antes de darlo por finalizado.</p>
