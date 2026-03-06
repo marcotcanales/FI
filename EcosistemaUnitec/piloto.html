@@ -92,6 +92,9 @@
         const MessageSquare = ({ className }) => <IconWrapper className={className}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></IconWrapper>;
         const CheckCircle = ({ className }) => <IconWrapper className={className}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></IconWrapper>;
         const Headphones = ({ className }) => <IconWrapper className={className}><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></IconWrapper>;
+        // EDNA MODE FIX: Iconos precisos para el botón de menú táctil
+        const MenuIcon = ({ className }) => <IconWrapper className={className}><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></IconWrapper>;
+        const CloseIcon = ({ className }) => <IconWrapper className={className}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></IconWrapper>;
 
         // --- PALETA DE COLORES UNITEC ---
         const UNITEC_COLORS = {
@@ -204,6 +207,8 @@
         const App = () => {
             const [activeTab, setActiveTab] = useState('summary');
             const [selectedQuestion, setSelectedQuestion] = useState(comparativeData[0].id);
+            // EDNA MODE FIX: Control de estado para ocultar/mostrar la bóveda móvil
+            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
             const renderContent = () => {
                 // 1. Resumen
@@ -564,53 +569,67 @@
                     <div className="sticky top-0 z-50 w-full flex flex-col shadow-none">
                         
                         {/* Header Institucional - Color sólido sin sombras de CSS no estándar */}
-                        <header className="bg-unitec-blue text-white border-b-4 border-unitec-cyan">
+                        <header className="bg-unitec-blue text-white border-b-4 border-unitec-cyan relative z-50">
                             <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
                                 <div className="flex items-center gap-4">
                                     <UnitecLogo />
                                     <div className="hidden md:block h-8 w-px bg-white/20"></div>
                                     <h1 className="hidden md:block text-sm font-bold tracking-widest text-unitec-sky uppercase">Facultad de Ingeniería</h1>
                                 </div>
-                                <div className="text-right">
+                                <div className="hidden md:block text-right">
                                     <p className="text-xs text-unitec-sky font-extrabold uppercase tracking-widest">Estudio 2025</p>
                                     <p className="text-sm font-bold">CIV324 Análisis Estructural</p>
                                 </div>
+
+                                {/* EDNA MODE FIX: Botón Menú Móvil contundente y sin adornos baratos */}
+                                <button 
+                                    className="md:hidden p-2 bg-unitec-cyan text-unitec-blue rounded-sm hover:bg-white transition-colors"
+                                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                >
+                                    {isMobileMenuOpen ? <CloseIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
+                                </button>
                             </div>
                         </header>
                         
-                        {/* Reproductor de Audio / Podcast */}
-                        <div className="bg-white border-b-2 border-slate-200 py-4 px-4 md:px-8">
-                            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                                <div className="flex items-center gap-3">
-                                    <div className="bg-unitec-blue p-2 rounded-sm">
-                                        <Headphones className="w-5 h-5 text-white" />
+                        {/* EDNA MODE FIX: Panel colapsable móvil (absoluto), estático en escritorio */}
+                        <div className={`
+                            ${isMobileMenuOpen ? 'block' : 'hidden'} md:block
+                            absolute md:relative top-full left-0 w-full bg-slate-50 border-b-[6px] border-unitec-blue md:border-none z-40
+                        `}>
+                            {/* Reproductor de Audio / Podcast */}
+                            <div className="bg-white border-b-2 border-slate-200 py-4 px-4 md:px-8">
+                                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                                    <div className="flex items-center gap-3">
+                                        <div className="bg-unitec-blue p-2 rounded-sm">
+                                            <Headphones className="w-5 h-5 text-white" />
+                                        </div>
+                                        <div>
+                                            <span className="text-sm font-bold text-unitec-blue uppercase tracking-wide block">Podcast del Estudio</span>
+                                            <span className="text-xs text-slate-500 font-medium">Comentarios sobre la implementación</span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <span className="text-sm font-bold text-unitec-blue uppercase tracking-wide block">Podcast del Estudio</span>
-                                        <span className="text-xs text-slate-500 font-medium">Comentarios sobre la implementación</span>
-                                    </div>
+                                    <audio controls className="h-10 w-full md:w-96 outline-none bg-slate-50 border border-slate-200">
+                                        <source src="AUD/Comentario_Piloto_de_Implementacion_CIV324.mp3" type="audio/mpeg" />
+                                        Tu navegador no soporta el elemento de audio.
+                                    </audio>
                                 </div>
-                                <audio controls className="h-10 w-full md:w-96 outline-none bg-slate-50 border border-slate-200">
-                                    <source src="AUD/Comentario_Piloto_de_Implementacion_CIV324.mp3" type="audio/mpeg" />
-                                    Tu navegador no soporta el elemento de audio.
-                                </audio>
                             </div>
-                        </div>
 
-                        {/* EDNA MODE FIX: Navegación Principal (Grid/Flex Responsivo, SIN scroll horizontal) */}
-                        <div className="bg-white border-b-2 border-slate-200">
-                            <div className="max-w-7xl mx-auto px-4 py-4">
-                                {/* Flex contenedor que envuelve los elementos si no caben, asegurando visibilidad total */}
-                                <div className="flex flex-wrap justify-center gap-2">
-                                    <NavButton active={activeTab === 'summary'} onClick={() => setActiveTab('summary')} icon={FileText} label="Resumen" />
-                                    <NavButton active={activeTab === 'intro'} onClick={() => setActiveTab('intro')} icon={Compass} label="Introducción" />
-                                    <NavButton active={activeTab === 'comparative'} onClick={() => setActiveTab('comparative')} icon={BarChart2} label="Comparativa" />
-                                    <NavButton active={activeTab === 'A'} onClick={() => setActiveTab('A')} label="Trayectoria A" />
-                                    <NavButton active={activeTab === 'B'} onClick={() => setActiveTab('B')} label="Trayectoria B" />
-                                    <NavButton active={activeTab === 'C'} onClick={() => setActiveTab('C')} label="Trayectoria C" />
-                                    <NavButton active={activeTab === 'reflection'} onClick={() => setActiveTab('reflection')} icon={Lightbulb} label="Reflexiones" />
-                                    <NavButton active={activeTab === 'discussion'} onClick={() => setActiveTab('discussion')} icon={MessageSquare} label="Discusión" />
-                                    <NavButton active={activeTab === 'conclusion'} onClick={() => setActiveTab('conclusion')} icon={CheckCircle} label="Conclusiones" />
+                            {/* EDNA MODE FIX: Navegación Principal (Grid/Flex Responsivo, SIN scroll horizontal) */}
+                            <div className="bg-white border-b-2 border-slate-200">
+                                <div className="max-w-7xl mx-auto px-4 py-4">
+                                    {/* Flex contenedor que envuelve los elementos si no caben, asegurando visibilidad total */}
+                                    <div className="flex flex-wrap justify-center gap-2">
+                                        <NavButton active={activeTab === 'summary'} onClick={() => { setActiveTab('summary'); setIsMobileMenuOpen(false); }} icon={FileText} label="Resumen" />
+                                        <NavButton active={activeTab === 'intro'} onClick={() => { setActiveTab('intro'); setIsMobileMenuOpen(false); }} icon={Compass} label="Introducción" />
+                                        <NavButton active={activeTab === 'comparative'} onClick={() => { setActiveTab('comparative'); setIsMobileMenuOpen(false); }} icon={BarChart2} label="Comparativa" />
+                                        <NavButton active={activeTab === 'A'} onClick={() => { setActiveTab('A'); setIsMobileMenuOpen(false); }} label="Trayectoria A" />
+                                        <NavButton active={activeTab === 'B'} onClick={() => { setActiveTab('B'); setIsMobileMenuOpen(false); }} label="Trayectoria B" />
+                                        <NavButton active={activeTab === 'C'} onClick={() => { setActiveTab('C'); setIsMobileMenuOpen(false); }} label="Trayectoria C" />
+                                        <NavButton active={activeTab === 'reflection'} onClick={() => { setActiveTab('reflection'); setIsMobileMenuOpen(false); }} icon={Lightbulb} label="Reflexiones" />
+                                        <NavButton active={activeTab === 'discussion'} onClick={() => { setActiveTab('discussion'); setIsMobileMenuOpen(false); }} icon={MessageSquare} label="Discusión" />
+                                        <NavButton active={activeTab === 'conclusion'} onClick={() => { setActiveTab('conclusion'); setIsMobileMenuOpen(false); }} icon={CheckCircle} label="Conclusiones" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
