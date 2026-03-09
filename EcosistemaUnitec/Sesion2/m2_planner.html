@@ -42,6 +42,11 @@
             -webkit-text-stroke: 1px #06065C;
             color: transparent;
         }
+        .active-capacity {
+            background-color: #03AED2 !important;
+            color: white !important;
+            border-color: #03AED2 !important;
+        }
     </style>
 </head>
 <body class="bg-unitec-light text-unitec-slate font-sans antialiased min-h-screen flex flex-col">
@@ -381,6 +386,25 @@
                     </a>
                 </div>
             </div>
+
+            <!-- Botones de las Capacidades -->
+            <div class="mt-12 bg-slate-50 border-2 border-slate-200 p-8">
+                <h3 class="text-xl font-bold text-unitec-federal mb-6 text-center">Selecciona las Capacidades Humanas de tu Módulo</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Líder con Propósito</button>
+                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Colaborador Constructivo</button>
+                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Comunicador Efectivo</button>
+                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Innovador Creativo</button>
+                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Ciudadano Responsable</button>
+                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Solucionador de Problemas Empático</button>
+                </div>
+                
+                <div class="mt-10 flex justify-center">
+                    <div class="p-2 border-4 border-unitec-federal bg-white inline-block">
+                        <img src="IMG/Ecosistema de Prendizaje.png" alt="Retrato del Egresado de UNITEC" class="w-full max-w-sm aspect-square object-cover">
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Checkpoint & Justification -->
@@ -389,28 +413,43 @@
             <!-- Checkpoint -->
             <div class="bg-white border-4 border-unitec-cyan p-8 relative">
                 <div class="absolute -top-4 -left-4 bg-unitec-cyan text-unitec-federal p-2">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                 </div>
-                <h3 class="text-2xl font-bold text-unitec-federal mb-4 mt-2">Checkpoint de Autoevaluación</h3>
-                <p class="text-sm text-unitec-slate mb-6">
-                    Antes de avanzar al siguiente módulo, se le pedirá al docente que aplique la <strong>Lista de Chequeo de Calidad para el Diseño de Módulos CGS</strong>. Se habilitará un cuestionario rápido en la plataforma donde deberán marcar afirmativamente los criterios evaluados (ítems del 1 al 7 de la sección <em>"1. EL PORQUÉ"</em>).
+                <h3 class="text-2xl font-bold text-unitec-federal mb-4 mt-2">Revisión en Pares (Peer Review)</h3>
+                <p class="text-sm text-unitec-slate mb-6 leading-relaxed">
+                    Antes de avanzar al siguiente módulo, te pedimos que <strong>revises en pares</strong> lo que has redactado para La Pregunta Convincente y para La Gran Idea. Utiliza este simple checkpoint para que un compañero pueda evaluar tu trabajo. Es importante que el par pueda evaluar que el lenguaje sea entendible por un estudiante.
                 </p>
-                <div class="bg-slate-50 border-2 border-slate-200 p-4">
-                    <label class="flex items-center space-x-3 text-sm text-unitec-slate cursor-pointer">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300">
-                        <span>¿Aborda un tema que realmente importa?</span>
+                
+                <div class="bg-slate-50 border-2 border-slate-200 p-5">
+                    <h4 class="font-bold text-unitec-federal uppercase tracking-wide text-xs mb-3 border-b-2 border-slate-200 pb-2">EL PORQUÉ (Propósito y Contexto)</h4>
+                    
+                    <h5 class="font-bold text-unitec-sky text-sm mb-2 mt-4">La Pregunta Convincente</h5>
+                    <label class="flex items-start space-x-3 text-sm text-unitec-slate cursor-pointer mb-2">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                        <span class="leading-snug">1. ¿Aborda un tema que realmente importa?</span>
                     </label>
-                    <label class="flex items-center space-x-3 text-sm text-unitec-slate cursor-pointer mt-3">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300">
-                        <span>¿Es una pregunta abierta, intrigante y atractiva?</span>
+                    <label class="flex items-start space-x-3 text-sm text-unitec-slate cursor-pointer mb-2">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                        <span class="leading-snug">2. ¿Es una pregunta abierta, intrigante y atractiva?</span>
                     </label>
-                    <label class="flex items-center space-x-3 text-sm text-unitec-slate cursor-pointer mt-3">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300">
-                        <span>¿Expresa conceptos que vale la pena comprender?</span>
+                    <label class="flex items-start space-x-3 text-sm text-unitec-slate cursor-pointer mb-4">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                        <span class="leading-snug">3. ¿Funciona como un "llamado a la investigación" sobre contenido auténtico y relevante?</span>
                     </label>
-                    <div class="text-center mt-4">
-                        <span class="text-xs font-bold text-unitec-sky uppercase tracking-wide">Completar en la plataforma LMS</span>
-                    </div>
+
+                    <h5 class="font-bold text-unitec-sky text-sm mb-2 mt-5">La Gran Idea</h5>
+                    <label class="flex items-start space-x-3 text-sm text-unitec-slate cursor-pointer mb-2">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                        <span class="leading-snug">4. ¿Es una declaración sencilla que aborda los conceptos clave del núcleo del módulo?</span>
+                    </label>
+                    <label class="flex items-start space-x-3 text-sm text-unitec-slate cursor-pointer mb-2">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                        <span class="leading-snug">5. ¿Comienza con la frase inicial: "Entender..." o "Entender que..."?</span>
+                    </label>
+                    <label class="flex items-start space-x-3 text-sm text-unitec-slate cursor-pointer">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                        <span class="leading-snug">6. ¿Expresa conceptos importantes que vale la pena comprender profundamente?</span>
+                    </label>
                 </div>
             </div>
 
