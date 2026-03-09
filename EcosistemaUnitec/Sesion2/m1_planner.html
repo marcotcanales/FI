@@ -1,1 +1,302 @@
-a
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1: El Unitec Planner | Train the Trainers</title>
+    
+    <!-- Tipografía Institucional Exclusiva: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', /* Federal Blue */
+                            pacific: '#03AED2', /* Pacific Cyan */
+                            vivid: '#47C8FD',   /* Vivid Sky Blue */
+                            light: '#F8FAFC',
+                            gray: '#E2E8F0'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Edna's Strict Rules: NO Shadows, NO Gradients, NO Rounded Corners */
+        * {
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #F8FAFC;
+        }
+        /* Custom square bullets to emulate diamond cuts */
+        .diamond-bullet {
+            width: 8px;
+            height: 8px;
+            background-color: #03AED2;
+            display: inline-block;
+            transform: rotate(45deg); /* Internal CSS geometry, not logo rotation */
+            margin-right: 12px;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-unitec-pacific selection:text-white">
+
+    <!-- Top Navigation with Brand Imagotipo -->
+    <nav class="bg-white border-b-4 border-unitec-pacific py-4 px-6 lg:px-12">
+        <div class="max-w-5xl mx-auto flex items-center">
+            <!-- Imagotipo Horizontal -->
+            <div class="flex items-center space-x-3">
+                <!-- Isotipo (Diamante) -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0L24 12L12 24L0 12L12 0Z" fill="#06065C"/>
+                </svg>
+                <!-- Logotipo -->
+                <span class="font-extrabold text-3xl tracking-tighter text-unitec-federal lowercase">unitec</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-unitec-federal text-white py-16 px-6 lg:px-12 relative">
+        <div class="max-w-5xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-2/3">
+                <span class="uppercase tracking-widest text-sm font-semibold text-unitec-vivid mb-4 block">Sesión 2 • Train the Trainers</span>
+                <h1 class="text-4xl md:text-5xl font-black mb-6 leading-tight">Módulo 1: <br>El Unitec Planner</h1>
+                <p class="text-lg md:text-xl text-gray-200 font-regular max-w-2xl border-l-2 border-unitec-pacific pl-4">
+                    Facilitando las herramientas necesarias para liderar talleres de co-diseño orientados a la formación de capacidades humanas.
+                </p>
+            </div>
+            <!-- Geometric Decorative Element -->
+            <div class="md:w-1/3 mt-10 md:mt-0 flex justify-center hidden md:flex">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-20">
+                    <path d="M12 0L24 12L12 24L0 12L12 0Z" fill="#47C8FD"/>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 lg:px-12 py-12 relative z-20">
+        
+        <!-- Objective Card -->
+        <section class="bg-white p-8 mb-12 border-l-8 border-unitec-pacific">
+            <h2 class="text-2xl font-bold text-unitec-federal mb-4 flex items-center uppercase tracking-wide">
+                <span class="diamond-bullet bg-unitec-federal"></span>
+                Objetivo del Módulo
+            </h2>
+            <p class="text-lg text-gray-700 leading-relaxed font-medium">
+                Familiarizar a los participantes con la estructura del <strong class="text-unitec-federal font-black">Unitec Planner</strong> y su propósito principal dentro del Collective Growth System (CGS).
+            </p>
+        </section>
+
+        <!-- Two Column Grid for Key Concepts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            
+            <!-- Propósito -->
+            <section class="bg-white p-8 border border-gray-200">
+                <div class="w-12 h-12 bg-unitec-federal text-white flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-unitec-federal mb-4 uppercase">Propósito del Planner</h3>
+                <p class="text-gray-700 mb-6 font-medium">
+                    Si la educación superior es un viaje a un destino:
+                </p>
+                <ul class="space-y-4 mb-6">
+                    <li class="flex items-center text-gray-800"><span class="diamond-bullet"></span> El Retrato es la <strong class="ml-1 text-unitec-federal font-bold">meta</strong>.</li>
+                    <li class="flex items-center text-gray-800"><span class="diamond-bullet"></span> El Sílabo es el <strong class="ml-1 text-unitec-federal font-bold">mapa</strong>.</li>
+                    <li class="flex items-center text-gray-800"><span class="diamond-bullet"></span> El Planner es la <strong class="ml-1 text-unitec-federal font-bold">brújula</strong>.</li>
+                </ul>
+                <p class="text-gray-600 text-sm">
+                    Sirve para orientar la experiencia educativa hacia los conceptos, competencias y carácter (Las 3Cs) que queremos formar. Es un documento para el docente, que puede utilizar como <strong class="text-unitec-federal">herramienta de transparencia</strong> con los estudiantes.
+                </p>
+            </section>
+
+            <!-- ¿Quién lo define? -->
+            <section class="bg-white p-8 border border-gray-200">
+                <div class="w-12 h-12 bg-unitec-federal text-white flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-unitec-federal mb-4 uppercase">¿Quién lo define?</h3>
+                <p class="text-gray-700 mb-6">
+                    Puede definirse por los <strong class="text-unitec-federal font-bold">docentes</strong> que imparten las clases, o por el <strong class="text-unitec-federal font-bold">jefe académico</strong>. Se puede homologar, pero es vital reconocer que tenemos contextos, modalidades y recursos diferentes en cada campus y sede.
+                </p>
+                <div class="bg-unitec-light p-5 border-l-4 border-unitec-pacific">
+                    <p class="text-sm text-unitec-federal font-semibold">
+                        El jefe académico debe tener acceso al planner para asegurar que en el "Big Picture" del plan académico, se esté desarrollando el retrato que buscamos.
+                    </p>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Co-Diseño Section -->
+        <section class="bg-unitec-federal p-8 md:p-12 mb-16 text-white border-t-8 border-unitec-pacific">
+            <h2 class="text-3xl font-black mb-8 uppercase">El Co-diseño: ¿Cómo se define?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+                <div>
+                    <p class="text-lg text-gray-200 mb-8 font-medium">
+                        Como nuestro objetivo es desarrollar un ecosistema y salirnos de los silos académicos, lo mejor es construir acompañados y no de manera aislada. A esto lo llamamos <strong class="text-unitec-vivid font-bold">Co-Diseñar</strong>, o tener autoría compartida entre líderes, docentes y estudiantes.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <span class="diamond-bullet bg-unitec-vivid"></span>
+                            </div>
+                            <p class="ml-2 text-sm text-gray-200"><strong class="text-white">Deconstrucción y Construcción:</strong> Deconstruimos normas y prácticas tradicionales para luego construir juntos un nuevo marco de referencia.</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <span class="diamond-bullet bg-unitec-vivid"></span>
+                            </div>
+                            <p class="ml-2 text-sm text-gray-200"><strong class="text-white">No es Imposición:</strong> Se aleja de crear teorías en una oficina para imponerlas en la práctica.</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <span class="diamond-bullet bg-unitec-vivid"></span>
+                            </div>
+                            <p class="ml-2 text-sm text-gray-200"><strong class="text-white">Es Síntesis:</strong> Toma en cuenta las experiencias personales, siendo una parte muy importante de la cultura que buscamos cultivar.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 border-4 border-unitec-pacific text-unitec-federal">
+                    <h4 class="font-bold text-lg mb-4 uppercase text-center">Núcleo del Co-Diseño</h4>
+                    <p class="text-center font-medium text-gray-600">
+                        "Construir acompañados para fortalecer el ecosistema educativo institucional."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estructura del Planner -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-black text-unitec-federal mb-10 text-center uppercase tracking-wide">¿Cuáles son las partes del Planner?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Sesión 2 Items A -->
+                <div class="bg-white border-t-8 border-unitec-federal p-8 border border-gray-200">
+                    <span class="text-xs font-bold uppercase tracking-wider text-unitec-pacific mb-4 block">Construiremos en esta Sesión</span>
+                    <ul class="space-y-4">
+                        <li class="p-4 bg-unitec-light border border-gray-200 flex items-center">
+                            <span class="w-8 h-8 bg-unitec-federal text-white flex items-center justify-center text-sm font-bold mr-4">1</span>
+                            <span class="text-unitec-federal font-semibold">Identidad del curso</span>
+                        </li>
+                        <li class="p-4 bg-unitec-light border border-gray-200 flex items-center">
+                            <span class="w-8 h-8 bg-unitec-federal text-white flex items-center justify-center text-sm font-bold mr-4">2</span>
+                            <span class="text-unitec-federal font-semibold">La pregunta atractiva</span>
+                        </li>
+                        <li class="p-4 bg-unitec-light border border-gray-200 flex items-center">
+                            <span class="w-8 h-8 bg-unitec-federal text-white flex items-center justify-center text-sm font-bold mr-4">3</span>
+                            <span class="text-unitec-federal font-semibold">La Gran Idea</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sesión 2 Items B -->
+                <div class="bg-white border-t-8 border-unitec-federal p-8 border border-gray-200">
+                    <span class="text-xs font-bold uppercase tracking-wider text-unitec-pacific mb-4 block">Construiremos en esta Sesión</span>
+                    <ul class="space-y-4">
+                        <li class="p-4 bg-unitec-light border border-gray-200 flex items-center">
+                            <span class="w-8 h-8 bg-unitec-federal text-white flex items-center justify-center text-sm font-bold mr-4">4</span>
+                            <span class="text-unitec-federal font-semibold">El Porqué</span>
+                        </li>
+                        <li class="p-4 bg-unitec-light border border-gray-200 flex items-center">
+                            <span class="w-8 h-8 bg-unitec-federal text-white flex items-center justify-center text-sm font-bold mr-4">5</span>
+                            <span class="text-unitec-federal font-semibold">El Qué</span>
+                        </li>
+                        <li class="p-4 bg-unitec-light border border-gray-200 flex items-center">
+                            <span class="w-8 h-8 bg-unitec-federal text-white flex items-center justify-center text-sm font-bold mr-4">6</span>
+                            <span class="text-unitec-federal font-semibold">Las Preguntas Marco</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sesión 3 Items -->
+                <div class="bg-gray-50 border-t-8 border-gray-300 p-8 border border-gray-200">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4 block">Construiremos en la Sesión 3</span>
+                    <ul class="space-y-4">
+                        <li class="p-4 bg-white border border-gray-200 flex items-center">
+                            <span class="w-8 h-8 bg-gray-300 text-gray-700 flex items-center justify-center text-sm font-bold mr-4">7</span>
+                            <span class="text-gray-600 font-semibold">La Evidencia</span>
+                        </li>
+                        <li class="p-4 bg-white border border-gray-200 flex items-center">
+                            <span class="w-8 h-8 bg-gray-300 text-gray-700 flex items-center justify-center text-sm font-bold mr-4">8</span>
+                            <span class="text-gray-600 font-semibold">El Cómo</span>
+                        </li>
+                        <li class="p-4 bg-white border border-gray-200 flex items-center">
+                            <span class="w-8 h-8 bg-gray-300 text-gray-700 flex items-center justify-center text-sm font-bold mr-4">9</span>
+                            <span class="text-gray-600 font-semibold">Reflexión y Transferencia</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Document Downloads Section -->
+        <section class="bg-white p-10 border-4 border-unitec-federal text-center">
+            <h2 class="text-2xl font-black text-unitec-federal mb-4 uppercase">Recursos para la Sesión</h2>
+            <p class="text-gray-700 mb-10 max-w-2xl mx-auto font-medium">
+                Utiliza los siguientes documentos para comenzar a construir el Planner de manera colaborativa. Estos formatos reflejan la estructura de diseño del CGS.
+            </p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                <!-- Link 1 -->
+                <a href="DOC/Unitec_Planner_Instrucciones.pdf" target="_blank" class="w-full md:w-auto flex items-center justify-center bg-white text-unitec-federal font-bold py-4 px-6 border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    Instrucciones (PDF)
+                </a>
+                
+                <!-- Link 2 -->
+                <a href="DOC/Unitec_Planner_Instrucciones.docx" class="w-full md:w-auto flex items-center justify-center bg-white text-unitec-federal font-bold py-4 px-6 border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Instrucciones (DOCX)
+                </a>
+
+                <!-- Link 3 -->
+                <a href="DOC/Template_Unitec_Planner.docx" class="w-full md:w-auto flex items-center justify-center bg-unitec-pacific text-white font-bold py-4 px-6 border-2 border-unitec-pacific hover:bg-unitec-federal hover:border-unitec-federal transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Plantilla Planner (DOCX)
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-unitec-federal text-white py-12 text-center text-sm border-t-4 border-unitec-pacific">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex justify-center mb-6">
+                <!-- Isotipo (Diamante) en blanco para el footer -->
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0L24 12L12 24L0 12L12 0Z" fill="#FFFFFF"/>
+                </svg>
+            </div>
+            <p class="font-medium text-gray-300">&copy; 2026 Universidad Tecnológica Centroamericana (UNITEC).</p>
+            <p class="text-gray-400 mt-2">Desarrollado en alineación con la Visión 2030 y el Common Ground Collaborative.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
