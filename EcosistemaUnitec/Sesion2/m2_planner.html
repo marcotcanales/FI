@@ -47,9 +47,14 @@
             color: white !important;
             border-color: #03AED2 !important;
         }
+        
+        /* Modal Transition */
+        #questionModal {
+            transition: opacity 0.3s ease-in-out;
+        }
     </style>
 </head>
-<body class="bg-unitec-light text-unitec-slate font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-unitec-light text-unitec-slate font-sans antialiased min-h-screen flex flex-col relative">
 
     <!-- Header Section -->
     <header class="bg-unitec-federal text-white py-16 px-6 relative overflow-hidden border-b-8 border-unitec-cyan">
@@ -152,45 +157,38 @@
                 </div>
             </div>
 
-            <!-- Ejemplos desde el Piloto -->
+            <!-- Ejemplos desde el Piloto (Interactivos) -->
             <div class="bg-slate-50 border-2 border-slate-200 p-8">
                 <h3 class="text-2xl font-extrabold text-unitec-federal mb-6 flex items-center">
                     <svg class="w-6 h-6 mr-3 text-unitec-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                     Ejemplos desde el Piloto
                 </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <article class="solid-card p-5 border-t-4 border-t-unitec-federal bg-white">
-                        <span class="text-xs font-bold uppercase text-unitec-sky block mb-2">Filosofía</span>
-                        <p class="font-medium text-unitec-slate text-sm italic">¿Vivimos para buscar la verdad… o para crearla?</p>
-                    </article>
-                    <article class="solid-card p-5 border-t-4 border-t-unitec-cyan bg-white">
-                        <span class="text-xs font-bold uppercase text-unitec-sky block mb-2">Sociología</span>
-                        <p class="font-medium text-unitec-slate text-sm italic">¿Hasta qué punto somos realmente dueños de nuestras decisiones, o es la sociedad quien decide por nosotros?</p>
-                    </article>
-                    <article class="solid-card p-5 border-t-4 border-t-unitec-federal bg-white">
-                        <span class="text-xs font-bold uppercase text-unitec-sky block mb-2">Historia de Honduras</span>
-                        <p class="font-medium text-unitec-slate text-sm italic">¿Qué historia de Honduras es la que se nos ha enseñado?</p>
-                    </article>
-                    <article class="solid-card p-5 border-t-4 border-t-unitec-cyan bg-white">
-                        <span class="text-xs font-bold uppercase text-unitec-sky block mb-2">Álgebra</span>
-                        <p class="font-medium text-unitec-slate text-sm italic">¿Cómo veo el Álgebra en la Vida Real?</p>
-                    </article>
-                    <article class="solid-card p-5 border-t-4 border-t-unitec-federal bg-white">
-                        <span class="text-xs font-bold uppercase text-unitec-sky block mb-2">Ofimática</span>
-                        <p class="font-medium text-unitec-slate text-sm italic">¿Cuál es el secreto para dominar la tecnología y entregar trabajos geniales con la mitad del esfuerzo?</p>
-                    </article>
-                    <article class="solid-card p-5 border-t-4 border-t-unitec-cyan bg-white">
-                        <span class="text-xs font-bold uppercase text-unitec-sky block mb-2">Investigación Cuantitativa</span>
-                        <p class="font-medium text-unitec-slate text-sm italic">¿Podemos confiar más en los números que en nuestra experiencia?</p>
-                    </article>
-                    <article class="solid-card p-5 border-t-4 border-t-unitec-federal bg-white lg:col-span-2">
-                        <span class="text-xs font-bold uppercase text-unitec-sky block mb-2">Análisis Estructural</span>
-                        <p class="font-medium text-unitec-slate text-sm italic">¿Cómo puedo preparar una estructura para el futuro, con la menor cantidad de información posible?</p>
-                    </article>
-                    <article class="solid-card p-5 border-t-4 border-t-unitec-cyan bg-white lg:col-span-4">
-                        <span class="text-xs font-bold uppercase text-unitec-sky block mb-2">Diseño Estructural en Concreto</span>
-                        <p class="font-medium text-unitec-slate text-sm italic">¿Cuánto cuesta 'no saber'? ¿Cómo utiliza el ingeniero su criterio para transformar la incertidumbre de las cargas en un riesgo calculado que sea financieramente aceptable y humanamente seguro?</p>
-                    </article>
+                <p class="text-sm text-unitec-slate mb-6"><em>Haz clic en cada asignatura para descubrir su Pregunta Convincente.</em></p>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <button onclick="openModal('¿Vivimos para buscar la verdad… o para crearla?')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Filosofía
+                    </button>
+                    <button onclick="openModal('¿Hasta qué punto somos realmente dueños de nuestras decisiones, o es la sociedad quien decide por nosotros?')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Sociología
+                    </button>
+                    <button onclick="openModal('¿Qué historia de Honduras es la que se nos ha enseñado?')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Historia de Honduras
+                    </button>
+                    <button onclick="openModal('¿Cómo veo el Álgebra en la Vida Real?')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Álgebra
+                    </button>
+                    <button onclick="openModal('¿Cuál es el secreto para dominar la tecnología y entregar trabajos geniales con la mitad del esfuerzo?')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Ofimática
+                    </button>
+                    <button onclick="openModal('¿Podemos confiar más en los números que en nuestra experiencia?')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Investigación Cuantitativa
+                    </button>
+                    <button onclick="openModal('¿Cómo puedo preparar una estructura para el futuro, con la menor cantidad de información posible?')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer lg:col-span-2">
+                        Análisis Estructural
+                    </button>
+                    <button onclick="openModal('¿Cuánto cuesta \'no saber\'? ¿Cómo utiliza el ingeniero su criterio para transformar la incertidumbre de las cargas en un riesgo calculado que sea financieramente aceptable y humanamente seguro?')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer lg:col-span-4">
+                        Diseño Estructural en Concreto
+                    </button>
                 </div>
             </div>
         </section>
@@ -202,6 +200,28 @@
                     <span class="-rotate-45 block">2</span>
                 </div>
                 <h2 class="text-3xl font-extrabold text-unitec-federal">Destilando la Gran Idea</h2>
+            </div>
+
+            <!-- Nuevas Tarjetas -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="solid-card p-6 border-t-4 border-t-unitec-federal bg-white text-center flex flex-col items-center justify-center">
+                    <span class="w-10 h-10 rounded-full bg-unitec-federal text-white flex items-center justify-center font-bold mb-3">1</span>
+                    <h3 class="text-lg font-bold text-unitec-federal">Escoge el contenido central</h3>
+                </div>
+                <div class="solid-card p-6 border-t-4 border-t-unitec-cyan bg-white text-center flex flex-col items-center justify-center">
+                    <span class="w-10 h-10 rounded-full bg-unitec-cyan text-white flex items-center justify-center font-bold mb-3">2</span>
+                    <h3 class="text-lg font-bold text-unitec-federal">Traza el hilo conductor</h3>
+                </div>
+                <div class="solid-card p-6 border-t-4 border-t-unitec-sky bg-white text-center flex flex-col items-center justify-center">
+                    <span class="w-10 h-10 rounded-full bg-unitec-sky text-white flex items-center justify-center font-bold mb-3">3</span>
+                    <h3 class="text-lg font-bold text-unitec-federal">No es necesario que todo el contenido esté cubierto</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 border-l-4 border-unitec-federal p-5 mb-10">
+                <p class="text-sm text-unitec-slate italic">
+                    <strong>Advertencia:</strong> A veces menos es más, y no es necesario que la idea central sea específica. En casos como este, juega a nuestro favor dejar cierta ambigüedad.
+                </p>
             </div>
 
             <!-- Instrucción Principal -->
@@ -391,12 +411,12 @@
             <div class="mt-12 bg-slate-50 border-2 border-slate-200 p-8">
                 <h3 class="text-xl font-bold text-unitec-federal mb-6 text-center">Selecciona las Capacidades Humanas de tu Módulo</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Líder con Propósito</button>
-                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Colaborador Constructivo</button>
-                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Comunicador Efectivo</button>
-                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Innovador Creativo</button>
-                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Ciudadano Responsable</button>
-                    <button onclick="this.classList.toggle('active-capacity')" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Solucionador de Problemas Empático</button>
+                    <button onclick="toggleCapacity(this)" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Líder con Propósito</button>
+                    <button onclick="toggleCapacity(this)" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Colaborador Constructivo</button>
+                    <button onclick="toggleCapacity(this)" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Comunicador Efectivo</button>
+                    <button onclick="toggleCapacity(this)" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Innovador Creativo</button>
+                    <button onclick="toggleCapacity(this)" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Ciudadano Responsable</button>
+                    <button onclick="toggleCapacity(this)" class="solid-card p-4 text-center font-bold text-sm text-unitec-slate hover:text-unitec-federal transition-colors duration-200 outline-none">El Solucionador de Problemas Empático</button>
                 </div>
                 
                 <div class="mt-10 flex justify-center">
@@ -479,5 +499,68 @@
         </div>
     </footer>
 
+    <!-- Full Screen Modal for Questions -->
+    <div id="questionModal" class="fixed inset-0 bg-unitec-federal bg-opacity-95 z-50 hidden flex items-center justify-center p-6 opacity-0" onclick="closeModal(event)">
+        <div class="relative max-w-4xl w-full text-center flex flex-col items-center justify-center min-h-[50vh]" onclick="event.stopPropagation()">
+            <!-- Botón Cerrar (X) -->
+            <button onclick="closeModal(event)" class="absolute -top-12 md:-top-16 right-0 text-white hover:text-unitec-cyan focus:outline-none transition-colors">
+                <svg class="w-10 h-10 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <p id="modalQuestionText" class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white leading-snug italic"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Lógica Modal Preguntas Convincentes
+        function openModal(text) {
+            const modal = document.getElementById('questionModal');
+            const textElement = document.getElementById('modalQuestionText');
+            textElement.textContent = text;
+            
+            modal.classList.remove('hidden');
+            // Pequeño timeout para permitir que la clase hidden se quite antes de hacer el fade-in
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+            
+            // Prevenir scroll en el fondo
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(e) {
+            if (e) e.stopPropagation();
+            const modal = document.getElementById('questionModal');
+            
+            modal.classList.remove('opacity-100');
+            // Esperar a que termine la transición de opacidad antes de ocultarlo completamente
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Lógica Selección de Capacidades (Máximo 2)
+        let selectedCapacities = [];
+
+        function toggleCapacity(btnElement) {
+            const index = selectedCapacities.indexOf(btnElement);
+            
+            // Si el botón ya está seleccionado, lo deseleccionamos
+            if (index > -1) {
+                btnElement.classList.remove('active-capacity');
+                selectedCapacities.splice(index, 1);
+            } else {
+                // Si ya hay 2 seleccionados, quitamos el más antiguo (FIFO)
+                if (selectedCapacities.length >= 2) {
+                    const firstBtn = selectedCapacities.shift();
+                    firstBtn.classList.remove('active-capacity');
+                }
+                // Añadimos el nuevo
+                btnElement.classList.add('active-capacity');
+                selectedCapacities.push(btnElement);
+            }
+        }
+    </script>
 </body>
 </html>
