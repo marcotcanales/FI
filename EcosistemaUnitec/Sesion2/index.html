@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 2: Deconstruyendo el Sílabo | Train the Trainers</title>
+    
+    <!-- Tipografía Institucional Exclusiva: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', /* Federal Blue */
+                            pacific: '#03AED2', /* Pacific Cyan */
+                            vivid: '#47C8FD',   /* Vivid Sky Blue */
+                            light: '#F8FAFC',
+                            gray: '#E2E8F0'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Edna's Strict Rules: NO Shadows, NO Gradients, NO Rounded Corners */
+        * {
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #F8FAFC;
+        }
+        .diamond-bullet {
+            width: 8px;
+            height: 8px;
+            background-color: #03AED2;
+            display: inline-block;
+            transform: rotate(45deg);
+            margin-right: 12px;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-unitec-pacific selection:text-white">
+
+    <!-- Top Navigation with Brand Imagotipo -->
+    <nav class="bg-white border-b-4 border-unitec-pacific py-4 px-6 lg:px-12">
+        <div class="max-w-6xl mx-auto flex items-center">
+            <!-- Imagotipo Horizontal -->
+            <div class="flex items-center space-x-3">
+                <!-- Isotipo (Diamante) -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0L24 12L12 24L0 12L12 0Z" fill="#06065C"/>
+                </svg>
+                <!-- Logotipo -->
+                <span class="font-extrabold text-3xl tracking-tighter text-unitec-federal lowercase">unitec</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-unitec-federal text-white py-16 px-6 lg:px-12 relative border-b-8 border-unitec-pacific">
+        <div class="max-w-6xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-2/3">
+                <span class="uppercase tracking-widest text-sm font-semibold text-unitec-vivid mb-4 block">Train the Trainers</span>
+                <h1 class="text-4xl md:text-5xl font-black mb-6 leading-tight uppercase">Sesión 2: <br>Deconstruyendo el Sílabo</h1>
+                <p class="text-lg md:text-xl text-gray-200 font-regular max-w-2xl border-l-2 border-unitec-pacific pl-4">
+                    Desarrollando un ecosistema educativo donde salimos de los silos académicos para co-diseñar con autoría compartida.
+                </p>
+            </div>
+            <!-- Geometric Decorative Element -->
+            <div class="md:w-1/3 mt-10 md:mt-0 flex justify-center hidden md:flex">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-20">
+                    <path d="M12 0L24 12L12 24L0 12L12 0Z" fill="#47C8FD"/>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content (Hub) -->
+    <main class="max-w-6xl mx-auto px-6 lg:px-12 py-16 relative z-20">
+        
+        <div class="mb-12">
+            <h2 class="text-2xl font-black text-unitec-federal mb-4 uppercase flex items-center">
+                <span class="diamond-bullet bg-unitec-federal"></span>
+                Módulos de la Sesión
+            </h2>
+            <p class="text-gray-700 font-medium">Selecciona un módulo para acceder al contenido, herramientas y reflexiones correspondientes al diseño del Planner.</p>
+        </div>
+
+        <!-- Grid of Modules -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Módulo 1 -->
+            <article class="bg-white border-2 border-unitec-federal flex flex-col h-full hover:border-unitec-pacific transition-colors duration-300 group">
+                <div class="bg-unitec-federal p-4 border-b-2 border-unitec-federal group-hover:bg-unitec-pacific transition-colors duration-300">
+                    <span class="text-xs font-bold uppercase tracking-widest text-white">Módulo 1</span>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-black text-unitec-federal mb-4 uppercase leading-tight">El Unitec Planner</h3>
+                    <p class="text-sm text-gray-700 font-medium"><strong class="text-unitec-federal">Objetivo:</strong> Familiarizar a los participantes con la estructura del Unitec Planner y su propósito principal.</p>
+                </div>
+                <div class="p-6 pt-0 mt-auto">
+                    <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion2/m1_planner" class="block w-full text-center bg-white text-unitec-federal font-bold py-3 px-4 border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white transition-colors duration-200 uppercase text-sm">
+                        Ingresar
+                    </a>
+                </div>
+            </article>
+
+            <!-- Módulo 2 -->
+            <article class="bg-white border-2 border-unitec-federal flex flex-col h-full hover:border-unitec-pacific transition-colors duration-300 group">
+                <div class="bg-unitec-federal p-4 border-b-2 border-unitec-federal group-hover:bg-unitec-pacific transition-colors duration-300">
+                    <span class="text-xs font-bold uppercase tracking-widest text-white">Módulo 2</span>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-black text-unitec-federal mb-4 uppercase leading-tight">El Despertar</h3>
+                    <p class="text-sm text-gray-700 font-medium"><strong class="text-unitec-federal">Objetivo:</strong> Transformar el listado de temas técnicos en un verdadero propósito de aprendizaje.</p>
+                    <div class="mt-4 bg-unitec-light p-3 border-l-4 border-unitec-pacific">
+                        <span class="text-xs font-bold uppercase tracking-wider text-unitec-federal block mb-2">Diseñaremos:</span>
+                        <ul class="space-y-1">
+                            <li class="flex items-center text-sm text-gray-700 font-medium"><span class="w-1.5 h-1.5 bg-unitec-pacific rotate-45 mr-2"></span> La Gran Idea</li>
+                            <li class="flex items-center text-sm text-gray-700 font-medium"><span class="w-1.5 h-1.5 bg-unitec-pacific rotate-45 mr-2"></span> La Pregunta Convincente</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 mt-auto">
+                    <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion2/m2_planner" class="block w-full text-center bg-white text-unitec-federal font-bold py-3 px-4 border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white transition-colors duration-200 uppercase text-sm">
+                        Ingresar
+                    </a>
+                </div>
+            </article>
+
+            <!-- Módulo 3 -->
+            <article class="bg-white border-2 border-unitec-federal flex flex-col h-full hover:border-unitec-pacific transition-colors duration-300 group">
+                <div class="bg-unitec-federal p-4 border-b-2 border-unitec-federal group-hover:bg-unitec-pacific transition-colors duration-300">
+                    <span class="text-xs font-bold uppercase tracking-widest text-white">Módulo 3</span>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-black text-unitec-federal mb-4 uppercase leading-tight">Narrativas con Propósito</h3>
+                    <p class="text-sm text-gray-700 font-medium"><strong class="text-unitec-federal">Objetivo:</strong> Humanizar la ingeniería y conectar emocional y profesionalmente con el contenido ("La Historia").</p>
+                    <div class="mt-4 bg-unitec-light p-3 border-l-4 border-unitec-pacific">
+                        <span class="text-xs font-bold uppercase tracking-wider text-unitec-federal block mb-2">Diseñaremos:</span>
+                        <ul class="space-y-1">
+                            <li class="flex items-center text-sm text-gray-700 font-medium"><span class="w-1.5 h-1.5 bg-unitec-pacific rotate-45 mr-2"></span> La Historia del Docente</li>
+                            <li class="flex items-center text-sm text-gray-700 font-medium"><span class="w-1.5 h-1.5 bg-unitec-pacific rotate-45 mr-2"></span> La Historia del Estudiante</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 mt-auto">
+                    <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion2/m3_planner" class="block w-full text-center bg-white text-unitec-federal font-bold py-3 px-4 border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white transition-colors duration-200 uppercase text-sm">
+                        Ingresar
+                    </a>
+                </div>
+            </article>
+
+            <!-- Módulo 4 -->
+            <article class="bg-white border-2 border-unitec-federal flex flex-col h-full hover:border-unitec-pacific transition-colors duration-300 group">
+                <div class="bg-unitec-federal p-4 border-b-2 border-unitec-federal group-hover:bg-unitec-pacific transition-colors duration-300">
+                    <span class="text-xs font-bold uppercase tracking-widest text-white">Módulo 4</span>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-black text-unitec-federal mb-4 uppercase leading-tight">El Núcleo del Aprendizaje</h3>
+                    <p class="text-sm text-gray-700 font-medium"><strong class="text-unitec-federal">Objetivo:</strong> Redactar los objetivos de aprendizaje abandonando la memorización y enfocándose en la comprensión, la competencia y el carácter.</p>
+                    <div class="mt-4 bg-unitec-light p-3 border-l-4 border-unitec-pacific">
+                        <span class="text-xs font-bold uppercase tracking-wider text-unitec-federal block mb-2">Diseñaremos:</span>
+                        <ul class="space-y-1">
+                            <li class="flex items-center text-sm text-gray-700 font-medium"><span class="w-1.5 h-1.5 bg-unitec-pacific rotate-45 mr-2"></span> Las Metas de Aprendizaje</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 mt-auto">
+                    <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion2/m4_planner" class="block w-full text-center bg-white text-unitec-federal font-bold py-3 px-4 border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white transition-colors duration-200 uppercase text-sm">
+                        Ingresar
+                    </a>
+                </div>
+            </article>
+
+            <!-- Módulo 5 -->
+            <article class="bg-white border-2 border-unitec-federal flex flex-col h-full hover:border-unitec-pacific transition-colors duration-300 group">
+                <div class="bg-unitec-federal p-4 border-b-2 border-unitec-federal group-hover:bg-unitec-pacific transition-colors duration-300">
+                    <span class="text-xs font-bold uppercase tracking-widest text-white">Módulo 5</span>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-black text-unitec-federal mb-4 uppercase leading-tight">Motores de Búsqueda</h3>
+                    <p class="text-sm text-gray-700 font-medium"><strong class="text-unitec-federal">Objetivo:</strong> Diseñar un total de 3 a 6 preguntas de encuadre que sirvan como hilo conductor del módulo y sean atractivas.</p>
+                    <div class="mt-4 bg-unitec-light p-3 border-l-4 border-unitec-pacific">
+                        <span class="text-xs font-bold uppercase tracking-wider text-unitec-federal block mb-2">Diseñaremos:</span>
+                        <ul class="space-y-1">
+                            <li class="flex items-center text-sm text-gray-700 font-medium"><span class="w-1.5 h-1.5 bg-unitec-pacific rotate-45 mr-2"></span> Las Preguntas Marco</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 mt-auto">
+                    <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion2/m5_planner" class="block w-full text-center bg-white text-unitec-federal font-bold py-3 px-4 border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white transition-colors duration-200 uppercase text-sm">
+                        Ingresar
+                    </a>
+                </div>
+            </article>
+
+            <!-- Módulo 6 -->
+            <article class="bg-white border-2 border-unitec-federal flex flex-col h-full hover:border-unitec-pacific transition-colors duration-300 group">
+                <div class="bg-unitec-federal p-4 border-b-2 border-unitec-federal group-hover:bg-unitec-pacific transition-colors duration-300">
+                    <span class="text-xs font-bold uppercase tracking-widest text-white">Módulo 6</span>
+                </div>
+                <div class="p-6 flex-grow">
+                    <h3 class="text-xl font-black text-unitec-federal mb-4 uppercase leading-tight">Casos de Éxito y Cierre</h3>
+                    <p class="text-sm text-gray-700 font-medium"><strong class="text-unitec-federal">Objetivo:</strong> Mostrar evidencias del piloto y sentar las bases para la sesión de evaluación culminante ("La Evidencia").</p>
+                </div>
+                <div class="p-6 pt-0 mt-auto">
+                    <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion2/m6_planner" class="block w-full text-center bg-white text-unitec-federal font-bold py-3 px-4 border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white transition-colors duration-200 uppercase text-sm">
+                        Ingresar
+                    </a>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Justificación Section -->
+        <section class="bg-white p-8 md:p-12 border-2 border-unitec-federal border-l-8 border-l-unitec-pacific mt-16 flex flex-col md:flex-row gap-10 items-center">
+            <div class="flex-1">
+                <h2 class="text-2xl font-black text-unitec-federal mb-4 uppercase">Justificación de Alineación</h2>
+                <p class="text-gray-700 font-medium leading-relaxed mb-4">
+                    Esta estructura asincrónica modela exactamente lo que pedimos a nuestros docentes. Al utilizar la <strong class="text-unitec-federal font-bold">Lista de Chequeo de Calidad</strong> como instrumento de autoevaluación durante el taller, garantizamos que las preguntas generadas sean motores genuinos de curiosidad técnica y humana.
+                </p>
+                <p class="text-gray-700 font-medium leading-relaxed">
+                    Esto asegura que la educación en UNITEC no se enseñe como un recetario de fórmulas, sino como una disciplina de <strong class="text-unitec-pacific font-bold">solucionadores de problemas empáticos</strong>.
+                </p>
+            </div>
+            <!-- Diseño decorativo de diamantes anidados -->
+            <div class="hidden md:flex shrink-0">
+                <div class="w-24 h-24 border-4 border-unitec-federal rotate-45 flex items-center justify-center p-2">
+                    <div class="w-full h-full border-4 border-unitec-pacific flex items-center justify-center p-2">
+                         <div class="w-full h-full bg-unitec-vivid"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-unitec-federal text-white py-12 text-center text-sm border-t-4 border-unitec-pacific">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-center mb-6">
+                <!-- Isotipo (Diamante) en blanco para el footer -->
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0L24 12L12 24L0 12L12 0Z" fill="#FFFFFF"/>
+                </svg>
+            </div>
+            <p class="font-medium text-gray-300">&copy; 2026 Universidad Tecnológica Centroamericana (UNITEC).</p>
+            <p class="text-gray-400 mt-2">Desarrollado en alineación con la Visión 2030 y el Common Ground Collaborative.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
