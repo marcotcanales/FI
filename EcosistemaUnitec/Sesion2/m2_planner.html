@@ -49,7 +49,7 @@
         }
         
         /* Modal Transition */
-        #questionModal {
+        #questionModal, #synthesisModal {
             transition: opacity 0.3s ease-in-out;
         }
     </style>
@@ -235,143 +235,30 @@
                 </p>
             </div>
 
-            <!-- Tarjetas de 2 lados: Ingredientes vs Síntesis -->
-            <div class="space-y-8">
-                
-                <!-- Ejemplo 1: Diseño Estructural -->
-                <div class="solid-card overflow-hidden">
-                    <div class="bg-unitec-federal text-white px-6 py-3 font-bold uppercase text-sm tracking-wider">
-                        Ejemplo de Diseño Estructural
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <!-- Lado Izquierdo -->
-                        <div class="p-6 border-b-2 md:border-b-0 md:border-r-2 border-slate-200 bg-white">
-                            <h4 class="text-unitec-sky font-bold uppercase text-xs mb-4">Los "Ingredientes" (Temas)</h4>
-                            <ol class="list-decimal list-inside text-sm text-unitec-slate space-y-3">
-                                <li>Introducción y fundamentos del diseño estructural</li>
-                                <li>Estructuración y modelación de edificaciones</li>
-                                <li>Análisis estructural y determinación de solicitaciones</li>
-                                <li>Dimensionamiento de elementos estructurales de concreto reforzado</li>
-                            </ol>
-                        </div>
-                        <!-- Lado Derecho -->
-                        <div class="p-6 bg-slate-50 flex flex-col justify-center">
-                            <h4 class="text-unitec-cyan font-bold uppercase text-xs mb-4">La Síntesis (La Gran Idea)</h4>
-                            <p class="text-unitec-federal font-medium italic text-lg leading-relaxed">
-                                "Entender que una estructura de concreto no es una colección de elementos aislados, sino un sistema interdependiente donde la seguridad global depende de la continuidad en el flujo de cargas y la correcta jerarquía entre sus partes."
-                            </p>
-                        </div>
-                    </div>
+            <!-- Ejemplos desde el Piloto (Interactivos) -->
+            <div class="bg-slate-50 border-2 border-slate-200 p-8">
+                <h3 class="text-2xl font-extrabold text-unitec-federal mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-unitec-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    Ejemplos desde el Piloto
+                </h3>
+                <p class="text-sm text-unitec-slate mb-6"><em>Haz clic en cada asignatura para ver la transformación de sus "ingredientes" a su Gran Idea.</em></p>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <button onclick="openSynthesisModal('diseno')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Diseño Estructural
+                    </button>
+                    <button onclick="openSynthesisModal('historia')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Historia de Honduras
+                    </button>
+                    <button onclick="openSynthesisModal('algebra')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Introducción al Álgebra
+                    </button>
+                    <button onclick="openSynthesisModal('ofimatica')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Ofimática
+                    </button>
+                    <button onclick="openSynthesisModal('analisis')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Análisis Estructural
+                    </button>
                 </div>
-
-                <!-- Ejemplo 2: Historia de Honduras -->
-                <div class="solid-card overflow-hidden">
-                    <div class="bg-unitec-federal text-white px-6 py-3 font-bold uppercase text-sm tracking-wider">
-                        Ejemplo de Historia de Honduras
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <!-- Lado Izquierdo -->
-                        <div class="p-6 border-b-2 md:border-b-0 md:border-r-2 border-slate-200 bg-white">
-                            <h4 class="text-unitec-sky font-bold uppercase text-xs mb-4">Los "Ingredientes" (Temas)</h4>
-                            <ol class="list-decimal list-inside text-sm text-unitec-slate space-y-3">
-                                <li>Introducción a la Historia.</li>
-                                <li>Período Prehispánico.</li>
-                                <li>Período Colonial.</li>
-                                <li>Período Independiente.</li>
-                            </ol>
-                        </div>
-                        <!-- Lado Derecho -->
-                        <div class="p-6 bg-slate-50 flex flex-col justify-center">
-                            <h4 class="text-unitec-cyan font-bold uppercase text-xs mb-4">La Síntesis (La Gran Idea)</h4>
-                            <p class="text-unitec-federal font-medium italic text-lg leading-relaxed">
-                                "Descubrir qué tipo de Historia de Honduras es la que se nos ha enseñado, para ser conscientes de su papel e impacto en nuestra vida cotidiana, el porqué de su importancia y el de su gran contribución para el Desarrollo de una Sociedad tan diversa como la nuestra."
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ejemplo 3: Introducción al Álgebra -->
-                <div class="solid-card overflow-hidden">
-                    <div class="bg-unitec-federal text-white px-6 py-3 font-bold uppercase text-sm tracking-wider">
-                        Ejemplo de Introducción al Álgebra
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <!-- Lado Izquierdo -->
-                        <div class="p-6 border-b-2 md:border-b-0 md:border-r-2 border-slate-200 bg-white">
-                            <h4 class="text-unitec-sky font-bold uppercase text-xs mb-4">Los "Ingredientes" (Temas)</h4>
-                            <ol class="list-decimal list-inside text-sm text-unitec-slate space-y-3">
-                                <li>Sistemas de ecuaciones y desigualdades lineales.</li>
-                                <li>Polinomios y su factorización. Ecuaciones polinómicas.</li>
-                                <li>Expresiones y ecuaciones racionales.</li>
-                                <li>Raíces, radicales y ecuaciones con radicales.</li>
-                                <li>Números complejos.</li>
-                                <li>Ecuaciones y desigualdades cuadráticas.</li>
-                                <li>Ecuaciones polinómicas de grado mayor que dos.</li>
-                                <li>Descomposición de expresiones racionales en fracciones parciales.</li>
-                            </ol>
-                        </div>
-                        <!-- Lado Derecho -->
-                        <div class="p-6 bg-slate-50 flex flex-col justify-center">
-                            <h4 class="text-unitec-cyan font-bold uppercase text-xs mb-4">La Síntesis (La Gran Idea)</h4>
-                            <p class="text-unitec-federal font-medium italic text-lg leading-relaxed">
-                                "Entender el significado de las matemáticas desde una cara del cubo para el uso de la vida cotidiana a partir de problemas cotidianos con un pensamiento crítico y resolviendo situaciones complejas con diseños soluciones sostenibles y equitativas."
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ejemplo 4: Ofimática -->
-                <div class="solid-card overflow-hidden">
-                    <div class="bg-unitec-federal text-white px-6 py-3 font-bold uppercase text-sm tracking-wider">
-                        Ejemplo de Ofimática
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <!-- Lado Izquierdo -->
-                        <div class="p-6 border-b-2 md:border-b-0 md:border-r-2 border-slate-200 bg-white">
-                            <h4 class="text-unitec-sky font-bold uppercase text-xs mb-4">Los "Ingredientes" (Temas)</h4>
-                            <ol class="list-decimal list-inside text-sm text-unitec-slate space-y-3">
-                                <li>Aplicación de formatos.</li>
-                                <li>Revisión de documentos.</li>
-                                <li>Inserción de objetos, uso de Tablas, imágenes, portadas.</li>
-                                <li>Diseño estético de documentos.</li>
-                            </ol>
-                        </div>
-                        <!-- Lado Derecho -->
-                        <div class="p-6 bg-slate-50 flex flex-col justify-center">
-                            <h4 class="text-unitec-cyan font-bold uppercase text-xs mb-4">La Síntesis (La Gran Idea)</h4>
-                            <p class="text-unitec-federal font-medium italic text-lg leading-relaxed">
-                                "Entender que el uso adecuado de la tecnología afina/potencia tus habilidades profesionales y permite mejorar la calidad de los trabajos."
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ejemplo 5: Análisis Estructural -->
-                <div class="solid-card overflow-hidden">
-                    <div class="bg-unitec-federal text-white px-6 py-3 font-bold uppercase text-sm tracking-wider">
-                        Ejemplo de Análisis Estructural
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <!-- Lado Izquierdo -->
-                        <div class="p-6 border-b-2 md:border-b-0 md:border-r-2 border-slate-200 bg-white">
-                            <h4 class="text-unitec-sky font-bold uppercase text-xs mb-4">Los "Ingredientes" (Temas)</h4>
-                            <ol class="list-decimal list-inside text-sm text-unitec-slate space-y-3">
-                                <li>Introducción al análisis estructural.</li>
-                                <li>Cargas y estática estructural.</li>
-                                <li>Análisis de vigas y marcos isostáticos.</li>
-                                <li>Análisis Matricial de Armaduras y vigas/marcos hiperestáticos.</li>
-                            </ol>
-                        </div>
-                        <!-- Lado Derecho -->
-                        <div class="p-6 bg-slate-50 flex flex-col justify-center">
-                            <h4 class="text-unitec-cyan font-bold uppercase text-xs mb-4">La Síntesis (La Gran Idea)</h4>
-                            <p class="text-unitec-federal font-medium italic text-lg leading-relaxed">
-                                "Entender que el Análisis Estructural es un proceso de modelación (idealización de materiales, geometría, apoyos y cargas) para predecir el comportamiento de los sistemas, y que la validez del resultado depende intrínsecamente del criterio del ingeniero y no solo de los cálculos."
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </section>
 
@@ -499,7 +386,7 @@
         </div>
     </footer>
 
-    <!-- Full Screen Modal for Questions -->
+    <!-- Full Screen Modal for Questions (Section 1) -->
     <div id="questionModal" class="fixed inset-0 bg-unitec-federal bg-opacity-95 z-50 hidden flex items-center justify-center p-6 opacity-0" onclick="closeModal(event)">
         <div class="relative max-w-4xl w-full text-center flex flex-col items-center justify-center min-h-[50vh]" onclick="event.stopPropagation()">
             <!-- Botón Cerrar (X) -->
@@ -510,21 +397,94 @@
         </div>
     </div>
 
+    <!-- Full Screen Modal for Synthesis (Section 2) -->
+    <div id="synthesisModal" class="fixed inset-0 bg-unitec-federal bg-opacity-95 z-50 hidden flex items-center justify-center p-6 opacity-0" onclick="closeSynthesisModal(event)">
+        <div class="relative max-w-6xl w-full flex flex-col items-center justify-center min-h-[50vh]" onclick="event.stopPropagation()">
+            <!-- Botón Cerrar (X) -->
+            <button onclick="closeSynthesisModal(event)" class="absolute -top-8 right-0 text-white hover:text-unitec-cyan focus:outline-none transition-colors">
+                <svg class="w-10 h-10 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 text-white mt-8">
+                <!-- Izquierda: Ingredientes -->
+                <div class="bg-white/10 p-8 border-l-4 border-unitec-sky rounded-sm">
+                    <h4 class="text-unitec-sky font-bold uppercase text-sm mb-6 tracking-widest opacity-80">Los "Ingredientes" (Temas)</h4>
+                    <div id="modalIngredients" class="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed"></div>
+                </div>
+                <!-- Derecha: Síntesis -->
+                <div class="bg-white/10 p-8 border-l-4 border-unitec-cyan flex flex-col justify-center rounded-sm">
+                    <h4 class="text-unitec-cyan font-bold uppercase text-sm mb-6 tracking-widest opacity-80">La Síntesis (La Gran Idea)</h4>
+                    <p id="modalSynthesisText" class="text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight italic"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script>
-        // Lógica Modal Preguntas Convincentes
+        // Data para Modal Síntesis (Sección 2)
+        const synthesisData = {
+            'diseno': {
+                ingredients: `<ol class="list-decimal list-inside space-y-4">
+                                <li>Introducción y fundamentos del diseño estructural</li>
+                                <li>Estructuración y modelación de edificaciones</li>
+                                <li>Análisis estructural y determinación de solicitaciones</li>
+                                <li>Dimensionamiento de elementos estructurales de concreto reforzado</li>
+                              </ol>`,
+                synthesis: '"Entender que una estructura de concreto no es una colección de elementos aislados, sino un sistema interdependiente donde la seguridad global depende de la continuidad en el flujo de cargas y la correcta jerarquía entre sus partes."'
+            },
+            'historia': {
+                ingredients: `<ol class="list-decimal list-inside space-y-4">
+                                <li>Introducción a la Historia.</li>
+                                <li>Período Prehispánico.</li>
+                                <li>Período Colonial.</li>
+                                <li>Período Independiente.</li>
+                              </ol>`,
+                synthesis: '"Descubrir qué tipo de Historia de Honduras es la que se nos ha enseñado, para ser conscientes de su papel e impacto en nuestra vida cotidiana, el porqué de su importancia y el de su gran contribución para el Desarrollo de una Sociedad tan diversa como la nuestra."'
+            },
+            'algebra': {
+                ingredients: `<ol class="list-decimal list-inside space-y-4">
+                                <li>Sistemas de ecuaciones y desigualdades lineales.</li>
+                                <li>Polinomios y su factorización. Ecuaciones polinómicas.</li>
+                                <li>Expresiones y ecuaciones racionales.</li>
+                                <li>Raíces, radicales y ecuaciones con radicales.</li>
+                                <li>Números complejos.</li>
+                                <li>Ecuaciones y desigualdades cuadráticas.</li>
+                                <li>Ecuaciones polinómicas de grado mayor que dos.</li>
+                                <li>Descomposición de expresiones racionales en fracciones parciales.</li>
+                              </ol>`,
+                synthesis: '"Entender el significado de las matemáticas desde una cara del cubo para el uso de la vida cotidiana a partir de problemas cotidianos con un pensamiento crítico y resolviendo situaciones complejas con diseños soluciones sostenibles y equitativas."'
+            },
+            'ofimatica': {
+                ingredients: `<ol class="list-decimal list-inside space-y-4">
+                                <li>Aplicación de formatos.</li>
+                                <li>Revisión de documentos.</li>
+                                <li>Inserción de objetos, uso de Tablas, imágenes, portadas.</li>
+                                <li>Diseño estético de documentos.</li>
+                              </ol>`,
+                synthesis: '"Entender que el uso adecuado de la tecnología afina/potencia tus habilidades profesionales y permite mejorar la calidad de los trabajos."'
+            },
+            'analisis': {
+                ingredients: `<ol class="list-decimal list-inside space-y-4">
+                                <li>Introducción al análisis estructural.</li>
+                                <li>Cargas y estática estructural.</li>
+                                <li>Análisis de vigas y marcos isostáticos.</li>
+                                <li>Análisis Matricial de Armaduras y vigas/marcos hiperestáticos.</li>
+                              </ol>`,
+                synthesis: '"Entender que el Análisis Estructural es un proceso de modelación (idealización de materiales, geometría, apoyos y cargas) para predecir el comportamiento de los sistemas, y que la validez del resultado depende intrínsecamente del criterio del ingeniero y no solo de los cálculos."'
+            }
+        };
+
+        // Lógica Modal Preguntas Convincentes (Sección 1)
         function openModal(text) {
             const modal = document.getElementById('questionModal');
             const textElement = document.getElementById('modalQuestionText');
             textElement.textContent = text;
             
             modal.classList.remove('hidden');
-            // Pequeño timeout para permitir que la clase hidden se quite antes de hacer el fade-in
             setTimeout(() => {
                 modal.classList.add('opacity-100');
             }, 10);
-            
-            // Prevenir scroll en el fondo
             document.body.style.overflow = 'hidden';
         }
 
@@ -533,7 +493,31 @@
             const modal = document.getElementById('questionModal');
             
             modal.classList.remove('opacity-100');
-            // Esperar a que termine la transición de opacidad antes de ocultarlo completamente
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Lógica Modal Síntesis (Sección 2)
+        function openSynthesisModal(key) {
+            const data = synthesisData[key];
+            document.getElementById('modalIngredients').innerHTML = data.ingredients;
+            document.getElementById('modalSynthesisText').textContent = data.synthesis;
+            
+            const modal = document.getElementById('synthesisModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSynthesisModal(e) {
+            if (e) e.stopPropagation();
+            const modal = document.getElementById('synthesisModal');
+            
+            modal.classList.remove('opacity-100');
             setTimeout(() => {
                 modal.classList.add('hidden');
                 document.body.style.overflow = 'auto';
