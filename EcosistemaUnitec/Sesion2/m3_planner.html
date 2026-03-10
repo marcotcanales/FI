@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3: Narrativas con Propósito | Ecosistema de Aprendizaje de UNITEC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C',
+                            cyan: '#03AED2',
+                            sky: '#47C8FD',
+                            light: '#F8FAFC',
+                            slate: '#334155'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* REGLAS DE MARCA: SIN SOMBRAS, BORDES SÓLIDOS */
+        .solid-card {
+            background-color: white;
+            border: 2px solid #E2E8F0;
+            transition: all 0.3s ease;
+        }
+        .solid-card:hover {
+            border-color: #03AED2;
+            transform: translateY(-4px);
+        }
+        .step-number {
+            font-family: 'Poppins', sans-serif;
+            -webkit-text-stroke: 1px #06065C;
+            color: transparent;
+        }
+        
+        /* Modal Transition */
+        .fullscreen-modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        /* Asegurar scroll en modales con mucho texto en movil */
+        .modal-content-scroll {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-unitec-light text-unitec-slate font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Header Section -->
+    <header class="bg-unitec-federal text-white py-16 px-6 relative overflow-hidden border-b-8 border-unitec-cyan">
+        <div class="max-w-5xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="md:w-2/3 text-center md:text-left">
+                <span class="text-unitec-sky font-bold tracking-widest uppercase text-sm mb-4 block">Train the Trainers • Sesión 2 • Módulo 3</span>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">Narrativas con Propósito</h1>
+                <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-blue-100">Redactando "La Historia" de la Asignatura</h2>
+            </div>
+            <!-- Icono Decorativo -->
+            <div class="md:w-1/3 flex justify-center opacity-80">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#03AED2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-5xl mx-auto px-6 py-12 w-full">
+        
+        <!-- Mensaje de Bienvenida -->
+        <section class="bg-white p-8 mb-16 border-l-8 border-unitec-federal border-y-2 border-r-2 border-slate-200">
+            <div class="flex items-start gap-4">
+                <div class="bg-unitec-sky text-white p-3 mt-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-unitec-federal mb-2">Mensaje de Bienvenida</h3>
+                    <p class="leading-relaxed text-unitec-slate">
+                        "Bienvenidos al Módulo 3. Ya tenemos nuestra Gran Idea y nuestra Pregunta Convincente. Ahora, necesitamos contar la historia de esta asignatura. En la educación tradicional, el sílabo es un contrato: establece reglas y responsabilidades. En el <strong>Ecosistema de Aprendizaje de UNITEC</strong>, el Planner es una invitación al aprendizaje. Hoy escribiremos dos narrativas breves pero poderosas: una para recordarles a ustedes mismos por qué enseñan esto, y otra para convencer a sus estudiantes de que este viaje vale la pena."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actividad 1: La Historia para Docentes -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-unitec-federal text-white text-xl font-bold w-12 h-12 flex items-center justify-center transform rotate-45">
+                    <span class="-rotate-45 block">1</span>
+                </div>
+                <h2 class="text-3xl font-extrabold text-unitec-federal">La Historia para Docentes (Tu Brújula Interna)</h2>
+            </div>
+            
+            <div class="bg-slate-50 border-l-4 border-unitec-federal p-6 mb-8">
+                <p class="text-lg text-unitec-slate">
+                    <strong>Instrucción para el participante:</strong> Esta sección es tu declaración de intenciones. Es un espacio para que reflexiones sobre tu verdadero rol como formador en esta asignatura. No eres un simple transmisor de fórmulas, algoritmos o datos; eres un mentor que forja el criterio de futuros profesionales. Redacta un párrafo corto que defina tu propósito más profundo al enseñar esta clase enlazado a las Capacidades Humanas.
+                </p>
+            </div>
+
+            <h3 class="text-xl font-bold text-unitec-cyan mb-6">Plantilla de Trabajo (Reflexión Docente):</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Paso 1 -->
+                <article class="solid-card p-6 flex flex-col relative overflow-hidden border-t-4 border-t-unitec-federal bg-white">
+                    <span class="absolute top-[-10px] right-[-5px] text-8xl font-bold step-number opacity-10">1</span>
+                    <h4 class="text-lg font-bold text-unitec-federal mb-3 relative z-10">Revisión</h4>
+                    <p class="text-sm text-unitec-slate relative z-10">
+                        Lee La Gran Idea y las Capacidades Humanas que seleccionaste en el módulo 2.
+                    </p>
+                </article>
+
+                <!-- Paso 2 -->
+                <article class="solid-card p-6 flex flex-col relative overflow-hidden border-t-4 border-t-unitec-cyan bg-white">
+                    <span class="absolute top-[-10px] right-[-5px] text-8xl font-bold step-number opacity-10">2</span>
+                    <h4 class="text-lg font-bold text-unitec-federal mb-3 relative z-10">Visualización</h4>
+                    <p class="text-sm text-unitec-slate relative z-10">
+                        Imagina el tipo de experiencias educativas necesarias para lograr que un profesional desarrolle esa capacidad humana en el camino a entender La Gran Idea.
+                    </p>
+                </article>
+
+                <!-- Paso 3 -->
+                <article class="solid-card p-6 flex flex-col relative overflow-hidden border-t-4 border-t-unitec-sky bg-white">
+                    <span class="absolute top-[-10px] right-[-5px] text-8xl font-bold step-number opacity-10">3</span>
+                    <h4 class="text-lg font-bold text-unitec-federal mb-3 relative z-10">Tu Rol</h4>
+                    <p class="text-sm text-unitec-slate relative z-10">
+                        Piensa en el rol del docente mientras guía a un profesional en esas experiencias educativas y abre el camino para la investigación y desarrollo.
+                    </p>
+                </article>
+
+                <!-- Paso 4 -->
+                <article class="solid-card p-6 flex flex-col relative overflow-hidden border-t-4 border-t-unitec-federal bg-white">
+                    <span class="absolute top-[-10px] right-[-5px] text-8xl font-bold step-number opacity-10">4</span>
+                    <h4 class="text-lg font-bold text-unitec-federal mb-3 relative z-10">Redacción</h4>
+                    <p class="text-sm text-unitec-slate relative z-10">
+                        Redáctalo en un párrafo corto, con una postura de mentoría.
+                    </p>
+                </article>
+            </div>
+
+            <!-- Recomendación Incorporada -->
+            <div class="bg-unitec-sky bg-opacity-10 border-l-4 border-unitec-sky p-6 mb-12 rounded-r-lg">
+                <h4 class="text-lg font-bold text-unitec-federal mb-2 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-unitec-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Recomendación
+                </h4>
+                <p class="text-unitec-slate text-md">
+                    Redacta esta historia para ti mismo. Debe ser un párrafo inspirador sobre tu rol en esta asignatura. Este párrafo debe de ser un inspirador recordatorio de porqué tu presencia en el aula importa. Mas adelante redactaremos otro párrafo dirigido al alumno. El texto debe de finalizar con la frase "Por eso esta asignatura importa."
+                </p>
+            </div>
+
+            <!-- Checkpoint de Calidad (Docentes) -->
+            <div class="bg-white border-2 border-slate-200 p-6 mb-12 flex flex-col md:flex-row gap-6 items-start">
+                <div class="flex-shrink-0 bg-unitec-federal text-white p-3 rounded-none mt-1">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div class="w-full">
+                    <h3 class="text-xl font-bold text-unitec-federal mb-4">Checkpoint de Calidad (Historia para Docentes)</h3>
+                    <div class="bg-slate-50 border-2 border-slate-200 p-5">
+                        <label class="flex items-start space-x-3 text-sm text-unitec-slate cursor-pointer mb-4">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">1. ¿Expresa claramente por qué esta asignatura es vital para el desarrollo humano y ético del profesional, conectando con el <strong>Retrato del Egresado</strong>?</span>
+                        </label>
+                        <label class="flex items-start space-x-3 text-sm text-unitec-slate cursor-pointer">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">2. ¿Describe un rol de facilitador o mentor que "saca al docente de la trampa del contenido" para enfocarse en el crecimiento del estudiante?</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejemplos desde el Piloto (Docentes) -->
+            <div class="bg-slate-50 border-2 border-slate-200 p-8">
+                <h3 class="text-2xl font-extrabold text-unitec-federal mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-unitec-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    Ejemplos desde el Piloto (Historia para Docentes)
+                </h3>
+                <p class="text-sm text-unitec-slate mb-6"><em>Haz clic en cada asignatura para visualizar un ejemplo de "La Historia para Docentes". (Haz clic en cualquier parte de la pantalla para cerrar el visor).</em></p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <button onclick="openTeacherStoryModal('Diseño Estructural en Concreto')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Diseño Estructural en Concreto
+                    </button>
+                    <button onclick="openTeacherStoryModal('Historia de Honduras')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Historia de Honduras
+                    </button>
+                    <button onclick="openTeacherStoryModal('Sociología')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Sociología
+                    </button>
+                    <button onclick="openTeacherStoryModal('Introducción al Algebra')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Introducción al Algebra
+                    </button>
+                    <button onclick="openTeacherStoryModal('Análisis Estructural')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Análisis Estructural
+                    </button>
+                    <button onclick="openTeacherStoryModal('Ofimática')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Ofimática
+                    </button>
+                    <button onclick="openTeacherStoryModal('Métodos Cuantitativos')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Métodos Cuantitativos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actividad 2: La Historia para Estudiantes -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-unitec-federal text-white text-xl font-bold w-12 h-12 flex items-center justify-center transform rotate-45">
+                    <span class="-rotate-45 block">2</span>
+                </div>
+                <h2 class="text-3xl font-extrabold text-unitec-federal">La Historia para Estudiantes (La Invitación al Viaje)</h2>
+            </div>
+            
+            <div class="bg-slate-50 border-l-4 border-unitec-cyan p-6 mb-8">
+                <p class="text-lg text-unitec-slate">
+                    <strong>Instrucción para el participante:</strong> Aquí es donde "vendes" la asignatura. Imagina que es el tráiler de una película. ¿Por qué deberían emocionarse? Evita el lenguaje seco ("Aprenderemos a sumar fuerzas..."). Usa lenguaje inspirador, muestra la relevancia y conecta con su futuro. Termina la historia con la frase: <em>"Por eso esta asignatura importa."</em>
+                </p>
+            </div>
+
+            <h3 class="text-xl font-bold text-unitec-cyan mb-6">Plantilla de Trabajo (El Gancho):</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Paso 1 -->
+                <article class="solid-card p-6 flex flex-col relative overflow-hidden border-t-4 border-t-unitec-federal bg-white">
+                    <span class="absolute top-[-10px] right-[-5px] text-8xl font-bold step-number opacity-10">1</span>
+                    <h4 class="text-lg font-bold text-unitec-federal mb-3 relative z-10">Revisión</h4>
+                    <p class="text-sm text-unitec-slate relative z-10">
+                        Lee cuidadosamente La Pregunta Convincente y Las Capacidades Humanas que definiste en el módulo anterior.
+                    </p>
+                </article>
+
+                <!-- Paso 2 -->
+                <article class="solid-card p-6 flex flex-col relative overflow-hidden border-t-4 border-t-unitec-cyan bg-white">
+                    <span class="absolute top-[-10px] right-[-5px] text-8xl font-bold step-number opacity-10">2</span>
+                    <h4 class="text-lg font-bold text-unitec-federal mb-3 relative z-10">Visualización</h4>
+                    <p class="text-sm text-unitec-slate relative z-10">
+                        Imagina el tipo de experiencias educativas necesarias para desarrollar esas capacidades humanas camino a construir respuestas a la Pregunta Convincente
+                    </p>
+                </article>
+
+                <!-- Paso 3 -->
+                <article class="solid-card p-6 flex flex-col relative overflow-hidden border-t-4 border-t-unitec-sky bg-white">
+                    <span class="absolute top-[-10px] right-[-5px] text-8xl font-bold step-number opacity-10">3</span>
+                    <h4 class="text-lg font-bold text-unitec-federal mb-3 relative z-10">Su Rol</h4>
+                    <p class="text-sm text-unitec-slate relative z-10">
+                        Piensa en el rol del estudiante y la mentalidad adecuada para alcanzar y trascender la meta (y posiblemente continuar con investigación y desarrollo).
+                    </p>
+                </article>
+
+                <!-- Paso 4 -->
+                <article class="solid-card p-6 flex flex-col relative overflow-hidden border-t-4 border-t-unitec-federal bg-white">
+                    <span class="absolute top-[-10px] right-[-5px] text-8xl font-bold step-number opacity-10">4</span>
+                    <h4 class="text-lg font-bold text-unitec-federal mb-3 relative z-10">Redacción</h4>
+                    <p class="text-sm text-unitec-slate relative z-10">
+                        Redáctalo en un parrafo corto, con una postura inspiradora pero aplicada.
+                    </p>
+                </article>
+            </div>
+
+            <!-- Recomendación Incorporada -->
+            <div class="bg-unitec-cyan bg-opacity-10 border-l-4 border-unitec-cyan p-6 mb-12 rounded-r-lg">
+                <h4 class="text-lg font-bold text-unitec-federal mb-2 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-unitec-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Recomendación
+                </h4>
+                <p class="text-unitec-slate text-md">
+                    A diferencia de la anterior, redacta esta historia para un joven profesional en tu aula. Debe de ser un párrafo concreto, vívido e inmediato. Este párrafo debe de poder servir como un inspirador recordatorio de porque es importante cada experiencia educativa de esta asignatura, debe enganchar con un escenario o pregunta. Debe estar redactada con un lenguaje apropiado para el estudiante, y no utilizar “jerga académica”. El texto debe de finalizar con la frase "Por eso esta asignatura importa".
+                </p>
+            </div>
+
+            <!-- Ejemplos desde el Piloto (Estudiantes) -->
+            <div class="bg-white border-2 border-slate-200 p-8 mb-12">
+                <h3 class="text-2xl font-extrabold text-unitec-federal mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-unitec-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    Ejemplos desde el Piloto (Historia para Estudiantes)
+                </h3>
+                <p class="text-sm text-unitec-slate mb-6"><em>Haz clic en cada asignatura para visualizar un ejemplo de "La Historia para Estudiantes". (Haz clic en cualquier parte de la pantalla para cerrar el visor).</em></p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <button onclick="openStudentStoryModal('Diseño Estructural en Concreto')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Diseño Estructural en Concreto
+                    </button>
+                    <button onclick="openStudentStoryModal('Historia de Honduras')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Historia de Honduras
+                    </button>
+                    <button onclick="openStudentStoryModal('Sociología')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Sociología
+                    </button>
+                    <button onclick="openStudentStoryModal('Introducción al Algebra')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Introducción al Algebra
+                    </button>
+                    <button onclick="openStudentStoryModal('Análisis Estructural')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Análisis Estructural
+                    </button>
+                    <button onclick="openStudentStoryModal('Ofimática')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Ofimática
+                    </button>
+                    <button onclick="openStudentStoryModal('Métodos Cuantitativos')" class="solid-card py-6 px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        Métodos Cuantitativos
+                    </button>
+                </div>
+            </div>
+
+            <!-- Checkpoint & Justification -->
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- Checkpoint de Calidad (Estudiantes) -->
+                <div class="bg-white border-4 border-unitec-cyan p-8 relative">
+                    <div class="absolute -top-4 -left-4 bg-unitec-cyan text-unitec-federal p-2">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-unitec-federal mb-6 mt-2">Checkpoint de Calidad</h3>
+                    
+                    <div class="bg-slate-50 border-2 border-slate-200 p-5">
+                        <label class="flex items-start space-x-3 text-sm text-unitec-slate cursor-pointer mb-4">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">¿Utiliza conceptos y lenguaje adecuados para el desarrollo de los estudiantes?</span>
+                        </label>
+                        <label class="flex items-start space-x-3 text-sm text-unitec-slate cursor-pointer mb-4">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">¿Menciona las principales líneas de investigación?</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Justificación de Alineación -->
+                <div class="bg-unitec-federal text-white p-8 border-r-8 border-unitec-sky flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-unitec-cyan mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Justificación de Alineación
+                    </h3>
+                    <p class="text-blue-100 text-sm leading-relaxed mb-4">
+                        Esta actividad conecta directamente con el <strong>Retrato del Egresado de UNITEC</strong> en todas sus disciplinas. Al redactar una historia que sitúa al estudiante como protagonista frente a problemas del mundo real y líneas de investigación relevantes, estamos cultivando activamente sus Capacidades Humanas: desde el <span class="text-white font-bold border-b-2 border-unitec-cyan">Solucionador de Problemas Empático</span> y el <span class="text-white font-bold border-b-2 border-unitec-cyan">Líder con Propósito</span>, hasta el <span class="text-white font-bold border-b-2 border-unitec-cyan">Ciudadano Responsable</span>, <span class="text-white font-bold border-b-2 border-unitec-cyan">Creador Innovador</span> y <span class="text-white font-bold border-b-2 border-unitec-cyan">Comunicador Efectivo</span>.
+                    </p>
+                    <p class="text-blue-100 text-sm leading-relaxed">
+                        Además, esta narrativa ayuda a trascender la trampa del contenido; establece un anclaje emocional que fomenta el crecimiento humano, ético y profesional del estudiante, pilar fundamental del Ecosistema de Aprendizaje de UNITEC.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-unitec-federal text-white py-8 text-center mt-12 border-t-4 border-unitec-cyan">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <p class="mb-4 md:mb-0 text-sm opacity-90">&copy; 2026 UNITEC - Train the Trainers (Sesión 2).</p>
+            <p class="text-sm opacity-90">Diseñado con <span class="font-bold text-unitec-sky">CGS 3Cs Toolkit</span></p>
+        </div>
+    </footer>
+
+    <!-- Full Screen Modal for Teacher Stories (Actividad 1) -->
+    <div id="teacherStoryModal" class="fullscreen-modal fixed inset-0 bg-unitec-federal bg-opacity-95 z-50 hidden flex items-center justify-center p-4 md:p-8 opacity-0 cursor-pointer" onclick="closeTeacherStoryModal(event)">
+        <div class="relative max-w-5xl w-full text-center flex flex-col items-center justify-center min-h-[50vh] modal-content-scroll">
+            <button onclick="closeTeacherStoryModal(event)" class="absolute -top-4 md:-top-16 right-0 text-white hover:text-unitec-cyan focus:outline-none transition-colors">
+                <svg class="w-8 h-8 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h4 id="modalTeacherStoryTitle" class="text-unitec-sky font-bold uppercase tracking-widest text-base md:text-xl mb-4 md:mb-6 opacity-90"></h4>
+            <p id="modalTeacherStoryText" class="text-lg md:text-2xl lg:text-3xl font-medium text-white leading-relaxed italic"></p>
+        </div>
+    </div>
+
+    <!-- Full Screen Modal for Student Stories (Actividad 2) -->
+    <div id="studentStoryModal" class="fullscreen-modal fixed inset-0 bg-unitec-federal bg-opacity-95 z-50 hidden flex items-center justify-center p-4 md:p-8 opacity-0 cursor-pointer" onclick="closeStudentStoryModal(event)">
+        <div class="relative max-w-5xl w-full text-center flex flex-col items-center justify-center min-h-[50vh] modal-content-scroll">
+            <button onclick="closeStudentStoryModal(event)" class="absolute -top-4 md:-top-16 right-0 text-white hover:text-unitec-cyan focus:outline-none transition-colors">
+                <svg class="w-8 h-8 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h4 id="modalStudentStoryTitle" class="text-unitec-sky font-bold uppercase tracking-widest text-base md:text-xl mb-4 md:mb-6 opacity-90"></h4>
+            <p id="modalStudentStoryText" class="text-lg md:text-2xl lg:text-3xl font-medium text-white leading-relaxed italic"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Data para Modal Historias de Docentes (Actividad 1)
+        const teacherStoriesData = {
+            'Diseño Estructural en Concreto': `Mi rol no es validar resultados aritméticos, sino calibrar el juicio
+profesional. Debo recordar que en ingeniería estructural no existe una única
+respuesta correcta, pero sí muchas respuestas peligrosas. El CHOC es nuestro
+suelo firme, pero el Criterio es nuestro techo. Mi objetivo es exponer al
+estudiante a la toma de decisiones, fomentar la detección de 'puntos ciegos' en
+equipo y enseñarles a defender técnicamente sus diseños. No gradúo calculadoras
+humanas; formo ingenieros con criterio. Por eso esta asignatura importa.`,
+            
+            'Historia de Honduras': `Honduras enfrenta tensiones sociales, políticas y económicas que con
+frecuencia se alimentan de compresiones limitadas o de relatos únicos del
+pasado, que en el presente son referentes y hegemónicos. Cuando las narrativas
+oficiales eclipsan las voces de los grupos indígenas, afrodescendientes,
+campesinos, obreros y de las mujeres, perdemos voces valiosas que fortalecen la
+identidad resiliente que ha sobrevivido con el pasar de los años. Este curso
+centrará su atención en los análisis multiperspectivos, para que los
+estudiantes lean la historia como protagonistas -siendo capaces de cuestionar
+las fuentes, comparar las narrativas y conectar activamente el pasado con el
+presente para construir un futuro más justo, rompiendo con aquellos paradigmas
+tradicionales y contraponiendo las miradas de la historia hegemónicas. Por eso
+esta asignatura importa.`,
+            
+            'Sociología': `En
+el proceso de enseñanza-aprendizaje de la vida académica universitaria, y como
+futuros profesionales de nuestro país, es fundamental que los estudiantes
+adquieran competencias claves en comprensión, análisis y pensamiento crítico
+sobre la dinámica de las sociedades.  Por
+eso esta asignatura importa.`,
+            
+            'Introducción al Algebra': `La ingeniería moderna demanda profesionales que no solo calculen,
+sino que piensen de manera abstracta, modelen sistemas complejos y diseñen
+soluciones innovadoras. Este curso es el cimiento de esa capacidad analítica.
+Nos enfocamos más en el manejo de conceptos que en la capacidad operatoria,
+para que los estudiantes aprendan a traducir problemas del mundo real a un
+lenguaje matemático. 
+Formamos la base del pensamiento
+estructurado que necesitarán a lo largo de toda su carrera. Por eso esta
+asignatura importa.`,
+            
+            'Análisis Estructural': `El diseño estructural es un arte cargado de incertidumbre. Trabajamos
+con materiales que no conocemos del todo bien, formamos estructuras que
+idealizamos con modelos simplificados y resistimos cargas que solo estimamos
+probabilísticamente. Este curso aborda el dilema de la ingeniería: ¿Cómo
+trascender la ignorancia y acercarse a la respuesta real a través de modelos
+rigurosos? La clave está en desarrollar la intuición ingenieril y aplicar
+criterios éticos en la modelación de los cuatro pilares (materiales, geometría,
+apoyos y cargas). La transición del análisis isostático (simplificado) al
+hiperestático (redundante y complejo) es crucial para diseñar sistemas más
+seguros y funcionales que sirvan a la comunidad. Por eso esta asignatura
+importa.`,
+            
+            'Ofimática': `La
+vida profesional exige un nivel de conocimiento tecnológico aplicable en
+entornos académicos y laborales, el curso propone el uso correcto y efectivo de
+las herramientas tecnológicas, desarrollando las habilidades para obtener el
+máximo provecho de la gran cantidad de programas y aplicaciones para facilitar
+la vida profesional. Por eso esta asignatura importa.`,
+            
+            'Métodos Cuantitativos': `La confianza pública
+se rompe cuando los números se usan de forma indebida. Una política basada en
+evidencias requiere diseños sólidos, métodos transparentes e interpretaciones
+éticas. Este curso forma investigadores que pueden producir y criticar afirmaciones
+cuantitativas con rigor e integridad—para que las decisiones sirvan a las
+personas, no a las agendas. Por eso esta asignatura importa.`
+        };
+
+        // Data para Modal Historias de Estudiantes (Actividad 2)
+        const studentStoriesData = {
+            'Sociología': `¿Se ha planteado alguna vez el
+porqué de tu nacimiento en este país? ¿Por qué la violencia y la corrupción?
+¿Por qué la pobreza en Honduras si es un país rico en recursos? ¿Es culpa de
+los gobernantes o del pueblo? ¿De quién depende el progreso del país? Estos
+cuestionamientos encuentran respuesta en el ámbito de la sociología.  Por eso esta asignatura importa.`,
+            
+            'Historia de Honduras': `Imagina que te
+adentras a comprender un evento ocurrido en el pasado, pero con dos libros que
+cuentan la historia de diferente manera. En uno el principal actor es un Héroe,
+en otro es un villano. La pregunta aquí es, ¿Quién tiene la razón? La historia
+no es un relato único; es una conversación de voces. Dos libros, un mismo
+hecho; en uno hay un héroe, en el otro un villano. ¿Quién dice la verdad? ¿Por
+qué se le ha otorgado a uno el papel de héroe y al otro el de villano? 
+ 
+La Historia de Honduras, te permite
+identificar ¿Cuál es la voz más fuerte? y ¿Cuál es la fuente? pero, además,
+¿Por qué ha sido así? Y ¿Por qué? este análisis es muy importante de hacerlo,
+para la comprensión de nuestro presente, porque nos permitirá integrar todas
+las voces que han construido la historia, reconociendo nuestra diversidad, pero
+también la justicia de poder visibilizar lo que ha sido invisibilizado, y de
+dar voz a los que, hasta ahora, no han tenido voz y que han jugado además un
+papel protagónico en el desarrollo de nuestras sociedades, ayudando a construir
+en el futuro, sociedades menos desiguales. Por eso esta asignatura importa.`,
+            
+            'Introducción al Algebra': `Imagina que
+quieres empezar un pequeño negocio, como vender camisetas personalizadas.
+Tienes costos fijos (la máquina para estampar) y costos variables (el precio de
+cada camiseta en blanco). ¿A qué precio debes venderlas? ¿Cuántas necesitas
+vender solo para cubrir tus gastos y no perder dinero? ¿Y cuántas más para
+empezar a tener ganancias reales? Sentarse a "adivinar" los números
+puede llevarte al fracaso. El álgebra te da el poder de construir una fórmula
+simple para encontrar tu punto de equilibrio exacto y predecir tus ganancias
+Por eso esta asignatura importa.`,
+            
+            'Diseño Estructural en Concreto': `A menudo
+pensamos que la ingeniería civil trata sobre la certeza: números exactos y
+estructuras inamovibles. Pero la realidad de la construcción es un negocio de
+gestión de incertidumbre. No sabemos cuándo ocurrirá el próximo terremoto ni si
+los usuarios sobrecargarán el edificio. 
+ En
+Diseño Estructural en Concreto, descubriremos que esa incertidumbre tiene un
+precio. Cuando un ingeniero duda, sobredimensiona; y cuando sobredimensiona, el
+costo se dispara. Por otro lado, si subestimamos el riesgo por ahorrar, ponemos
+vidas en peligro.  
+¿Dónde está el equilibrio? En el Criterio
+Ingenieril. Durante estas 10 semanas, no solo calcularás vigas y columnas;
+aprenderás a tomar decisiones valientes. Entenderás que cada factor de
+seguridad es una confesión de lo que no sabemos, y tu trabajo es reducir esa
+ignorancia para crear estructuras seguras y viables.`, // Agregando el finalizador manual en el JS (ver función)
+            
+            'Ofimática': `Tardas demasiado tiempo en tus
+trabajos teniendo los recursos, pero sin saber cómo aprovecharlos, vamos a
+cambiar eso. Por eso esta asignatura importa.`,
+            
+            'Análisis Estructural': `Has visto en las
+noticias estructuras que fallan. Muchas veces no es solo un error de cálculo,
+sino un error de concepto: modelar la estructura o sus cargas de manera
+incorrecta. Aprender Análisis Hiperestático I es aprender a ver el mundo no
+como un físico (ideal), sino como un ingeniero (real): idealizando,
+simplificando y estimando con la mayor responsabilidad. Descubrirás por qué la
+estabilidad cinemática es vital y cómo estructuras más robustas
+(hiperestáticas) distribuyen los esfuerzos de manera diferente a las simples
+(isostáticas). La precisión de tu modelo dependerá de tu criterio y tu
+imaginación. Por eso esta asignatura importa.`,
+            
+            'Métodos Cuantitativos': `Has visto a dos
+políticos mostrando gráficos que “prueban” cosas opuestas. ¿A quién creer?
+Aprenderemos a diseñar estudios justos, leer resultados críticamente y contar
+la verdadera historia que muestran los datos—para que los números sirvan a la
+verdad. Por eso esta asignatura importa.`
+        };
+
+        // Lógica Modal Historias para Docentes (Actividad 1)
+        function openTeacherStoryModal(subject) {
+            const modal = document.getElementById('teacherStoryModal');
+            document.getElementById('modalTeacherStoryTitle').textContent = subject;
+            document.getElementById('modalTeacherStoryText').textContent = `"${teacherStoriesData[subject]}"`;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTeacherStoryModal(e) {
+            if (e) e.stopPropagation();
+            const modal = document.getElementById('teacherStoryModal');
+            
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Lógica Modal Historias para Estudiantes (Actividad 2)
+        function openStudentStoryModal(subject) {
+            const modal = document.getElementById('studentStoryModal');
+            document.getElementById('modalStudentStoryTitle').textContent = subject;
+            
+            // Verificamos si la historia no termina con la frase obligatoria para agregarla (ej: Diseño Estructural)
+            let storyText = studentStoriesData[subject];
+            if (!storyText.includes("Por eso esta asignatura importa") && !storyText.includes("Por eso esta asignatura importa.")) {
+                storyText += " Por eso esta asignatura importa.";
+            }
+
+            document.getElementById('modalStudentStoryText').textContent = `"${storyText}"`;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeStudentStoryModal(e) {
+            if (e) e.stopPropagation();
+            const modal = document.getElementById('studentStoryModal');
+            
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
