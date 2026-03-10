@@ -172,17 +172,23 @@
                 <p class="text-sm md:text-base text-unitec-slate mb-6"><em>Haz clic en cada asignatura para visualizar los ejemplos de Preguntas Conceptuales y de Competencia redactadas durante el piloto.</em></p>
                 
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <button onclick="openSection1Modal('Diseño Estructural en Concreto')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
-                        Diseño Estructural en Concreto
-                    </button>
                     <button onclick="openSection1Modal('Historia de Honduras')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
                         Historia de Honduras
+                    </button>
+                    <button onclick="openSection1Modal('Diseño Estructural en Concreto')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Diseño Estructural en Concreto
                     </button>
                     <button onclick="openSection1Modal('Métodos Cuantitativos')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
                         Métodos Cuantitativos
                     </button>
                     <button onclick="openSection1Modal('Ofimática')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
                         Ofimática
+                    </button>
+                    <button onclick="openSection1Modal('Análisis Estructural')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Análisis Estructural
+                    </button>
+                    <button onclick="openSection1Modal('Introducción al Algebra')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Introducción al Algebra
                     </button>
                 </div>
             </div>
@@ -264,11 +270,11 @@
                 <p class="text-sm md:text-base text-unitec-slate mb-6"><em>Haz clic en cada asignatura para visualizar los ejemplos de Preguntas de Carácter y L2L.</em></p>
                 
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <button onclick="openSection2Modal('Diseño Estructural en Concreto')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
-                        Diseño Estructural en Concreto
-                    </button>
                     <button onclick="openSection2Modal('Historia de Honduras')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
                         Historia de Honduras
+                    </button>
+                    <button onclick="openSection2Modal('Diseño Estructural en Concreto')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Diseño Estructural en Concreto
                     </button>
                     <button onclick="openSection2Modal('Métodos Cuantitativos')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
                         Métodos Cuantitativos
@@ -332,46 +338,81 @@
 
     <!-- Scripts -->
     <script>
-        // Data para Modal de Sección 1 (Conceptuales y Competencia)
+        // Data para Modal de Sección 1 (Conceptuales y Competencia) actualizados según input
         const section1Data = {
-            'Diseño Estructural en Concreto': {
-                conceptual: [
-                    "¿Cómo 'viaja' una carga desde el techo hasta el suelo y qué sucede con el sistema global cuando interrumpimos o desviamos ese camino?",
-                    "¿Por qué un cálculo perfectamente ejecutado sobre un modelo incorrecto produce una estructura más peligrosa que un cálculo aproximado sobre un modelo conceptualmente sólido?"
-                ],
-                competencia: [
-                    "¿Cómo traducimos fenómenos naturales caóticos (como el viento o un sismo) en fuerzas estáticas predecibles dentro de un modelo estructural?",
-                    "¿De qué manera utilizamos el código (CHOC) no como un manual de instrucciones ciego, sino como un marco de referencia para justificar nuestras decisiones de diseño?"
-                ]
-            },
             'Historia de Honduras': {
                 conceptual: [
-                    "¿Quién cuenta la historia oficial y qué voces o actores sociales han quedado marginados o silenciados en la narrativa nacional?",
-                    "¿De qué forma las estructuras de poder colonial siguen moldeando las dinámicas sociales y económicas del presente?"
+                    "¿Qué voces han construido la historia que hoy conocemos como historia?",
+                    "¿Cómo dichas voces cambian nuestra comprensión de la historia?",
+                    "¿Cómo estas diferentes voces han influenciado en nuestra Identidad nacional?",
+                    "¿Por qué es importante la historia para imaginar futuros posibles?"
                 ],
                 competencia: [
-                    "¿Cómo podemos interrogar a una fuente primaria (un documento, una carta, un decreto) para descubrir el sesgo o la intencionalidad de su autor?",
-                    "¿Qué proceso utilizamos para contrastar múltiples fuentes y construir un argumento histórico fundamentado y coherente?"
+                    "¿Cuáles son las voces que han sido incluidas o excluidas en las fuentes históricas y por qué?",
+                    "¿Cómo estas voces nos permiten comparar las distintas perspectivas que se tienen de la comprensión del pasado?",
+                    "¿Cómo compartimos lo que nos construye desde nuestra Identidad de forma clara, responsable y ética?",
+                    "¿Cómo podemos usar el estudio/ conocimiento del pasado para proponer soluciones a problemas actuales y venideros?"
+                ]
+            },
+            'Diseño Estructural en Concreto': {
+                conceptual: [
+                    "¿Cómo 'viaja' una carga desde el techo hasta el suelo y qué sucede con el sistema global cuando interrumpimos o desviamos ese camino?"
+                ],
+                competencia: [
+                    "¿Cómo traducimos fenómenos naturales caóticos (como el viento o un sismo) en fuerzas estáticas dentro de un software sin perder el contacto con la realidad física?"
                 ]
             },
             'Métodos Cuantitativos': {
                 conceptual: [
-                    "Si los datos empíricos no 'hablan por sí solos', ¿cómo determinamos qué historia nos están contando realmente?",
-                    "¿En qué punto la correlación estadística nos engaña haciéndonos creer que hemos encontrado la causalidad de un problema?"
+                    "¿Cómo sabemos que algo puede medirse objetivamente en la realidad?",
+                    "¿Cuál es la diferencia entre observar un patrón y demostrarlo con evidencia?",
+                    "¿Por qué se afirma que la estadística descriptiva transforma datos brutos en conocimiento estratégico?",
+                    "¿Qué nos dice la dispersión de los datos sobre el nivel de riesgo o estabilidad de un negocio?",
+                    "¿Qué implicaciones tiene una distribución sesgada (asimetría) en la interpretación de resultados?",
+                    "¿Por qué el análisis exploratorio de datos es un paso indispensable antes de aplicar técnicas más avanzadas?"
                 ],
                 competencia: [
-                    "¿Cuándo es suficiente una medida de tendencia central y cuándo necesitamos aplicar inferencia compleja para tomar una decisión directiva segura?",
-                    "¿Cómo estructuramos un modelo matemático en Excel para proyectar escenarios de incertidumbre en los negocios?"
+                    "¿Cómo se definen las variables de un problema real de su entorno para poder medirlo y analizarlo estadísticamente?",
+                    "¿Qué herramienta estadística utilizará para determinar si un cambio en la empresa incide en los resultados?",
+                    "¿Qué método estadístico es el más adecuado para analizar y presentar este conjunto de datos?"
                 ]
             },
             'Ofimática': {
                 conceptual: [
-                    "¿Es la tecnología una herramienta que nos sirve a nosotros, o terminamos adaptando la calidad de nuestro trabajo a las limitaciones del software que utilizamos?",
-                    "¿Por qué la verdadera eficiencia no reside en conocer todas las funciones de un programa, sino en saber estructurar la información antes de teclear?"
+                    "¿Por qué el dominio avanzado de herramientas ofimáticas es esencial en el mundo laboral actual?",
+                    "¿Cómo transforma Excel datos en información significativa para la toma de decisiones?",
+                    "¿Qué diferencia existe entre un documento básico y uno profesional en Word?",
+                    "¿De qué manera el diseño visual en PowerPoint influye en la comprensión de un mensaje?",
+                    "¿Cómo las plataformas colaborativas en la nube cambian la forma de trabajar en equipo?"
                 ],
                 competencia: [
-                    "¿Cómo transformamos una tabla caótica de miles de registros en un dashboard interactivo que permita a un gerente tomar decisiones en 5 minutos?",
-                    "¿Qué pasos seguimos para automatizar una tarea repetitiva conectando diferentes herramientas (ej. Word, Excel, Nube) sin perder el control de los datos?"
+                    "¿Cómo puedo utilizar Excel para que resuma datos complejos de manera simple?",
+                    "¿Cómo puedo automatizar una tarea repetitiva con una macro?",
+                    "¿Cómo se organiza un documento largo en Word para hacerlo claro y accesible?",
+                    "¿Qué técnicas puedo usar en PowerPoint para captar la atención de mi audiencia?",
+                    "¿Cómo aplico herramientas colaborativas para desarrollar un proyecto grupal en tiempo real?"
+                ]
+            },
+            'Análisis Estructural': {
+                conceptual: [
+                    "¿Qué tan \"real\" es un modelo estructural y dónde se concentra el riesgo de inexactitud?",
+                    "¿Cómo afecta la variabilidad de un sistema a la distribución de solicitaciones internas y a la estabilidad?",
+                    "¿Qué ventaja clave ofrece la redundancia hiperestática frente a la simplicidad isostática en términos de seguridad?"
+                ],
+                competencia: [
+                    "¿Cómo se modelan cargas dinámicas, como el sismo, en un esquema estático (simil) y cuáles son las limitaciones de esa simplificación?",
+                    "¿Cómo se usan las tablas de carga del CHOC para pasar de valores probabilísticos de área (kN/m²) a cargas lineales de diseño (kN/m)?",
+                    "¿Cómo se utilizan los métodos de energía (p. ej., Trabajo Virtual) para calcular deflexiones en vigas y marcos?"
+                ]
+            },
+            'Introducción al Algebra': {
+                conceptual: [
+                    "¿Cómo nos ayudan los símbolos a contar una historia sobre el mundo?",
+                    "¿De qué manera una ecuación representa un equilibrio?"
+                ],
+                competencia: [
+                    "¿Cuál es la estrategia más eficiente para resolver este problema y por qué?",
+                    "¿Cómo verifico que mi solución es lógica en el contexto del problema?"
                 ]
             }
         };
@@ -417,7 +458,9 @@
                     "¿Cómo gestiono mi frustración y soluciono un problema técnico del software cuando la respuesta no está ni en el manual ni en el primer resultado de Google?",
                     "¿De qué manera evalúo continuamente si estoy utilizando la herramienta correcta para la tarea, en lugar de usar la única herramienta que sé manejar?"
                 ]
-            }
+            },
+            'Análisis Estructural': { caracter: [], l2l: [] },
+            'Introducción al Algebra': { caracter: [], l2l: [] }
         };
 
         // Lógica Modal Sección 1 (Conceptuales y Competencia)
@@ -429,25 +472,27 @@
             let htmlContent = '';
             
             // Bloque para Conceptuales (Azul Federal)
-            if (data.conceptual && data.conceptual.length > 0) {
+            if (data && data.conceptual && data.conceptual.length > 0) {
                 htmlContent += `
                     <div class="bg-unitec-federal bg-opacity-80 border-l-8 border-unitec-sky p-5 rounded shadow-lg">
                         <h5 class="text-unitec-sky font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Preguntas Conceptuales</h5>
                 `;
                 data.conceptual.forEach(item => {
-                    htmlContent += `<p class="text-white text-md md:text-lg mb-3 font-medium">❓ "${item}"</p>`;
+                    // Íconos eliminados según requerimiento del usuario
+                    htmlContent += `<p class="text-white text-md md:text-lg mb-3 font-medium">"${item}"</p>`;
                 });
                 htmlContent += `</div>`;
             }
             
             // Bloque para Competencia (Cyan)
-            if (data.competencia && data.competencia.length > 0) {
+            if (data && data.competencia && data.competencia.length > 0) {
                 htmlContent += `
                     <div class="bg-unitec-cyan bg-opacity-20 border-l-8 border-unitec-cyan p-5 rounded mt-6 shadow-md">
                         <h5 class="text-unitec-cyan font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Preguntas de Competencia</h5>
                 `;
                 data.competencia.forEach(item => {
-                    htmlContent += `<p class="text-white text-md md:text-lg mb-3 font-medium">⚙️ "${item}"</p>`;
+                    // Íconos eliminados según requerimiento del usuario
+                    htmlContent += `<p class="text-white text-md md:text-lg mb-3 font-medium">"${item}"</p>`;
                 });
                 htmlContent += `</div>`;
             }
@@ -482,7 +527,7 @@
             let htmlContent = '';
             
             // Bloque para Carácter (Sky Blue)
-            if (data.caracter && data.caracter.length > 0) {
+            if (data && data.caracter && data.caracter.length > 0) {
                 htmlContent += `
                     <div class="bg-unitec-sky bg-opacity-20 border-l-8 border-unitec-sky p-5 rounded shadow-md">
                         <h5 class="text-unitec-sky font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Preguntas de Carácter (Dilemas)</h5>
@@ -494,7 +539,7 @@
             }
             
             // Bloque para L2L (Cyan / Light)
-            if (data.l2l && data.l2l.length > 0) {
+            if (data && data.l2l && data.l2l.length > 0) {
                 htmlContent += `
                     <div class="bg-white bg-opacity-10 border-l-8 border-white p-5 rounded mt-6 shadow-md">
                         <h5 class="text-white font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Learning to Learn (Metacognición)</h5>
@@ -505,6 +550,10 @@
                 htmlContent += `</div>`;
             }
             
+            if (htmlContent === '') {
+                htmlContent = '<p class="text-white text-md md:text-lg text-center opacity-70 italic">Ejemplos para esta sección pendientes de revisión.</p>';
+            }
+
             document.getElementById('modalSection2TextContainer').innerHTML = htmlContent;
             
             modal.classList.remove('hidden');
