@@ -273,6 +273,9 @@
                     <button onclick="openSection2Modal('Historia de Honduras')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
                         Historia de Honduras
                     </button>
+                    <button onclick="openSection2Modal('Sociología')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Sociología
+                    </button>
                     <button onclick="openSection2Modal('Diseño Estructural en Concreto')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
                         Diseño Estructural en Concreto
                     </button>
@@ -281,6 +284,12 @@
                     </button>
                     <button onclick="openSection2Modal('Ofimática')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
                         Ofimática
+                    </button>
+                    <button onclick="openSection2Modal('Análisis Estructural')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Análisis Estructural
+                    </button>
+                    <button onclick="openSection2Modal('Introducción al Algebra')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Introducción al Algebra
                     </button>
                 </div>
             </div>
@@ -338,7 +347,7 @@
 
     <!-- Scripts -->
     <script>
-        // Data para Modal de Sección 1 (Conceptuales y Competencia) actualizados según input
+        // Data para Modal de Sección 1 (Conceptuales y Competencia)
         const section1Data = {
             'Historia de Honduras': {
                 conceptual: [
@@ -417,50 +426,80 @@
             }
         };
 
-        // Data para Modal de Sección 2 (Carácter y L2L)
+        // Data para Modal de Sección 2 (Carácter y L2L) actualizados
         const section2Data = {
-            'Diseño Estructural en Concreto': {
-                caracter: [
-                    "¿Tiene sentido buscar una precisión matemática de tres decimales en el diseño, cuando las fuerzas que resistimos son meras estimaciones probabilísticas llenas de incertidumbre?",
-                    "Cuando el presupuesto de la obra exige reducir costos, ¿dónde dibujas la línea ética entre 'optimización' y 'negligencia estructural'?"
-                ],
-                l2l: [
-                    "¿Es la crítica de un colega durante la revisión de mi modelo un ataque a mi capacidad personal, o es el mecanismo de seguridad más barato para evitar un colapso en la obra?",
-                    "Cuando el software arroja un resultado que no entiendo, ¿confío ciegamente en la máquina o confío en mi intuición física para detener el proceso y verificar?"
-                ]
-            },
             'Historia de Honduras': {
                 caracter: [
-                    "¿De qué manera conocer las injusticias de nuestro pasado nos obliga éticamente a asumir responsabilidad por la construcción de nuestro presente?",
-                    "¿Es posible ser verdaderamente patriota si nos negamos a reconocer los fracasos y los episodios oscuros de nuestra propia historia?"
+                    "¿Cómo demuestro responsabilidad al incluir las voces marginadas en la construcción y comprensión de un hecho histórico?",
+                    "¿Cómo compruebo la equidad al analizar y compartir las distintas narrativas históricas que se han venido construyendo desde el pasado?",
+                    "¿En quién me estoy convirtiendo cuando de manera veraz comunicamos la historia y esta fortalece la confianza comunitaria?",
+                    "¿Cómo mostramos justicia y respeto al interpretar, presentar y visibilizar las diferentes perspectivas que posee la historia?"
                 ],
                 l2l: [
-                    "¿Cómo cambia mi disposición a aprender cuando escucho una versión argumentada de la historia que contradice totalmente lo que me enseñaron de niño?",
-                    "¿Qué estrategias utilizo para mantener mi objetividad cuando analizo un tema histórico que choca con mis creencias políticas actuales?"
+                    "¿Qué estrategias me ayudan a mantenerme curioso y abierto para comparar las distintas fuentes y narrativas de las fuentes que construyen el pasado?",
+                    "¿Qué retroalimentación me ayudó aprender y mejorar el análisis y la comunicación histórica? Y ¿Por qué?",
+                    "¿De qué manera reflexionar sobre mi aprendizaje me ayuda a crecer como ciudadano responsable?"
+                ]
+            },
+            'Sociología': {
+                caracter: [],
+                l2l: [
+                    "¿Cómo puedes ser curioso ante las concepciones antropológicas y metafísicas para lograr mayor claridad sobre lo tangible e intangible?",
+                    "¿Cómo puedes ser escéptico ante las capacidades humanas y las de la inteligencia artificial, cuestionando la posibilidad de que la segunda se equipare a la primera?",
+                    "¿Cómo puedes ser reflexivo ante las dinámicas sociales e individuales que plantea la propuesta posmoderna?"
+                ]
+            },
+            'Diseño Estructural en Concreto': {
+                caracter: [
+                    "Si la seguridad absoluta es técnicamente imposible y económicamente inviable, ¿dónde trazamos la línea ética de 'suficiente seguridad'?"
+                ],
+                l2l: [
+                    "Si la seguridad absoluta es técnicamente imposible y económicamente inviable, ¿dónde trazamos la línea ética de 'suficiente seguridad'?"
                 ]
             },
             'Métodos Cuantitativos': {
                 caracter: [
-                    "¿Hasta qué punto es ético omitir ciertas variables o manipular la escala de un gráfico estadístico para que los datos 'apoyen' la propuesta de nuestro departamento?",
-                    "Si un algoritmo predictivo sugiere una decisión de negocio rentable pero que afecta negativamente a la comunidad, ¿qué responsabilidad tiene el analista de datos?"
+                    "Qué responsabilidad ética tengo al presentar datos para que no induzcan a error?",
+                    "¿Cómo el rigor en el análisis cuantitativo fortalece la confianza y la transparencia en una organización?"
                 ],
-                l2l: [
-                    "¿Qué hago y cómo reacciono cuando la evidencia estadística rigurosa destruye por completo mi intuición inicial o la de mi equipo?",
-                    "¿Cómo organizo mis ciclos de estudio y práctica para no abrumarme con la ansiedad matemática antes de llegar al examen de certificación?"
-                ]
+                l2l: []
             },
             'Ofimática': {
                 caracter: [
-                    "¿Qué responsabilidad asumo sobre la calidad del trabajo cuando automatizo un proceso y elimino la necesidad de la revisión humana?",
-                    "En un entorno de trabajo colaborativo en la nube, ¿dónde termina la autoría individual y empieza el mérito del equipo?"
+                    "¿De qué manera reflejo integridad y honestidad en el manejo de la información digital?",
+                    "¿Cómo mantengo la disciplina en la práctica constante de nuevas herramientas?",
+                    "¿Qué significa ser responsable al trabajar con datos sensibles en ofimática?",
+                    "¿Cómo promuevo el trabajo colaborativo en lugar del individualismo en proyectos?",
+                    "¿De qué forma puedo ser proactivo al enfrentarme a un reto tecnológico?"
                 ],
                 l2l: [
-                    "¿Cómo gestiono mi frustración y soluciono un problema técnico del software cuando la respuesta no está ni en el manual ni en el primer resultado de Google?",
-                    "¿De qué manera evalúo continuamente si estoy utilizando la herramienta correcta para la tarea, en lugar de usar la única herramienta que sé manejar?"
+                    "¿Qué estrategias uso para aprender una nueva función de Excel que no conozco?",
+                    "¿Cómo identifico mis errores y qué hago para corregirlos?",
+                    "¿Qué recursos adicionales puedo consultar para fortalecer mis competencias ofimáticas?",
+                    "¿Cómo organizo mi tiempo de estudio entre teoría y práctica?",
+                    "¿De qué manera aplico lo aprendido en un nuevo contexto o problema real?"
                 ]
             },
-            'Análisis Estructural': { caracter: [], l2l: [] },
-            'Introducción al Algebra': { caracter: [], l2l: [] }
+            'Análisis Estructural': {
+                caracter: [
+                    "Dada la incertidumbre de las cargas, ¿qué responsabilidad ética tiene el ingeniero al elegir los factores de seguridad y los valores normativos de diseño?",
+                    "¿En quién me estoy convirtiendo como ingeniero al justificar el criterio sobre la dependencia ciega de un software de cálculo?"
+                ],
+                l2l: [
+                    "¿Qué estrategias de análisis (p. ej., simplificación, descomposición, chequeo cruzado) me ayudaron a abordar la complejidad de un marco hiperestático?",
+                    "¿Cómo cambió la retroalimentación STAR de mis compañeros mi modelación inicial de las cargas en el proyecto?"
+                ]
+            },
+            'Introducción al Algebra': {
+                caracter: [
+                    "¿Cómo demuestro resiliencia cuando un problema no se resuelve al primer intento?",
+                    "¿En quién me estoy convirtiendo como un solucionador de problemas responsable?"
+                ],
+                l2l: [
+                    "¿Qué error cometí en la última prueba y qué puedo hacer para no repetirlo?",
+                    "¿Qué estrategia de estudio me funcionó mejor y por qué?"
+                ]
+            }
         };
 
         // Lógica Modal Sección 1 (Conceptuales y Competencia)
@@ -478,7 +517,6 @@
                         <h5 class="text-unitec-sky font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Preguntas Conceptuales</h5>
                 `;
                 data.conceptual.forEach(item => {
-                    // Íconos eliminados según requerimiento del usuario
                     htmlContent += `<p class="text-white text-md md:text-lg mb-3 font-medium">"${item}"</p>`;
                 });
                 htmlContent += `</div>`;
@@ -491,7 +529,6 @@
                         <h5 class="text-unitec-cyan font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Preguntas de Competencia</h5>
                 `;
                 data.competencia.forEach(item => {
-                    // Íconos eliminados según requerimiento del usuario
                     htmlContent += `<p class="text-white text-md md:text-lg mb-3 font-medium">"${item}"</p>`;
                 });
                 htmlContent += `</div>`;
@@ -533,7 +570,7 @@
                         <h5 class="text-unitec-sky font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Preguntas de Carácter (Dilemas)</h5>
                 `;
                 data.caracter.forEach(item => {
-                    htmlContent += `<p class="text-white text-md md:text-lg mb-3 font-medium italic">⚖️ "${item}"</p>`;
+                    htmlContent += `<p class="text-white text-md md:text-lg mb-3 font-medium italic">"${item}"</p>`;
                 });
                 htmlContent += `</div>`;
             }
@@ -545,7 +582,7 @@
                         <h5 class="text-white font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Learning to Learn (Metacognición)</h5>
                 `;
                 data.l2l.forEach(item => {
-                    htmlContent += `<p class="text-blue-100 text-md md:text-lg mb-3 font-medium italic">🧠 "${item}"</p>`;
+                    htmlContent += `<p class="text-blue-100 text-md md:text-lg mb-3 font-medium italic">"${item}"</p>`;
                 });
                 htmlContent += `</div>`;
             }
