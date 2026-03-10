@@ -252,6 +252,39 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Ejemplos desde el Piloto (Metas de Competencia) -->
+            <div class="bg-slate-50 border-2 border-slate-200 p-6 md:p-8 mt-8">
+                <h3 class="text-xl md:text-2xl font-extrabold text-unitec-federal mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-unitec-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    Ejemplos desde el Piloto
+                </h3>
+                <p class="text-sm md:text-base text-unitec-slate mb-6"><em>Haz clic en cada asignatura para visualizar los ejemplos de Metas de Competencia redactadas durante el piloto.</em></p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <button onclick="openCompetenceModal('Diseño Estructural en Concreto')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Diseño Estructural en Concreto
+                    </button>
+                    <button onclick="openCompetenceModal('Historia de Honduras')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Historia de Honduras
+                    </button>
+                    <button onclick="openCompetenceModal('Sociología')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Sociología
+                    </button>
+                    <button onclick="openCompetenceModal('Introducción al Algebra')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Introducción al Algebra
+                    </button>
+                    <button onclick="openCompetenceModal('Análisis Estructural')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Análisis Estructural
+                    </button>
+                    <button onclick="openCompetenceModal('Ofimática')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Ofimática
+                    </button>
+                    <button onclick="openCompetenceModal('Métodos Cuantitativos')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Métodos Cuantitativos
+                    </button>
+                </div>
+            </div>
         </section>
 
         <!-- SECCIÓN 3: Las Metas de Carácter y Learning to Learn -->
@@ -420,6 +453,20 @@
         </div>
     </div>
 
+    <!-- Full Screen Modal for Competence Goals (Section 2) -->
+    <div id="competenceModal" class="fullscreen-modal fixed inset-0 bg-unitec-federal bg-opacity-95 z-50 hidden flex items-center justify-center p-4 md:p-8 opacity-0 cursor-pointer" onclick="closeCompetenceModal(event)">
+        <div class="relative max-w-4xl w-full text-center flex flex-col items-center justify-center min-h-[50vh] modal-content-scroll bg-white bg-opacity-10 p-8 rounded-lg border-l-8 border-unitec-cyan">
+            <button onclick="closeCompetenceModal(event)" class="absolute -top-4 md:-top-16 right-0 text-white hover:text-unitec-cyan focus:outline-none transition-colors">
+                <svg class="w-8 h-8 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h4 id="modalCompetenceTitle" class="text-unitec-sky font-bold uppercase tracking-widest text-base md:text-2xl mb-6 opacity-90"></h4>
+            
+            <div id="modalCompetenceTextContainer" class="text-left text-white text-lg md:text-xl space-y-4 font-medium italic">
+                <!-- El contenido se inyecta dinámicamente aquí -->
+            </div>
+        </div>
+    </div>
+
     <!-- Full Screen Modal for General Goals Examples (Bottom) -->
     <div id="goalsModal" class="fullscreen-modal fixed inset-0 bg-unitec-federal bg-opacity-95 z-50 hidden flex items-center justify-center p-4 md:p-8 opacity-0 cursor-pointer" onclick="closeGoalsModal(event)">
         <div class="relative max-w-4xl w-full text-center flex flex-col items-center justify-center min-h-[50vh] modal-content-scroll">
@@ -436,7 +483,7 @@
 
     <!-- Scripts -->
     <script>
-        // Data para Modal de Metas Conceptuales (Actividad 1) - Textual según documento
+        // Data para Modal de Metas Conceptuales (Actividad 1)
         const conceptualStoriesData = {
             'Historia de Honduras': [
                 "Los estudiantes comprenden que la historia ha estado moldeada por las perspectivas del poder.",
@@ -471,6 +518,45 @@
                 "Los estudiantes entienden los conceptos de la teoría de conjuntos para clasificar información",
                 "Los estudiantes entienden que los sistemas de ecuaciones y las desigualdades son modelos que representan relaciones y restricciones en problemas del mundo real",
                 "Los estudiantes entienden que los polinomios, las expresiones racionales y los radicales son herramientas para resolver ecuaciones complejas."
+            ]
+        };
+
+        // Data para Modal de Metas de Competencia (Actividad 2)
+        const competenceStoriesData = {
+            'Historia de Honduras': [
+                "1. Los estudiantes son capaces de analizar las fuentes primarias e identifican el porqué de las voces que están incluidas y excluidas.",
+                "2. Los estudiantes son capaces de reflexionar, analizar y expresar con claridad los problemas actuales a partir de fundamentos históricos y sociológicos, para saber cómo resolverlos en su vida cotidiana.",
+                "3. Los estudiantes son capaces de comunicar ideas de forma clara y coherente a través presentaciones orales y escritas, que les permitan fortalecer la identidad nacional."
+            ],
+            'Diseño Estructural en Concreto': [
+                "1. Los estudiantes serán capaces de traducir planos arquitectónicos en modelos estructurales válidos, aplicando el CHOC para diseñar elementos (losas, vigas, columnas) que respondan a cargas reales.",
+                "2. Los estudiantes serán capaces de comunicar y justificar técnicamente el criterio de idealización utilizado, defendiendo ante pares o clientes por qué su modelo es seguro y eficiente."
+            ],
+            'Sociología': [
+                "1. Los estudiantes son capaces de analizar y comparar los procesos evolutivos de los seres humanos desde los primeros grupos humanos por medio de teorías y conceptos sociológicos.",
+                "2. Los estudiantes son capaces de compartir ideas y explicaciones coherentes relacionados con el comportamiento y la dinámica de las diferentes sociedades."
+            ],
+            'Métodos Cuantitativos': [
+                "Los estudiantes serán capaces de manejar técnicas estadísticas.",
+                "Los estudiantes serán capaces de describir tendencias, identificar patrones y sustentar decisiones basadas en evidencia estadística.",
+                "Los estudiantes serán capaces de tomar decisiones que involucra la inversión adecuada de los recursos con que cuenta la empresa"
+            ],
+            'Ofimática': [
+                "Los estudiantes serán capaces de Aplicar funciones avanzadas de Excel para resolver problemas reales.",
+                "Los estudiantes serán capaces de Usar herramientas colaborativas para gestionar proyectos en equipo integrando Word, Excel, PowerPoint y plataformas en la nube para el desarrollo de proyectos.",
+                "Los estudiantes serán capaces de Usar herramientas colaborativas para gestionar proyectos en equipo."
+            ],
+            'Análisis Estructural': [
+                "1.  Los estudiantes serán capaces de Modelar elementos estructurales, apoyos, y cargas (Muerta, Viva, Viento, Sismo) de un pórtico reticular, justificando las idealizaciones realizadas según el contexto (p. ej., el CHOC).",
+                "2. Los estudiantes serán capaces de Analizar la estabilidad cinemática de los sistemas estructurales (variabilidad e invariabilidad) utilizando los métodos analítico y gráfico (para juzgar su variabilidad).",
+                "3. Los estudiantes serán capaces de Determinar solicitaciones internas (M, V, N) y deflexiones en estructuras isostáticas bajo diferentes esquemas de carga (utilizando métodos manuales o energéticos).",
+                "4. Los estudiantes serán capaces de Calcular solicitaciones y desplazamientos en estructuras hiperestáticas de Grado I y II utilizando el Método de las Fuerzas.",
+                "5. Los estudiantes será capaces de: Diseñar y comunicar propuestas de análisis estructural rigurosas (informes técnicos) contrastando modelos isostáticos vs. hiperestáticos y sus implicaciones."
+            ],
+            'Introducción al Algebra': [
+                "1. Los estudiantes analizan adecuadamente datos cuantitativos y cualitativos",
+                "2. Los estudiantes analizan datos cualitativos y cuantitativos para resolver problemas",
+                "3. Los estudiantes interpretan datos cualitativos y cuantitativos para construir y resolver modelos matemáticos"
             ]
         };
 
@@ -540,6 +626,41 @@
         function closeConceptualModal(e) {
             if (e) e.stopPropagation();
             const modal = document.getElementById('conceptualModal');
+            
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Lógica Modal Ejemplos Metas de Competencia (Sección 2)
+        function openCompetenceModal(subject) {
+            const modal = document.getElementById('competenceModal');
+            document.getElementById('modalCompetenceTitle').textContent = `Metas de Competencia: ${subject}`;
+            
+            const goalsArray = competenceStoriesData[subject];
+            const container = document.getElementById('modalCompetenceTextContainer');
+            
+            // Limpiar contenido previo y crear la lista (algunos tienen números en el string y otros no)
+            container.innerHTML = '';
+            goalsArray.forEach(goal => {
+                const p = document.createElement('p');
+                p.textContent = goal;
+                container.appendChild(p);
+            });
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCompetenceModal(e) {
+            if (e) e.stopPropagation();
+            const modal = document.getElementById('competenceModal');
             
             modal.classList.remove('opacity-100');
             setTimeout(() => {
