@@ -1,1 +1,530 @@
-a
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 5: Motores de Búsqueda | Ecosistema de Aprendizaje de UNITEC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C',
+                            cyan: '#03AED2',
+                            sky: '#47C8FD',
+                            light: '#F8FAFC',
+                            slate: '#334155'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* REGLAS DE MARCA: SIN SOMBRAS, BORDES SÓLIDOS */
+        .solid-card {
+            background-color: white;
+            border: 2px solid #E2E8F0;
+            transition: all 0.3s ease;
+        }
+        .solid-card:hover {
+            border-color: #03AED2;
+            transform: translateY(-4px);
+        }
+        .step-number {
+            font-family: 'Poppins', sans-serif;
+            -webkit-text-stroke: 1px #06065C;
+            color: transparent;
+        }
+        
+        /* Modal Transition */
+        .fullscreen-modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .modal-content-scroll {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-unitec-light text-unitec-slate font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Header Section -->
+    <header class="bg-unitec-federal text-white py-12 md:py-16 px-6 relative overflow-hidden border-b-8 border-unitec-cyan">
+        <div class="max-w-5xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="md:w-2/3 text-center md:text-left">
+                <span class="text-unitec-sky font-bold tracking-widest uppercase text-xs md:text-sm mb-4 block">Train the Trainers • Sesión 2 • Módulo 5</span>
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight text-white">Motores de Búsqueda</h1>
+                <h2 class="text-xl md:text-3xl font-semibold mb-4 text-blue-100">Las Preguntas de Encuadre (Framing Questions)</h2>
+            </div>
+            <!-- Icono Decorativo: Lupas/Búsqueda -->
+            <div class="md:w-1/3 flex justify-center opacity-80">
+                <svg width="100" height="100" class="md:w-[120px] md:h-[120px]" viewBox="0 0 24 24" fill="none" stroke="#03AED2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <path d="M11 8v6"></path>
+                    <path d="M8 11h6"></path>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full">
+        
+        <!-- Mensaje de Bienvenida -->
+        <section class="bg-white p-6 md:p-8 mb-12 md:mb-16 border-l-8 border-unitec-federal border-y-2 border-r-2 border-slate-200">
+            <div class="flex flex-col md:flex-row items-start gap-4">
+                <div class="bg-unitec-sky text-white p-3 mt-1 shrink-0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold text-unitec-federal mb-2">Mensaje de Bienvenida</h3>
+                    <p class="leading-relaxed text-unitec-slate text-sm md:text-base">
+                        "Bienvenidos al Módulo 5. Hasta ahora, hemos definido 'El Porqué' y 'El Qué' de nuestra asignatura. Ahora debemos construir el puente entre el contenido y el estudiante. Diseñaremos entre <strong>3 y 6 Preguntas de Encuadre</strong>. Estas preguntas transforman los temas aburridos en problemas a investigar, pueden utilizarse para guiar el contenido del curso y servirán como faros para mantener la curiosidad viva durante todo el período."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: Preguntas Conceptuales y de Competencia -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-unitec-federal text-white text-xl font-bold w-10 h-10 md:w-12 md:h-12 shrink-0 flex items-center justify-center transform rotate-45">
+                    <span class="-rotate-45 block">1</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-unitec-federal">Preguntas Conceptuales y de Competencia</h2>
+            </div>
+            
+            <div class="bg-slate-50 border-l-4 border-unitec-federal p-5 md:p-6 mb-8">
+                <p class="text-base md:text-lg text-unitec-slate">
+                    <strong>Instrucción para el participante:</strong> Transformaremos los "temas a cubrir" en problemas a investigar. <br><br>
+                    • <strong>Conceptuales:</strong> Deben ser abiertas y reflejar directamente los misterios o principios profundos a explorar.<br>
+                    • <strong>Competencia:</strong> Deben ser preguntas de proceso prácticas sobre cómo abordar la investigación o aplicar las herramientas.
+                </p>
+            </div>
+
+            <h3 class="text-lg md:text-xl font-bold text-unitec-cyan mb-6">Plantillas de Trabajo (El Motor Técnico):</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Tarjeta Conceptual -->
+                <article class="solid-card p-6 bg-white border-t-4 border-t-unitec-federal">
+                    <h4 class="text-md font-bold text-unitec-federal mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Conceptual
+                    </h4>
+                    <p class="text-sm text-unitec-slate mb-4 font-semibold italic">¿Qué misterio o principio profundo vamos a explorar?</p>
+                    <div class="bg-slate-100 p-4 font-mono text-sm text-slate-700 border border-slate-200 mb-2">
+                        <strong>Ejemplo en Ingeniería:</strong> "¿Cómo 'viaja' una carga desde el techo hasta el suelo y qué sucede con el sistema global cuando interrumpimos o desviamos ese camino?"
+                    </div>
+                </article>
+
+                <!-- Tarjeta de Competencia -->
+                <article class="solid-card p-6 bg-white border-t-4 border-t-unitec-cyan">
+                    <h4 class="text-md font-bold text-unitec-cyan mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Competencia
+                    </h4>
+                    <p class="text-sm text-unitec-slate mb-4 font-semibold italic">¿Cómo aplicamos la técnica o el proceso?</p>
+                    <div class="bg-unitec-light p-4 font-mono text-sm text-slate-700 border border-unitec-cyan">
+                        <strong>Ejemplo en Ingeniería:</strong> "¿Cómo traducimos fenómenos naturales caóticos (como el viento o un sismo) en fuerzas estáticas predecibles dentro de un modelo estructural?"
+                    </div>
+                </article>
+            </div>
+
+            <!-- Checkpoint Actividad 1 -->
+            <div class="bg-white border-2 border-slate-200 p-6 mb-8 flex flex-col md:flex-row gap-6 items-start">
+                <div class="flex-shrink-0 bg-unitec-federal text-white p-3 rounded-none mt-1">
+                    <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div class="w-full">
+                    <h3 class="text-lg md:text-xl font-bold text-unitec-federal mb-4">Checkpoint de Calidad (Motor Técnico)</h3>
+                    <div class="bg-slate-50 border-2 border-slate-200 p-4 md:p-5">
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer mb-4">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug"><strong>Conceptuales:</strong> ¿Son abiertas y reflejan directamente los objetivos de aprendizaje conceptual, incitando la curiosidad?</span>
+                        </label>
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer mb-4">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug"><strong>Competencia:</strong> ¿Son preguntas de proceso prácticas sobre cómo abordar la investigación o ejecutar una herramienta?</span>
+                        </label>
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug"><strong>General:</strong> ¿Están enlazadas con "La Gran Idea" y son lo suficientemente atractivas para guiar las secuencias de aprendizaje?</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejemplos desde el Piloto -->
+            <div class="bg-slate-50 border-2 border-slate-200 p-6 md:p-8">
+                <h3 class="text-xl md:text-2xl font-extrabold text-unitec-federal mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-unitec-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    Ejemplos desde el Piloto
+                </h3>
+                <p class="text-sm md:text-base text-unitec-slate mb-6"><em>Haz clic en cada asignatura para visualizar los ejemplos de Preguntas Conceptuales y de Competencia redactadas durante el piloto.</em></p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <button onclick="openSection1Modal('Diseño Estructural en Concreto')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Diseño Estructural en Concreto
+                    </button>
+                    <button onclick="openSection1Modal('Historia de Honduras')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Historia de Honduras
+                    </button>
+                    <button onclick="openSection1Modal('Métodos Cuantitativos')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Métodos Cuantitativos
+                    </button>
+                    <button onclick="openSection1Modal('Ofimática')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Ofimática
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: Preguntas de Carácter y Learning to Learn -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-unitec-cyan text-white text-xl font-bold w-10 h-10 md:w-12 md:h-12 shrink-0 flex items-center justify-center transform rotate-45">
+                    <span class="-rotate-45 block">2</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-unitec-federal">Preguntas de Carácter y L2L</h2>
+            </div>
+            
+            <div class="bg-slate-50 border-l-4 border-unitec-cyan p-5 md:p-6 mb-8">
+                <p class="text-base md:text-lg text-unitec-slate">
+                    <strong>Instrucción para el participante:</strong> Formulemos preguntas que desafíen al estudiante en su plano humano (El Motor Humano). <br><br>
+                    • <strong>Carácter:</strong> Deben presentar dilemas éticos o de valores relacionados a la práctica profesional. No tienen una "respuesta fácil".<br>
+                    • <strong>Learning to Learn (L2L):</strong> Deben promover la metacognición, cuestionando cómo el estudiante aborda su propio proceso de aprendizaje, la recepción de retroalimentación o el trabajo colaborativo.
+                </p>
+            </div>
+
+            <h3 class="text-lg md:text-xl font-bold text-unitec-cyan mb-6">Plantillas de Trabajo (El Motor Humano):</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Tarjeta Carácter -->
+                <article class="solid-card p-6 bg-white border-t-4 border-t-unitec-sky flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-md font-bold text-unitec-sky mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                            Carácter
+                        </h4>
+                        <p class="text-sm text-unitec-slate mb-4 font-semibold italic">¿Qué dilema ético o valor enfrentaremos?</p>
+                        <div class="bg-slate-100 p-4 font-mono text-sm text-slate-700 border border-slate-200 mb-2">
+                            <strong>Ejemplo en Ingeniería:</strong> "¿Tiene sentido buscar una precisión matemática de tres decimales en el diseño, cuando las fuerzas que resistimos son meras estimaciones probabilísticas llenas de incertidumbre?"
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Tarjeta L2L -->
+                <article class="solid-card p-6 bg-white border-t-4 border-t-unitec-cyan flex flex-col justify-center">
+                    <h4 class="text-md font-bold text-unitec-cyan mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        Learning to Learn (Metacognición / Feedback)
+                    </h4>
+                    <p class="text-sm text-unitec-slate mb-4 font-semibold italic">¿Cómo reflexionamos sobre nuestro aprendizaje?</p>
+                    <div class="bg-unitec-light p-4 font-mono text-sm text-slate-700 border border-unitec-cyan">
+                        <strong>Ejemplo en Ingeniería:</strong> "¿Es la crítica de un colega un ataque a mi capacidad personal o el mecanismo de seguridad más barato para evitar un colapso en obra?"
+                    </div>
+                </article>
+            </div>
+
+            <!-- Checkpoint Actividad 2 -->
+            <div class="bg-white border-2 border-slate-200 p-6 flex flex-col md:flex-row gap-6 items-start mb-8">
+                <div class="flex-shrink-0 bg-unitec-cyan text-white p-3 rounded-none mt-1">
+                    <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div class="w-full">
+                    <h3 class="text-lg md:text-xl font-bold text-unitec-federal mb-4">Checkpoint de Calidad (Motor Humano)</h3>
+                    <div class="bg-slate-50 border-2 border-slate-200 p-4 md:p-5">
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer mb-4">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug"><strong>Carácter:</strong> ¿Son provocativas, ambiguas ("sin respuesta fácil") y requieren reflexión sobre creencias, integridad y ética profesional?</span>
+                        </label>
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug"><strong>L2L:</strong> ¿Ayudan al estudiante a pensar sobre <em>cómo</em> aprende, <em>cómo</em> recibe crítica y <em>cómo</em> gestiona su resiliencia?</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejemplos desde el Piloto -->
+            <div class="bg-slate-50 border-2 border-slate-200 p-6 md:p-8 mt-8 mb-12">
+                <h3 class="text-xl md:text-2xl font-extrabold text-unitec-federal mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-unitec-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    Ejemplos desde el Piloto
+                </h3>
+                <p class="text-sm md:text-base text-unitec-slate mb-6"><em>Haz clic en cada asignatura para visualizar los ejemplos de Preguntas de Carácter y L2L.</em></p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <button onclick="openSection2Modal('Diseño Estructural en Concreto')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Diseño Estructural en Concreto
+                    </button>
+                    <button onclick="openSection2Modal('Historia de Honduras')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Historia de Honduras
+                    </button>
+                    <button onclick="openSection2Modal('Métodos Cuantitativos')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Métodos Cuantitativos
+                    </button>
+                    <button onclick="openSection2Modal('Ofimática')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Ofimática
+                    </button>
+                </div>
+            </div>
+
+            <!-- Justificación de Alineación Textual -->
+            <div class="bg-unitec-federal text-white p-6 md:p-8 border-r-8 border-unitec-sky flex flex-col justify-center mb-12">
+                <h3 class="text-lg md:text-xl font-bold text-unitec-cyan mb-4 flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Justificación de Alineación
+                </h3>
+                <p class="text-blue-100 text-sm md:text-base leading-relaxed">
+                    Al incorporar la dimensión de "Aprendiendo a Aprender" (L2L) y de Carácter en nuestras preguntas de encuadre, estamos operativizando la meta metacognitiva de la institución. En el ejemplo técnico, forzamos al estudiante a desarrollar <strong>"Escepticismo Constructivo"</strong> ante el software y <strong>"Feedback Literacy"</strong> para auditar profesionalmente a otros. Esto transforma una clase de software estructural (o cualquier otra clase teórica) en una clínica de criterio profesional, alineándose totalmente con la visión de "Enseñar-Aprender con Propósito" de la Visión 2030.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-unitec-federal text-white py-8 text-center mt-12 border-t-4 border-unitec-cyan">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <p class="mb-4 md:mb-0 text-sm opacity-90">&copy; 2026 UNITEC - Train the Trainers (Sesión 2).</p>
+            <p class="text-sm opacity-90">Diseñado con <span class="font-bold text-unitec-sky">CGS 3Cs Toolkit</span></p>
+        </div>
+    </footer>
+
+    <!-- Full Screen Modal for Section 1 (Conceptual & Competence) -->
+    <div id="section1Modal" class="fullscreen-modal fixed inset-0 bg-unitec-federal bg-opacity-95 z-50 hidden flex items-center justify-center p-4 md:p-8 opacity-0 cursor-pointer" onclick="closeSection1Modal(event)">
+        <div class="relative max-w-4xl w-full text-center flex flex-col items-center justify-center min-h-[50vh] modal-content-scroll bg-white bg-opacity-5 p-4 md:p-8 rounded-lg">
+            <button onclick="closeSection1Modal(event)" class="absolute -top-4 md:-top-16 right-0 text-white hover:text-unitec-cyan focus:outline-none transition-colors">
+                <svg class="w-8 h-8 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h4 id="modalSection1Title" class="text-white font-bold uppercase tracking-widest text-base md:text-2xl mb-6 opacity-90"></h4>
+            
+            <div id="modalSection1TextContainer" class="text-left w-full space-y-6">
+                <!-- El contenido se inyecta dinámicamente aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Full Screen Modal for Section 2 (Character & L2L) -->
+    <div id="section2Modal" class="fullscreen-modal fixed inset-0 bg-unitec-federal bg-opacity-95 z-50 hidden flex items-center justify-center p-4 md:p-8 opacity-0 cursor-pointer" onclick="closeSection2Modal(event)">
+        <div class="relative max-w-4xl w-full text-center flex flex-col items-center justify-center min-h-[50vh] modal-content-scroll bg-white bg-opacity-5 p-4 md:p-8 rounded-lg">
+            <button onclick="closeSection2Modal(event)" class="absolute -top-4 md:-top-16 right-0 text-white hover:text-unitec-cyan focus:outline-none transition-colors">
+                <svg class="w-8 h-8 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h4 id="modalSection2Title" class="text-white font-bold uppercase tracking-widest text-base md:text-2xl mb-6 opacity-90"></h4>
+            
+            <div id="modalSection2TextContainer" class="text-left w-full space-y-6">
+                <!-- El contenido se inyecta dinámicamente aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Data para Modal de Sección 1 (Conceptuales y Competencia)
+        const section1Data = {
+            'Diseño Estructural en Concreto': {
+                conceptual: [
+                    "¿Cómo 'viaja' una carga desde el techo hasta el suelo y qué sucede con el sistema global cuando interrumpimos o desviamos ese camino?",
+                    "¿Por qué un cálculo perfectamente ejecutado sobre un modelo incorrecto produce una estructura más peligrosa que un cálculo aproximado sobre un modelo conceptualmente sólido?"
+                ],
+                competencia: [
+                    "¿Cómo traducimos fenómenos naturales caóticos (como el viento o un sismo) en fuerzas estáticas predecibles dentro de un modelo estructural?",
+                    "¿De qué manera utilizamos el código (CHOC) no como un manual de instrucciones ciego, sino como un marco de referencia para justificar nuestras decisiones de diseño?"
+                ]
+            },
+            'Historia de Honduras': {
+                conceptual: [
+                    "¿Quién cuenta la historia oficial y qué voces o actores sociales han quedado marginados o silenciados en la narrativa nacional?",
+                    "¿De qué forma las estructuras de poder colonial siguen moldeando las dinámicas sociales y económicas del presente?"
+                ],
+                competencia: [
+                    "¿Cómo podemos interrogar a una fuente primaria (un documento, una carta, un decreto) para descubrir el sesgo o la intencionalidad de su autor?",
+                    "¿Qué proceso utilizamos para contrastar múltiples fuentes y construir un argumento histórico fundamentado y coherente?"
+                ]
+            },
+            'Métodos Cuantitativos': {
+                conceptual: [
+                    "Si los datos empíricos no 'hablan por sí solos', ¿cómo determinamos qué historia nos están contando realmente?",
+                    "¿En qué punto la correlación estadística nos engaña haciéndonos creer que hemos encontrado la causalidad de un problema?"
+                ],
+                competencia: [
+                    "¿Cuándo es suficiente una medida de tendencia central y cuándo necesitamos aplicar inferencia compleja para tomar una decisión directiva segura?",
+                    "¿Cómo estructuramos un modelo matemático en Excel para proyectar escenarios de incertidumbre en los negocios?"
+                ]
+            },
+            'Ofimática': {
+                conceptual: [
+                    "¿Es la tecnología una herramienta que nos sirve a nosotros, o terminamos adaptando la calidad de nuestro trabajo a las limitaciones del software que utilizamos?",
+                    "¿Por qué la verdadera eficiencia no reside en conocer todas las funciones de un programa, sino en saber estructurar la información antes de teclear?"
+                ],
+                competencia: [
+                    "¿Cómo transformamos una tabla caótica de miles de registros en un dashboard interactivo que permita a un gerente tomar decisiones en 5 minutos?",
+                    "¿Qué pasos seguimos para automatizar una tarea repetitiva conectando diferentes herramientas (ej. Word, Excel, Nube) sin perder el control de los datos?"
+                ]
+            }
+        };
+
+        // Data para Modal de Sección 2 (Carácter y L2L)
+        const section2Data = {
+            'Diseño Estructural en Concreto': {
+                caracter: [
+                    "¿Tiene sentido buscar una precisión matemática de tres decimales en el diseño, cuando las fuerzas que resistimos son meras estimaciones probabilísticas llenas de incertidumbre?",
+                    "Cuando el presupuesto de la obra exige reducir costos, ¿dónde dibujas la línea ética entre 'optimización' y 'negligencia estructural'?"
+                ],
+                l2l: [
+                    "¿Es la crítica de un colega durante la revisión de mi modelo un ataque a mi capacidad personal, o es el mecanismo de seguridad más barato para evitar un colapso en la obra?",
+                    "Cuando el software arroja un resultado que no entiendo, ¿confío ciegamente en la máquina o confío en mi intuición física para detener el proceso y verificar?"
+                ]
+            },
+            'Historia de Honduras': {
+                caracter: [
+                    "¿De qué manera conocer las injusticias de nuestro pasado nos obliga éticamente a asumir responsabilidad por la construcción de nuestro presente?",
+                    "¿Es posible ser verdaderamente patriota si nos negamos a reconocer los fracasos y los episodios oscuros de nuestra propia historia?"
+                ],
+                l2l: [
+                    "¿Cómo cambia mi disposición a aprender cuando escucho una versión argumentada de la historia que contradice totalmente lo que me enseñaron de niño?",
+                    "¿Qué estrategias utilizo para mantener mi objetividad cuando analizo un tema histórico que choca con mis creencias políticas actuales?"
+                ]
+            },
+            'Métodos Cuantitativos': {
+                caracter: [
+                    "¿Hasta qué punto es ético omitir ciertas variables o manipular la escala de un gráfico estadístico para que los datos 'apoyen' la propuesta de nuestro departamento?",
+                    "Si un algoritmo predictivo sugiere una decisión de negocio rentable pero que afecta negativamente a la comunidad, ¿qué responsabilidad tiene el analista de datos?"
+                ],
+                l2l: [
+                    "¿Qué hago y cómo reacciono cuando la evidencia estadística rigurosa destruye por completo mi intuición inicial o la de mi equipo?",
+                    "¿Cómo organizo mis ciclos de estudio y práctica para no abrumarme con la ansiedad matemática antes de llegar al examen de certificación?"
+                ]
+            },
+            'Ofimática': {
+                caracter: [
+                    "¿Qué responsabilidad asumo sobre la calidad del trabajo cuando automatizo un proceso y elimino la necesidad de la revisión humana?",
+                    "En un entorno de trabajo colaborativo en la nube, ¿dónde termina la autoría individual y empieza el mérito del equipo?"
+                ],
+                l2l: [
+                    "¿Cómo gestiono mi frustración y soluciono un problema técnico del software cuando la respuesta no está ni en el manual ni en el primer resultado de Google?",
+                    "¿De qué manera evalúo continuamente si estoy utilizando la herramienta correcta para la tarea, en lugar de usar la única herramienta que sé manejar?"
+                ]
+            }
+        };
+
+        // Lógica Modal Sección 1 (Conceptuales y Competencia)
+        function openSection1Modal(subject) {
+            const modal = document.getElementById('section1Modal');
+            document.getElementById('modalSection1Title').textContent = `Encuadre Técnico: ${subject}`;
+            
+            const data = section1Data[subject];
+            let htmlContent = '';
+            
+            // Bloque para Conceptuales (Azul Federal)
+            if (data.conceptual && data.conceptual.length > 0) {
+                htmlContent += `
+                    <div class="bg-unitec-federal bg-opacity-80 border-l-8 border-unitec-sky p-5 rounded shadow-lg">
+                        <h5 class="text-unitec-sky font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Preguntas Conceptuales</h5>
+                `;
+                data.conceptual.forEach(item => {
+                    htmlContent += `<p class="text-white text-md md:text-lg mb-3 font-medium">❓ "${item}"</p>`;
+                });
+                htmlContent += `</div>`;
+            }
+            
+            // Bloque para Competencia (Cyan)
+            if (data.competencia && data.competencia.length > 0) {
+                htmlContent += `
+                    <div class="bg-unitec-cyan bg-opacity-20 border-l-8 border-unitec-cyan p-5 rounded mt-6 shadow-md">
+                        <h5 class="text-unitec-cyan font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Preguntas de Competencia</h5>
+                `;
+                data.competencia.forEach(item => {
+                    htmlContent += `<p class="text-white text-md md:text-lg mb-3 font-medium">⚙️ "${item}"</p>`;
+                });
+                htmlContent += `</div>`;
+            }
+            
+            document.getElementById('modalSection1TextContainer').innerHTML = htmlContent;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSection1Modal(e) {
+            if (e) e.stopPropagation();
+            const modal = document.getElementById('section1Modal');
+            
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Lógica Modal Sección 2 (Carácter y L2L)
+        function openSection2Modal(subject) {
+            const modal = document.getElementById('section2Modal');
+            document.getElementById('modalSection2Title').textContent = `Encuadre Humano: ${subject}`;
+            
+            const data = section2Data[subject];
+            let htmlContent = '';
+            
+            // Bloque para Carácter (Sky Blue)
+            if (data.caracter && data.caracter.length > 0) {
+                htmlContent += `
+                    <div class="bg-unitec-sky bg-opacity-20 border-l-8 border-unitec-sky p-5 rounded shadow-md">
+                        <h5 class="text-unitec-sky font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Preguntas de Carácter (Dilemas)</h5>
+                `;
+                data.caracter.forEach(item => {
+                    htmlContent += `<p class="text-white text-md md:text-lg mb-3 font-medium italic">⚖️ "${item}"</p>`;
+                });
+                htmlContent += `</div>`;
+            }
+            
+            // Bloque para L2L (Cyan / Light)
+            if (data.l2l && data.l2l.length > 0) {
+                htmlContent += `
+                    <div class="bg-white bg-opacity-10 border-l-8 border-white p-5 rounded mt-6 shadow-md">
+                        <h5 class="text-white font-bold text-lg md:text-xl mb-4 uppercase tracking-wider">Learning to Learn (Metacognición)</h5>
+                `;
+                data.l2l.forEach(item => {
+                    htmlContent += `<p class="text-blue-100 text-md md:text-lg mb-3 font-medium italic">🧠 "${item}"</p>`;
+                });
+                htmlContent += `</div>`;
+            }
+            
+            document.getElementById('modalSection2TextContainer').innerHTML = htmlContent;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSection2Modal(e) {
+            if (e) e.stopPropagation();
+            const modal = document.getElementById('section2Modal');
+            
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
