@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4: El Núcleo del Aprendizaje | Ecosistema de Aprendizaje de UNITEC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C',
+                            cyan: '#03AED2',
+                            sky: '#47C8FD',
+                            light: '#F8FAFC',
+                            slate: '#334155'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* REGLAS DE MARCA: SIN SOMBRAS, BORDES SÓLIDOS */
+        .solid-card {
+            background-color: white;
+            border: 2px solid #E2E8F0;
+            transition: all 0.3s ease;
+        }
+        .solid-card:hover {
+            border-color: #03AED2;
+            transform: translateY(-4px);
+        }
+        .step-number {
+            font-family: 'Poppins', sans-serif;
+            -webkit-text-stroke: 1px #06065C;
+            color: transparent;
+        }
+        
+        /* Modal Transition */
+        .fullscreen-modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .modal-content-scroll {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-unitec-light text-unitec-slate font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Header Section -->
+    <header class="bg-unitec-federal text-white py-12 md:py-16 px-6 relative overflow-hidden border-b-8 border-unitec-cyan">
+        <div class="max-w-5xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="md:w-2/3 text-center md:text-left">
+                <span class="text-unitec-sky font-bold tracking-widest uppercase text-xs md:text-sm mb-4 block">Train the Trainers • Sesión 2 • Módulo 4</span>
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight text-white">El Núcleo del Aprendizaje</h1>
+                <h2 class="text-xl md:text-3xl font-semibold mb-4 text-blue-100">Definiendo "El Qué" (Las 3Cs)</h2>
+            </div>
+            <!-- Icono Decorativo -->
+            <div class="md:w-1/3 flex justify-center opacity-80">
+                <svg width="100" height="100" class="md:w-[120px] md:h-[120px]" viewBox="0 0 24 24" fill="none" stroke="#03AED2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="6"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full">
+        
+        <!-- Mensaje de Bienvenida -->
+        <section class="bg-white p-6 md:p-8 mb-12 md:mb-16 border-l-8 border-unitec-federal border-y-2 border-r-2 border-slate-200">
+            <div class="flex flex-col md:flex-row items-start gap-4">
+                <div class="bg-unitec-sky text-white p-3 mt-1 shrink-0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold text-unitec-federal mb-2">Mensaje de Bienvenida</h3>
+                    <p class="leading-relaxed text-unitec-slate text-sm md:text-base">
+                        "Bienvenidos al Módulo 4. En la educación tradicional, nos enfocamos en lo que el docente va a 'cubrir'. En el <strong>Ecosistema de Aprendizaje de UNITEC</strong>, nos enfocamos en lo que el estudiante va a 'descubrir y lograr'. Hoy redactaremos nuestras metas en tres dimensiones interconectadas (Las 3Cs): Conceptual (lo que comprenderán profundamente), Competencia (lo que sabrán hacer) y Carácter (cómo actuarán frente a los desafíos). ¡Manos a la obra!"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: Las Metas Conceptuales -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-unitec-federal text-white text-xl font-bold w-10 h-10 md:w-12 md:h-12 shrink-0 flex items-center justify-center transform rotate-45">
+                    <span class="-rotate-45 block">1</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-unitec-federal">Las Metas Conceptuales</h2>
+            </div>
+            
+            <div class="bg-slate-50 border-l-4 border-unitec-federal p-5 md:p-6 mb-8">
+                <p class="text-base md:text-lg text-unitec-slate">
+                    <strong>Instrucción para el participante:</strong> Selecciona entre 1 y 3 ideas importantes que representen el núcleo cognitivo de tu módulo. Estas no son definiciones memorizables, sino principios sistémicos. Expresa cada meta con precisión utilizando el enunciado obligatorio: <em>"Los estudiantes comprenden que..."</em>.
+                </p>
+            </div>
+
+            <h3 class="text-lg md:text-xl font-bold text-unitec-cyan mb-6">Plantilla de Trabajo (El Cambio de Enfoque):</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <article class="solid-card p-6 bg-white border-t-4 border-t-slate-300">
+                    <h4 class="text-md font-bold text-slate-500 mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        Enfoque Tradicional (Temas)
+                    </h4>
+                    <p class="text-sm text-unitec-slate mb-4">Lo que solías listar:</p>
+                    <div class="bg-slate-100 p-4 font-mono text-sm text-slate-600 border border-slate-200">
+                        (Ej: Tipos de fallas en estructuras, factores de carga).
+                    </div>
+                </article>
+
+                <article class="solid-card p-6 bg-white border-t-4 border-t-unitec-cyan">
+                    <h4 class="text-md font-bold text-unitec-cyan mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Meta Conceptual del Ecosistema
+                    </h4>
+                    <p class="text-sm text-unitec-slate mb-4">Empieza con:</p>
+                    <div class="bg-unitec-light p-4 font-bold text-sm text-unitec-federal border border-unitec-cyan">
+                        "Los estudiantes comprenden que..."
+                    </div>
+                </article>
+            </div>
+
+            <!-- Checkpoint Metas Conceptuales -->
+            <div class="bg-white border-2 border-slate-200 p-6 mb-8 flex flex-col md:flex-row gap-6 items-start">
+                <div class="flex-shrink-0 bg-unitec-federal text-white p-3 rounded-none mt-1">
+                    <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div class="w-full">
+                    <h3 class="text-lg md:text-xl font-bold text-unitec-federal mb-4">Checkpoint de Calidad</h3>
+                    <div class="bg-slate-50 border-2 border-slate-200 p-4 md:p-5">
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer mb-4">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">1. ¿Están expresados con precisión utilizando el enunciado "Los estudiantes comprenden que..."?</span>
+                        </label>
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">2. ¿Son claros, específicos y exigen un pensamiento de orden superior?</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejemplos desde el Piloto (Metas Conceptuales) -->
+            <div class="bg-slate-50 border-2 border-slate-200 p-6 md:p-8">
+                <h3 class="text-xl md:text-2xl font-extrabold text-unitec-federal mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-unitec-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    Ejemplos desde el Piloto
+                </h3>
+                <p class="text-sm md:text-base text-unitec-slate mb-6"><em>Haz clic en cada asignatura para visualizar los ejemplos de Metas Conceptuales redactadas durante el piloto.</em></p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <button onclick="openConceptualModal('Diseño Estructural en Concreto')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Diseño Estructural en Concreto
+                    </button>
+                    <button onclick="openConceptualModal('Historia de Honduras')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Historia de Honduras
+                    </button>
+                    <button onclick="openConceptualModal('Sociología')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Sociología
+                    </button>
+                    <button onclick="openConceptualModal('Introducción al Algebra')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Introducción al Algebra
+                    </button>
+                    <button onclick="openConceptualModal('Análisis Estructural')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Análisis Estructural
+                    </button>
+                    <button onclick="openConceptualModal('Ofimática')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Ofimática
+                    </button>
+                    <button onclick="openConceptualModal('Métodos Cuantitativos')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Métodos Cuantitativos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: Las Metas de Competencia -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-unitec-cyan text-white text-xl font-bold w-10 h-10 md:w-12 md:h-12 shrink-0 flex items-center justify-center transform rotate-45">
+                    <span class="-rotate-45 block">2</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-unitec-federal">Las Metas de Competencia</h2>
+            </div>
+            
+            <div class="bg-slate-50 border-l-4 border-unitec-cyan p-5 md:p-6 mb-8">
+                <p class="text-base md:text-lg text-unitec-slate">
+                    <strong>Instrucción para el participante:</strong> Aquí definimos lo que el estudiante sabrá hacer con el conocimiento. Define entre 1 y 3 metas de competencia o habilidades importantes que estén vinculadas a las metas conceptuales. Puedes basarte en las competencias ya establecidas para tu asignatura en el sílabo. Utiliza la <em>Taxonomía de Verbos de UNITEC</em> para seleccionar verbos de acción observables. Asegúrate de expresar cada meta utilizando el enunciado obligatorio.
+                </p>
+            </div>
+
+            <h3 class="text-lg md:text-xl font-bold text-unitec-cyan mb-6">Plantilla de Trabajo:</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <article class="solid-card p-6 bg-white border-t-4 border-t-unitec-federal flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-md font-bold text-unitec-federal mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                            Taxonomía de Verbos
+                        </h4>
+                        <p class="text-sm text-unitec-slate mb-6">
+                            Selecciona el verbo adecuado (Evaluar, diseñar, formular, inspeccionar, etc) considera la taxonomía adecuada.
+                        </p>
+                    </div>
+                    <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion2/taxonomia.html" target="_blank" class="inline-block bg-unitec-cyan text-white text-center font-bold py-3 px-6 hover:bg-unitec-federal transition-colors w-full md:w-auto">
+                        Ver Taxonomía
+                    </a>
+                </article>
+
+                <article class="solid-card p-6 bg-white border-t-4 border-t-unitec-cyan flex flex-col justify-center">
+                    <h4 class="text-md font-bold text-unitec-cyan mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Meta de Competencia
+                    </h4>
+                    <p class="text-sm text-unitec-slate mb-4">Empieza con:</p>
+                    <div class="bg-unitec-light p-4 font-bold text-sm text-unitec-federal border border-unitec-cyan">
+                        "Los Estudiantes son capaces de..."
+                    </div>
+                </article>
+            </div>
+
+            <!-- Checkpoint Metas de Competencia -->
+            <div class="bg-white border-2 border-slate-200 p-6 flex flex-col md:flex-row gap-6 items-start">
+                <div class="flex-shrink-0 bg-unitec-cyan text-white p-3 rounded-none mt-1">
+                    <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div class="w-full">
+                    <h3 class="text-lg md:text-xl font-bold text-unitec-federal mb-4">Checkpoint de Calidad</h3>
+                    <div class="bg-slate-50 border-2 border-slate-200 p-4 md:p-5">
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer mb-4">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">1. ¿Están expresados con precisión utilizando el enunciado "Los estudiantes son capaces de..."?</span>
+                        </label>
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">2. ¿Comienzan con un verbo observable que promueva la construcción de significado (Bloom)?</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: Las Metas de Carácter y Learning to Learn -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-unitec-sky text-white text-xl font-bold w-10 h-10 md:w-12 md:h-12 shrink-0 flex items-center justify-center transform rotate-45">
+                    <span class="-rotate-45 block">3</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-unitec-federal">Las Metas de Carácter y Learning to Learn</h2>
+            </div>
+            
+            <div class="bg-slate-50 border-l-4 border-unitec-sky p-5 md:p-6 mb-8">
+                <p class="text-base md:text-lg text-unitec-slate mb-4">
+                    <strong>Instrucción para el participante:</strong> El Retrato del Egresado de UNITEC nos exige formar capacidades humanas fundamentadas en valores y principios. Selecciona 2 o 3 valores que reflejen oportunidades genuinas para el desarrollo del carácter en este módulo. Al redactar mantén el enfoque en la capacidad humana que seleccionaste. Adicionalmente, identificaremos cómo desarrollarán el "Aprender a Aprender" (L2L). Te brindaremos algunos templates que puedes considerar para las metas de Aprender a Aprender que puedes editar a tu buen juicio.
+                </p>
+                
+                <!-- Recomendación Textual -->
+                <div class="bg-unitec-sky bg-opacity-10 border-l-4 border-unitec-sky p-4 md:p-6 mt-4">
+                    <h4 class="text-md md:text-lg font-bold text-unitec-federal mb-2 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-unitec-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Recomendación
+                    </h4>
+                    <p class="text-unitec-slate text-sm md:text-base">
+                        No es necesario usar las metas textuales, pero puedes utilizar estos ejemplos en combinación con la capacidad humana que estás desarrollando para redactar metas específicas de Learning to Learn.
+                    </p>
+                </div>
+
+                <!-- Templates L2L -->
+                <div class="mt-8 bg-white p-6 border-t-4 border-t-unitec-sky">
+                    <h4 class="text-lg md:text-xl font-bold text-unitec-federal mb-4 border-b-2 border-slate-100 pb-2">Templates de Metas de Aprender a Aprender</h4>
+                    <ul class="space-y-4 text-unitec-slate text-sm md:text-base">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-unitec-sky mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            <span>Los estudiantes están desarrollando la capacidad de monitorear el progreso con hitos claros y ajustar estrategias.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-unitec-sky mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            <span>Los estudiantes están desarrollando la capacidad de dar/recibir retroalimentación STAR (Específica, Oportuna, Accionable, Respetuosa).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-unitec-sky mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            <span>Los estudiantes están desarrollando la capacidad de transferir estrategias entre disciplinas.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-unitec-sky mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            <span>Los estudiantes están desarrollando la capacidad de autorregular su tiempo, atención y flujo digital de trabajo.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-unitec-sky mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            <span>Los estudiantes están desarrollando la capacidad de reflexionar sobre cómo el aprendizaje cambia su pensamiento, elecciones e identidad.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Contenedor Grid para Checkpoints (Carácter y L2L) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Checkpoint Carácter -->
+                <div class="bg-white border-2 border-slate-200 p-6 relative">
+                    <div class="absolute -top-4 -left-4 bg-unitec-federal text-white p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-unitec-federal mb-4 mt-2">Checklist: Metas de Carácter</h3>
+                    <div class="bg-slate-50 border-2 border-slate-200 p-4 md:p-5">
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer mb-4">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">1. ¿Están expresados con precisión utilizando el enunciado "Los estudiantes se vuelven más..."?</span>
+                        </label>
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer mb-4">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">2. ¿Se centran en disposiciones o valores específicos (ej. empatía, integridad)?</span>
+                        </label>
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">3. ¿Están vinculados a las expectativas de comportamiento o al Retrato del Egresado?</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Checkpoint L2L -->
+                <div class="bg-white border-2 border-slate-200 p-6 relative">
+                    <div class="absolute -top-4 -left-4 bg-unitec-sky text-white p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-unitec-federal mb-4 mt-2">Checklist: Aprender a Aprender</h3>
+                    <div class="bg-slate-50 border-2 border-slate-200 p-4 md:p-5">
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer mb-4">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">1. ¿Se enfocan en el desarrollo de habilidades metacognitivas y de autorregulación?</span>
+                        </label>
+                        <label class="flex items-start space-x-3 text-sm md:text-base text-unitec-slate cursor-pointer">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-unitec-cyan rounded-none border-2 border-slate-300 mt-0.5">
+                            <span class="leading-snug">2. ¿Utilizan el enunciado "Los estudiantes desarrollan la capacidad de..."?</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Justificación de Alineación Textual -->
+            <div class="bg-unitec-federal text-white p-6 md:p-8 border-r-8 border-unitec-sky flex flex-col justify-center mb-12">
+                <h3 class="text-lg md:text-xl font-bold text-unitec-cyan mb-4 flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Justificación de Alineación
+                </h3>
+                <p class="text-blue-100 text-sm md:text-base leading-relaxed">
+                    Al incentivar al docente a alinear las competencias con verbos observables de la Taxonomía y atarlos a valores como la Integridad, aseguramos que la evaluación futura no sea solo un examen escrito, sino una demostración real de capacidades técnicas y éticas. Esto garantiza la transición del modelo tradicional hacia la verdadera formación de capacidades humanas que estipula la Visión 2030 de UNITEC.
+                </p>
+            </div>
+
+            <!-- Ejemplos desde el Piloto (Módulo general) -->
+            <div class="bg-slate-50 border-2 border-slate-200 p-6 md:p-8">
+                <h3 class="text-xl md:text-2xl font-extrabold text-unitec-federal mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-unitec-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    Ejemplos Consolidados desde el Piloto
+                </h3>
+                <p class="text-sm md:text-base text-unitec-slate mb-6"><em>Haz clic en cada asignatura para visualizar los ejemplos integrados de las 3Cs. (Status actual de Competencia y Carácter: Pendiente).</em></p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <button onclick="openGoalsModal('Diseño Estructural en Concreto')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Diseño Estructural en Concreto
+                    </button>
+                    <button onclick="openGoalsModal('Historia de Honduras')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Historia de Honduras
+                    </button>
+                    <button onclick="openGoalsModal('Sociología')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Sociología
+                    </button>
+                    <button onclick="openGoalsModal('Introducción al Algebra')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Introducción al Algebra
+                    </button>
+                    <button onclick="openGoalsModal('Análisis Estructural')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-cyan bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Análisis Estructural
+                    </button>
+                    <button onclick="openGoalsModal('Ofimática')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-sky bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Ofimática
+                    </button>
+                    <button onclick="openGoalsModal('Métodos Cuantitativos')" class="solid-card py-4 px-3 md:py-6 md:px-4 border-t-4 border-t-unitec-federal bg-white text-center font-bold text-unitec-federal hover:bg-slate-100 focus:outline-none cursor-pointer text-sm md:text-base">
+                        Métodos Cuantitativos
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-unitec-federal text-white py-8 text-center mt-12 border-t-4 border-unitec-cyan">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <p class="mb-4 md:mb-0 text-sm opacity-90">&copy; 2026 UNITEC - Train the Trainers (Sesión 2).</p>
+            <p class="text-sm opacity-90">Diseñado con <span class="font-bold text-unitec-sky">CGS 3Cs Toolkit</span></p>
+        </div>
+    </footer>
+
+    <!-- Full Screen Modal for Conceptual Goals (Section 1) -->
+    <div id="conceptualModal" class="fullscreen-modal fixed inset-0 bg-unitec-federal bg-opacity-95 z-50 hidden flex items-center justify-center p-4 md:p-8 opacity-0 cursor-pointer" onclick="closeConceptualModal(event)">
+        <div class="relative max-w-4xl w-full text-center flex flex-col items-center justify-center min-h-[50vh] modal-content-scroll bg-white bg-opacity-10 p-8 rounded-lg border-l-8 border-unitec-cyan">
+            <button onclick="closeConceptualModal(event)" class="absolute -top-4 md:-top-16 right-0 text-white hover:text-unitec-cyan focus:outline-none transition-colors">
+                <svg class="w-8 h-8 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h4 id="modalConceptualTitle" class="text-unitec-sky font-bold uppercase tracking-widest text-base md:text-2xl mb-6 opacity-90"></h4>
+            
+            <ol id="modalConceptualTextContainer" class="list-decimal text-left text-white text-lg md:text-xl space-y-4 pl-6 font-medium italic">
+                <!-- El contenido de listas se inyecta dinámicamente aquí -->
+            </ol>
+        </div>
+    </div>
+
+    <!-- Full Screen Modal for General Goals Examples (Bottom) -->
+    <div id="goalsModal" class="fullscreen-modal fixed inset-0 bg-unitec-federal bg-opacity-95 z-50 hidden flex items-center justify-center p-4 md:p-8 opacity-0 cursor-pointer" onclick="closeGoalsModal(event)">
+        <div class="relative max-w-4xl w-full text-center flex flex-col items-center justify-center min-h-[50vh] modal-content-scroll">
+            <button onclick="closeGoalsModal(event)" class="absolute -top-4 md:-top-16 right-0 text-white hover:text-unitec-cyan focus:outline-none transition-colors">
+                <svg class="w-8 h-8 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h4 id="modalGoalsTitle" class="text-unitec-sky font-bold uppercase tracking-widest text-base md:text-xl mb-4 md:mb-8 opacity-90"></h4>
+            
+            <div id="modalGoalsTextContainer" class="w-full space-y-6 text-left">
+                <!-- El contenido se inyecta dinámicamente aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Data para Modal de Metas Conceptuales (Actividad 1) - Textual según documento
+        const conceptualStoriesData = {
+            'Historia de Honduras': [
+                "Los estudiantes comprenden que la historia ha estado moldeada por las perspectivas del poder.",
+                "Los estudiantes comprenden que los procesos históricos influyen en los problemas sociales actuales.",
+                "Los estudiantes comprenden que la construcción de narrativas históricas fortalece o debilita la identidad nacional."
+            ],
+            'Diseño Estructural en Concreto': [
+                "Los estudiantes comprenden que un cálculo perfecto sobre un modelo incorrecto genera soluciones peligrosas (\"Garbage In, Garbage Out\"). La seguridad depende de qué tan fielmente el modelo representa la realidad física.",
+                "Los estudiantes comprenden que la relación costo-beneficio-seguridad es el eje central de la toma de decisiones, reconociendo que el criterio ingenieril gestiona la incertidumbre para hacer viable la obra."
+            ],
+            'Sociología': [
+                "Los estudiantes comprenden que la Sociología estudia el origen evolución y desarrollo de las sociedades desde sus orígenes hasta la actualidad.",
+                "Los estudiantes comprenden que los procesos sociales atraves de la historia de la humanidad repercuten en la actualidad."
+            ],
+            'Métodos Cuantitativos': [
+                "Los estudiantes comprenden que todo fenómeno puede ser definido en términos de variables, entonces, todo puede ser medido, analizado y comprendido objetivamente.",
+                "Los estudiantes comprenden que si una conclusión válida nace de una hipótesis comprobada, entonces, la causalidad no se asume, se demuestra.",
+                "Los estudiantes comprenden que la estadística descriptiva transforma datos brutos en conocimiento estratégico, revelando la estructura fundamental, patrones y tendencias que permiten interpretar la realidad financiera y de negocios."
+            ],
+            'Ofimática': [
+                "Los estudiantes comprenden que la ofimática avanzada es una herramienta estratégica para mejorar la eficiencia y productividad en cualquier entorno laboral o académico.",
+                "Los estudiantes comprenden que las herramientas de ofimática permiten transformar datos en información útil para la toma de decisiones.",
+                "Los estudiantes comprenden que las herramientas de la ofimática simplifican procesos repetitivos y reducen errores humanos."
+            ],
+            'Análisis Estructural': [
+                "Los estudiantes comprenden que la validez estructural reside en la idealización apropiada de sus componentes (geometría, materiales, apoyos, y cargas).",
+                "Los estudiantes comprenden que la modelación de las cargas (viva, ecológica, excepcional) requiere de un enfoque probabilístico para gestionar la incertidumbre y asegurar la seguridad (cargas características).",
+                "Los estudiantes comprenden que La variabilidad de un sistema y sus grados de libertad determinan si es un sistema estático o un mecanismo, siendo el análisis cinemático crucial para un esquema de análisis adecuado.",
+                "Los estudiantes compren que las estructuras hiperestáticas tienen la ventaja de la redundancia que permite la redistribución de esfuerzos al fallar una unión o apoyo, a diferencia de las isostáticas."
+            ],
+            'Introducción al Algebra': [
+                "Los estudiantes entienden los conceptos de la teoría de conjuntos para clasificar información",
+                "Los estudiantes entienden que los sistemas de ecuaciones y las desigualdades son modelos que representan relaciones y restricciones en problemas del mundo real",
+                "Los estudiantes entienden que los polinomios, las expresiones racionales y los radicales son herramientas para resolver ecuaciones complejas."
+            ]
+        };
+
+        // Data para Modal de Metas Generales (Final de página)
+        const goalsData = {
+            'Diseño Estructural en Concreto': {
+                conceptual: `"Los estudiantes comprenden que un cálculo perfecto sobre un modelo incorrecto genera soluciones peligrosas ('Garbage In, Garbage Out'). La seguridad depende de qué tan fielmente el modelo representa la realidad física."`,
+                competencia: "Pendiente",
+                caracter: "Pendiente"
+            },
+            'Historia de Honduras': {
+                conceptual: "Pendiente",
+                competencia: "Pendiente",
+                caracter: "Pendiente"
+            },
+            'Sociología': {
+                conceptual: "Pendiente",
+                competencia: "Pendiente",
+                caracter: "Pendiente"
+            },
+            'Introducción al Algebra': {
+                conceptual: "Pendiente",
+                competencia: "Pendiente",
+                caracter: "Pendiente"
+            },
+            'Análisis Estructural': {
+                conceptual: "Pendiente",
+                competencia: "Pendiente",
+                caracter: "Pendiente"
+            },
+            'Ofimática': {
+                conceptual: "Pendiente",
+                competencia: "Pendiente",
+                caracter: "Pendiente"
+            },
+            'Métodos Cuantitativos': {
+                conceptual: "Pendiente",
+                competencia: "Pendiente",
+                caracter: "Pendiente"
+            }
+        };
+
+        // Lógica Modal Ejemplos Metas Conceptuales (Sección 1)
+        function openConceptualModal(subject) {
+            const modal = document.getElementById('conceptualModal');
+            document.getElementById('modalConceptualTitle').textContent = `Metas Conceptuales: ${subject}`;
+            
+            const goalsArray = conceptualStoriesData[subject];
+            const container = document.getElementById('modalConceptualTextContainer');
+            
+            // Limpiar contenido previo y crear la lista ordenada
+            container.innerHTML = '';
+            goalsArray.forEach(goal => {
+                const li = document.createElement('li');
+                li.textContent = goal;
+                container.appendChild(li);
+            });
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeConceptualModal(e) {
+            if (e) e.stopPropagation();
+            const modal = document.getElementById('conceptualModal');
+            
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Lógica Modal Ejemplos Metas Generales Consolidadas (Sección 3 / Final)
+        function openGoalsModal(subject) {
+            const modal = document.getElementById('goalsModal');
+            document.getElementById('modalGoalsTitle').textContent = `Ejemplos Consolidados: ${subject}`;
+            
+            const data = goalsData[subject];
+            
+            // Construimos el HTML interno para mostrar las 3Cs en el modal
+            const contentHtml = `
+                <div class="bg-white bg-opacity-10 p-6 border-l-4 border-unitec-cyan rounded">
+                    <h5 class="text-unitec-cyan font-bold text-lg mb-2">Meta Conceptual:</h5>
+                    <p class="text-white text-lg md:text-xl leading-relaxed italic">${data.conceptual}</p>
+                </div>
+                <div class="bg-white bg-opacity-10 p-6 border-l-4 border-unitec-sky rounded">
+                    <h5 class="text-unitec-sky font-bold text-lg mb-2">Meta de Competencia:</h5>
+                    <p class="text-white text-lg md:text-xl leading-relaxed italic">${data.competencia}</p>
+                </div>
+                <div class="bg-white bg-opacity-10 p-6 border-l-4 border-white rounded">
+                    <h5 class="text-white font-bold text-lg mb-2">Meta de Carácter / L2L:</h5>
+                    <p class="text-white text-lg md:text-xl leading-relaxed italic">${data.caracter}</p>
+                </div>
+            `;
+            
+            document.getElementById('modalGoalsTextContainer').innerHTML = contentHtml;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGoalsModal(e) {
+            if (e) e.stopPropagation();
+            const modal = document.getElementById('goalsModal');
+            
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
