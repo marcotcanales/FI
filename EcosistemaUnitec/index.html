@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train the Trainers | Ecosistema UNITEC</title>
+    <!-- Importando la tipografía oficial: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Paleta de Colores Oficial UNITEC */
+            --federal-blue: #06065C;
+            --pacific-cyan: #03AED2;
+            --vivid-sky-blue: #47C8FD;
+            --white: #FFFFFF;
+            --dark-overlay: rgba(6, 6, 92, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--federal-blue);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Geometría de fondo inspirada en el diamante */
+        .bg-geometry {
+            position: fixed;
+            top: -10vh;
+            right: -10vw;
+            width: 50vw;
+            height: 50vw;
+            background-color: var(--pacific-cyan);
+            opacity: 0.05;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bg-geometry-2 {
+            position: fixed;
+            bottom: -20vh;
+            left: -10vw;
+            width: 70vw;
+            height: 70vw;
+            background-color: var(--vivid-sky-blue);
+            opacity: 0.03;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header & Logo */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 3rem;
+            border-bottom: 2px solid var(--pacific-cyan);
+            margin-bottom: 4rem;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .diamond-isotype {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logotype {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--white);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: var(--vivid-sky-blue);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            font-weight: 400;
+            color: var(--pacific-cyan);
+        }
+
+        /* Grid de Sesiones */
+        .sessions-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .sessions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Tarjeta de Sesión (Diseño Audaz) */
+        .session-card {
+            background-color: transparent;
+            border: 2px solid var(--pacific-cyan);
+            position: relative;
+            padding: 2.5rem 2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 320px;
+            /* Cortes geométricos en las esquinas */
+            clip-path: polygon(
+                0 0, 
+                calc(100% - 30px) 0, 
+                100% 30px, 
+                100% 100%, 
+                30px 100%, 
+                0 calc(100% - 30px)
+            );
+        }
+
+        .session-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--pacific-cyan);
+            z-index: -1;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+
+        .session-card:hover {
+            border-color: var(--vivid-sky-blue);
+        }
+
+        .session-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .session-number {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--vivid-sky-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .session-card:hover .session-number {
+            color: var(--federal-blue);
+        }
+
+        .session-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .session-card:hover .session-title {
+            color: var(--federal-blue);
+        }
+
+        .session-desc {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .session-card:hover .session-desc {
+            color: var(--federal-blue);
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        /* Botón estilo diamante */
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            background-color: var(--vivid-sky-blue);
+            color: var(--federal-blue);
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            width: max-content;
+            /* Corte asimétrico audaz */
+            clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+        }
+
+        .session-card:hover .btn-link {
+            background-color: var(--federal-blue);
+            color: var(--white);
+        }
+
+        .btn-link:active {
+            transform: scale(0.95);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 5rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+            color: var(--pacific-cyan);
+            font-weight: 400;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Elementos Decorativos -->
+    <div class="bg-geometry"></div>
+    <div class="bg-geometry-2"></div>
+
+    <div class="container">
+        
+        <!-- Header con Identidad de Marca Estricta -->
+        <header>
+            <div class="brand-logo">
+                <!-- Construcción del Isotipo en SVG para garantizar nitidez, proporciones y colores exactos -->
+                <svg class="diamond-isotype" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Faceta Superior Izquierda -->
+                    <polygon points="50,0 50,50 0,50" fill="#47C8FD" />
+                    <!-- Faceta Superior Derecha -->
+                    <polygon points="50,0 100,50 50,50" fill="#03AED2" />
+                    <!-- Faceta Inferior Izquierda -->
+                    <polygon points="0,50 50,50 50,100" fill="#03AED2" />
+                    <!-- Faceta Inferior Derecha -->
+                    <polygon points="100,50 50,50 50,100" fill="#47C8FD" />
+                </svg>
+                <div class="logotype">unitec</div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Train the <span>Trainers</span></h1>
+            <p>Ecosistema de Aprendizaje UNITEC/CEUTEC. Plataforma asincrónica para Jefes y Coordinadores Académicos.</p>
+        </section>
+
+        <!-- Grid de Recursos Asincrónicos -->
+        <main class="sessions-grid">
+
+            <!-- Sesión 1 -->
+            <article class="session-card">
+                <div>
+                    <div class="session-number">Sesión 1</div>
+                    <h2 class="session-title">El Ecosistema de Aprendizaje y el Nuevo Paradigma</h2>
+                    <p class="session-desc">Comprende la filosofía del CGS, interioriza el Retrato del Aprendiz y domina el concepto de Las 3 Cs.</p>
+                </div>
+                <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion1/" target="_blank" class="btn-link">Ingresar al Módulo</a>
+            </article>
+
+            <!-- Sesión 2 -->
+            <article class="session-card">
+                <div>
+                    <div class="session-number">Sesión 2</div>
+                    <h2 class="session-title">Definiendo "El Porqué" y "El Qué"</h2>
+                    <p class="session-desc">Taller de Construcción del Planner. Deconstrucción del sílabo, La Gran Idea y Preguntas de Encuadre.</p>
+                </div>
+                <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion2/" target="_blank" class="btn-link">Ingresar al Módulo</a>
+            </article>
+
+            <!-- Sesión 3 -->
+            <article class="session-card">
+                <div>
+                    <div class="session-number">Sesión 3</div>
+                    <h2 class="session-title">Construyendo "La Evidencia"</h2>
+                    <p class="session-desc">Taller de Evaluación Auténtica y S.T.A.R. Feedback. Diseños GRASPS y cultura de retroalimentación.</p>
+                </div>
+                <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion3/" target="_blank" class="btn-link">Ingresar al Módulo</a>
+            </article>
+
+            <!-- Sesión 4 -->
+            <article class="session-card">
+                <div>
+                    <div class="session-number">Sesión 4</div>
+                    <h2 class="session-title">Planificando "El Cómo"</h2>
+                    <p class="session-desc">Secuencias de Aprendizaje (Connect, Construct, Contribute) y formación del Carácter en el Aula.</p>
+                </div>
+                <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion4/" target="_blank" class="btn-link">Ingresar al Módulo</a>
+            </article>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Universidad Tecnológica Centroamericana. Innovación Académica.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
