@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNITEC | Constructor de Metas CGS</title>
+    <title>UNITEC | Constructor de Metas Ecosistema de Aprendizaje</title>
     
     <!-- Fuentes: Poppins Estricto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,37 +97,37 @@
             id: 1, level: 'Recordar', icon: <Brain className="w-6 h-6" />, brandAccent: 'bg-unitec-sky text-unitec-federal', brandBorder: 'border-unitec-sky', bgCard: 'bg-white',
             def: 'Exhibir la memoria del material aprendido previamente recordando hechos, términos, conceptos básicos y respuestas.', 
             verbs: ['Listar', 'Nombrar', 'Recordar', 'Registrar', 'Relatar', 'Repetir', 'Expresar', 'Contar', 'Definir'],
-            cgsDimension: 'Base (Pre-requisito)'
+            Dimension: 'Base (Pre-requisito)'
           },
           { 
             id: 2, level: 'Comprender', icon: <Lightbulb className="w-6 h-6" />, brandAccent: 'bg-unitec-cyan text-white', brandBorder: 'border-unitec-cyan', bgCard: 'bg-white',
             def: 'Demostrar comprensión de hechos e ideas organizando, comparando, traduciendo, interpretando y expresando las ideas.', 
             verbs: ['Comparar', 'Describir', 'Discutir', 'Explicar', 'Identificar', 'Reconocer', 'Reafirmar', 'Traducir', 'Clasificar'],
-            cgsDimension: 'Conceptual'
+            Dimension: 'Conceptual'
           },
           { 
             id: 3, level: 'Aplicar', icon: <PenTool className="w-6 h-6" />, brandAccent: 'bg-unitec-blue text-white', brandBorder: 'border-unitec-blue', bgCard: 'bg-white',
             def: 'Resolver problemas en situaciones nuevas aplicando los conocimientos adquiridos, técnicas y reglas de manera diferente.', 
             verbs: ['Solicitar', 'Completar', 'Construir', 'Demostrar', 'Emplear', 'Ilustrar', 'Interpretar', 'Funcionar', 'Bosquejar'],
-            cgsDimension: 'Competencial'
+            Dimension: 'Competencial'
           },
           { 
             id: 4, level: 'Analizar', icon: <Search className="w-6 h-6" />, brandAccent: 'bg-unitec-sky text-unitec-federal', brandBorder: 'border-unitec-sky', bgCard: 'bg-gray-50',
             def: 'Examinar y dividir la información en partes identificando motivos o causas. Hacer inferencias y encontrar evidencia.', 
             verbs: ['Analizar', 'Evaluar', 'Categorizar', 'Comparar', 'Contrastar', 'Debatir', 'Diagramar', 'Diferenciar', 'Examinar'],
-            cgsDimension: 'Conceptual / Competencial'
+            Dimension: 'Conceptual / Competencial'
           },
           { 
             id: 5, level: 'Evaluar', icon: <Scale className="w-6 h-6" />, brandAccent: 'bg-unitec-cyan text-white', brandBorder: 'border-unitec-cyan', bgCard: 'bg-gray-50',
             def: 'Presentar y defender opiniones haciendo juicios sobre la validez de las ideas o la calidad con base en criterios.', 
             verbs: ['Evaluar', 'Argumentar', 'Escoger', 'Concluir', 'Estimar', 'Juzgar', 'Justificar', 'Medir', 'Revisar'],
-            cgsDimension: 'Carácter / Conceptual'
+            Dimension: 'Carácter / Conceptual'
           },
           { 
             id: 6, level: 'Crear', icon: <Rocket className="w-6 h-6" />, brandAccent: 'bg-unitec-blue text-white', brandBorder: 'border-unitec-blue', bgCard: 'bg-gray-50',
             def: 'Compilar información de forma diferente combinando elementos en un nuevo patrón o proponiendo soluciones alternativas.', 
             verbs: ['Arreglar', 'Armar', 'Combinar', 'Componer', 'Construir', 'Crear', 'Diseñar', 'Idear', 'Inventar', 'Sintetizar'],
-            cgsDimension: 'Competencial / Carácter'
+            Dimension: 'Competencial / Carácter'
           }
         ];
 
@@ -136,7 +136,7 @@
           const [selectedVerb, setSelectedVerb] = React.useState('');
           const [learningContent, setLearningContent] = React.useState('');
           const [learningContext, setLearningContext] = React.useState('');
-          const [selectedCGS, setSelectedCGS] = React.useState('Conceptual');
+          const [selected, setSelected] = React.useState('Conceptual');
           const [copied, setCopied] = React.useState(false);
 
           const handleVerbClick = (verb) => {
@@ -151,7 +151,7 @@
           };
 
           const handleCopy = () => {
-            const textToCopy = `Meta ${selectedCGS}: ${getGeneratedObjective()}`;
+            const textToCopy = `Meta ${selected}: ${getGeneratedObjective()}`;
             // Método seguro para copiar al portapapeles sin iFrame blocks
             const textArea = document.createElement("textarea");
             textArea.value = textToCopy;
@@ -174,7 +174,7 @@
               <nav className="w-full bg-unitec-blue border-b-4 border-unitec-cyan py-6 px-6 md:px-8 flex justify-between items-center z-50 sticky top-0 shadow-lg">
                 <UnitecLogo />
                 <div className="hidden md:flex gap-4 items-center">
-                    <span className="text-unitec-sky font-semibold tracking-widest uppercase text-xs mt-1">Herramientas CGS</span>
+                    <span className="text-unitec-sky font-semibold tracking-widest uppercase text-xs mt-1">Herramientas del Ecosistema de Aprendizaje</span>
                 </div>
               </nav>
 
