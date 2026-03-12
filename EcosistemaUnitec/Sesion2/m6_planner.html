@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 6: Recursos y Preparación | Ecosistema de Aprendizaje de UNITEC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C',
+                            cyan: '#03AED2',
+                            sky: '#47C8FD',
+                            light: '#F8FAFC',
+                            slate: '#334155'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* REGLAS DE MARCA: SIN SOMBRAS, BORDES SÓLIDOS */
+        .solid-card {
+            background-color: white;
+            border: 2px solid #E2E8F0;
+            transition: all 0.3s ease;
+        }
+        .solid-card:hover {
+            border-color: #03AED2;
+            transform: translateY(-4px);
+        }
+        .step-number {
+            font-family: 'Poppins', sans-serif;
+            -webkit-text-stroke: 1px #06065C;
+            color: transparent;
+        }
+        
+        /* Personalización del reproductor de audio para que encaje con la marca */
+        audio {
+            width: 100%;
+            height: 40px;
+            outline: none;
+            border-radius: 0;
+        }
+        audio::-webkit-media-controls-panel {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 0;
+        }
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-mute-button {
+            background-color: #03AED2;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-unitec-light text-unitec-slate font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Header Section -->
+    <header class="bg-unitec-federal text-white py-12 md:py-16 px-6 relative overflow-hidden border-b-8 border-unitec-cyan">
+        <div class="max-w-5xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="md:w-2/3 text-center md:text-left">
+                <span class="text-unitec-sky font-bold tracking-widest uppercase text-xs md:text-sm mb-4 block">Train the Trainers • Sesión 2 • Módulo 6</span>
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight text-white">Recursos y Preparación</h1>
+                <h2 class="text-xl md:text-3xl font-semibold mb-4 text-blue-100">Transición hacia la Evaluación Auténtica</h2>
+            </div>
+            <!-- Icono Decorativo: Herramientas/Engranajes -->
+            <div class="md:w-1/3 flex justify-center opacity-80">
+                <svg width="100" height="100" class="md:w-[120px] md:h-[120px]" viewBox="0 0 24 24" fill="none" stroke="#03AED2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full">
+        
+        <!-- Mensaje de Bienvenida -->
+        <section class="bg-white p-6 md:p-8 mb-12 border-l-8 border-unitec-federal border-y-2 border-r-2 border-slate-200">
+            <div class="flex flex-col md:flex-row items-start gap-4">
+                <div class="bg-unitec-sky text-white p-3 mt-1 shrink-0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold text-unitec-federal mb-2">Reflexión y Acción</h3>
+                    <p class="leading-relaxed text-unitec-slate text-sm md:text-base">
+                        "Colegas, hemos llegado al cierre de la Sesión 2. Este módulo de recursos está diseñado para acompañarles en ese punto de inflexión entre el modelo tradicional basado en competencias y el <strong>Ecosistema de Aprendizaje de UNITEC (CGS)</strong>. Aquí encontrarán discusiones profundas que retan nuestros paradigmas y las instrucciones exactas para preparar el terreno hacia nuestra próxima sesión, donde diseñaremos 'La Evidencia' de aprendizaje."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: Podcasts de Discusión -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-unitec-federal text-white text-xl font-bold w-10 h-10 md:w-12 md:h-12 shrink-0 flex items-center justify-center transform rotate-45">
+                    <span class="-rotate-45 block">1</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-unitec-federal">Podcasts de Discusión</h2>
+            </div>
+            
+            <div class="bg-slate-50 border-l-4 border-unitec-cyan p-5 md:p-6 mb-8">
+                <p class="text-base md:text-lg text-unitec-slate">
+                    Estos episodios están diseñados exclusivamente para la comunidad docente de UNITEC y CEUTEC. Acompáñanos a explorar los debates pedagógicos más relevantes en nuestra transición hacia la Visión 2030. Escúchalos mientras te desplazas, diseñas o reflexionas sobre tu práctica.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Podcast 1 -->
+                <article class="solid-card p-6 bg-white border-t-4 border-t-unitec-cyan flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold text-unitec-sky uppercase tracking-wider">Episodio 1</span>
+                            <svg class="w-6 h-6 text-unitec-federal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                        </div>
+                        <h4 class="text-md font-bold text-unitec-federal mb-3">Alquimia Docente con el UNITEC Planner</h4>
+                        <p class="text-sm text-unitec-slate mb-6">
+                            Un <em>Deep Dive</em> (análisis profundo) sobre la importancia fundamental del UNITEC Planner dentro del proceso de transformación de una asignatura para alinearse verdaderamente con la Visión 2030.
+                        </p>
+                    </div>
+                    <div class="mt-auto">
+                        <audio controls preload="none">
+                            <source src="AUD/Alquimia_docente_con_el_Unitec_Planner.mp3" type="audio/mpeg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                    </div>
+                </article>
+
+                <!-- Podcast 2 -->
+                <article class="solid-card p-6 bg-white border-t-4 border-t-unitec-federal flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold text-unitec-cyan uppercase tracking-wider">Episodio 2</span>
+                            <svg class="w-6 h-6 text-unitec-federal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                        </div>
+                        <h4 class="text-md font-bold text-unitec-federal mb-3">¿Sílabo tradicional o el UNITEC Planner?</h4>
+                        <p class="text-sm text-unitec-slate mb-6">
+                            Un debate crítico entre el uso del sílabo tradicional (como evidencia frente a entes reguladores y de acreditación) versus el uso del UNITEC Planner y su intención ideal centrada en el aprendizaje. ¿Vale la pena soñar?
+                        </p>
+                    </div>
+                    <div class="mt-auto">
+                        <audio controls preload="none">
+                            <source src="AUD/¿Sílabo_tradicional_o_el_UNITEC_Planner_.mp3" type="audio/mpeg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                    </div>
+                </article>
+
+                <!-- Podcast 3 -->
+                <article class="solid-card p-6 bg-white border-t-4 border-t-unitec-sky flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold text-unitec-federal uppercase tracking-wider">Episodio 3</span>
+                            <svg class="w-6 h-6 text-unitec-federal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                        </div>
+                        <h4 class="text-md font-bold text-unitec-federal mb-3">La Paradoja de Humanizar con Inteligencia Artificial</h4>
+                        <p class="text-sm text-unitec-slate mb-6">
+                            ¿Es irónico que, para rescatar nuestra esencia humana en el aula, estemos recurriendo a la inteligencia artificial? Totalmente. Exploramos esta fascinante paradoja y cómo la tecnología apoya nuestro modelo "Becoming Human".
+                        </p>
+                    </div>
+                    <div class="mt-auto">
+                        <audio controls preload="none">
+                            <source src="AUD/La_paradoja_de_humanizar_con_inteligencia_artificial.mp3" type="audio/mpeg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: Agentes de IA -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-unitec-cyan text-white text-xl font-bold w-10 h-10 md:w-12 md:h-12 shrink-0 flex items-center justify-center transform rotate-45">
+                    <span class="-rotate-45 block">2</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-unitec-federal">Herramientas: Agentes de Inteligencia Artificial</h2>
+            </div>
+
+            <div class="bg-white border-2 border-slate-200 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-start">
+                <div class="md:w-1/3 flex justify-center sticky top-8">
+                    <!-- Icono IA -->
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-unitec-sky rounded-full blur-lg opacity-20"></div>
+                        <svg class="w-32 h-32 text-unitec-federal relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 9l5 3-5 3V9z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h3 class="text-xl md:text-2xl font-bold text-unitec-federal mb-4">Crea tu propio Agente basado en "Rosalila"</h3>
+                    <p class="text-unitec-slate mb-4">
+                        Actualmente, ustedes ya tienen acceso al agente de IA institucional <strong>"Rosalila"</strong>. Este agente ha sido preparado de forma amplia y estandarizada para que pueda ser útil para la gran mayoría de los docentes de UNITEC y CEUTEC en su proceso de alineación al ecosistema CGS.
+                    </p>
+                    <p class="text-unitec-slate mb-4">
+                        Sin embargo, les queremos proveer estas instrucciones base para que puedan tomarlas como referencia y <strong>crear sus propias versiones del agente</strong>. Construir un agente personalizado puede ser sumamente útil para atender necesidades formativas muy particulares, por ejemplo:
+                    </p>
+                    
+                    <ul class="list-disc pl-5 mb-6 text-unitec-slate space-y-2">
+                        <li><strong>Modalidades de enseñanza:</strong> Adaptar actividades para teledocencia sincrónica, asincrónica, clases presenciales o modalidades híbridas.</li>
+                        <li><strong>Niveles académicos:</strong> Ajustar la complejidad cognitiva para pregrado, postgrado, programas técnicos o educación continua.</li>
+                        <li><strong>Disciplinas específicas:</strong> Integrar metodologías exactas de Ingeniería Civil, Ciencias de la Salud, Derecho o Diseño Gráfico.</li>
+                        <li><strong>Inclusión y accesibilidad:</strong> Dirigir la creación de materiales y evaluaciones amigables para estudiantes con discapacidades específicas.</li>
+                    </ul>
+
+                    <div class="bg-slate-50 border-l-4 border-unitec-cyan p-5 mb-6 text-sm text-slate-700">
+                        <strong class="text-unitec-federal block mb-2 text-base">🌐 Adaptabilidad a otros Modelos (LLMs):</strong>
+                        Es importante recalcar que las instrucciones de Rosalila (disponibles para descarga) están redactadas pensando en las características específicas de <strong>Microsoft Copilot</strong> y nuestro esquema de licenciamiento institucional. 
+                        <br><br>
+                        No obstante, <strong>pueden ser fácilmente adaptadas a otros modelos</strong> como ChatGPT (GPTs), Gemini (Gems), Claude (Projects), entre otros. Simplemente debes pedir a tu modelo de preferencia que revise el documento base y adapte las instrucciones de programación a sus propias características y limitaciones.
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 p-5 mb-6 text-sm text-slate-700">
+                        <strong class="text-unitec-federal block mb-2">Limitaciones Técnicas Actuales en Copilot Institucional:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>El agente no es de carácter público ni tiene acceso sin restricciones a <em>web crawlers</em> de toda la web.</li>
+                            <li>Las instrucciones del agente tienen un límite estricto de 8,000 caracteres.</li>
+                            <li>Actualmente, no puede realizar integraciones externas mediante APIs, conectores premium o vinculaciones fuera del entorno M365.</li>
+                        </ul>
+                    </div>
+
+                    <a href="DOC/Instrucciones Rosalila.docx" download class="inline-flex items-center justify-center px-6 py-4 bg-unitec-federal text-white font-bold text-sm hover:bg-unitec-cyan transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-unitec-federal w-full sm:w-auto shadow-md hover:shadow-lg">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Descargar Instrucciones Base (DOCX)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: Preparación para la Sesión 3 -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-unitec-sky text-white text-xl font-bold w-10 h-10 md:w-12 md:h-12 shrink-0 flex items-center justify-center transform rotate-45">
+                    <span class="-rotate-45 block">3</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-unitec-federal">Preparación para la Siguiente Sesión</h2>
+            </div>
+
+            <div class="bg-unitec-federal text-white p-6 md:p-8 border-r-8 border-unitec-cyan mb-8">
+                <h3 class="text-lg md:text-xl font-bold text-unitec-cyan mb-2">Sesión 3: Construyendo "La Evidencia"</h3>
+                <p class="text-blue-100 text-sm md:text-base">
+                    Taller de Evaluación Auténtica y STAR Feedback. En nuestra próxima sesión discutiremos la creación de actividades de evaluación que verdaderamente midan la comprensión conceptual, la competencia práctica y el carácter, siguiendo los lineamientos de nuestro ecosistema.
+                </p>
+            </div>
+
+            <h3 class="text-lg md:text-xl font-bold text-unitec-federal mb-6">Lista de Tareas Previas:</h3>
+
+            <div class="space-y-6">
+                <!-- Tarea 1 -->
+                <div class="solid-card p-6 flex gap-6 items-start">
+                    <div class="flex-shrink-0 bg-slate-100 text-unitec-federal font-extrabold text-2xl w-12 h-12 flex items-center justify-center border-2 border-slate-200">
+                        1
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-unitec-federal mb-2">Construye y Refina tu Planner</h4>
+                        <p class="text-unitec-slate text-sm md:text-base">
+                            Utiliza el sílabo actual de tu asignatura para diseñar el <strong>UNITEC Planner</strong>. Puedes apoyarte en el agente de IA "Rosalila" (instrucciones arriba) o trabajarlo colaborativamente con tus compañeros de academia. Revisa y refina el Planner iterativamente hasta que sientas que es un fiel reflejo de tus verdaderas intenciones de aprendizaje.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tarea 2 -->
+                <div class="solid-card p-6 flex gap-6 items-start border-l-4 border-l-unitec-cyan">
+                    <div class="flex-shrink-0 bg-slate-100 text-unitec-federal font-extrabold text-2xl w-12 h-12 flex items-center justify-center border-2 border-slate-200">
+                        2
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-unitec-federal mb-2">Selecciona un Instrumento a Transformar</h4>
+                        <p class="text-unitec-slate text-sm md:text-base">
+                            Escoge <strong>1 o 2 actividades evaluativas</strong> que utilizas actualmente en tu asignatura y que te gustaría evolucionar hacia una Evaluación Auténtica. Estas pueden ser: Tareas, Investigaciones, Proyectos Finales, Estudios de Caso o Foros de Discusión.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tarea 3 -->
+                <div class="solid-card p-6 flex gap-6 items-start">
+                    <div class="flex-shrink-0 bg-slate-100 text-unitec-federal font-extrabold text-2xl w-12 h-12 flex items-center justify-center border-2 border-slate-200">
+                        3
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-unitec-federal mb-2">Trae tus Materiales Actuales</h4>
+                        <p class="text-unitec-slate text-sm md:text-base">
+                            Para el trabajo práctico grupal, es indispensable que traigas la <strong>descripción exacta</strong> que normalmente le brindas a los estudiantes para realizar la actividad seleccionada, junto con su <strong>rúbrica de evaluación</strong> actual. Haremos un taller de co-diseño en vivo para rediseñar estos elementos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Justificación Evinkay -->
+            <div class="mt-8 bg-slate-50 border-2 border-slate-200 p-5 md:p-6 italic text-unitec-slate text-sm md:text-base">
+                <strong>💡 Nota del Consultor:</strong> ¿Por qué hacemos esto? En el modelo CGS, la evaluación no es un autopsia al final del aprendizaje, sino el motor que lo impulsa (Evaluación COMO aprendizaje). Traer tus rúbricas y proyectos actuales nos permitirá aplicar la matriz S.T.A.R. y asegurar que medimos capacidades reales (competencia y carácter), no solo la memorización de información. ¡Nos vemos en el taller!
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-unitec-federal text-white py-8 text-center mt-12 border-t-4 border-unitec-cyan">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <p class="mb-4 md:mb-0 text-sm opacity-90">&copy; 2026 UNITEC - Train the Trainers (Sesión 2).</p>
+            <p class="text-sm opacity-90">Diseñado con <span class="font-bold text-unitec-sky">CGS 3Cs Toolkit</span></p>
+        </div>
+    </footer>
+
+</body>
+</html>
