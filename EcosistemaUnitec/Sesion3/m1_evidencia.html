@@ -105,15 +105,17 @@
                 <p class="mt-4 text-lg text-gray-500 font-light">Inicia tu inmersión en este módulo revisando la primera parte de nuestro video explicativo. Comprende la base de la evaluación auténtica.</p>
             </div>
             
-            <!-- Estructura de Video Limpia -->
-            <div class="relative bg-unitec-federal rounded-xl shadow-lg overflow-hidden aspect-video group cursor-pointer flex items-center justify-center">
-                <div class="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80')] bg-cover bg-center transition-opacity group-hover:opacity-30 mix-blend-luminosity"></div>
-                <div class="relative z-10 text-center text-white p-6">
-                    <div class="w-20 h-20 mx-auto bg-unitec-cyan rounded-full flex items-center justify-center transform transition-transform group-hover:scale-105 mb-6">
-                        <i class="fa-solid fa-play text-3xl ml-1 text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold tracking-tight">[Espacio para Video Explainer - Parte 1]</h3>
-                    <p class="text-sm mt-3 font-light text-unitec-sky">De la Transacción a la Trascendencia (6 min)</p>
+            <!-- Estructura de Video Funcional 1 -->
+            <div class="max-w-4xl mx-auto">
+                <div class="relative bg-unitec-federal rounded-xl shadow-lg overflow-hidden aspect-video border border-gray-100">
+                    <video class="w-full h-full outline-none bg-black" controls preload="metadata" poster="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80">
+                        <source src="VID/Evaluación_Auténtica_pt1.mp4" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                </div>
+                <div class="mt-5 text-center">
+                    <h3 class="text-xl font-bold text-unitec-federal">De la Transacción a la Trascendencia</h3>
+                    <p class="text-sm font-light text-gray-500 mt-1"><i class="fa-regular fa-clock mr-1"></i> Duración: 6 min</p>
                 </div>
             </div>
         </div>
@@ -195,15 +197,17 @@
                 <p class="mt-4 text-lg text-gray-500 font-light">Continúa con la segunda parte del video explicativo para profundizar en el rediseño del aprendizaje y la evaluación en nuestra institución.</p>
             </div>
             
-            <!-- Estructura de Video Limpia -->
-            <div class="relative bg-unitec-federal rounded-xl shadow-lg overflow-hidden aspect-video group cursor-pointer flex items-center justify-center">
-                <div class="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80')] bg-cover bg-center transition-opacity group-hover:opacity-30 mix-blend-luminosity"></div>
-                <div class="relative z-10 text-center text-white p-6">
-                    <div class="w-20 h-20 mx-auto bg-unitec-cyan rounded-full flex items-center justify-center transform transition-transform group-hover:scale-105 mb-6">
-                        <i class="fa-solid fa-play text-3xl ml-1 text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold tracking-tight">[Espacio para Video Explainer - Parte 2]</h3>
-                    <p class="text-sm mt-3 font-light text-unitec-sky">El Rol del Docente Transformador (6 min)</p>
+            <!-- Estructura de Video Funcional 2 -->
+            <div class="max-w-4xl mx-auto">
+                <div class="relative bg-unitec-federal rounded-xl shadow-lg overflow-hidden aspect-video border border-gray-100">
+                    <video class="w-full h-full outline-none bg-black" controls preload="metadata" poster="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80">
+                        <source src="VID/Evaluación_Auténtica_pt2.mp4" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                </div>
+                <div class="mt-5 text-center">
+                    <h3 class="text-xl font-bold text-unitec-federal">El Rol del Docente Transformador</h3>
+                    <p class="text-sm font-light text-gray-500 mt-1"><i class="fa-regular fa-clock mr-1"></i> Duración: 6 min</p>
                 </div>
             </div>
         </div>
@@ -301,9 +305,10 @@
                 Descarga el documento completo con la redacción extensa de este módulo, guías de implementación, y las herramientas metacognitivas listas para integrar en tu próximo Planner.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button onclick="downloadDocument()" class="bg-unitec-cyan hover:bg-[#0296b5] text-white font-bold py-3 px-8 rounded-md transition-colors flex items-center justify-center gap-3">
+                <!-- Botón convertido en etiqueta 'a' para descarga directa del PDF -->
+                <a href="DOC/Modulo 1 - El Cambio de Paradigma.pdf" download="Modulo 1 - El Cambio de Paradigma.pdf" target="_blank" class="bg-unitec-cyan hover:bg-[#0296b5] text-white font-bold py-3 px-8 rounded-md transition-colors flex items-center justify-center gap-3">
                     <i class="fa-solid fa-download"></i> Descargar PDF Completo
-                </button>
+                </a>
             </div>
         </div>
     </section>
@@ -500,10 +505,6 @@
             setTimeout(() => {
                 modal.classList.add('hidden');
             }, 200);
-        }
-
-        function downloadDocument() {
-            alert("Descarga de material institucional iniciada. (El PDF contendrá toda la información alineada al manual de marca).");
         }
         
         document.addEventListener('keydown', (e) => {
