@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1: El Cambio de Paradigma | CGS UNITEC</title>
+    <!-- Tipografía Institucional UNITEC: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // Forzamos Poppins como la fuente principal
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', // Color principal - Autoridad y claridad
+                            cyan: '#03AED2',    // Acentos y botones - Precisión
+                            sky: '#47C8FD',     // Detalles luminosos
+                            light: '#F8FAFC',   // Fondo gris ultra-claro para limpieza visual
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Transiciones suaves y limpias para modales */
+        body { font-family: 'Poppins', sans-serif; }
+        .modal-enter { opacity: 0; transform: translateY(10px); }
+        .modal-enter-active { opacity: 1; transform: translateY(0); transition: opacity 300ms ease-out, transform 300ms ease-out; }
+        .modal-leave { opacity: 1; transform: translateY(0); }
+        .modal-leave-active { opacity: 0; transform: translateY(10px); transition: opacity 200ms ease-in, transform 200ms ease-in; }
+        
+        /* Aseguramos que los íconos mantengan un look corporativo */
+        .icon-container { transition: all 0.3s ease; }
+        .group:hover .icon-container { transform: scale(1.05); }
+    </style>
+</head>
+<body class="bg-unitec-light text-slate-800 antialiased selection:bg-unitec-cyan selection:text-white">
+
+    <!-- Navegación Clásica -->
+    <nav class="bg-unitec-federal text-white sticky top-0 z-40 border-b border-unitec-federal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Imagotipo Horizontal -->
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center">
+                        <!-- Isotipo de Diamante -->
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                            <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#03AED2"/>
+                        </svg>
+                        <span class="font-bold text-3xl tracking-tight text-white lowercase">unitec</span>
+                    </div>
+                    <span class="hidden sm:inline-block font-light text-unitec-sky border-l border-unitec-sky/40 pl-3 ml-1 text-sm tracking-wide">
+                        Collective Growth System
+                    </span>
+                </div>
+                <!-- Menú -->
+                <div class="hidden md:block">
+                    <div class="flex items-center space-x-6">
+                        <a href="#video-section" class="hover:text-unitec-cyan text-sm font-semibold transition-colors">Video Introductorio</a>
+                        <a href="#modulos-section" class="hover:text-unitec-cyan text-sm font-semibold transition-colors">Contenido Interactivo</a>
+                        <a href="#recursos-section" class="bg-unitec-cyan hover:bg-[#0296b5] text-white px-5 py-2.5 rounded-md text-sm font-bold transition-colors">
+                            Descargar Materiales
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section Corporativo -->
+    <header class="relative bg-unitec-federal text-white overflow-hidden">
+        <!-- Overlay sólido de Federal Blue para mantener limpieza, sobre imagen muy tenue -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-10 mix-blend-luminosity"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-24 lg:py-32">
+            <span class="inline-block py-1.5 px-4 rounded-full bg-white/10 text-unitec-sky text-sm font-bold tracking-wide mb-6 uppercase border border-unitec-sky/30">
+                Train the Trainers - Módulo 1
+            </span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4 leading-tight">
+                El Cambio de Paradigma <br>
+                <span class="text-unitec-cyan font-light">¿Qué es la Evaluación Auténtica?</span>
+            </h1>
+            <p class="mt-6 max-w-2xl text-xl text-gray-300 font-light leading-relaxed">
+                De la transacción a la trascendencia. Alineando nuestra práctica docente con la Visión 2030 y el modelo de capacidades humanas para formar solucionadores de problemas empáticos.
+            </p>
+            <div class="mt-10 flex gap-4">
+                <a href="#video-section" class="bg-unitec-cyan text-white hover:bg-[#0296b5] px-8 py-3.5 rounded-md font-bold transition-colors flex items-center gap-3">
+                    <i class="fa-solid fa-play text-sm"></i> Iniciar Recorrido
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Video Explainer Section -->
+    <section id="video-section" class="py-20 bg-white border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-unitec-federal">Exploración Asincrónica (Parte 1)</h2>
+                <p class="mt-4 text-lg text-gray-500 font-light">Inicia tu inmersión en este módulo revisando la primera parte de nuestro video explicativo. Comprende la base de la evaluación auténtica.</p>
+            </div>
+            
+            <!-- Estructura de Video Limpia -->
+            <div class="relative bg-unitec-federal rounded-xl shadow-lg overflow-hidden aspect-video group cursor-pointer flex items-center justify-center">
+                <div class="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80')] bg-cover bg-center transition-opacity group-hover:opacity-30 mix-blend-luminosity"></div>
+                <div class="relative z-10 text-center text-white p-6">
+                    <div class="w-20 h-20 mx-auto bg-unitec-cyan rounded-full flex items-center justify-center transform transition-transform group-hover:scale-105 mb-6">
+                        <i class="fa-solid fa-play text-3xl ml-1 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold tracking-tight">[Espacio para Video Explainer - Parte 1]</h3>
+                    <p class="text-sm mt-3 font-light text-unitec-sky">De la Transacción a la Trascendencia (6 min)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Los Principios de Aprendizaje Section -->
+    <section id="principios-section" class="py-20 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-black text-unitec-federal">Los Principios de Aprendizaje</h2>
+                <p class="mt-4 text-lg text-gray-500 font-light max-w-3xl mx-auto">Nuestro recordatorio fundamental de cómo y para qué aprendemos en nuestra institución.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Principio 1 -->
+                <div class="bg-unitec-light p-8 rounded-lg border-l-4 border-unitec-cyan shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-white text-unitec-federal rounded-full flex items-center justify-center shadow-sm text-xl shrink-0">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-unitec-federal leading-tight">Aprendizaje con propósito</h3>
+                            <span class="text-sm text-unitec-cyan font-semibold">¿Para qué aprendemos?</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 font-light leading-relaxed">En UNITEC y CEUTEC aprendemos siempre con un propósito claro, conectando el proceso de enseñanza con la realidad para generar un impacto positivo y tangible en nuestra sociedad.</p>
+                </div>
+
+                <!-- Principio 2 -->
+                <div class="bg-unitec-light p-8 rounded-lg border-l-4 border-unitec-federal shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-white text-unitec-federal rounded-full flex items-center justify-center shadow-sm text-xl shrink-0">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-unitec-federal leading-tight">Posibilidad</h3>
+                            <span class="text-sm text-unitec-cyan font-semibold">¿Quiénes estamos llamados a ser?</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 font-light leading-relaxed">En UNITEC y CEUTEC creemos en el potencial de cada persona. Asumimos los grandes desafíos, transformamos el error en una oportunidad de aprendizaje y nos comprometemos a mejorar siempre.</p>
+                </div>
+
+                <!-- Principio 3 -->
+                <div class="bg-unitec-light p-8 rounded-lg border-l-4 border-unitec-sky shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-white text-unitec-federal rounded-full flex items-center justify-center shadow-sm text-xl shrink-0">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-unitec-federal leading-tight">Personas</h3>
+                            <span class="text-sm text-unitec-cyan font-semibold">¿Con quién aprendemos?</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 font-light leading-relaxed">En UNITEC y CEUTEC aprendemos mejor en comunidad, cultivando un entorno de confianza, respeto y sentido de pertenencia.</p>
+                </div>
+
+                <!-- Principio 4 -->
+                <div class="bg-unitec-light p-8 rounded-lg border-l-4 border-unitec-cyan shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-white text-unitec-federal rounded-full flex items-center justify-center shadow-sm text-xl shrink-0">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-unitec-federal leading-tight">Autonomía</h3>
+                            <span class="text-sm text-unitec-cyan font-semibold">¿Cómo asumimos la responsabilidad?</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 font-light leading-relaxed">En UNITEC y CEUTEC fomentamos la autonomía como eje del desarrollo profesional. El estudiante lidera activamente su aprendizaje, mientras el docente actúa como guía estratégico para que cada persona avance con criterio propio y autorregulación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Explainer Section - Parte 2 -->
+    <section id="video-section-2" class="py-20 bg-white border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-unitec-federal">Exploración Asincrónica (Parte 2)</h2>
+                <p class="mt-4 text-lg text-gray-500 font-light">Continúa con la segunda parte del video explicativo para profundizar en el rediseño del aprendizaje y la evaluación en nuestra institución.</p>
+            </div>
+            
+            <!-- Estructura de Video Limpia -->
+            <div class="relative bg-unitec-federal rounded-xl shadow-lg overflow-hidden aspect-video group cursor-pointer flex items-center justify-center">
+                <div class="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80')] bg-cover bg-center transition-opacity group-hover:opacity-30 mix-blend-luminosity"></div>
+                <div class="relative z-10 text-center text-white p-6">
+                    <div class="w-20 h-20 mx-auto bg-unitec-cyan rounded-full flex items-center justify-center transform transition-transform group-hover:scale-105 mb-6">
+                        <i class="fa-solid fa-play text-3xl ml-1 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold tracking-tight">[Espacio para Video Explainer - Parte 2]</h3>
+                    <p class="text-sm mt-3 font-light text-unitec-sky">El Rol del Docente Transformador (6 min)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Presentation Sections -->
+    <section id="modulos-section" class="py-20 bg-unitec-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-unitec-cyan font-bold tracking-wider uppercase text-sm">Contenido de Estudio</span>
+                <h2 class="text-3xl md:text-4xl font-black text-unitec-federal mt-2">Enfoques del Ecosistema de Aprendizaje</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto font-light">Selecciona cada tarjeta para profundizar en la lectura ampliada y descubrir cómo aplicar estos conceptos en tu asignatura de ingeniería.</p>
+            </div>
+
+            <!-- Grid de Tarjetas (Unificadas en paleta de marca) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Tarjeta 1 -->
+                <button onclick="openModal('modal-1')" class="text-left bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 border-t-4 border-t-unitec-federal flex flex-col h-full group">
+                    <div class="p-8 flex-grow">
+                        <div class="icon-container w-12 h-12 bg-unitec-light text-unitec-cyan rounded flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-unitec-federal mb-3">1. La Analogía del Chef</h3>
+                        <p class="text-gray-500 font-light leading-relaxed mb-4">
+                            De la transacción a la trascendencia. El fin del "examen forense" y la transición hacia el <i>assessment</i> continuo. ¿Cómo probar el platillo mientras se cocina?
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-unitec-cyan font-bold text-sm">Leer a profundidad</span>
+                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </button>
+
+                <!-- Tarjeta 2 -->
+                <button onclick="openModal('modal-2')" class="text-left bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 border-t-4 border-t-unitec-cyan flex flex-col h-full group">
+                    <div class="p-8 flex-grow">
+                        <div class="icon-container w-12 h-12 bg-unitec-light text-unitec-cyan rounded flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-hammer"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-unitec-federal mb-3">2. Producción Artesanal</h3>
+                        <p class="text-gray-500 font-light leading-relaxed mb-4">
+                            Nuestra Identidad: Producción Artesanal vs. Industrial. No somos un filtro masivo; somos transformadores de talento alineados a la Visión 2030.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-unitec-cyan font-bold text-sm">Leer a profundidad</span>
+                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </button>
+
+                <!-- Tarjeta 3 -->
+                <button onclick="openModal('modal-3')" class="text-left bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 border-t-4 border-t-unitec-sky flex flex-col h-full group">
+                    <div class="p-8 flex-grow">
+                        <div class="icon-container w-12 h-12 bg-unitec-light text-unitec-cyan rounded flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-cubes"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-unitec-federal mb-3">3. La Evidencia: Las 3Cs</h3>
+                        <p class="text-gray-500 font-light leading-relaxed mb-4">
+                            Si el aprendizaje es tridimensional, la evaluación también debe serlo: <b>Conceptual, Competencia y Carácter</b>. El verdadero producto final es el estudiante.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-unitec-cyan font-bold text-sm">Leer a profundidad</span>
+                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </button>
+
+                <!-- Tarjeta 4 -->
+                <button onclick="openModal('modal-4')" class="text-left bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 border-t-4 border-t-unitec-federal flex flex-col h-full group">
+                    <div class="p-8 flex-grow">
+                        <div class="icon-container w-12 h-12 bg-unitec-light text-unitec-cyan rounded flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-unitec-federal mb-3">4. Aterrizando en el Aula</h3>
+                        <p class="text-gray-500 font-light leading-relaxed mb-4">
+                            El Retrato del Aprendiz y las Herramientas de Diseño. La sinergia entre el Sílabo, el Planner UNITEC y la aceleración mediante Inteligencia Artificial.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-unitec-cyan font-bold text-sm">Leer a profundidad</span>
+                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recursos / Descargas Section -->
+    <section id="recursos-section" class="py-20 bg-unitec-federal text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <i class="fa-solid fa-file-pdf text-5xl text-unitec-sky mb-6"></i>
+            <h2 class="text-3xl font-bold mb-4">Material de Estudio y Referencia</h2>
+            <p class="text-gray-300 mb-10 text-lg font-light">
+                Descarga el documento completo con la redacción extensa de este módulo, guías de implementación, y las herramientas metacognitivas listas para integrar en tu próximo Planner.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="downloadDocument()" class="bg-unitec-cyan hover:bg-[#0296b5] text-white font-bold py-3 px-8 rounded-md transition-colors flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-download"></i> Descargar PDF Completo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white text-gray-500 py-10 text-center border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <!-- Footer Logo -->
+            <div class="flex justify-center items-center gap-2 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#06065C"/>
+                </svg>
+                <span class="font-bold text-xl text-unitec-federal lowercase">unitec</span>
+            </div>
+            <p class="text-sm">&copy; 2026 Universidad Tecnológica Centroamericana (UNITEC).</p>
+            <p class="mt-1 text-sm font-light">Collective Growth System | Formando solucionadores de problemas empáticos.</p>
+        </div>
+    </footer>
+
+    <!-- MODALS (Lecturas Ampliadas) -->
+
+    <!-- Modal 1: Analogía del Chef -->
+    <div id="modal-1" class="fixed inset-0 z-50 hidden flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-unitec-federal/40 backdrop-blur-sm transition-opacity" onclick="closeModal('modal-1')"></div>
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative z-10 modal-content modal-enter border border-gray-200">
+            <div class="sticky top-0 bg-white border-b border-gray-100 px-8 py-6 flex justify-between items-center z-20">
+                <h3 class="text-2xl font-bold text-unitec-federal flex items-center gap-3">
+                    <i class="fa-solid fa-utensils text-unitec-cyan"></i> De la Transacción a la Trascendencia
+                </h3>
+                <button onclick="closeModal('modal-1')" class="text-gray-400 hover:text-unitec-cyan transition-colors text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-8 text-gray-600 font-light space-y-6">
+                <p class="text-lg leading-relaxed text-gray-700">
+                    En UNITEC, guiados por nuestra Visión 2030, tenemos un mandato claro: buscar y construir experiencias educativas que fortalezcan el crecimiento integral de las personas a lo largo de la vida. Esto significa que lo que logramos en el aula debe ir más allá del momento presente; debe trascender.
+                </p>
+                <div class="bg-unitec-light border-l-4 border-unitec-cyan p-6 rounded-r">
+                    <h4 class="font-bold text-unitec-federal mb-2 text-lg">El fin del "Examen Forense"</h4>
+                    <p>Históricamente, la educación ha tratado la evaluación como un "juego del teléfono": le brindamos la información al estudiante en el Punto A, y en el Punto B revisamos si es capaz de repetir esa información. Tenemos que dejar de ver la evaluación como un <b>examen forense</b>, donde solo revisamos qué "murió" o qué se olvidó al final del periodo.</p>
+                </div>
+                <h4 class="text-xl font-bold text-unitec-federal mt-6">La Analogía: El Chef vs. El Cliente</h4>
+                <ul class="list-none space-y-4 pl-0">
+                    <li class="flex gap-3 items-start">
+                        <i class="fa-solid fa-check text-unitec-cyan mt-1"></i>
+                        <span><b>Piensa como un Chef:</b> Un buen chef prueba su platillo, ajusta la sal y corrige los sabores <i>mientras</i> está cocinando. Hace un <i>assessment</i> continuo.</span>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <i class="fa-solid fa-check text-unitec-cyan mt-1"></i>
+                        <span><b>No actúes solo como el Cliente:</b> El cliente evalúa el plato cuando ya está servido en la mesa. Si solo evaluamos al final, estamos actuando como clientes.</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-gray-50 px-8 py-5 border-t border-gray-100 text-right">
+                <button onclick="closeModal('modal-1')" class="bg-unitec-cyan hover:bg-[#0296b5] text-white font-bold py-2.5 px-6 rounded transition-colors text-sm">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Producción Artesanal -->
+    <div id="modal-2" class="fixed inset-0 z-50 hidden flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-unitec-federal/40 backdrop-blur-sm transition-opacity" onclick="closeModal('modal-2')"></div>
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative z-10 modal-content modal-enter border border-gray-200">
+            <div class="sticky top-0 bg-white border-b border-gray-100 px-8 py-6 flex justify-between items-center z-20">
+                <h3 class="text-2xl font-bold text-unitec-federal flex items-center gap-3">
+                    <i class="fa-solid fa-hammer text-unitec-cyan"></i> Producción Artesanal vs. Industrial
+                </h3>
+                <button onclick="closeModal('modal-2')" class="text-gray-400 hover:text-unitec-cyan transition-colors text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-8 text-gray-600 font-light space-y-6">
+                <h4 class="text-xl font-bold text-unitec-federal">El Propósito de la Institución Privada</h4>
+                <p>Nuestros estudiantes están aquí porque sus familias buscan cumplir un sueño, eligiendo a UNITEC por su ecosistema integral. Esta elección conlleva una gran responsabilidad para nosotros como docentes.</p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div class="border border-gray-200 rounded p-6 bg-white">
+                        <div class="text-3xl text-gray-300 mb-4"><i class="fa-solid fa-industry"></i></div>
+                        <h5 class="font-bold text-gray-700 mb-2">El Modelo Industrial (Filtro)</h5>
+                        <p class="text-sm">Nuestro enfoque no es descartar masivamente. No somos una línea de ensamblaje rígida que desecha la materia prima "defectuosa".</p>
+                    </div>
+                    <div class="border border-unitec-cyan rounded p-6 bg-unitec-light">
+                        <div class="text-3xl text-unitec-cyan mb-4"><i class="fa-solid fa-hands-holding-circle"></i></div>
+                        <h5 class="font-bold text-unitec-federal mb-2">El Modelo Artesanal (Transformación)</h5>
+                        <p class="text-sm">Nuestro deber es tomar a cada estudiante, entender su punto de partida, y transformarlo según sus necesidades. Nuestra educación es una <b>producción artesanal</b>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-8 py-5 border-t border-gray-100 text-right">
+                <button onclick="closeModal('modal-2')" class="bg-unitec-cyan hover:bg-[#0296b5] text-white font-bold py-2.5 px-6 rounded transition-colors text-sm">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Las 3Cs -->
+    <div id="modal-3" class="fixed inset-0 z-50 hidden flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-unitec-federal/40 backdrop-blur-sm transition-opacity" onclick="closeModal('modal-3')"></div>
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative z-10 modal-content modal-enter border border-gray-200">
+            <div class="sticky top-0 bg-white border-b border-gray-100 px-8 py-6 flex justify-between items-center z-20">
+                <h3 class="text-2xl font-bold text-unitec-federal flex items-center gap-3">
+                    <i class="fa-solid fa-cubes text-unitec-cyan"></i> La Evidencia del Aprendizaje: Las 3Cs
+                </h3>
+                <button onclick="closeModal('modal-3')" class="text-gray-400 hover:text-unitec-cyan transition-colors text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-8 text-gray-600 font-light space-y-6">
+                <p class="text-lg">Una evaluación verdaderamente auténtica y válida debe evaluar simultáneamente las tres dimensiones del CGS:</p>
+
+                <div class="space-y-4">
+                    <div class="flex gap-4 p-5 border border-gray-100 rounded bg-white">
+                        <div class="text-2xl text-unitec-cyan"><i class="fa-solid fa-lightbulb"></i></div>
+                        <div>
+                            <h4 class="font-bold text-unitec-federal">1. Lo Conceptual (Comprensión)</h4>
+                            <p class="text-sm mt-1">Pasar de memorizar "contenidos" a dominar los "conceptos principales" (Big Ideas). Entender el <i>por qué</i>.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-5 border border-gray-100 rounded bg-white">
+                        <div class="text-2xl text-unitec-cyan"><i class="fa-solid fa-gears"></i></div>
+                        <div>
+                            <h4 class="font-bold text-unitec-federal">2. La Competencia (Aplicación)</h4>
+                            <p class="text-sm mt-1">Evaluamos descriptores amplios de lo que el estudiante <b>sabe hacer</b> mediante proyectos e instrumentos robustos.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-5 border border-gray-100 rounded bg-white">
+                        <div class="text-2xl text-unitec-cyan"><i class="fa-solid fa-heart"></i></div>
+                        <div>
+                            <h4 class="font-bold text-unitec-federal">3. El Carácter (Ética)</h4>
+                            <p class="text-sm mt-1">La dimensión donde el estudiante aprende a <b>saber ser</b>. Colaboración, comportamiento ante la incertidumbre y ética.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-8 py-5 border-t border-gray-100 text-right">
+                <button onclick="closeModal('modal-3')" class="bg-unitec-cyan hover:bg-[#0296b5] text-white font-bold py-2.5 px-6 rounded transition-colors text-sm">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Herramientas -->
+    <div id="modal-4" class="fixed inset-0 z-50 hidden flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-unitec-federal/40 backdrop-blur-sm transition-opacity" onclick="closeModal('modal-4')"></div>
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative z-10 modal-content modal-enter border border-gray-200">
+            <div class="sticky top-0 bg-white border-b border-gray-100 px-8 py-6 flex justify-between items-center z-20">
+                <h3 class="text-2xl font-bold text-unitec-federal flex items-center gap-3">
+                    <i class="fa-solid fa-map-location-dot text-unitec-cyan"></i> Aterrizando en el Aula
+                </h3>
+                <button onclick="closeModal('modal-4')" class="text-gray-400 hover:text-unitec-cyan transition-colors text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-8 text-gray-600 font-light space-y-6">
+                <p class="text-lg">Nuestro producto definitivo al concluir el plan de estudios es el <b>Retrato del Aprendiz</b>.</p>
+
+                <div class="bg-unitec-light border border-gray-200 p-6 rounded my-6 text-center">
+                    <h4 class="font-bold text-unitec-federal mb-2">Selección Estratégica</h4>
+                    <p class="text-sm">En una clase de 10 semanas no podemos abarcar todas las capacidades humanas; <b>debemos priorizar 1 o 2</b> y alinear todas nuestras actividades a ellas.</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6 items-center justify-center pt-4">
+                    <div class="text-center w-full md:w-1/2 p-4 border border-gray-100 rounded">
+                        <i class="fa-solid fa-file-contract text-3xl text-gray-400 mb-3"></i>
+                        <h5 class="font-bold text-unitec-federal">1. El Sílabo</h5>
+                        <p class="text-xs text-gray-500 mt-2">Lo que necesitamos cumplir por temas de acreditación y normativas.</p>
+                    </div>
+                    <div class="text-center w-full md:w-1/2 p-4 border border-unitec-cyan bg-unitec-light rounded">
+                        <i class="fa-solid fa-map text-3xl text-unitec-cyan mb-3"></i>
+                        <h5 class="font-bold text-unitec-federal">2. El Planner UNITEC</h5>
+                        <p class="text-xs text-gray-500 mt-2">El mapa de diseño que prioriza el aprendizaje, las 3Cs y la curiosidad.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-8 py-5 border-t border-gray-100 text-right">
+                <button onclick="closeModal('modal-4')" class="bg-unitec-cyan hover:bg-[#0296b5] text-white font-bold py-2.5 px-6 rounded transition-colors text-sm">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                const content = modal.querySelector('.modal-content');
+                if(content) {
+                    content.classList.remove('modal-leave-active', 'modal-leave');
+                    content.classList.add('modal-enter-active');
+                }
+            }, 10);
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            const content = modal.querySelector('.modal-content');
+            
+            if(content) {
+                content.classList.remove('modal-enter-active', 'modal-enter');
+                content.classList.add('modal-leave-active');
+            }
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        function downloadDocument() {
+            alert("Descarga de material institucional iniciada. (El PDF contendrá toda la información alineada al manual de marca).");
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modals = document.querySelectorAll('[id^="modal-"]:not(.hidden)');
+                modals.forEach(modal => closeModal(modal.id));
+            }
+        });
+    </script>
+</body>
+</html>
