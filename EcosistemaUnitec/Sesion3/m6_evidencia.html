@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Education Summit | CGS UNITEC</title>
+    <!-- Tipografía Institucional UNITEC: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', // Color principal - Autoridad y claridad
+                            cyan: '#03AED2',    // Acentos y botones - Precisión
+                            sky: '#47C8FD',     // Detalles luminosos
+                            light: '#F8FAFC',   // Fondo gris ultra-claro para limpieza visual
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        /* Estilos personalizados para los reproductores de audio */
+        audio {
+            width: 100%;
+            height: 40px;
+            outline: none;
+            border-radius: 9999px;
+        }
+        audio::-webkit-media-controls-panel {
+            background-color: #F8FAFC;
+        }
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-mute-button {
+            background-color: #03AED2;
+            border-radius: 50%;
+        }
+        .icon-container { transition: all 0.3s ease; }
+        .group:hover .icon-container { transform: scale(1.05); }
+    </style>
+</head>
+<body class="bg-unitec-light text-slate-800 antialiased selection:bg-unitec-cyan selection:text-white">
+
+    <!-- Navegación Institucional -->
+    <nav class="bg-unitec-federal text-white sticky top-0 z-40 border-b border-unitec-federal shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Imagotipo Horizontal -->
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center">
+                        <!-- Isotipo de Diamante -->
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                            <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#03AED2"/>
+                        </svg>
+                        <span class="font-bold text-3xl tracking-tight text-white lowercase">unitec</span>
+                    </div>
+                    <span class="hidden sm:inline-block font-light text-unitec-sky border-l border-unitec-sky/40 pl-3 ml-1 text-sm tracking-wide leading-tight">
+                        Collective Growth<br>System
+                    </span>
+                </div>
+                <!-- Menú -->
+                <div class="hidden md:block">
+                    <div class="flex items-center space-x-6">
+                        <a href="#contexto" class="hover:text-unitec-cyan text-sm font-semibold transition-colors">Contexto Institucional</a>
+                        <a href="#podcasts" class="hover:text-unitec-cyan text-sm font-semibold transition-colors">Episodios del Summit</a>
+                        <a href="#recursos" class="bg-unitec-cyan hover:bg-[#0296b5] text-white px-5 py-2.5 rounded-md text-sm font-bold transition-colors">
+                            Descargar Insumos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-unitec-federal text-white overflow-hidden">
+        <!-- Overlay sutil para textura de fondo -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-10 mix-blend-luminosity"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 lg:py-28">
+            <span class="inline-block py-1.5 px-4 rounded-full bg-white/10 text-unitec-sky text-sm font-bold tracking-wide mb-6 uppercase border border-unitec-sky/30">
+                IFE Conference 2026 • Monterrey, México
+            </span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4 leading-tight">
+                AI in Education Summit <br>
+                <span class="text-unitec-cyan font-light">Reflexiones y Apuntes Clave</span>
+            </h1>
+            <p class="mt-6 max-w-3xl text-xl text-gray-300 font-light leading-relaxed">
+                Profundiza en las discusiones globales sobre cómo la Inteligencia Artificial está reconfigurando la cognición, el aprendizaje y nuestras instituciones. Un paso adelante en la construcción de nuestro ecosistema.
+            </p>
+            <div class="mt-10 flex gap-4">
+                <a href="#podcasts" class="bg-unitec-cyan text-white hover:bg-[#0296b5] px-8 py-3.5 rounded-md font-bold transition-colors flex items-center gap-3">
+                    <i class="fa-solid fa-headphones text-sm"></i> Escuchar Podcasts
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección de Contexto e Integración CGS -->
+    <section id="contexto" class="py-16 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row gap-10 items-center">
+                <div class="md:w-1/2">
+                    <div class="w-16 h-16 bg-unitec-light text-unitec-cyan rounded-xl flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-unitec-federal mb-4">Un Paso Adelante en la Transformación</h2>
+                    <p class="text-gray-600 font-light leading-relaxed mb-4 text-lg">
+                        La IA ha cambiado el contexto en la Educación Superior, y globalmente el mundo se está preparando para transformar sus modelos. Todos los insumos discutidos en este <strong>AI in Education Summit</strong> son altamente relevantes para nuestro proceso de formación.
+                    </p>
+                    <p class="text-gray-600 font-light leading-relaxed text-lg">
+                        Ahora que estas discusiones recién comienzan en las diferentes universidades del mundo, <strong>nosotros en UNITEC y CEUTEC estamos un paso adelante</strong> en la construcción de este ecosistema de aprendizaje. Nuestro enfoque en las capacidades humanas (3Cs) nos permite no solo adaptar herramientas, sino <em>humanizar</em> el aprendizaje en esta nueva era.
+                    </p>
+                </div>
+                <div class="md:w-1/2 bg-unitec-light rounded-2xl p-8 border border-gray-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-unitec-cyan opacity-5 rounded-bl-full"></div>
+                    <h3 class="text-xl font-bold text-unitec-federal mb-4 border-b border-gray-200 pb-2">Ejes de Discusión en los Episodios</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-unitec-cyan mt-1"></i>
+                            <span class="text-gray-700 font-light">Estrategia institucional y espacios de experimentación.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-unitec-cyan mt-1"></i>
+                            <span class="text-gray-700 font-light">Diseñar tecnologías educativas basadas en las <strong>Ciencias del Aprendizaje</strong>.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-unitec-cyan mt-1"></i>
+                            <span class="text-gray-700 font-light">Desafiar narrativas corporativas y priorizar la conexión humana docente-estudiante.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-unitec-cyan mt-1"></i>
+                            <span class="text-gray-700 font-light">La fricción productiva: evitar que la IA reemplace el esfuerzo cognitivo necesario para aprender.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Podcasts Section -->
+    <section id="podcasts" class="py-20 bg-unitec-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-unitec-cyan font-bold tracking-wider uppercase text-sm">Deep Dives</span>
+                <h2 class="text-3xl md:text-4xl font-black text-unitec-federal mt-2">Explora los Podcasts del Summit</h2>
+                <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto font-light">Análisis profundos de los apuntes tomados durante las principales conferencias y paneles del evento.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Podcast 1 -->
+                <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 border-t-4 border-t-unitec-federal p-6 flex flex-col group">
+                    <div class="flex flex-col sm:flex-row gap-6 mb-6">
+                        <!-- Imagen -->
+                        <div class="shrink-0 relative">
+                            <img src="PIC/Podcast1_MichaelFung.jpg" alt="Participantes del Podcast 1" class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-lg shadow-sm">
+                            <div class="absolute -bottom-3 -right-3 w-8 h-8 bg-unitec-federal text-white rounded-full flex items-center justify-center text-xs shadow-md">
+                                <i class="fa-solid fa-microphone"></i>
+                            </div>
+                        </div>
+                        <!-- Información -->
+                        <div class="flex-grow">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Conferencia Inaugural</span>
+                            <h3 class="text-xl font-bold text-unitec-federal leading-tight mb-2">Humanizar el aprendizaje en la era IA</h3>
+                            <p class="text-xs font-semibold text-unitec-cyan mb-3">
+                                <i class="fa-solid fa-users mr-1"></i> Michael Fung, Roberto Iñiguez, Paulo Blikstein, Genaro Zavala
+                            </p>
+                            <p class="text-sm text-gray-600 font-light leading-relaxed">
+                                Análisis de cómo la Inteligencia Artificial está transformando el sector educativo. Se aborda la necesidad de crear estrategias institucionales y enfrentar los retos éticos y de diseño al integrar estas herramientas para potenciar competencias humanas esenciales.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Controles y Descarga -->
+                    <div class="mt-auto pt-4 border-t border-gray-100">
+                        <audio controls class="mb-4" preload="metadata">
+                            <source src="AUD/Humanizar_el_aprendizaje_en_la_era_IA.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                        <a href="DOC/1 Humanizar el aprendizaje en la era IA.pdf" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-unitec-federal hover:text-unitec-cyan transition-colors">
+                            <i class="fa-regular fa-file-pdf text-lg text-red-500"></i>
+                            Leer descripción y contexto completo
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Podcast 2 -->
+                <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 border-t-4 border-t-unitec-cyan p-6 flex flex-col group">
+                    <div class="flex flex-col sm:flex-row gap-6 mb-6">
+                        <!-- Imagen -->
+                        <div class="shrink-0 relative">
+                            <img src="PIC/Podcast2_RaquelCoelho.jpeg" alt="Raquel Coelho" class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-lg shadow-sm">
+                            <div class="absolute -bottom-3 -right-3 w-8 h-8 bg-unitec-cyan text-white rounded-full flex items-center justify-center text-xs shadow-md">
+                                <i class="fa-solid fa-microphone"></i>
+                            </div>
+                        </div>
+                        <!-- Información -->
+                        <div class="flex-grow">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Centering Learning Sciences in AI</span>
+                            <h3 class="text-xl font-bold text-unitec-federal leading-tight mb-2">No automatices un sistema educativo roto</h3>
+                            <p class="text-xs font-semibold text-unitec-cyan mb-3">
+                                <i class="fa-solid fa-user mr-1"></i> Raquel Coelho
+                            </p>
+                            <p class="text-sm text-gray-600 font-light leading-relaxed">
+                                Diseñar experiencias poderosas con IA requiere basarse en las ciencias del aprendizaje. En lugar de utilizar la IA para automatizar prácticas repetitivas de un sistema deficiente, debemos "reestructurar" por completo lo que es posible aprender.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Controles y Descarga -->
+                    <div class="mt-auto pt-4 border-t border-gray-100">
+                        <audio controls class="mb-4" preload="metadata">
+                            <source src="AUD/No_automatices_un_sistema_educativo_roto.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                        <a href="DOC/2 No Automatices Un Sistema Educativo Roto.pdf" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-unitec-federal hover:text-unitec-cyan transition-colors">
+                            <i class="fa-regular fa-file-pdf text-lg text-red-500"></i>
+                            Leer descripción y contexto completo
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Podcast 3 -->
+                <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 border-t-4 border-t-unitec-sky p-6 flex flex-col group">
+                    <div class="flex flex-col sm:flex-row gap-6 mb-6">
+                        <!-- Imagen -->
+                        <div class="shrink-0 relative">
+                            <img src="PIC/Podcast3_YasminKafai.jpg" alt="Participantes del Panel 1" class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-lg shadow-sm">
+                            <div class="absolute -bottom-3 -right-3 w-8 h-8 bg-unitec-sky text-white rounded-full flex items-center justify-center text-xs shadow-md">
+                                <i class="fa-solid fa-microphone"></i>
+                            </div>
+                        </div>
+                        <!-- Información -->
+                        <div class="flex-grow">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Can AI Really Change Schools?</span>
+                            <h3 class="text-xl font-bold text-unitec-federal leading-tight mb-2">El docente frente a Silicon Valley</h3>
+                            <p class="text-xs font-semibold text-unitec-cyan mb-3">
+                                <i class="fa-solid fa-users mr-1"></i> P. Blikstein, S. Vakil, Y. Kafai, J. Reich
+                            </p>
+                            <p class="text-sm text-gray-600 font-light leading-relaxed">
+                                Un profundo panel que desafía las narrativas corporativas tecnológicas. Discute la necesidad de investigación empírica rigurosa y reafirma que el futuro del aprendizaje debe mantenerse anclado en la irreemplazable conexión humana.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Controles y Descarga -->
+                    <div class="mt-auto pt-4 border-t border-gray-100">
+                        <audio controls class="mb-4" preload="metadata">
+                            <source src="AUD/El_docente_frente_a_Silicon_Valley.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                        <a href="DOC/3 El docente frente a Silicon Valley.pdf" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-unitec-federal hover:text-unitec-cyan transition-colors">
+                            <i class="fa-regular fa-file-pdf text-lg text-red-500"></i>
+                            Leer descripción y contexto completo
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Podcast 4 -->
+                <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 border-t-4 border-t-unitec-federal p-6 flex flex-col group">
+                    <div class="flex flex-col sm:flex-row gap-6 mb-6">
+                        <!-- Imagen -->
+                        <div class="shrink-0 relative">
+                            <img src="PIC/Podcast4_Panel2.jpeg" alt="Participantes del Panel 2" class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-lg shadow-sm">
+                            <div class="absolute -bottom-3 -right-3 w-8 h-8 bg-unitec-federal text-white rounded-full flex items-center justify-center text-xs shadow-md">
+                                <i class="fa-solid fa-microphone"></i>
+                            </div>
+                        </div>
+                        <!-- Información -->
+                        <div class="flex-grow">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Generative AI in Higher Ed</span>
+                            <h3 class="text-xl font-bold text-unitec-federal leading-tight mb-2">La IA solo iluminó un sistema roto</h3>
+                            <p class="text-xs font-semibold text-unitec-cyan mb-3">
+                                <i class="fa-solid fa-users mr-1"></i> P. Blikstein, D. Lynch, B. Au, R. Culatta
+                            </p>
+                            <p class="text-sm text-gray-600 font-light leading-relaxed">
+                                La IA actúa como una "linterna" que ilumina fallas estructurales previas. El panel discute cómo evitar eliminar la "fricción productiva" en los estudiantes y prepararlos para formular buenas preguntas, priorizando retroalimentación por sobre el contenido.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Controles y Descarga -->
+                    <div class="mt-auto pt-4 border-t border-gray-100">
+                        <audio controls class="mb-4" preload="metadata">
+                            <source src="AUD/La_IA_solo_iluminó_un_sistema_roto.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                        <a href="DOC/4 La IA solo iluminó un sistema roto.pdf" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-unitec-federal hover:text-unitec-cyan transition-colors">
+                            <i class="fa-regular fa-file-pdf text-lg text-red-500"></i>
+                            Leer descripción y contexto completo
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Institucional -->
+    <footer class="bg-white text-gray-500 py-10 text-center border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center items-center gap-2 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#06065C"/>
+                </svg>
+                <span class="font-bold text-xl text-unitec-federal lowercase">unitec</span>
+            </div>
+            <p class="text-sm">&copy; 2026 Universidad Tecnológica Centroamericana (UNITEC).</p>
+            <p class="mt-1 text-sm font-light">Collective Growth System | Formando solucionadores de problemas empáticos.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
