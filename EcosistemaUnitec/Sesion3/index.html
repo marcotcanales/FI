@@ -35,18 +35,19 @@
 </head>
 <body class="bg-unitec-light text-slate-800 antialiased selection:bg-unitec-cyan selection:text-white flex flex-col min-h-screen">
 
-    <!-- Navegación Clásica -->
-    <nav class="bg-unitec-federal text-white sticky top-0 z-40 border-b border-unitec-federal">
+    <!-- Navegación Institucional Pura (Sin Sombras, Sin Gradientes) -->
+    <nav class="bg-unitec-federal text-white sticky top-0 z-40 border-b-2 border-unitec-cyan">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center gap-3">
                     <div class="flex items-center">
+                        <!-- Isotipo y Logotipo íntegros -->
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                             <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#03AED2"/>
                         </svg>
                         <span class="font-bold text-3xl tracking-tight text-white lowercase">unitec</span>
                     </div>
-                    <span class="hidden sm:inline-block font-light text-unitec-sky border-l border-unitec-sky/40 pl-3 ml-1 text-sm tracking-wide">
+                    <span class="hidden sm:inline-block font-light text-unitec-sky border-l-2 border-unitec-sky/40 pl-3 ml-1 text-sm tracking-wide">
                         Collective Growth System
                     </span>
                 </div>
@@ -55,10 +56,11 @@
     </nav>
 
     <!-- Hero Section Corporativo -->
-    <header class="relative bg-unitec-federal text-white overflow-hidden">
+    <header class="relative bg-unitec-federal text-white overflow-hidden border-b-4 border-unitec-cyan">
+        <!-- Textura sutil, NO gradiente -->
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-10 mix-blend-luminosity"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 lg:py-28 text-center md:text-left">
-            <span class="inline-block py-1.5 px-4 rounded-full bg-white/10 text-unitec-sky text-sm font-bold tracking-wide mb-6 uppercase border border-unitec-sky/30">
+            <span class="inline-block py-1.5 px-4 bg-transparent text-unitec-sky text-sm font-bold tracking-wide mb-6 uppercase border-2 border-unitec-sky">
                 Train the Trainers - Sesión 3
             </span>
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4 leading-tight">
@@ -66,120 +68,125 @@
                 <span class="text-unitec-cyan font-light">Taller de Evaluación Auténtica</span>
             </h1>
             <p class="mt-6 max-w-2xl text-xl text-gray-300 font-light leading-relaxed mx-auto md:mx-0">
-                Transición de la evaluación tradicional a una recopilación de evidencias auténticas. Explora los 5 módulos interactivos diseñados para alinear nuestra práctica con la Visión 2030.
+                Transición de la evaluación tradicional a una recopilación de evidencias auténticas. Explora los módulos interactivos diseñados para alinear nuestra práctica con la Visión 2030.
             </p>
         </div>
     </header>
 
-    <!-- Hub de Módulos -->
+    <!-- Hub de Módulos - Diseño Geométrico y Audaz -->
     <main class="flex-grow py-20 bg-unitec-light">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <span class="text-unitec-cyan font-bold tracking-wider uppercase text-sm">Ruta de Aprendizaje</span>
                 <h2 class="text-3xl md:text-4xl font-black text-unitec-federal mt-2">Módulos de la Sesión</h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto font-light">Selecciona cada tarjeta para navegar al contenido interactivo correspondiente. Te recomendamos seguir el orden numérico para una experiencia de aprendizaje óptima.</p>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto font-light">Selecciona cada tarjeta para navegar al contenido. Estructura plana, limpia y audaz. Sin distracciones.</p>
             </div>
 
-            <!-- Grid de Tarjetas de Navegación -->
+            <!-- Grid de Tarjetas (Cortes Angulares, Sin Sombras) -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
                 <!-- Módulo 1 -->
-                <a href="m1_evidencia.html" class="bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 border-t-4 border-t-unitec-federal flex flex-col h-full group transform hover:-translate-y-1">
+                <a href="m1_evidencia.html" class="bg-white border-2 border-gray-200 border-t-8 border-t-unitec-federal flex flex-col h-full group transform hover:-translate-y-2 hover:border-unitec-cyan hover:bg-unitec-sky/5 transition-all duration-300">
                     <div class="p-8 flex-grow">
-                        <div class="icon-container w-12 h-12 bg-unitec-light text-unitec-cyan rounded flex items-center justify-center text-xl mb-6">
+                        <div class="icon-container w-14 h-14 bg-unitec-light text-unitec-cyan border-2 border-unitec-cyan flex items-center justify-center text-2xl mb-6">
                             <i class="fa-solid fa-lightbulb"></i>
                         </div>
                         <h3 class="text-xl font-bold text-unitec-federal mb-3">Módulo 1: El Cambio de Paradigma</h3>
                         <p class="text-gray-500 font-light leading-relaxed mb-4 text-sm">
                             ¿Qué es la Evaluación Auténtica? De la transacción a la trascendencia. Conoce el enfoque de las 3Cs en la Evidencia y el Retrato del Aprendiz.
                         </p>
-                        <div class="flex items-center gap-2 mt-4">
-                            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider bg-gray-100 px-2 py-1 rounded">15 Min</span>
-                        </div>
                     </div>
-                    <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center">
-                        <span class="text-unitec-cyan font-bold text-sm">Iniciar Módulo</span>
-                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-1 transition-transform"></i>
+                    <div class="px-8 py-5 border-t-2 border-gray-100 flex justify-between items-center group-hover:bg-unitec-cyan/10 transition-colors">
+                        <span class="text-unitec-cyan font-bold text-sm uppercase tracking-wider">Iniciar</span>
+                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-2 transition-transform"></i>
                     </div>
                 </a>
 
                 <!-- Módulo 2 -->
-                <a href="m2_evidencia.html" class="bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 border-t-4 border-t-unitec-cyan flex flex-col h-full group transform hover:-translate-y-1">
+                <a href="m2_evidencia.html" class="bg-white border-2 border-gray-200 border-t-8 border-t-unitec-cyan flex flex-col h-full group transform hover:-translate-y-2 hover:border-unitec-cyan hover:bg-unitec-sky/5 transition-all duration-300">
                     <div class="p-8 flex-grow">
-                        <div class="icon-container w-12 h-12 bg-unitec-light text-unitec-cyan rounded flex items-center justify-center text-xl mb-6">
+                        <div class="icon-container w-14 h-14 bg-unitec-light text-unitec-cyan border-2 border-unitec-cyan flex items-center justify-center text-2xl mb-6">
                             <i class="fa-solid fa-vial-circle-check"></i>
                         </div>
                         <h3 class="text-xl font-bold text-unitec-federal mb-3">Módulo 2: Soluciones del Piloto</h3>
                         <p class="text-gray-500 font-light leading-relaxed mb-4 text-sm">
                             Compartiendo Experiencias. Presentación de actividades y retroalimentación de docentes del piloto en disciplinas numéricas y técnicas.
                         </p>
-                        <div class="flex items-center gap-2 mt-4">
-                            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider bg-gray-100 px-2 py-1 rounded">10 Min</span>
-                        </div>
                     </div>
-                    <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center">
-                        <span class="text-unitec-cyan font-bold text-sm">Iniciar Módulo</span>
-                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-1 transition-transform"></i>
+                    <div class="px-8 py-5 border-t-2 border-gray-100 flex justify-between items-center group-hover:bg-unitec-cyan/10 transition-colors">
+                        <span class="text-unitec-cyan font-bold text-sm uppercase tracking-wider">Iniciar</span>
+                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-2 transition-transform"></i>
                     </div>
                 </a>
 
                 <!-- Módulo 3 -->
-                <a href="m3_evidencia.html" class="bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 border-t-4 border-t-unitec-sky flex flex-col h-full group transform hover:-translate-y-1">
+                <a href="m3_evidencia.html" class="bg-white border-2 border-gray-200 border-t-8 border-t-unitec-sky flex flex-col h-full group transform hover:-translate-y-2 hover:border-unitec-cyan hover:bg-unitec-sky/5 transition-all duration-300">
                     <div class="p-8 flex-grow">
-                        <div class="icon-container w-12 h-12 bg-unitec-light text-unitec-cyan rounded flex items-center justify-center text-xl mb-6">
+                        <div class="icon-container w-14 h-14 bg-unitec-light text-unitec-cyan border-2 border-unitec-cyan flex items-center justify-center text-2xl mb-6">
                             <i class="fa-solid fa-compass-drafting"></i>
                         </div>
                         <h3 class="text-xl font-bold text-unitec-federal mb-3">Módulo 3: Taller Práctico - Parte 1</h3>
                         <p class="text-gray-500 font-light leading-relaxed mb-4 text-sm">
                             Diseñando la Experiencia GRASPS. Estructura el esqueleto de tu Tarea de Desempeño Principal utilizando la matriz de diseño.
                         </p>
-                        <div class="flex items-center gap-2 mt-4">
-                            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider bg-gray-100 px-2 py-1 rounded">35 Min</span>
-                        </div>
                     </div>
-                    <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center">
-                        <span class="text-unitec-cyan font-bold text-sm">Iniciar Módulo</span>
-                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-1 transition-transform"></i>
+                    <div class="px-8 py-5 border-t-2 border-gray-100 flex justify-between items-center group-hover:bg-unitec-cyan/10 transition-colors">
+                        <span class="text-unitec-cyan font-bold text-sm uppercase tracking-wider">Iniciar</span>
+                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-2 transition-transform"></i>
                     </div>
                 </a>
 
                 <!-- Módulo 4 -->
-                <a href="m4_evidencia.html" class="bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 border-t-4 border-t-unitec-federal flex flex-col h-full group transform hover:-translate-y-1">
+                <a href="m4_evidencia.html" class="bg-white border-2 border-gray-200 border-t-8 border-t-unitec-federal flex flex-col h-full group transform hover:-translate-y-2 hover:border-unitec-cyan hover:bg-unitec-sky/5 transition-all duration-300">
                     <div class="p-8 flex-grow">
-                        <div class="icon-container w-12 h-12 bg-unitec-light text-unitec-cyan rounded flex items-center justify-center text-xl mb-6">
+                        <div class="icon-container w-14 h-14 bg-unitec-light text-unitec-cyan border-2 border-unitec-cyan flex items-center justify-center text-2xl mb-6">
                             <i class="fa-solid fa-comments"></i>
                         </div>
                         <h3 class="text-xl font-bold text-unitec-federal mb-3">Módulo 4: Taller Práctico - Parte 2</h3>
                         <p class="text-gray-500 font-light leading-relaxed mb-4 text-sm">
                             Actividades No-GRASPS y Feedback Formativo. Descubre el Pre-Mortem, auditorías en pares y la metodología de feedback constructivo S.T.A.R.
                         </p>
-                        <div class="flex items-center gap-2 mt-4">
-                            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider bg-gray-100 px-2 py-1 rounded">25 Min</span>
-                        </div>
                     </div>
-                    <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center">
-                        <span class="text-unitec-cyan font-bold text-sm">Iniciar Módulo</span>
-                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-1 transition-transform"></i>
+                    <div class="px-8 py-5 border-t-2 border-gray-100 flex justify-between items-center group-hover:bg-unitec-cyan/10 transition-colors">
+                        <span class="text-unitec-cyan font-bold text-sm uppercase tracking-wider">Iniciar</span>
+                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-2 transition-transform"></i>
                     </div>
                 </a>
 
                 <!-- Módulo 5 -->
-                <a href="m5_evidencia.html" class="bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 border-t-4 border-t-unitec-cyan flex flex-col h-full group transform hover:-translate-y-1">
+                <a href="m5_evidencia.html" class="bg-white border-2 border-gray-200 border-t-8 border-t-unitec-cyan flex flex-col h-full group transform hover:-translate-y-2 hover:border-unitec-cyan hover:bg-unitec-sky/5 transition-all duration-300">
                     <div class="p-8 flex-grow">
-                        <div class="icon-container w-12 h-12 bg-unitec-light text-unitec-cyan rounded flex items-center justify-center text-xl mb-6">
+                        <div class="icon-container w-14 h-14 bg-unitec-light text-unitec-cyan border-2 border-unitec-cyan flex items-center justify-center text-2xl mb-6">
                             <i class="fa-solid fa-clipboard-check"></i>
                         </div>
                         <h3 class="text-xl font-bold text-unitec-federal mb-3">Módulo 5: Validación y Cierre</h3>
                         <p class="text-gray-500 font-light leading-relaxed mb-4 text-sm">
                             Cierre Metacognitivo. Audita la calidad de lo producido con la Checklist Planner y reflexiona sobre el cambio en tu rol en el aula.
                         </p>
-                        <div class="flex items-center gap-2 mt-4">
-                            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider bg-gray-100 px-2 py-1 rounded">15 Min</span>
+                    </div>
+                    <div class="px-8 py-5 border-t-2 border-gray-100 flex justify-between items-center group-hover:bg-unitec-cyan/10 transition-colors">
+                        <span class="text-unitec-cyan font-bold text-sm uppercase tracking-wider">Iniciar</span>
+                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </a>
+
+                <!-- Módulo 6: BOLD & INNOVATIVE (Ocupa todo el ancho en escritorio, 2 col en tablet) -->
+                <a href="m6_ife2026.html" class="md:col-span-2 lg:col-span-3 bg-unitec-federal border-2 border-unitec-federal border-t-8 border-t-unitec-sky flex flex-col md:flex-row h-full group transform hover:-translate-y-2 hover:border-unitec-cyan transition-all duration-300">
+                    <div class="p-8 md:p-10 flex-grow flex flex-col md:flex-row gap-8 items-start md:items-center">
+                        <div class="icon-container w-20 h-20 shrink-0 bg-transparent text-unitec-sky border-4 border-unitec-sky flex items-center justify-center text-4xl">
+                            <i class="fa-solid fa-podcast"></i>
+                        </div>
+                        <div>
+                            <span class="text-unitec-sky font-bold tracking-wider uppercase text-xs mb-2 block">AI in Education Summit · Tec de Monterrey</span>
+                            <h3 class="text-2xl md:text-3xl font-black text-white mb-3">Módulo 6: Perspectivas del IFE 2026</h3>
+                            <p class="text-gray-300 font-light leading-relaxed text-sm md:text-base max-w-4xl">
+                                Sumérgete en nuestros podcasts analizando ponencias del IFE. Discutiremos los apuntes tomados durante conferencias magistrales, paneles y presentaciones realizadas durante el <strong>IFE 2026 Conference</strong> (27 al 29 de enero del 2026).
+                            </p>
                         </div>
                     </div>
-                    <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center">
-                        <span class="text-unitec-cyan font-bold text-sm">Iniciar Módulo</span>
-                        <i class="fa-solid fa-arrow-right text-unitec-cyan group-hover:translate-x-1 transition-transform"></i>
+                    <div class="px-8 py-6 md:py-0 md:px-12 border-t-2 md:border-t-0 md:border-l-2 border-unitec-sky/20 flex md:flex-col justify-between md:justify-center items-center gap-4 group-hover:bg-unitec-sky/10 transition-colors shrink-0">
+                        <span class="text-unitec-sky font-bold text-sm md:text-base uppercase tracking-wider text-center">Escuchar<br class="hidden md:block"> Episodios</span>
+                        <i class="fa-solid fa-arrow-right text-unitec-sky text-2xl group-hover:translate-x-2 transition-transform"></i>
                     </div>
                 </a>
 
@@ -187,17 +194,18 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white text-gray-500 py-10 text-center border-t border-gray-200">
+    <!-- Footer Puro y Geométrico -->
+    <footer class="bg-white text-gray-500 py-12 text-center border-t-4 border-unitec-federal">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-center items-center gap-2 mb-4">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div class="flex justify-center items-center gap-2 mb-6">
+                <!-- Isotipo limpio -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#06065C"/>
                 </svg>
-                <span class="font-bold text-xl text-unitec-federal lowercase">unitec</span>
+                <span class="font-black text-2xl text-unitec-federal lowercase">unitec</span>
             </div>
-            <p class="text-sm">&copy; 2026 Universidad Tecnológica Centroamericana (UNITEC).</p>
-            <p class="mt-1 text-sm font-light">Collective Growth System | Formando solucionadores de problemas empáticos.</p>
+            <p class="text-sm font-semibold text-unitec-federal">&copy; 2026 Universidad Tecnológica Centroamericana (UNITEC).</p>
+            <p class="mt-2 text-sm font-light text-gray-400">Collective Growth System | Formando solucionadores de problemas empáticos.</p>
         </div>
     </footer>
 
