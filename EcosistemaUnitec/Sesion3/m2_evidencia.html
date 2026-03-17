@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repositorio de Experiencias | CGS UNITEC</title>
+    <!-- Tipografía Institucional UNITEC: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', // Base masiva
+                            cyan: '#03AED2',    // Acentos vibrantes
+                            sky: '#47C8FD',     // Detalles de luz/métricas
+                            light: '#F8FAFC',   // Fondo limpio
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        
+        /* Funcionalidad del Acordeón (Intacta) */
+        .accordion-content {
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.open {
+            max-height: 1500px; /* Ajuste holgado para contenido dinámico */
+            opacity: 1;
+        }
+        .accordion-icon {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .accordion-btn.open .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Cortes de Diamante (Estética Opción B) */
+        .diamond-tag {
+            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+        }
+        .diamond-icon-bg {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        .diamond-border-top {
+            border-top: 6px solid #03AED2;
+        }
+    </style>
+</head>
+<body class="bg-unitec-light text-slate-800 antialiased selection:bg-unitec-sky selection:text-unitec-federal">
+
+    <!-- Header Masivo e Inmersivo -->
+    <header class="relative bg-unitec-federal text-white overflow-hidden shadow-2xl">
+        <!-- Textura de fondo geométrica/abstracta sutil -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-unitec-federal/80 to-unitec-federal"></div>
+        
+        <!-- Navegación Integrada -->
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+            <div class="flex items-center gap-3">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#03AED2"/>
+                </svg>
+                <span class="font-bold text-2xl tracking-tight text-white lowercase">unitec</span>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-8">
+                <div class="max-w-3xl">
+                    <span class="diamond-tag bg-unitec-cyan text-unitec-federal text-xs font-black px-5 py-2 uppercase tracking-widest mb-6 inline-block shadow-lg">
+                        Collective Growth System
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight mb-4">
+                        Evaluación Auténtica <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-unitec-sky to-white">en Acción</span>
+                    </h1>
+                    <p class="mt-4 text-blue-100 text-lg md:text-xl font-light leading-relaxed">
+                        Un repositorio colaborativo donde nuestros docentes comparten sus experiencias reales, desafíos y victorias al implementar el rediseño de asignaturas bajo el ecosistema CGS de UNITEC.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-20 -mt-10">
+        
+        <!-- Contenedor Modular de Tarjetas -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+            <!-- ========================================== -->
+            <!-- TARJETA DE EXPERIENCIA: MARCO CANALES      -->
+            <!-- ========================================== -->
+            <article class="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden hover:shadow-[0_20px_50px_rgba(6,6,92,0.15)] transition-all duration-300 diamond-border-top group">
+                
+                <!-- Encabezado de Tarjeta -->
+                <div class="p-8 relative">
+                    <!-- Etiqueta con corte de diamante -->
+                    <div class="absolute top-8 right-8">
+                        <span class="diamond-tag bg-unitec-federal text-white text-[10px] font-bold px-4 py-1.5 flex items-center gap-1.5 shadow-md">
+                            <i class="fa-solid fa-cube text-unitec-sky"></i> Actividad GRASPS
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-2xl font-black text-unitec-federal pr-32 leading-tight">Análisis Estructural</h2>
+                    <p class="text-sm font-bold text-unitec-cyan mt-1 uppercase tracking-wider">Prof. Marco Canales</p>
+                    <h3 class="text-lg font-semibold text-slate-700 mt-5 flex items-start gap-2">
+                        <i class="fa-solid fa-folder-open text-unitec-sky mt-1"></i> Proyecto de Modelación Estructural
+                    </h3>
+                    
+                    <!-- Descripción Mejorada -->
+                    <div class="mt-5 bg-slate-50 p-5 rounded border-l-2 border-unitec-federal">
+                        <p class="text-sm text-slate-600 leading-relaxed font-light">
+                            <strong class="text-unitec-federal font-bold">El Reto:</strong> Los estudiantes asumen el rol de ingenieros estructurales para crear un modelo digital de una edificación real a partir de un juego de planos, aplicando el código CHOC para la asignación precisa de cargas (Muerta, Viva, Viento, Sismo). 
+                            <span class="italic text-slate-400 text-xs mt-3 block font-medium">*Nota de diseño: Esta actividad fue inicialmente planteada como una alternativa opcional al examen tradicional.</span>
+                        </p>
+                    </div>
+
+                    <!-- Métricas de la Actividad (Estilo Bold) -->
+                    <div class="flex flex-wrap gap-8 mt-6 pt-6 border-t border-gray-100">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mb-1">Efectividad Global</span>
+                            <div class="flex items-center gap-1 text-unitec-sky text-lg">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="font-black text-unitec-federal ml-2 text-xl">5/5</span>
+                            </div>
+                        </div>
+                        <div class="w-px bg-gray-200 hidden sm:block"></div>
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mb-1">Receptividad Estudiantil</span>
+                            <div class="flex items-center gap-1 text-unitec-cyan text-lg">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star text-slate-300"></i>
+                                <span class="font-black text-unitec-federal ml-2 text-xl">4/5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acordeones (Detalles Interactivos) -->
+                <div class="divide-y divide-gray-100 border-t border-gray-100 bg-white">
+                    
+                    <!-- Acordeón 1: Las 3Cs -->
+                    <div class="accordion-item">
+                        <button class="accordion-btn w-full px-8 py-5 flex items-center justify-between text-left hover:bg-slate-50 transition focus:outline-none">
+                            <div class="flex items-center gap-4">
+                                <!-- Ícono con fondo de diamante -->
+                                <div class="diamond-icon-bg w-10 h-10 bg-unitec-federal text-unitec-sky flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-cubes text-sm"></i>
+                                </div>
+                                <span class="font-bold text-unitec-federal text-lg">Impacto en las 3Cs (Evaluación)</span>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-unitec-federal">
+                                <i class="fa-solid fa-chevron-down text-sm accordion-icon"></i>
+                            </div>
+                        </button>
+                        <div class="accordion-content bg-slate-50 px-8">
+                            <div class="py-6 space-y-4">
+                                <p class="text-sm text-slate-600 mb-4 font-light">La actividad permitió evaluar claramente metas conceptuales, de competencia y de carácter de forma integral:</p>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-4">
+                                        <div class="mt-1 text-unitec-cyan"><i class="fa-solid fa-lightbulb text-lg"></i></div>
+                                        <p class="text-sm font-light text-slate-600"><strong class="text-unitec-federal font-bold">Conceptual:</strong> Se evidenció la comprensión profunda del estudiante al identificar y justificar correctamente <em>qué</em> cargas utilizar según la normativa.</p>
+                                    </li>
+                                    <li class="flex items-start gap-4">
+                                        <div class="mt-1 text-unitec-cyan"><i class="fa-solid fa-gears text-lg"></i></div>
+                                        <p class="text-sm font-light text-slate-600"><strong class="text-unitec-federal font-bold">Competencia:</strong> Se verificó la habilidad técnica y destreza aplicada en la creación del modelo digital a partir de planos físicos.</p>
+                                    </li>
+                                    <li class="flex items-start gap-4">
+                                        <div class="mt-1 text-unitec-cyan"><i class="fa-solid fa-heart text-lg"></i></div>
+                                        <p class="text-sm font-light text-slate-600"><strong class="text-unitec-federal font-bold">Carácter:</strong> Se puso en práctica el respeto, la responsabilidad y la colaboración al momento de <em>dar y recibir retroalimentación</em> entre colegas.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón 2: Ejecución y Realidad -->
+                    <div class="accordion-item">
+                        <button class="accordion-btn w-full px-8 py-5 flex items-center justify-between text-left hover:bg-slate-50 transition focus:outline-none">
+                            <div class="flex items-center gap-4">
+                                <div class="diamond-icon-bg w-10 h-10 bg-unitec-federal text-unitec-sky flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-person-chalkboard text-sm"></i>
+                                </div>
+                                <span class="font-bold text-unitec-federal text-lg">Realidad del Aula (Fidelidad)</span>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-unitec-federal">
+                                <i class="fa-solid fa-chevron-down text-sm accordion-icon"></i>
+                            </div>
+                        </button>
+                        <div class="accordion-content bg-slate-50 px-8">
+                            <div class="py-6 space-y-6">
+                                <div>
+                                    <h4 class="text-xs font-black text-unitec-cyan uppercase tracking-widest">Desafíos en la Ejecución</h4>
+                                    <p class="text-sm text-slate-600 mt-2 font-light">
+                                        Se requirieron <strong class="text-unitec-federal font-semibold">ajustes sobre la marcha</strong>. El obstáculo principal fue la falta de tiempo en aula y la necesidad de buscar una vía más rápida para proveer retroalimentación (Assessment FOR learning).
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-black text-unitec-cyan uppercase tracking-widest">La Solución Implementada</h4>
+                                    <p class="text-sm text-slate-600 mt-2 font-light">
+                                        Para mitigar el factor tiempo, se habilitaron <strong class="text-unitec-federal font-semibold">foros asincrónicos públicos</strong>. Esto permitió que las dudas y retroalimentaciones fuesen visibles para todos, fomentando el aprendizaje entre pares.
+                                    </p>
+                                </div>
+                                <div class="bg-white p-5 border-l-4 border-unitec-sky shadow-sm">
+                                    <h4 class="text-xs font-black text-unitec-federal uppercase tracking-widest flex items-center gap-2"><i class="fa-solid fa-users text-unitec-cyan"></i> Reacción de los Estudiantes</h4>
+                                    <p class="text-sm text-slate-600 mt-2 font-light">
+                                        Hubo temor inicial. Algunos alumnos sintieron resistencia e incluso miedo a participar al enfrentarse a un problema abierto sin "una única respuesta correcta". Sin embargo, a medida que avanzaron, descubrieron que el reto era realizable, mejorando radicalmente la receptividad hacia el final.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón 3: Lecciones Aprendidas -->
+                    <div class="accordion-item">
+                        <button class="accordion-btn w-full px-8 py-5 flex items-center justify-between text-left hover:bg-slate-50 transition focus:outline-none">
+                            <div class="flex items-center gap-4">
+                                <div class="diamond-icon-bg w-10 h-10 bg-unitec-federal text-unitec-sky flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-seedling text-sm"></i>
+                                </div>
+                                <span class="font-bold text-unitec-federal text-lg">Lecciones y Consejos</span>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-unitec-federal">
+                                <i class="fa-solid fa-chevron-down text-sm accordion-icon"></i>
+                            </div>
+                        </button>
+                        <div class="accordion-content bg-slate-50 px-8">
+                            <div class="py-6 space-y-6">
+                                <div>
+                                    <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">¿Qué cambiaría en el futuro?</h4>
+                                    <div class="border-l-2 border-unitec-cyan pl-4 py-1">
+                                        <p class="text-sm text-slate-600 italic font-light">
+                                            "No les daría la opción de elegir su forma de evaluación [entre el examen tradicional y este proyecto]. Muchos no toman una decisión sabia respecto a qué es lo mejor para su propio aprendizaje."
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="bg-unitec-federal text-white p-5 rounded-r relative overflow-hidden">
+                                    <!-- Acento visual dentro de la caja oscura -->
+                                    <div class="absolute -right-4 -top-4 opacity-10">
+                                        <i class="fa-solid fa-quote-right text-6xl"></i>
+                                    </div>
+                                    <h4 class="text-xs font-black text-unitec-sky uppercase tracking-widest flex items-center gap-2 relative z-10">
+                                        <i class="fa-solid fa-comment-dots"></i> Consejo para otros colegas
+                                    </h4>
+                                    <p class="text-sm mt-3 font-medium leading-relaxed relative z-10">
+                                        "Debe estar listo para reconocer si algo no está funcionando en el momento y tener la disposición de hacer ajustes sobre la marcha."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </article>
+            <!-- ========================================== -->
+            <!-- FIN TARJETA DE EXPERIENCIA                 -->
+            <!-- ========================================== -->
+
+            <!-- El contenedor grid (lg:grid-cols-2) automáticamente reservará el espacio aquí al lado derecho para la próxima tarjeta que agregues. -->
+        </div>
+    </main>
+
+    <!-- Footer Corporativo -->
+    <footer class="bg-white text-slate-500 py-10 text-center border-t border-slate-200 mt-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center items-center gap-2 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#06065C"/>
+                </svg>
+                <span class="font-bold text-xl text-unitec-federal lowercase">unitec</span>
+            </div>
+            <p class="text-sm">&copy; 2026 Universidad Tecnológica Centroamericana (UNITEC).</p>
+            <p class="mt-1 text-sm font-light">Collective Growth System | Formando solucionadores de problemas empáticos.</p>
+        </div>
+    </footer>
+
+    <!-- Script para los Acordeones (Lógica Funcional Intacta) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionBtns = document.querySelectorAll('.accordion-btn');
+
+            accordionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const isOpen = this.classList.contains('open');
+
+                    if (!isOpen) {
+                        this.classList.add('open');
+                        content.classList.add('open');
+                        content.style.paddingTop = '1.5rem';
+                        content.style.paddingBottom = '1.5rem';
+                    } else {
+                        this.classList.remove('open');
+                        content.classList.remove('open');
+                        content.style.paddingTop = '0';
+                        content.style.paddingBottom = '0';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
