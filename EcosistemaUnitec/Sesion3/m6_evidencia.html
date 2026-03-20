@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller: Ecosistema de Herramientas - UNITEC</title>
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Poppins (Strictly Unitec) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration for Unitec Palette -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', // Federal Blue
+                            cyan: '#03AED2',    // Pacific Cyan
+                            sky: '#47C8FD',     // Vivid Sky Blue
+                            light: '#F8FAFC',   // Clean background
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        
+        .fade-in {
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        /* Cortes de Diamante (Estética Dinámica UNITEC) */
+        .diamond-tag { clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+        .diamond-icon-bg { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+        .diamond-border-top { border-top: 6px solid #03AED2; }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(6, 6, 92, 0.15), 0 10px 10px -5px rgba(6, 6, 92, 0.04);
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #03AED2; }
+    </style>
+</head>
+<body class="bg-unitec-light text-slate-800 h-screen flex flex-col overflow-hidden font-sans selection:bg-unitec-cyan selection:text-white">
+
+    <!-- Header Institucional Inmersivo -->
+    <header class="relative bg-unitec-federal text-white shadow-2xl z-20 shrink-0">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center relative z-10">
+            <div class="flex items-center gap-4">
+                <div class="diamond-icon-bg w-10 h-10 bg-unitec-cyan text-unitec-federal flex items-center justify-center shrink-0 shadow-lg">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black tracking-tight leading-none text-white">UNITEC <span class="font-light text-unitec-sky opacity-60">|</span> Ecosistema de Aprendizaje de Unitec y Ceutec</h1>
+                    <p class="text-[10px] text-unitec-cyan font-bold tracking-widest uppercase mt-1">Menú de Transformación Pedagógica</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-3">
+                <button id="btn-home" onclick="goHome()" class="hidden px-5 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-xs font-bold uppercase tracking-widest border border-white/20 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-house"></i> Menú Principal
+                </button>
+                <span class="diamond-tag px-4 py-1.5 bg-unitec-cyan text-unitec-federal text-[10px] font-black uppercase tracking-widest shadow-sm">
+                    Learning to Learn Toolkit
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="flex flex-1 overflow-hidden relative" id="main-container">
+        
+        <!-- ================= HOME VIEW ================= -->
+        <div id="home-view" class="w-full h-full overflow-y-auto p-6 md:p-10 fade-in absolute inset-0 bg-unitec-light z-10 custom-scrollbar">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12 bg-white p-8 rounded-2xl shadow-xl border border-slate-100 diamond-border-top relative overflow-hidden group">
+                    <div class="absolute -top-10 -left-10 opacity-5 transition-transform duration-500 group-hover:rotate-12">
+                        <i class="fa-solid fa-layer-group text-9xl text-unitec-federal"></i>
+                    </div>
+                    <span class="diamond-tag inline-block px-4 py-1.5 bg-unitec-federal text-unitec-sky text-[10px] font-black tracking-widest mb-4 uppercase shadow-sm relative z-10">Diseño de Tareas de Desempeño</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-unitec-federal mb-4 leading-tight relative z-10">Hackeando el Entregable Tradicional</h2>
+                    <p class="text-lg text-slate-600 max-w-4xl mx-auto font-light leading-relaxed relative z-10">
+                        <strong class="font-bold text-unitec-cyan uppercase tracking-wider text-xs block mb-2">Instrucciones para los Grupos:</strong> 
+                        Cada equipo debe elegir una de las siguientes 5 herramientas de transformación. Analicen qué tipo de evaluación tradicional desean hackear hoy y seleccionen la tarjeta correspondiente para ingresar a su entorno interactivo de rediseño. Tienen <span class="font-bold text-unitec-federal bg-unitec-sky/20 px-2 py-0.5 rounded">30 minutos</span> en total.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Option 1 -->
+                    <div onclick="openActivity(1)" class="activity-card bg-white rounded-2xl p-8 border border-slate-100 shadow-lg cursor-pointer flex flex-col h-full diamond-border-top">
+                        <div class="diamond-icon-bg w-14 h-14 bg-unitec-federal text-unitec-sky flex items-center justify-center text-2xl mb-6 shadow-md">
+                            <i class="fa-solid fa-people-arrows"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 leading-tight">1. Foro Dinámico: El Tira y Afloja</h3>
+                        <p class="text-sm text-slate-500 font-light mb-6 flex-grow leading-relaxed">Ideal para transformar el tradicional y aburrido foro de discusión ("Aporte su opinión y comente a dos compañeros").</p>
+                        <div class="text-xs font-black text-unitec-cyan uppercase tracking-widest mt-auto flex items-center bg-slate-50 p-3 rounded-lg">
+                            <i class="fa-solid fa-wrench mr-2 text-slate-400"></i> Herramienta: Tug-of-War
+                        </div>
+                    </div>
+
+                    <!-- Option 2 -->
+                    <div onclick="openActivity(2)" class="activity-card bg-white rounded-2xl p-8 border border-slate-100 shadow-lg cursor-pointer flex flex-col h-full diamond-border-top">
+                        <div class="diamond-icon-bg w-14 h-14 bg-unitec-federal text-unitec-sky flex items-center justify-center text-2xl mb-6 shadow-md">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 leading-tight">2. Del Ensayo al Ecosistema</h3>
+                        <p class="text-sm text-slate-500 font-light mb-6 flex-grow leading-relaxed">Ideal para transformar el típico ensayo descriptivo, resumen o reporte de investigación lineal en un análisis sistémico.</p>
+                        <div class="text-xs font-black text-unitec-cyan uppercase tracking-widest mt-auto flex items-center bg-slate-50 p-3 rounded-lg">
+                            <i class="fa-solid fa-wrench mr-2 text-slate-400"></i> Herramienta: Causal Interaction Map
+                        </div>
+                    </div>
+
+                    <!-- Option 3 -->
+                    <div onclick="openActivity(3)" class="activity-card bg-white rounded-2xl p-8 border border-slate-100 shadow-lg cursor-pointer flex flex-col h-full diamond-border-top">
+                        <div class="diamond-icon-bg w-14 h-14 bg-unitec-federal text-unitec-sky flex items-center justify-center text-2xl mb-6 shadow-md">
+                            <i class="fa-solid fa-puzzle-piece"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 leading-tight">3. La Tarea Reflexiva</h3>
+                        <p class="text-sm text-slate-500 font-light mb-6 flex-grow leading-relaxed">Ideal para transformar las guías de ejercicios matemáticos, físicos o de programación mecánicos y repetitivos.</p>
+                        <div class="text-xs font-black text-unitec-cyan uppercase tracking-widest mt-auto flex items-center bg-slate-50 p-3 rounded-lg">
+                            <i class="fa-solid fa-wrench mr-2 text-slate-400"></i> Herramienta: Struggles & Puzzles
+                        </div>
+                    </div>
+
+                    <!-- Option 4 -->
+                    <div onclick="openActivity(4)" class="activity-card bg-white rounded-2xl p-8 border border-slate-100 shadow-lg cursor-pointer flex flex-col h-full diamond-border-top">
+                        <div class="diamond-icon-bg w-14 h-14 bg-unitec-federal text-unitec-sky flex items-center justify-center text-2xl mb-6 shadow-md">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 leading-tight">4. Investigación Inversa</h3>
+                        <p class="text-sm text-slate-500 font-light mb-6 flex-grow leading-relaxed">Ideal para transformar el inicio de un tema nuevo o una aburrida tarea directa de "investigue los siguientes conceptos".</p>
+                        <div class="text-xs font-black text-unitec-cyan uppercase tracking-widest mt-auto flex items-center bg-slate-50 p-3 rounded-lg">
+                            <i class="fa-solid fa-wrench mr-2 text-slate-400"></i> Herramienta: QFT Framework
+                        </div>
+                    </div>
+
+                    <!-- Option 5 -->
+                    <div onclick="openActivity(5)" class="activity-card bg-white rounded-2xl p-8 border border-slate-100 shadow-lg cursor-pointer flex flex-col h-full md:col-span-2 lg:col-span-1 diamond-border-top">
+                        <div class="diamond-icon-bg w-14 h-14 bg-unitec-federal text-unitec-sky flex items-center justify-center text-2xl mb-6 shadow-md">
+                            <i class="fa-solid fa-user-secret"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 leading-tight">5. Autopsia de un Caso</h3>
+                        <p class="text-sm text-slate-500 font-light mb-6 flex-grow leading-relaxed">Ideal para transformar un simple control de lectura o el análisis de un caso de estudio tradicional en un debate profundo.</p>
+                        <div class="text-xs font-black text-unitec-cyan uppercase tracking-widest mt-auto flex items-center bg-slate-50 p-3 rounded-lg">
+                            <i class="fa-solid fa-wrench mr-2 text-slate-400"></i> Herramienta: The Story Routine
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ACTIVITY VIEW ================= -->
+        <div id="activity-view" class="w-full h-full flex hidden absolute inset-0 bg-unitec-light z-0">
+            <!-- Sidebar Navigation -->
+            <aside class="w-72 bg-white shadow-[5px_0_15px_rgba(0,0,0,0.05)] z-0 hidden md:flex flex-col border-r border-slate-100 shrink-0">
+                <div class="p-6 pb-2">
+                    <h2 class="text-xs font-black text-unitec-cyan uppercase tracking-widest mb-1">Ruta del Taller</h2>
+                    <p class="text-xs text-slate-400 font-medium mb-6">Navegación de Fases</p>
+                </div>
+                <nav class="px-4 space-y-2 overflow-y-auto custom-scrollbar pb-6 flex-1">
+                    <button onclick="goToPhase(0)" id="nav-0" class="w-full text-left px-5 py-4 rounded-xl transition-all duration-300 border-l-4 flex items-center gap-3 group bg-white text-unitec-federal border-unitec-cyan font-black shadow-md">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center transition-colors shadow-sm bg-unitec-cyan text-unitec-federal" id="icon-bg-0">
+                            <i class="fa-solid fa-flag text-sm"></i>
+                        </div>
+                        <span class="text-sm leading-tight">Inicio</span>
+                    </button>
+                    <button onclick="goToPhase(1)" id="nav-1" class="w-full text-left px-5 py-4 rounded-xl transition-all duration-300 border-l-4 flex items-center gap-3 group text-slate-500 border-transparent font-semibold hover:bg-slate-50">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center transition-colors shadow-none bg-slate-100 text-slate-400 group-hover:bg-unitec-sky group-hover:text-white" id="icon-bg-1">
+                            <i class="fa-solid fa-1 text-sm"></i>
+                        </div>
+                        <span id="lbl-nav-1" class="text-sm leading-tight">Fase 1</span>
+                    </button>
+                    <button onclick="goToPhase(2)" id="nav-2" class="w-full text-left px-5 py-4 rounded-xl transition-all duration-300 border-l-4 flex items-center gap-3 group text-slate-500 border-transparent font-semibold hover:bg-slate-50">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center transition-colors shadow-none bg-slate-100 text-slate-400 group-hover:bg-unitec-sky group-hover:text-white" id="icon-bg-2">
+                            <i class="fa-solid fa-2 text-sm"></i>
+                        </div>
+                        <span id="lbl-nav-2" class="text-sm leading-tight">Fase 2</span>
+                    </button>
+                    <button onclick="goToPhase(3)" id="nav-3" class="w-full text-left px-5 py-4 rounded-xl transition-all duration-300 border-l-4 flex items-center gap-3 group text-slate-500 border-transparent font-semibold hover:bg-slate-50">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center transition-colors shadow-none bg-slate-100 text-slate-400 group-hover:bg-unitec-sky group-hover:text-white" id="icon-bg-3">
+                            <i class="fa-solid fa-3 text-sm"></i>
+                        </div>
+                        <span id="lbl-nav-3" class="text-sm leading-tight">Fase 3</span>
+                    </button>
+                    <button onclick="goToPhase(4)" id="nav-4" class="w-full text-left px-5 py-4 rounded-xl transition-all duration-300 border-l-4 flex items-center gap-3 group text-slate-500 border-transparent font-semibold hover:bg-slate-50">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center transition-colors shadow-none bg-slate-100 text-slate-400 group-hover:bg-unitec-sky group-hover:text-white" id="icon-bg-4">
+                            <i class="fa-solid fa-link text-sm"></i>
+                        </div>
+                        <span class="text-sm leading-tight">Alineación</span>
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Dynamic Content Area -->
+            <main class="flex-1 relative overflow-y-auto p-6 md:p-10 pb-32 custom-scrollbar" id="dynamic-content">
+                <!-- Content will be injected here via JS -->
+            </main>
+        </div>
+    </div>
+
+    <!-- Persistent Timer Footer (Hidden by default, shown in Activity View) -->
+    <div id="timer-container" class="fixed bottom-0 w-full glass-panel shadow-[0_-10px_40px_rgba(6,6,92,0.1)] transition-transform transform translate-y-full z-50">
+        <!-- Progress Bar at top of footer -->
+        <div class="h-2 w-full bg-slate-100 absolute top-0 left-0">
+            <div id="time-progress" class="h-full bg-unitec-cyan w-full transition-all duration-1000 ease-linear"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center pt-6">
+            <div class="flex items-center gap-4 mb-3 md:mb-0">
+                <div class="diamond-icon-bg bg-unitec-cyan text-unitec-federal w-10 h-10 flex items-center justify-center animate-pulse shadow-md">
+                    <i class="fa-solid fa-hourglass-half text-sm"></i>
+                </div>
+                <div>
+                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">Control de Tiempo</span>
+                    <span id="timer-phase-title" class="font-black text-unitec-federal text-lg md:text-xl uppercase tracking-wide leading-none">Fase de Trabajo</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div id="time-display" class="text-4xl md:text-5xl font-mono font-black text-unitec-federal tracking-tighter w-32 text-center drop-shadow-sm">
+                    00:00
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="toggleTimer()" id="btn-play-pause" class="bg-unitec-federal hover:bg-[#040440] text-white w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center transition-colors focus:outline-none shadow-md group">
+                        <i class="fa-solid fa-play text-xl group-hover:scale-110 transition-transform" id="icon-play-pause"></i>
+                    </button>
+                    <button onclick="resetTimer()" class="bg-white border-2 border-slate-200 hover:border-unitec-cyan text-slate-500 hover:text-unitec-federal w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center transition-colors focus:outline-none shadow-sm group">
+                        <i class="fa-solid fa-rotate-right text-lg group-hover:-rotate-90 transition-transform duration-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Messages -->
+    <div id="msg-modal" class="fixed inset-0 bg-unitec-federal/80 z-[110] flex items-center justify-center hidden opacity-0 transition-opacity backdrop-blur-sm">
+        <div class="bg-white rounded-2xl p-10 max-w-md w-full text-center shadow-2xl transform scale-95 transition-transform diamond-border-top" id="msg-content">
+            <div class="diamond-icon-bg bg-unitec-cyan text-unitec-federal text-4xl w-24 h-24 flex items-center justify-center mx-auto mb-6 shadow-lg animate-bounce">
+                <i class="fa-solid fa-bell"></i>
+            </div>
+            <h3 class="text-3xl font-black text-unitec-federal mb-3">¡Tiempo Terminado!</h3>
+            <p class="text-slate-600 mb-8 font-light text-lg">Por favor, prepárense para pasar a la siguiente fase.</p>
+            <button onclick="closeModal()" class="bg-unitec-federal hover:bg-[#040440] text-white font-bold py-3.5 px-8 rounded-lg w-full transition-colors shadow-lg uppercase tracking-widest text-sm">Entendido</button>
+        </div>
+    </div>
+
+    <!-- ================= DATA & TEMPLATES ================= -->
+    <script>
+        // Database of all 5 activities (Preserved Wording, Updated Tailwind Palette)
+        const activitiesDB = {
+            1: {
+                title: "Foro Dinámico: El Tira y Afloja de las Decisiones Técnicas",
+                tool: "Tug-of-War",
+                section: "Conceptual Learning -> Connecting",
+                icon: "fa-people-arrows",
+                purpose: "Transformar el tradicional y aburrido foro de discusión ('Aporte su opinión y comente a dos compañeros').",
+                transform: "En lugar de pedir una opinión plana sobre un tema técnico, el docente diseñará un foro basado en un dilema donde dos principios válidos 'tiran' en direcciones opuestas (Ej. en Ingeniería Civil: Reducción extrema de costos vs. Máxima mitigación de impacto ambiental). Los estudiantes deberán colocar su argumento en algún punto de la 'cuerda' y justificarlo.",
+                phases: [
+                    { id: 0, title: "Inicio", navTitle: "Inicio", time: 0 },
+                    { id: 1, title: "Seleccionar Foro", navTitle: "Seleccionar", time: 5,
+                      content: `<ul class="space-y-6 mb-6">
+                                  <li class="flex items-start gap-4 bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                                      <div class="w-8 h-8 rounded-full bg-unitec-federal text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5"><i class="fa-solid fa-check text-sm"></i></div>
+                                      <span class="text-slate-700 text-sm leading-relaxed font-light"><strong class="font-bold text-unitec-federal">Seleccionen</strong> un foro de discusión tradicional y plano de una de sus clases actuales.</span>
+                                  </li>
+                                </ul>` 
+                    },
+                    { id: 2, title: "Rediseño con la Herramienta", navTitle: "Rediseño", time: 15,
+                      content: `<p class="text-slate-700 mb-6 font-light text-lg">Reconstruyan el foro utilizando el principio de 'Tug-of-War' (Tira y Afloja):</p>
+                                <div class="grid gap-6">
+                                    <div class="bg-slate-50 border-l-4 border-unitec-federal p-6 rounded-r-xl">
+                                        <h4 class="font-black text-unitec-federal mb-2 flex items-center gap-2"><i class="fa-solid fa-1 text-unitec-cyan"></i> Identificar Extremos</h4>
+                                        <p class="text-sm text-slate-600 font-light leading-relaxed">Encuentren los dos "extremos" del dilema técnico (los dos lados de la cuerda). Ej. Rendimiento Absoluto vs. Eficiencia Energética.</p>
+                                    </div>
+                                    <div class="bg-white border border-slate-200 p-6 rounded-xl shadow-sm">
+                                        <h4 class="font-black text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-2 text-unitec-cyan"></i> Pregunta de Encuadre</h4>
+                                        <p class="text-sm text-slate-600 font-light leading-relaxed">Formulen la pregunta o el escenario que obligará al estudiante a posicionarse en la cuerda.</p>
+                                    </div>
+                                </div>`
+                    },
+                    { id: 3, title: "Reglas de Interacción", navTitle: "Reglas", time: 10,
+                      content: `<ul class="space-y-6 mb-8">
+                                    <li class="flex items-start gap-4 bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                                      <div class="w-8 h-8 rounded-full bg-unitec-federal text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5"><i class="fa-solid fa-1 text-sm"></i></div>
+                                      <span class="text-slate-700 text-sm leading-relaxed font-light"><strong class="font-bold text-unitec-federal">Redacten las nuevas instrucciones</strong> del foro.</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                                      <div class="w-8 h-8 rounded-full bg-unitec-federal text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5"><i class="fa-solid fa-2 text-sm"></i></div>
+                                      <span class="text-slate-700 text-sm leading-relaxed font-light">Asegúrense de requerir que los alumnos no solo comenten, sino que intenten <strong class="font-bold text-unitec-cyan">"jalar" el argumento</strong> de un compañero hacia su lado usando evidencia técnica (Competencia).</span>
+                                    </li>
+                                </ul>
+                                <div class="bg-unitec-federal rounded-xl p-8 text-white shadow-inner relative overflow-hidden diamond-border-top">
+                                    <i class="fa-solid fa-quote-right absolute -right-4 -top-4 text-8xl opacity-10"></i>
+                                    <p class="text-lg font-light italic leading-relaxed relative z-10 pl-4 border-l-2 border-unitec-cyan">"No basta con decir 'estoy de acuerdo'. Debes proveer un dato o principio ingenieril que mueva el peso del argumento hacia tu postura."</p>
+                                </div>`
+                    },
+                    { id: 4, title: "Alineación", navTitle: "Alineación", time: 0,
+                      align1: { title: "Aprendizaje Conceptual", desc: "Fomenta el aprendizaje conceptual al mostrar que en ingeniería rara vez hay respuestas absolutas de 'blanco o negro'." },
+                      align2: { title: "Visión UNITEC 2030", desc: "Desarrolla el rasgo de <strong class='font-bold text-unitec-federal'>Pensador Crítico</strong>, obligando a los estudiantes a sopesar variables opuestas y tomar decisiones fundamentadas." }
+                    }
+                ]
+            },
+            2: {
+                title: "Del Ensayo al Ecosistema: Mapeo de Interacciones Causales",
+                tool: "Causal Interaction Map",
+                section: "Conceptual Learning -> Constructing",
+                icon: "fa-diagram-project",
+                purpose: "Transformar el típico ensayo descriptivo, resumen o reporte de investigación lineal.",
+                transform: "En lugar de pedir a los alumnos que 'redacten un resumen de 2 páginas sobre termodinámica' (que fácilmente puede hacer una IA), el docente diseñará una tarea donde el alumno deba crear un mapa visual que explique cómo una alteración en la variable A causa un efecto dominó en B y C.",
+                phases: [
+                    { id: 0, title: "Inicio", navTitle: "Inicio", time: 0 },
+                    { id: 1, title: "Tomar Tarea", navTitle: "Tomar Tarea", time: 5,
+                      content: `<ul class="space-y-6 mb-6">
+                                  <li class="flex items-start gap-4 bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                                      <div class="w-8 h-8 rounded-full bg-unitec-federal text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5"><i class="fa-solid fa-check text-sm"></i></div>
+                                      <span class="text-slate-700 text-sm leading-relaxed font-light"><strong class="font-bold text-unitec-federal">Tomen</strong> una tarea de investigación, ensayo o resumen tradicional de su clase.</span>
+                                  </li>
+                                </ul>` 
+                    },
+                    { id: 2, title: "Rediseño Visual", navTitle: "Rediseño", time: 15,
+                      content: `<p class="text-slate-700 mb-6 font-light text-lg">Construyan el andamiaje para el Causal Interaction Map:</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="bg-slate-50 border-l-4 border-unitec-federal p-6 rounded-r-xl">
+                                        <h4 class="font-black text-unitec-federal mb-2 flex items-center gap-2"><i class="fa-solid fa-1 text-unitec-cyan"></i> Variables</h4>
+                                        <p class="text-sm text-slate-600 font-light leading-relaxed">Identificar al menos 5 variables interdependientes del tema técnico.</p>
+                                    </div>
+                                    <div class="bg-white border border-slate-200 p-6 rounded-xl shadow-sm">
+                                        <h4 class="font-black text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-2 text-unitec-cyan"></i> Diseño de Instrucción</h4>
+                                        <p class="text-sm text-slate-600 font-light leading-relaxed">Definan cómo el alumno construirá el mapa (ej. usar flechas, grosores de línea para indicar la fuerza de la causa).</p>
+                                    </div>
+                                </div>`
+                    },
+                    { id: 3, title: "El Entregable", navTitle: "Entregable", time: 10,
+                      content: `<ul class="space-y-6 mb-8">
+                                    <li class="flex items-start gap-4 bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                                      <div class="w-8 h-8 rounded-full bg-unitec-federal text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5"><i class="fa-solid fa-1 text-sm"></i></div>
+                                      <span class="text-slate-700 text-sm leading-relaxed font-light"><strong class="font-bold text-unitec-federal">Redacten la consigna final.</strong></span>
+                                    </li>
+                                </ul>
+                                <div class="bg-unitec-federal rounded-xl p-8 text-white shadow-inner relative overflow-hidden diamond-border-top">
+                                    <i class="fa-solid fa-quote-right absolute -right-4 -top-4 text-8xl opacity-10"></i>
+                                    <p class="text-lg font-light italic leading-relaxed relative z-10 pl-4 border-l-2 border-unitec-cyan">"El alumno entregará el mapa gráfico y un breve párrafo metacognitivo explicando la conexión más crítica del sistema y por qué la eligió."</p>
+                                </div>`
+                    },
+                    { id: 4, title: "Alineación", navTitle: "Alineación", time: 0,
+                      align1: { title: "Pensamiento Sistémico", desc: "Transforma la memorización aislada en Pensamiento Sistémico, obligando a construir (Constructing) teorías sobre cómo funcionan las cosas en red." },
+                      align2: { title: "Visión UNITEC 2030", desc: "Es vital para formar al <strong class='font-bold text-unitec-federal'>Solucionador de Problemas Empático</strong> que entiende el 'efecto dominó' de sus diseños." }
+                    }
+                ]
+            },
+            3: {
+                title: "La Tarea Reflexiva: Tropezones, Rompecabezas y Revelaciones",
+                tool: "Struggles, Puzzles, Insights",
+                section: "Conceptual Learning -> Contributing",
+                icon: "fa-puzzle-piece",
+                purpose: "Transformar las guías de ejercicios matemáticos, físicos o de programación (Problem Sets) repetitivos.",
+                transform: "En el modelo tradicional, el alumno resuelve 15 ejercicios mecánicamente. En este rediseño, el docente pedirá resolver solo 3 o 4 problemas de alta complejidad, pero añadirá obligatoriamente una rutina metacognitiva al final de la tarea.",
+                phases: [
+                    { id: 0, title: "Inicio", navTitle: "Inicio", time: 0 },
+                    { id: 1, title: "Seleccionar Guía", navTitle: "Seleccionar", time: 5,
+                      content: `<ul class="space-y-6 mb-6">
+                                  <li class="flex items-start gap-4 bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                                      <div class="w-8 h-8 rounded-full bg-unitec-federal text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5"><i class="fa-solid fa-check text-sm"></i></div>
+                                      <span class="text-slate-700 text-sm leading-relaxed font-light"><strong class="font-bold text-unitec-federal">Seleccionen</strong> una guía de ejercicios o problem set tradicional denso (esos de 15+ ejercicios mecánicos).</span>
+                                  </li>
+                                </ul>` 
+                    },
+                    { id: 2, title: "Curación de Ejercicios", navTitle: "Curación", time: 10,
+                      content: `<p class="text-slate-700 mb-6 font-light text-lg">Menos es más. Apliquen curación profunda:</p>
+                                <div class="bg-slate-50 border-l-4 border-unitec-federal p-8 rounded-r-xl shadow-sm">
+                                    <h4 class="font-black text-unitec-federal mb-4 flex items-center gap-2"><i class="fa-solid fa-filter text-unitec-cyan"></i> Selección Estratégica</h4>
+                                    <p class="text-sm text-slate-600 font-light leading-relaxed">Seleccionen únicamente los <strong class="font-bold text-unitec-cyan">3 ejercicios más representativos o desafiantes</strong>. Aquellos que realmente expongan si el estudiante comprendió el concepto o solo memorizó la fórmula.</p>
+                                </div>`
+                    },
+                    { id: 3, title: "Integración Metacognitiva", navTitle: "Integración", time: 15,
+                      content: `<p class="text-slate-700 mb-6 font-light text-lg">Diseñen la plantilla de entrega. Además del procedimiento matemático, el alumno debe documentar obligatoriamente:</p>
+                                <ul class="space-y-4">
+                                    <li class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex gap-4 items-center">
+                                        <div class="w-10 h-10 rounded-full bg-red-50 text-red-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-person-falling"></i></div>
+                                        <div><strong class="text-red-600 font-black tracking-widest text-xs uppercase block mb-1">Struggles:</strong> <span class="text-sm font-light text-slate-600">¿Con qué me tropecé o qué me costó más?</span></div>
+                                    </li>
+                                    <li class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex gap-4 items-center">
+                                        <div class="w-10 h-10 rounded-full bg-yellow-50 text-yellow-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                        <div><strong class="text-yellow-600 font-black tracking-widest text-xs uppercase block mb-1">Puzzles:</strong> <span class="text-sm font-light text-slate-600">¿Qué parte del concepto sigue siendo un rompecabezas para mí?</span></div>
+                                    </li>
+                                    <li class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex gap-4 items-center">
+                                        <div class="w-10 h-10 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-lightbulb"></i></div>
+                                        <div><strong class="text-green-600 font-black tracking-widest text-xs uppercase block mb-1">Insights:</strong> <span class="text-sm font-light text-slate-600">¿Qué revelación o "Aha! moment" tuve al resolverlo?</span></div>
+                                    </li>
+                                </ul>`
+                    },
+                    { id: 4, title: "Alineación", navTitle: "Alineación", time: 0,
+                      align1: { title: "Metacognición Pura", desc: "Integra reflexión profunda en tareas de ciencias exactas. Ayuda a pasar del 'hacer' al 'pensar sobre lo que se hace'." },
+                      align2: { title: "Evaluación Formativa", desc: "Ayuda al docente a evaluar para el aprendizaje (Assessment FOR Learning), ajustando su próxima clase de forma quirúrgica según los 'Puzzles' reportados." }
+                    }
+                ]
+            },
+            4: {
+                title: "Investigación Inversa: El Motor de Preguntas",
+                tool: "Question Formulation Technique (QFT)",
+                section: "Conceptual Learning -> Connecting",
+                icon: "fa-magnifying-glass-chart",
+                purpose: "Transformar el inicio de un tema nuevo o una tarea de 'investigue los siguientes conceptos'.",
+                transform: "En lugar de darle al alumno una lista de temas a investigar, se le presenta un 'estímulo provocador' (una foto de un puente colapsado, una línea de código con un bug crítico, una gráfica en picada). La tarea es generar, mejorar y priorizar sus propias preguntas.",
+                phases: [
+                    { id: 0, title: "Inicio", navTitle: "Inicio", time: 0 },
+                    { id: 1, title: "Tomar Tema", navTitle: "Tomar Tema", time: 5,
+                      content: `<ul class="space-y-6 mb-6">
+                                  <li class="flex items-start gap-4 bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                                      <div class="w-8 h-8 rounded-full bg-unitec-federal text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5"><i class="fa-solid fa-check text-sm"></i></div>
+                                      <span class="text-slate-700 text-sm leading-relaxed font-light"><strong class="font-bold text-unitec-federal">Tomen</strong> un tema del sílabo que usualmente mandan a investigar de forma directa al inicio de un parcial.</span>
+                                  </li>
+                                </ul>` 
+                    },
+                    { id: 2, title: "Diseño del Estímulo", navTitle: "Diseño Estímulo", time: 15,
+                      content: `<p class="text-slate-700 mb-6 font-light text-lg">El ancla de la técnica es el 'Foco de la Pregunta' (QFocus):</p>
+                                <div class="bg-slate-50 border-l-4 border-unitec-federal p-8 rounded-r-xl shadow-sm">
+                                    <h4 class="font-black text-unitec-federal mb-4 flex items-center gap-2"><i class="fa-solid fa-bolt text-unitec-cyan"></i> Crear el Provocador</h4>
+                                    <p class="text-sm text-slate-600 font-light leading-relaxed">Busquen o describan un estímulo provocador visual, auditivo o situacional. <em class="font-bold text-unitec-cyan">Debe generar intriga, no dar la respuesta.</em> Ej. Un video de 10 segundos de resonancia estructural destructiva.</p>
+                                </div>`
+                    },
+                    { id: 3, title: "Redacción de la Tarea", navTitle: "Redacción", time: 10,
+                      content: `<p class="text-slate-700 mb-6 font-light text-lg">Diseñen las instrucciones usando la rutina estricta de QFT:</p>
+                                <ul class="space-y-4">
+                                    <li class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex gap-4 items-center">
+                                        <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-black flex items-center justify-center shrink-0 text-xs">1</div>
+                                        <div class="text-sm font-light text-slate-600"><strong class="font-black text-unitec-federal uppercase tracking-widest text-[10px] block mb-1">Generar</strong> Escribir tantas preguntas como sea posible sobre el estímulo sin juzgarlas.</div>
+                                    </li>
+                                    <li class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex gap-4 items-center">
+                                        <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-black flex items-center justify-center shrink-0 text-xs">2</div>
+                                        <div class="text-sm font-light text-slate-600"><strong class="font-black text-unitec-federal uppercase tracking-widest text-[10px] block mb-1">Mejorar</strong> Categorizar preguntas en abiertas/cerradas y cambiar al menos una de cada tipo.</div>
+                                    </li>
+                                    <li class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex gap-4 items-center">
+                                        <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-black flex items-center justify-center shrink-0 text-xs">3</div>
+                                        <div class="text-sm font-light text-slate-600"><strong class="font-black text-unitec-federal uppercase tracking-widest text-[10px] block mb-1">Priorizar</strong> Elegir las 3 mejores preguntas que guiarán su propia investigación técnica.</div>
+                                    </li>
+                                </ul>`
+                    },
+                    { id: 4, title: "Alineación", navTitle: "Alineación", time: 0,
+                      align1: { title: "Conexión CGS", desc: "Cambia radicalmente la dinámica de 'consumir información pasivamente' a 'conectar y cuestionar' activamente (Connecting)." },
+                      align2: { title: "Visión UNITEC 2030", desc: "Fomenta un <strong class='font-bold text-unitec-federal'>Líder con Propósito</strong> impulsado por la curiosidad insaciable, vital para la innovación." }
+                    }
+                ]
+            },
+            5: {
+                title: "Autopsia de un Caso: La Historia Oculta",
+                tool: "The Story: Main, Side, Hidden",
+                section: "Conceptual Learning -> Constructing",
+                icon: "fa-user-secret",
+                purpose: "Transformar un control de lectura o el análisis de un caso de estudio tradicional.",
+                transform: "Tradicionalmente, tras leer un caso (ej. el fracaso de una startup o un error de software), se hacen 3 preguntas de comprensión. Aquí, el docente estructurará el análisis pidiendo al alumno que desglose el caso en tres capas narrativas, incluyendo la capa ética.",
+                phases: [
+                    { id: 0, title: "Inicio", navTitle: "Inicio", time: 0 },
+                    { id: 1, title: "Elegir Caso", navTitle: "Elegir Caso", time: 5,
+                      content: `<ul class="space-y-6 mb-6">
+                                  <li class="flex items-start gap-4 bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                                      <div class="w-8 h-8 rounded-full bg-unitec-federal text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5"><i class="fa-solid fa-check text-sm"></i></div>
+                                      <span class="text-slate-700 text-sm leading-relaxed font-light"><strong class="font-bold text-unitec-federal">Elijan</strong> un caso de estudio real o una lectura técnica obligatoria de su clase.</span>
+                                  </li>
+                                </ul>` 
+                    },
+                    { id: 2, title: "Mapeo de las 3 Historias", navTitle: "Rediseño", time: 15,
+                      content: `<p class="text-slate-700 mb-6 font-light text-lg">Mapeen cómo esperan que los alumnos desglosen la lectura en sus 3 capas:</p>
+                                <div class="space-y-4 text-sm">
+                                    <div class="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center shrink-0"><i class="fa-solid fa-book text-lg"></i></div>
+                                        <div class="font-light text-slate-600"><strong class="font-black text-unitec-federal uppercase tracking-widest text-[10px] block mb-1">Main Story</strong> La falla técnica, la métrica clave o el evento principal evidente.</div>
+                                    </div>
+                                    <div class="bg-slate-50 p-5 rounded-xl border-l-4 border-unitec-cyan shadow-sm flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-lg bg-unitec-light text-unitec-cyan flex items-center justify-center shrink-0"><i class="fa-solid fa-code-branch text-lg"></i></div>
+                                        <div class="font-light text-slate-600"><strong class="font-black text-unitec-cyan uppercase tracking-widest text-[10px] block mb-1">Side Story</strong> Los efectos colaterales. El impacto en la comunidad, los stakeholders, el presupuesto.</div>
+                                    </div>
+                                    <div class="bg-unitec-federal p-5 rounded-xl text-white shadow-md flex items-center gap-4 diamond-border-top">
+                                        <div class="w-10 h-10 rounded-lg bg-white/10 text-unitec-sky flex items-center justify-center shrink-0"><i class="fa-solid fa-eye-slash text-lg"></i></div>
+                                        <div class="font-light text-blue-100"><strong class="font-black text-unitec-sky uppercase tracking-widest text-[10px] block mb-1">Hidden Story</strong> El dilema ético, el sesgo cognitivo, o el "Carácter" detrás de las decisiones tomadas que nadie menciona directamente.</div>
+                                    </div>
+                                </div>`
+                    },
+                    { id: 3, title: "Instrucciones de Análisis", navTitle: "Instrucciones", time: 10,
+                      content: `<ul class="space-y-6 mb-8">
+                                    <li class="flex items-start gap-4 bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                                      <div class="w-8 h-8 rounded-full bg-unitec-federal text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5"><i class="fa-solid fa-1 text-sm"></i></div>
+                                      <span class="text-slate-700 text-sm leading-relaxed font-light"><strong class="font-bold text-unitec-federal">Redacten la guía de análisis</strong>.</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                                      <div class="w-8 h-8 rounded-full bg-unitec-federal text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5"><i class="fa-solid fa-2 text-sm"></i></div>
+                                      <span class="text-slate-700 text-sm leading-relaxed font-light">En lugar de un cuestionario literal, el alumno debe entregar su matriz gráfica/textual de las 3 historias debidamente justificadas.</span>
+                                    </li>
+                                </ul>`
+                    },
+                    { id: 4, title: "Alineación", navTitle: "Alineación", time: 0,
+                      align1: { title: "CGS: Aprendizaje de Carácter", desc: "Entrelaza poderosamente el Aprendizaje Conceptual con el Aprendizaje de Carácter (Character Learning)." },
+                      align2: { title: "Visión UNITEC 2030", desc: "Desarrolla <strong class='font-bold text-unitec-federal'>Ciudadanos Responsables</strong> que ven más allá de los números y entienden el impacto humano de la ingeniería." }
+                    }
+                ]
+            }
+        };
+
+        // State variables
+        let currentActivityId = null;
+        let currentPhaseIndex = 0;
+        let timerInterval;
+        let totalSeconds = 0;
+        let remainingSeconds = 0;
+        let isRunning = false;
+
+        // Estilos base para navegación en JS
+        const baseNavClasses = ['w-full', 'text-left', 'px-5', 'py-4', 'rounded-xl', 'transition-all', 'duration-300', 'border-l-4', 'flex', 'items-center', 'gap-3', 'group'];
+        const activeNavClasses = ['bg-white', 'text-unitec-federal', 'border-unitec-cyan', 'font-black', 'shadow-md'];
+        const inactiveNavClasses = ['text-slate-500', 'border-transparent', 'font-semibold', 'hover:bg-white/50'];
+        const activeIconBgClasses = ['bg-unitec-cyan', 'text-unitec-federal', 'shadow-md'];
+        const inactiveIconBgClasses = ['bg-slate-100', 'text-slate-400', 'group-hover:bg-unitec-sky', 'group-hover:text-white', 'shadow-none'];
+
+        // ================= NAVIGATION LOGIC =================
+
+        function goHome() {
+            stopTimer();
+            currentActivityId = null;
+            document.getElementById('home-view').classList.remove('hidden');
+            document.getElementById('activity-view').classList.add('hidden');
+            document.getElementById('timer-container').classList.add('translate-y-full');
+            document.getElementById('btn-home').classList.add('hidden');
+        }
+
+        function openActivity(id) {
+            currentActivityId = id;
+            const act = activitiesDB[id];
+            
+            // Hide Home, Show Activity
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('activity-view').classList.remove('hidden');
+            document.getElementById('btn-home').classList.remove('hidden');
+
+            // Update Sidebar Navigation Titles based on selected activity phases
+            document.getElementById('lbl-nav-1').innerText = act.phases[1].navTitle;
+            document.getElementById('lbl-nav-2').innerText = act.phases[2].navTitle;
+            document.getElementById('lbl-nav-3').innerText = act.phases[3].navTitle;
+
+            // Start at Phase 0
+            goToPhase(0);
+        }
+
+        function goToPhase(index) {
+            if (!currentActivityId) return;
+            currentPhaseIndex = index;
+            const act = activitiesDB[currentActivityId];
+            const phase = act.phases[index];
+
+            // Update Sidebar UI
+            document.querySelectorAll('button[id^="nav-"]').forEach((el, i) => {
+                el.classList.remove(...activeNavClasses);
+                el.classList.add(...inactiveNavClasses);
+                
+                const iconBg = document.getElementById(`icon-bg-${i}`);
+                if(iconBg) {
+                    iconBg.classList.remove(...activeIconBgClasses);
+                    iconBg.classList.add(...inactiveIconBgClasses);
+                }
+            });
+
+            const navItem = document.getElementById(`nav-${index}`);
+            if(navItem) {
+                navItem.classList.remove(...inactiveNavClasses);
+                navItem.classList.add(...activeNavClasses);
+            }
+            
+            const iconBgActive = document.getElementById(`icon-bg-${index}`);
+            if(iconBgActive) {
+                iconBgActive.classList.remove(...inactiveIconBgClasses);
+                iconBgActive.classList.add(...activeIconBgClasses);
+            }
+
+            // Render Content
+            renderPhaseContent(act, phase, index);
+
+            // Handle Timer Visibility & Setup
+            const timerContainer = document.getElementById('timer-container');
+            if (phase.time > 0) {
+                timerContainer.classList.remove('translate-y-full');
+                document.getElementById('timer-phase-title').innerText = phase.title;
+                setupTimer(phase.time);
+            } else {
+                timerContainer.classList.add('translate-y-full');
+                stopTimer();
+            }
+        }
+
+        function renderPhaseContent(act, phase, index) {
+            const container = document.getElementById('dynamic-content');
+            let html = '';
+
+            if (index === 0) {
+                // Intro Phase
+                html = `
+                <section class="fade-in max-w-4xl mx-auto">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100 diamond-border-top">
+                        <div class="bg-unitec-federal p-10 text-white relative overflow-hidden">
+                            <i class="fa-solid ${act.icon} absolute -right-10 -bottom-10 text-9xl opacity-10"></i>
+                            <div class="relative z-10">
+                                <span class="diamond-tag inline-block px-4 py-1.5 bg-unitec-cyan text-unitec-federal text-[10px] font-black tracking-widest mb-6 uppercase shadow-md">Herramienta CGS: ${act.tool}</span>
+                                <h2 class="text-3xl md:text-4xl font-black mb-4 leading-tight">${act.title}</h2>
+                                <p class="text-sm text-unitec-sky font-medium uppercase tracking-widest">${act.section}</p>
+                            </div>
+                        </div>
+                        <div class="p-8 md:p-10">
+                            <div class="mb-10">
+                                <h3 class="font-black text-unitec-federal text-lg uppercase tracking-wider mb-4 flex items-center gap-3">
+                                    <div class="diamond-icon-bg w-10 h-10 bg-unitec-light text-unitec-cyan flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-bullseye"></i>
+                                    </div>
+                                    Propósito de la Herramienta
+                                </h3>
+                                <p class="text-slate-600 bg-slate-50 p-6 rounded-xl border-l-4 border-unitec-cyan text-sm leading-relaxed font-light shadow-sm">${act.purpose}</p>
+                            </div>
+                            <div class="bg-white p-8 rounded-xl border border-slate-100 shadow-md relative overflow-hidden">
+                                <div class="absolute -right-4 -bottom-4 opacity-5">
+                                    <i class="fa-solid fa-lightbulb text-6xl text-unitec-federal"></i>
+                                </div>
+                                <h3 class="font-black text-unitec-federal mb-4 flex items-center gap-2 text-sm uppercase tracking-widest relative z-10">
+                                    <i class="fa-solid fa-bolt text-yellow-500 text-lg"></i> La Transformación Pedagógica
+                                </h3>
+                                <p class="text-slate-600 text-sm leading-relaxed font-light relative z-10">${act.transform}</p>
+                            </div>
+                            <div class="mt-10 flex justify-end">
+                                <button onclick="goToPhase(1)" class="bg-unitec-federal hover:bg-[#040440] text-white font-bold py-3.5 px-8 rounded-lg shadow-lg transform transition-all hover:scale-105 flex items-center gap-3">
+                                    Iniciar Rediseño <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>`;
+            } 
+            else if (index > 0 && index < 4) {
+                // Working Phases
+                html = `
+                <section class="fade-in max-w-4xl mx-auto">
+                    <div class="mb-8">
+                        <h2 class="text-3xl md:text-4xl font-black text-unitec-federal flex items-center gap-4">
+                            <span class="diamond-icon-bg w-12 h-12 bg-unitec-cyan text-unitec-federal flex items-center justify-center text-xl shadow-md shrink-0">${index}</span>
+                            ${phase.title}
+                        </h2>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-slate-100 mb-8 min-h-[250px] diamond-border-top relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 opacity-5"><i class="fa-solid ${act.icon} text-8xl text-unitec-federal"></i></div>
+                        <div class="relative z-10">
+                            ${phase.content}
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mt-8">
+                        <button onclick="goToPhase(${index - 1})" class="text-slate-400 hover:text-unitec-cyan font-bold px-6 py-3 transition-colors text-sm uppercase tracking-widest flex items-center gap-2"><i class="fa-solid fa-arrow-left"></i> Volver</button>
+                        <button onclick="goToPhase(${index + 1})" class="bg-unitec-federal hover:bg-[#040440] text-white font-bold py-3.5 px-8 rounded-lg shadow-lg transition-transform hover:scale-105 flex items-center gap-3">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </section>`;
+            } 
+            else if (index === 4) {
+                // Alignment Phase
+                html = `
+                <section class="fade-in max-w-5xl mx-auto">
+                    <div class="mb-12 text-center max-w-2xl mx-auto">
+                        <div class="diamond-icon-bg inline-flex w-20 h-20 bg-unitec-federal text-unitec-cyan items-center justify-center mb-6 shadow-xl">
+                            <i class="fa-solid fa-award text-3xl"></i>
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-black text-unitec-federal mb-4">Justificación y Alineación Institucional</h2>
+                        <p class="text-slate-500 text-lg font-light">Impacto en el Ecosistema UNITEC</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-100 diamond-border-top hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
+                            <i class="fa-solid fa-layer-group absolute -right-4 -bottom-4 text-8xl text-unitec-federal opacity-5"></i>
+                            <div class="text-unitec-cyan text-3xl mb-5 relative z-10"><i class="fa-solid fa-layer-group"></i></div>
+                            <h3 class="font-black text-unitec-federal text-xl mb-3 relative z-10">${phase.align1.title}</h3>
+                            <p class="text-slate-600 text-sm font-light leading-relaxed relative z-10">${phase.align1.desc}</p>
+                        </div>
+                        
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-100 diamond-border-top hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
+                            <i class="fa-solid fa-eye absolute -right-4 -bottom-4 text-8xl text-unitec-federal opacity-5"></i>
+                            <div class="text-unitec-cyan text-3xl mb-5 relative z-10"><i class="fa-solid fa-eye"></i></div>
+                            <h3 class="font-black text-unitec-federal text-xl mb-3 relative z-10">${phase.align2.title}</h3>
+                            <p class="text-slate-600 text-sm font-light leading-relaxed relative z-10">${phase.align2.desc}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-16 text-center">
+                        <button onclick="goHome()" class="text-unitec-cyan font-bold hover:text-unitec-federal transition-colors uppercase tracking-widest text-sm flex items-center justify-center mx-auto gap-2">
+                            <i class="fa-solid fa-house"></i> Volver al Menú de Herramientas
+                        </button>
+                    </div>
+                </section>`;
+            }
+
+            container.innerHTML = html;
+            const newSection = container.querySelector('section');
+            newSection.classList.remove('fade-in');
+            void newSection.offsetWidth; // trigger reflow
+            newSection.classList.add('fade-in');
+        }
+
+
+        // ================= TIMER LOGIC =================
+        
+        function setupTimer(minutes) {
+            stopTimer();
+            totalSeconds = minutes * 60;
+            remainingSeconds = totalSeconds;
+            updateTimerUI();
+            document.getElementById('icon-play-pause').classList.replace('fa-pause', 'fa-play');
+            isRunning = false;
+        }
+
+        function toggleTimer() {
+            if (isRunning) {
+                stopTimer();
+                document.getElementById('icon-play-pause').classList.replace('fa-pause', 'fa-play');
+            } else {
+                startTimer();
+                document.getElementById('icon-play-pause').classList.replace('fa-play', 'fa-pause');
+            }
+        }
+
+        function startTimer() {
+            if (remainingSeconds <= 0) return;
+            isRunning = true;
+            timerInterval = setInterval(() => {
+                remainingSeconds--;
+                updateTimerUI();
+                
+                if (remainingSeconds <= 0) {
+                    stopTimer();
+                    document.getElementById('icon-play-pause').classList.replace('fa-pause', 'fa-play');
+                    showTimeUpModal();
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            isRunning = false;
+            clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            stopTimer();
+            remainingSeconds = totalSeconds;
+            updateTimerUI();
+            document.getElementById('icon-play-pause').classList.replace('fa-pause', 'fa-play');
+        }
+
+        function updateTimerUI() {
+            const display = document.getElementById('time-display');
+            const progress = document.getElementById('time-progress');
+            
+            const m = Math.floor(remainingSeconds / 60).toString().padStart(2, '0');
+            const s = (remainingSeconds % 60).toString().padStart(2, '0');
+            display.innerText = `${m}:${s}`;
+
+            if (remainingSeconds <= 60 && remainingSeconds > 0) {
+                display.classList.remove('text-unitec-federal');
+                display.classList.add('text-red-600', 'animate-pulse');
+            } else {
+                display.classList.remove('text-red-600', 'animate-pulse');
+                display.classList.add('text-unitec-federal');
+            }
+
+            const percentage = (remainingSeconds / totalSeconds) * 100;
+            progress.style.width = `${percentage}%`;
+            
+            progress.className = 'h-full transition-all duration-1000 ease-linear'; // reset
+            if(percentage < 20) {
+                progress.classList.add('bg-red-600');
+            } else if (percentage < 50) {
+                progress.classList.add('bg-yellow-400');
+            } else {
+                progress.classList.add('bg-unitec-cyan');
+            }
+        }
+
+        function showTimeUpModal() {
+            const modal = document.getElementById('msg-modal');
+            const content = document.getElementById('msg-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('msg-modal');
+            const content = document.getElementById('msg-content');
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body>
+</html>
