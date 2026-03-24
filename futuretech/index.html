@@ -53,6 +53,16 @@
             transform: translateY(-2px); 
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
+
+        /* Animación sutil y corporativa para el CTA de Retos */
+        @keyframes pulse-soft {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+        .btn-pulse {
+            animation: pulse-soft 2s infinite;
+        }
     </style>
 </head>
 <body class="bg-unitec-light text-gray-800 font-sans antialiased flex h-screen overflow-hidden">
@@ -331,13 +341,19 @@
 
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-4 h-4 bg-unitec-federal rounded-full -left-[9px] top-1.5 ring-4 ring-white"></div>
-                            <h4 class="text-lg font-bold text-unitec-federal">Semana 1</h4>
+                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
+                                Semana 1 
+                                <span class="bg-gray-100 text-gray-500 text-xs py-1 px-2 rounded-md font-medium">20 - 24 de abril</span>
+                            </h4>
                             <p class="text-gray-600 mt-1">Lanzamiento oficial y asignación de retos.</p>
                         </div>
 
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-4 h-4 bg-unitec-federal rounded-full -left-[9px] top-1.5 ring-4 ring-white"></div>
-                            <h4 class="text-lg font-bold text-unitec-federal">Semana 2</h4>
+                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
+                                Semana 2 
+                                <span class="bg-gray-100 text-gray-500 text-xs py-1 px-2 rounded-md font-medium">27 de abril - 1 de mayo</span>
+                            </h4>
                             <p class="text-gray-600 mt-1">Taller de Mentoría GBM 1 (Virtual/Presencial).</p>
                         </div>
 
@@ -345,19 +361,28 @@
                             <div class="absolute w-5 h-5 bg-unitec-sky rounded-full -left-[11px] top-1 ring-4 ring-white shadow-sm flex items-center justify-center">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <h4 class="text-lg font-bold text-unitec-federal">Semana 3 - Hito 1</h4>
+                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
+                                Semana 3 - Hito 1 
+                                <span class="bg-[#E6F7FB] text-unitec-cyan text-xs py-1 px-2 rounded-md font-bold">4 - 8 de mayo</span>
+                            </h4>
                             <p class="text-gray-700 font-medium mt-2 bg-unitec-light p-3 rounded-md border-l-2 border-unitec-sky">Entrega de Nota Conceptual (Concept Note) y definición del alcance.</p>
                         </div>
 
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-4 h-4 bg-unitec-federal rounded-full -left-[9px] top-1.5 ring-4 ring-white"></div>
-                            <h4 class="text-lg font-bold text-unitec-federal">Semana 4</h4>
+                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
+                                Semana 4 
+                                <span class="bg-gray-100 text-gray-500 text-xs py-1 px-2 rounded-md font-medium">11 - 15 de mayo</span>
+                            </h4>
                             <p class="text-gray-600 mt-1">Masterclass GBM 1 o “Clínica Tecnológica 1”.</p>
                         </div>
 
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-4 h-4 bg-unitec-federal rounded-full -left-[9px] top-1.5 ring-4 ring-white"></div>
-                            <h4 class="text-lg font-bold text-unitec-federal">Semana 5</h4>
+                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
+                                Semana 5 
+                                <span class="bg-gray-100 text-gray-500 text-xs py-1 px-2 rounded-md font-medium">18 - 22 de mayo</span>
+                            </h4>
                             <p class="text-gray-600 mt-1">Taller de Mentoría GBM 2 (Virtual/Presencial).</p>
                         </div>
 
@@ -365,13 +390,19 @@
                             <div class="absolute w-5 h-5 bg-unitec-sky rounded-full -left-[11px] top-1 ring-4 ring-white shadow-sm flex items-center justify-center">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <h4 class="text-lg font-bold text-unitec-federal">Semana 7 - Hito 2</h4>
+                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
+                                Semana 7 - Hito 2 
+                                <span class="bg-[#E6F7FB] text-unitec-cyan text-xs py-1 px-2 rounded-md font-bold">1 - 5 de junio</span>
+                            </h4>
                             <p class="text-gray-700 font-medium mt-2 bg-unitec-light p-3 rounded-md border-l-2 border-unitec-sky">Entrega de diseño técnico, presupuesto preliminar y arquitectura.</p>
                         </div>
 
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-4 h-4 bg-unitec-federal rounded-full -left-[9px] top-1.5 ring-4 ring-white"></div>
-                            <h4 class="text-lg font-bold text-unitec-federal">Semana 8</h4>
+                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
+                                Semana 8 
+                                <span class="bg-gray-100 text-gray-500 text-xs py-1 px-2 rounded-md font-medium">8 - 12 de junio</span>
+                            </h4>
                             <p class="text-gray-600 mt-1">Masterclass GBM 2 o “Clínica Tecnológica 2”.</p>
                         </div>
 
@@ -421,6 +452,25 @@
                         <h4 class="text-lg font-bold text-unitec-federal mb-3">Retribución</h4>
                         <span class="bg-gray-100 text-gray-500 text-xs py-1 px-3 rounded-full mb-3 uppercase tracking-wider font-semibold">Propuesta (no aprobada aún)</span>
                         <p class="text-gray-800 text-sm font-medium leading-relaxed">Suficiencia de Capstone Project en carreras aplicables, o evaluación de proyecto final de asignaturas.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Proposal CTA Link -->
+            <section class="mt-20 mb-10 text-center">
+                <div class="bg-unitec-federal rounded-2xl p-12 text-white shadow-xl relative overflow-hidden">
+                    <!-- Decoración geométrica sutil (Diamante) -->
+                    <div class="absolute -top-24 -right-24 w-64 h-64 border-[40px] border-white opacity-5 transform rotate-45"></div>
+                    <div class="absolute -bottom-24 -left-24 w-64 h-64 border-[40px] border-white opacity-5 transform rotate-45"></div>
+                    
+                    <div class="relative z-10 flex flex-col items-center">
+                        <i class="fas fa-rocket text-4xl mb-6 text-unitec-cyan"></i>
+                        <h3 class="text-3xl md:text-4xl font-black mb-4 tracking-tight">Explora los Retos Propuestos</h3>
+                        <p class="mb-10 text-lg opacity-80 max-w-xl text-center font-light">Conoce a detalle las áreas temáticas y las problemáticas de la industria que los equipos deberán resolver.</p>
+                        <a href="https://capexfi25-30.netlify.app/futuretech/retos.html" target="_blank" class="bg-white text-unitec-federal hover:bg-unitec-cyan hover:text-white transition-all duration-300 font-bold py-4 px-10 rounded-md text-lg shadow-lg flex items-center group btn-pulse">
+                            Ver Propuesta de Retos 
+                            <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-1 transition-transform"></i>
+                        </a>
                     </div>
                 </div>
             </section>
