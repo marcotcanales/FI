@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FutureTech Builders: Desafíos GBM-UNITEC</title>
     
-    <!-- Tipografía Institucional UNITEC: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- FontAwesome para Iconografía -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <script>
@@ -25,15 +22,10 @@
                             federal: '#06065C', /* Federal Blue */
                             cyan: '#03AED2',    /* Pacific Cyan */
                             sky: '#47C8FD',     /* Vivid Sky Blue */
-                            light: '#F8FAFC'    /* Fondo neutro y limpio */
-                        },
-                        gbm: {
-                            blue: '#0055A5',
-                            dark: '#0B132B'
+                            light: '#F8FAFC'
                         }
                     },
                     fontFamily: {
-                        /* Uso estricto de Poppins como indica el manual */
                         sans: ['Poppins', 'sans-serif'],
                     }
                 }
@@ -41,21 +33,18 @@
         }
     </script>
     <style>
-        /* Scrollbar elegante y corporativo */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #06065C; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #03AED2; }
         
-        /* Estilo activo para el ScrollSpy basado en la paleta oficial */
         .nav-active {
-            background-color: #F0F9FF; /* Fondo muy sutil */
+            background-color: #F0F9FF;
             color: #06065C !important;
             font-weight: 700;
             border-left: 4px solid #03AED2;
         }
         
-        /* Sombras suaves para las tarjetas, prohibidas en el logo, pero aptas para UI */
         .section-card {
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -68,16 +57,12 @@
 </head>
 <body class="bg-unitec-light text-gray-800 font-sans antialiased flex h-screen overflow-hidden">
 
-    <!-- Sidebar Navigation -->
     <aside class="w-72 bg-white shadow-xl flex flex-col h-full relative z-20 hidden md:flex shrink-0 border-r border-gray-100">
-        <!-- Logotipo UNITEC Compuesto Horizontal (Isotipo + Logotipo) -->
         <div class="p-6 bg-white border-b border-gray-100 flex items-center justify-center">
             <div class="flex items-center space-x-2">
-                <!-- Isotipo: Diamante en Federal Blue (sin gradientes, sin sombras) -->
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#06065C"/>
                 </svg>
-                <!-- Logotipo en Poppins -->
                 <span class="font-extrabold text-2xl tracking-tighter text-unitec-federal" style="letter-spacing: -0.05em;">unitec</span>
             </div>
         </div>
@@ -88,19 +73,17 @@
         </div>
         
         <nav class="flex-1 overflow-y-auto py-4" id="sidebar-nav">
-            <a href="#presentacion" class="nav-link block px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors border-l-4 border-transparent font-medium"><i class="fas fa-bullseye w-5 mr-2 text-gray-400"></i> 1. Propósito y Objetivos</a>
-            <a href="#retos" class="nav-link block px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors border-l-4 border-transparent font-medium"><i class="fas fa-map-marker-alt w-5 mr-2 text-gray-400"></i> 2. Retos por Sede</a>
-            <a href="#equipos" class="nav-link block px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors border-l-4 border-transparent font-medium"><i class="fas fa-users-cog w-5 mr-2 text-gray-400"></i> 3. Conformación de Equipos</a>
-            <a href="#acompanamiento" class="nav-link block px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors border-l-4 border-transparent font-medium"><i class="fas fa-hands-helping w-5 mr-2 text-gray-400"></i> 4. Acompañamiento</a>
-            <a href="#cronograma" class="nav-link block px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors border-l-4 border-transparent font-medium"><i class="fas fa-calendar-alt w-5 mr-2 text-gray-400"></i> 5. Cronograma (Q2 2026)</a>
+            <a href="#presentacion" class="nav-link block px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors border-l-4 border-transparent font-medium"><i class="fas fa-bullseye w-5 mr-2 text-gray-400"></i> 1. Presentación</a>
+            <a href="#retos" class="nav-link block px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors border-l-4 border-transparent font-medium"><i class="fas fa-map-marker-alt w-5 mr-2 text-gray-400"></i> 2. Los Retos</a>
+            <a href="#equipos" class="nav-link block px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors border-l-4 border-transparent font-medium"><i class="fas fa-users-cog w-5 mr-2 text-gray-400"></i> 3. Equipos y Roles</a>
+            <a href="#acompanamiento" class="nav-link block px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors border-l-4 border-transparent font-medium"><i class="fas fa-hands-helping w-5 mr-2 text-gray-400"></i> 4. Mentoría GBM</a>
+            <a href="#cronograma" class="nav-link block px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors border-l-4 border-transparent font-medium"><i class="fas fa-calendar-alt w-5 mr-2 text-gray-400"></i> 5. Cronograma</a>
             <a href="#evaluacion" class="nav-link block px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors border-l-4 border-transparent font-medium"><i class="fas fa-clipboard-check w-5 mr-2 text-gray-400"></i> 6. Evaluación</a>
         </nav>
     </aside>
 
-    <!-- Main Content Area -->
     <main class="flex-1 overflow-y-auto bg-gray-50 relative scroll-smooth" id="main-content">
         
-        <!-- Mobile Header -->
         <header class="md:hidden bg-unitec-federal text-white p-4 sticky top-0 z-30 shadow-md flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -111,7 +94,7 @@
             <button id="mobile-menu-btn" class="text-white focus:outline-none"><i class="fas fa-bars text-xl"></i></button>
         </header>
 
-        <!-- Mobile Nav Overlay -->
+        <!-- Mobile Nav Overlay (Restaurado para que JS no falle) -->
         <div id="mobile-nav" class="hidden fixed inset-0 bg-unitec-federal bg-opacity-90 z-40 transition-opacity backdrop-blur-sm">
             <div class="bg-white w-72 h-full shadow-2xl flex flex-col">
                 <div class="p-5 bg-unitec-federal text-white flex justify-between items-center">
@@ -119,10 +102,10 @@
                     <button id="close-menu-btn" class="text-white hover:text-unitec-cyan transition-colors"><i class="fas fa-times text-xl"></i></button>
                 </div>
                 <nav class="flex-1 overflow-y-auto py-4">
-                    <a href="#presentacion" class="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 border-b border-gray-100">1. Propósito y Objetivos</a>
-                    <a href="#retos" class="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 border-b border-gray-100">2. Retos por Sede</a>
-                    <a href="#equipos" class="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 border-b border-gray-100">3. Conformación de Equipos</a>
-                    <a href="#acompanamiento" class="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 border-b border-gray-100">4. Acompañamiento</a>
+                    <a href="#presentacion" class="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 border-b border-gray-100">1. Presentación</a>
+                    <a href="#retos" class="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 border-b border-gray-100">2. Los Retos</a>
+                    <a href="#equipos" class="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 border-b border-gray-100">3. Equipos y Roles</a>
+                    <a href="#acompanamiento" class="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 border-b border-gray-100">4. Mentoría GBM</a>
                     <a href="#cronograma" class="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 border-b border-gray-100">5. Cronograma</a>
                     <a href="#evaluacion" class="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 border-b border-gray-100">6. Evaluación</a>
                 </nav>
@@ -131,7 +114,6 @@
 
         <div class="max-w-5xl mx-auto p-6 md:p-10 lg:p-12">
             
-            <!-- Hero Section -->
             <div class="mb-12 text-center md:text-left bg-unitec-federal text-white rounded-2xl p-10 shadow-lg relative overflow-hidden">
                 <div class="absolute top-0 right-0 -mt-10 -mr-10 text-white opacity-5">
                     <i class="fas fa-microchip text-9xl"></i>
@@ -139,197 +121,199 @@
                 <div class="relative z-10">
                     <span class="bg-unitec-cyan text-unitec-federal text-xs font-bold uppercase tracking-widest py-1.5 px-4 rounded-full inline-block mb-6 shadow-sm">Propuesta de Colaboración</span>
                     <h2 class="text-3xl md:text-5xl font-black mb-5 leading-tight tracking-tight">FutureTech Builders:<br>Desafíos GBM-UNITEC</h2>
-                    <p class="text-lg md:text-xl font-regular max-w-2xl text-gray-200">Trasladando a los estudiantes de un pensamiento técnico a una mentalidad horizontal orientada a la innovación corporativa.</p>
+                    <p class="text-lg md:text-xl font-regular max-w-2xl text-gray-200">Trasladando a los estudiantes de un pensamiento puramente vertical y técnico hacia una mentalidad horizontal orientada a la innovación.</p>
                 </div>
             </div>
 
-            <!-- 1. Presentación y Propósito -->
             <section id="presentacion" class="mb-16 scroll-mt-24">
                 <div class="flex items-center mb-8">
                     <div class="bg-unitec-federal text-white rounded-md w-10 h-10 flex items-center justify-center text-xl font-bold mr-4 shadow-sm shrink-0">1</div>
-                    <h3 class="text-2xl font-bold text-unitec-federal border-b-2 border-unitec-cyan pb-2 inline-block">Presentación y Objetivos</h3>
+                    <h3 class="text-2xl font-bold text-unitec-federal border-b-2 border-unitec-cyan pb-2 inline-block">Presentación y Propósito</h3>
                 </div>
                 
                 <div class="bg-white rounded-xl p-8 section-card border border-gray-100">
-                    <h4 class="text-xl font-bold text-unitec-federal mb-4"><i class="fas fa-info-circle mr-2 text-unitec-cyan"></i>Descripción y Propósito</h4>
                     <p class="mb-5 text-gray-600 leading-relaxed text-[1.05rem]">
-                        El concurso "FutureTech Builders: Desafíos GBM-UNITEC" nace como una iniciativa estratégica y conjunta entre la Facultad de Ingeniería de UNITEC y la empresa multinacional de tecnología GBM. Este concurso de 8 semanas desafía los paradigmas tradicionales de la educación en ingeniería, trasladando a los estudiantes de un pensamiento puramente vertical y técnico hacia una mentalidad horizontal, orientada al desarrollo, la innovación y la automatización corporativa.
+                        El concurso nace como una iniciativa estratégica y conjunta entre la Facultad de Ingeniería de UNITEC y GBM. A través de la resolución de retos basados en las áreas de negocio reales de GBM, equipos multidisciplinarios competirán diseñando soluciones tecnológicas viables.
                     </p>
                     <div class="mb-8 p-6 bg-unitec-light rounded-lg border-l-4 border-unitec-cyan">
                         <p class="text-gray-700 leading-relaxed text-[1.05rem]">
-                            <strong class="text-unitec-federal font-bold">Objetivo General:</strong> Potenciar el impacto que los egresados de la Facultad de Ingeniería de UNITEC tienen en la sociedad, dotándolos de una visión integral que les permita transformar sus sólidos conocimientos técnicos en soluciones tecnológicas reales, escalables y orientadas a resolver problemáticas empresariales actuales.
+                            <strong class="text-unitec-federal font-bold">Objetivo General:</strong> Potenciar el impacto que los egresados tienen en la sociedad, dotándolos de una visión integral para transformar sus sólidos conocimientos técnicos en soluciones reales y escalables.
                         </p>
                     </div>
 
                     <h4 class="text-xl font-bold text-unitec-federal mb-5"><i class="fas fa-tasks mr-2 text-unitec-cyan"></i>Objetivos Específicos</h4>
-                    <ul class="space-y-5">
+                    <ul class="space-y-4">
                         <li class="flex items-start">
                             <i class="fas fa-check text-unitec-cyan mt-1.5 mr-4 text-lg"></i>
-                            <span class="text-gray-600 text-[1.05rem]"><strong class="text-gray-800 font-semibold">Fomentar el trabajo multidisciplinario:</strong> Romper los silos académicos integrando a estudiantes de diversas ramas de la ingeniería en un mismo equipo de trabajo, simulando la dinámica operativa y los roles de la industria corporativa.</span>
+                            <span class="text-gray-600 text-[1.05rem]"><strong class="text-gray-800 font-semibold">Fomentar el trabajo multidisciplinario:</strong> Simular la dinámica operativa y los roles de la industria corporativa moderna.</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check text-unitec-cyan mt-1.5 mr-4 text-lg"></i>
-                            <span class="text-gray-600 text-[1.05rem]"><strong class="text-gray-800 font-semibold">Desarrollar capacidades de resolución de problemas reales:</strong> Utilizar necesidades auténticas de la industria (Infraestructura, Software, SAP, Ciberseguridad) como motor de aprendizaje práctico.</span>
+                            <span class="text-gray-600 text-[1.05rem]"><strong class="text-gray-800 font-semibold">Comprensión integral:</strong> Capacitar para que comprendan el modelo de negocio, viabilidad financiera y el impacto de la solución.</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check text-unitec-cyan mt-1.5 mr-4 text-lg"></i>
-                            <span class="text-gray-600 text-[1.05rem]"><strong class="text-gray-800 font-semibold">Cultivar el Pensamiento Financiero y Viabilidad:</strong> Lograr que los estudiantes comprendan cómo la ingeniería se traduce en rentabilidad, eficiencia operativa y reducción de costos para el cliente final.</span>
+                            <span class="text-gray-600 text-[1.05rem]"><strong class="text-gray-800 font-semibold">Habilidades blandas y técnicas:</strong> Liderazgo, comunicación asertiva, gestión ágil y diseño centrado en el usuario.</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check text-unitec-cyan mt-1.5 mr-4 text-lg"></i>
-                            <span class="text-gray-600 text-[1.05rem]"><strong class="text-gray-800 font-semibold">Potenciar la Comunicación Asertiva y Pitching:</strong> Fortalecer la capacidad de los equipos para defender y vender sus soluciones técnicas ante paneles de expertos e inversores simulados.</span>
+                            <span class="text-gray-600 text-[1.05rem]"><strong class="text-gray-800 font-semibold">Acercar a la industria:</strong> Proveer mentoría directa con expertos de GBM para responder a las demandas del mercado.</span>
                         </li>
                     </ul>
                 </div>
             </section>
 
-            <!-- 2. Retos por Sede -->
             <section id="retos" class="mb-16 scroll-mt-24">
                 <div class="flex items-center mb-8">
                     <div class="bg-unitec-federal text-white rounded-md w-10 h-10 flex items-center justify-center text-xl font-bold mr-4 shadow-sm shrink-0">2</div>
-                    <h3 class="text-2xl font-bold text-unitec-federal border-b-2 border-unitec-cyan pb-2 inline-block">Retos por Sede</h3>
+                    <h3 class="text-2xl font-bold text-unitec-federal border-b-2 border-unitec-cyan pb-2 inline-block">Los Retos</h3>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Tegucigalpa -->
                     <div class="bg-white rounded-xl p-8 section-card border-t-4 border-unitec-federal flex flex-col h-full">
                         <div class="flex items-center mb-5">
                             <div class="bg-unitec-light p-3 rounded-md mr-4"><i class="fas fa-city text-unitec-federal text-xl"></i></div>
                             <h4 class="text-xl font-bold text-unitec-federal tracking-tight">Sede Tegucigalpa<br><span class="text-sm text-unitec-cyan font-semibold">(ExpoFI)</span></h4>
                         </div>
-                        <p class="text-gray-600 mb-6 text-sm font-medium">Enfocado en las dinámicas corporativas, gubernamentales y de servicios centrales.</p>
-                        <ul class="space-y-3 text-gray-600 text-[0.95rem] flex-1">
-                            <li class="pl-4 border-l-2 border-gray-200 hover:border-unitec-cyan transition-colors"><strong class="text-gray-800">Reto A:</strong> Modernización de Infraestructura Cloud para alta disponibilidad en el sector financiero.</li>
-                            <li class="pl-4 border-l-2 border-gray-200 hover:border-unitec-cyan transition-colors"><strong class="text-gray-800">Reto B:</strong> Integración de Plataformas SAP para eficiencia en la administración pública o corporativa.</li>
-                            <li class="pl-4 border-l-2 border-gray-200 hover:border-unitec-cyan transition-colors"><strong class="text-gray-800">Reto C:</strong> Soluciones de Ciberseguridad perimetral para protección de datos sensibles.</li>
+                        <ul class="space-y-4 text-gray-600 text-[1rem] flex-1 mt-4">
+                            <li class="p-4 bg-gray-50 rounded-lg border-l-2 border-unitec-cyan hover:shadow-md transition-shadow">
+                                <strong class="text-unitec-federal block mb-1">Reto TGU-1:</strong> Monitoreo de Congesiton Vehicular via Cloud y Cisco IoT
+                            </li>
+                            <li class="p-4 bg-gray-50 rounded-lg border-l-2 border-unitec-cyan hover:shadow-md transition-shadow">
+                                <strong class="text-unitec-federal block mb-1">Reto TGU-2:</strong> Tablero de Monitoreo Electoral en Tiempo Real
+                            </li>
                         </ul>
                     </div>
                     
-                    <!-- San Pedro Sula -->
                     <div class="bg-white rounded-xl p-8 section-card border-t-4 border-unitec-cyan flex flex-col h-full">
                         <div class="flex items-center mb-5">
                             <div class="bg-[#E6F7FB] p-3 rounded-md mr-4"><i class="fas fa-industry text-unitec-cyan text-xl"></i></div>
                             <h4 class="text-xl font-bold text-unitec-federal tracking-tight">Sede San Pedro Sula<br><span class="text-sm text-unitec-cyan font-semibold">(Mecatón)</span></h4>
                         </div>
-                        <p class="text-gray-600 mb-6 text-sm font-medium">Enfocado en el músculo industrial, manufactura, maquila y logística del país.</p>
-                        <ul class="space-y-3 text-gray-600 text-[0.95rem] flex-1">
-                            <li class="pl-4 border-l-2 border-gray-200 hover:border-unitec-federal transition-colors"><strong class="text-gray-800">Reto A:</strong> Automatización industrial e IoT aplicado a líneas de ensamblaje o manufactura.</li>
-                            <li class="pl-4 border-l-2 border-gray-200 hover:border-unitec-federal transition-colors"><strong class="text-gray-800">Reto B:</strong> Optimización de Outsourcing Logístico mediante sistemas de trazabilidad y software a medida.</li>
-                            <li class="pl-4 border-l-2 border-gray-200 hover:border-unitec-federal transition-colors"><strong class="text-gray-800">Reto C:</strong> Mantenimiento predictivo de maquinaria pesada utilizando análisis de datos e IA.</li>
+                        <ul class="space-y-4 text-gray-600 text-[1rem] flex-1 mt-4">
+                            <li class="p-4 bg-gray-50 rounded-lg border-l-2 border-unitec-federal hover:shadow-md transition-shadow">
+                                <strong class="text-unitec-federal block mb-1">Reto SPS-1:</strong> Trazabilidad de Medicamentos con Blockchain e IoT
+                            </li>
+                            <li class="p-4 bg-gray-50 rounded-lg border-l-2 border-unitec-federal hover:shadow-md transition-shadow">
+                                <strong class="text-unitec-federal block mb-1">Reto SPS-2:</strong> Virtualización de Laboratorios Universitarios
+                            </li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- 3. Conformación de Equipos -->
             <section id="equipos" class="mb-16 scroll-mt-24">
                 <div class="flex items-center mb-8">
                     <div class="bg-unitec-federal text-white rounded-md w-10 h-10 flex items-center justify-center text-xl font-bold mr-4 shadow-sm shrink-0">3</div>
-                    <h3 class="text-2xl font-bold text-unitec-federal border-b-2 border-unitec-cyan pb-2 inline-block">Conformación de Equipos</h3>
+                    <h3 class="text-2xl font-bold text-unitec-federal border-b-2 border-unitec-cyan pb-2 inline-block">Equipos y Roles</h3>
                 </div>
                 
                 <div class="bg-white rounded-xl p-8 md:p-10 section-card border border-gray-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                        <div>
+                            <h4 class="text-lg font-bold text-unitec-federal mb-3"><i class="fas fa-clipboard-list mr-2 text-unitec-cyan"></i>Proceso de Inscripción</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-sm text-gray-600">
+                                <li>Cupos limitados por sede, evaluados por orden de llegada.</li>
+                                <li>Estudiantes activos de pregrado en UNITEC.</li>
+                                <li>Deben indicar, por orden de preferencia, los retos a resolver.</li>
+                                <li>Mantener representatividad de 2 a 5 miembros en todas las actividades.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-unitec-federal mb-3"><i class="fas fa-network-wired mr-2 text-unitec-cyan"></i>Estructura del Equipo</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-sm text-gray-600">
+                                <li>Conformados por un <strong class="text-gray-800">mínimo de 3 y máximo de 5 integrantes</strong>.</li>
+                                <li>Al menos 1 estudiante de las carreras objetivo del reto.</li>
+                                <li>No más de 2 personas de la misma carrera para fomentar diversidad.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="text-xl font-bold text-unitec-federal mb-6"><i class="fas fa-sitemap mr-2 text-unitec-cyan"></i>Estructura de Roles (Entorno Corporativo)</h4>
+                    <p class="text-sm text-gray-600 mb-6">Cada estudiante deberá asumir uno (o máximo dos) de los siguientes roles:</p>
                     
-                    <h4 class="text-xl font-bold text-unitec-federal mb-3"><i class="fas fa-clipboard-list mr-2 text-unitec-cyan"></i>Proceso y Requisitos</h4>
-                    <p class="text-gray-600 mb-8 text-[1.05rem] leading-relaxed">
-                        Los equipos deben estar conformados por un mínimo de <strong class="text-gray-800">4</strong> y un máximo de <strong class="text-gray-800">5 estudiantes activos</strong> de la Facultad de Ingeniería de UNITEC (con índice académico mayor a 75%). La inscripción se realizará mediante un formulario oficial durante las fechas establecidas, presentando un documento de intención de participación.
-                    </p>
-
-                    <h4 class="text-xl font-bold text-unitec-federal mb-3"><i class="fas fa-network-wired mr-2 text-unitec-cyan"></i>Estructura y Multidisciplinariedad</h4>
-                    <p class="text-gray-600 mb-8 text-[1.05rem] leading-relaxed">
-                        Es <strong class="text-unitec-federal">obligatorio</strong> que cada equipo integre estudiantes de al menos <strong class="text-gray-800">dos carreras diferentes</strong> de ingeniería (ej. Sistemas Computacionales + Mecatrónica, Biomédica + Civil, Telecomunicaciones + Energía). No se aceptarán equipos conformados por estudiantes de una sola disciplina, para forzar el enfoque colaborativo horizontal.
-                    </p>
-
-                    <h4 class="text-xl font-bold text-unitec-federal mb-6"><i class="fas fa-sitemap mr-2 text-unitec-cyan"></i>Estructura de Roles (Simulación Corporativa)</h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-unitec-light p-6 rounded-lg border-t-4 border-unitec-federal shadow-sm">
-                            <h5 class="font-bold text-unitec-federal text-lg mb-2">1. Project Manager (PM)</h5>
-                            <p class="text-sm text-gray-600 leading-relaxed">Líder integrador. Responsable del cumplimiento de hitos, gestión de recursos, coordinación del equipo y comunicación principal con los mentores de GBM.</p>
+                            <h5 class="font-bold text-unitec-federal text-lg mb-2">1. Coordinador Ágil <span class="text-xs text-gray-500 block font-normal">(Agile Delivery Manager)</span></h5>
+                            <p class="text-sm text-gray-600 leading-relaxed mt-2">Enlace principal. Gestiona el tiempo, entrega de hitos y lidera comunicación con GBM. Asegura que el equipo trabaje horizontalmente.</p>
                         </div>
                         <div class="bg-unitec-light p-6 rounded-lg border-t-4 border-unitec-cyan shadow-sm">
-                            <h5 class="font-bold text-unitec-federal text-lg mb-2">2. Arquitecto de Soluciones</h5>
-                            <p class="text-sm text-gray-600 leading-relaxed">Líder técnico. Encargado del diseño de la arquitectura tecnológica, viabilidad técnica, diagramación y selección de tecnologías.</p>
+                            <h5 class="font-bold text-unitec-federal text-lg mb-2">2. Arquitecto de Soluciones <span class="text-xs text-gray-500 block font-normal">(Solutions Architect)</span></h5>
+                            <p class="text-sm text-gray-600 leading-relaxed mt-2">Núcleo técnico. Define tecnologías (IoT, BD en nube, IA) e interacciones. Responsable del diseño robusto, moderno y escalable.</p>
                         </div>
                         <div class="bg-unitec-light p-6 rounded-lg border-t-4 border-unitec-sky shadow-sm">
-                            <h5 class="font-bold text-unitec-federal text-lg mb-2">3. Especialista Financiero / Costos</h5>
-                            <p class="text-sm text-gray-600 leading-relaxed">Garantiza la rentabilidad de la solución. Elabora presupuestos, análisis de ROI (Retorno de Inversión) y demuestra el impacto económico para el cliente.</p>
+                            <h5 class="font-bold text-unitec-federal text-lg mb-2">3. Estratega de Negocios e Industria <span class="text-xs text-gray-500 block font-normal">(Business Strategy Lead)</span></h5>
+                            <p class="text-sm text-gray-600 leading-relaxed mt-2">Justifica el impacto. Analiza el modelo de negocio, presupuesto, comprende necesidades del mercado y asegura que resuelva un problema real.</p>
                         </div>
                         <div class="bg-unitec-light p-6 rounded-lg border-t-4 border-gray-400 shadow-sm">
-                            <h5 class="font-bold text-unitec-federal text-lg mb-2">4. QA & Compliance</h5>
-                            <p class="text-sm text-gray-600 leading-relaxed">Responsable de las pruebas (testing), estándares de calidad, seguridad de la información y viabilidad en el entorno real de implementación.</p>
+                            <h5 class="font-bold text-unitec-federal text-lg mb-2">4. Especialista en Innovación y Experiencia <span class="text-xs text-gray-500 block font-normal">(UX/UI Lead)</span></h5>
+                            <p class="text-sm text-gray-600 leading-relaxed mt-2">Cara visible. Transforma complejidad técnica en prototipo funcional y estético. Diseña mock-ups y flujogramas de usuario.</p>
+                        </div>
+                        <div class="bg-unitec-light p-6 rounded-lg border-t-4 border-gray-600 shadow-sm md:col-span-2 md:w-1/2 md:mx-auto">
+                            <h5 class="font-bold text-unitec-federal text-lg mb-2">5. Auditor de Calidad y Ciberseguridad <span class="text-xs text-gray-500 block font-normal">(QA & Security Auditor)</span></h5>
+                            <p class="text-sm text-gray-600 leading-relaxed mt-2">Filtro final. Prueba prototipos, garantiza seguridad de la infraestructura/software y verifica cumplimiento milimétrico con la rúbrica.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 4. Acompañamiento, Talleres y Clínicas -->
             <section id="acompanamiento" class="mb-16 scroll-mt-24">
                 <div class="flex items-center mb-8">
                     <div class="bg-unitec-federal text-white rounded-md w-10 h-10 flex items-center justify-center text-xl font-bold mr-4 shadow-sm shrink-0">4</div>
-                    <h3 class="text-2xl font-bold text-unitec-federal border-b-2 border-unitec-cyan pb-2 inline-block">Acompañamiento Técnico y Pedagógico</h3>
+                    <h3 class="text-2xl font-bold text-unitec-federal border-b-2 border-unitec-cyan pb-2 inline-block">Acompañamiento y Mentoría GBM</h3>
                 </div>
                 
                 <div class="bg-white rounded-xl p-8 md:p-10 section-card border border-gray-100">
-                    <p class="mb-8 text-gray-600 leading-relaxed text-[1.05rem]">
-                        El núcleo del éxito de este proyecto radica en explicar a los estudiantes cómo los sistemas de planificación de recursos (ej. SAP) orquestan manufactura y logística, y cómo la ingeniería se traduce en rentabilidad. Para lograrlo, contarán con múltiples capas de soporte:
-                    </p>
+                    <p class="text-gray-600 mb-8">Expertos de GBM impartirán charlas y talleres técnicos obligatorios. Se ejecutarán al menos 2 talleres clave que acompañen el desarrollo de los prototipos.</p>
 
-                    <div class="mb-10">
-                        <h4 class="text-lg font-bold text-unitec-federal mb-4 uppercase tracking-wider text-sm">Formas de Acompañamiento</h4>
-                        <div class="space-y-4">
-                            <div class="flex">
-                                <i class="fas fa-angle-right text-unitec-cyan mt-1 mr-3"></i>
-                                <p class="text-gray-600"><strong class="text-gray-800">Mentoría Técnica GBM:</strong> Cada equipo tendrá asignado un Ingeniero o Especialista de GBM para reuniones de validación, asegurando estándares corporativos reales.</p>
-                            </div>
-                            <div class="flex">
-                                <i class="fas fa-angle-right text-unitec-cyan mt-1 mr-3"></i>
-                                <p class="text-gray-600"><strong class="text-gray-800">Asesoría Pedagógica UNITEC:</strong> Docentes guías apoyando la estructura del proyecto y aplicando rúbricas formativas (Feedback S.T.A.R.) previo a las entregas.</p>
-                            </div>
-                            <div class="flex">
-                                <i class="fas fa-angle-right text-unitec-cyan mt-1 mr-3"></i>
-                                <p class="text-gray-600"><strong class="text-gray-800">Espacios de Validación:</strong> Puntos de control donde los equipos reciben retroalimentación crítica para pivotar o refinar sus soluciones antes del Hito Final.</p>
-                            </div>
+                    <h4 class="text-lg font-bold text-unitec-federal mb-6 border-b pb-2 uppercase tracking-wider text-sm">Propuesta de Talleres Especializados (Prácticos)</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                        <div class="border border-gray-200 p-5 rounded-lg hover:border-unitec-cyan transition-colors">
+                            <strong class="text-unitec-federal block mb-2">De la Ingeniería al Valor: Consultoría Tecnológica y Casos de Negocio</strong>
+                            <p class="text-xs text-gray-500 mb-2">Dirigido a: Estratega de Negocios y Coordinador Ágil.</p>
+                            <p class="text-sm text-gray-600">Estructurar casos de negocio, cálculo de ROI, presupuestación Cloud y necesidades de automatización.</p>
+                        </div>
+                        <div class="border border-gray-200 p-5 rounded-lg hover:border-unitec-cyan transition-colors">
+                            <strong class="text-unitec-federal block mb-2">UX/UI y Storytelling para Pitch de Proyectos</strong>
+                            <p class="text-xs text-gray-500 mb-2">Dirigido a: Especialista UX/UI y equipo completo.</p>
+                            <p class="text-sm text-gray-600">Diseño centrado en el usuario, mock-ups y comunicación efectiva para vender la solución a directivos.</p>
+                        </div>
+                        <div class="border border-gray-200 p-5 rounded-lg hover:border-unitec-cyan transition-colors">
+                            <strong class="text-unitec-federal block mb-2">Arquitecturas Modernas: Cloud, IoT y Escalabilidad</strong>
+                            <p class="text-xs text-gray-500 mb-2">Dirigido a: Arquitecto de Soluciones.</p>
+                            <p class="text-sm text-gray-600">Topologías de red, bases de datos, virtualización y uso de herramientas empresariales existentes (Datacenters, Azure, AWS).</p>
+                        </div>
+                        <div class="border border-gray-200 p-5 rounded-lg hover:border-unitec-cyan transition-colors">
+                            <strong class="text-unitec-federal block mb-2">Frameworks Ágiles para el Desarrollo Tecnológico</strong>
+                            <p class="text-xs text-gray-500 mb-2">Dirigido a: Coordinador Ágil y equipo completo.</p>
+                            <p class="text-sm text-gray-600">Metodologías Scrum/Kanban, gestión de tiempo y resolución de cuellos de botella técnicos.</p>
+                        </div>
+                        <div class="border border-gray-200 p-5 rounded-lg hover:border-unitec-cyan transition-colors md:col-span-2">
+                            <strong class="text-unitec-federal block mb-2">Ciberseguridad desde el Diseño (Security by Design)</strong>
+                            <p class="text-xs text-gray-500 mb-2">Dirigido a: Auditor de Calidad y Ciberseguridad.</p>
+                            <p class="text-sm text-gray-600">Identificación de vulnerabilidades, protección de datos sensibles y estructuración de pruebas QA.</p>
                         </div>
                     </div>
 
-                    <div class="mb-10">
-                        <h4 class="text-lg font-bold text-unitec-federal mb-4 uppercase tracking-wider text-sm">Talleres Propuestos (Workshops Obligatorios)</h4>
-                        <div class="flex flex-col md:flex-row gap-6">
-                            <div class="flex-1 bg-unitec-light p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-4 text-unitec-federal shadow-sm"><i class="fas fa-lightbulb"></i></div>
-                                <h5 class="font-bold text-unitec-federal mb-2">Design Thinking & Ideación</h5>
-                                <p class="text-sm text-gray-600">Enfoque en definir el problema correcto, empatizar con el cliente corporativo y estructurar la nota conceptual. (Semana 2)</p>
-                            </div>
-                            <div class="flex-1 bg-[#E6F7FB] p-6 rounded-lg border border-[#c5eff7] shadow-sm hover:shadow-md transition-shadow">
-                                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-4 text-unitec-cyan shadow-sm"><i class="fas fa-microphone"></i></div>
-                                <h5 class="font-bold text-unitec-federal mb-2">Executive Pitching</h5>
-                                <p class="text-sm text-gray-600">Cómo vender una idea tecnológica a una junta directiva: habilidades de comunicación asertiva, síntesis y defensa del ROI. (Semana 5)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h4 class="text-lg font-bold text-unitec-federal mb-4 uppercase tracking-wider text-sm">Clínicas Tecnológicas (Masterclasses por GBM)</h4>
-                        <p class="text-gray-600 text-sm mb-5 font-medium">Durante las semanas 4 y 8, se impartirán Masterclasses especializadas. Los equipos deben asistir a las que mejor se adapten a su reto. Las 4 opciones propuestas son:</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="border border-gray-200 p-4 rounded-lg hover:border-unitec-cyan hover:bg-unitec-light transition-all">
-                                <strong class="text-unitec-federal block mb-1">Opción 1</strong> <span class="text-gray-600 text-sm">Arquitecturas Cloud y Alta Disponibilidad (Data Centers del Futuro).</span>
-                            </div>
-                            <div class="border border-gray-200 p-4 rounded-lg hover:border-unitec-cyan hover:bg-unitec-light transition-all">
-                                <strong class="text-unitec-federal block mb-1">Opción 2</strong> <span class="text-gray-600 text-sm">Ciberseguridad Corporativa: Diseño de arquitecturas Zero-Trust.</span>
-                            </div>
-                            <div class="border border-gray-200 p-4 rounded-lg hover:border-unitec-cyan hover:bg-unitec-light transition-all">
-                                <strong class="text-unitec-federal block mb-1">Opción 3</strong> <span class="text-gray-600 text-sm">Integración SAP y Automatización de Procesos de Negocio.</span>
-                            </div>
-                            <div class="border border-gray-200 p-4 rounded-lg hover:border-unitec-cyan hover:bg-unitec-light transition-all">
-                                <strong class="text-unitec-federal block mb-1">Opción 4</strong> <span class="text-gray-600 text-sm">Inteligencia Artificial y analítica de datos aplicada a la toma de decisiones.</span>
-                            </div>
-                        </div>
-                    </div>
+                    <h4 class="text-lg font-bold text-unitec-federal mb-6 border-b pb-2 uppercase tracking-wider text-sm">Clínicas Tecnológicas (Masterclasses Estratégicas)</h4>
+                    <p class="text-sm text-gray-600 mb-6">Conferencias magistrales o paneles de expertos orientados a abrir el panorama de los estudiantes. Se realizarán dos sesiones en todo el concurso.</p>
+                    <ul class="space-y-4 text-sm">
+                        <li class="bg-unitec-light p-4 rounded-lg">
+                            <strong class="text-gray-800">Opción 1: Más allá del Hardware y el Código.</strong> Entendiendo la Industria y la Automatización para romper el paradigma vertical.
+                        </li>
+                        <li class="bg-unitec-light p-4 rounded-lg">
+                            <strong class="text-gray-800">Opción 2: La Nueva Frontera: IA, IoT y Ciberseguridad.</strong> Exploración de tecnologías disruptivas aplicadas (avatares, análisis de datos).
+                        </li>
+                        <li class="bg-unitec-light p-4 rounded-lg">
+                            <strong class="text-gray-800">Opción 3: Infraestructura Invisible.</strong> Datacenters, Nube y el Poder del Outsourcing (Azure, AWS, Cisco).
+                        </li>
+                        <li class="bg-unitec-light p-4 rounded-lg">
+                            <strong class="text-gray-800">Opción 4: Transformación Digital Empresarial.</strong> Integrando AGILE y SAP en la Industria para rentabilidad y eficiencia.
+                        </li>
+                    </ul>
                 </div>
             </section>
 
-            <!-- 5. Cronograma -->
             <section id="cronograma" class="mb-16 scroll-mt-24">
                 <div class="flex items-center mb-8">
                     <div class="bg-unitec-federal text-white rounded-md w-10 h-10 flex items-center justify-center text-xl font-bold mr-4 shadow-sm shrink-0">5</div>
@@ -339,88 +323,58 @@
                 <div class="bg-white rounded-xl p-8 md:p-12 section-card border border-gray-100">
                     <div class="relative border-l-2 border-gray-200 ml-4 md:ml-6 space-y-10 pb-4">
                         
-                        <!-- Timeline Item -->
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-4 h-4 bg-unitec-cyan rounded-full -left-[9px] top-1.5 ring-4 ring-white"></div>
                             <h4 class="text-lg font-bold text-unitec-federal">Inscripción</h4>
                             <p class="text-unitec-cyan text-sm font-bold tracking-wide uppercase mb-2">7 - 17 de abril</p>
                         </div>
 
-                        <!-- Timeline Item -->
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-4 h-4 bg-unitec-federal rounded-full -left-[9px] top-1.5 ring-4 ring-white"></div>
-                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
-                                Semana 1 
-                                <span class="bg-gray-100 text-gray-500 text-xs py-1 px-2 rounded-md font-medium">20 - 24 de abril</span>
-                            </h4>
-                            <p class="text-gray-600 mt-2">Lanzamiento oficial y asignación de retos.</p>
+                            <h4 class="text-lg font-bold text-unitec-federal">Semana 1</h4>
+                            <p class="text-gray-600 mt-1">Lanzamiento oficial y asignación de retos.</p>
                         </div>
 
-                        <!-- Timeline Item -->
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-4 h-4 bg-unitec-federal rounded-full -left-[9px] top-1.5 ring-4 ring-white"></div>
-                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
-                                Semana 2 
-                                <span class="bg-gray-100 text-gray-500 text-xs py-1 px-2 rounded-md font-medium">27 de abril - 1 de mayo</span>
-                            </h4>
-                            <p class="text-gray-600 mt-2">Taller de Mentoría GBM 1: Design Thinking (Virtual/Presencial)</p>
+                            <h4 class="text-lg font-bold text-unitec-federal">Semana 2</h4>
+                            <p class="text-gray-600 mt-1">Taller de Mentoría GBM 1 (Virtual/Presencial).</p>
                         </div>
 
-                        <!-- Milestone -->
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-5 h-5 bg-unitec-sky rounded-full -left-[11px] top-1 ring-4 ring-white shadow-sm flex items-center justify-center">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
-                                Semana 3 - Hito 1
-                                <span class="bg-[#E6F7FB] text-unitec-cyan text-xs py-1 px-2 rounded-md font-bold">4 - 8 de mayo</span>
-                            </h4>
-                            <p class="text-gray-700 font-medium mt-2 bg-unitec-light p-3 rounded-md border-l-2 border-unitec-sky">Entrega de Nota Conceptual (Concept Note), alcance y roles definidos.</p>
+                            <h4 class="text-lg font-bold text-unitec-federal">Semana 3 - Hito 1</h4>
+                            <p class="text-gray-700 font-medium mt-2 bg-unitec-light p-3 rounded-md border-l-2 border-unitec-sky">Entrega de Nota Conceptual (Concept Note) y definición del alcance.</p>
                         </div>
 
-                        <!-- Timeline Item -->
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-4 h-4 bg-unitec-federal rounded-full -left-[9px] top-1.5 ring-4 ring-white"></div>
-                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
-                                Semana 4 
-                                <span class="bg-gray-100 text-gray-500 text-xs py-1 px-2 rounded-md font-medium">11 - 15 de mayo</span>
-                            </h4>
-                            <p class="text-gray-600 mt-2">Masterclass GBM 1 / “Clínica Tecnológica 1”</p>
+                            <h4 class="text-lg font-bold text-unitec-federal">Semana 4</h4>
+                            <p class="text-gray-600 mt-1">Masterclass GBM 1 o “Clínica Tecnológica 1”.</p>
                         </div>
 
-                        <!-- Timeline Item -->
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-4 h-4 bg-unitec-federal rounded-full -left-[9px] top-1.5 ring-4 ring-white"></div>
-                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
-                                Semana 5 
-                                <span class="bg-gray-100 text-gray-500 text-xs py-1 px-2 rounded-md font-medium">18 - 22 de mayo</span>
-                            </h4>
-                            <p class="text-gray-600 mt-2">Taller de Mentoría GBM 2: Executive Pitching (Virtual/Presencial).</p>
+                            <h4 class="text-lg font-bold text-unitec-federal">Semana 5</h4>
+                            <p class="text-gray-600 mt-1">Taller de Mentoría GBM 2 (Virtual/Presencial).</p>
                         </div>
 
-                        <!-- Milestone -->
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-5 h-5 bg-unitec-sky rounded-full -left-[11px] top-1 ring-4 ring-white shadow-sm flex items-center justify-center">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
-                                Semana 7 - Hito 2
-                                <span class="bg-[#E6F7FB] text-unitec-cyan text-xs py-1 px-2 rounded-md font-bold">1 - 5 de junio</span>
-                            </h4>
-                            <p class="text-gray-700 font-medium mt-2 bg-unitec-light p-3 rounded-md border-l-2 border-unitec-sky">Entrega de diseño técnico, presupuesto final, retorno de inversión y arquitectura.</p>
+                            <h4 class="text-lg font-bold text-unitec-federal">Semana 7 - Hito 2</h4>
+                            <p class="text-gray-700 font-medium mt-2 bg-unitec-light p-3 rounded-md border-l-2 border-unitec-sky">Entrega de diseño técnico, presupuesto preliminar y arquitectura.</p>
                         </div>
 
-                        <!-- Timeline Item -->
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-4 h-4 bg-unitec-federal rounded-full -left-[9px] top-1.5 ring-4 ring-white"></div>
-                            <h4 class="text-lg font-bold text-unitec-federal flex items-center flex-wrap gap-2">
-                                Semana 8 
-                                <span class="bg-gray-100 text-gray-500 text-xs py-1 px-2 rounded-md font-medium">8 - 12 de junio</span>
-                            </h4>
-                            <p class="text-gray-600 mt-2">Masterclass GBM 2 / “Clínica Tecnológica 2” y ensayos finales.</p>
+                            <h4 class="text-lg font-bold text-unitec-federal">Semana 8</h4>
+                            <p class="text-gray-600 mt-1">Masterclass GBM 2 o “Clínica Tecnológica 2”.</p>
                         </div>
 
-                        <!-- Final -->
                         <div class="relative pl-8 md:pl-10">
                             <div class="absolute w-8 h-8 bg-unitec-federal rounded-full -left-[17px] -top-1 ring-4 ring-white shadow-md flex items-center justify-center">
                                 <i class="fas fa-star text-white text-xs"></i>
@@ -430,14 +384,13 @@
                                 <span class="bg-[#E6F7FB] text-unitec-federal border border-unitec-cyan text-xs py-1 px-2 rounded-md font-bold">15 - 19 de junio</span>
                             </h4>
                             <p class="text-gray-800 text-[1.05rem] mt-3 font-medium bg-gray-50 p-4 rounded-lg border border-gray-100">
-                                Presentación Final (Pitch) frente a jurado (representantes académicos y ejecutivos GBM) durante la <strong class="text-unitec-cyan">ExpoFI</strong> y el <strong class="text-unitec-cyan">Mecatón</strong>.
+                                Presentación Final (Pitch) frente a jurado (representantes académicos y de GBM) durante la <strong class="text-unitec-cyan">ExpoFI</strong> y el <strong class="text-unitec-cyan">Mecatón</strong>.
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 6. Evaluación -->
             <section id="evaluacion" class="mb-16 scroll-mt-24">
                 <div class="flex items-center mb-8">
                     <div class="bg-unitec-federal text-white rounded-md w-10 h-10 flex items-center justify-center text-xl font-bold mr-4 shadow-sm shrink-0">6</div>
@@ -450,15 +403,15 @@
                             <i class="fas fa-gavel text-2xl text-unitec-federal"></i>
                         </div>
                         <h4 class="text-lg font-bold text-unitec-federal mb-3">Jurado Calificador</h4>
-                        <p class="text-gray-600 text-sm leading-relaxed">Compuesto de forma paritaria por Jefaturas Académicas de UNITEC y Expertos/Directivos de la industria por parte de GBM.</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">Compuesto por Jefaturas Académicas/ Representantes de Unitec y expertos de la industria de GBM.</p>
                     </div>
 
                     <div class="bg-white rounded-xl p-8 section-card border-t-4 border-unitec-cyan text-center flex flex-col items-center">
                         <div class="bg-[#E6F7FB] w-16 h-16 rounded-full flex items-center justify-center mb-5">
                             <i class="fas fa-tasks text-2xl text-unitec-cyan"></i>
                         </div>
-                        <h4 class="text-lg font-bold text-unitec-federal mb-3">Criterios (Rúbrica CGS)</h4>
-                        <p class="text-gray-600 text-sm leading-relaxed">Evaluará la competencia técnica, la viabilidad financiera, el carácter colaborativo del equipo, la calidad de presentación y funcionalidad del diseño.</p>
+                        <h4 class="text-lg font-bold text-unitec-federal mb-3">Criterios (Rúbrica)</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">Evaluará viabilidad técnica, innovación, calidad de presentación y funcionalidad del prototipo.</p>
                     </div>
 
                     <div class="bg-white rounded-xl p-8 section-card border-t-4 border-unitec-sky text-center flex flex-col items-center">
@@ -466,32 +419,12 @@
                             <i class="fas fa-award text-2xl text-unitec-sky"></i>
                         </div>
                         <h4 class="text-lg font-bold text-unitec-federal mb-3">Retribución</h4>
-                        <span class="bg-gray-100 text-gray-500 text-xs py-1 px-3 rounded-full mb-3 uppercase tracking-wider font-semibold">En Validación</span>
-                        <p class="text-gray-800 text-sm font-medium leading-relaxed">Suficiencia de clases afines, puntos extra en rúbricas de proyecto final, o reconocimiento equivalente.</p>
+                        <span class="bg-gray-100 text-gray-500 text-xs py-1 px-3 rounded-full mb-3 uppercase tracking-wider font-semibold">Propuesta (no aprobada aún)</span>
+                        <p class="text-gray-800 text-sm font-medium leading-relaxed">Suficiencia de Capstone Project en carreras aplicables, o evaluación de proyecto final de asignaturas.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Proposal CTA Link -->
-            <section class="mt-20 mb-10 text-center">
-                <div class="bg-unitec-federal rounded-2xl p-12 text-white shadow-xl relative overflow-hidden">
-                    <!-- Decoración geométrica sutil (Diamante) -->
-                    <div class="absolute -top-24 -right-24 w-64 h-64 border-[40px] border-white opacity-5 transform rotate-45"></div>
-                    <div class="absolute -bottom-24 -left-24 w-64 h-64 border-[40px] border-white opacity-5 transform rotate-45"></div>
-                    
-                    <div class="relative z-10 flex flex-col items-center">
-                        <i class="fas fa-rocket text-4xl mb-6 text-unitec-cyan"></i>
-                        <h3 class="text-3xl md:text-4xl font-black mb-4 tracking-tight">Explora los Retos Propuestos</h3>
-                        <p class="mb-10 text-lg opacity-80 max-w-xl text-center font-light">Conoce a detalle las áreas temáticas y las problemáticas de la industria que los equipos deberán resolver.</p>
-                        <a href="https://capexfi25-30.netlify.app/futuretech/retos.html" target="_blank" class="bg-white text-unitec-federal hover:bg-unitec-cyan hover:text-white transition-all duration-300 font-bold py-4 px-10 rounded-md text-lg shadow-md flex items-center group">
-                            Ver Propuesta de Retos 
-                            <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Footer -->
             <footer class="text-center text-gray-400 text-sm mt-16 pb-8 border-t border-gray-200 pt-8 font-medium">
                 <p>&copy; 2026 Facultad de Ingeniería, UNITEC Honduras. Propuesta interna sujeta a revisión.</p>
             </footer>
@@ -500,7 +433,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Lógica elegante para el ScrollSpy
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-link');
             const mainContent = document.getElementById('main-content');
@@ -522,7 +454,6 @@
                 });
             });
 
-            // Toggle para el menú móvil con animaciones sutiles
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const closeBtn = document.getElementById('close-menu-btn');
             const mobileNav = document.getElementById('mobile-nav');
