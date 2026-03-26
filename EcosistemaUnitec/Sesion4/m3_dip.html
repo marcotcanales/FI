@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3: Metas de Competencia | Ecosistema de Aprendizaje UNITEC</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: STRICTLY POPPINS AS PER BRAND MANUAL -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Edna's decree: Poppins only.
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', /* Federal Blue */
+                            cyan: '#03AED2',    /* Pacific Cyan */
+                            sky: '#47C8FD',     /* Vivid Sky Blue */
+                            gray: '#F3F4F6',
+                            text: '#334155'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #FAFAFA; /* Option A: Clean light background */
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 4px; /* Precision sharp corners */
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 4px 6px -1px rgba(6, 6, 92, 0.05); /* Clean, institutional depth */
+            background-color: #06065C;
+        }
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Custom Checkbox - Option A Styling */
+        .checklist-item {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .checklist-item:hover {
+            background-color: #F8FAFC;
+        }
+        .checkbox-custom {
+            transition: all 0.2s;
+        }
+        /* Using Federal Blue for the checked state */
+        input:checked + .checkbox-custom {
+            background-color: #06065C;
+            border-color: #06065C;
+        }
+        /* Using Pacific Cyan for the check icon to pop */
+        input:checked + .checkbox-custom i {
+            opacity: 1;
+            transform: scale(1);
+            color: #03AED2;
+        }
+        .checklist-text {
+            transition: all 0.2s;
+        }
+        input:checked ~ .checklist-text {
+            color: #9CA3AF;
+            text-decoration: line-through;
+        }
+
+        /* Custom scrollbar reflecting brand colors */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #06065C; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #03AED2; }
+    </style>
+</head>
+<body class="text-unitec-text antialiased flex flex-col min-h-screen">
+
+    <!-- Header / Navbar: Solid Federal Blue matching Option A completely -->
+    <header class="bg-unitec-federal text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            
+            <!-- BRANDING: Imagotipo Horizontal (Isotipo + Logotipo) -->
+            <a href="sesion4.html" class="flex items-center gap-2 cursor-pointer group">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="text-white group-hover:text-unitec-sky transition-colors">
+                    <polygon points="12,1 22,10 12,23 2,10" />
+                </svg>
+                <span class="text-2xl font-black tracking-tighter lowercase leading-none mt-1 group-hover:text-unitec-sky transition-colors">unitec</span>
+                <div class="h-6 w-px bg-unitec-cyan mx-3 opacity-50 hidden md:block"></div>
+                <div>
+                    <h1 class="font-medium tracking-wide text-unitec-sky leading-tight text-sm">Módulo 3: Metas de Competencia</h1>
+                </div>
+            </a>
+
+            <div class="hidden sm:flex items-center gap-6 text-xs font-bold tracking-wider uppercase text-unitec-sky">
+                <a href="sesion4.html" class="flex items-center gap-2 hover:text-white transition-colors border border-unitec-sky/30 px-4 py-1.5 rounded-sm">
+                    <i class="ph-bold ph-arrow-left text-base"></i> Volver a Módulos
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Section (Hero) -->
+    <header class="bg-unitec-federal text-white py-16 relative overflow-hidden border-t border-white/10">
+        <!-- Decorative background elements: Diamonds -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+            <div class="absolute top-10 left-10 w-64 h-64 border-2 border-white transform rotate-45"></div>
+            <div class="absolute -bottom-20 -right-20 w-96 h-96 border-2 border-white transform rotate-45"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center md:text-left">
+            <span class="inline-block py-1.5 px-4 rounded-sm border border-unitec-cyan text-xs font-bold tracking-widest uppercase mb-4 text-unitec-cyan">
+                Modelo DIP
+            </span>
+            <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight">
+                El Cómo: Desarrollando Metas de Competencia
+            </h1>
+            <p class="text-lg text-gray-300 leading-relaxed max-w-2xl font-medium">
+                Estructurando secuencias de aprendizaje para el dominio de habilidades prácticas en el Ecosistema de Aprendizaje de Unitec y Ceutec a través del modelo Deconstruir, Identificar y Practicar.
+            </p>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        
+        <!-- Video 1 (Introductory Explainer) -->
+        <section class="mb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="ph-fill ph-play-circle text-unitec-cyan text-3xl"></i>
+                <h2 class="text-2xl font-black text-unitec-federal tracking-tight">Video Introductorio</h2>
+            </div>
+            <div class="video-container">
+                <!-- Fallback poster image in case video doesn't load immediately -->
+                <video controls poster="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+                    <source src="VID/DIP_competencia_1.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+            <p class="text-sm text-gray-500 mt-3 font-medium text-center">Reproduce este video para explorar cómo pasar de la teoría a la ejecución magistral de una habilidad.</p>
+        </section>
+
+        <!-- Context & Definition -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-black text-unitec-federal tracking-tight mb-6">El Planteamiento Inicial</h2>
+            <div class="text-gray-700 leading-relaxed space-y-4">
+                <p class="font-medium">
+                    En la sección 8 del <strong>Unitec Planner</strong>, denominada <em>"El Cómo"</em>, diseñamos la "coreografía" del aprendizaje. A diferencia de los enfoques tradicionales, el Ecosistema de Aprendizaje de Unitec y Ceutec no utiliza un modelo único de instrucción, sino que aplica distintos flujos dependiendo de si se está desarrollando una meta Conceptual, de Competencia o de Carácter.
+                </p>
+                <div class="bg-gray-50 border-l-4 border-unitec-federal p-6 rounded-r-sm shadow-sm">
+                    <p class="font-bold text-unitec-federal">
+                        Para el desarrollo de las <span class="text-unitec-cyan uppercase tracking-wider text-xs mx-1">Metas de Competencia</span> —aquellas centradas en habilidades y destrezas prácticas donde buscamos que el alumno demuestre <em>"ser capaz de..."</em> mediante acciones observables— se utiliza el <strong>Modelo DIP (Deconstruct, Identify, Practice)</strong>.
+                    </p>
+                </div>
+                <p class="font-medium">
+                    El enfoque DIP ayuda a los estudiantes a comprender profundamente cómo se construye y funciona una habilidad compleja antes de ejecutarla. Este flujo permite desarrollar las técnicas necesarias para aplicar la habilidad con éxito en un contexto del mundo real.
+                </p>
+            </div>
+        </section>
+
+        <!-- The 3 Phases (Clean Cards) -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-black text-unitec-federal tracking-tight mb-4">Fases del Modelo DIP</h2>
+            <p class="mb-8 text-gray-600 font-medium">La secuencia se divide en tres fases fundamentales, guiadas siempre por una Pregunta Marco (Framing Question) de competencia que promueve la indagación y guía la práctica (ej. <em>"¿Cómo estructuro un documento colaborativo para evitar el caos de versiones?"</em>).</p>
+            
+            <div class="space-y-6">
+                <!-- Fase 1: Deconstruir -->
+                <div class="bg-white border border-gray-200 rounded-sm p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6 items-start relative overflow-hidden group hover:border-unitec-cyan transition-colors">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-cyan transition-colors"></div>
+                    <div class="w-16 h-16 shrink-0 bg-gray-50 border border-gray-100 rounded-sm flex items-center justify-center text-unitec-federal group-hover:bg-unitec-cyan group-hover:text-unitec-federal transition-colors">
+                        <i class="ph-bold ph-puzzle-piece text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 tracking-tight">1. Fase de DECONSTRUIR (Deconstruct)</h3>
+                        <div class="space-y-3">
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Propósito</strong> Analizar ejemplos expertos o modelos preexistentes para desglosar una habilidad compleja en partes manejables.</p>
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Dinámica</strong> En lugar de simplemente decirles a los alumnos "cómo hacerlo", el docente presenta un "producto terminado" (ej. un reporte de laboratorio impecable, un algoritmo eficiente) y los guía para que descubran por qué funciona.</p>
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Acción del Alumno</strong> Analiza críticamente el modelo para entender "qué lo hace bueno".</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fase 2: Identificar -->
+                <div class="bg-white border border-gray-200 rounded-sm p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6 items-start relative overflow-hidden group hover:border-unitec-cyan transition-colors">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-cyan transition-colors"></div>
+                    <div class="w-16 h-16 shrink-0 bg-gray-50 border border-gray-100 rounded-sm flex items-center justify-center text-unitec-federal group-hover:bg-unitec-cyan group-hover:text-unitec-federal transition-colors">
+                        <i class="ph-bold ph-crosshair text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 tracking-tight">2. Fase de IDENTIFICAR (Identify)</h3>
+                        <div class="space-y-3">
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Propósito</strong> Reconocer los criterios de éxito y aislar las estrategias o pasos específicos utilizados por el experto.</p>
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Dinámica</strong> El docente ayuda a formalizar los descubrimientos de la fase anterior, nombrando las técnicas o herramientas clave. Se crea conjuntamente una rúbrica o lista de criterios de éxito.</p>
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Acción del Alumno</strong> Documenta los pasos, fórmulas o metodologías precisas que necesitará para ejecutar la tarea por sí mismo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fase 3: Practicar -->
+                <div class="bg-white border border-gray-200 rounded-sm p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6 items-start relative overflow-hidden group hover:border-unitec-cyan transition-colors">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-cyan transition-colors"></div>
+                    <div class="w-16 h-16 shrink-0 bg-gray-50 border border-gray-100 rounded-sm flex items-center justify-center text-unitec-federal group-hover:bg-unitec-cyan group-hover:text-unitec-federal transition-colors">
+                        <i class="ph-bold ph-person-simple-run text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 tracking-tight">3. Fase de PRACTICAR (Practice)</h3>
+                        <div class="space-y-3">
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Propósito</strong> Aplicar las habilidades aisladas en una práctica guiada o independiente, integrando procesos de retroalimentación para refinar el desempeño.</p>
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Dinámica</strong> El docente diseña escenarios prácticos reales. Se facilitan sesiones de evaluación formativa y <em>Feedback S.T.A.R.</em> entre pares para lograr mejoras iterativas.</p>
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Acción del Alumno</strong> Ejecuta la habilidad, comete errores en un entorno seguro, recibe críticas constructivas y perfecciona su técnica.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Example (Engineering) - Clean Institutional Box -->
+        <section class="mb-16">
+            <div class="bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden border-t-4 border-t-unitec-federal">
+                <div class="p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-8 border-b border-gray-100 pb-4">
+                        <div class="text-unitec-cyan">
+                            <i class="ph-bold ph-flask text-3xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-black text-unitec-federal tracking-tight">Ejemplo Práctico de Secuencia DIP</h2>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Aplicado a Ingeniería (Diseño de Mezclas de Concreto)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 bg-gray-50 p-6 rounded-sm border-l-4 border-unitec-cyan">
+                        <p class="text-gray-800 font-medium leading-relaxed"><strong class="text-unitec-federal font-black uppercase tracking-widest text-[10px] block mb-2">Meta de Competencia:</strong>
+                        "Los estudiantes son capaces de diseñar y ajustar una mezcla de concreto que cumpla con especificaciones precisas de resistencia y trabajabilidad."</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white border border-gray-200 p-6 rounded-sm">
+                            <h4 class="font-black text-unitec-federal text-sm uppercase tracking-widest mb-3 flex items-center gap-2 pb-2 border-b border-gray-100"><i class="ph-bold ph-puzzle-piece text-unitec-cyan text-lg"></i> Deconstruir</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed font-medium">El docente presenta a los estudiantes tres cilindros de concreto ya ensayados (uno con falla frágil, uno poroso y uno óptimo) junto con sus respectivas memorias de cálculo. En grupos, los estudiantes inspeccionan físicamente y comparan los documentos para inferir "qué falló" y "qué funcionó" en el diseño óptimo.</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 p-6 rounded-sm">
+                            <h4 class="font-black text-unitec-federal text-sm uppercase tracking-widest mb-3 flex items-center gap-2 pb-2 border-b border-gray-100"><i class="ph-bold ph-crosshair text-unitec-cyan text-lg"></i> Identificar</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed font-medium">Tras la discusión, el grupo extrae colaborativamente las variables críticas del éxito: identifican la relación Agua/Cemento precisa, el tipo de agregado y el uso de aditivos. El docente formaliza la tabla de criterios ACI que utilizarán como estándar para medir su propio trabajo.</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 p-6 rounded-sm">
+                            <h4 class="font-black text-unitec-federal text-sm uppercase tracking-widest mb-3 flex items-center gap-2 pb-2 border-b border-gray-100"><i class="ph-bold ph-person-simple-run text-unitec-cyan text-lg"></i> Practicar</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed font-medium">Los estudiantes entran al laboratorio para dosificar su propia mezcla. Preparan un lote de prueba, miden el revenimiento (slump) y documentan su proceso. Intercambian sus resultados preliminares con otro grupo usando Feedback S.T.A.R. para ajustar la humedad de los agregados antes del vaciado final.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Designer Checklist -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-black text-unitec-federal tracking-tight mb-2">Lista de Chequeo para el Diseñador</h2>
+            <p class="text-gray-600 mb-8 font-medium">Al momento de redactar las secuencias de competencia en tu Planner, asegúrate de validar lo siguiente. Haga clic para marcar su progreso.</p>
+            
+            <div class="bg-white rounded-sm border border-gray-200 shadow-sm overflow-hidden">
+                <!-- Checklist Item 1 -->
+                <label class="checklist-item flex items-center p-5 border-b border-gray-100 w-full group">
+                    <input type="checkbox" class="hidden" />
+                    <div class="checkbox-custom w-6 h-6 rounded-sm border-2 border-gray-300 flex items-center justify-center mr-4 shrink-0 bg-white group-hover:border-unitec-cyan">
+                        <i class="ph-bold ph-check text-white opacity-0 transform scale-50 transition-all text-sm"></i>
+                    </div>
+                    <span class="checklist-text font-medium text-gray-800 text-sm md:text-base"><strong class="text-unitec-federal block mb-1 text-xs uppercase tracking-wider">Alineación con el Verbo:</strong> ¿La secuencia completa permite al estudiante practicar el verbo de acción (ej. Evaluar, Diseñar, Formular) definido en la Meta de Competencia?</span>
+                </label>
+
+                <!-- Checklist Item 2 -->
+                <label class="checklist-item flex items-center p-5 border-b border-gray-100 w-full group">
+                    <input type="checkbox" class="hidden" />
+                    <div class="checkbox-custom w-6 h-6 rounded-sm border-2 border-gray-300 flex items-center justify-center mr-4 shrink-0 bg-white group-hover:border-unitec-cyan">
+                        <i class="ph-bold ph-check text-white opacity-0 transform scale-50 transition-all text-sm"></i>
+                    </div>
+                    <span class="checklist-text font-medium text-gray-800 text-sm md:text-base"><strong class="text-unitec-federal block mb-1 text-xs uppercase tracking-wider">Pregunta Guía:</strong> ¿Las actividades prácticas responden claramente a la Pregunta Marco de Competencia definida previamente en el Planner?</span>
+                </label>
+
+                <!-- Checklist Item 3 -->
+                <label class="checklist-item flex items-center p-5 w-full group">
+                    <input type="checkbox" class="hidden" />
+                    <div class="checkbox-custom w-6 h-6 rounded-sm border-2 border-gray-300 flex items-center justify-center mr-4 shrink-0 bg-white group-hover:border-unitec-cyan">
+                        <i class="ph-bold ph-check text-white opacity-0 transform scale-50 transition-all text-sm"></i>
+                    </div>
+                    <span class="checklist-text font-medium text-gray-800 text-sm md:text-base"><strong class="text-unitec-federal block mb-1 text-xs uppercase tracking-wider">Andamiaje:</strong> ¿La secuencia sigue el flujo lógico de examinar lo complejo (Deconstruir) <i class="ph-bold ph-arrow-right inline text-unitec-cyan mx-1"></i> entender las partes (Identificar) <i class="ph-bold ph-arrow-right inline text-unitec-cyan mx-1"></i> y ejecutarlo (Practicar)?</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- Video 2 (Closing Explainer) -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="ph-fill ph-check-circle text-unitec-cyan text-3xl"></i>
+                <h2 class="text-2xl font-black text-unitec-federal tracking-tight">Reflexión Final</h2>
+            </div>
+            <div class="video-container">
+                <video controls poster="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+                    <source src="VID/DIP_competencia_2.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+            <p class="text-sm text-gray-500 mt-3 font-medium text-center">Video de cierre: Validando el desarrollo de la competencia a través de la práctica iterativa.</p>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- BRANDING: Isotipo only + Text -->
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-unitec-federal flex items-center justify-center rounded-sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="text-white">
+                        <polygon points="12,1 22,10 12,23 2,10" />
+                    </svg>
+                </div>
+                <span class="text-unitec-federal font-black tracking-tight">Ecosistema de Aprendizaje</span>
+            </div>
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                Programa de Formación Docente • UNITEC
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
