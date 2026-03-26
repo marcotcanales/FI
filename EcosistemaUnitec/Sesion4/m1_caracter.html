@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educación del Carácter | Ecosistema de Aprendizaje UNITEC</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: STRICTLY POPPINS AS PER BRAND MANUAL -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Replacing default sans with Poppins
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', /* Federal Blue */
+                            cyan: '#03AED2',    /* Pacific Cyan */
+                            sky: '#47C8FD',     /* Vivid Sky Blue */
+                            gray: '#F3F4F6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #FAFAFA; /* Very clean, light background for contrast */
+        }
+        
+        /* Opción A: Clean, Academic, Precision-focused Cards */
+        .clean-card {
+            background: #ffffff;
+            border: 1px solid #E5E7EB;
+            border-radius: 4px; /* Sharp, slight corners emulating precision */
+            transition: all 0.3s ease;
+        }
+        
+        .clean-card:hover {
+            transform: translateY(-4px);
+            border-color: #03AED2; /* Pacific Cyan highlight */
+            box-shadow: 0 8px 16px rgba(6, 6, 92, 0.06); /* Very clean, institutional depth. NOT a heavy shadow. */
+        }
+
+        /* Modal Animations */
+        .modal-enter { opacity: 0; transform: scale(0.98); }
+        .modal-enter-active { opacity: 1; transform: scale(1); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .modal-leave { opacity: 1; transform: scale(1); }
+        .modal-leave-active { opacity: 0; transform: scale(0.98); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        /* Custom scrollbar reflecting brand colors */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #06065C; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #03AED2; }
+    </style>
+</head>
+<body class="text-gray-800 antialiased h-screen flex flex-col overflow-hidden">
+
+    <!-- Header / Navbar: Solid Federal Blue as requested in Option A -->
+    <header class="bg-unitec-federal text-white shadow-md z-10 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            
+            <!-- BRANDING: Imagotipo Horizontal (Isotipo + Logotipo) -->
+            <!-- NO shadows, NO gradients, NO rotation -->
+            <div class="flex items-center gap-2 cursor-pointer">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="text-white">
+                    <polygon points="12,1 22,10 12,23 2,10" />
+                </svg>
+                <span class="text-2xl font-black tracking-tighter lowercase leading-none mt-1">unitec</span>
+                <div class="h-6 w-px bg-unitec-cyan mx-3 opacity-50 hidden md:block"></div>
+                <h1 class="hidden md:block text-sm font-medium tracking-wide text-unitec-sky">Ecosistema de Aprendizaje</h1>
+            </div>
+
+            <div class="hidden md:flex items-center gap-4 text-xs font-semibold tracking-wider uppercase">
+                <span class="border border-unitec-sky text-unitec-sky px-4 py-1.5 rounded-sm flex items-center gap-2">
+                    <i class="ph ph-target text-lg"></i> Visión 2030
+                </span>
+                <span class="bg-unitec-cyan text-unitec-federal px-4 py-1.5 rounded-sm flex items-center gap-2 font-bold">
+                    <i class="ph ph-tree-structure text-lg"></i> Las 3 Cs
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto pb-12">
+        <!-- Hero Section -->
+        <section class="bg-white border-b border-gray-200">
+            <div class="max-w-4xl mx-auto px-4 py-16 text-center">
+                <h2 class="text-sm font-bold text-unitec-cyan tracking-widest uppercase mb-4">Sesión de Reflexión Estratégica</h2>
+                <h1 class="text-4xl md:text-5xl font-black text-unitec-federal mb-6 leading-tight tracking-tight">
+                    Diez ideas marco para rediseñar la educación del carácter
+                </h1>
+                <p class="text-lg text-gray-500 mb-8 font-medium">Basado en los principios de María Cecilia Álvarez</p>
+                
+                <div class="bg-gray-50 border-l-4 border-unitec-federal p-6 text-left shadow-sm rounded-r-sm max-w-3xl mx-auto">
+                    <p class="text-gray-700 leading-relaxed font-medium">
+                        <strong class="text-unitec-federal font-black uppercase tracking-wider text-sm mr-2">Tesis Central:</strong> 
+                        La formación del carácter no debe entenderse como un añadido al currículo, ni como un programa complementario, sino como una dimensión constitutiva de una buena educación. Esta experiencia interactiva invita a repensar la educación universitaria no solo en función de competencias académicas, sino del <span class="text-unitec-cyan font-bold">tipo de personas que la institución está contribuyendo a formar</span>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video 1: El Corazón de la Educación -->
+        <section class="max-w-4xl mx-auto px-4 py-10">
+            <div class="mb-6 text-center">
+                <h3 class="text-2xl font-black text-unitec-federal tracking-tight mb-2">El Corazón de la Educación</h3>
+                <p class="text-gray-600 font-medium">Una mirada al ADN que impulsa a toda institución educativa de excelencia.</p>
+            </div>
+            <div class="relative w-full overflow-hidden rounded-sm border border-gray-200 shadow-sm bg-white p-2">
+                <video controls class="w-full rounded-sm outline-none" preload="metadata">
+                    <source src="VID/El_Corazón_de_la_Educación_1.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de este video.
+                </video>
+            </div>
+        </section>
+
+        <!-- Interactive Grid -->
+        <section class="max-w-7xl mx-auto px-4 py-16">
+            <div class="flex justify-between items-end mb-10 border-b border-gray-200 pb-4">
+                <div>
+                    <h3 class="text-2xl font-black text-unitec-federal tracking-tight">Las 10 Ideas Principales</h3>
+                    <p class="text-gray-500 mt-2 text-sm font-medium">Seleccione una idea para explorar su aplicación en nuestro ecosistema.</p>
+                </div>
+            </div>
+
+            <div id="ideas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+                <!-- Cards will be injected here by JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Call to Action / Reflection -->
+        <section class="max-w-4xl mx-auto px-4 py-10 mb-12 bg-unitec-federal text-white text-center rounded-sm shadow-lg border-t-4 border-unitec-cyan">
+            <i class="ph-fill ph-quotes text-4xl text-unitec-cyan mb-4"></i>
+            <h3 class="text-2xl font-bold mb-4 tracking-tight">La pregunta no es si estamos formando el carácter,<br>sino qué carácter estamos formando.</h3>
+            <p class="text-unitec-sky mb-8 font-medium">¿Cómo refleja su próximo <em>Unitec Planner</em> esta intencionalidad formativa?</p>
+            
+            <!-- Video 2: Cultivando El Caracter (Reemplaza el botón de volver al inicio) -->
+            <div class="max-w-2xl mx-auto mt-8 border-t border-unitec-sky/30 pt-8">
+                <h4 class="text-sm font-black text-unitec-cyan uppercase tracking-widest mb-4">Parte II: Cultivando El Caracter</h4>
+                <div class="relative w-full overflow-hidden rounded-sm border border-unitec-cyan shadow-md bg-[#020220] p-1">
+                    <video controls class="w-full rounded-sm outline-none" preload="metadata">
+                        <source src="VID/El_Corazón_de_la_Educación_2.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de este video.
+                    </video>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Details (Solid Institutional Header) -->
+    <div id="modal-backdrop" class="fixed inset-0 bg-unitec-federal bg-opacity-80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div id="modal-content" class="bg-white rounded-sm shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col transform transition-all scale-95 opacity-0">
+            <!-- Modal Header: Solid Federal Blue -->
+            <div class="bg-unitec-federal px-6 py-5 flex justify-between items-center">
+                <div class="flex items-center gap-4 text-white">
+                    <div id="modal-icon" class="text-3xl text-unitec-cyan">
+                        <!-- Icon injected by JS -->
+                    </div>
+                    <h3 id="modal-title" class="text-xl font-bold tracking-tight">Título de la Idea</h3>
+                </div>
+                <button onclick="closeModal()" class="text-gray-300 hover:text-unitec-sky transition-colors p-1">
+                    <i class="ph-bold ph-x text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="p-8 overflow-y-auto flex-1">
+                <div class="mb-8">
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Postulado Original</h4>
+                    <p id="modal-desc" class="text-gray-700 leading-relaxed text-lg">
+                        Descripción de la idea...
+                    </p>
+                </div>
+                
+                <!-- Institutional Application Block -->
+                <div class="bg-gray-50 border-l-4 border-unitec-cyan p-6 rounded-r-sm mt-8 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i class="ph-fill ph-lightbulb text-unitec-cyan text-xl"></i>
+                        <h4 class="text-sm font-black text-unitec-federal uppercase tracking-wider">Aplicación en el Ecosistema UNITEC</h4>
+                    </div>
+                    <p id="modal-evinkay" class="text-gray-800 leading-relaxed font-medium">
+                        Conexión con el Ecosistema...
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="bg-gray-50 px-6 py-4 border-t border-gray-200 flex justify-end">
+                <button onclick="closeModal()" class="bg-unitec-federal hover:bg-[#080880] text-white font-bold tracking-wide text-sm py-2 px-8 rounded-sm transition-colors">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Data and Logic -->
+    <script>
+        const ideasData = [
+            {
+                id: 1,
+                icon: "ph-graduation-cap",
+                title: "1. Parte de la buena educación",
+                shortTitle: "Parte de la buena educación",
+                desc: "Educar bien no consiste únicamente en transmitir conocimientos o desarrollar habilidades técnicas. También implica formar personas capaces de ejercer su libertad con responsabilidad, de convivir, de comprometerse con otros y de orientar su vida profesional hacia fines valiosos. No es 'algo más' que se añade, sino una manera de comprender lo que la educación ya está llamada a ser.",
+                evinkay: "En el Ecosistema de Aprendizaje de Unitec y Ceutec, esto se refleja intrínsecamente en las 3Cs. No podemos separar el aspecto Conceptual y la Competencia del Carácter. En una clase de Ingeniería Civil (ej. Diseño de Concreto), la buena educación no es solo que el estudiante sepa calcular la carga viva (Competencia), sino que desarrolle la integridad para no alterar datos de seguridad por ahorrar costos (Carácter)."
+            },
+            {
+                id: 2,
+                icon: "ph-squares-four",
+                title: "2. Revisar el marco, no agregar programas",
+                shortTitle: "Revisar el marco",
+                desc: "Existe un riesgo actual de pensar que hay que sumar nuevas capas al currículo formal: educación socioemocional, ética, ciudadanía. La propuesta aquí es distinta: no se trata de sobrecargar a las instituciones con nuevas iniciativas, sino de revisar el marco general desde el cual se diseña la experiencia educativa y lograr que lo que ya hacemos esté al servicio del crecimiento personal.",
+                evinkay: "Esta es la razón de ser del Unitec Planner. No pedimos a los docentes que hagan un 'taller extra' de ética los viernes. Les pedimos que, a través de la Pregunta Convincente (Compelling Question) y la Tarea de Desempeño (GRASPS), diseñen experiencias donde el carácter se forje en el hacer diario. Evitamos la fatiga de iniciativas integrando todo en un solo ecosistema."
+            },
+            {
+                id: 3,
+                icon: "ph-key",
+                title: "3. La farola y las llaves",
+                shortTitle: "La farola y las llaves",
+                desc: "A menudo buscamos soluciones 'debajo de la farola' (donde hay más control o facilidad para medir: protocolos, metodologías, indicadores). Sin embargo, las verdaderas 'llaves' del cambio están en otro sitio: en la cultura, en las relaciones, en la confianza, en la coherencia de los adultos y en el modo en que se vive cotidianamente la vida académica.",
+                evinkay: "En nuestro ecosistema, recordamos que la evaluación y el aprendizaje se transforman construyendo cultura. A veces medimos la rúbrica perfecta (la farola), pero la clave (la llave) está en si hemos creado un ambiente seguro. En un laboratorio de Mecatrónica, si la cultura castiga el error, los estudiantes esconderán fallas. Si la cultura celebra el aprendizaje, desarrollarán honestidad investigativa."
+            },
+            {
+                id: 4,
+                icon: "ph-puzzle-piece",
+                title: "4. Lo que no es necesario ni suficiente",
+                shortTitle: "Ni necesario ni suficiente",
+                desc: "Las asignaturas de ética, mentorías o aprendizaje-servicio son muy valiosas, pero ninguna es estrictamente necesaria ni suficiente por sí sola para formar el carácter. Instituciones con muchas prácticas a veces no logran resultados humanos profundos. El foco debe desplazarse de las herramientas aisladas hacia las condiciones más arraigadas que hacen posible una cultura formativa.",
+                evinkay: "Por eso en el Ecosistema de Aprendizaje de Unitec y Ceutec no dependemos de una sola clase de 'Ética Profesional' al final de la carrera. Utilizamos herramientas de metacognición de manera transversal. Hacer que el estudiante piense sobre su propio aprendizaje y comportamiento debe ocurrir en cada asignatura, desde Álgebra hasta Proyectos de Modelación, cimentando una cultura de autoconciencia."
+            },
+            {
+                id: 5,
+                icon: "ph-users-three",
+                title: "5. La cultura institucional",
+                shortTitle: "La cultura institucional",
+                desc: "La cultura (clima, ambiente institucional) forma de manera más profunda que muchos discursos. Se expresa en cómo se tratan las personas, cómo se ejerce la autoridad, qué se premia y qué se admira. Existe un claro contraste entre una cultura de miedo, mínimo esfuerzo y desconfianza, y una donde las personas se sienten vistas, escuchadas, exigidas con sentido y acompañadas.",
+                evinkay: "Este es el corazón de nuestra Visión 2030. Para formar a un Empathetic Problem-Solver (Retrato del Egresado), el estudiante debe habitar un ecosistema empático. Si un estudiante de ingeniería presenta un plano estructural con fallas, una retroalimentación que humilla genera miedo; una retroalimentación estilo S.T.A.R. (constructiva y estructurada) genera resiliencia y exige excelencia con sentido."
+            },
+            {
+                id: 6,
+                icon: "ph-plant",
+                title: "6. El enfoque de la semilla",
+                shortTitle: "El enfoque de la semilla",
+                desc: "Formar personas se parece más a cultivar que a fabricar. No se pueden 'instalar' virtudes mecánicamente desde el exterior. La universidad debe generar las condiciones (respeto, confianza, exigencia, reconocimiento, participación) para que el crecimiento personal se produzca, dándole a la libertad contextos reales donde ejercerse responsablemente.",
+                evinkay: "El modelo tradicional basado puramente en competencias técnicas a menudo trata a los estudiantes como productos en una línea de ensamblaje. El Ecosistema de Aprendizaje de Unitec y Ceutec aborda la enseñanza como el diseño de entornos de aprendizaje (cultivar). Proveemos el 'suelo rico' mediante escenarios auténticos en el Planner, permitiendo que la Responsabilidad Ciudadana florezca naturalmente al enfrentarse a problemas reales."
+            },
+            {
+                id: 7,
+                icon: "ph-scales",
+                title: "7. Instrucción vs. Formación",
+                shortTitle: "Instrucción vs. Formación",
+                desc: "Existe una diferencia fundamental entre instrucción y formación: la instrucción transmite conocimientos, conceptos y competencias; la formación tiene que ver con el crecimiento de la persona como tal, su juicio, su manera de enfrentar el error y cómo usa su libertad. Toda instrucción puede contribuir a la formación, pero reducir la misión universitaria a logros puramente académicos y de instrucción es un riesgo.",
+                evinkay: "Esta es la distinción exacta entre el sílabo tradicional y el Unitec Planner. El sílabo tradicional instruye (ej. 'El alumno aplicará integrales múltiples'). El Planner forma (ej. 'Gran Idea: Entender que las matemáticas son un lenguaje para modelar la realidad y tomar decisiones que protegen vidas'). En Unitec y Ceutec, instruimos mentes y formamos profesionales íntegros."
+            },
+            {
+                id: 8,
+                icon: "ph-calendar-check",
+                title: "8. Lo ordinario forma más",
+                shortTitle: "Lo ordinario forma más",
+                desc: "La educación del carácter ocurre fundamentalmente en lo ordinario: en la clase, en la forma de evaluar, en el tono de una retroalimentación, en el trabajo colaborativo, la puntualidad, la resolución de conflictos y el estilo cotidiano de convivencia. Su impacto depende del rediseño consciente de la vida ordinaria universitaria, y no del depender de intervenciones excepcionales.",
+                evinkay: "Aquí brillan las herramientas de nuestro ecosistema de aprendizaje. Las rutinas de pensamiento, las evaluaciones para el aprendizaje (formativas), las co-evaluaciones... esto es 'lo ordinario'. Cuando un docente de programación pide a sus alumnos hacer revisión de pares diaria de su código enfocándose en ser colaboradores constructivos, está forjando el carácter en el día a día."
+            },
+            {
+                id: 9,
+                icon: "ph-compass-tool",
+                title: "9. El liderazgo académico",
+                shortTitle: "El liderazgo académico",
+                desc: "El liderazgo configura cultura de manera decisiva. Los jefes académicos, coordinadores y directivos no solo administran procesos; modelan prioridades, establecen tonos de relación, habilitan conversaciones y definen la experiencia general de estudiantes y docentes. Liderar implica crear condiciones para que otros puedan crecer, siendo esto una responsabilidad formativa clave.",
+                evinkay: "Mensaje vital para los Decanos y Jefes Académicos. Ustedes son los arquitectos del Ecosistema de Aprendizaje de Unitec y Ceutec. Su labor al revisar un Unitec Planner no es solo de auditoría de formato, es de mentoría pedagógica. Si lideran modelando el 'aprender a aprender', los docentes replicarán esta actitud con los estudiantes."
+            },
+            {
+                id: 10,
+                icon: "ph-warning-circle",
+                title: "10. No es opcional",
+                shortTitle: "No es opcional",
+                desc: "Toda institución forma carácter, lo quiera o no. No existe un 'interruptor' para decidir si una universidad influye o no en el modo de ser de sus estudiantes. Toda experiencia educativa transmite una visión particular del esfuerzo, la autoridad, la verdad, la convivencia y el mérito. Asumir conscientemente esta responsabilidad es una parte esencial de la tarea.",
+                evinkay: "No existe la neutralidad pedagógica. Si un curso de Sistemas se evalúa únicamente con exámenes memorísticos donde importa el resultado individual a cualquier costo, se están 'formando' profesionales individualistas. Al implementar intencionalmente el Ecosistema de Aprendizaje de Unitec y Ceutec, decidimos conscientemente qué carácter queremos nutrir en Honduras y el mundo."
+            }
+        ];
+
+        // Render Grid with "Edna's Precision" (Option A style)
+        const gridContainer = document.getElementById('ideas-grid');
+        
+        ideasData.forEach((idea, index) => {
+            const delay = index * 40; 
+            const cardHTML = `
+                <div onclick="openModal(${idea.id})" class="clean-card cursor-pointer p-6 flex flex-col items-start h-full animate-fade-in-up group" style="animation-delay: ${delay}ms; animation-fill-mode: both;">
+                    <div class="mb-4 text-unitec-cyan group-hover:text-unitec-federal transition-colors">
+                        <i class="ph ${idea.icon} text-4xl"></i>
+                    </div>
+                    <div class="flex-1 w-full">
+                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Idea 0${idea.id}</span>
+                        <h4 class="font-bold text-unitec-federal text-lg leading-tight mb-4">${idea.shortTitle}</h4>
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-gray-100 w-full text-xs text-unitec-cyan font-bold flex items-center justify-start gap-2 group-hover:text-unitec-federal transition-colors">
+                        Explorar concepto <i class="ph-bold ph-arrow-right"></i>
+                    </div>
+                </div>
+            `;
+            gridContainer.insertAdjacentHTML('beforeend', cardHTML);
+        });
+
+        // Modal Logic
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalContent = document.getElementById('modal-content');
+
+        function openModal(id) {
+            const idea = ideasData.find(i => i.id === id);
+            if (!idea) return;
+
+            document.getElementById('modal-icon').innerHTML = `<i class="ph ${idea.icon}"></i>`;
+            document.getElementById('modal-title').innerText = idea.title;
+            document.getElementById('modal-desc').innerHTML = idea.desc;
+            document.getElementById('modal-evinkay').innerHTML = idea.evinkay;
+
+            modalBackdrop.classList.remove('hidden');
+            
+            setTimeout(() => {
+                modalContent.classList.remove('opacity-0', 'scale-95');
+                modalContent.classList.add('opacity-100', 'scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modalContent.classList.remove('opacity-100', 'scale-100');
+            modalContent.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                modalBackdrop.classList.add('hidden');
+            }, 300);
+        }
+
+        modalBackdrop.addEventListener('click', (e) => {
+            if (e.target === modalBackdrop) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modalBackdrop.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(15px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in-up {
+                animation: fadeInUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            }
+        `;
+        document.head.appendChild(style);
+
+    </script>
+</body>
+</html>
