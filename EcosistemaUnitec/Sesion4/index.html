@@ -111,12 +111,26 @@
             </div>
         </section>
 
+        <!-- Video 1: El Corazón de la Educación -->
+        <section class="max-w-4xl mx-auto px-4 py-10">
+            <div class="mb-6 text-center">
+                <h3 class="text-2xl font-black text-unitec-federal tracking-tight mb-2">El Corazón de la Educación</h3>
+                <p class="text-gray-600 font-medium">Una mirada al ADN que impulsa a toda institución educativa de excelencia.</p>
+            </div>
+            <div class="relative w-full overflow-hidden rounded-sm border border-gray-200 shadow-sm bg-white p-2">
+                <video controls class="w-full rounded-sm outline-none" preload="metadata">
+                    <source src="VID/El_Corazón_de_la_Educación_1.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de este video.
+                </video>
+            </div>
+        </section>
+
         <!-- Interactive Grid -->
         <section class="max-w-7xl mx-auto px-4 py-16">
             <div class="flex justify-between items-end mb-10 border-b border-gray-200 pb-4">
                 <div>
                     <h3 class="text-2xl font-black text-unitec-federal tracking-tight">Las 10 Ideas Principales</h3>
-                    <p class="text-gray-500 mt-2 text-sm font-medium">Seleccione un módulo para explorar su aplicación en nuestro ecosistema.</p>
+                    <p class="text-gray-500 mt-2 text-sm font-medium">Seleccione una idea para explorar su aplicación en nuestro ecosistema.</p>
                 </div>
             </div>
 
@@ -130,9 +144,17 @@
             <i class="ph-fill ph-quotes text-4xl text-unitec-cyan mb-4"></i>
             <h3 class="text-2xl font-bold mb-4 tracking-tight">La pregunta no es si estamos formando el carácter,<br>sino qué carácter estamos formando.</h3>
             <p class="text-unitec-sky mb-8 font-medium">¿Cómo refleja su próximo <em>Unitec Planner</em> esta intencionalidad formativa?</p>
-            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-unitec-cyan hover:bg-unitec-sky text-unitec-federal font-black uppercase tracking-wider text-sm py-3 px-8 rounded-sm transition-colors shadow-md">
-                Volver al inicio
-            </button>
+            
+            <!-- Video 2: Cultivando Cultura (Reemplaza el botón de volver al inicio) -->
+            <div class="max-w-2xl mx-auto mt-8 border-t border-unitec-sky/30 pt-8">
+                <h4 class="text-sm font-black text-unitec-cyan uppercase tracking-widest mb-4">Parte II: Cultivando Cultura</h4>
+                <div class="relative w-full overflow-hidden rounded-sm border border-unitec-cyan shadow-md bg-[#020220] p-1">
+                    <video controls class="w-full rounded-sm outline-none" preload="metadata">
+                        <source src="VID/El_Corazón_de_la_Educación_2.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de este video.
+                    </video>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -278,7 +300,7 @@
                         <i class="ph ${idea.icon} text-4xl"></i>
                     </div>
                     <div class="flex-1 w-full">
-                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Módulo 0${idea.id}</span>
+                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Idea 0${idea.id}</span>
                         <h4 class="font-bold text-unitec-federal text-lg leading-tight mb-4">${idea.shortTitle}</h4>
                     </div>
                     <div class="mt-auto pt-4 border-t border-gray-100 w-full text-xs text-unitec-cyan font-bold flex items-center justify-start gap-2 group-hover:text-unitec-federal transition-colors">
