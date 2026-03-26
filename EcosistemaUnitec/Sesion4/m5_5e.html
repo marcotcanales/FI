@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 5: Modelos de las 5Es | Ecosistema de Aprendizaje UNITEC</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: STRICTLY POPPINS AS PER BRAND MANUAL -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Edna's decree: Poppins only.
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', /* Federal Blue */
+                            cyan: '#03AED2',    /* Pacific Cyan */
+                            sky: '#47C8FD',     /* Vivid Sky Blue */
+                            gray: '#F3F4F6',
+                            text: '#334155'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #FAFAFA; /* Option A: Clean light background */
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 4px; /* Precision sharp corners */
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 4px 6px -1px rgba(6, 6, 92, 0.05); /* Clean, institutional depth */
+            background-color: #06065C;
+        }
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Custom Checkbox - Option A Styling */
+        .checklist-item {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .checklist-item:hover {
+            background-color: #F8FAFC;
+        }
+        .checkbox-custom {
+            transition: all 0.2s;
+        }
+        /* Using Federal Blue for the checked state */
+        input:checked + .checkbox-custom {
+            background-color: #06065C;
+            border-color: #06065C;
+        }
+        /* Using Pacific Cyan for the check icon to pop */
+        input:checked + .checkbox-custom i {
+            opacity: 1;
+            transform: scale(1);
+            color: #03AED2;
+        }
+        .checklist-text {
+            transition: all 0.2s;
+        }
+        input:checked ~ .checklist-text {
+            color: #9CA3AF;
+            text-decoration: line-through;
+        }
+
+        /* Custom scrollbar reflecting brand colors */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #06065C; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #03AED2; }
+    </style>
+</head>
+<body class="text-unitec-text antialiased flex flex-col min-h-screen">
+
+    <!-- Header / Navbar: Solid Federal Blue matching Option A completely -->
+    <header class="bg-unitec-federal text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            
+            <!-- BRANDING: Imagotipo Horizontal (Isotipo + Logotipo) -->
+            <a href="sesion4.html" class="flex items-center gap-2 cursor-pointer group">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="text-white group-hover:text-unitec-sky transition-colors">
+                    <polygon points="12,1 22,10 12,23 2,10" />
+                </svg>
+                <span class="text-2xl font-black tracking-tighter lowercase leading-none mt-1 group-hover:text-unitec-sky transition-colors">unitec</span>
+                <div class="h-6 w-px bg-unitec-cyan mx-3 opacity-50 hidden md:block"></div>
+                <div>
+                    <h1 class="font-medium tracking-wide text-unitec-sky leading-tight text-sm">Módulo 5: Modelos de las 5Es</h1>
+                </div>
+            </a>
+
+            <div class="hidden sm:flex items-center gap-6 text-xs font-bold tracking-wider uppercase text-unitec-sky">
+                <a href="sesion4.html" class="flex items-center gap-2 hover:text-white transition-colors border border-unitec-sky/30 px-4 py-1.5 rounded-sm">
+                    <i class="ph-bold ph-arrow-left text-base"></i> Volver a Módulos
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Section (Hero) -->
+    <header class="bg-unitec-federal text-white py-16 relative overflow-hidden border-t border-white/10">
+        <!-- Decorative background elements: Diamonds -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+            <div class="absolute top-10 left-10 w-64 h-64 border-2 border-white transform rotate-45"></div>
+            <div class="absolute -bottom-20 -right-20 w-96 h-96 border-2 border-white transform rotate-45"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center md:text-left">
+            <span class="inline-block py-1.5 px-4 rounded-sm border border-unitec-cyan text-xs font-bold tracking-widest uppercase mb-4 text-unitec-cyan">
+                Modelo Metodológico
+            </span>
+            <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight">
+                El Cómo: Estructurando el Ciclo con las 5Es
+            </h1>
+            <p class="text-lg text-gray-300 leading-relaxed max-w-2xl font-medium">
+                Diseñando la "coreografía" del aprendizaje en el Ecosistema de Aprendizaje de Unitec y Ceutec guiando al estudiante desde la curiosidad inicial hasta la evaluación reflexiva de su propio desempeño.
+            </p>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        
+        <!-- Video 1 (Introductory Explainer) -->
+        <section class="mb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="ph-fill ph-play-circle text-unitec-cyan text-3xl"></i>
+                <h2 class="text-2xl font-black text-unitec-federal tracking-tight">Video Introductorio</h2>
+            </div>
+            <div class="video-container">
+                <!-- Fallback poster image in case video doesn't load immediately -->
+                <video controls poster="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+                    <source src="VID/5Es_1.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+            <p class="text-sm text-gray-500 mt-3 font-medium text-center">Reproduce este video para explorar cómo el modelo de las 5Es transforma el aula de un espacio de transmisión a un laboratorio de indagación.</p>
+        </section>
+
+        <!-- Context & Definition -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-black text-unitec-federal tracking-tight mb-6">El Planteamiento Inicial</h2>
+            <div class="text-gray-700 leading-relaxed space-y-4">
+                <p class="font-medium">
+                    En la sección 8 del <strong>Unitec Planner</strong>, denominada <em>"El Cómo"</em>, se diseña la "coreografía" del aprendizaje para la experiencia educativa. Al redactar estas secuencias, es fundamental que estén siempre guiadas por las Preguntas Marco (Framing Questions) planteadas en el diseño del curso.
+                </p>
+                <div class="bg-gray-50 border-l-4 border-unitec-federal p-6 rounded-r-sm shadow-sm">
+                    <p class="font-bold text-unitec-federal">
+                        Para estructurar un flujo de aprendizaje basado en la indagación profunda, una de las metodologías más efectivas aplicables en el Ecosistema de Aprendizaje de Unitec y Ceutec es el <span class="text-unitec-cyan uppercase tracking-wider text-xs mx-1">Modelo de las 5 Es</span>.
+                    </p>
+                </div>
+                <p class="font-medium">
+                    Este enfoque pedagógico (Engage, Explore, Explain, Elaborate, Evaluate) permite a los estudiantes construir su comprensión a través de fases estructuradas, evitando que el docente entregue las respuestas antes de que los estudiantes hayan tenido la oportunidad de hacer las preguntas.
+                </p>
+            </div>
+        </section>
+
+        <!-- The 5 Phases (Clean Cards) -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-black text-unitec-federal tracking-tight mb-4">Las Fases del Modelo de las 5 Es</h2>
+            <p class="mb-8 text-gray-600 font-medium">Este ciclo asegura una participación sostenida y una comprensión genuina. Cada "E" cumple un propósito específico dentro de la coreografía de la clase:</p>
+            
+            <div class="space-y-6">
+                <!-- Fase 1: Engage -->
+                <div class="bg-white border border-gray-200 rounded-sm p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6 items-start relative overflow-hidden group hover:border-unitec-cyan transition-colors">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-cyan transition-colors"></div>
+                    <div class="w-16 h-16 shrink-0 bg-gray-50 border border-gray-100 rounded-sm flex items-center justify-center text-unitec-federal group-hover:bg-unitec-cyan group-hover:text-unitec-federal transition-colors">
+                        <i class="ph-bold ph-magnet text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 tracking-tight">1. Involucrar (Engage)</h3>
+                        <div class="space-y-3">
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Propósito</strong> Capturar la atención del alumno y recuperar sus conocimientos previos.</p>
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Dinámica</strong> Se introduce el tema planteando un problema auténtico o un fenómeno que despierte la curiosidad del estudiante, motivándolo a querer descubrir más y preparándolo para el nuevo contenido.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fase 2: Explore -->
+                <div class="bg-white border border-gray-200 rounded-sm p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6 items-start relative overflow-hidden group hover:border-unitec-cyan transition-colors">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-cyan transition-colors"></div>
+                    <div class="w-16 h-16 shrink-0 bg-gray-50 border border-gray-100 rounded-sm flex items-center justify-center text-unitec-federal group-hover:bg-unitec-cyan group-hover:text-unitec-federal transition-colors">
+                        <i class="ph-bold ph-compass text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 tracking-tight">2. Explorar (Explore)</h3>
+                        <div class="space-y-3">
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Propósito</strong> Fomentar el descubrimiento guiado <em>antes</em> de la instrucción formal.</p>
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Dinámica</strong> Se ofrecen experiencias prácticas o de indagación donde los estudiantes investigan, prueban o experimentan de primera mano. Interactúan activamente con el desafío, generando hipótesis y buscando patrones por sí mismos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fase 3: Explain -->
+                <div class="bg-white border border-gray-200 rounded-sm p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6 items-start relative overflow-hidden group hover:border-unitec-cyan transition-colors">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-cyan transition-colors"></div>
+                    <div class="w-16 h-16 shrink-0 bg-gray-50 border border-gray-100 rounded-sm flex items-center justify-center text-unitec-federal group-hover:bg-unitec-cyan group-hover:text-unitec-federal transition-colors">
+                        <i class="ph-bold ph-chalkboard-teacher text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 tracking-tight">3. Explicar (Explain)</h3>
+                        <div class="space-y-3">
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Propósito</strong> Estructurar y formalizar los descubrimientos realizados en la fase de exploración.</p>
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Dinámica</strong> Se hace explícito el pensamiento. Primero, los alumnos articulan sus hallazgos preliminares. Luego, el docente interviene para proporcionar el andamiaje: aclara conceptos, introduce el lenguaje técnico y corrige malentendidos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fase 4: Elaborate -->
+                <div class="bg-white border border-gray-200 rounded-sm p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6 items-start relative overflow-hidden group hover:border-unitec-cyan transition-colors">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-cyan transition-colors"></div>
+                    <div class="w-16 h-16 shrink-0 bg-gray-50 border border-gray-100 rounded-sm flex items-center justify-center text-unitec-federal group-hover:bg-unitec-cyan group-hover:text-unitec-federal transition-colors">
+                        <i class="ph-bold ph-tree-structure text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 tracking-tight">4. Elaborar (Elaborate)</h3>
+                        <div class="space-y-3">
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Propósito</strong> Fomentar la transferencia del conocimiento a situaciones inéditas.</p>
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Dinámica</strong> Se reta al estudiante a extender y aplicar su nueva comprensión a nuevos contextos. Deben ser situaciones reales o tener un enfoque interdisciplinario, asegurando que el aprendizaje sea útil fuera del aula.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fase 5: Evaluate -->
+                <div class="bg-white border border-gray-200 rounded-sm p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6 items-start relative overflow-hidden group hover:border-unitec-cyan transition-colors">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-cyan transition-colors"></div>
+                    <div class="w-16 h-16 shrink-0 bg-gray-50 border border-gray-100 rounded-sm flex items-center justify-center text-unitec-federal group-hover:bg-unitec-cyan group-hover:text-unitec-federal transition-colors">
+                        <i class="ph-bold ph-chart-line-up text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-unitec-federal mb-3 tracking-tight">5. Evaluar (Evaluate)</h3>
+                        <div class="space-y-3">
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Propósito</strong> Medir el impacto del aprendizaje de manera formativa y colaborativa.</p>
+                            <p class="text-gray-700 text-sm"><strong class="text-unitec-cyan font-black uppercase tracking-widest text-[10px] mr-2 block mb-1">Dinámica</strong> En lugar de una simple prueba estandarizada, se valora la comprensión profunda y la eficacia en la aplicación. Esta fase incluye procesos de reflexión personal y retroalimentación para el crecimiento continuo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Example (Engineering) - Clean Institutional Box -->
+        <section class="mb-16">
+            <div class="bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden border-t-4 border-t-unitec-federal">
+                <div class="p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-8 border-b border-gray-100 pb-4">
+                        <div class="text-unitec-cyan">
+                            <i class="ph-bold ph-robot text-3xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-black text-unitec-federal tracking-tight">Ejemplo Práctico del Modelo 5Es</h2>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Aplicado a Ingeniería Mecatrónica (Sistemas de Control Automático)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 bg-gray-50 p-6 rounded-sm border-l-4 border-unitec-cyan">
+                        <p class="text-gray-800 font-medium leading-relaxed"><strong class="text-unitec-federal font-black uppercase tracking-widest text-[10px] block mb-2">Escenario de Aprendizaje:</strong>
+                        "Los estudiantes deben entender cómo un Controlador PID ajusta automáticamente un sistema físico para mantener un nivel deseado frente a perturbaciones."</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                        <div class="bg-white border border-gray-200 p-5 rounded-sm">
+                            <h4 class="font-black text-unitec-federal text-xs uppercase tracking-widest mb-3 flex items-center gap-2 pb-2 border-b border-gray-100"><i class="ph-bold ph-magnet text-unitec-cyan text-lg"></i> Engage</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed font-medium">El docente muestra un video de un dron industrial perdiendo el control por una ráfaga de viento y estrellándose. Pregunta: <em class="text-gray-800">"¿Por qué los motores no compensaron el error a tiempo?"</em>.</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 p-5 rounded-sm">
+                            <h4 class="font-black text-unitec-federal text-xs uppercase tracking-widest mb-3 flex items-center gap-2 pb-2 border-b border-gray-100"><i class="ph-bold ph-compass text-unitec-cyan text-lg"></i> Explore</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed font-medium">Sin dar la fórmula matemática aún, los estudiantes usan un simulador en línea de un termostato. Juegan arbitrariamente con los valores P, I, y D para intentar estabilizar la temperatura y observan los gráficos.</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 p-5 rounded-sm">
+                            <h4 class="font-black text-unitec-federal text-xs uppercase tracking-widest mb-3 flex items-center gap-2 pb-2 border-b border-gray-100"><i class="ph-bold ph-chalkboard-teacher text-unitec-cyan text-lg"></i> Explain</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed font-medium">Los estudiantes comparten qué valor causaba oscilaciones o demoras. Luego, el docente introduce las ecuaciones de cálculo integral y derivativo, conectando la teoría con las observaciones visuales.</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 p-5 rounded-sm">
+                            <h4 class="font-black text-unitec-federal text-xs uppercase tracking-widest mb-3 flex items-center gap-2 pb-2 border-b border-gray-100"><i class="ph-bold ph-tree-structure text-unitec-cyan text-lg"></i> Elaborate</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed font-medium">Transfieren el conocimiento a un nuevo contexto: Se les asigna programar el microcontrolador de un brazo robótico físico para que mueva un vaso de agua sin derramarlo, aplicando el cálculo PID aprendido.</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 p-5 rounded-sm">
+                            <h4 class="font-black text-unitec-federal text-xs uppercase tracking-widest mb-3 flex items-center gap-2 pb-2 border-b border-gray-100"><i class="ph-bold ph-chart-line-up text-unitec-cyan text-lg"></i> Evaluate</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed font-medium">Se evalúa el desempeño del brazo robótico mediante co-evaluación. Escriben una reflexión metacognitiva: <em class="text-gray-800">"¿Cómo mi ajuste erróneo de la variable 'D' me ayudó a entender el sistema?"</em>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Designer Checklist -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-black text-unitec-federal tracking-tight mb-2">Lista de Chequeo para el Diseñador</h2>
+            <p class="text-gray-600 mb-8 font-medium">Al estructurar secuencias usando las 5Es en tu Unitec Planner, valida los siguientes puntos. Haga clic para marcar su progreso.</p>
+            
+            <div class="bg-white rounded-sm border border-gray-200 shadow-sm overflow-hidden">
+                <!-- Checklist Item 1 -->
+                <label class="checklist-item flex items-center p-5 border-b border-gray-100 w-full group">
+                    <input type="checkbox" class="hidden" />
+                    <div class="checkbox-custom w-6 h-6 rounded-sm border-2 border-gray-300 flex items-center justify-center mr-4 shrink-0 bg-white group-hover:border-unitec-cyan">
+                        <i class="ph-bold ph-check text-white opacity-0 transform scale-50 transition-all text-sm"></i>
+                    </div>
+                    <span class="checklist-text font-medium text-gray-800 text-sm md:text-base"><strong class="text-unitec-federal block mb-1 text-xs uppercase tracking-wider">Secuenciación Correcta:</strong> ¿Se garantiza que la fase de "Explorar" ocurre <em>antes</em> que la fase de "Explicar" para promover la verdadera indagación?</span>
+                </label>
+
+                <!-- Checklist Item 2 -->
+                <label class="checklist-item flex items-center p-5 border-b border-gray-100 w-full group">
+                    <input type="checkbox" class="hidden" />
+                    <div class="checkbox-custom w-6 h-6 rounded-sm border-2 border-gray-300 flex items-center justify-center mr-4 shrink-0 bg-white group-hover:border-unitec-cyan">
+                        <i class="ph-bold ph-check text-white opacity-0 transform scale-50 transition-all text-sm"></i>
+                    </div>
+                    <span class="checklist-text font-medium text-gray-800 text-sm md:text-base"><strong class="text-unitec-federal block mb-1 text-xs uppercase tracking-wider">Elaboración vs. Repetición:</strong> ¿La fase de "Elaborar" exige que el estudiante transfiera lo aprendido a un <em>nuevo escenario</em> en lugar de simplemente repetir la práctica inicial?</span>
+                </label>
+
+                <!-- Checklist Item 3 -->
+                <label class="checklist-item flex items-center p-5 w-full group">
+                    <input type="checkbox" class="hidden" />
+                    <div class="checkbox-custom w-6 h-6 rounded-sm border-2 border-gray-300 flex items-center justify-center mr-4 shrink-0 bg-white group-hover:border-unitec-cyan">
+                        <i class="ph-bold ph-check text-white opacity-0 transform scale-50 transition-all text-sm"></i>
+                    </div>
+                    <span class="checklist-text font-medium text-gray-800 text-sm md:text-base"><strong class="text-unitec-federal block mb-1 text-xs uppercase tracking-wider">Evaluación Formativa:</strong> ¿La fase de "Evaluar" incluye espacios para la reflexión del estudiante y no se limita únicamente a un examen o calificación final?</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- Video 2 (Closing Explainer) -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="ph-fill ph-check-circle text-unitec-cyan text-3xl"></i>
+                <h2 class="text-2xl font-black text-unitec-federal tracking-tight">Reflexión Final</h2>
+            </div>
+            <div class="video-container">
+                <video controls poster="https://images.unsplash.com/photo-1503694978374-8a2fa686963a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+                    <source src="VID/5Es_2.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+            <p class="text-sm text-gray-500 mt-3 font-medium text-center">Video de cierre: Validando el ciclo completo del aprendizaje y el rol del docente como diseñador de experiencias.</p>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- BRANDING: Isotipo only + Text -->
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-unitec-federal flex items-center justify-center rounded-sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="text-white">
+                        <polygon points="12,1 22,10 12,23 2,10" />
+                    </svg>
+                </div>
+                <span class="text-unitec-federal font-black tracking-tight">Ecosistema de Aprendizaje</span>
+            </div>
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                Programa de Formación Docente • UNITEC
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
