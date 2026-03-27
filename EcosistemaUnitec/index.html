@@ -118,6 +118,87 @@
             color: var(--pacific-cyan);
         }
 
+        /* ========== SECCIÓN DE VIDEO (OPCIÓN B - AUDAZ) ========== */
+        .video-section {
+            margin-bottom: 5rem;
+            display: grid;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (min-width: 992px) {
+            .video-section {
+                grid-template-columns: 1fr 1.3fr;
+                gap: 4rem;
+            }
+        }
+
+        .video-text {
+            text-align: left;
+        }
+
+        .video-title {
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+
+        .video-title span {
+            color: var(--vivid-sky-blue);
+        }
+
+        .video-subtitle {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--pacific-cyan);
+            border-left: 4px solid var(--vivid-sky-blue);
+            padding-left: 1rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            /* Espacio para que el acento visual respire */
+            padding: 20px 20px 20px 0; 
+        }
+
+        /* Acento geométrico sólido (Diamante lateral) */
+        .video-decorator {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 20px;
+            background-color: var(--vivid-sky-blue);
+            z-index: 0;
+            /* Corte asimétrico audaz pero limpio */
+            clip-path: polygon(25px 0, 100% 0, calc(100% - 25px) 100%, 0 100%);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Ratio 16:9 */
+            height: 0;
+            z-index: 1;
+            background-color: var(--federal-blue);
+            border: 4px solid var(--pacific-cyan);
+            /* Sin bordes redondeados, mantenemos la rigidez de los cortes */
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        /* ========================================================= */
+
         /* Grid de Sesiones */
         .sessions-grid {
             display: grid;
@@ -285,6 +366,25 @@
             <h1>Train the <span>Trainers</span></h1>
             <p>Ecosistema de Aprendizaje UNITEC/CEUTEC. Plataforma asincrónica para Jefes y Coordinadores Académicos.</p>
         </section>
+
+        <!-- ========== SECCIÓN DE VIDEO (NUEVA) ========== -->
+        <section class="video-section">
+            <div class="video-text">
+                <h2 class="video-title">¿Qué es el <br><span>Ecosistema</span> de Aprendizaje UNITEC/CEUTEC?</h2>
+                <p class="video-subtitle">Este curso es para aprender a implementarlo en el aula.</p>
+            </div>
+            
+            <div class="video-wrapper">
+                <!-- Geometría sólida decorativa de fondo -->
+                <div class="video-decorator"></div>
+                
+                <!-- Contenedor del reproductor -->
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/WVr14XkPbEc?si=QfAMAlkJeeCoP3-D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+        <!-- ============================================== -->
 
         <!-- Grid de Recursos Asincrónicos -->
         <main class="sessions-grid">
