@@ -33,6 +33,10 @@
             font-family: 'Poppins', sans-serif; 
             background-color: #F8FAFC;
         }
+        /* Transiciones suaves para el filtrado */
+        .kpi-card {
+            transition: all 0.4s ease-in-out;
+        }
     </style>
 </head>
 <body class="text-gray-800 antialiased selection:bg-unitec-pacific selection:text-white">
@@ -65,7 +69,7 @@
         </div>
     </nav>
 
-    <!-- Header Section (Sin degradados, color sólido corporativo) -->
+    <!-- Header Section -->
     <header class="bg-unitec-federal text-white py-16 px-4 sm:px-6 lg:px-8 border-b-4 border-unitec-pacific">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -90,7 +94,7 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
         <!-- Instrucciones breves -->
-        <div class="bg-white border border-gray-200 border-l-4 border-l-unitec-pacific p-6 mb-12">
+        <div class="bg-white border border-gray-200 border-l-4 border-l-unitec-pacific p-6 mb-10">
             <div class="flex">
                 <div class="flex-shrink-0">
                     <i class="fas fa-info-circle text-unitec-pacific mt-1 text-xl"></i>
@@ -104,11 +108,31 @@
             </div>
         </div>
 
-        <!-- Grid de KPIs (Flat design absoluto, sin sombras) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- SECCIÓN NUEVA: Filtro por Colaborador -->
+        <section class="bg-white border border-gray-200 p-6 mb-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4 border-b border-gray-100 pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-unitec-federal flex items-center gap-2">
+                        <i class="fas fa-filter text-unitec-pacific"></i> Filtro de Responsabilidades
+                    </h3>
+                    <p class="text-sm text-gray-500 font-light mt-1">Selecciona un colaborador para aislar sus KPIs asignados.</p>
+                </div>
+                <button id="btn-clear-filter" class="hidden px-4 py-2 bg-unitec-pacific text-white text-xs font-bold uppercase tracking-widest hover:bg-unitec-sky transition-colors flex items-center gap-2">
+                    <i class="fas fa-times"></i> Liberar Selección
+                </button>
+            </div>
+            
+            <!-- Contenedor dinámico de botones de colaboradores -->
+            <div id="colaboradores-container" class="flex flex-wrap gap-2">
+                <!-- Los botones se generarán por JavaScript -->
+            </div>
+        </section>
+
+        <!-- Grid de KPIs (Añadido data-kpi="N" a cada artículo) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="kpi-grid">
 
             <!-- KPI 1 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="1" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 1</span>
@@ -128,7 +152,7 @@
             </article>
 
             <!-- KPI 2 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="2" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 2</span>
@@ -148,7 +172,7 @@
             </article>
 
             <!-- KPI 3 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="3" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 3</span>
@@ -158,7 +182,7 @@
                 <div class="space-y-4">
                     <div>
                         <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Tasa Deserción 2026 < Tasa Deserción 2025</p>
+                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Tasa Deserción 2026 &lt; Tasa Deserción 2025</p>
                     </div>
                     <div>
                         <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
@@ -168,7 +192,7 @@
             </article>
 
             <!-- KPI 4 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="4" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 4</span>
@@ -188,7 +212,7 @@
             </article>
 
             <!-- KPI 5 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="5" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 5</span>
@@ -208,7 +232,7 @@
             </article>
 
             <!-- KPI 6 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="6" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 6</span>
@@ -228,7 +252,7 @@
             </article>
 
             <!-- KPI 7 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="7" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 7</span>
@@ -248,7 +272,7 @@
             </article>
 
             <!-- KPI 8 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="8" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 8</span>
@@ -268,7 +292,7 @@
             </article>
 
             <!-- KPI 9 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="9" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 9</span>
@@ -288,7 +312,7 @@
             </article>
 
             <!-- KPI 10 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="10" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 10</span>
@@ -308,7 +332,7 @@
             </article>
 
             <!-- KPI 11 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="11" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 11</span>
@@ -328,7 +352,7 @@
             </article>
 
             <!-- KPI 12 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="12" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 12</span>
@@ -348,7 +372,7 @@
             </article>
 
             <!-- KPI 13 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="13" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 13</span>
@@ -368,7 +392,7 @@
             </article>
 
             <!-- KPI 14 -->
-            <article class="bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
+            <article data-kpi="14" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
                 <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 14</span>
@@ -391,11 +415,10 @@
 
     </main>
 
-    <!-- Footer (Idéntico a la línea gráfica de index.html) -->
+    <!-- Footer -->
     <footer class="bg-white border-t border-gray-200 mt-12 py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-3">
-                <!-- Isotipo en el Footer -->
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#06065C"/>
                 </svg>
@@ -407,5 +430,116 @@
         </div>
     </footer>
 
+    <!-- Lógica de Filtrado -->
+    <script>
+        // Data estructurada consolidada final (Todos los colaboradores incluyendo los nuevos del CSV)
+        const colaboradores = [
+            { nombre: "Marco Canales", puesto: "Decano TGU", kpis: [1,2,3,6,8,11] },
+            { nombre: "Edwin Dore", puesto: "Director SPS", kpis: [1,2,3,6,8,11] },
+            { nombre: "Karen Martinez", puesto: "Oficial TGU", kpis: [3,5,10] },
+            { nombre: "Pendiente - Oficial SPS", puesto: "Oficial SPS", kpis: [3,5,10] },
+            { nombre: "Geovanny Fortín", puesto: "Coordinador FabLab", kpis: [5,7,10,12,13,14] },
+            { nombre: "Reynod Bocanegra", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11] },
+            { nombre: "Carlos Roberto Perez", puesto: "Coordinador SPS", kpis: [1,2,3,6,10,11] },
+            { nombre: "Georgina Galeano", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11] },
+            { nombre: "Cristhyan Rivera", puesto: "Coordinador Academico SPS", kpis: [1,2,3,6,10,11] },
+            { nombre: "Hector Padilla", puesto: "Jefe Academico SPS", kpis: [1,2,3,6,10,11] },
+            { nombre: "Juan Carlos Reyes", puesto: "Coordinador Lab TGU", kpis: [5,7,10,12,13,14] },
+            { nombre: "Pendiente - Docente CIV", puesto: "Docente Asociado TGU", kpis: [5,7,10,11] },
+            { nombre: "Ada Rodriguez", puesto: "Docente Investigador SPS", kpis: [8,9,10,11] },
+            { nombre: "Pendiente - Docente TEL", puesto: "Docente TGU", kpis: [5,7,10,11] },
+            { nombre: "Rene Leon", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11] },
+            { nombre: "Juan Miguel Mejia", puesto: "Jefe Academico SPS", kpis: [1,2,3,6,10,11] },
+            { nombre: "Favell Nuñez", puesto: "Docente Investigador TGU", kpis: [8,9,10,11] },
+            { nombre: "Jose Luis Ordoñez", puesto: "Docente Investigador SPS", kpis: [8,9,10,11] },
+            { nombre: "Daniel Ramos", puesto: "Coordinador Lab TGU", kpis: [5,7,10,12,13,14] },
+            { nombre: "Fernanda Cáceres", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11] },
+            { nombre: "Reyna Valle", puesto: "Jefe Academico SPS", kpis: [1,2,3,6,10,11] },
+            { nombre: "Yaro Cáceres", puesto: "Docente TGU", kpis: [5,7,10,11] },
+            // Nuevos colaboradores extraídos desde el archivo CSV:
+            { nombre: "Mendel Nelson", puesto: "Docente TGU", kpis: [5,7,10,11] },
+            { nombre: "Pendiente - Docente IND", puesto: "Docente Investigador TGU", kpis: [8,9,10,11] },
+            { nombre: "Maria Elena Perdomo", puesto: "Docente Investigador SPS", kpis: [8,9,10,11] },
+            { nombre: "Julio Cesar Lopez", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11] }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('colaboradores-container');
+            const btnClear = document.getElementById('btn-clear-filter');
+            const kpiCards = document.querySelectorAll('.kpi-card');
+            let selectedColaborador = null;
+
+            // Renderizar botones
+            colaboradores.forEach((colab, index) => {
+                const btn = document.createElement('button');
+                btn.className = `btn-colab px-4 py-2 border border-gray-200 text-xs text-left transition-colors font-medium flex flex-col gap-1 
+                                 hover:border-unitec-pacific hover:text-unitec-pacific text-gray-600`;
+                btn.innerHTML = `
+                    <span class="font-bold pointer-events-none">${colab.nombre}</span>
+                    <span class="text-[10px] uppercase tracking-widest font-light pointer-events-none opacity-80">${colab.puesto}</span>
+                `;
+                btn.dataset.index = index;
+
+                btn.addEventListener('click', () => {
+                    // Si hacemos click en el que ya está seleccionado, no hace nada (se libera con el botón de limpiar)
+                    if (selectedColaborador === index) return;
+                    
+                    selectedColaborador = index;
+                    updateUI();
+                    filterKPIs(colab.kpis);
+                });
+
+                container.appendChild(btn);
+            });
+
+            // Acción de limpiar filtro
+            btnClear.addEventListener('click', () => {
+                selectedColaborador = null;
+                updateUI();
+                showAllKPIs();
+            });
+
+            function updateUI() {
+                const buttons = document.querySelectorAll('.btn-colab');
+                buttons.forEach((btn, idx) => {
+                    if (idx === selectedColaborador) {
+                        btn.classList.remove('text-gray-600', 'border-gray-200', 'hover:border-unitec-pacific', 'hover:text-unitec-pacific');
+                        btn.classList.add('bg-unitec-federal', 'text-white', 'border-unitec-federal');
+                    } else {
+                        btn.classList.add('text-gray-600', 'border-gray-200', 'hover:border-unitec-pacific', 'hover:text-unitec-pacific');
+                        btn.classList.remove('bg-unitec-federal', 'text-white', 'border-unitec-federal');
+                    }
+                });
+
+                if (selectedColaborador !== null) {
+                    btnClear.classList.remove('hidden');
+                } else {
+                    btnClear.classList.add('hidden');
+                }
+            }
+
+            function filterKPIs(activeKpis) {
+                kpiCards.forEach(card => {
+                    const kpiNum = parseInt(card.dataset.kpi);
+                    if (activeKpis.includes(kpiNum)) {
+                        card.style.display = 'block';
+                        // Pequeño truco para forzar el reflow y aplicar la animación
+                        setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => { card.style.display = 'none'; }, 400); // 400ms match the CSS transition
+                    }
+                });
+            }
+
+            function showAllKPIs() {
+                kpiCards.forEach(card => {
+                    card.style.display = 'block';
+                    setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
