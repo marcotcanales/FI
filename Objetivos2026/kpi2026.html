@@ -123,8 +123,8 @@
             </div>
             
             <!-- Contenedor dinámico de botones de colaboradores -->
-            <div id="colaboradores-container" class="flex flex-wrap gap-2">
-                <!-- Los botones se generarán por JavaScript -->
+            <div id="colaboradores-container" class="space-y-8 mt-6">
+                <!-- Los botones y categorías se generarán por JavaScript -->
             </div>
         </section>
 
@@ -432,46 +432,59 @@
 
     <!-- Lógica de Filtrado -->
     <script>
-        // Data estructurada consolidada final (Todos los colaboradores incluyendo los nuevos del CSV)
+        // Data estructurada consolidada final y agrupada por áreas
         const colaboradores = [
-            { nombre: "Marco Canales", puesto: "Decano TGU", kpis: [1,2,3,6,8,11] },
-            { nombre: "Edwin Dore", puesto: "Director SPS", kpis: [1,2,3,6,8,11] },
-            { nombre: "Karen Martinez", puesto: "Oficial TGU", kpis: [3,5,10] },
-            { nombre: "Pendiente - Oficial SPS", puesto: "Oficial SPS", kpis: [3,5,10] },
-            { nombre: "Geovanny Fortín", puesto: "Coordinador FabLab", kpis: [5,7,10,12,13,14] },
-            { nombre: "Reynod Bocanegra", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11] },
-            { nombre: "Carlos Roberto Perez", puesto: "Coordinador SPS", kpis: [1,2,3,6,10,11] },
-            { nombre: "Georgina Galeano", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11] },
-            { nombre: "Cristhyan Rivera", puesto: "Coordinador Academico SPS", kpis: [1,2,3,6,10,11] },
-            { nombre: "Hector Padilla", puesto: "Jefe Academico SPS", kpis: [1,2,3,6,10,11] },
-            { nombre: "Juan Carlos Reyes", puesto: "Coordinador Lab TGU", kpis: [5,7,10,12,13,14] },
-            { nombre: "Pendiente - Docente CIV", puesto: "Docente Asociado TGU", kpis: [5,7,10,11] },
-            { nombre: "Ada Rodriguez", puesto: "Docente Investigador SPS", kpis: [8,9,10,11] },
-            { nombre: "Pendiente - Docente TEL", puesto: "Docente TGU", kpis: [5,7,10,11] },
-            { nombre: "Rene Leon", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11] },
-            { nombre: "Juan Miguel Mejia", puesto: "Jefe Academico SPS", kpis: [1,2,3,6,10,11] },
-            { nombre: "Favell Nuñez", puesto: "Docente Investigador TGU", kpis: [8,9,10,11] },
-            { nombre: "Jose Luis Ordoñez", puesto: "Docente Investigador SPS", kpis: [8,9,10,11] },
-            { nombre: "Daniel Ramos", puesto: "Coordinador Lab TGU", kpis: [5,7,10,12,13,14] },
-            { nombre: "Fernanda Cáceres", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11] },
-            { nombre: "Reyna Valle", puesto: "Jefe Academico SPS", kpis: [1,2,3,6,10,11] },
-            { nombre: "Yaro Cáceres", puesto: "Docente TGU", kpis: [5,7,10,11] },
-            { nombre: "Mendel Nelson", puesto: "Docente TGU", kpis: [5,7,10,11] },
-            { nombre: "Pendiente - Docente IND", puesto: "Docente Investigador TGU", kpis: [8,9,10,11] },
-            { nombre: "Maria Elena Perdomo", puesto: "Docente Investigador SPS", kpis: [8,9,10,11] },
-            { nombre: "Julio Cesar Lopez", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11] },
-            // Nuevos colaboradores extraídos del último archivo CSV
-            { nombre: "Manuel Gamero", puesto: "Docente Asociado SPS", kpis: [5,7,10,11] },
-            { nombre: "Pendiente - Docente BMD", puesto: "Docente Investigador SPS", kpis: [5,7,10,11] },
-            { nombre: "Roger Ponce", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11] },
-            { nombre: "Vielka Barahona", puesto: "Jefe Academico SPS", kpis: [1,2,3,6,10,11] },
-            { nombre: "Alex Sanchez", puesto: "Jefe Academico TGU", kpis: [1,2,3,4,10,11] },
-            { nombre: "Julio Enrique Ramirez", puesto: "Jefe Academico SPS", kpis: [1,2,3,4,10,11] },
-            { nombre: "Nereyda Lainez", puesto: "Coordinador Lab TGU", kpis: [3,4,5,7,12,13,14] },
-            { nombre: "Emilson Fortín", puesto: "Auxiliar Lab TGU", kpis: [3,4,5,12,13,14] },
-            // Nuevos colaboradores extraídos del archivo CSV (v1_5)
-            { nombre: "Winder Matamoros", puesto: "Coordinador Lab SPS", kpis: [3,4,5,12,13,14] },
-            { nombre: "Tatiana Suazo", puesto: "Docente Asociado TGU", kpis: [3,4,7,10,11] }
+            // Decanatura y Dirección
+            { nombre: "Marco Canales", puesto: "Decano TGU", kpis: [1,2,3,6,8,11], area: "Decanatura y Dirección" },
+            { nombre: "Edwin Dore", puesto: "Director SPS", kpis: [1,2,3,6,8,11], area: "Decanatura y Dirección" },
+            { nombre: "Karen Martinez", puesto: "Oficial TGU", kpis: [3,5,10], area: "Decanatura y Dirección" },
+            { nombre: "Pendiente - Oficial SPS", puesto: "Oficial SPS", kpis: [3,5,10], area: "Decanatura y Dirección" },
+            { nombre: "Geovanny Fortín", puesto: "Coordinador FabLab", kpis: [5,7,10,12,13,14], area: "Decanatura y Dirección" },
+            { nombre: "Winder Matamoros", puesto: "Coordinador Lab SPS", kpis: [3,4,5,12,13,14], area: "Decanatura y Dirección" },
+
+            // Ciencias de la Computación
+            { nombre: "Reynod Bocanegra", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11], area: "Ciencias de la Computación" },
+            { nombre: "Carlos Roberto Perez", puesto: "Coordinador SPS", kpis: [1,2,3,6,10,11], area: "Ciencias de la Computación" },
+
+            // Industrial y de Sistemas
+            { nombre: "Georgina Galeano", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11], area: "Industrial y de Sistemas" },
+            { nombre: "Cristhyan Rivera", puesto: "Coordinador Academico SPS", kpis: [1,2,3,6,10,11], area: "Industrial y de Sistemas" },
+            { nombre: "Mendel Nelson", puesto: "Docente TGU", kpis: [5,7,10,11], area: "Industrial y de Sistemas" },
+            { nombre: "Pendiente - Docente IND", puesto: "Docente Investigador TGU", kpis: [8,9,10,11], area: "Industrial y de Sistemas" },
+            { nombre: "Maria Elena Perdomo", puesto: "Docente Investigador SPS", kpis: [8,9,10,11], area: "Industrial y de Sistemas" },
+
+            // Civil
+            { nombre: "Julio Cesar Lopez", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11], area: "Civil" },
+            { nombre: "Hector Padilla", puesto: "Jefe Academico SPS", kpis: [1,2,3,6,10,11], area: "Civil" },
+            { nombre: "Ada Rodriguez", puesto: "Docente Investigador SPS", kpis: [8,9,10,11], area: "Civil" },
+            { nombre: "Juan Carlos Reyes", puesto: "Coordinador Lab TGU", kpis: [5,7,10,12,13,14], area: "Civil" },
+            { nombre: "Pendiente - Docente CIV", puesto: "Docente Asociado TGU", kpis: [5,7,10,11], area: "Civil" },
+
+            // Mecatrónica
+            { nombre: "Rene Leon", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11], area: "Mecatrónica" },
+            { nombre: "Juan Miguel Mejia", puesto: "Jefe Academico SPS", kpis: [1,2,3,6,10,11], area: "Mecatrónica" },
+            { nombre: "Favell Nuñez", puesto: "Docente Investigador TGU", kpis: [8,9,10,11], area: "Mecatrónica" },
+            { nombre: "Jose Luis Ordoñez", puesto: "Docente Investigador SPS", kpis: [8,9,10,11], area: "Mecatrónica" },
+            { nombre: "Daniel Ramos", puesto: "Coordinador Lab TGU", kpis: [5,7,10,12,13,14], area: "Mecatrónica" },
+
+            // Biomédica
+            { nombre: "Fernanda Cáceres", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11], area: "Biomédica" },
+            { nombre: "Reyna Valle", puesto: "Jefe Academico SPS", kpis: [1,2,3,6,10,11], area: "Biomédica" },
+            { nombre: "Yaro Cáceres", puesto: "Docente TGU", kpis: [5,7,10,11], area: "Biomédica" },
+            { nombre: "Manuel Gamero", puesto: "Docente Asociado SPS", kpis: [5,7,10,11], area: "Biomédica" },
+            { nombre: "Pendiente - Docente BMD", puesto: "Docente Investigador SPS", kpis: [5,7,10,11], area: "Biomédica" },
+
+            // Energía y Telecomunicaciones
+            { nombre: "Roger Ponce", puesto: "Jefe Academico TGU", kpis: [1,2,3,6,10,11], area: "Energía y Telecomunicaciones" },
+            { nombre: "Vielka Barahona", puesto: "Jefe Academico SPS", kpis: [1,2,3,6,10,11], area: "Energía y Telecomunicaciones" },
+            { nombre: "Pendiente - Docente TEL", puesto: "Docente TGU", kpis: [5,7,10,11], area: "Energía y Telecomunicaciones" },
+
+            // Ciencias y Matemáticas
+            { nombre: "Alex Sanchez", puesto: "Jefe Academico TGU", kpis: [1,2,3,4,10,11], area: "Ciencias y Matemáticas" },
+            { nombre: "Julio Enrique Ramirez", puesto: "Jefe Academico SPS", kpis: [1,2,3,4,10,11], area: "Ciencias y Matemáticas" },
+            { nombre: "Nereyda Lainez", puesto: "Coordinador Lab TGU", kpis: [3,4,5,7,12,13,14], area: "Ciencias y Matemáticas" },
+            { nombre: "Emilson Fortín", puesto: "Auxiliar Lab TGU", kpis: [3,4,5,12,13,14], area: "Ciencias y Matemáticas" },
+            { nombre: "Tatiana Suazo", puesto: "Docente Asociado TGU", kpis: [3,4,7,10,11], area: "Ciencias y Matemáticas" }
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -480,27 +493,50 @@
             const kpiCards = document.querySelectorAll('.kpi-card');
             let selectedColaborador = null;
 
-            // Renderizar botones
+            // Agrupar colaboradores por área
+            const agrupados = {};
             colaboradores.forEach((colab, index) => {
-                const btn = document.createElement('button');
-                btn.className = `btn-colab px-4 py-2 border border-gray-200 text-xs text-left transition-colors font-medium flex flex-col gap-1 
-                                 hover:border-unitec-pacific hover:text-unitec-pacific text-gray-600`;
-                btn.innerHTML = `
-                    <span class="font-bold pointer-events-none">${colab.nombre}</span>
-                    <span class="text-[10px] uppercase tracking-widest font-light pointer-events-none opacity-80">${colab.puesto}</span>
-                `;
-                btn.dataset.index = index;
+                if (!agrupados[colab.area]) agrupados[colab.area] = [];
+                // Guardamos el índice original para mantener la coherencia de la selección global
+                agrupados[colab.area].push({ ...colab, originalIndex: index });
+            });
 
-                btn.addEventListener('click', () => {
-                    // Si hacemos click en el que ya está seleccionado, no hace nada (se libera con el botón de limpiar)
-                    if (selectedColaborador === index) return;
-                    
-                    selectedColaborador = index;
-                    updateUI();
-                    filterKPIs(colab.kpis);
+            // Renderizar botones categorizados
+            Object.keys(agrupados).forEach(area => {
+                const areaSection = document.createElement('div');
+                
+                const title = document.createElement('h4');
+                title.className = 'text-sm font-bold text-gray-400 uppercase tracking-widest mb-3 border-b border-gray-100 pb-2';
+                title.innerHTML = `<i class="fas fa-sitemap mr-2 text-unitec-pacific opacity-50"></i>${area}`;
+                areaSection.appendChild(title);
+
+                const btnGroup = document.createElement('div');
+                btnGroup.className = 'flex flex-wrap gap-2';
+
+                agrupados[area].forEach(colab => {
+                    const btn = document.createElement('button');
+                    btn.className = `btn-colab px-4 py-2 border border-gray-200 text-xs text-left transition-colors font-medium flex flex-col gap-1 
+                                     hover:border-unitec-pacific hover:text-unitec-pacific text-gray-600`;
+                    btn.innerHTML = `
+                        <span class="font-bold pointer-events-none">${colab.nombre}</span>
+                        <span class="text-[10px] uppercase tracking-widest font-light pointer-events-none opacity-80">${colab.puesto}</span>
+                    `;
+                    btn.dataset.index = colab.originalIndex;
+
+                    btn.addEventListener('click', () => {
+                        // Si hacemos click en el que ya está seleccionado, no hace nada
+                        if (selectedColaborador === colab.originalIndex) return;
+                        
+                        selectedColaborador = colab.originalIndex;
+                        updateUI();
+                        filterKPIs(colab.kpis);
+                    });
+
+                    btnGroup.appendChild(btn);
                 });
 
-                container.appendChild(btn);
+                areaSection.appendChild(btnGroup);
+                container.appendChild(areaSection);
             });
 
             // Acción de limpiar filtro
