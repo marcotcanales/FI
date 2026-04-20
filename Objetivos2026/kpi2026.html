@@ -37,6 +37,10 @@
         .kpi-card {
             transition: all 0.4s ease-in-out;
         }
+        /* Transición para el colapso suave */
+        #colaboradores-wrapper {
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="text-gray-800 antialiased selection:bg-unitec-pacific selection:text-white">
@@ -109,22 +113,32 @@
         </div>
 
         <!-- SECCIÓN NUEVA: Filtro por Colaborador -->
-        <section class="bg-white border border-gray-200 p-6 mb-10">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4 border-b border-gray-100 pb-4">
-                <div>
-                    <h3 class="text-lg font-bold text-unitec-federal flex items-center gap-2">
-                        <i class="fas fa-filter text-unitec-pacific"></i> Filtro de Responsabilidades
-                    </h3>
-                    <p class="text-sm text-gray-500 font-light mt-1">Selecciona un colaborador para aislar sus KPIs asignados.</p>
+        <section class="bg-white border border-gray-200 p-6 mb-10 rounded-lg shadow-sm">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="flex-1 cursor-pointer select-none" id="toggle-filter-btn">
+                    <div class="flex items-center gap-3">
+                        <h3 class="text-lg font-bold text-unitec-federal flex items-center gap-2">
+                            <i class="fas fa-filter text-unitec-pacific"></i> Filtro de Responsabilidades
+                        </h3>
+                        <i id="filter-chevron" class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </div>
+                    <p class="text-sm text-gray-500 font-light mt-1">Selecciona un colaborador para aislar sus KPIs asignados. Haz clic aquí para expandir/contraer.</p>
                 </div>
-                <button id="btn-clear-filter" class="hidden px-4 py-2 bg-unitec-pacific text-white text-xs font-bold uppercase tracking-widest hover:bg-unitec-sky transition-colors flex items-center gap-2">
-                    <i class="fas fa-times"></i> Liberar Selección
-                </button>
+                <div class="flex gap-2">
+                    <span id="active-filter-badge" class="hidden inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-unitec-pacific text-white">
+                        Filtro Activo
+                    </span>
+                    <button id="btn-clear-filter" class="hidden px-4 py-2 bg-gray-100 text-gray-700 text-xs font-bold uppercase tracking-widest hover:bg-gray-200 rounded transition-colors flex items-center gap-2 border border-gray-300">
+                        <i class="fas fa-times"></i> Liberar Selección
+                    </button>
+                </div>
             </div>
             
-            <!-- Contenedor dinámico de botones de colaboradores -->
-            <div id="colaboradores-container" class="space-y-8 mt-6">
-                <!-- Los botones y categorías se generarán por JavaScript -->
+            <!-- Contenedor dinámico colapsable -->
+            <div id="colaboradores-wrapper" class="overflow-hidden max-h-0 opacity-0 border-t border-gray-100">
+                <div id="colaboradores-container" class="space-y-8 mt-6 pb-2">
+                    <!-- Los botones y categorías se generarán por JavaScript -->
+                </div>
             </div>
         </section>
 
@@ -491,7 +505,39 @@
             const container = document.getElementById('colaboradores-container');
             const btnClear = document.getElementById('btn-clear-filter');
             const kpiCards = document.querySelectorAll('.kpi-card');
+            const toggleBtn = document.getElementById('toggle-filter-btn');
+            const filterWrapper = document.getElementById('colaboradores-wrapper');
+            const filterChevron = document.getElementById('filter-chevron');
+            const activeFilterBadge = document.getElementById('active-filter-badge');
             let selectedColaborador = null;
+            let isFilterOpen = false;
+
+            // Función para abrir/cerrar el acordeón de filtros
+            function toggleFilterPanel() {
+                isFilterOpen = !isFilterOpen;
+                if (isFilterOpen) {
+                    filterWrapper.style.maxHeight = filterWrapper.scrollHeight + "px";
+                    filterWrapper.style.opacity = "1";
+                    filterWrapper.classList.add('mt-4', 'pt-4');
+                    filterChevron.style.transform = "rotate(180deg)";
+                } else {
+                    filterWrapper.style.maxHeight = "0";
+                    filterWrapper.style.opacity = "0";
+                    filterWrapper.classList.remove('mt-4', 'pt-4');
+                    filterChevron.style.transform = "rotate(0deg)";
+                }
+            }
+
+            toggleBtn.addEventListener('click', toggleFilterPanel);
+
+            // Actualizar max-height en resize por si el contenido cambia
+            window.addEventListener('resize', () => {
+                if (isFilterOpen) {
+                    filterWrapper.style.maxHeight = "none";
+                    const newHeight = filterWrapper.scrollHeight;
+                    filterWrapper.style.maxHeight = newHeight + "px";
+                }
+            });
 
             // Agrupar colaboradores por área
             const agrupados = {};
@@ -515,8 +561,8 @@
 
                 agrupados[area].forEach(colab => {
                     const btn = document.createElement('button');
-                    btn.className = `btn-colab px-4 py-2 border border-gray-200 text-xs text-left transition-colors font-medium flex flex-col gap-1 
-                                     hover:border-unitec-pacific hover:text-unitec-pacific text-gray-600`;
+                    btn.className = `btn-colab px-4 py-2 border border-gray-200 rounded text-xs text-left transition-colors font-medium flex flex-col gap-1 
+                                     hover:border-unitec-pacific hover:text-unitec-pacific text-gray-600 bg-white`;
                     btn.innerHTML = `
                         <span class="font-bold pointer-events-none">${colab.nombre}</span>
                         <span class="text-[10px] uppercase tracking-widest font-light pointer-events-none opacity-80">${colab.puesto}</span>
@@ -530,6 +576,9 @@
                         selectedColaborador = colab.originalIndex;
                         updateUI();
                         filterKPIs(colab.kpis);
+                        
+                        // Opcional: auto-cerrar el panel tras seleccionar (comentar si no se desea)
+                        // toggleFilterPanel();
                     });
 
                     btnGroup.appendChild(btn);
@@ -550,18 +599,20 @@
                 const buttons = document.querySelectorAll('.btn-colab');
                 buttons.forEach((btn, idx) => {
                     if (idx === selectedColaborador) {
-                        btn.classList.remove('text-gray-600', 'border-gray-200', 'hover:border-unitec-pacific', 'hover:text-unitec-pacific');
-                        btn.classList.add('bg-unitec-federal', 'text-white', 'border-unitec-federal');
+                        btn.classList.remove('text-gray-600', 'border-gray-200', 'hover:border-unitec-pacific', 'hover:text-unitec-pacific', 'bg-white');
+                        btn.classList.add('bg-unitec-federal', 'text-white', 'border-unitec-federal', 'shadow-md');
                     } else {
-                        btn.classList.add('text-gray-600', 'border-gray-200', 'hover:border-unitec-pacific', 'hover:text-unitec-pacific');
-                        btn.classList.remove('bg-unitec-federal', 'text-white', 'border-unitec-federal');
+                        btn.classList.add('text-gray-600', 'border-gray-200', 'hover:border-unitec-pacific', 'hover:text-unitec-pacific', 'bg-white');
+                        btn.classList.remove('bg-unitec-federal', 'text-white', 'border-unitec-federal', 'shadow-md');
                     }
                 });
 
                 if (selectedColaborador !== null) {
                     btnClear.classList.remove('hidden');
+                    activeFilterBadge.classList.remove('hidden');
                 } else {
                     btnClear.classList.add('hidden');
+                    activeFilterBadge.classList.add('hidden');
                 }
             }
 
