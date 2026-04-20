@@ -95,11 +95,19 @@
             <!-- Detalle diamante esquina -->
             <div class="absolute -top-3 -left-3 w-6 h-6 bg-unitec-cyan transform rotate-45 border-2 border-white"></div>
             
-            <div class="flex flex-col md:flex-row justify-between items-center mb-6 pb-4 border-b-2 border-gray-100">
-                <h2 class="text-2xl font-bold text-unitec-federal tracking-tight">
-                    <i class="fas fa-filter mr-2 text-unitec-cyan"></i> Explorar Iniciativas
-                </h2>
-                <button onclick="filtrarProyectos('todos', '')" class="mt-4 md:mt-0 bg-white border-2 border-unitec-federal text-unitec-federal hover:bg-unitec-federal hover:text-white font-bold py-2 px-6 transition-colors duration-300 text-sm uppercase tracking-wider">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 pb-4 border-b-2 border-gray-100 gap-4">
+                <div class="max-w-4xl">
+                    <h2 class="text-2xl font-bold text-unitec-federal tracking-tight mb-3">
+                        <i class="fas fa-filter mr-2 text-unitec-cyan"></i> Explorar Iniciativas
+                    </h2>
+                    <p class="text-sm font-medium text-gray-700 leading-relaxed mb-3 border-l-4 border-unitec-cyan pl-3">
+                        <strong class="text-unitec-federal">Alineación Visión 2030:</strong> Cada proyecto responde al compromiso de ser una universidad de clase mundial, protagonista del desarrollo de Honduras mediante la excelencia académica y la innovación constante.
+                    </p>
+                    <p class="text-xs font-black text-unitec-cyan uppercase tracking-widest bg-unitec-federal inline-block px-3 py-1 text-white">
+                        <i class="fas fa-hand-pointer mr-1"></i> Instrucción: Haga clic en un Eje o Impacto para filtrar. Su selección se resaltará.
+                    </p>
+                </div>
+                <button id="btn-mostrar-todos" onclick="filtrarProyectos('todos', '')" class="w-full md:w-auto mt-4 md:mt-0 bg-unitec-federal text-white border-2 border-unitec-federal font-black py-3 px-8 transition-colors duration-300 text-sm uppercase tracking-wider whitespace-nowrap cursor-default">
                     Mostrar Todos
                 </button>
             </div>
@@ -177,6 +185,10 @@
             }
         ];
 
+        // Variables de estado para los filtros
+        let filtroActualTipo = 'todos';
+        let filtroActualValor = '';
+
         function normalizeStr(str) {
             if (!str) return "";
             return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
@@ -189,10 +201,17 @@
             jerarquiaEjes.forEach(eje => {
                 let ejeHtml = `<div class="flex flex-col gap-3">`;
                 
+                // Lógica de estado activo para Ejes
+                const isEjeActive = (filtroActualTipo === 'eje' && filtroActualValor === eje.nombre);
+                const ejeClasses = isEjeActive
+                    ? "w-full text-left font-black bg-unitec-cyan text-unitec-federal p-4 border-2 border-unitec-federal transition-colors duration-300 text-sm flex justify-between items-center group"
+                    : "w-full text-left font-bold bg-unitec-federal text-white p-4 border-2 border-transparent hover:border-unitec-cyan transition-colors duration-300 text-sm flex justify-between items-center group";
+                const ejeDiamondColor = isEjeActive ? "bg-unitec-federal" : "bg-white";
+                
                 // Botón del Eje: Flat design, solid colors
-                ejeHtml += `<button onclick="filtrarProyectos('eje', '${eje.nombre}')" class="w-full text-left font-bold bg-unitec-federal text-white p-4 border-2 border-transparent hover:border-unitec-cyan transition-colors duration-300 text-sm flex justify-between items-center group">
+                ejeHtml += `<button onclick="filtrarProyectos('eje', '${eje.nombre}')" class="${ejeClasses}">
                                 <span>${eje.nombre}</span>
-                                <div class="w-2 h-2 bg-white transform rotate-45 group-hover:bg-unitec-cyan transition-colors"></div>
+                                <div class="w-2 h-2 ${ejeDiamondColor} transform rotate-45 group-hover:bg-unitec-cyan transition-colors"></div>
                             </button>`;
                 
                 // Botones de Impactos: Borders only, flat
@@ -200,13 +219,25 @@
                     const hasProjects = proyectosData.some(p => normalizeStr(p.Impacto) === normalizeStr(impacto));
                     
                     if (hasProjects) {
-                        ejeHtml += `<button onclick="filtrarProyectos('impacto', '${impacto}')" class="w-full text-left text-xs p-3 border-2 border-gray-200 text-unitec-federal bg-white hover:border-unitec-cyan transition-colors font-medium flex items-center">
-                                        <div class="w-1.5 h-1.5 bg-unitec-sky transform rotate-45 mr-3"></div> ${impacto}
+                        const isImpactoActive = (filtroActualTipo === 'impacto' && filtroActualValor === impacto);
+                        const impactoClasses = isImpactoActive
+                            ? "w-full text-left text-xs p-3 border-2 border-unitec-federal text-white bg-unitec-federal transition-colors font-bold flex items-center"
+                            : "w-full text-left text-xs p-3 border-2 border-gray-200 text-unitec-federal bg-white hover:border-unitec-cyan transition-colors font-medium flex items-center";
+                        const impactoDiamondColor = isImpactoActive ? "bg-unitec-cyan" : "bg-unitec-sky";
+
+                        ejeHtml += `<button onclick="filtrarProyectos('impacto', '${impacto}')" class="${impactoClasses}">
+                                        <div class="w-1.5 h-1.5 ${impactoDiamondColor} transform rotate-45 mr-3"></div> ${impacto}
                                     </button>`;
                     } else {
-                        ejeHtml += `<button onclick="mostrarEstrategiaFutura('${impacto}')" class="w-full text-left text-xs p-3 border-2 border-gray-100 bg-gray-50 text-gray-400 hover:border-gray-300 transition-colors font-medium">
-                                        <div class="flex items-center"><div class="w-1.5 h-1.5 bg-gray-300 transform rotate-45 mr-3"></div> ${impacto}</div>
-                                        <span class="text-[10px] text-gray-400 block mt-2 ml-4 italic">(Planificado post-2026)</span>
+                        const isFuturoActive = (filtroActualTipo === 'futuro' && filtroActualValor === impacto);
+                        const futuroClasses = isFuturoActive
+                            ? "w-full text-left text-xs p-3 border-2 border-unitec-federal text-unitec-federal bg-gray-100 transition-colors font-bold"
+                            : "w-full text-left text-xs p-3 border-2 border-gray-100 bg-gray-50 text-gray-400 hover:border-gray-300 transition-colors font-medium";
+                        const futuroDiamondColor = isFuturoActive ? "bg-unitec-federal" : "bg-gray-300";
+
+                        ejeHtml += `<button onclick="mostrarEstrategiaFutura('${impacto}')" class="${futuroClasses}">
+                                        <div class="flex items-center"><div class="w-1.5 h-1.5 ${futuroDiamondColor} transform rotate-45 mr-3"></div> ${impacto}</div>
+                                        <span class="text-[10px] ${isFuturoActive ? 'text-unitec-federal' : 'text-gray-400'} block mt-2 ml-4 italic">(Planificado post-2026)</span>
                                     </button>`;
                     }
                 });
@@ -217,6 +248,21 @@
         }
 
         function filtrarProyectos(tipo, valor) {
+            // Actualizar estado global
+            filtroActualTipo = tipo;
+            filtroActualValor = valor;
+            
+            // Actualizar botón Mostrar Todos
+            const btnTodos = document.getElementById('btn-mostrar-todos');
+            if (tipo === 'todos') {
+                btnTodos.className = "w-full md:w-auto mt-4 md:mt-0 bg-unitec-federal text-white border-2 border-unitec-federal font-black py-3 px-8 transition-colors duration-300 text-sm uppercase tracking-wider whitespace-nowrap cursor-default";
+            } else {
+                btnTodos.className = "w-full md:w-auto mt-4 md:mt-0 bg-white text-unitec-federal border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white font-bold py-3 px-8 transition-colors duration-300 text-sm uppercase tracking-wider whitespace-nowrap";
+            }
+
+            // Re-renderizar filtros para aplicar estilos activos
+            renderFilters();
+
             let filtrados = [];
             if (tipo === 'todos') {
                 filtrados = proyectosData;
@@ -230,6 +276,16 @@
         }
 
         function mostrarEstrategiaFutura(impactoNombre) {
+            // Actualizar estado global
+            filtroActualTipo = 'futuro';
+            filtroActualValor = impactoNombre;
+            
+            // Actualizar botón Mostrar Todos
+            const btnTodos = document.getElementById('btn-mostrar-todos');
+            btnTodos.className = "w-full md:w-auto mt-4 md:mt-0 bg-white text-unitec-federal border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white font-bold py-3 px-8 transition-colors duration-300 text-sm uppercase tracking-wider whitespace-nowrap";
+            
+            renderFilters();
+
             const container = document.getElementById('cards-container');
             container.innerHTML = `
                 <div class="col-span-full bg-white border-2 border-unitec-federal p-8 mt-4 relative">
@@ -365,8 +421,7 @@
         }
 
         window.onload = () => {
-            renderFilters();
-            renderCards(proyectosData);
+            filtrarProyectos('todos', '');
         };
     </script>
 </body>
