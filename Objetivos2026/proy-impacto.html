@@ -4,13 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fichas de Proyectos - FI UNITEC</title>
+    
+    <!-- Tipografía Institucional: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <!-- Tailwind CSS para el diseño -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de Tailwind basada en el Manual de Marca UNITEC -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Poppins como única fuente
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C',
+                            cyan: '#03AED2',
+                            sky: '#47C8FD'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Estilos personalizados para la impresión */
+        /* Estilos personalizados para la impresión - CERO SOMBRAS */
         @media print {
             .no-print {
                 display: none !important;
@@ -22,28 +49,40 @@
             body {
                 background-color: white !important;
             }
-            .shadow-lg {
-                box-shadow: none !important;
-                border: 1px solid #e5e7eb !important;
+            .card-impresion {
+                border: 2px solid #06065C !important;
             }
             #cards-container {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr); /* 2 fichas por página al imprimir */
+                grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
             }
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen font-sans text-gray-800">
+<body class="bg-white min-h-screen font-sans text-unitec-federal selection:bg-unitec-cyan selection:text-white">
 
-    <!-- Encabezado -->
-    <header class="bg-[#002f6c] text-white shadow-md no-print">
+    <!-- Encabezado corporativo - Imagotipo Horizontal -->
+    <header class="bg-unitec-federal text-white no-print border-b-4 border-unitec-cyan">
         <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-            <div>
-                <h1 class="text-3xl font-bold flex items-center">
-                    <i class="fas fa-university mr-3"></i> Fichas de Proyectos
+            
+            <!-- Logo Institucional Recreado en SVG Plano -->
+            <div class="flex items-center mb-4 md:mb-0">
+                <!-- Isotipo Diamante -->
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-3">
+                    <path d="M50 0L95 45V55L50 100L5 55V45L50 0Z" fill="#03AED2"/>
+                    <path d="M50 20L80 50L50 80L20 50L50 20Z" fill="#47C8FD"/>
+                    <path d="M50 35L65 50L50 65L35 50L50 35Z" fill="#FFFFFF"/>
+                </svg>
+                <!-- Logotipo Textual -->
+                <span class="text-4xl font-bold tracking-tight mt-1">unitec</span>
+            </div>
+
+            <div class="text-center md:text-right">
+                <h1 class="text-xl font-bold text-unitec-sky uppercase tracking-widest">
+                    Fichas de Proyectos
                 </h1>
-                <p class="mt-1 text-blue-200">Facultad de Ingeniería - UNITEC</p>
+                <p class="mt-1 text-sm font-medium text-white/80">Facultad de Ingeniería</p>
             </div>
             
         </div>
@@ -51,11 +90,16 @@
 
     <main class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         
-        <!-- Sección de Filtros -->
-        <div id="filters-section" class="bg-white p-6 rounded-lg shadow-md mb-8 no-print border-t-4 border-[#002f6c]">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-4 pb-2 border-b border-gray-200">
-                <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-filter mr-2 text-[#002f6c]"></i>Filtrar Proyectos</h2>
-                <button onclick="filtrarProyectos('todos', '')" class="mt-2 md:mt-0 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-4 rounded transition text-sm">
+        <!-- Sección de Filtros - Flat Design (Sin sombras) -->
+        <div id="filters-section" class="bg-white p-6 mb-8 no-print border-2 border-unitec-federal relative">
+            <!-- Detalle diamante esquina -->
+            <div class="absolute -top-3 -left-3 w-6 h-6 bg-unitec-cyan transform rotate-45 border-2 border-white"></div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 pb-4 border-b-2 border-gray-100">
+                <h2 class="text-2xl font-bold text-unitec-federal tracking-tight">
+                    <i class="fas fa-filter mr-2 text-unitec-cyan"></i> Explorar Iniciativas
+                </h2>
+                <button onclick="filtrarProyectos('todos', '')" class="mt-4 md:mt-0 bg-white border-2 border-unitec-federal text-unitec-federal hover:bg-unitec-federal hover:text-white font-bold py-2 px-6 transition-colors duration-300 text-sm uppercase tracking-wider">
                     Mostrar Todos
                 </button>
             </div>
@@ -64,16 +108,17 @@
             </div>
         </div>
 
-        <!-- Leyenda de Períodos -->
-        <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg mb-8 flex flex-col md:flex-row justify-between items-center text-sm">
-            <div class="mb-2 md:mb-0 text-[#002f6c] font-semibold">
-                <i class="fas fa-info-circle mr-1"></i> Nomenclatura de Períodos de Ejecución:
+        <!-- Leyenda de Períodos - Estilo Preciso -->
+        <div class="bg-white border-l-4 border-unitec-sky p-4 mb-8 flex flex-col md:flex-row justify-between items-center text-sm border-y-2 border-r-2 border-gray-100">
+            <div class="mb-3 md:mb-0 text-unitec-federal font-bold uppercase tracking-wide flex items-center">
+                <div class="w-2 h-2 bg-unitec-federal transform rotate-45 mr-3"></div>
+                Períodos de Ejecución
             </div>
-            <div class="flex flex-wrap gap-3">
-                <span class="bg-white px-2 py-1 rounded border border-blue-100 shadow-sm"><strong class="text-blue-800">Q1:</strong> Ene, Feb, Mar</span>
-                <span class="bg-white px-2 py-1 rounded border border-blue-100 shadow-sm"><strong class="text-blue-800">Q2:</strong> Abr, May, Jun</span>
-                <span class="bg-white px-2 py-1 rounded border border-blue-100 shadow-sm"><strong class="text-blue-800">Q3:</strong> Jul, Ago, Sep</span>
-                <span class="bg-white px-2 py-1 rounded border border-blue-100 shadow-sm"><strong class="text-blue-800">Q4:</strong> Oct, Nov, Dic</span>
+            <div class="flex flex-wrap gap-2">
+                <span class="bg-gray-50 px-3 py-1 border border-gray-200 text-gray-600"><strong class="text-unitec-federal font-bold">Q1:</strong> Ene - Mar</span>
+                <span class="bg-gray-50 px-3 py-1 border border-gray-200 text-gray-600"><strong class="text-unitec-federal font-bold">Q2:</strong> Abr - Jun</span>
+                <span class="bg-gray-50 px-3 py-1 border border-gray-200 text-gray-600"><strong class="text-unitec-federal font-bold">Q3:</strong> Jul - Sep</span>
+                <span class="bg-gray-50 px-3 py-1 border border-gray-200 text-gray-600"><strong class="text-unitec-federal font-bold">Q4:</strong> Oct - Dic</span>
             </div>
         </div>
 
@@ -85,336 +130,83 @@
     </main>
 
     <script>
-        // Datos de proyectos pre-cargados desde el archivo Descr_Proy_v2_1.csv
+        // Datos de proyectos originales intactos
         const proyectosData = [
-            {
-                "Codigo": "PRO1A",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "1. Transformacion del Aprendizaje",
-                "Impacto": "Experiencia estudiantil transformadora",
-                "Nombre Breve": "Acreditacion",
-                "Metrica": "Numero de acreditaciones completadas",
-                "Indicador": "Acreditacion otorgada por ACAAI",
-                "Actividades Acordadas": "Completar la acreditación de Ingeniería en Telecomunicaciones y Redes con ACAAI, y completar el Autoestudio para la acreditacion de Ingeniería en Energía",
-                "Resultados Esperados": "Acreditacion de Telecomunicaciones completa y Autoestudio de Energía listo",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO1B",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "1. Transformacion del Aprendizaje",
-                "Impacto": "Experiencia estudiantil transformadora",
-                "Nombre Breve": "Actualizacion Curricular",
-                "Metrica": "Porcentaje de avance en la reforma curricular.",
-                "Indicador": "Reformas completadas en Mecatrónica y Biomédica.",
-                "Actividades Acordadas": "Completar la reforma de los programas de Mecatrónica y Biomédica.",
-                "Resultados Esperados": "Planes de estudio modernizados y alineados a necesidades del sector.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO1C",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "1. Transformacion del Aprendizaje",
-                "Impacto": "Ecosistema de Aprendizaje",
-                "Nombre Breve": "Capacitacion en el Ecosistema",
-                "Metrica": "Número de talleres realizados.",
-                "Indicador": "Al menos 1 Taller de 8 horas por programa y por campus al año",
-                "Actividades Acordadas": "Realizar talleres que habiliten a los docentes en el ecosistema de aprendizaje (Mentorías, Talleres de Co-diseño, charlas, etc.) impartidas por personal de la FI.",
-                "Resultados Esperados": "Apoyo a docentes en la adopción del ecosistema de aprendizaje",
-                "Período": "Q2 Y Q3"
-            },
-            {
-                "Codigo": "PRO1D",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "1. Transformacion del Aprendizaje",
-                "Impacto": "Ecosistema de Aprendizaje",
-                "Nombre Breve": "Co-Design en el Ecosistema",
-                "Metrica": "Cantidad de docentes que están implementando el Ecosistema de Aprendizaje",
-                "Indicador": "Equivalente a 4 sesiones de 1 hora por período académico en Q3 y Q4 para acompañar a todo el equipo de docentes del area academica respectiva.",
-                "Actividades Acordadas": "Realizar sesiones de acompañamiento y co-diseño dirigidas a cada area académica encabezadas por los jefes académicos y apoyadas por el equipo académico.",
-                "Resultados Esperados": "Apoyo a docentes en la adopción del ecosistema de aprendizaje",
-                "Período": "Q3 Y Q4"
-            },
-            {
-                "Codigo": "PRO1E",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "1. Transformacion del Aprendizaje",
-                "Impacto": "Docentes como motor de la innovación educativa y del aprendizaje continuo",
-                "Nombre Breve": "Implementacion del Ecosistema",
-                "Metrica": "Cantidad de cursos donde se está implementando el Ecosistema de Aprendizaje",
-                "Indicador": "Al menos 100 asignaturas impactadas.",
-                "Actividades Acordadas": "Reportar al menos 1 asignaturas por período académico por programa por campus en Q3, y 4 asignaturas en Q4 donde se está implementando el ecosistema de aprendizaje",
-                "Resultados Esperados": "Experiencia estudiantil impactad por el Ecosistema de Aprendizaje",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO1F",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "1. Transformacion del Aprendizaje",
-                "Impacto": "Campus y sedes referentes",
-                "Nombre Breve": "Iniciativas Intercampus",
-                "Metrica": "Número de iniciativas coordinadas entre campus.",
-                "Indicador": "Al menos 2 iniciativas semestrales entre campus.",
-                "Actividades Acordadas": "Coordinación de iniciativas entre los campus para articulación de docentes y estudiantes.",
-                "Resultados Esperados": "Mayor articulación entre docentes y estudiantes.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO1G",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "1. Transformacion del Aprendizaje",
-                "Impacto": "Experiencia estudiantil transformadora",
-                "Nombre Breve": "Transformacion de CCMM",
-                "Metrica": "Tasa de aprobación en las Ciencias y Matemáticas",
-                "Indicador": "Incremento del 10% en la tasa de aprobación.",
-                "Actividades Acordadas": "Realizar acciones con el objetivo de transformar la experiencia educativa de los estudiantes en las Matemáticas",
-                "Resultados Esperados": "Mejora en el desempeño de los estudiantes en las matemáticas",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO1H",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "1. Transformacion del Aprendizaje",
-                "Impacto": "Experiencia estudiantil transformadora",
-                "Nombre Breve": "Internacionalizacion",
-                "Metrica": "Número de actividades de internacionalización realizadas.",
-                "Indicador": "Equivalente a 1 iniciativa que sume internacionalidad al curriculum existente por programa por campus por periodo en Q2, Q3 y Q4 (COIL, viajes académicos, masterclass, etc.).",
-                "Actividades Acordadas": "Realizacion de iniciativas en colaboracion con socios internacionales para sumar internacionalidad al currículo existente.",
-                "Resultados Esperados": "Mayor exposición internacional del estudiantado y docencia.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO2C",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "2. Incidencia Local y Conexión Global",
-                "Impacto": "Presencia global",
-                "Nombre Breve": "Proyectos Estratégicos de Ingenieria Visibilizados",
-                "Metrica": "Número de eventos y proyectos visibilizados.",
-                "Indicador": "Equivalente a 2 proyectos o iniciativas por período académico (Q2, Q3 y Q4) compartido en redes sociales (LinkedIn) por cada jefe academico, en cada campus. ",
-                "Actividades Acordadas": "Realización y visibilación de Proyectos de Vinculación, Investigación, Colaboración Industrial, Eventos Alumni, Innovación o emprendimiento, con cobertura en medios o redes sociales.",
-                "Resultados Esperados": "Mayor posicionamiento de la Facultad en el ecosistema académico e industrial.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO2D",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "2. Incidencia Local y Conexión Global",
-                "Impacto": "Presencia global",
-                "Nombre Breve": "Publicaciones de Valor",
-                "Metrica": "Cantidad de publicaciones de valor en LinkedIn",
-                "Indicador": "Equivalente a 1 publicacion no relacionada a difusion de proyectos por período académico por programa por campus.",
-                "Actividades Acordadas": "Realizar 1 publicación de valor (diferente a difusion de proyectos) por período por programa académico por campus en LinkedIn (Q2, Q3, y Q4)",
-                "Resultados Esperados": "Mayor posicionamiento de la Facultad en el ecosistema académico e industrial.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO2E",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "2. Incidencia Local y Conexión Global",
-                "Impacto": "Vinculación institucional estratégica",
-                "Nombre Breve": "IABs",
-                "Metrica": "Número de Actas de sesiones realizadas con los Industry Advisory Boards.",
-                "Indicador": "2 Actas de Sesiones de IAB al año .",
-                "Actividades Acordadas": "Realizar 2 sesiones en cada Industry Advisory Board abordando PEOs y competencias del programa.",
-                "Resultados Esperados": "Conexión efectiva entre academia e industria.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO2F",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "2. Incidencia Local y Conexión Global",
-                "Impacto": "Presencia global",
-                "Nombre Breve": "Micrositio",
-                "Metrica": "Micrositio activo con proyectos publicados.",
-                "Indicador": "Al menos 2 proyectos publicados en el micrositio por programa académico por campus.",
-                "Actividades Acordadas": "Conformación de un Portafolio de Proyectos de FI y publicación en un micrositio.",
-                "Resultados Esperados": "Visibilidad institucional mejorada.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO2G",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "2. Incidencia Local y Conexión Global",
-                "Impacto": "Vinculación institucional estratégica",
-                "Nombre Breve": "SII 2026",
-                "Metrica": "Semana Internacional realizada con éxito.",
-                "Indicador": "Participación de al menos 1 socio relevante (investigacion, innovacion, internacional, empleador, o emprendedor) a cada programa de la FI",
-                "Actividades Acordadas": "Organización y realización de la Semana Internacional de Ingeniería 2026 con participacion de socios estratégicos",
-                "Resultados Esperados": "Visibilidad institucional mejorada.",
-                "Período": "Q2"
-            },
-            {
-                "Codigo": "PRO2H",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "2. Incidencia Local y Conexión Global",
-                "Impacto": "Propuesta Institucional de aprendizaje a lo largo de la vida",
-                "Nombre Breve": "Lifelong Learning",
-                "Metrica": "Número de certificados diseñados en colaboración con Formación Continua.",
-                "Indicador": "Desarrollo de al menos 1 certificado de formación profesional alineados a la industria por campus",
-                "Actividades Acordadas": "Generar certificados articulando la Facultad de Ingeniería con el área de Formación Continua.",
-                "Resultados Esperados": "Ampliación de la oferta académica con cursos que fortalezcan la empleabilidad de los egresados.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO3C",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "3. Fortalecimiento Institucional",
-                "Impacto": "Cultura organizacional de alto desempeño e inclusiva",
-                "Nombre Breve": "Colaboracion entre areas",
-                "Metrica": "Número de eventos de prospección apoyados.",
-                "Indicador": "Realizar 1 solicitud por programa por año en la que requieran apoyo de Prospeccion y/o Admisiones",
-                "Actividades Acordadas": "Generar solicitudes de apoyo a las áreas de Prospección y Admisiones (Science Fairs, Technology Day, Bootcamps, etc.)",
-                "Resultados Esperados": "Mayor visibilidad y atracción de estudiantes potenciales hacia las carreras de ingeniería.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO3D",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "3. Fortalecimiento Institucional",
-                "Impacto": "Cultura organizacional de alto desempeño e inclusiva",
-                "Nombre Breve": "Colaboracion Interna",
-                "Metrica": "Número de iniciativas de colaboración interdisciplinaria dentro de la Facultad.",
-                "Indicador": "Registro de al menos 1 accion transversal por colaborador que impacte positivamente en la Facultad.",
-                "Actividades Acordadas": "Realizar acciones que sumen transversalmente a las metas de la Facultad de Ingeniería (Proyectos y funciones fuera del descriptor de puesto y desempeño).",
-                "Resultados Esperados": "Mayor sinergia y trabajo colaborativo en iniciativas que fortalezcan el desarrollo institucional.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO3E",
-                "Objetivo": "Proyectos de otras areas",
-                "Eje": "3. Fortalecimiento Institucional",
-                "Impacto": "Cultura organizacional de alto desempeño e inclusiva",
-                "Nombre Breve": "Solicitudes de DGA",
-                "Metrica": "Registro de atención a las solicitudes de DGA",
-                "Indicador": "Registro de atención a las solicitudes de DGA",
-                "Actividades Acordadas": "Revisar y atender las solicitudes de DGA",
-                "Resultados Esperados": "Solicitudes de DGA resueltas",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO3A",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "3. Fortalecimiento Institucional",
-                "Impacto": "Cultura organizacional de alto desempeño e inclusiva",
-                "Nombre Breve": "Clima Laboral",
-                "Metrica": "Actividades de integracion realizadas",
-                "Indicador": "Al menos 1 actividad de integración del equipo organizada eficientemente por período académico por campus",
-                "Actividades Acordadas": "Realizar 1 actividad de integración del equipo por período académico por campus (Q2, Q3, y Q4)",
-                "Resultados Esperados": "Fortalecer el trabajo en equipo y el compañerismo",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO3B",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "3. Fortalecimiento Institucional",
-                "Impacto": "Cultura organizacional de alto desempeño e inclusiva",
-                "Nombre Breve": "Impulsar el Primer Ingreso",
-                "Metrica": "Número de eventos de prospección apoyados.",
-                "Indicador": "Participación de la Facultad en el 80% de los eventos solicitados",
-                "Actividades Acordadas": "Apoyar las solicitudes de las áreas de Prospección y Admisiones (Science Fairs, Technology Day, Bootcamps, etc.)",
-                "Resultados Esperados": "Mayor visibilidad y atracción de estudiantes potenciales hacia las carreras de ingeniería.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO1I",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "1. Transformacion del Aprendizaje",
-                "Impacto": "Experiencia estudiantil transformadora",
-                "Nombre Breve": "Masterclasses",
-                "Metrica": "Número de Estudiantes y sus respectivas carreras participando en Masterclasses con docentes visitantes.",
-                "Indicador": "Al menos 1 docente visitante activo en contacto con los estudiantes de cada programa académico.",
-                "Actividades Acordadas": "Realizar 1 Masterclass con un docente visitante para cada programa académico",
-                "Resultados Esperados": "Diversificación de la oferta académica con expertos internacionales.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO2A",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "2. Incidencia Local y Conexión Global",
-                "Impacto": "Investigación e innovación para el desarrollo",
-                "Nombre Breve": "Transferencia de Tecnologias Aplicadas",
-                "Metrica": "Numero de estudiantes participando en eventos e el FabLab",
-                "Indicador": "Al menos 500 estudiantes interactuado en proyectos de investigacion, innovacion, internacionalizacion, o emprendimiento en el FabLab en 2026",
-                "Actividades Acordadas": "Alcanzar la participación significante de estudiantes en proyectos multidisciplinarios de investigacion, innovación, internacionalización, o emprendimiento desarrollados en el FabLab en TGU o Espacios Especializados en SPS",
-                "Resultados Esperados": "Incremento en participación estudiantil en iniciativas innovadoras.",
-                "Período": "Q2 a Q4"
-            },
-            {
-                "Codigo": "PRO2B",
-                "Objetivo": "Proyectos Alineados a Impactos",
-                "Eje": "2. Incidencia Local y Conexión Global",
-                "Impacto": "Vinculación institucional estratégica",
-                "Nombre Breve": "Eventos de Vinculacion estratégica",
-                "Metrica": "Numero de eventos realizados",
-                "Indicador": "Al menos 8 eventos (hackathons, rallies, concursos) al año con el involucramiento de un socio estratégico",
-                "Actividades Acordadas": "Realización de concursos, hackathons, competencias y rallies que impulsen la innovación con la participación de un socio estratégico (Empleadores locales o internacionales, universidades en el extranjero, organizaciones internacionales). ExpoFI y Mecaton cuentan para este proyecto.",
-                "Resultados Esperados": "Elevar la vinculación institucional estratégica con el uso del FabLab",
-                "Período": "Q2 a Q4"
-            }
+            { "Codigo": "PRO1A", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Acreditacion", "Metrica": "Numero de acreditaciones completadas", "Indicador": "Acreditacion otorgada por ACAAI", "Actividades Acordadas": "Completar la acreditación de Ingeniería en Telecomunicaciones y Redes con ACAAI, y completar el Autoestudio para la acreditacion de Ingeniería en Energía", "Resultados Esperados": "Acreditacion de Telecomunicaciones completa y Autoestudio de Energía listo", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1B", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Actualizacion Curricular", "Metrica": "Porcentaje de avance en la reforma curricular.", "Indicador": "Reformas completadas en Mecatrónica y Biomédica.", "Actividades Acordadas": "Completar la reforma de los programas de Mecatrónica y Biomédica.", "Resultados Esperados": "Planes de estudio modernizados y alineados a necesidades del sector.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1C", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Ecosistema de Aprendizaje", "Nombre Breve": "Capacitacion en el Ecosistema", "Metrica": "Número de talleres realizados.", "Indicador": "Al menos 1 Taller de 8 horas por programa y por campus al año", "Actividades Acordadas": "Realizar talleres que habiliten a los docentes en el ecosistema de aprendizaje (Mentorías, Talleres de Co-diseño, charlas, etc.) impartidas por personal de la FI.", "Resultados Esperados": "Apoyo a docentes en la adopción del ecosistema de aprendizaje", "Período": "Q2 Y Q3" },
+            { "Codigo": "PRO1D", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Ecosistema de Aprendizaje", "Nombre Breve": "Co-Design en el Ecosistema", "Metrica": "Cantidad de docentes que están implementando el Ecosistema de Aprendizaje", "Indicador": "Equivalente a 4 sesiones de 1 hora por período académico en Q3 y Q4 para acompañar a todo el equipo de docentes del area academica respectiva.", "Actividades Acordadas": "Realizar sesiones de acompañamiento y co-diseño dirigidas a cada area académica encabezadas por los jefes académicos y apoyadas por el equipo académico.", "Resultados Esperados": "Apoyo a docentes en la adopción del ecosistema de aprendizaje", "Período": "Q3 Y Q4" },
+            { "Codigo": "PRO1E", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Docentes como motor de la innovación educativa y del aprendizaje continuo", "Nombre Breve": "Implementacion del Ecosistema", "Metrica": "Cantidad de cursos donde se está implementando el Ecosistema de Aprendizaje", "Indicador": "Al menos 100 asignaturas impactadas.", "Actividades Acordadas": "Reportar al menos 1 asignaturas por período académico por programa por campus en Q3, y 4 asignaturas en Q4 donde se está implementando el ecosistema de aprendizaje", "Resultados Esperados": "Experiencia estudiantil impactad por el Ecosistema de Aprendizaje", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1F", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Campus y sedes referentes", "Nombre Breve": "Iniciativas Intercampus", "Metrica": "Número de iniciativas coordinadas entre campus.", "Indicador": "Al menos 2 iniciativas semestrales entre campus.", "Actividades Acordadas": "Coordinación de iniciativas entre los campus para articulación de docentes y estudiantes.", "Resultados Esperados": "Mayor articulación entre docentes y estudiantes.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1G", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Transformacion de CCMM", "Metrica": "Tasa de aprobación en las Ciencias y Matemáticas", "Indicador": "Incremento del 10% en la tasa de aprobación.", "Actividades Acordadas": "Realizar acciones con el objetivo de transformar la experiencia educativa de los estudiantes en las Matemáticas", "Resultados Esperados": "Mejora en el desempeño de los estudiantes en las matemáticas", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1H", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Internacionalizacion", "Metrica": "Número de actividades de internacionalización realizadas.", "Indicador": "Equivalente a 1 iniciativa que sume internacionalidad al curriculum existente por programa por campus por periodo en Q2, Q3 y Q4 (COIL, viajes académicos, masterclass, etc.).", "Actividades Acordadas": "Realizacion de iniciativas en colaboracion con socios internacionales para sumar internacionalidad al currículo existente.", "Resultados Esperados": "Mayor exposición internacional del estudiantado y docencia.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2C", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Presencia global", "Nombre Breve": "Proyectos Estratégicos de Ingenieria Visibilizados", "Metrica": "Número de eventos y proyectos visibilizados.", "Indicador": "Equivalente a 2 proyectos o iniciativas por período académico (Q2, Q3 y Q4) compartido en redes sociales (LinkedIn) por cada jefe academico, en cada campus. ", "Actividades Acordadas": "Realización y visibilación de Proyectos de Vinculación, Investigación, Colaboración Industrial, Eventos Alumni, Innovación o emprendimiento, con cobertura en medios o redes sociales.", "Resultados Esperados": "Mayor posicionamiento de la Facultad en el ecosistema académico e industrial.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2D", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Presencia global", "Nombre Breve": "Publicaciones de Valor", "Metrica": "Cantidad de publicaciones de valor en LinkedIn", "Indicador": "Equivalente a 1 publicacion no relacionada a difusion de proyectos por período académico por programa por campus.", "Actividades Acordadas": "Realizar 1 publicación de valor (diferente a difusion de proyectos) por período por programa académico por campus en LinkedIn (Q2, Q3, y Q4)", "Resultados Esperados": "Mayor posicionamiento de la Facultad en el ecosistema académico e industrial.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2E", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Vinculación institucional estratégica", "Nombre Breve": "IABs", "Metrica": "Número de Actas de sesiones realizadas con los Industry Advisory Boards.", "Indicador": "2 Actas de Sesiones de IAB al año .", "Actividades Acordadas": "Realizar 2 sesiones en cada Industry Advisory Board abordando PEOs y competencias del programa.", "Resultados Esperados": "Conexión efectiva entre academia e industria.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2F", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Presencia global", "Nombre Breve": "Micrositio", "Metrica": "Micrositio activo con proyectos publicados.", "Indicador": "Al menos 2 proyectos publicados en el micrositio por programa académico por campus.", "Actividades Acordadas": "Conformación de un Portafolio de Proyectos de FI y publicación en un micrositio.", "Resultados Esperados": "Visibilidad institucional mejorada.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2G", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Vinculación institucional estratégica", "Nombre Breve": "SII 2026", "Metrica": "Semana Internacional realizada con éxito.", "Indicador": "Participación de al menos 1 socio relevante (investigacion, innovacion, internacional, empleador, o emprendedor) a cada programa de la FI", "Actividades Acordadas": "Organización y realización de la Semana Internacional de Ingeniería 2026 con participacion de socios estratégicos", "Resultados Esperados": "Visibilidad institucional mejorada.", "Período": "Q2" },
+            { "Codigo": "PRO2H", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Propuesta Institucional de aprendizaje a lo largo de la vida", "Nombre Breve": "Lifelong Learning", "Metrica": "Número de certificados diseñados en colaboración con Formación Continua.", "Indicador": "Desarrollo de al menos 1 certificado de formación profesional alineados a la industria por campus", "Actividades Acordadas": "Generar certificados articulando la Facultad de Ingeniería con el área de Formación Continua.", "Resultados Esperados": "Ampliación de la oferta académica con cursos que fortalezcan la empleabilidad de los egresados.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO3C", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "3. Fortalecimiento Institucional", "Impacto": "Cultura organizacional de alto desempeño e inclusiva", "Nombre Breve": "Colaboracion entre areas", "Metrica": "Número de eventos de prospección apoyados.", "Indicador": "Realizar 1 solicitud por programa por año en la que requieran apoyo de Prospeccion y/o Admisiones", "Actividades Acordadas": "Generar solicitudes de apoyo a las áreas de Prospección y Admisiones (Science Fairs, Technology Day, Bootcamps, etc.)", "Resultados Esperados": "Mayor visibilidad y atracción de estudiantes potenciales hacia las carreras de ingeniería.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO3D", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "3. Fortalecimiento Institucional", "Impacto": "Cultura organizacional de alto desempeño e inclusiva", "Nombre Breve": "Colaboracion Interna", "Metrica": "Número de iniciativas de colaboración interdisciplinaria dentro de la Facultad.", "Indicador": "Registro de al menos 1 accion transversal por colaborador que impacte positivamente en la Facultad.", "Actividades Acordadas": "Realizar acciones que sumen transversalmente a las metas de la Facultad de Ingeniería (Proyectos y funciones fuera del descriptor de puesto y desempeño).", "Resultados Esperados": "Mayor sinergia y trabajo colaborativo en iniciativas que fortalezcan el desarrollo institucional.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO3E", "Objetivo": "Proyectos de otras areas", "Eje": "3. Fortalecimiento Institucional", "Impacto": "Cultura organizacional de alto desempeño e inclusiva", "Nombre Breve": "Solicitudes de DGA", "Metrica": "Registro de atención a las solicitudes de DGA", "Indicador": "Registro de atención a las solicitudes de DGA", "Actividades Acordadas": "Revisar y atender las solicitudes de DGA", "Resultados Esperados": "Solicitudes de DGA resueltas", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO3A", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "3. Fortalecimiento Institucional", "Impacto": "Cultura organizacional de alto desempeño e inclusiva", "Nombre Breve": "Clima Laboral", "Metrica": "Actividades de integracion realizadas", "Indicador": "Al menos 1 actividad de integración del equipo organizada eficientemente por período académico por campus", "Actividades Acordadas": "Realizar 1 actividad de integración del equipo por período académico por campus (Q2, Q3, y Q4)", "Resultados Esperados": "Fortalecer el trabajo en equipo y el compañerismo", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO3B", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "3. Fortalecimiento Institucional", "Impacto": "Cultura organizacional de alto desempeño e inclusiva", "Nombre Breve": "Impulsar el Primer Ingreso", "Metrica": "Número de eventos de prospección apoyados.", "Indicador": "Participación de la Facultad en el 80% de los eventos solicitados", "Actividades Acordadas": "Apoyar las solicitudes de las áreas de Prospección y Admisiones (Science Fairs, Technology Day, Bootcamps, etc.)", "Resultados Esperados": "Mayor visibilidad y atracción de estudiantes potenciales hacia las carreras de ingeniería.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1I", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Masterclasses", "Metrica": "Número de Estudiantes y sus respectivas carreras participando en Masterclasses con docentes visitantes.", "Indicador": "Al menos 1 docente visitante activo en contacto con los estudiantes de cada programa académico.", "Actividades Acordadas": "Realizar 1 Masterclass con un docente visitante para cada programa académico", "Resultados Esperados": "Diversificación de la oferta académica con expertos internacionales.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2A", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Investigación e innovación para el desarrollo", "Nombre Breve": "Transferencia de Tecnologias Aplicadas", "Metrica": "Numero de estudiantes participando en eventos e el FabLab", "Indicador": "Al menos 500 estudiantes interactuado en proyectos de investigacion, innovacion, internacionalizacion, o emprendimiento en el FabLab en 2026", "Actividades Acordadas": "Alcanzar la participación significante de estudiantes en proyectos multidisciplinarios de investigacion, innovación, internacionalización, o emprendimiento desarrollados en el FabLab en TGU o Espacios Especializados en SPS", "Resultados Esperados": "Incremento en participación estudiantil en iniciativas innovadoras.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2B", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Vinculación institucional estratégica", "Nombre Breve": "Eventos de Vinculacion estratégica", "Metrica": "Numero de eventos realizados", "Indicador": "Al menos 8 eventos (hackathons, rallies, concursos) al año con el involucramiento de un socio estratégico", "Actividades Acordadas": "Realización de concursos, hackathons, competencias y rallies que impulsen la innovación con la participación de un socio estratégico (Empleadores locales o internacionales, universidades en el extranjero, organizaciones internacionales). ExpoFI y Mecaton cuentan para este proyecto.", "Resultados Esperados": "Elevar la vinculación institucional estratégica con el uso del FabLab", "Período": "Q2 a Q4" }
         ];
 
-        // Jerarquía institucional (Ejes e Impactos) basada en los lineamientos
         const jerarquiaEjes = [
             {
                 nombre: "1. Transformación del aprendizaje",
                 impactos: [
-                    "Ecosistema de aprendizaje",
-                    "Campus y sedes referentes",
-                    "Docentes como motor de la innovación educativa y del aprendizaje continuo",
-                    "Propuesta institucional de aprendizaje a lo largo de la vida",
-                    "Experiencia estudiantil transformadora"
+                    "Ecosistema de aprendizaje", "Campus y sedes referentes", "Docentes como motor de la innovación educativa y del aprendizaje continuo", "Propuesta institucional de aprendizaje a lo largo de la vida", "Experiencia estudiantil transformadora"
                 ]
             },
             {
                 nombre: "2. Incidencia local y conexión global",
                 impactos: [
-                    "Vinculación institucional estratégica",
-                    "Presencia global",
-                    "Investigación e innovación para el desarrollo"
+                    "Vinculación institucional estratégica", "Presencia global", "Investigación e innovación para el desarrollo"
                 ]
             },
             {
                 nombre: "3. Fortalecimiento institucional",
                 impactos: [
-                    "Cultura organizacional de alto desempeño e inclusiva",
-                    "Gobernanza institucional sostenible",
-                    "Gestión ambiental",
-                    "Capacidades tecnológicas fortalecidas"
+                    "Cultura organizacional de alto desempeño e inclusiva", "Gobernanza institucional sostenible", "Gestión ambiental", "Capacidades tecnológicas fortalecidas"
                 ]
             }
         ];
 
-        // Función para normalizar texto (quitar tildes, mayúsculas y espacios extra) para comparaciones seguras
         function normalizeStr(str) {
             if (!str) return "";
             return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
         }
 
-        // Renderizar los botones de filtro
         function renderFilters() {
             const container = document.getElementById('filters-grid');
             container.innerHTML = '';
 
             jerarquiaEjes.forEach(eje => {
-                let ejeHtml = `<div class="flex flex-col gap-2">`;
+                let ejeHtml = `<div class="flex flex-col gap-3">`;
                 
-                // Botón del Eje
-                ejeHtml += `<button onclick="filtrarProyectos('eje', '${eje.nombre}')" class="w-full text-left font-bold bg-[#002f6c] text-white p-3 rounded shadow hover:bg-blue-800 transition text-sm flex justify-between items-center">
+                // Botón del Eje: Flat design, solid colors
+                ejeHtml += `<button onclick="filtrarProyectos('eje', '${eje.nombre}')" class="w-full text-left font-bold bg-unitec-federal text-white p-4 border-2 border-transparent hover:border-unitec-cyan transition-colors duration-300 text-sm flex justify-between items-center group">
                                 <span>${eje.nombre}</span>
-                                <i class="fas fa-chevron-right text-xs opacity-50"></i>
+                                <div class="w-2 h-2 bg-white transform rotate-45 group-hover:bg-unitec-cyan transition-colors"></div>
                             </button>`;
                 
-                // Botones de Impactos
+                // Botones de Impactos: Borders only, flat
                 eje.impactos.forEach(impacto => {
                     const hasProjects = proyectosData.some(p => normalizeStr(p.Impacto) === normalizeStr(impacto));
                     
                     if (hasProjects) {
-                        ejeHtml += `<button onclick="filtrarProyectos('impacto', '${impacto}')" class="w-full text-left text-xs p-2 rounded border border-blue-200 bg-blue-50 text-blue-900 hover:bg-blue-100 transition shadow-sm">
-                                        <i class="fas fa-bullseye text-red-500 mr-1"></i> ${impacto}
+                        ejeHtml += `<button onclick="filtrarProyectos('impacto', '${impacto}')" class="w-full text-left text-xs p-3 border-2 border-gray-200 text-unitec-federal bg-white hover:border-unitec-cyan transition-colors font-medium flex items-center">
+                                        <div class="w-1.5 h-1.5 bg-unitec-sky transform rotate-45 mr-3"></div> ${impacto}
                                     </button>`;
                     } else {
-                        ejeHtml += `<button onclick="mostrarEstrategiaFutura('${impacto}')" class="w-full text-left text-xs p-2 rounded border border-gray-200 bg-gray-50 text-gray-500 hover:bg-gray-100 transition italic shadow-sm">
-                                        <i class="fas fa-bullseye text-gray-400 mr-1"></i> ${impacto} <br><span class="text-[10px] text-gray-400 block mt-1">(Sin proyectos asociados en 2026)</span>
+                        ejeHtml += `<button onclick="mostrarEstrategiaFutura('${impacto}')" class="w-full text-left text-xs p-3 border-2 border-gray-100 bg-gray-50 text-gray-400 hover:border-gray-300 transition-colors font-medium">
+                                        <div class="flex items-center"><div class="w-1.5 h-1.5 bg-gray-300 transform rotate-45 mr-3"></div> ${impacto}</div>
+                                        <span class="text-[10px] text-gray-400 block mt-2 ml-4 italic">(Planificado post-2026)</span>
                                     </button>`;
                     }
                 });
@@ -424,42 +216,36 @@
             });
         }
 
-        // Lógica de filtrado principal
         function filtrarProyectos(tipo, valor) {
             let filtrados = [];
-            
             if (tipo === 'todos') {
                 filtrados = proyectosData;
             } else if (tipo === 'eje') {
-                // Buscamos coincidencia parcial para lidiar con la numeración ("1. Transformacion..." vs "Transformación...")
                 const valorNorm = normalizeStr(valor).replace(/^[0-9]\.\s*/, ''); 
                 filtrados = proyectosData.filter(p => normalizeStr(p.Eje).includes(valorNorm));
             } else if (tipo === 'impacto') {
                 filtrados = proyectosData.filter(p => normalizeStr(p.Impacto) === normalizeStr(valor));
             }
-            
             renderCards(filtrados);
         }
 
-        // Mostrar la tarjeta de estrategia futura cuando el impacto está vacío
         function mostrarEstrategiaFutura(impactoNombre) {
             const container = document.getElementById('cards-container');
             container.innerHTML = `
-                <div class="col-span-full bg-blue-50 border-l-4 border-[#002f6c] p-8 rounded-lg shadow-md mt-4">
-                    <div class="flex flex-col md:flex-row items-start md:items-center">
-                        <div class="flex-shrink-0 mb-4 md:mb-0">
-                            <i class="fas fa-rocket text-5xl text-[#002f6c]"></i>
-                        </div>
+                <div class="col-span-full bg-white border-2 border-unitec-federal p-8 mt-4 relative">
+                    <div class="absolute -top-3 -right-3 w-6 h-6 bg-unitec-federal transform rotate-45 border-2 border-white"></div>
+                    <div class="flex flex-col md:flex-row items-start">
                         <div class="md:ml-6 flex-grow">
-                            <h3 class="text-2xl font-bold text-[#002f6c] mb-2">Estrategia Multi-año 2026-2030</h3>
-                            <h4 class="text-lg font-semibold text-gray-700 mb-3">Impacto Estratégico: ${impactoNombre}</h4>
-                            <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                            <span class="text-xs font-bold text-unitec-cyan uppercase tracking-widest block mb-1">Visión de Futuro</span>
+                            <h3 class="text-3xl font-black text-unitec-federal mb-4 uppercase tracking-tight">Estrategia Multi-año</h3>
+                            <h4 class="text-lg font-bold text-gray-800 mb-4 border-l-4 border-unitec-cyan pl-3">${impactoNombre}</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm md:text-base mb-6 font-medium">
                                 Esta distribución de objetivos forma parte de una estrategia multi-año a nivel institucional. 
                                 En el <strong>2026 no se tienen proyectos mapeados</strong> a este impacto específico en la Facultad de Ingeniería de UNITEC, 
                                 pero esto evolucionará en base a nuestro crecimiento institucional planificado para el 2027 en adelante.
                             </p>
-                            <button onclick="filtrarProyectos('todos', '')" class="mt-4 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold py-2 px-4 rounded shadow-sm transition text-sm inline-flex items-center">
-                                <i class="fas fa-arrow-left mr-2"></i> Volver a todos los proyectos
+                            <button onclick="filtrarProyectos('todos', '')" class="bg-unitec-federal text-white hover:bg-unitec-cyan font-bold py-3 px-6 transition-colors text-sm uppercase tracking-wider">
+                                Volver al Portafolio Actual
                             </button>
                         </div>
                     </div>
@@ -467,128 +253,109 @@
             `;
         }
 
-        // Lógica heurística para determinar el Criterio ACAAI relacionado
         function determinarCriterioACAAI(proyecto) {
-            // Unir varios campos para analizar el contexto
-            const textoContexto = [
-                proyecto['Nombre Breve'], 
-                proyecto['Impacto'], 
-                proyecto['Actividades Acordadas'],
-                proyecto['Objetivo']
-            ].join(' ').toLowerCase();
-
-            if (textoContexto.includes('acreditacion') || textoContexto.includes('acaai') || textoContexto.includes('autoestudio')) {
-                return 'Criterio 10: Mejora Continua y Acreditación';
-            }
-            if (textoContexto.includes('curricular') || textoContexto.includes('estudio') || textoContexto.includes('clase')) {
-                return 'Criterio 3: Plan de Estudios';
-            }
-            if (textoContexto.includes('docente') || textoContexto.includes('capacitacion') || textoContexto.includes('taller')) {
-                return 'Criterio 1: Personal Docente';
-            }
-            if (textoContexto.includes('estudiant') || textoContexto.includes('prospeccion') || textoContexto.includes('admision')) {
-                return 'Criterio 2: Estudiantes';
-            }
-            if (textoContexto.includes('institucional') || textoContexto.includes('dga') || textoContexto.includes('colaboracion')) {
-                return 'Criterio 8: Apoyo Institucional';
-            }
-            
-            // Por defecto, todo cae bajo seguimiento sistemático de mejora
+            const textoContexto = [proyecto['Nombre Breve'], proyecto['Impacto'], proyecto['Actividades Acordadas'], proyecto['Objetivo']].join(' ').toLowerCase();
+            if (textoContexto.includes('acreditacion') || textoContexto.includes('acaai') || textoContexto.includes('autoestudio')) return 'Criterio 10: Mejora Continua y Acreditación';
+            if (textoContexto.includes('curricular') || textoContexto.includes('estudio') || textoContexto.includes('clase')) return 'Criterio 3: Plan de Estudios';
+            if (textoContexto.includes('docente') || textoContexto.includes('capacitacion') || textoContexto.includes('taller')) return 'Criterio 1: Personal Docente';
+            if (textoContexto.includes('estudiant') || textoContexto.includes('prospeccion') || textoContexto.includes('admision')) return 'Criterio 2: Estudiantes';
+            if (textoContexto.includes('institucional') || textoContexto.includes('dga') || textoContexto.includes('colaboracion')) return 'Criterio 8: Apoyo Institucional';
             return 'Criterio 10: Plan de Mejora Continua';
         }
 
-        // Función para limpiar y normalizar el período
         function normalizarPeriodo(periodoStr) {
             if (!periodoStr) return "N/D";
-            // Convierte cosas como Q2=Q4 o Q1 Y Q4 a un formato estandar
             return periodoStr.replace(/=/g, '-').replace(/y/gi, '&').toUpperCase().trim();
         }
 
-        // Renderizar las fichas en el DOM
         function renderCards(proyectos) {
             const container = document.getElementById('cards-container');
-            container.innerHTML = ''; // Limpiar contenedor
+            container.innerHTML = ''; 
 
             if (proyectos.length === 0) {
-                container.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500">No se encontraron datos de proyectos para mostrar.</div>';
+                container.innerHTML = '<div class="col-span-full text-center py-12 text-unitec-federal font-bold text-lg">No se encontraron datos de proyectos para este criterio.</div>';
                 return;
             }
 
             proyectos.forEach(p => {
-                // Validación para evitar filas vacías
                 if (!p['Codigo'] && !p['Nombre Breve']) return;
 
                 const criterioACAAI = determinarCriterioACAAI(p);
                 const periodo = normalizarPeriodo(p['Período']);
 
+                // Diseño plano, sin bordes redondeados exagerados, con colores de marca exactos
                 const cardHTML = `
-                    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden flex flex-col h-full print-break-inside-avoid hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-white border-2 border-unitec-federal flex flex-col h-full print-break-inside-avoid hover:border-unitec-cyan transition-colors duration-300 card-impresion group">
                         
                         <!-- Header de la Ficha -->
-                        <div class="bg-[#002f6c] text-white p-4">
-                            <div class="flex justify-between items-start gap-2">
-                                <h3 class="font-bold text-lg leading-tight flex-1">${p['Nombre Breve'] || 'Proyecto Sin Nombre'}</h3>
-                                <span class="bg-blue-100 text-[#002f6c] text-xs font-bold px-2 py-1 rounded whitespace-nowrap">
-                                    <i class="fas fa-tag mr-1"></i> ${p['Codigo'] || '-'}
+                        <div class="bg-unitec-federal text-white p-5 group-hover:bg-[#080875] transition-colors">
+                            <div class="flex justify-between items-start gap-4">
+                                <h3 class="font-black text-xl leading-tight flex-1 uppercase tracking-tight">${p['Nombre Breve'] || 'Proyecto Sin Nombre'}</h3>
+                                <span class="bg-unitec-cyan text-white text-xs font-bold px-3 py-1 whitespace-nowrap tracking-widest border border-unitec-cyan">
+                                    ${p['Codigo'] || '-'}
                                 </span>
                             </div>
                         </div>
                         
                         <!-- Cuerpo de la Ficha -->
-                        <div class="p-5 flex-grow flex flex-col gap-4 text-sm">
+                        <div class="p-6 flex-grow flex flex-col gap-6 text-sm">
                             
                             <!-- Eje e Impacto -->
-                            <div class="bg-gray-50 p-3 rounded border border-gray-100">
-                                <div class="mb-2">
-                                    <span class="font-semibold text-[#002f6c] block text-xs uppercase tracking-wider mb-1">Eje Institucional</span>
-                                    <span class="text-gray-700">${p['Eje'] || 'No especificado'}</span>
+                            <div class="border-l-4 border-unitec-federal pl-4">
+                                <div class="mb-3">
+                                    <span class="font-black text-unitec-federal block text-[10px] uppercase tracking-widest mb-1">Eje Institucional</span>
+                                    <span class="text-gray-800 font-semibold">${p['Eje'] || 'No especificado'}</span>
                                 </div>
                                 <div>
-                                    <span class="font-semibold text-[#002f6c] block text-xs uppercase tracking-wider mb-1">Impacto Asociado</span>
-                                    <span class="text-gray-700"><i class="fas fa-bullseye text-red-600 mr-1"></i> ${p['Impacto'] || 'No especificado'}</span>
+                                    <span class="font-black text-unitec-federal block text-[10px] uppercase tracking-widest mb-1">Impacto Asociado</span>
+                                    <span class="text-gray-800 font-medium flex items-center">
+                                        <div class="w-1.5 h-1.5 bg-unitec-cyan transform rotate-45 mr-2"></div>
+                                        ${p['Impacto'] || 'No especificado'}
+                                    </span>
                                 </div>
                             </div>
                             
                             <!-- Actividades -->
                             <div>
-                                <span class="font-bold text-gray-800 block border-b-2 border-red-600 pb-1 inline-block mb-2">Actividades Acordadas</span>
-                                <p class="text-gray-600 leading-relaxed">${p['Actividades Acordadas'] || 'Ninguna actividad descrita.'}</p>
+                                <span class="font-black text-white bg-unitec-federal px-2 py-1 text-[10px] uppercase tracking-widest inline-block mb-3">Actividades Acordadas</span>
+                                <p class="text-gray-700 leading-relaxed font-medium">${p['Actividades Acordadas'] || 'Ninguna actividad descrita.'}</p>
                             </div>
                             
                             <!-- Indicador & Métrica -->
-                            <div class="grid grid-cols-2 gap-3">
-                                <div class="bg-blue-50/50 p-3 rounded border border-blue-100 flex flex-col">
-                                    <span class="font-semibold text-blue-900 block text-xs uppercase mb-1">Indicador</span>
-                                    <span class="text-gray-700 text-sm flex-grow">${p['Indicador'] || '-'}</span>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 border border-gray-200 flex flex-col">
+                                    <span class="font-bold text-unitec-cyan block text-[10px] uppercase tracking-widest mb-2">Indicador</span>
+                                    <span class="text-gray-800 font-medium text-xs flex-grow">${p['Indicador'] || '-'}</span>
                                 </div>
-                                <div class="bg-blue-50/50 p-3 rounded border border-blue-100 flex flex-col">
-                                    <span class="font-semibold text-blue-900 block text-xs uppercase mb-1">Métrica</span>
-                                    <span class="text-gray-700 text-sm flex-grow">${p['Metrica'] || '-'}</span>
+                                <div class="bg-gray-50 p-4 border border-gray-200 flex flex-col">
+                                    <span class="font-bold text-unitec-cyan block text-[10px] uppercase tracking-widest mb-2">Métrica</span>
+                                    <span class="text-gray-800 font-medium text-xs flex-grow">${p['Metrica'] || '-'}</span>
                                 </div>
                             </div>
 
                             <!-- Resultados Esperados -->
-                            <div class="bg-green-50 p-3 rounded border border-green-200">
-                                <span class="font-bold text-green-800 block mb-1 flex items-center">
-                                    <i class="fas fa-flag-checkered mr-2"></i> Resultados Esperados
+                            <div class="border-t-2 border-gray-100 pt-4 mt-2">
+                                <span class="font-black text-unitec-federal block text-xs uppercase tracking-widest mb-2 flex items-center">
+                                    Resultados Esperados
                                 </span>
-                                <p class="text-gray-700 italic">${p['Resultados Esperados'] || '-'}</p>
+                                <p class="text-gray-600 font-medium italic">${p['Resultados Esperados'] || '-'}</p>
                             </div>
                             
-                            <!-- Criterio ACAAI (Calculado) -->
-                            <div class="mt-auto pt-2">
-                                <span class="font-semibold text-gray-500 block text-xs uppercase mb-1">Criterio ACAAI Relacionado</span>
-                                <span class="inline-block bg-[#002f6c] text-white text-xs px-2 py-1 rounded shadow-sm">
-                                    <i class="fas fa-clipboard-check mr-1 text-blue-300"></i> ${criterioACAAI}
+                            <!-- Criterio ACAAI -->
+                            <div class="mt-auto pt-4">
+                                <span class="font-bold text-gray-400 block text-[10px] uppercase tracking-widest mb-2">Criterio ACAAI Relacionado</span>
+                                <span class="inline-block border border-unitec-federal text-unitec-federal font-bold text-xs px-3 py-1">
+                                    ${criterioACAAI}
                                 </span>
                             </div>
                         </div>
                         
                         <!-- Footer: Período -->
-                        <div class="bg-gray-100 p-3 border-t border-gray-200 flex justify-between items-center">
-                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Período de Ejecución</span>
-                            <span class="bg-white text-red-600 font-bold px-3 py-1 rounded shadow-sm border border-red-100 text-sm flex items-center">
-                                <i class="far fa-calendar-alt mr-2"></i> ${periodo}
+                        <div class="bg-white p-4 border-t-2 border-unitec-federal flex justify-between items-center group-hover:bg-gray-50 transition-colors">
+                            <span class="text-[10px] font-black text-unitec-federal uppercase tracking-widest">Ejecución</span>
+                            <span class="text-unitec-federal font-black text-sm flex items-center tracking-wider">
+                                <div class="w-2 h-2 border border-unitec-federal transform rotate-45 mr-2"></div>
+                                ${periodo}
                             </span>
                         </div>
                     </div>
@@ -597,7 +364,6 @@
             });
         }
 
-        // Inicializar con los datos cargados de manera automática al abrir la página
         window.onload = () => {
             renderFilters();
             renderCards(proyectosData);
