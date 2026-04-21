@@ -186,36 +186,204 @@
             { nombre: "Tatiana Suazo", puesto: "Docente Asociado TGU", rsp: [], area: "Ciencias y Matemáticas" }
         ];
 
-        // 2. Base de Datos de Responsabilidades extraídas del CSV
+        // 2. Base de Datos de Responsabilidades extraídas y alimentadas en base al CSV
         const rspData = [
-            { id: 1, codigo: "RSP1", nombre: "Planificación académica", icon: "fa-calendar-alt" },
-            { id: 2, codigo: "RSP2", nombre: "Cumplimiento normativo", icon: "fa-file-signature" },
-            { id: 3, codigo: "RSP3", nombre: "Seguimiento académico", icon: "fa-user-graduate" },
-            { id: 4, codigo: "RSP4", nombre: "Acompañamiento Docente", icon: "fa-chalkboard-teacher" },
-            { id: 5, codigo: "RSP5", nombre: "Innovación pedagógica", icon: "fa-lightbulb" },
-            { id: 6, codigo: "RSP6", nombre: "Atención al estudiante", icon: "fa-hands-helping" },
-            { id: 7, codigo: "RSP7", nombre: "Retención y progresión", icon: "fa-chart-line" },
-            { id: 8, codigo: "RSP8", nombre: "Vinculación con industria", icon: "fa-industry" },
-            { id: 9, codigo: "RSP9", nombre: "Internacionalización académica", icon: "fa-globe" },
-            { id: 10, codigo: "RSP10", nombre: "Uso de indicadores", icon: "fa-chart-pie" },
-            { id: 11, codigo: "RSP11", nombre: "Mejora continua", icon: "fa-sync-alt" },
-            { id: 12, codigo: "RSP12", nombre: "Gestión de compras y materiales", icon: "fa-shopping-cart" },
-            { id: 13, codigo: "RSP13", nombre: "Logística de Actividades", icon: "fa-boxes" },
-            { id: 14, codigo: "RSP14", nombre: "Colaboración Institucional", icon: "fa-building" },
-            { id: 15, codigo: "RSP15", nombre: "Atención a Visitas, Estudiantes y Docentes", icon: "fa-comments" },
-            { id: 16, codigo: "RSP16", nombre: "Apoyo en Procesos de Matrícula", icon: "fa-id-card" },
-            { id: 17, codigo: "RSP17", nombre: "Ecosistema de Aprendizaje (Metodologías)", icon: "fa-laptop-code" },
-            { id: 18, codigo: "RSP18", nombre: "Calidad Académica", icon: "fa-award" },
-            { id: 19, codigo: "RSP19", nombre: "Actualización de Conocimiento", icon: "fa-book-reader" },
-            { id: 20, codigo: "RSP20", nombre: "Cumplimiento Administrativo (Matrícula, Graduación y Notas)", icon: "fa-folder-open" },
-            { id: 21, codigo: "RSP21", nombre: "Colaboración Internacional", icon: "fa-handshake" },
-            { id: 22, codigo: "RSP22", nombre: "Proyectos de Impacto (Investigación, Innovación o Social)", icon: "fa-rocket" },
-            { id: 23, codigo: "RSP23", nombre: "Fidelización de Promotores externos (Reputación Institucional)", icon: "fa-star" },
-            { id: 24, codigo: "RSP24", nombre: "Visibilización de Proyectos e Iniciativas", icon: "fa-bullhorn" },
-            { id: 25, codigo: "RSP25", nombre: "Inventario", icon: "fa-clipboard-list" },
-            { id: 26, codigo: "RSP26", nombre: "Procesos de Auditoria", icon: "fa-search" },
-            { id: 27, codigo: "RSP27", nombre: "Planes de Accion", icon: "fa-tasks" },
-            { id: 28, codigo: "RSP28", nombre: "Medición 5s", icon: "fa-broom" }
+            { 
+                id: 1, codigo: "RSP1", nombre: "Planificación académica", icon: "fa-calendar-alt",
+                nivel4: `• Proyecta matrícula, carga docente y secciones con tendencias históricas.\n• Identifica riesgos (sobrecupo, traslapes, prerrequisitos) antes del periodo.\n• Ajusta programación oportunamente evitando cierres/cambios de última hora.\n• Propone mejoras a horarios/estructura para mayor eficiencia.`,
+                nivel3: `• Cumple calendario y planificación con incidencias menores.\n• Ajusta secciones ante variaciones de matrícula.\n• Mantiene coherencia básica en asignaciones y horarios.`,
+                nivel2: `• Requiere apoyo para resolver conflictos de horarios/cargas.\n• Reacciona tarde a cambios de matrícula.\n• Ajustes frecuentes durante el periodo que generan fricción.`,
+                nivel1: `• Cancelaciones, sobrecupos o falta de docentes recurrentes.\n• Planificación tardía o incompleta.\n• Impacto negativo en estudiantes y operación.`
+            },
+            { 
+                id: 2, codigo: "RSP2", nombre: "Cumplimiento normativo", icon: "fa-file-signature",
+                nivel4: `• Realiza inducciones preventivas sobre reglamentos.\n• Aplica procesos con consistencia y debido proceso.\n• Documenta y gestiona casos disciplinarios correctamente.\n• Propone mejoras normativas basadas en casos y lecciones aprendidas.`,
+                nivel3: `• Aplica reglamentos correctamente.\n• Escala casos cuando corresponde.\n• Mantiene documentación básica y tiempos razonables.`,
+                nivel2: `• Aplicación inconsistente entre docentes/secciones.\n• Dudas frecuentes sobre procedimientos.\n• Errores formales o retrasos en documentación.`,
+                nivel1: `• Incumplimientos reiterados.\n• Omite seguimiento a faltas académicas.\n• Riesgo reputacional/institucional.`
+            },
+            { 
+                id: 3, codigo: "RSP3", nombre: "Seguimiento académico", icon: "fa-user-graduate",
+                nivel4: `• Analiza aprobación, retiro, repetición y desempeño por curso/cohorte.\n• Define intervenciones focalizadas (tutorías, ajustes didácticos, alertas).\n• Monitorea cursos críticos durante el periodo (no solo al cierre).\n• Evidencia mejora sostenida en indicadores.`,
+                nivel3: `• Revisa reportes académicos al menos al cierre y en puntos clave.\n• Da seguimiento a casos relevantes.\n• Identifica cursos problemáticos y coordina acciones básicas.`,
+                nivel2: `• Revisión esporádica de datos.\n• Acciones generales sin focalización.\n• Dependencia de reportes externos para actuar.`,
+                nivel1: `• No utiliza datos para decisiones.\n• Problemas se detectan tarde (al final del periodo).\n• Sin acciones correctivas.`
+            },
+            { 
+                id: 4, codigo: "RSP4", nombre: "Acompañamiento Docente", icon: "fa-chalkboard-teacher",
+                nivel4: `• Observa clases y brinda retroalimentación estructurada.\n• Define planes individuales de mejora docente.\n• Facilita comunidades de práctica/mentoría.\n• Evidencia mejora (evaluaciones docentes, desempeño, retención).`,
+                nivel3: `• Atiende consultas pedagógicas y operativas.\n• Comparte recomendaciones y recursos.\n• Canaliza capacitaciones cuando se requiere.`,
+                nivel2: `• Contacto principalmente administrativo.\n• Retroalimentación ocasional y no sistemática.\n• Escasa evidencia de mejora docente.`,
+                nivel1: `• No acompaña ni orienta.\n• Ausencia de retroalimentación.\n• Conflictos o brechas docentes no atendidas.`
+            },
+            { 
+                id: 5, codigo: "RSP5", nombre: "Innovación pedagógica", icon: "fa-lightbulb",
+                nivel4: `• Implementa pilotos metodológicos y los evalúa.\n• Promueve evaluación auténtica y reducción de prácticas vulnerables.\n• Integra tecnología con propósito pedagógico (no solo uso).\n• Documenta y comparte buenas prácticas con otras áreas.`,
+                nivel3: `• Apoya iniciativas institucionales.\n• Incentiva uso de herramientas educativas.\n• Propone mejoras puntuales en cursos.`,
+                nivel2: `• Participación mínima; innovación depende del docente.\n• Adopción superficial (herramientas sin diseño).\n• Poca evidencia de impacto.`,
+                nivel1: `• Resistencia activa al cambio.\n• Desincentiva innovaciones.\n• Mantiene prácticas sin revisión pese a resultados.`
+            },
+            { 
+                id: 6, codigo: "RSP6", nombre: "Atención al estudiante", icon: "fa-hands-helping",
+                nivel4: `• Detecta riesgos tempranos (inasistencia, bajo rendimiento) y actúa.\n• Contacta preventivamente y documenta casos.\n• Coordina soluciones con apoyo estudiantil.\n• Mantiene alta satisfacción y reduce escalaciones.`,
+                nivel3: `• Atiende casos reportados en tiempos razonables.\n• Da seguimiento básico y deriva cuando corresponde.`,
+                nivel2: `• Respuesta tardía o parcial.\n• Seguimiento irregular.\n• El estudiante debe insistir para ser atendido.`,
+                nivel1: `• No atiende o evade casos.\n• Falta de seguimiento.\n• Genera quejas recurrentes.`
+            },
+            { 
+                id: 7, codigo: "RSP7", nombre: "Retención y progresión", icon: "fa-chart-line",
+                nivel4: `• Implementa acciones basadas en datos por cohorte (alertas, tutorías, rediseño de cursos).\n• Monitorea avance en rutas/prerrequisitos.\n• Evidencia mejora en retención y progresión.\n• Coordina acciones con becas/finanzas cuando aplica.`,
+                nivel3: `• Monitorea estudiantes en riesgo y comunica oportunamente.\n• Realiza seguimiento básico a cohortes.\n• Ejecuta acciones estándar definidas.`,
+                nivel2: `• Acciones aisladas sin continuidad.\n• Escasa coordinación inter-áreas.\n• No mide impacto de las acciones.`,
+                nivel1: `• Sin acciones ni monitoreo.\n• Desconoce principales causas de deserción.\n• Retención/progresión se deteriora sin respuesta.`
+            },
+            { 
+                id: 8, codigo: "RSP8", nombre: "Vinculación con industria", icon: "fa-industry",
+                nivel4: `• Genera convenios activos y los convierte en proyectos/retos reales.\n• Integra industria en cursos (charlas, jurados, casos, visitas).\n• Facilita prácticas/pasantías y proyectos aplicados.\n• Evidencia de resultados (empleabilidad, proyectos, patrocinio).`,
+                nivel3: `• Mantiene relaciones activas con empresas.\n• Invita profesionales a actividades puntuales.\n• Gestiona oportunidades cuando surgen.`,
+                nivel2: `• Contactos esporádicos sin continuidad.\n• Poca conversión a actividades para estudiantes.\n• Dependencia de terceros para gestionar.`,
+                nivel1: `• Sin vinculación.\n• No gestiona contactos.\n• No integra industria al programa.`
+            },
+            { 
+                id: 9, codigo: "RSP9", nombre: "Internacionalización académica", icon: "fa-globe",
+                nivel4: `• Promueve y ejecuta experiencias internacionales: movilidad, estancias, dobles titulaciones (cuando aplica).\n• Implementa experiencias COIL/virtual exchange y proyectos colaborativos.\n• Gestiona invitados internacionales (master class/webinars) vinculados al currículo.\n• Integra perspectiva global en cursos y evidencia participación estudiantil.`,
+                nivel3: `• Apoya convocatorias institucionales y difunde oportunidades.\n• Participa en al menos una iniciativa internacional por periodo/año.\n• Coordina actividades puntuales con apoyo de la institución.`,
+                nivel2: `• Participación ocasional y reactiva.\n• Difusión limitada; baja movilización estudiantil.\n• Actividades sin integración curricular clara.`,
+                nivel1: `• No participa ni apoya iniciativas.\n• No promueve oportunidades.\n• Ausencia de acciones internacionales.`
+            },
+            { 
+                id: 10, codigo: "RSP10", nombre: "Uso de indicadores", icon: "fa-chart-pie",
+                nivel4: `• Usa KPIs para decidir y priorizar (matrícula, aprobación, retención, satisfacción, empleabilidad).\n• Presenta análisis periódicos con hallazgos y acciones.\n• Ajusta estrategias con base en resultados y seguimiento.`,
+                nivel3: `• Conoce y revisa KPIs con regularidad.\n• Toma decisiones operativas basadas en datos disponibles.\n• Reporta avances cuando se solicita.`,
+                nivel2: `• Uso superficial (solo mira números).\n• Escasa interpretación y acciones.\n• Depende de otros para entender indicadores.`,
+                nivel1: `• Desconoce indicadores.\n• No reporta ni toma decisiones informadas.`
+            },
+            { 
+                id: 11, codigo: "RSP11", nombre: "Mejora continua", icon: "fa-sync-alt",
+                nivel4: `• Define planes con metas, responsables y plazos.\n• Evalúa resultados (qué funcionó/qué no) y ajusta.\n• Evidencia mejoras sostenidas y aprendizaje organizacional.\n• Documenta y estandariza buenas prácticas.`,
+                nivel3: `• Ejecuta planes institucionales y reporta avances.\n• Cumple acciones comprometidas en tiempo razonable.`,
+                nivel2: `• Acciones sin evaluación o sin responsables claros.\n• Seguimiento irregular.\n• Se diluyen iniciativas con el tiempo.`,
+                nivel1: `• No implementa mejoras.\n• Incumple compromisos.\n• Repite problemas sin aprendizaje.`
+            },
+            { 
+                id: 12, codigo: "RSP12", nombre: "Gestión de compras y materiales", icon: "fa-shopping-cart",
+                nivel4: `Anticipa las necesidades de la facultad, manteniendo siempre el inventario óptimo en sitio. Gestiona cotizaciones y requisiciones con extrema agilidad, logrando ahorros o mejores alternativas sin que se le solicite.`,
+                nivel3: `Elabora y gestiona las requisiciones de material de oficina a tiempo. Asegura que los materiales didácticos y de oficina estén disponibles en el sitio cuando se requieren.`,
+                nivel2: `Ocasionalmente olvida solicitar materiales a tiempo o requiere recordatorios constantes para procesar requisiciones, causando retrasos menores.`,
+                nivel1: `Descuida el inventario de la oficina, provocando falta de insumos críticos. No sigue el proceso establecido para cotizaciones y pagos.`
+            },
+            { 
+                id: 13, codigo: "RSP13", nombre: "Logística de Actividades", icon: "fa-boxes",
+                nivel4: `Lidera la logística de conferencias, inducciones y eventos de forma impecable. Identifica riesgos logísticos de antemano y propone soluciones. Coordina de manera proactiva los arreglos de aulas y apoyos audiovisuales.`,
+                nivel3: `Apoya efectivamente en la realización de eventos, inducciones y conferencias, manejando bien las bases de datos y el material didáctico en sitio. Cumple con las tareas logísticas asignadas.`,
+                nivel2: `Presenta fallas organizativas en los eventos (falta de material, problemas con reservaciones). Requiere supervisión directa para completar la logística solicitada.`,
+                nivel1: `Ignora las responsabilidades logísticas asignadas. Los eventos sufren contratiempos severos por falta de planeación, cotizaciones o trámite de pagos a proveedores.`
+            },
+            { 
+                id: 14, codigo: "RSP14", nombre: "Colaboración Institucional", icon: "fa-building",
+                nivel4: `Es un facilitador clave entre la academia, Registro, Admisiones, Finanzas y Servicios Generales. Busca activamente cómo aligerar la carga de los Jefes y Coordinadores Académicos.`,
+                nivel3: `Participa en reuniones y trabaja bien en equipo con otras áreas de la academia y la Dirección del Campus. Proporciona soporte administrativo confiable al equipo de San Pedro Sula.`,
+                nivel2: `Su comunicación con otros departamentos es deficiente, lo que genera reprocesos. Ocasionalmente muestra resistencia para apoyar en actividades de equipo o requerimientos de Pregrado.`,
+                nivel1: `Genera conflictos con otras áreas o se niega a colaborar con los Coordinadores, Jefes Académicos o personal de otras dependencias institucionales.`
+            },
+            { 
+                id: 15, codigo: "RSP15", nombre: "Atención a Visitas, Estudiantes y Docentes", icon: "fa-comments",
+                nivel4: `Ofrece un servicio al cliente excepcional. Resuelve dudas de estudiantes y docentes de primer ingreso al instante. Hace que los docentes extranjeros e invitados sientan un respaldo total en su estadía.`,
+                nivel3: `Brinda un buen servicio, gestionando correctamente viáticos, honorarios y reservaciones para docentes extranjeros y oradores invitados. Apoya amablemente a estudiantes y docentes regulares.`,
+                nivel2: `Su trato es intermitentemente apático o presenta demoras al atender solicitudes de estudiantes o coordinar la estadía de profesores extranjeros.`,
+                nivel1: `Existen quejas formales de estudiantes, docentes o invitados sobre su actitud o negligencia en el servicio. Omite gestiones críticas para visitas internacionales.`
+            },
+            { 
+                id: 16, codigo: "RSP16", nombre: "Apoyo en Procesos de Matrícula", icon: "fa-id-card",
+                nivel4: `Logra un alto impacto en la retención persuadiendo y guiando efectivamente a los estudiantes durante las llamadas. Tramita adiciones, cancelaciones y cambios de forma inmediata y sin fricciones.`,
+                nivel3: `Realiza la cantidad de llamadas esperadas a las bases de datos de alumnos para impulsar la matrícula. Elabora correctamente los memorándums requeridos para la gestión estudiantil.`,
+                nivel2: `No cumple con la meta de llamadas de matrícula asignadas. Muestra lentitud para procesar cambios y adiciones de clases, afectando los horarios de los alumnos.`,
+                nivel1: `Se desentiende del proceso de apoyo a matrícula o trata de forma inadecuada a los alumnos durante la gestión telefónica, perjudicando los esfuerzos de retención de la facultad.`
+            },
+            { 
+                id: 17, codigo: "RSP17", nombre: "Ecosistema de Aprendizaje (Metodologías)", icon: "fa-laptop-code",
+                nivel4: `Integra plenamente el modelo educativo, transformando el aula (física o virtual) en un entorno de aprendizaje interactivo. Logra una participación activa excepcional de los alumnos. El aula virtual está enriquecida y cargada con antelación, excediendo los lineamientos base. Inicia siempre con objetivos claros y realiza cierres contundentes que consolidan el conocimiento.`,
+                nivel3: `Utiliza metodologías congruentes con el modelo educativo de UNITEC. Carga el aula virtual antes del inicio de clases según los lineamientos. Fomenta la participación, presenta los objetivos al inicio y realiza un cierre adecuado.`,
+                nivel2: `Presenta deficiencias en el uso de las metodologías activas; en ocasiones la clase recae en un modelo puramente unidireccional. El aula virtual se utiliza más como repositorio pasivo y a veces omite estructurar la clase con objetivos iniciales o conclusiones finales.`,
+                nivel1: `Sus métodos de enseñanza no se alinean con el modelo de la institución. No incentiva la participación de los estudiantes. El aula virtual está desactualizada, no cumple los lineamientos y carece de estructura pedagógica en sus sesiones.`
+            },
+            { 
+                id: 18, codigo: "RSP18", nombre: "Calidad Académica", icon: "fa-award",
+                nivel4: `Mantiene la Evaluación 360 consistentemente por encima del 90% y goza de un alto reconocimiento por parte de sus alumnos. Su sílabo por competencias y cuadro de planificación son modelos de excelencia. El portafolio docente evidencia una retroalimentación rica, detallada y constante a través de la plataforma LMS.`,
+                nivel3: `Mantiene una nota de 90% o más en la Evaluación 360. Mantiene vigente el sílabo por competencias y el cuadro de planificación. Actualiza puntualmente el portafolio docente con el registro y las evidencias de las actividades del período.`,
+                nivel2: `Su Evaluación 360 presenta fluctuaciones que caen por debajo del 90% exigido. El portafolio docente presenta evidencias incompletas o el sílabo requiere ajustes recurrentes en la alineación de sus actividades y competencias.`,
+                nivel1: `Obtiene resultados deficientes en la Evaluación 360 (muy por debajo del 90%). Omite la actualización del sílabo o la creación del portafolio docente. No utiliza la plataforma LMS para evaluar o retroalimentar a los estudiantes.`
+            },
+            { 
+                id: 19, codigo: "RSP19", nombre: "Actualización de Conocimiento", icon: "fa-book-reader",
+                nivel4: `Evidencia un dominio experto y actualizado de su especialidad. Participa de forma destacada en los programas de la Dirección de Innovación Educativa (DIE), certificándose continuamente e implementando inmediatamente esas nuevas herramientas tecnológicas o pedagógicas en sus asignaturas.`,
+                nivel3: `Mantiene vigentes sus conocimientos técnicos y pedagógicos. Aprueba y asiste a los cursos del programa de capacitación y certificación facilitados por la Jefatura Académica y la DIE.`,
+                nivel2: `Asiste a las capacitaciones técnicas o pedagógicas únicamente tras múltiples recordatorios de la jefatura. Muestra dificultad o resistencia para incorporar los nuevos conocimientos en su práctica docente.`,
+                nivel1: `No asiste ni aprueba los cursos de formación institucional. El contenido impartido en sus clases refleja desactualización en los avances de su disciplina o en el uso de los recursos tecnológicos para la enseñanza.`
+            },
+            { 
+                id: 20, codigo: "RSP20", nombre: "Cumplimiento Administrativo (Matrícula, Graduación y Notas)", icon: "fa-folder-open",
+                nivel4: `Es un pilar operativo para la facultad. Entrega notas adelantándose a los tiempos del calendario académico. Apoya proactivamente y con alta calidad como asesor temático y miembro de ternas evaluadoras. Su control de asistencia es impecable al 100%.`,
+                nivel3: `Realiza la entrega de notas estrictamente dentro del tiempo establecido en el calendario académico. Cumple a cabalidad con su asistencia y atiende eficientemente a la Jefatura como asesor temático y/o en ternas de evaluación de práctica profesional y proyectos de graduación.`,
+                nivel2: `Presenta retrasos ocasionales en el ingreso de notas al sistema o en la entrega de reportes de asistencia. Requiere seguimiento constante para que cumpla con sus compromisos y revisiones en los procesos de tesis y proyectos de graduación.`,
+                nivel1: `Incumple las fechas del calendario académico para la entrega de notas. Presenta inasistencias sin tramitar las reposiciones debidas (FO-AD-001). Ignora las convocatorias de la Jefatura para conformar ternas o asesorar a estudiantes próximos a graduarse.`
+            },
+            { 
+                id: 21, codigo: "RSP21", nombre: "Colaboración Internacional", icon: "fa-handshake",
+                nivel4: `Lidera activamente redes globales de investigación, consolidando la planificación de movilidad docente o estudiantil de alto nivel. Logra publicaciones en coautoría con pares internacionales de prestigio y genera oportunidades tangibles de financiamiento externo conjunto.`,
+                nivel3: `Establece y mantiene colaboraciones con investigadores y grupos de investigación internacionales. Participa consistentemente en actividades académicas globales, como revisiones a revistas internacionales.`,
+                nivel2: `Sus contactos internacionales son esporádicos o pasivos. Inicia acercamientos con pares extranjeros, pero estos rara vez se formalizan en colaboraciones concretas, revisiones o proyectos conjuntos.`,
+                nivel1: `Trabaja de forma aislada. No evidencia esfuerzos para establecer colaboraciones con investigadores o grupos internacionales, limitando su red al entorno local.`
+            },
+            { 
+                id: 22, codigo: "RSP22", nombre: "Proyectos de Impacto (Investigación, Innovación o Social)", icon: "fa-rocket",
+                nivel4: `Lidera proyectos transformadores que inciden directamente en políticas públicas, sostenibilidad o desarrollo de infraestructura. Supera la meta de publicación científica y logra una integración magistral de la metodología ABI (Aprendizaje Basado en Investigación) con resultados medibles en la comunidad o la industria.`,
+                nivel3: `Ejecuta proyectos de investigación alineados a los objetivos regionales y logra la publicación de al menos 1 artículo original por año. Implementa correctamente la metodología ABI en todas las asignaturas que imparte.`,
+                nivel2: `Participa en proyectos de investigación pero sin asumir un rol de liderazgo claro. Presenta dificultades para concretar la publicación anual de artículos originales o la aplicación de la metodología ABI es inconsistente.`,
+                nivel1: `No desarrolla líneas de investigación claras ni proyectos de impacto. Incumple con la publicación de artículos científicos y omite la integración de la investigación en su práctica docente diaria.`
+            },
+            { 
+                id: 23, codigo: "RSP23", nombre: "Fidelización de Promotores externos (Reputación Institucional)", icon: "fa-star",
+                nivel4: `Cierra alianzas estratégicas de alto perfil que se traducen en convenios, captación de fondos o consultorías de gran escala. Convierte a líderes del sector empresarial y gubernamental en promotores activos y defensores del prestigio de los programas de ingeniería de la institución.`,
+                nivel3: `Establece canales de comunicación constantes con empleadores, gremios y gobierno. Gestiona eficazmente oportunidades de patrocinio y asegura la participación activa de estos actores en consejos consultivos y eventos académicos.`,
+                nivel2: `Su interacción con empresas, gobierno u ONG es reactiva. Asiste a reuniones de vinculación cuando se le solicita, pero rara vez concreta acuerdos, alianzas o proyectos conjuntos.`,
+                nivel1: `Muestra apatía hacia la vinculación externa. No establece relaciones con la industria ni con instituciones gubernamentales, desaprovechando oportunidades de transferencia tecnológica o impacto social.`
+            },
+            { 
+                id: 24, codigo: "RSP24", nombre: "Visibilización de Proyectos e Iniciativas", icon: "fa-bullhorn",
+                nivel4: `Es un referente público en su campo. Posiciona los proyectos de la facultad en congresos de primer nivel y medios de alto alcance. Logra que la institución y sus alumnos obtengan reconocimiento a nivel nacional e internacional a través de la victoria o figuración en concursos y programas altamente competitivos.`,
+                nivel3: `Promueve estrategias efectivas para la difusión de sus investigaciones en ámbitos académicos, sociales, gubernamentales y al público general. Participa activamente en programas y concursos relevantes para elevar el perfil de la institución y sus alumnos.`,
+                nivel2: `La difusión de sus proyectos se limita estrictamente al entorno interno de la universidad. Presenta poca iniciativa para documentar sus logros, participar en concursos o llevar sus resultados a foros y congresos externos.`,
+                nivel1: `Mantiene sus investigaciones y proyectos aislados. No coordina la actualización de sus registros de publicaciones y muestra nulo interés en participar en espacios que eleven la visibilidad de la facultad.`
+            },
+            { 
+                id: 25, codigo: "RSP25", nombre: "Inventario", icon: "fa-clipboard-list",
+                nivel4: `El inventario está digitalizado y se actualiza en tiempo real. Anticipa necesidades de reposición y optimiza el uso de recursos existentes sin roturas de stock.`,
+                nivel3: `Mantiene el inventario de insumos actualizado y organizado. Reporta a tiempo las existencias para asegurar la continuidad de las prácticas.`,
+                nivel2: `El inventario se actualiza de forma reactiva o solo cuando se solicita. Presenta discrepancias menores entre lo registrado y lo físico.`,
+                nivel1: `El inventario está desactualizado o es inexistente. Hay pérdida frecuente de insumos o falta de control sobre el stock.`
+            },
+            { 
+                id: 26, codigo: "RSP26", nombre: "Procesos de Auditoria", icon: "fa-search",
+                nivel4: `Cero hallazgos en auditorías externas. Implementa controles preventivos que sirven de modelo para otras facultades.`,
+                nivel3: `Disminuye significativamente las incidencias. Resuelve observaciones previas y mantiene la documentación organizada para los auditores.`,
+                nivel2: `Se limita a corregir incidencias después de la auditoría. Mantiene un orden básico, pero persisten errores recurrentes por falta de seguimiento.`,
+                nivel1: `Alto número de incidencias o incumplimientos graves. La falta de orden documental pone en riesgo las certificaciones de la facultad.`
+            },
+            { 
+                id: 27, codigo: "RSP27", nombre: "Planes de Accion", icon: "fa-tasks",
+                nivel4: `Ejecuta el plan de acción antes de los plazos previstos, logrando mejoras medibles en los indicadores de gestión académica.`,
+                nivel3: `Cumple rigurosamente con el plan de acción definido y socializado por la decanatura, respetando tiempos y formas.`,
+                nivel2: `Cumple parcialmente con las actividades del plan. La socialización con su equipo es débil o la ejecución se percibe como un trámite obligatorio.`,
+                nivel1: `No sigue el plan de acción ni cumple con las directrices de la decanatura. Ignora los compromisos de gestión establecidos.`
+            },
+            { 
+                id: 28, codigo: "RSP28", nombre: "Medición 5s", icon: "fa-broom",
+                nivel4: `Los indicadores de 5S son excelentes y constantes. Ha creado una cultura de orden donde los usuarios del laboratorio mantienen la metodología de forma autónoma.`,
+                nivel3: `Aplica correctamente la metodología 5S según las capacitaciones. Los resultados de las mediciones muestran un entorno de trabajo eficiente y seguro.`,
+                nivel2: `Aplica la metodología de forma intermitente o superficial. Los espacios se ordenan solo para el momento de la medición, pero no se mantiene el hábito.`,
+                nivel1: `No utiliza la metodología 5S ni aplica los conocimientos de las capacitaciones. El recurso especializado se encuentra desorganizado y sin control.`
+            }
         ];
 
         // Orden estático de las áreas
@@ -384,55 +552,47 @@
                             <p class="text-gray-500 text-sm mt-2 font-medium">Rúbrica de evaluación de desempeño para esta responsabilidad.</p>
                         </div>
                         
-                        <!-- Rúbrica de 4 niveles -->
+                        <!-- Rúbrica de 4 niveles inyectada desde los datos -->
                         <div class="flex flex-col gap-4">
                             
                             <!-- Nivel 4 -->
                             <div class="border-l-4 border-unitec-federal bg-blue-50/50 p-4 rounded-r relative overflow-hidden group">
                                 <div class="absolute right-0 top-0 h-full w-2 bg-unitec-federal opacity-10 group-hover:opacity-20 transition-opacity"></div>
                                 <h4 class="font-bold text-unitec-federal uppercase tracking-widest text-xs mb-2 flex items-center">
-                                    <span class="bg-unitec-federal text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow">4</span>
+                                    <span class="bg-unitec-federal text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow shrink-0">4</span>
                                     Trasciende Expectativas
                                 </h4>
-                                <p class="text-sm text-gray-700 font-medium leading-relaxed pl-7">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus erat a interdum elementum. Aenean fringilla magna ut nunc sollicitudin viverra.
-                                </p>
+                                <p class="text-sm text-gray-700 font-medium leading-relaxed pl-7 whitespace-pre-line">${rsp.nivel4}</p>
                             </div>
 
                             <!-- Nivel 3 -->
                             <div class="border-l-4 border-unitec-pacific bg-cyan-50/50 p-4 rounded-r relative overflow-hidden group">
                                 <div class="absolute right-0 top-0 h-full w-2 bg-unitec-pacific opacity-10 group-hover:opacity-20 transition-opacity"></div>
                                 <h4 class="font-bold text-unitec-pacific uppercase tracking-widest text-xs mb-2 flex items-center">
-                                    <span class="bg-unitec-pacific text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow">3</span>
+                                    <span class="bg-unitec-pacific text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow shrink-0">3</span>
                                     Transforma su entorno
                                 </h4>
-                                <p class="text-sm text-gray-700 font-medium leading-relaxed pl-7">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in urna a neque elementum vehicula ut at tortor. Vivamus vulputate nulla id pulvinar ultrices.
-                                </p>
+                                <p class="text-sm text-gray-700 font-medium leading-relaxed pl-7 whitespace-pre-line">${rsp.nivel3}</p>
                             </div>
 
                             <!-- Nivel 2 -->
                             <div class="border-l-4 border-gray-400 bg-gray-50 p-4 rounded-r relative overflow-hidden group">
                                 <div class="absolute right-0 top-0 h-full w-2 bg-gray-400 opacity-10 group-hover:opacity-20 transition-opacity"></div>
                                 <h4 class="font-bold text-gray-600 uppercase tracking-widest text-xs mb-2 flex items-center">
-                                    <span class="bg-gray-400 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow">2</span>
+                                    <span class="bg-gray-400 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow shrink-0">2</span>
                                     Esfuerzo transaccional
                                 </h4>
-                                <p class="text-sm text-gray-600 font-medium leading-relaxed pl-7">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Proin id velit at eros sodales sollicitudin a sit amet metus.
-                                </p>
+                                <p class="text-sm text-gray-600 font-medium leading-relaxed pl-7 whitespace-pre-line">${rsp.nivel2}</p>
                             </div>
 
                             <!-- Nivel 1 -->
                             <div class="border-l-4 border-red-400 bg-red-50/30 p-4 rounded-r relative overflow-hidden group">
                                 <div class="absolute right-0 top-0 h-full w-2 bg-red-400 opacity-10 group-hover:opacity-20 transition-opacity"></div>
                                 <h4 class="font-bold text-red-600 uppercase tracking-widest text-xs mb-2 flex items-center">
-                                    <span class="bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow">1</span>
+                                    <span class="bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow shrink-0">1</span>
                                     Insuficiente
                                 </h4>
-                                <p class="text-sm text-gray-600 font-medium leading-relaxed pl-7">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras suscipit purus eget sapien tincidunt iaculis. Fusce feugiat, libero eget euismod volutpat.
-                                </p>
+                                <p class="text-sm text-gray-600 font-medium leading-relaxed pl-7 whitespace-pre-line">${rsp.nivel1}</p>
                             </div>
 
                         </div>
