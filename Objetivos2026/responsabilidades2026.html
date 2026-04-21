@@ -139,51 +139,57 @@
     </div>
 
     <script>
-        // 1. Datos Estructurados de Colaboradores (Asignaciones de RSP vacías por ahora)
+        // 1. Datos Estructurados de Colaboradores (Con responsabilidades asignadas según CSV)
         const colaboradoresData = [
-            { nombre: "Marco Canales", puesto: "Decano TGU", rsp: [], area: "Decanatura y Dirección" },
-            { nombre: "Edwin Dore", puesto: "Director SPS", rsp: [], area: "Decanatura y Dirección" },
-            { nombre: "Karen Martinez", puesto: "Oficial TGU", rsp: [], area: "Decanatura y Dirección" },
-            { nombre: "Pendiente - Oficial SPS", puesto: "Oficial SPS", rsp: [], area: "Decanatura y Dirección" },
-            { nombre: "Geovanny Fortín", puesto: "Coordinador FabLab", rsp: [], area: "Decanatura y Dirección" },
-            { nombre: "Winder Matamoros", puesto: "Coordinador Lab SPS", rsp: [], area: "Decanatura y Dirección" },
+            // Decanatura y Dirección
+            { nombre: "Karen Martinez", puesto: "Oficial TGU", rsp: [12, 13, 14, 15, 16], area: "Decanatura y Dirección" },
+            { nombre: "Pendiente - Oficial SPS", puesto: "Oficial SPS", rsp: [12, 13, 14, 15, 16], area: "Decanatura y Dirección" },
+            { nombre: "Geovanny Fortín", puesto: "Coordinador FabLab", rsp: [2, 5, 8, 9, 10, 12, 15], area: "Decanatura y Dirección" },
+            { nombre: "Winder Matamoros", puesto: "Coordinador Lab SPS", rsp: [2, 5, 8, 9, 10, 12, 15], area: "Decanatura y Dirección" },
 
-            { nombre: "Reynod Bocanegra", puesto: "Jefe Academico TGU", rsp: [], area: "Ciencias de la Computación" },
-            { nombre: "Carlos Roberto Perez", puesto: "Coordinador SPS", rsp: [], area: "Ciencias de la Computación" },
+            // Ciencias de la Computación
+            { nombre: "Reynod Bocanegra", puesto: "Jefe Academico TGU", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Ciencias de la Computación" },
+            { nombre: "Carlos Roberto Perez", puesto: "Coordinador SPS", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Ciencias de la Computación" },
 
-            { nombre: "Georgina Galeano", puesto: "Jefe Academico TGU", rsp: [], area: "Industrial y de Sistemas" },
-            { nombre: "Cristhyan Rivera", puesto: "Coordinador Academico SPS", rsp: [], area: "Industrial y de Sistemas" },
-            { nombre: "Mendel Nelson", puesto: "Docente TGU", rsp: [], area: "Industrial y de Sistemas" },
-            { nombre: "Pendiente - Docente IND", puesto: "Docente Investigador TGU", rsp: [], area: "Industrial y de Sistemas" },
-            { nombre: "Maria Elena Perdomo", puesto: "Docente Investigador SPS", rsp: [], area: "Industrial y de Sistemas" },
+            // Industrial y de Sistemas
+            { nombre: "Georgina Galeano", puesto: "Jefe Academico TGU", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Industrial y de Sistemas" },
+            { nombre: "Cristhyan Rivera", puesto: "Coordinador Academico SPS", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Industrial y de Sistemas" },
+            { nombre: "Mendel Nelson", puesto: "Docente TGU", rsp: [5, 8, 9, 10, 17, 18, 19, 20], area: "Industrial y de Sistemas" },
+            { nombre: "Pendiente - Docente IND", puesto: "Docente Investigador TGU", rsp: [5, 8, 9, 10, 17, 18, 19, 20, 21, 22, 23], area: "Industrial y de Sistemas" },
+            { nombre: "Maria Elena Perdomo", puesto: "Docente Investigador SPS", rsp: [5, 8, 9, 10, 17, 18, 19, 20, 21, 22, 23], area: "Industrial y de Sistemas" },
 
-            { nombre: "Julio Cesar Lopez", puesto: "Jefe Academico TGU", rsp: [], area: "Civil" },
-            { nombre: "Hector Padilla", puesto: "Jefe Academico SPS", rsp: [], area: "Civil" },
-            { nombre: "Ada Rodriguez", puesto: "Docente Investigador SPS", rsp: [], area: "Civil" },
-            { nombre: "Juan Carlos Reyes", puesto: "Coordinador Lab TGU", rsp: [], area: "Civil" },
-            { nombre: "Pendiente - Docente CIV", puesto: "Docente Asociado TGU", rsp: [], area: "Civil" },
+            // Civil
+            { nombre: "Julio Cesar Lopez", puesto: "Jefe Academico TGU", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Civil" },
+            { nombre: "Hector Padilla", puesto: "Jefe Academico SPS", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Civil" },
+            { nombre: "Ada Rodriguez", puesto: "Docente Investigador SPS", rsp: [5, 8, 9, 10, 17, 18, 19, 20, 21, 22, 23], area: "Civil" },
+            { nombre: "Juan Carlos Reyes", puesto: "Coordinador Lab TGU", rsp: [2, 5, 8, 9, 10, 12, 15], area: "Civil" },
+            { nombre: "Pendiente - Docente CIV", puesto: "Docente Asociado TGU", rsp: [5, 8, 9, 10, 17, 18, 19, 20], area: "Civil" },
 
-            { nombre: "Rene Leon", puesto: "Jefe Academico TGU", rsp: [], area: "Mecatrónica" },
-            { nombre: "Juan Miguel Mejia", puesto: "Jefe Academico SPS", rsp: [], area: "Mecatrónica" },
-            { nombre: "Favell Nuñez", puesto: "Docente Investigador TGU", rsp: [], area: "Mecatrónica" },
-            { nombre: "Jose Luis Ordoñez", puesto: "Docente Investigador SPS", rsp: [], area: "Mecatrónica" },
-            { nombre: "Daniel Ramos", puesto: "Coordinador Lab TGU", rsp: [], area: "Mecatrónica" },
+            // Mecatrónica
+            { nombre: "Rene Leon", puesto: "Jefe Academico TGU", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Mecatrónica" },
+            { nombre: "Juan Miguel Mejia", puesto: "Jefe Academico SPS", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Mecatrónica" },
+            { nombre: "Favell Nuñez", puesto: "Docente Investigador TGU", rsp: [5, 8, 9, 10, 17, 18, 19, 20, 21, 22, 23], area: "Mecatrónica" },
+            { nombre: "Jose Luis Ordoñez", puesto: "Docente Investigador SPS", rsp: [5, 8, 9, 10, 17, 18, 19, 20, 21, 22, 23], area: "Mecatrónica" },
+            { nombre: "Daniel Ramos", puesto: "Coordinador Lab TGU", rsp: [2, 5, 8, 9, 10, 12, 15], area: "Mecatrónica" },
 
-            { nombre: "Fernanda Cáceres", puesto: "Jefe Academico TGU", rsp: [], area: "Biomédica" },
-            { nombre: "Reyna Valle", puesto: "Jefe Academico SPS", rsp: [], area: "Biomédica" },
-            { nombre: "Yaro Cáceres", puesto: "Docente TGU", rsp: [], area: "Biomédica" },
-            { nombre: "Manuel Gamero", puesto: "Docente Asociado SPS", rsp: [], area: "Biomédica" },
-            { nombre: "Pendiente - Docente BMD", puesto: "Docente Investigador SPS", rsp: [], area: "Biomédica" },
+            // Biomédica
+            { nombre: "Fernanda Cáceres", puesto: "Jefe Academico TGU", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Biomédica" },
+            { nombre: "Reyna Valle", puesto: "Jefe Academico SPS", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Biomédica" },
+            { nombre: "Yaro Cáceres", puesto: "Docente TGU", rsp: [5, 8, 9, 10, 17, 18, 19, 20], area: "Biomédica" },
+            { nombre: "Manuel Gamero", puesto: "Docente Asociado SPS", rsp: [5, 8, 9, 10, 17, 18, 19, 20], area: "Biomédica" },
+            { nombre: "Pendiente - Docente BMD", puesto: "Docente Investigador SPS", rsp: [5, 8, 9, 10, 17, 18, 19, 20, 21, 22, 23], area: "Biomédica" },
 
-            { nombre: "Roger Ponce", puesto: "Jefe Academico TGU", rsp: [], area: "Energía y Telecomunicaciones" },
-            { nombre: "Vielka Barahona", puesto: "Jefe Academico SPS", rsp: [], area: "Energía y Telecomunicaciones" },
-            { nombre: "Pendiente - Docente TEL", puesto: "Docente TGU", rsp: [], area: "Energía y Telecomunicaciones" },
+            // Energía y Telecomunicaciones
+            { nombre: "Roger Ponce", puesto: "Jefe Academico TGU", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Energía y Telecomunicaciones" },
+            { nombre: "Vielka Barahona", puesto: "Jefe Academico SPS", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Energía y Telecomunicaciones" },
+            { nombre: "Pendiente - Docente TEL", puesto: "Docente TGU", rsp: [5, 8, 9, 10, 17, 18, 19, 20], area: "Energía y Telecomunicaciones" },
 
-            { nombre: "Alex Sanchez", puesto: "Jefe Academico TGU", rsp: [], area: "Ciencias y Matemáticas" },
-            { nombre: "Julio Enrique Ramirez", puesto: "Jefe Academico SPS", rsp: [], area: "Ciencias y Matemáticas" },
-            { nombre: "Nereyda Lainez", puesto: "Coordinador Lab TGU", rsp: [], area: "Ciencias y Matemáticas" },
-            { nombre: "Emilson Fortín", puesto: "Auxiliar Lab TGU", rsp: [], area: "Ciencias y Matemáticas" },
-            { nombre: "Tatiana Suazo", puesto: "Docente Asociado TGU", rsp: [], area: "Ciencias y Matemáticas" }
+            // Ciencias y Matemáticas
+            { nombre: "Alex Sanchez", puesto: "Jefe Academico TGU", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Ciencias y Matemáticas" },
+            { nombre: "Julio Enrique Ramirez", puesto: "Jefe Academico SPS", rsp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], area: "Ciencias y Matemáticas" },
+            { nombre: "Nereyda Lainez", puesto: "Coordinador Lab TGU", rsp: [2, 5, 8, 9, 10, 12, 15], area: "Ciencias y Matemáticas" },
+            { nombre: "Emilson Fortín", puesto: "Auxiliar Lab TGU", rsp: [2, 5, 8, 9, 10, 12, 15], area: "Ciencias y Matemáticas" },
+            { nombre: "Tatiana Suazo", puesto: "Docente Asociado TGU", rsp: [5, 8, 9, 10, 17, 18, 19, 20], area: "Ciencias y Matemáticas" }
         ];
 
         // 2. Base de Datos de Responsabilidades extraídas y alimentadas en base al CSV
@@ -359,7 +365,7 @@
             { 
                 id: 25, codigo: "RSP25", nombre: "Inventario", icon: "fa-clipboard-list",
                 nivel4: `El inventario está digitalizado y se actualiza en tiempo real. Anticipa necesidades de reposición y optimiza el uso de recursos existentes sin roturas de stock.`,
-                nivel3: `Mantiene el inventario de insumos actualizado y organizado. Reporta a tiempo las existencias para asegurar la continuidad de las prácticas.`,
+                nivel3: `Mantiene el inventario de insumos actualizado y organizado. Reporta a tiempo las existencias para asegurar la continuidad de las practices.`,
                 nivel2: `El inventario se actualiza de forma reactiva o solo cuando se solicita. Presenta discrepancias menores entre lo registrado y lo físico.`,
                 nivel1: `El inventario está desactualizado o es inexistente. Hay pérdida frecuente de insumos o falta de control sobre el stock.`
             },
