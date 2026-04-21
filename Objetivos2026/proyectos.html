@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fichas de Proyectos - FI UNITEC</title>
+    
+    <!-- Tipografía Institucional: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de Tailwind basada en el Manual de Marca UNITEC -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C',
+                            cyan: '#03AED2',
+                            sky: '#47C8FD'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Scrollbar personalizado para mejor estética */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white !important; height: auto !important; overflow: visible !important; display: block !important; }
+            #modal-ficha { position: static !important; display: block !important; opacity: 1 !important; pointer-events: none; }
+            #modal-backdrop { display: none !important; }
+            .card-impresion { border: 2px solid #06065C !important; box-shadow: none !important; }
+            /* Ocultar botones interactivos en impresión si hay un modal abierto */
+            #main-content { display: none !important; } 
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-unitec-federal selection:bg-unitec-cyan selection:text-white h-screen flex flex-col overflow-hidden relative">
+
+    <!-- Encabezado corporativo -->
+    <header class="bg-unitec-federal text-white no-print border-b-4 border-unitec-cyan shrink-0 z-20">
+        <div class="px-4 md:px-6 py-3 md:py-4 flex flex-col md:flex-row justify-between items-center w-full">
+            <div class="flex items-center mb-2 md:mb-0">
+                <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-3 md:w-8 md:h-8">
+                    <path d="M50 0L95 45V55L50 100L5 55V45L50 0Z" fill="#03AED2"/>
+                    <path d="M50 20L80 50L50 80L20 50L50 20Z" fill="#47C8FD"/>
+                    <path d="M50 35L65 50L50 65L35 50L50 35Z" fill="#FFFFFF"/>
+                </svg>
+                <span class="text-2xl md:text-3xl font-bold tracking-tight mt-1">unitec</span>
+            </div>
+            <div class="text-center md:text-right">
+                <h1 class="text-base md:text-lg font-bold text-unitec-sky uppercase tracking-widest leading-none">Fichas de Proyectos</h1>
+                <p class="mt-1 text-[10px] md:text-xs font-medium text-white/80">Facultad de Ingeniería</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal (Sidebar + Contenido) -->
+    <div class="flex flex-col md:flex-row flex-1 overflow-hidden w-full bg-white">
+        
+        <!-- SIDEBAR: Colaboradores -->
+        <aside class="w-full md:w-80 bg-slate-50 border-b md:border-b-0 md:border-r border-gray-200 shrink-0 flex flex-col h-[35vh] md:h-full no-print z-10 relative shadow-[4px_0_15px_-3px_rgba(0,0,0,0.05)]">
+            <div class="p-4 md:p-5 border-b border-gray-200 bg-white shrink-0">
+                <h2 class="text-base md:text-lg font-black text-unitec-federal uppercase tracking-widest flex items-center">
+                    <i class="fas fa-users mr-2 text-unitec-cyan"></i> Colaboradores
+                </h2>
+                <p class="text-[10px] md:text-xs text-gray-500 mt-1 font-medium">Seleccione a un miembro para ver sus proyectos asignados.</p>
+                
+                <!-- Badge de filtro activo (oculto por defecto) -->
+                <div id="colaborador-badge" class="hidden mt-3 bg-blue-50 border border-blue-200 px-3 py-2 flex justify-between items-center rounded-md">
+                    <span class="text-xs font-bold text-unitec-federal truncate mr-2" id="colaborador-nombre-badge"></span>
+                    <button onclick="seleccionarColaborador(null)" class="text-gray-400 hover:text-red-500 transition-colors">
+                        <i class="fas fa-times-circle"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-3" id="sidebar-colaboradores">
+                <!-- Se inyectará dinámicamente -->
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main id="main-content" class="flex-1 overflow-y-auto custom-scrollbar bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8">
+                
+                <!-- Sección de Filtros por Eje/Impacto (COLAPSABLE) -->
+                <div id="filters-section" class="bg-white p-5 md:p-6 mb-6 md:mb-8 no-print border-2 border-unitec-federal relative shadow-sm transition-all duration-300">
+                    <div class="absolute -top-3 -left-3 w-6 h-6 bg-unitec-cyan transform rotate-45 border-2 border-white"></div>
+                    
+                    <div class="flex justify-between items-center cursor-pointer group select-none" onclick="toggleFilters()">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <h2 class="text-lg md:text-xl font-bold text-unitec-federal tracking-tight group-hover:text-unitec-cyan transition-colors">
+                                <i class="fas fa-filter mr-2 text-unitec-cyan"></i> Filtrar por Impactos
+                            </h2>
+                            <!-- Badge indicador del filtro actual -->
+                            <span id="filtro-aplicado-texto" class="mt-2 md:mt-0 md:ml-4 px-2.5 py-1 bg-blue-50 text-unitec-federal text-[10px] md:text-xs rounded border border-blue-100 font-bold uppercase tracking-wider inline-block w-max">
+                                Mostrando todos
+                            </span>
+                        </div>
+                        <div class="bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center group-hover:bg-blue-50 transition-colors shrink-0">
+                            <i id="filters-chevron" class="fas fa-chevron-down text-unitec-federal transition-transform duration-300"></i>
+                        </div>
+                    </div>
+
+                    <div id="filters-body" class="hidden mt-5 md:mt-6">
+                        <div class="flex flex-col xl:flex-row justify-between items-start xl:items-center mb-6 pb-4 border-b-2 border-gray-100 gap-4">
+                            <div class="max-w-3xl">
+                                <p class="text-xs md:text-sm font-medium text-gray-700 leading-relaxed mb-3 border-l-4 border-unitec-cyan pl-3">
+                                    <strong class="text-unitec-federal">Alineación Visión 2030:</strong> Cada proyecto responde al compromiso de ser una universidad de clase mundial.
+                                </p>
+                                <p class="text-[10px] md:text-xs font-black text-unitec-cyan uppercase tracking-widest bg-unitec-federal inline-block px-3 py-1 text-white">
+                                    <i class="fas fa-hand-pointer mr-1"></i> Haga clic en un Eje o Impacto para filtrar.
+                                </p>
+                            </div>
+                            <button id="btn-mostrar-todos" onclick="filtrarProyectos('todos', ''); event.stopPropagation();" class="w-full xl:w-auto mt-2 xl:mt-0 bg-unitec-federal text-white border-2 border-unitec-federal font-black py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap cursor-default shadow-sm">
+                                Mostrar Todos
+                            </button>
+                        </div>
+                        <div id="filters-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                            <!-- Los filtros de ejes se insertarán aquí -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estado del Listado -->
+                <div class="flex items-center justify-between border-b border-gray-200 pb-3 mb-6">
+                    <h3 class="text-lg font-black text-unitec-federal uppercase tracking-wider flex items-center">
+                        <i class="fas fa-layer-group mr-2 text-unitec-cyan"></i> Proyectos
+                    </h3>
+                    <span id="contador-proyectos" class="text-xs font-bold bg-gray-100 text-gray-500 px-3 py-1 rounded-full"></span>
+                </div>
+
+                <!-- Contenedor de Fichas -->
+                <div id="cards-container" class="pb-12 flex flex-col gap-8">
+                    <!-- Los botones (agrupados o no) se insertarán aquí dinámicamente -->
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL PARA LA FICHA COMPLETA -->
+    <div id="modal-ficha" class="fixed inset-0 z-50 hidden items-center justify-center pointer-events-none">
+        <!-- Backdrop oscuro -->
+        <div id="modal-backdrop" class="absolute inset-0 bg-unitec-federal/80 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto" onclick="cerrarFicha()"></div>
+        
+        <!-- Contenedor de la Ficha -->
+        <div id="modal-content" class="bg-transparent w-full max-w-2xl max-h-[90vh] overflow-y-auto custom-scrollbar relative z-10 opacity-0 transform scale-95 transition-all duration-300 pointer-events-auto p-4">
+            <!-- La ficha completa se inyecta aquí -->
+        </div>
+    </div>
+
+    <script>
+        // 1. Datos de proyectos originales
+        const proyectosData = [
+            { "Codigo": "PRO1A", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Acreditacion", "Metrica": "Numero de acreditaciones completadas", "Indicador": "Acreditacion otorgada por ACAAI", "Actividades Acordadas": "Completar la acreditación de Ingeniería en Telecomunicaciones y Redes con ACAAI, y completar el Autoestudio para la acreditacion de Ingeniería en Energía", "Resultados Esperados": "Acreditacion de Telecomunicaciones completa y Autoestudio de Energía listo", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1B", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Actualizacion Curricular", "Metrica": "Porcentaje de avance en la reforma curricular.", "Indicador": "Reformas completadas en Mecatrónica y Biomédica.", "Actividades Acordadas": "Completar la reforma de los programas de Mecatrónica y Biomédica.", "Resultados Esperados": "Planes de estudio modernizados y alineados a necesidades del sector.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1C", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Ecosistema de Aprendizaje", "Nombre Breve": "Capacitacion en el Ecosistema", "Metrica": "Número de talleres realizados.", "Indicador": "Al menos 1 Taller de 8 horas por programa y por campus al año", "Actividades Acordadas": "Realizar talleres que habiliten a los docentes en el ecosistema de aprendizaje (Mentorías, Talleres de Co-diseño, charlas, etc.) impartidas por personal de la FI.", "Resultados Esperados": "Apoyo a docentes en la adopción del ecosistema de aprendizaje", "Período": "Q2 Y Q3" },
+            { "Codigo": "PRO1D", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Ecosistema de Aprendizaje", "Nombre Breve": "Co-Design en el Ecosistema", "Metrica": "Cantidad de docentes que están implementando el Ecosistema de Aprendizaje", "Indicador": "Equivalente a 4 sesiones de 1 hora por período académico en Q3 y Q4 para acompañar a todo el equipo de docentes del area academica respectiva.", "Actividades Acordadas": "Realizar sesiones de acompañamiento y co-diseño dirigidas a cada area académica encabezadas por los jefes académicos y apoyadas por el equipo académico.", "Resultados Esperados": "Apoyo a docentes en la adopción del ecosistema de aprendizaje", "Período": "Q3 Y Q4" },
+            { "Codigo": "PRO1E", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Docentes como motor de la innovación educativa y del aprendizaje continuo", "Nombre Breve": "Implementacion del Ecosistema", "Metrica": "Cantidad de cursos donde se está implementando el Ecosistema de Aprendizaje", "Indicador": "Al menos 100 asignaturas impactadas.", "Actividades Acordadas": "Reportar al menos 1 asignaturas por período académico por programa por campus en Q3, y 4 asignaturas en Q4 donde se está implementando el ecosistema de aprendizaje", "Resultados Esperados": "Experiencia estudiantil impactad por el Ecosistema de Aprendizaje", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1F", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Campus y sedes referentes", "Nombre Breve": "Iniciativas Intercampus", "Metrica": "Número de iniciativas coordinadas entre campus.", "Indicador": "Al menos 2 iniciativas semestrales entre campus.", "Actividades Acordadas": "Coordinación de iniciativas entre los campus para articulación de docentes y estudiantes.", "Resultados Esperados": "Mayor articulación entre docentes y estudiantes.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1G", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Transformacion de CCMM", "Metrica": "Tasa de aprobación en las Ciencias y Matemáticas", "Indicador": "Incremento del 10% en la tasa de aprobación.", "Actividades Acordadas": "Realizar acciones con el objetivo de transformar la experiencia educativa de los estudiantes en las Matemáticas", "Resultados Esperados": "Mejora en el desempeño de los estudiantes en las matemáticas", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1H", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Internacionalizacion", "Metrica": "Número de actividades de internacionalización realizadas.", "Indicador": "Equivalente a 1 iniciativa que sume internacionalidad al curriculum existente por programa por campus por periodo en Q2, Q3 y Q4 (COIL, viajes académicos, masterclass, etc.).", "Actividades Acordadas": "Realizacion de iniciativas en colaboracion con socios internacionales para sumar internacionalidad al currículo existente.", "Resultados Esperados": "Mayor exposición internacional del estudiantado y docencia.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2C", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Presencia global", "Nombre Breve": "Proyectos Estratégicos de Ingenieria Visibilizados", "Metrica": "Número de eventos y proyectos visibilizados.", "Indicador": "Equivalente a 2 proyectos o iniciativas por período académico (Q2, Q3 y Q4) compartido en redes sociales (LinkedIn) por cada jefe academico, en cada campus. ", "Actividades Acordadas": "Realización y visibilación de Proyectos de Vinculación, Investigación, Colaboración Industrial, Eventos Alumni, Innovación o emprendimiento, con cobertura en medios o redes sociales.", "Resultados Esperados": "Mayor posicionamiento de la Facultad en el ecosistema académico e industrial.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2D", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Presencia global", "Nombre Breve": "Publicaciones de Valor", "Metrica": "Cantidad de publicaciones de valor en LinkedIn", "Indicador": "Equivalente a 1 publicacion no relacionada a difusion de proyectos por período académico por programa por campus.", "Actividades Acordadas": "Realizar 1 publicación de valor (diferente a difusion de proyectos) por período por programa académico por campus en LinkedIn (Q2, Q3, y Q4)", "Resultados Esperados": "Mayor posicionamiento de la Facultad en el ecosistema académico e industrial.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2E", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Vinculación institucional estratégica", "Nombre Breve": "IABs", "Metrica": "Número de Actas de sesiones realizadas con los Industry Advisory Boards.", "Indicador": "2 Actas de Sesiones de IAB al año .", "Actividades Acordadas": "Realizar 2 sesiones en cada Industry Advisory Board abordando PEOs y competencias del programa.", "Resultados Esperados": "Conexión efectiva entre academia e industria.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2F", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Presencia global", "Nombre Breve": "Micrositio", "Metrica": "Micrositio activo con proyectos publicados.", "Indicador": "Al menos 2 proyectos publicados en el micrositio por programa académico por campus.", "Actividades Acordadas": "Conformación de un Portafolio de Proyectos de FI y publicación en un micrositio.", "Resultados Esperados": "Visibilidad institucional mejorada.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2G", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Vinculación institucional estratégica", "Nombre Breve": "SII 2026", "Metrica": "Semana Internacional realizada con éxito.", "Indicador": "Participación de al menos 1 socio relevante (investigacion, innovacion, internacional, empleador, o emprendedor) a cada programa de la FI", "Actividades Acordadas": "Organización y realización de la Semana Internacional de Ingeniería 2026 con participacion de socios estratégicos", "Resultados Esperados": "Visibilidad institucional mejorada.", "Período": "Q2" },
+            { "Codigo": "PRO2H", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Propuesta Institucional de aprendizaje a lo largo de la vida", "Nombre Breve": "Lifelong Learning", "Metrica": "Número de certificados diseñados en colaboración con Formación Continua.", "Indicador": "Desarrollo de al menos 1 certificado de formación profesional alineados a la industria por campus", "Actividades Acordadas": "Generar certificados articulando la Facultad de Ingeniería con el área de Formación Continua.", "Resultados Esperados": "Ampliación de la oferta académica con cursos que fortalezcan la empleabilidad de los egresados.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO3C", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "3. Fortalecimiento Institucional", "Impacto": "Cultura organizacional de alto desempeño e inclusiva", "Nombre Breve": "Colaboracion entre areas", "Metrica": "Número de eventos de prospección apoyados.", "Indicador": "Realizar 1 solicitud por programa por año en la que requieran apoyo de Prospeccion y/o Admisiones", "Actividades Acordadas": "Generar solicitudes de apoyo a las áreas de Prospección y Admisiones (Science Fairs, Technology Day, Bootcamps, etc.)", "Resultados Esperados": "Mayor visibilidad y atracción de estudiantes potenciales hacia las carreras de ingeniería.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO3D", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "3. Fortalecimiento Institucional", "Impacto": "Cultura organizacional de alto desempeño e inclusiva", "Nombre Breve": "Colaboracion Interna", "Metrica": "Número de iniciativas de colaboración interdisciplinaria dentro de la Facultad.", "Indicador": "Registro de al menos 1 accion transversal por colaborador que impacte positivamente en la Facultad.", "Actividades Acordadas": "Realizar acciones que sumen transversalmente a las metas de la Facultad de Ingeniería (Proyectos y funciones fuera del descriptor de puesto y desempeño).", "Resultados Esperados": "Mayor sinergia y trabajo colaborativo en iniciativas que fortalezcan el desarrollo institucional.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO3E", "Objetivo": "Proyectos de otras areas", "Eje": "3. Fortalecimiento Institucional", "Impacto": "Cultura organizacional de alto desempeño e inclusiva", "Nombre Breve": "Solicitudes de DGA", "Metrica": "Registro de atención a las solicitudes de DGA", "Indicador": "Registro de atención a las solicitudes de DGA", "Actividades Acordadas": "Revisar y atender las solicitudes de DGA", "Resultados Esperados": "Solicitudes de DGA resueltas", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO3A", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "3. Fortalecimiento Institucional", "Impacto": "Cultura organizacional de alto desempeño e inclusiva", "Nombre Breve": "Clima Laboral", "Metrica": "Actividades de integracion realizadas", "Indicador": "Al menos 1 actividad de integración del equipo organizada eficientemente por período académico por campus", "Actividades Acordadas": "Realizar 1 actividad de integración del equipo por período académico por campus (Q2, Q3, y Q4)", "Resultados Esperados": "Fortalecer el trabajo en equipo y el compañerismo", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO3B", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "3. Fortalecimiento Institucional", "Impacto": "Cultura organizacional de alto desempeño e inclusiva", "Nombre Breve": "Impulsar el Primer Ingreso", "Metrica": "Número de eventos de prospección apoyados.", "Indicador": "Participación de la Facultad en el 80% de los eventos solicitados", "Actividades Acordadas": "Apoyar las solicitudes de las áreas de Prospección y Admisiones (Science Fairs, Technology Day, Bootcamps, etc.)", "Resultados Esperados": "Mayor visibilidad y atracción de estudiantes potenciales hacia las carreras de ingeniería.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO1I", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Masterclasses", "Metrica": "Número de Estudiantes y sus respectivas carreras participando en Masterclasses con docentes visitantes.", "Indicador": "Al menos 1 docente visitante activo en contacto con los estudiantes de cada programa académico.", "Actividades Acordadas": "Realizar 1 Masterclass con un docente visitante para cada programa académico", "Resultados Esperados": "Diversificación de la oferta académica con expertos internacionales.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2A", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Investigación e innovación para el desarrollo", "Nombre Breve": "Transferencia de Tecnologias Aplicadas", "Metrica": "Numero de estudiantes participando en eventos e el FabLab", "Indicador": "Al menos 500 estudiantes interactuado en proyectos de investigacion, innovacion, internacionalizacion, o emprendimiento en el FabLab en 2026", "Actividades Acordadas": "Alcanzar la participación significante de estudiantes en proyectos multidisciplinarios de investigacion, innovación, internacionalización, o emprendimiento desarrollados en el FabLab en TGU o Espacios Especializados en SPS", "Resultados Esperados": "Incremento en participación estudiantil en iniciativas innovadoras.", "Período": "Q2 a Q4" },
+            { "Codigo": "PRO2B", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Vinculación institucional estratégica", "Nombre Breve": "Eventos de Vinculacion estratégica", "Metrica": "Numero de eventos realizados", "Indicador": "Al menos 8 eventos (hackathons, rallies, concursos) al año con el involucramiento de un socio estratégico", "Actividades Acordadas": "Realización de concursos, hackathons, competencias y rallies que impulsen la innovación con la participación de un socio estratégico (Empleadores locales o internacionales, universidades en el extranjero, organizaciones internacionales). ExpoFI y Mecaton cuentan para este proyecto.", "Resultados Esperados": "Elevar la vinculación institucional estratégica con el uso del FabLab", "Período": "Q2 a Q4" }
+        ];
+
+        // 2. Base de datos del personal
+        const colaboradoresData = [
+            { nombre: "Marco Canales", puesto: "Decano TGU", area: "Decanatura y Dirección", proys: { PRO1A: 'R', PRO1B: 'A', PRO1C: 'L', PRO1D: 'R', PRO1E: 'A', PRO1F: 'R', PRO1G: 'R', PRO1H: 'A', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'R', PRO2F: 'R', PRO2G: 'A', PRO2H: 'A', PRO3A: 'A', PRO3B: 'A', PRO3C: 'A', PRO3D: 'R' } },
+            { nombre: "Edwin Dore", puesto: "Director SPS", area: "Decanatura y Dirección", proys: { PRO1A: 'R', PRO1B: 'A', PRO1C: 'R', PRO1D: 'L', PRO1E: 'A', PRO1F: 'R', PRO1G: 'R', PRO1H: 'A', PRO1I: 'L', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'R', PRO2F: 'A', PRO2G: 'A', PRO2H: 'A', PRO3A: 'A', PRO3B: 'A', PRO3C: 'A', PRO3D: 'R' } },
+            { nombre: "Karen Martinez", puesto: "Oficial TGU", area: "Decanatura y Dirección", proys: { PRO1A: 'A', PRO1B: 'A', PRO1G: 'A', PRO2B: 'A', PRO2E: 'A', PRO2G: 'A', PRO3A: 'L', PRO3D: 'R' } },
+            { nombre: "Pendiente - Oficial SPS", puesto: "Oficial SPS", area: "Decanatura y Dirección", proys: { PRO1A: 'A', PRO1B: 'A', PRO1G: 'A', PRO2B: 'A', PRO2E: 'A', PRO2G: 'A', PRO3A: 'L', PRO3D: 'R' } },
+            { nombre: "Geovanny Fortín", puesto: "Coordinador FabLab", area: "Decanatura y Dirección", proys: { PRO1G: 'R', PRO1H: 'A', PRO1I: 'A', PRO2A: 'L', PRO2B: 'L', PRO2C: 'R', PRO2F: 'L', PRO2G: 'A', PRO2H: 'R', PRO3A: 'R', PRO3B: 'A', PRO3C: 'A', PRO3D: 'R', PRO3E: 'R' } },
+            { nombre: "Winder Matamoros", puesto: "Coordinador Lab SPS", area: "Decanatura y Dirección", proys: { PRO1D: 'A', PRO1E: 'A', PRO1F: 'A', PRO1G: 'A', PRO1H: 'A', PRO2B: 'A', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3A: 'A', PRO3D: 'R', PRO3E: 'R' } },
+            { nombre: "Reynod Bocanegra", puesto: "Jefe Academico TGU", area: "Ciencias de la Computación", proys: { PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'R', PRO1H: 'R', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'R', PRO2F: 'A', PRO2G: 'L', PRO3B: 'R', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Carlos Roberto Perez", puesto: "Coordinador SPS", area: "Ciencias de la Computación", proys: { PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'R', PRO1H: 'R', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'R', PRO2F: 'A', PRO2G: 'R', PRO3B: 'L', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Georgina Galeano", puesto: "Jefe Academico TGU", area: "Industrial y de Sistemas", proys: { PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'L', PRO1H: 'R', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'L', PRO2D: 'R', PRO2E: 'R', PRO2F: 'A', PRO2G: 'A', PRO3B: 'R', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Cristhyan Rivera", puesto: "Coordinador Academico SPS", area: "Industrial y de Sistemas", proys: { PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'R', PRO1H: 'R', PRO1I: 'R', PRO2A: 'L', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'R', PRO2F: 'A', PRO2G: 'A', PRO3B: 'R', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Mendel Nelson", puesto: "Docente TGU", area: "Industrial y de Sistemas", proys: { PRO1D: 'A', PRO1E: 'R', PRO1F: 'A', PRO1H: 'R', PRO2B: 'R', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3D: 'R' } },
+            { nombre: "Pendiente - Docente IND", puesto: "Docente Investigador TGU", area: "Industrial y de Sistemas", proys: { PRO1D: 'A', PRO1E: 'R', PRO1F: 'A', PRO1H: 'R', PRO2B: 'A', PRO2C: 'A', PRO2G: 'A', PRO3D: 'R' } },
+            { nombre: "Maria Elena Perdomo", puesto: "Docente Investigador SPS", area: "Industrial y de Sistemas", proys: { PRO1D: 'A', PRO1E: 'R', PRO1F: 'A', PRO1H: 'R', PRO2B: 'A', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3D: 'R' } },
+            { nombre: "Julio Cesar Lopez", puesto: "Jefe Academico TGU", area: "Civil", proys: { PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'R', PRO1H: 'R', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'L', PRO2F: 'A', PRO2G: 'A', PRO3B: 'R', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Hector Padilla", puesto: "Jefe Academico SPS", area: "Civil", proys: { PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'R', PRO1H: 'R', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'L', PRO2E: 'R', PRO2F: 'A', PRO2G: 'A', PRO3B: 'R', PRO3C: 'L', PRO3D: 'R' } },
+            { nombre: "Ada Rodriguez", puesto: "Docente Investigador SPS", area: "Civil", proys: { PRO1E: 'R', PRO1F: 'A', PRO1H: 'R', PRO2B: 'A', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3D: 'R' } },
+            { nombre: "Juan Carlos Reyes", puesto: "Coordinador Lab TGU", area: "Civil", proys: { PRO1D: 'A', PRO1E: 'A', PRO1F: 'A', PRO1H: 'A', PRO2B: 'R', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3A: 'A', PRO3D: 'R' } },
+            { nombre: "Pendiente - Docente CIV", puesto: "Docente Asociado TGU", area: "Civil", proys: { PRO1D: 'A', PRO1E: 'R', PRO1F: 'A', PRO1H: 'R', PRO2B: 'A', PRO2G: 'A', PRO3D: 'R' } },
+            { nombre: "Rene Leon", puesto: "Jefe Academico TGU", area: "Mecatrónica", proys: { PRO1B: 'L', PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'R', PRO1H: 'R', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'R', PRO2F: 'A', PRO2G: 'R', PRO3B: 'R', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Juan Miguel Mejia", puesto: "Jefe Academico SPS", area: "Mecatrónica", proys: { PRO1B: 'R', PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'L', PRO1H: 'R', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'R', PRO2F: 'A', PRO2G: 'A', PRO2H: 'L', PRO3B: 'R', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Favell Nuñez", puesto: "Docente Investigador TGU", area: "Mecatrónica", proys: { PRO1B: 'R', PRO1D: 'A', PRO1E: 'R', PRO1F: 'A', PRO1H: 'L', PRO2B: 'R', PRO2C: 'A', PRO2G: 'A', PRO2H: 'L', PRO3D: 'R' } },
+            { nombre: "Jose Luis Ordoñez", puesto: "Docente Investigador SPS", area: "Mecatrónica", proys: { PRO1B: 'R', PRO1D: 'A', PRO1E: 'R', PRO1F: 'A', PRO1H: 'R', PRO2B: 'A', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3D: 'R' } },
+            { nombre: "Daniel Ramos", puesto: "Coordinador Lab TGU", area: "Mecatrónica", proys: { PRO1B: 'R', PRO1D: 'A', PRO1E: 'A', PRO1F: 'A', PRO1H: 'A', PRO2B: 'R', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3A: 'A', PRO3D: 'R', PRO3E: 'R' } },
+            { nombre: "Fernanda Cáceres", puesto: "Jefe Academico TGU", area: "Biomédica", proys: { PRO1B: 'R', PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'R', PRO1H: 'R', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'L', PRO2E: 'R', PRO2F: 'A', PRO2G: 'A', PRO3B: 'R', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Reyna Valle", puesto: "Jefe Academico SPS", area: "Biomédica", proys: { PRO1B: 'L', PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'R', PRO1H: 'R', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'L', PRO2D: 'R', PRO2E: 'R', PRO2F: 'A', PRO2G: 'A', PRO3B: 'R', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Yaro Cáceres", puesto: "Docente TGU", area: "Biomédica", proys: { PRO1B: 'R', PRO1D: 'A', PRO1E: 'R', PRO1F: 'A', PRO1H: 'R', PRO2B: 'R', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3D: 'R' } },
+            { nombre: "Manuel Gamero", puesto: "Docente Asociado SPS", area: "Biomédica", proys: { PRO1B: 'R', PRO1D: 'A', PRO1E: 'R', PRO1F: 'A', PRO1H: 'R', PRO2B: 'R', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3D: 'R' } },
+            { nombre: "Pendiente - Docente BMD", puesto: "Docente Investigador SPS", area: "Biomédica", proys: { PRO1B: 'R', PRO1D: 'A', PRO1E: 'R', PRO1F: 'A', PRO1H: 'R', PRO2B: 'R', PRO2C: 'A', PRO2G: 'A', PRO3D: 'R' } },
+            { nombre: "Roger Ponce", puesto: "Jefe Academico TGU", area: "Energía y Telecomunicaciones", proys: { PRO1A: 'L', PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'R', PRO1H: 'R', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'R', PRO2F: 'A', PRO2G: 'A', PRO3B: 'L', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Vielka Barahona", puesto: "Jefe Academico SPS", area: "Energía y Telecomunicaciones", proys: { PRO1A: 'R', PRO1C: 'R', PRO1D: 'R', PRO1E: 'R', PRO1F: 'R', PRO1H: 'R', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'R', PRO2F: 'A', PRO2G: 'L', PRO3C: 'L', PRO3D: 'R' } },
+            { nombre: "Pendiente - Docente TEL", puesto: "Docente TGU", area: "Energía y Telecomunicaciones", proys: { PRO1A: 'R', PRO1E: 'R', PRO1F: 'A', PRO1H: 'R', PRO2B: 'R', PRO2G: 'A', PRO3D: 'R' } },
+            { nombre: "Alex Sanchez", puesto: "Jefe Academico TGU", area: "Ciencias y Matemáticas", proys: { PRO1C: 'R', PRO1D: 'R', PRO1E: 'L', PRO1F: 'A', PRO1G: 'L', PRO1H: 'A', PRO1I: 'A', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2F: 'A', PRO2G: 'A', PRO3B: 'R', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Julio Enrique Ramirez", puesto: "Jefe Academico SPS", area: "Ciencias y Matemáticas", proys: { PRO1C: 'R', PRO1D: 'R', PRO1E: 'L', PRO1F: 'A', PRO1G: 'L', PRO1H: 'A', PRO1I: 'A', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2F: 'A', PRO2G: 'A', PRO3B: 'R', PRO3C: 'R', PRO3D: 'R' } },
+            { nombre: "Nereyda Lainez", puesto: "Coordinador Lab TGU", area: "Ciencias y Matemáticas", proys: { PRO1D: 'A', PRO1E: 'A', PRO1F: 'A', PRO1G: 'A', PRO1H: 'A', PRO2B: 'R', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3D: 'R' } },
+            { nombre: "Emilson Fortín", puesto: "Auxiliar Lab TGU", area: "Ciencias y Matemáticas", proys: { PRO1D: 'A', PRO1E: 'A', PRO1F: 'A', PRO1G: 'A', PRO1H: 'A', PRO2B: 'A', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3A: 'A', PRO3D: 'R', PRO3E: 'R' } },
+            { nombre: "Tatiana Suazo", puesto: "Docente Asociado TGU", area: "Ciencias y Matemáticas", proys: { PRO1D: 'R', PRO1E: 'R', PRO1F: 'A', PRO1G: 'R', PRO1H: 'R', PRO2B: 'R', PRO2C: 'A', PRO2G: 'A', PRO2H: 'A', PRO3D: 'R' } }
+        ];
+
+        // Orden de las áreas para el sidebar
+        const areasOrden = [
+            "Decanatura y Dirección",
+            "Ciencias de la Computación",
+            "Industrial y de Sistemas",
+            "Civil",
+            "Mecatrónica",
+            "Biomédica",
+            "Energía y Telecomunicaciones",
+            "Ciencias y Matemáticas"
+        ];
+
+        const jerarquiaEjes = [
+            {
+                nombre: "1. Transformación del aprendizaje",
+                impactos: [
+                    "Ecosistema de aprendizaje", "Campus y sedes referentes", "Docentes como motor de la innovación educativa y del aprendizaje continuo", "Propuesta institucional de aprendizaje a lo largo de la vida", "Experiencia estudiantil transformadora"
+                ]
+            },
+            {
+                nombre: "2. Incidencia local y conexión global",
+                impactos: [
+                    "Vinculación institucional estratégica", "Presencia global", "Investigación e innovación para el desarrollo"
+                ]
+            },
+            {
+                nombre: "3. Fortalecimiento institucional",
+                impactos: [
+                    "Cultura organizacional de alto desempeño e inclusiva", "Gobernanza institucional sostenible", "Gestión ambiental", "Capacidades tecnológicas fortalecidas"
+                ]
+            }
+        ];
+
+        // Variables de estado para los filtros
+        let filtroActualTipo = 'todos';
+        let filtroActualValor = '';
+        let colaboradorActivo = null;
+
+        function normalizeStr(str) {
+            if (!str) return "";
+            return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+        }
+
+        function getProjectTeam(projectId) {
+            const team = { L: [], R: [], A: [] };
+            colaboradoresData.forEach(colab => {
+                const role = colab.proys[projectId];
+                if (role && (role === 'L' || role === 'R' || role === 'A')) {
+                    team[role].push(colab.nombre);
+                }
+            });
+            return team;
+        }
+
+        // RENDER DE BARRA LATERAL (COLABORADORES)
+        function renderSidebar() {
+            const container = document.getElementById('sidebar-colaboradores');
+            container.innerHTML = '';
+
+            areasOrden.forEach(areaNombre => {
+                const colaboradoresDelArea = colaboradoresData.filter(c => c.area === areaNombre);
+                if (colaboradoresDelArea.length === 0) return;
+
+                const areaHeader = document.createElement('div');
+                areaHeader.className = 'mt-5 mb-2 text-[10px] font-black text-gray-400 uppercase tracking-widest pl-2 border-l-2 border-gray-300';
+                areaHeader.textContent = areaNombre;
+                container.appendChild(areaHeader);
+
+                colaboradoresDelArea.forEach(colab => {
+                    const btn = document.createElement('button');
+                    const isActive = (colaboradorActivo === colab.nombre);
+                    
+                    btn.className = `w-full text-left p-2.5 rounded-md mb-1 flex flex-col transition-all duration-200 border group
+                        ${isActive 
+                            ? 'bg-unitec-federal text-white border-unitec-federal shadow-md' 
+                            : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:border-unitec-cyan'}`;
+
+                    btn.innerHTML = `
+                        <span class="text-xs font-bold truncate block w-full ${isActive ? 'text-white' : 'text-unitec-federal group-hover:text-unitec-cyan'}">${colab.nombre}</span>
+                        <span class="text-[10px] truncate block w-full ${isActive ? 'text-blue-200 font-medium' : 'text-gray-500'}">${colab.puesto}</span>
+                    `;
+
+                    btn.onclick = () => seleccionarColaborador(colab.nombre);
+                    container.appendChild(btn);
+                });
+            });
+
+            const badge = document.getElementById('colaborador-badge');
+            const badgeNombre = document.getElementById('colaborador-nombre-badge');
+            if (colaboradorActivo) {
+                badgeNombre.textContent = colaboradorActivo;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        // ACCIÓN AL SELECCIONAR COLABORADOR
+        function seleccionarColaborador(nombre) {
+            if (colaboradorActivo === nombre) {
+                colaboradorActivo = null; 
+            } else {
+                colaboradorActivo = nombre;
+            }
+            renderSidebar();
+            aplicarFiltrosCombinados();
+        }
+
+        // FNC PARA COLAPSAR/EXPANDIR LOS FILTROS
+        function toggleFilters() {
+            const body = document.getElementById('filters-body');
+            const chevron = document.getElementById('filters-chevron');
+            
+            if (body.classList.contains('hidden')) {
+                body.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                body.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        }
+
+        // ACTUALIZA EL TEXTO DEL BADGE DE FILTRO
+        function actualizarBadgeFiltro() {
+            const badge = document.getElementById('filtro-aplicado-texto');
+            if (filtroActualTipo === 'todos') {
+                badge.textContent = 'Mostrando todos';
+            } else {
+                badge.textContent = filtroActualValor;
+            }
+        }
+
+        // RENDER DE FILTROS SUPERIORES (EJES/IMPACTOS)
+        function renderFilters() {
+            const container = document.getElementById('filters-grid');
+            container.innerHTML = '';
+
+            jerarquiaEjes.forEach(eje => {
+                let ejeHtml = `<div class="flex flex-col gap-2.5">`;
+                
+                const isEjeActive = (filtroActualTipo === 'eje' && filtroActualValor === eje.nombre);
+                const ejeClasses = isEjeActive
+                    ? "w-full text-left font-black bg-unitec-cyan text-unitec-federal p-3 md:p-3.5 border-2 border-unitec-federal transition-colors duration-300 text-xs md:text-sm flex justify-between items-center group shadow-sm"
+                    : "w-full text-left font-bold bg-unitec-federal text-white p-3 md:p-3.5 border-2 border-transparent hover:border-unitec-cyan transition-colors duration-300 text-xs md:text-sm flex justify-between items-center group shadow-sm";
+                const ejeDiamondColor = isEjeActive ? "bg-unitec-federal" : "bg-white";
+                
+                ejeHtml += `<button onclick="filtrarProyectos('eje', '${eje.nombre}')" class="${ejeClasses}">
+                                <span class="leading-tight">${eje.nombre}</span>
+                                <div class="w-2 h-2 shrink-0 ml-3 ${ejeDiamondColor} transform rotate-45 group-hover:bg-unitec-cyan transition-colors"></div>
+                            </button>`;
+                
+                eje.impactos.forEach(impacto => {
+                    const hasProjects = proyectosData.some(p => normalizeStr(p.Impacto) === normalizeStr(impacto));
+                    
+                    if (hasProjects) {
+                        const isImpactoActive = (filtroActualTipo === 'impacto' && filtroActualValor === impacto);
+                        const impactoClasses = isImpactoActive
+                            ? "w-full text-left text-[10px] md:text-xs p-3 border-2 border-unitec-federal text-white bg-unitec-federal transition-colors font-bold flex items-center shadow-sm"
+                            : "w-full text-left text-[10px] md:text-xs p-3 border-2 border-gray-200 text-unitec-federal bg-white hover:border-unitec-cyan transition-colors font-medium flex items-center shadow-sm";
+                        const impactoDiamondColor = isImpactoActive ? "bg-unitec-cyan" : "bg-unitec-sky";
+
+                        ejeHtml += `<button onclick="filtrarProyectos('impacto', '${impacto}')" class="${impactoClasses}">
+                                        <div class="w-1.5 h-1.5 shrink-0 ${impactoDiamondColor} transform rotate-45 mr-3"></div> 
+                                        <span class="leading-tight">${impacto}</span>
+                                    </button>`;
+                    } else {
+                        const isFuturoActive = (filtroActualTipo === 'futuro' && filtroActualValor === impacto);
+                        const futuroClasses = isFuturoActive
+                            ? "w-full text-left text-[10px] md:text-xs p-3 border-2 border-unitec-federal text-unitec-federal bg-gray-100 transition-colors font-bold"
+                            : "w-full text-left text-[10px] md:text-xs p-3 border-2 border-gray-100 bg-gray-50 text-gray-400 hover:border-gray-300 transition-colors font-medium";
+                        const futuroDiamondColor = isFuturoActive ? "bg-unitec-federal" : "bg-gray-300";
+
+                        ejeHtml += `<button onclick="mostrarEstrategiaFutura('${impacto}')" class="${futuroClasses}">
+                                        <div class="flex items-center"><div class="w-1.5 h-1.5 shrink-0 ${futuroDiamondColor} transform rotate-45 mr-3"></div> <span class="leading-tight">${impacto}</span></div>
+                                        <span class="text-[10px] ${isFuturoActive ? 'text-unitec-federal' : 'text-gray-400'} block mt-2 ml-4.5 italic">(Planificado post-2026)</span>
+                                    </button>`;
+                    }
+                });
+
+                ejeHtml += `</div>`;
+                container.insertAdjacentHTML('beforeend', ejeHtml);
+            });
+        }
+
+        // ACCIÓN AL SELECCIONAR EJE/IMPACTO
+        function filtrarProyectos(tipo, valor) {
+            filtroActualTipo = tipo;
+            filtroActualValor = valor;
+            
+            const btnTodos = document.getElementById('btn-mostrar-todos');
+            if (tipo === 'todos') {
+                btnTodos.className = "w-full xl:w-auto mt-2 xl:mt-0 bg-unitec-federal text-white border-2 border-unitec-federal font-black py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap cursor-default shadow-sm";
+            } else {
+                btnTodos.className = "w-full xl:w-auto mt-2 xl:mt-0 bg-white text-unitec-federal border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white font-bold py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap shadow-sm";
+            }
+
+            actualizarBadgeFiltro();
+            renderFilters();
+            aplicarFiltrosCombinados();
+        }
+
+        // LÓGICA CENTRAL DE FILTRADO COMBINADO
+        function aplicarFiltrosCombinados() {
+            if (filtroActualTipo === 'futuro') {
+                return;
+            }
+
+            let filtrados = proyectosData;
+
+            // 1. Aplicar filtro Eje / Impacto
+            if (filtroActualTipo === 'eje') {
+                const valorNorm = normalizeStr(filtroActualValor).replace(/^[0-9]\.\s*/, ''); 
+                filtrados = filtrados.filter(p => normalizeStr(p.Eje).includes(valorNorm));
+            } else if (filtroActualTipo === 'impacto') {
+                filtrados = filtrados.filter(p => normalizeStr(p.Impacto) === normalizeStr(filtroActualValor));
+            }
+
+            // 2. Renderizar (Agrupado por rol si hay colaborador activo)
+            renderProjectButtons(filtrados);
+        }
+
+        function mostrarEstrategiaFutura(impactoNombre) {
+            filtroActualTipo = 'futuro';
+            filtroActualValor = impactoNombre;
+            
+            const btnTodos = document.getElementById('btn-mostrar-todos');
+            btnTodos.className = "w-full xl:w-auto mt-2 xl:mt-0 bg-white text-unitec-federal border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white font-bold py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap shadow-sm";
+            
+            actualizarBadgeFiltro();
+            renderFilters();
+            document.getElementById('contador-proyectos').textContent = '0';
+
+            const container = document.getElementById('cards-container');
+            container.innerHTML = `
+                <div class="col-span-full bg-white border-2 border-unitec-federal p-6 md:p-8 relative shadow-sm">
+                    <div class="absolute -top-3 -right-3 w-6 h-6 bg-unitec-federal transform rotate-45 border-2 border-white"></div>
+                    <div class="flex flex-col md:flex-row items-start">
+                        <div class="md:ml-6 flex-grow">
+                            <span class="text-[10px] md:text-xs font-bold text-unitec-cyan uppercase tracking-widest block mb-1">Visión de Futuro</span>
+                            <h3 class="text-2xl md:text-3xl font-black text-unitec-federal mb-4 uppercase tracking-tight">Estrategia Multi-año</h3>
+                            <h4 class="text-base md:text-lg font-bold text-gray-800 mb-4 border-l-4 border-unitec-cyan pl-3">${impactoNombre}</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm md:text-base mb-6 font-medium max-w-4xl">
+                                Esta distribución de objetivos forma parte de una estrategia multi-año a nivel institucional. 
+                                En el <strong>2026 no se tienen proyectos mapeados</strong> a este impacto específico en la Facultad de Ingeniería de UNITEC, 
+                                pero esto evolucionará en base a nuestro crecimiento institucional planificado para el 2027 en adelante.
+                            </p>
+                            <button onclick="filtrarProyectos('todos', '')" class="bg-unitec-federal text-white hover:bg-unitec-cyan font-bold py-3 px-6 transition-colors text-xs md:text-sm uppercase tracking-wider shadow-sm">
+                                Volver al Portafolio Actual
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // CONSTRUCCIÓN DEL HTML PARA UN BOTÓN INDIVIDUAL
+        function buildButtonHTML(p) {
+            return `
+                <button onclick="abrirFicha('${p['Codigo']}')" class="bg-white border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white text-unitec-federal transition-all duration-300 p-4 rounded shadow-sm flex flex-col items-start text-left group w-full relative overflow-hidden">
+                    <span class="bg-unitec-cyan text-white text-[10px] font-bold px-2 py-0.5 mb-3 tracking-widest uppercase shadow-sm relative z-10">${p['Codigo']}</span>
+                    <span class="font-black text-sm md:text-base leading-tight relative z-10 group-hover:text-white transition-colors">${p['Nombre Breve']}</span>
+                    
+                    <!-- Elemento decorativo hover -->
+                    <div class="absolute -bottom-6 -right-6 text-unitec-sky opacity-0 group-hover:opacity-20 transition-opacity duration-300 z-0">
+                        <i class="fas fa-project-diagram text-6xl"></i>
+                    </div>
+                </button>
+            `;
+        }
+
+        // CONSTRUCCIÓN DEL BLOQUE DE ROL (Líder, Responsable, Apoyo)
+        function buildRoleSection(title, badgeClasses, badgeLetter, proyectosList) {
+            return `
+                <div class="mb-4">
+                    <h4 class="text-xs md:text-sm font-black text-gray-800 uppercase tracking-widest mb-4 flex items-center border-b border-gray-200 pb-2">
+                        <span class="w-6 h-6 flex items-center justify-center rounded-sm text-[10px] mr-2 shadow-sm ${badgeClasses}">${badgeLetter}</span>
+                        ${title} <span class="ml-2 text-gray-400 font-bold">(${proyectosList.length})</span>
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+                        ${proyectosList.map(p => buildButtonHTML(p)).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // RENDERIZA LOS BOTONES INTERACTIVOS DE PROYECTOS AGRUPADOS O GENERALES
+        function renderProjectButtons(proyectos) {
+            const container = document.getElementById('cards-container');
+            const contador = document.getElementById('contador-proyectos');
+            container.innerHTML = ''; 
+            
+            // Manejo de Estados Vacíos
+            if (proyectos.length === 0 || (colaboradorActivo && proyectos.filter(p => ['L','R','A'].includes(colaboradoresData.find(c => c.nombre === colaboradorActivo).proys[p.Codigo])).length === 0)) {
+                contador.textContent = '0';
+                let mensajeVacio = 'No se encontraron proyectos para los criterios seleccionados.';
+                
+                if (colaboradorActivo && filtroActualTipo !== 'todos') {
+                    mensajeVacio = `El colaborador <span class="text-unitec-cyan font-black">${colaboradorActivo}</span> no tiene proyectos asignados para el eje o impacto seleccionado.`;
+                } else if (colaboradorActivo) {
+                    mensajeVacio = `El colaborador <span class="text-unitec-cyan font-black">${colaboradorActivo}</span> no cuenta con proyectos asignados actualmente en el portafolio 2026.`;
+                }
+
+                container.innerHTML = `
+                    <div class="col-span-full flex flex-col items-center justify-center py-12 md:py-16 px-4 bg-gray-50 border border-gray-200 border-dashed rounded-lg text-center">
+                        <i class="fas fa-folder-open text-3xl md:text-4xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-500 font-medium text-base md:text-lg max-w-xl leading-relaxed">${mensajeVacio}</p>
+                        ${colaboradorActivo ? `<button onclick="seleccionarColaborador(null)" class="mt-4 text-xs md:text-sm text-unitec-federal font-bold hover:text-unitec-cyan underline decoration-2 underline-offset-4">Limpiar filtro de colaborador</button>` : ''}
+                    </div>`;
+                return;
+            }
+
+            // Lógica de agrupamiento si hay un colaborador seleccionado
+            if (colaboradorActivo) {
+                const colabInfo = colaboradoresData.find(c => c.nombre === colaboradorActivo);
+                const pLider = [];
+                const pResp = [];
+                const pApoyo = [];
+
+                proyectos.forEach(p => {
+                    const rol = colabInfo.proys[p.Codigo];
+                    if (rol === 'L') pLider.push(p);
+                    else if (rol === 'R') pResp.push(p);
+                    else if (rol === 'A') pApoyo.push(p);
+                });
+
+                contador.textContent = pLider.length + pResp.length + pApoyo.length;
+
+                if (pLider.length > 0) {
+                    container.insertAdjacentHTML('beforeend', buildRoleSection('Líder del Proyecto', 'bg-unitec-federal text-white', 'L', pLider));
+                }
+                if (pResp.length > 0) {
+                    container.insertAdjacentHTML('beforeend', buildRoleSection('Responsable', 'bg-unitec-cyan text-white', 'R', pResp));
+                }
+                if (pApoyo.length > 0) {
+                    container.insertAdjacentHTML('beforeend', buildRoleSection('Personal de Apoyo', 'bg-gray-200 text-gray-700', 'A', pApoyo));
+                }
+
+            } else {
+                // Render normal sin agrupaciones si no hay colaborador seleccionado
+                contador.textContent = proyectos.length;
+                const generalGridHTML = `
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 w-full">
+                        ${proyectos.map(p => buildButtonHTML(p)).join('')}
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', generalGridHTML);
+            }
+        }
+
+        // FUNCIONES DEL MODAL (FICHA COMPLETA)
+        function determinarCriterioACAAI(proyecto) {
+            const textoContexto = [proyecto['Nombre Breve'], proyecto['Impacto'], proyecto['Actividades Acordadas'], proyecto['Objetivo']].join(' ').toLowerCase();
+            if (textoContexto.includes('acreditacion') || textoContexto.includes('acaai') || textoContexto.includes('autoestudio')) return 'Criterio 10: Mejora Continua y Acreditación';
+            if (textoContexto.includes('curricular') || textoContexto.includes('estudio') || textoContexto.includes('clase')) return 'Criterio 3: Plan de Estudios';
+            if (textoContexto.includes('docente') || textoContexto.includes('capacitacion') || textoContexto.includes('taller')) return 'Criterio 1: Personal Docente';
+            if (textoContexto.includes('estudiant') || textoContexto.includes('prospeccion') || textoContexto.includes('admision')) return 'Criterio 2: Estudiantes';
+            if (textoContexto.includes('institucional') || textoContexto.includes('dga') || textoContexto.includes('colaboracion')) return 'Criterio 8: Apoyo Institucional';
+            return 'Criterio 10: Plan de Mejora Continua';
+        }
+
+        function normalizarPeriodo(periodoStr) {
+            if (!periodoStr) return "N/D";
+            return periodoStr.replace(/=/g, '-').replace(/y/gi, '&').toUpperCase().trim();
+        }
+
+        function abrirFicha(codigo) {
+            const p = proyectosData.find(x => x.Codigo === codigo);
+            if (!p) return;
+
+            const modal = document.getElementById('modal-ficha');
+            const backdrop = document.getElementById('modal-backdrop');
+            const content = document.getElementById('modal-content');
+            
+            const criterioACAAI = determinarCriterioACAAI(p);
+            const periodo = normalizarPeriodo(p['Período']);
+            const team = getProjectTeam(p['Codigo']);
+            
+            let equipoHTML = `<div class="border-t-2 border-gray-100 pt-4 mt-2">
+                                <span class="font-black text-unitec-federal block text-xs uppercase tracking-widest mb-3 flex items-center">
+                                    <i class="fas fa-users mr-2 text-unitec-cyan"></i> Equipo Asignado
+                                </span>
+                                <div class="flex flex-col gap-2">`;
+            
+            equipoHTML += `<div class="flex items-start"><span class="bg-unitec-federal text-white text-[10px] font-bold px-2 py-0.5 rounded-sm mr-2 w-7 text-center shrink-0 shadow-sm">L</span><span class="${team.L.length > 0 ? 'text-sm font-semibold text-unitec-federal' : 'text-xs italic text-gray-400 mt-0.5'}">${team.L.length > 0 ? team.L.join(', ') : 'En proceso de asignación'}</span></div>`;
+            equipoHTML += `<div class="flex items-start"><span class="bg-unitec-cyan text-white text-[10px] font-bold px-2 py-0.5 rounded-sm mr-2 w-7 text-center shrink-0 shadow-sm">R</span><span class="${team.R.length > 0 ? 'text-xs md:text-sm font-medium text-gray-700 leading-tight' : 'text-xs italic text-gray-400 mt-0.5'}">${team.R.length > 0 ? team.R.join(', ') : 'En proceso de asignación'}</span></div>`;
+            equipoHTML += `<div class="flex items-start"><span class="bg-gray-200 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-sm mr-2 w-7 text-center shrink-0 shadow-sm">A</span><span class="${team.A.length > 0 ? 'text-xs font-normal text-gray-500 leading-tight' : 'text-xs italic text-gray-400 mt-0.5'}">${team.A.length > 0 ? team.A.join(', ') : 'En proceso de asignación'}</span></div>`;
+            equipoHTML += `</div></div>`;
+
+            // Construir interior del modal (Reutilizando diseño de tarjeta original)
+            const cardHTML = `
+                <div class="bg-white border-2 border-unitec-federal flex flex-col relative card-impresion shadow-2xl">
+                    
+                    <!-- Botón de Cerrar Modal -->
+                    <button onclick="cerrarFicha()" class="absolute top-3 md:top-4 right-3 md:right-4 text-white hover:text-unitec-cyan transition-colors z-20 focus:outline-none bg-unitec-federal rounded-full w-8 h-8 flex items-center justify-center shadow-md no-print">
+                        <i class="fas fa-times fa-lg"></i>
+                    </button>
+
+                    <div class="bg-unitec-federal text-white p-5 pr-14 transition-colors">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between items-start gap-3 md:gap-4">
+                            <h3 class="font-black text-xl md:text-2xl leading-tight uppercase tracking-tight">${p['Nombre Breve'] || 'Proyecto Sin Nombre'}</h3>
+                            <span class="bg-unitec-cyan text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 whitespace-nowrap tracking-widest border border-unitec-cyan shadow-sm self-start md:self-auto">
+                                ${p['Codigo'] || '-'}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-5 md:p-8 flex-grow flex flex-col gap-6 text-sm">
+                        <div class="border-l-4 border-unitec-federal pl-4">
+                            <div class="mb-3">
+                                <span class="font-black text-unitec-federal block text-[10px] uppercase tracking-widest mb-1">Eje Institucional</span>
+                                <span class="text-gray-800 font-semibold text-sm md:text-base">${p['Eje'] || 'No especificado'}</span>
+                            </div>
+                            <div>
+                                <span class="font-black text-unitec-federal block text-[10px] uppercase tracking-widest mb-1">Impacto Asociado</span>
+                                <span class="text-gray-800 font-medium text-sm md:text-base flex items-center">
+                                    <div class="w-1.5 h-1.5 shrink-0 bg-unitec-cyan transform rotate-45 mr-2"></div>
+                                    <span class="leading-tight">${p['Impacto'] || 'No especificado'}</span>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <span class="font-black text-white bg-unitec-federal px-2 py-1 text-[10px] uppercase tracking-widest inline-block mb-3 shadow-sm">Actividades Acordadas</span>
+                            <p class="text-gray-700 leading-relaxed font-medium text-sm md:text-base">${p['Actividades Acordadas'] || 'Ninguna actividad descrita.'}</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-50 p-4 border border-gray-200 flex flex-col">
+                                <span class="font-bold text-unitec-cyan block text-[10px] uppercase tracking-widest mb-2">Indicador</span>
+                                <span class="text-gray-800 font-medium text-xs md:text-sm flex-grow">${p['Indicador'] || '-'}</span>
+                            </div>
+                            <div class="bg-gray-50 p-4 border border-gray-200 flex flex-col">
+                                <span class="font-bold text-unitec-cyan block text-[10px] uppercase tracking-widest mb-2">Métrica</span>
+                                <span class="text-gray-800 font-medium text-xs md:text-sm flex-grow">${p['Metrica'] || '-'}</span>
+                            </div>
+                        </div>
+
+                        <div class="border-t-2 border-gray-100 pt-4 mt-2">
+                            <span class="font-black text-unitec-federal block text-xs uppercase tracking-widest mb-2 flex items-center">
+                                Resultados Esperados
+                            </span>
+                            <p class="text-gray-600 font-medium italic text-sm md:text-base">${p['Resultados Esperados'] || '-'}</p>
+                        </div>
+                        
+                        ${equipoHTML}
+                        
+                        <div class="mt-auto pt-4">
+                            <span class="font-bold text-gray-400 block text-[10px] uppercase tracking-widest mb-2">Criterio ACAAI Relacionado</span>
+                            <span class="inline-block border border-unitec-federal text-unitec-federal font-bold text-xs px-3 py-1">
+                                ${criterioACAAI}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-50 p-4 md:p-5 border-t-2 border-unitec-federal flex justify-between items-center">
+                        <span class="text-[10px] font-black text-unitec-federal uppercase tracking-widest">Ejecución</span>
+                        <span class="text-unitec-federal font-black text-sm md:text-base flex items-center tracking-wider">
+                            <div class="w-2 h-2 shrink-0 border border-unitec-federal transform rotate-45 mr-2"></div>
+                            ${periodo}
+                        </span>
+                    </div>
+                </div>
+            `;
+            
+            content.innerHTML = cardHTML;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                content.classList.remove('opacity-0', 'scale-95');
+            }, 10);
+        }
+
+        function cerrarFicha() {
+            const modal = document.getElementById('modal-ficha');
+            const backdrop = document.getElementById('modal-backdrop');
+            const content = document.getElementById('modal-content');
+            
+            backdrop.classList.add('opacity-0');
+            content.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        window.onload = () => {
+            renderSidebar();
+            filtrarProyectos('todos', '');
+        };
+    </script>
+</body>
+</html>
