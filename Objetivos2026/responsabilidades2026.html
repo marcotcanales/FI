@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsabilidades y Rúbricas | Facultad de Ingeniería UNITEC</title>
+    
+    <!-- Tipografía Institucional: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unitec: {
+                            federal: '#06065C', /* Federal Blue */
+                            pacific: '#03AED2', /* Pacific Cyan */
+                            sky: '#47C8FD',     /* Vivid Sky Blue */
+                            light: '#F8FAFC',
+                            gray: '#4B5563'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Scrollbar personalizado */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-unitec-federal selection:bg-unitec-pacific selection:text-white h-screen flex flex-col overflow-hidden relative">
+
+    <!-- Encabezado Corporativo -->
+    <header class="bg-unitec-federal text-white border-b-4 border-unitec-pacific shrink-0 z-20">
+        <div class="px-4 md:px-6 py-3 md:py-4 flex flex-col md:flex-row justify-between items-center w-full">
+            <div class="flex items-center mb-2 md:mb-0">
+                <!-- Isotipo -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-3 md:w-8 md:h-8">
+                    <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#03AED2"/>
+                </svg>
+                <span class="text-2xl md:text-3xl font-bold tracking-tight mt-1 lowercase">unitec</span>
+                <span class="text-unitec-pacific font-light text-xl md:text-2xl ml-2 mt-1 hidden sm:block">| Ingeniería</span>
+            </div>
+            <div class="text-center md:text-right">
+                <h1 class="text-base md:text-lg font-bold text-unitec-sky uppercase tracking-widest leading-none">Catálogo de Responsabilidades</h1>
+                <p class="mt-1 text-[10px] md:text-xs font-medium text-white/80">Rúbricas de Evaluación de Desempeño</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal (Sidebar + Contenido) -->
+    <div class="flex flex-col md:flex-row flex-1 overflow-hidden w-full bg-white">
+        
+        <!-- SIDEBAR: Menú Vertical de Colaboradores -->
+        <aside class="w-full md:w-80 bg-slate-50 border-b md:border-b-0 md:border-r border-gray-200 shrink-0 flex flex-col h-[35vh] md:h-full z-10 relative shadow-[4px_0_15px_-3px_rgba(0,0,0,0.05)]">
+            <div class="p-4 md:p-5 border-b border-gray-200 bg-white shrink-0">
+                <h2 class="text-base md:text-lg font-black text-unitec-federal uppercase tracking-widest flex items-center">
+                    <i class="fas fa-sitemap mr-2 text-unitec-pacific"></i> Colaboradores
+                </h2>
+                <p class="text-[10px] md:text-xs text-gray-500 mt-1 font-medium">Seleccione a un miembro para ver sus responsabilidades asignadas.</p>
+                
+                <!-- Badge de filtro activo (oculto por defecto) -->
+                <div id="colaborador-badge" class="hidden mt-3 bg-blue-50 border border-blue-200 px-3 py-2 flex justify-between items-center rounded-md">
+                    <span class="text-xs font-bold text-unitec-federal truncate mr-2" id="colaborador-nombre-badge"></span>
+                    <button onclick="seleccionarColaborador(null)" class="text-gray-400 hover:text-red-500 transition-colors" title="Limpiar filtro">
+                        <i class="fas fa-times-circle"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-3" id="sidebar-colaboradores">
+                <!-- Se inyectará dinámicamente -->
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL: Grid de Responsabilidades -->
+        <main id="main-content" class="flex-1 overflow-y-auto custom-scrollbar bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8">
+                
+                <!-- Instrucciones -->
+                <div class="bg-white border border-gray-200 border-l-4 border-l-unitec-pacific p-5 mb-8 shadow-sm">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-list-check text-unitec-pacific mt-1 text-lg"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-sm font-bold text-unitec-federal uppercase tracking-wider">Diccionario de Responsabilidades</h3>
+                            <div class="mt-1 text-xs md:text-sm text-gray-600 font-light leading-relaxed">
+                                <p>Explora el catálogo de responsabilidades de la Facultad. Haz clic en cualquiera de ellas para visualizar la rúbrica de evaluación (escala de 1 a 4).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estado del Listado -->
+                <div class="flex items-center justify-between border-b border-gray-200 pb-3 mb-6">
+                    <h3 class="text-lg font-black text-unitec-federal uppercase tracking-wider flex items-center">
+                        <i class="fas fa-clipboard-list mr-2 text-unitec-pacific"></i> Responsabilidades
+                    </h3>
+                    <span id="contador-rsp" class="text-xs font-bold bg-gray-100 text-gray-500 px-3 py-1 rounded-full">0</span>
+                </div>
+
+                <!-- Contenedor de Botones -->
+                <div id="cards-container" class="pb-12">
+                    <!-- Se inyectará dinámicamente -->
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL PARA LA FICHA DE RÚBRICA -->
+    <div id="modal-ficha" class="fixed inset-0 z-50 hidden items-center justify-center pointer-events-none">
+        <!-- Backdrop oscuro -->
+        <div id="modal-backdrop" class="absolute inset-0 bg-unitec-federal/80 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto" onclick="cerrarFicha()"></div>
+        
+        <!-- Contenedor de la Ficha -->
+        <div id="modal-content" class="bg-transparent w-full max-w-2xl max-h-[90vh] overflow-y-auto custom-scrollbar relative z-10 opacity-0 transform scale-95 transition-all duration-300 pointer-events-auto p-4">
+            <!-- La ficha completa se inyecta aquí -->
+        </div>
+    </div>
+
+    <script>
+        // 1. Datos Estructurados de Colaboradores (Asignaciones de RSP vacías por ahora)
+        const colaboradoresData = [
+            { nombre: "Marco Canales", puesto: "Decano TGU", rsp: [], area: "Decanatura y Dirección" },
+            { nombre: "Edwin Dore", puesto: "Director SPS", rsp: [], area: "Decanatura y Dirección" },
+            { nombre: "Karen Martinez", puesto: "Oficial TGU", rsp: [], area: "Decanatura y Dirección" },
+            { nombre: "Pendiente - Oficial SPS", puesto: "Oficial SPS", rsp: [], area: "Decanatura y Dirección" },
+            { nombre: "Geovanny Fortín", puesto: "Coordinador FabLab", rsp: [], area: "Decanatura y Dirección" },
+            { nombre: "Winder Matamoros", puesto: "Coordinador Lab SPS", rsp: [], area: "Decanatura y Dirección" },
+
+            { nombre: "Reynod Bocanegra", puesto: "Jefe Academico TGU", rsp: [], area: "Ciencias de la Computación" },
+            { nombre: "Carlos Roberto Perez", puesto: "Coordinador SPS", rsp: [], area: "Ciencias de la Computación" },
+
+            { nombre: "Georgina Galeano", puesto: "Jefe Academico TGU", rsp: [], area: "Industrial y de Sistemas" },
+            { nombre: "Cristhyan Rivera", puesto: "Coordinador Academico SPS", rsp: [], area: "Industrial y de Sistemas" },
+            { nombre: "Mendel Nelson", puesto: "Docente TGU", rsp: [], area: "Industrial y de Sistemas" },
+            { nombre: "Pendiente - Docente IND", puesto: "Docente Investigador TGU", rsp: [], area: "Industrial y de Sistemas" },
+            { nombre: "Maria Elena Perdomo", puesto: "Docente Investigador SPS", rsp: [], area: "Industrial y de Sistemas" },
+
+            { nombre: "Julio Cesar Lopez", puesto: "Jefe Academico TGU", rsp: [], area: "Civil" },
+            { nombre: "Hector Padilla", puesto: "Jefe Academico SPS", rsp: [], area: "Civil" },
+            { nombre: "Ada Rodriguez", puesto: "Docente Investigador SPS", rsp: [], area: "Civil" },
+            { nombre: "Juan Carlos Reyes", puesto: "Coordinador Lab TGU", rsp: [], area: "Civil" },
+            { nombre: "Pendiente - Docente CIV", puesto: "Docente Asociado TGU", rsp: [], area: "Civil" },
+
+            { nombre: "Rene Leon", puesto: "Jefe Academico TGU", rsp: [], area: "Mecatrónica" },
+            { nombre: "Juan Miguel Mejia", puesto: "Jefe Academico SPS", rsp: [], area: "Mecatrónica" },
+            { nombre: "Favell Nuñez", puesto: "Docente Investigador TGU", rsp: [], area: "Mecatrónica" },
+            { nombre: "Jose Luis Ordoñez", puesto: "Docente Investigador SPS", rsp: [], area: "Mecatrónica" },
+            { nombre: "Daniel Ramos", puesto: "Coordinador Lab TGU", rsp: [], area: "Mecatrónica" },
+
+            { nombre: "Fernanda Cáceres", puesto: "Jefe Academico TGU", rsp: [], area: "Biomédica" },
+            { nombre: "Reyna Valle", puesto: "Jefe Academico SPS", rsp: [], area: "Biomédica" },
+            { nombre: "Yaro Cáceres", puesto: "Docente TGU", rsp: [], area: "Biomédica" },
+            { nombre: "Manuel Gamero", puesto: "Docente Asociado SPS", rsp: [], area: "Biomédica" },
+            { nombre: "Pendiente - Docente BMD", puesto: "Docente Investigador SPS", rsp: [], area: "Biomédica" },
+
+            { nombre: "Roger Ponce", puesto: "Jefe Academico TGU", rsp: [], area: "Energía y Telecomunicaciones" },
+            { nombre: "Vielka Barahona", puesto: "Jefe Academico SPS", rsp: [], area: "Energía y Telecomunicaciones" },
+            { nombre: "Pendiente - Docente TEL", puesto: "Docente TGU", rsp: [], area: "Energía y Telecomunicaciones" },
+
+            { nombre: "Alex Sanchez", puesto: "Jefe Academico TGU", rsp: [], area: "Ciencias y Matemáticas" },
+            { nombre: "Julio Enrique Ramirez", puesto: "Jefe Academico SPS", rsp: [], area: "Ciencias y Matemáticas" },
+            { nombre: "Nereyda Lainez", puesto: "Coordinador Lab TGU", rsp: [], area: "Ciencias y Matemáticas" },
+            { nombre: "Emilson Fortín", puesto: "Auxiliar Lab TGU", rsp: [], area: "Ciencias y Matemáticas" },
+            { nombre: "Tatiana Suazo", puesto: "Docente Asociado TGU", rsp: [], area: "Ciencias y Matemáticas" }
+        ];
+
+        // 2. Base de Datos de Responsabilidades extraídas del CSV
+        const rspData = [
+            { id: 1, codigo: "RSP1", nombre: "Planificación académica", icon: "fa-calendar-alt" },
+            { id: 2, codigo: "RSP2", nombre: "Cumplimiento normativo", icon: "fa-file-signature" },
+            { id: 3, codigo: "RSP3", nombre: "Seguimiento académico", icon: "fa-user-graduate" },
+            { id: 4, codigo: "RSP4", nombre: "Acompañamiento Docente", icon: "fa-chalkboard-teacher" },
+            { id: 5, codigo: "RSP5", nombre: "Innovación pedagógica", icon: "fa-lightbulb" },
+            { id: 6, codigo: "RSP6", nombre: "Atención al estudiante", icon: "fa-hands-helping" },
+            { id: 7, codigo: "RSP7", nombre: "Retención y progresión", icon: "fa-chart-line" },
+            { id: 8, codigo: "RSP8", nombre: "Vinculación con industria", icon: "fa-industry" },
+            { id: 9, codigo: "RSP9", nombre: "Internacionalización académica", icon: "fa-globe" },
+            { id: 10, codigo: "RSP10", nombre: "Uso de indicadores", icon: "fa-chart-pie" },
+            { id: 11, codigo: "RSP11", nombre: "Mejora continua", icon: "fa-sync-alt" },
+            { id: 12, codigo: "RSP12", nombre: "Gestión de compras y materiales", icon: "fa-shopping-cart" },
+            { id: 13, codigo: "RSP13", nombre: "Logística de Actividades", icon: "fa-boxes" },
+            { id: 14, codigo: "RSP14", nombre: "Colaboración Institucional", icon: "fa-building" },
+            { id: 15, codigo: "RSP15", nombre: "Atención a Visitas, Estudiantes y Docentes", icon: "fa-comments" },
+            { id: 16, codigo: "RSP16", nombre: "Apoyo en Procesos de Matrícula", icon: "fa-id-card" },
+            { id: 17, codigo: "RSP17", nombre: "Ecosistema de Aprendizaje (Metodologías)", icon: "fa-laptop-code" },
+            { id: 18, codigo: "RSP18", nombre: "Calidad Académica", icon: "fa-award" },
+            { id: 19, codigo: "RSP19", nombre: "Actualización de Conocimiento", icon: "fa-book-reader" },
+            { id: 20, codigo: "RSP20", nombre: "Cumplimiento Administrativo (Matrícula, Graduación y Notas)", icon: "fa-folder-open" },
+            { id: 21, codigo: "RSP21", nombre: "Colaboración Internacional", icon: "fa-handshake" },
+            { id: 22, codigo: "RSP22", nombre: "Proyectos de Impacto (Investigación, Innovación o Social)", icon: "fa-rocket" },
+            { id: 23, codigo: "RSP23", nombre: "Fidelización de Promotores externos (Reputación Institucional)", icon: "fa-star" },
+            { id: 24, codigo: "RSP24", nombre: "Visibilización de Proyectos e Iniciativas", icon: "fa-bullhorn" },
+            { id: 25, codigo: "RSP25", nombre: "Inventario", icon: "fa-clipboard-list" },
+            { id: 26, codigo: "RSP26", nombre: "Procesos de Auditoria", icon: "fa-search" },
+            { id: 27, codigo: "RSP27", nombre: "Planes de Accion", icon: "fa-tasks" },
+            { id: 28, codigo: "RSP28", nombre: "Medición 5s", icon: "fa-broom" }
+        ];
+
+        // Orden estático de las áreas
+        const areasOrden = [
+            "Decanatura y Dirección",
+            "Ciencias de la Computación",
+            "Industrial y de Sistemas",
+            "Civil",
+            "Mecatrónica",
+            "Biomédica",
+            "Energía y Telecomunicaciones",
+            "Ciencias y Matemáticas"
+        ];
+
+        let colaboradorActivo = null;
+
+        // 3. Renderizar el Menú Vertical Lateral (Sidebar)
+        function renderSidebar() {
+            const container = document.getElementById('sidebar-colaboradores');
+            container.innerHTML = '';
+
+            areasOrden.forEach(areaNombre => {
+                const colaboradoresDelArea = colaboradoresData.filter(c => c.area === areaNombre);
+                if (colaboradoresDelArea.length === 0) return;
+
+                const areaHeader = document.createElement('div');
+                areaHeader.className = 'mt-5 mb-2 text-[10px] font-black text-gray-400 uppercase tracking-widest pl-2 border-l-2 border-gray-300';
+                areaHeader.textContent = areaNombre;
+                container.appendChild(areaHeader);
+
+                colaboradoresDelArea.forEach(colab => {
+                    const btn = document.createElement('button');
+                    const isActive = (colaboradorActivo === colab.nombre);
+                    
+                    btn.className = `w-full text-left p-2.5 rounded-md mb-1 flex flex-col transition-all duration-200 border group
+                        ${isActive 
+                            ? 'bg-unitec-federal text-white border-unitec-federal shadow-md' 
+                            : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:border-unitec-pacific'}`;
+
+                    btn.innerHTML = `
+                        <span class="text-xs font-bold truncate block w-full ${isActive ? 'text-white' : 'text-unitec-federal group-hover:text-unitec-pacific'}">${colab.nombre}</span>
+                        <span class="text-[10px] truncate block w-full ${isActive ? 'text-blue-200 font-medium' : 'text-gray-500'}">${colab.puesto}</span>
+                    `;
+
+                    btn.onclick = () => seleccionarColaborador(colab.nombre);
+                    container.appendChild(btn);
+                });
+            });
+
+            // Control visual del badge
+            const badge = document.getElementById('colaborador-badge');
+            const badgeNombre = document.getElementById('colaborador-nombre-badge');
+            if (colaboradorActivo) {
+                badgeNombre.textContent = colaboradorActivo;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        // 4. Seleccionar Colaborador y Filtrar Responsabilidades
+        function seleccionarColaborador(nombre) {
+            if (colaboradorActivo === nombre) {
+                colaboradorActivo = null; 
+            } else {
+                colaboradorActivo = nombre;
+            }
+            renderSidebar();
+            aplicarFiltroRSP();
+        }
+
+        // 5. Aplicar Filtrado en el Área Principal
+        function aplicarFiltroRSP() {
+            let rspAMostrar = rspData; // Mostrar todas por defecto si no hay nadie seleccionado
+
+            if (colaboradorActivo) {
+                const colabInfo = colaboradoresData.find(c => c.nombre === colaboradorActivo);
+                if (colabInfo) {
+                    // Filtrar por las que tenga asignadas en su array
+                    rspAMostrar = rspData.filter(rsp => colabInfo.rsp.includes(rsp.id));
+                }
+            }
+
+            renderGridRSP(rspAMostrar);
+        }
+
+        // 6. Construir HTML de cada Botón de Responsabilidad
+        function buildRSPButton(rsp) {
+            return `
+                <button onclick="abrirFichaRSP(${rsp.id})" class="bg-white border-2 border-gray-200 hover:border-unitec-federal hover:shadow-lg transition-all duration-300 p-5 rounded flex flex-col items-start text-left group w-full relative overflow-hidden h-full">
+                    
+                    <div class="flex justify-between w-full mb-4 z-10 relative">
+                        <span class="bg-gray-100 text-unitec-federal group-hover:bg-unitec-pacific group-hover:text-white transition-colors text-[10px] font-bold px-3 py-1 tracking-widest uppercase rounded shadow-sm">
+                            ${rsp.codigo}
+                        </span>
+                        <i class="fas ${rsp.icon} text-unitec-sky opacity-40 group-hover:opacity-100 transition-opacity text-xl"></i>
+                    </div>
+
+                    <span class="font-black text-unitec-federal group-hover:text-unitec-pacific text-sm md:text-base leading-tight relative z-10 transition-colors">
+                        ${rsp.nombre}
+                    </span>
+                    
+                    <!-- Elemento decorativo hover -->
+                    <div class="absolute -bottom-6 -right-6 text-gray-100 group-hover:text-blue-50 transition-colors duration-300 z-0">
+                        <i class="fas ${rsp.icon} text-6xl"></i>
+                    </div>
+                </button>
+            `;
+        }
+
+        // 7. Renderizar el Grid de Responsabilidades en pantalla principal
+        function renderGridRSP(listaRsp) {
+            const container = document.getElementById('cards-container');
+            const contador = document.getElementById('contador-rsp');
+            container.innerHTML = ''; 
+            
+            contador.textContent = listaRsp.length;
+
+            // Manejo del estado vacío (cuando se selecciona colaborador sin asignaciones)
+            if (listaRsp.length === 0) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-16 px-4 bg-gray-50 border border-gray-200 border-dashed rounded-lg text-center">
+                        <i class="fas fa-folder-open text-4xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-500 font-medium text-base mb-2">Este colaborador no tiene responsabilidades asignadas por ahora.</p>
+                        <p class="text-gray-400 font-light text-sm max-w-md">Limpia el filtro de colaborador para explorar el catálogo completo de responsabilidades.</p>
+                        <button onclick="seleccionarColaborador(null)" class="mt-4 text-sm text-unitec-federal font-bold hover:text-unitec-pacific underline decoration-2">Ver todas las responsabilidades</button>
+                    </div>`;
+                return;
+            }
+
+            const gridHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
+                    ${listaRsp.map(rsp => buildRSPButton(rsp)).join('')}
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', gridHTML);
+        }
+
+        // 8. Abrir Modal de la Ficha de la Rúbrica
+        function abrirFichaRSP(id) {
+            const rsp = rspData.find(x => x.id === id);
+            if (!rsp) return;
+
+            const modal = document.getElementById('modal-ficha');
+            const backdrop = document.getElementById('modal-backdrop');
+            const content = document.getElementById('modal-content');
+            
+            const cardHTML = `
+                <div class="bg-white border-t-4 border-unitec-pacific flex flex-col relative shadow-2xl rounded">
+                    
+                    <!-- Botón de Cerrar Modal -->
+                    <button onclick="cerrarFicha()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors z-20 focus:outline-none w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full hover:bg-red-50">
+                        <i class="fas fa-times fa-lg"></i>
+                    </button>
+
+                    <div class="p-6 md:p-8 flex-grow flex flex-col gap-6">
+                        
+                        <div class="pr-8 mb-2">
+                            <span class="bg-unitec-federal text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest rounded-sm mb-3 inline-block">
+                                ${rsp.codigo}
+                            </span>
+                            <h3 class="font-black text-unitec-federal text-xl md:text-2xl leading-tight flex items-center gap-3">
+                                <i class="fas ${rsp.icon} text-unitec-pacific opacity-80"></i>
+                                ${rsp.nombre}
+                            </h3>
+                            <p class="text-gray-500 text-sm mt-2 font-medium">Rúbrica de evaluación de desempeño para esta responsabilidad.</p>
+                        </div>
+                        
+                        <!-- Rúbrica de 4 niveles -->
+                        <div class="flex flex-col gap-4">
+                            
+                            <!-- Nivel 4 -->
+                            <div class="border-l-4 border-unitec-federal bg-blue-50/50 p-4 rounded-r relative overflow-hidden group">
+                                <div class="absolute right-0 top-0 h-full w-2 bg-unitec-federal opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                                <h4 class="font-bold text-unitec-federal uppercase tracking-widest text-xs mb-2 flex items-center">
+                                    <span class="bg-unitec-federal text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow">4</span>
+                                    Trasciende Expectativas
+                                </h4>
+                                <p class="text-sm text-gray-700 font-medium leading-relaxed pl-7">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus erat a interdum elementum. Aenean fringilla magna ut nunc sollicitudin viverra.
+                                </p>
+                            </div>
+
+                            <!-- Nivel 3 -->
+                            <div class="border-l-4 border-unitec-pacific bg-cyan-50/50 p-4 rounded-r relative overflow-hidden group">
+                                <div class="absolute right-0 top-0 h-full w-2 bg-unitec-pacific opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                                <h4 class="font-bold text-unitec-pacific uppercase tracking-widest text-xs mb-2 flex items-center">
+                                    <span class="bg-unitec-pacific text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow">3</span>
+                                    Transforma su entorno
+                                </h4>
+                                <p class="text-sm text-gray-700 font-medium leading-relaxed pl-7">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in urna a neque elementum vehicula ut at tortor. Vivamus vulputate nulla id pulvinar ultrices.
+                                </p>
+                            </div>
+
+                            <!-- Nivel 2 -->
+                            <div class="border-l-4 border-gray-400 bg-gray-50 p-4 rounded-r relative overflow-hidden group">
+                                <div class="absolute right-0 top-0 h-full w-2 bg-gray-400 opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                                <h4 class="font-bold text-gray-600 uppercase tracking-widest text-xs mb-2 flex items-center">
+                                    <span class="bg-gray-400 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow">2</span>
+                                    Esfuerzo transaccional
+                                </h4>
+                                <p class="text-sm text-gray-600 font-medium leading-relaxed pl-7">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Proin id velit at eros sodales sollicitudin a sit amet metus.
+                                </p>
+                            </div>
+
+                            <!-- Nivel 1 -->
+                            <div class="border-l-4 border-red-400 bg-red-50/30 p-4 rounded-r relative overflow-hidden group">
+                                <div class="absolute right-0 top-0 h-full w-2 bg-red-400 opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                                <h4 class="font-bold text-red-600 uppercase tracking-widest text-xs mb-2 flex items-center">
+                                    <span class="bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 shadow">1</span>
+                                    Insuficiente
+                                </h4>
+                                <p class="text-sm text-gray-600 font-medium leading-relaxed pl-7">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras suscipit purus eget sapien tincidunt iaculis. Fusce feugiat, libero eget euismod volutpat.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            content.innerHTML = cardHTML;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                content.classList.remove('opacity-0', 'scale-95');
+            }, 10);
+        }
+
+        // 9. Cerrar Ficha del Modal
+        function cerrarFicha() {
+            const modal = document.getElementById('modal-ficha');
+            const backdrop = document.getElementById('modal-backdrop');
+            const content = document.getElementById('modal-content');
+            
+            backdrop.classList.add('opacity-0');
+            content.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        // Inicialización al cargar la página
+        window.onload = () => {
+            renderSidebar();
+            aplicarFiltroRSP(); // Muestra todas las responsabilidades al inicio
+        };
+    </script>
+</body>
+</html>
