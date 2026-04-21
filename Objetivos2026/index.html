@@ -37,6 +37,13 @@
         .hero-bg {
             background: linear-gradient(rgba(6, 6, 92, 0.85), rgba(6, 6, 92, 0.95)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
         }
+        /* Ocultar el marcador por defecto (flechita) del elemento summary en todos los navegadores */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
     </style>
 </head>
 <body class="text-gray-800 antialiased selection:bg-unitec-pacific selection:text-white">
@@ -121,36 +128,9 @@
             </div>
         </section>
 
-        <!-- PARTE 2: Recursos de Recursos Humanos -->
-        <section id="recursos" class="space-y-10">
-            <div class="text-center max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-unitec-federal">Recursos y Documentación Institucional</h2>
-                <p class="text-gray-500 mt-4 text-lg font-light">Herramientas compartidas por Recursos Humanos para facilitar tu proceso de planificación y evaluación del desempeño.</p>
-            </div>
-            
-            <div class="grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Recurso 1 -->
-                <a href="#" class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200 flex flex-col items-center text-center hover:-translate-y-1">
-                    <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-unitec-federal group-hover:bg-unitec-federal group-hover:text-white transition-colors mb-5 border border-gray-100">
-                        <i class="fas fa-book text-2xl"></i>
-                    </div>
-                    <h3 class="font-bold text-unitec-federal mb-2 text-lg">Guia para formular sus objetivos de desempeño en Evolution</h3>
-                    <p class="text-sm text-gray-500 font-light">Guía metodológica para la evaluación y seguimiento.</p>
-                </a>
-                
-                <!-- Recurso 2 -->
-                <a href="plantillas.html" class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200 flex flex-col items-center text-center hover:-translate-y-1">
-                    <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-unitec-pacific group-hover:bg-unitec-pacific group-hover:text-white transition-colors mb-5 border border-gray-100">
-                        <i class="fas fa-file-excel text-2xl"></i>
-                    </div>
-                    <h3 class="font-bold text-unitec-federal mb-2 text-lg">Plantillas de Objetivos</h3>
-                    <p class="text-sm text-gray-500 font-light">Formatos SMART para la redacción de metas individuales.</p>
-                </a>
-            </div>
-        </section>
-
-        <!-- PARTE 3: Navegación del Plan (Accesos 3 Botones Principales) -->
-        <section id="accesos" class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 md:p-14 mt-12 relative overflow-hidden">
+        <!-- PARTE 2: Navegación del Plan (Accesos 3 Botones Principales) -->
+        <!-- Se movió hacia arriba, antes de Recursos -->
+        <section id="accesos" class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 md:p-14 relative overflow-hidden">
             <!-- Elementos decorativos sutiles basados en el diamante -->
             <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-gray-50 transform rotate-45 opacity-50"></div>
             
@@ -199,6 +179,49 @@
                     </a>
                 </div>
             </div>
+        </section>
+
+        <!-- PARTE 3: Recursos de Recursos Humanos (Oculta y Colapsable) -->
+        <!-- NOTA: Se ha agregado la clase 'hidden'. Para hacerla visible, solo quita esa palabra. -->
+        <section id="recursos" class="hidden bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+            <details class="group p-8 md:p-14">
+                <!-- El summary actúa como el botón colapsable -->
+                <summary class="cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-6 outline-none select-none">
+                    <div class="max-w-3xl">
+                        <h2 class="text-2xl md:text-3xl font-bold text-unitec-federal flex items-center gap-3">
+                            Recursos y Documentación Institucional
+                        </h2>
+                        <p class="text-gray-500 mt-2 text-lg font-light">Herramientas compartidas por Recursos Humanos para facilitar tu proceso de planificación y evaluación del desempeño. Haz clic para expandir.</p>
+                    </div>
+                    <!-- Icono de flecha que rota cuando se abre el details -->
+                    <div class="w-12 h-12 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center text-unitec-pacific shrink-0 group-open:rotate-180 transition-transform duration-300">
+                        <i class="fas fa-chevron-down text-xl"></i>
+                    </div>
+                </summary>
+                
+                <!-- Contenido Colapsable -->
+                <div class="mt-10 pt-10 border-t border-gray-100">
+                    <div class="grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <!-- Recurso 1 -->
+                        <a href="#" class="group/card bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200 flex flex-col items-center text-center hover:-translate-y-1">
+                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-unitec-federal group-hover/card:bg-unitec-federal group-hover/card:text-white transition-colors mb-5 border border-gray-100">
+                                <i class="fas fa-book text-2xl"></i>
+                            </div>
+                            <h3 class="font-bold text-unitec-federal mb-2 text-lg">Guia para formular sus objetivos de desempeño en Evolution</h3>
+                            <p class="text-sm text-gray-500 font-light">Guía metodológica para la evaluación y seguimiento.</p>
+                        </a>
+                        
+                        <!-- Recurso 2 -->
+                        <a href="plantillas.html" class="group/card bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200 flex flex-col items-center text-center hover:-translate-y-1">
+                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-unitec-pacific group-hover/card:bg-unitec-pacific group-hover/card:text-white transition-colors mb-5 border border-gray-100">
+                                <i class="fas fa-file-excel text-2xl"></i>
+                            </div>
+                            <h3 class="font-bold text-unitec-federal mb-2 text-lg">Plantillas de Objetivos</h3>
+                            <p class="text-sm text-gray-500 font-light">Formatos SMART para la redacción de metas individuales.</p>
+                        </a>
+                    </div>
+                </div>
+            </details>
         </section>
 
     </main>
