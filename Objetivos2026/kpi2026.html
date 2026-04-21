@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indicadores (KPIs) 2026 | Facultad de Ingeniería UNITEC</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
     <!-- Tipografía Institucional: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -28,426 +34,113 @@
             }
         }
     </script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background-color: #F8FAFC;
-        }
-        /* Transiciones suaves para el filtrado */
-        .kpi-card {
-            transition: all 0.4s ease-in-out;
-        }
-        /* Transición para el colapso suave */
-        #colaboradores-wrapper {
-            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
-        }
+        /* Scrollbar personalizado */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="text-gray-800 antialiased selection:bg-unitec-pacific selection:text-white">
+<body class="bg-gray-50 font-sans text-unitec-federal selection:bg-unitec-pacific selection:text-white h-screen flex flex-col overflow-hidden relative">
 
-    <!-- Navbar -->
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
-                <div class="flex items-center gap-6">
-                    <a href="index.html" class="text-gray-400 hover:text-unitec-pacific transition-colors" title="Volver al Inicio">
-                        <i class="fas fa-arrow-left text-lg"></i>
-                    </a>
-                    <div class="flex-shrink-0 flex items-center gap-3 border-l border-gray-200 pl-6">
-                        <!-- Imagotipo UNITEC Horizontal -->
-                        <div class="flex items-center gap-2">
-                            <!-- Isotipo Diamante -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#06065C"/>
-                            </svg>
-                            <!-- Logotipo -->
-                            <span class="font-extrabold text-2xl text-unitec-federal tracking-tight lowercase mt-1">unitec</span>
-                        </div>
-                        <span class="text-unitec-pacific font-light text-2xl ml-1 mt-1 hidden sm:block">| Ingeniería</span>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <span class="text-sm font-medium text-gray-500 uppercase tracking-widest">Módulo de Desempeño</span>
-                </div>
+    <!-- Encabezado Corporativo -->
+    <header class="bg-unitec-federal text-white border-b-4 border-unitec-pacific shrink-0 z-20">
+        <div class="px-4 md:px-6 py-3 md:py-4 flex flex-col md:flex-row justify-between items-center w-full">
+            <div class="flex items-center mb-2 md:mb-0">
+                <!-- Isotipo -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-3 md:w-8 md:h-8">
+                    <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#03AED2"/>
+                </svg>
+                <span class="text-2xl md:text-3xl font-bold tracking-tight mt-1 lowercase">unitec</span>
+                <span class="text-unitec-pacific font-light text-xl md:text-2xl ml-2 mt-1 hidden sm:block">| Ingeniería</span>
             </div>
-        </div>
-    </nav>
-
-    <!-- Header Section -->
-    <header class="bg-unitec-federal text-white py-16 px-4 sm:px-6 lg:px-8 border-b-4 border-unitec-pacific">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="max-w-3xl space-y-4">
-                    <span class="inline-block px-4 py-1.5 bg-white/10 text-white rounded-none text-xs font-bold uppercase tracking-widest border border-white/20">
-                        Tablero de Metas Estratégicas
-                    </span>
-                    <h1 class="text-3xl md:text-5xl font-bold tracking-tight">
-                        Fichas de Indicadores (KPIs) 2026
-                    </h1>
-                    <p class="text-lg text-blue-100 leading-relaxed font-light mt-4">
-                        Estas métricas representan nuestra evidencia de crecimiento colectivo. Cada indicador nos acerca a la visión de transformar la experiencia educativa, fortalecer la investigación y garantizar nuestra excelencia operativa.
-                    </p>
-                </div>
-                <div class="hidden md:block opacity-20">
-                    <i class="fas fa-chart-line text-8xl text-white"></i>
-                </div>
+            <div class="text-center md:text-right">
+                <h1 class="text-base md:text-lg font-bold text-unitec-sky uppercase tracking-widest leading-none">Fichas de Indicadores (KPIs)</h1>
+                <p class="mt-1 text-[10px] md:text-xs font-medium text-white/80">Metas Estratégicas 2026</p>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Contenedor Principal (Sidebar + Contenido) -->
+    <div class="flex flex-col md:flex-row flex-1 overflow-hidden w-full bg-white">
         
-        <!-- Instrucciones breves -->
-        <div class="bg-white border border-gray-200 border-l-4 border-l-unitec-pacific p-6 mb-10">
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <i class="fas fa-info-circle text-unitec-pacific mt-1 text-xl"></i>
-                </div>
-                <div class="ml-4">
-                    <h3 class="text-sm font-bold text-unitec-federal uppercase tracking-wider">Guía de Consulta</h3>
-                    <div class="mt-2 text-sm text-gray-600 font-light leading-relaxed">
-                        <p>A continuación se detallan los parámetros de éxito para el año 2026. Utilice estas fichas como referencia principal al redactar sus metas individuales en la plataforma Evolution y para asegurar que sus iniciativas docentes abonen a los resultados esperados por la facultad (Alineación ACAAI / Visión 2030).</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECCIÓN NUEVA: Filtro por Colaborador -->
-        <section class="bg-white border border-gray-200 p-6 mb-10 rounded-lg shadow-sm">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div class="flex-1 cursor-pointer select-none" id="toggle-filter-btn">
-                    <div class="flex items-center gap-3">
-                        <h3 class="text-lg font-bold text-unitec-federal flex items-center gap-2">
-                            <i class="fas fa-filter text-unitec-pacific"></i> Filtro de Responsabilidades
-                        </h3>
-                        <i id="filter-chevron" class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
-                    </div>
-                    <p class="text-sm text-gray-500 font-light mt-1">Selecciona un colaborador para aislar sus KPIs asignados. Haz clic aquí para expandir/contraer.</p>
-                </div>
-                <div class="flex gap-2">
-                    <span id="active-filter-badge" class="hidden inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-unitec-pacific text-white">
-                        Filtro Activo
-                    </span>
-                    <button id="btn-clear-filter" class="hidden px-4 py-2 bg-gray-100 text-gray-700 text-xs font-bold uppercase tracking-widest hover:bg-gray-200 rounded transition-colors flex items-center gap-2 border border-gray-300">
-                        <i class="fas fa-times"></i> Liberar Selección
+        <!-- SIDEBAR: Menú Vertical de Colaboradores -->
+        <aside class="w-full md:w-80 bg-slate-50 border-b md:border-b-0 md:border-r border-gray-200 shrink-0 flex flex-col h-[35vh] md:h-full z-10 relative shadow-[4px_0_15px_-3px_rgba(0,0,0,0.05)]">
+            <div class="p-4 md:p-5 border-b border-gray-200 bg-white shrink-0">
+                <h2 class="text-base md:text-lg font-black text-unitec-federal uppercase tracking-widest flex items-center">
+                    <i class="fas fa-sitemap mr-2 text-unitec-pacific"></i> Colaboradores
+                </h2>
+                <p class="text-[10px] md:text-xs text-gray-500 mt-1 font-medium">Selecciona un colaborador para ver sus KPIs asignados.</p>
+                
+                <!-- Badge de filtro activo (oculto por defecto) -->
+                <div id="colaborador-badge" class="hidden mt-3 bg-blue-50 border border-blue-200 px-3 py-2 flex justify-between items-center rounded-md">
+                    <span class="text-xs font-bold text-unitec-federal truncate mr-2" id="colaborador-nombre-badge"></span>
+                    <button onclick="seleccionarColaborador(null)" class="text-gray-400 hover:text-red-500 transition-colors" title="Limpiar filtro">
+                        <i class="fas fa-times-circle"></i>
                     </button>
                 </div>
             </div>
-            
-            <!-- Contenedor dinámico colapsable -->
-            <div id="colaboradores-wrapper" class="overflow-hidden max-h-0 opacity-0 border-t border-gray-100">
-                <div id="colaboradores-container" class="space-y-8 mt-6 pb-2">
-                    <!-- Los botones y categorías se generarán por JavaScript -->
-                </div>
+
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-3" id="sidebar-colaboradores">
+                <!-- Se inyectará dinámicamente -->
             </div>
-        </section>
+        </aside>
 
-        <!-- Grid de KPIs (Añadido data-kpi="N" a cada artículo) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="kpi-grid">
+        <!-- CONTENIDO PRINCIPAL: Grid de KPIs -->
+        <main id="main-content" class="flex-1 overflow-y-auto custom-scrollbar bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8">
+                
+                <!-- Instrucciones -->
+                <div class="bg-white border border-gray-200 border-l-4 border-l-unitec-pacific p-5 mb-8 shadow-sm">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-unitec-pacific mt-1 text-lg"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-sm font-bold text-unitec-federal uppercase tracking-wider">Tablero de Desempeño</h3>
+                            <div class="mt-1 text-xs md:text-sm text-gray-600 font-light leading-relaxed">
+                                <p>Haz clic en un botón de KPI para visualizar su métrica de evaluación y el resultado esperado correspondiente para el periodo 2026.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- KPI 1 -->
-            <article data-kpi="1" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 1</span>
-                    <i class="fas fa-compress-arrows-alt text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
+                <!-- Estado del Listado -->
+                <div class="flex items-center justify-between border-b border-gray-200 pb-3 mb-6">
+                    <h3 class="text-lg font-black text-unitec-federal uppercase tracking-wider flex items-center">
+                        <i class="fas fa-chart-pie mr-2 text-unitec-pacific"></i> KPIs Asignados
+                    </h3>
+                    <span id="contador-kpis" class="text-xs font-bold bg-gray-100 text-gray-500 px-3 py-1 rounded-full">0</span>
                 </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Índice de Compactación</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Índice 2026 > Índice 2025</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Mejora del Índice de Compactación de la facultad.</p>
-                    </div>
-                </div>
-            </article>
 
-            <!-- KPI 2 -->
-            <article data-kpi="2" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 2</span>
-                    <i class="fas fa-users-class text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
+                <!-- Contenedor de Botones de KPIs -->
+                <div id="cards-container" class="pb-12">
+                    <!-- Se inyectará dinámicamente -->
                 </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Clases por Estudiante</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Promedio 2026 > Promedio 2025</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Mejora del promedio de clases matriculadas por estudiante.</p>
-                    </div>
-                </div>
-            </article>
 
-            <!-- KPI 3 -->
-            <article data-kpi="3" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 3</span>
-                    <i class="fas fa-user-minus text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Deserción del 1er Período</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Tasa Deserción 2026 &lt; Tasa Deserción 2025</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Disminución efectiva de la tasa de deserción estudiantil en su primer período.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- KPI 4 -->
-            <article data-kpi="4" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 4</span>
-                    <i class="fas fa-square-root-alt text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Tasa de Aprobación (CCMM)</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Tasa Aprobación 2026 > Tasa Aprobación 2025</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Mejora de la tasa de aprobación en cursos fundamentales como Introducción al Álgebra.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- KPI 5 -->
-            <article data-kpi="5" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 5</span>
-                    <i class="fas fa-lightbulb text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Participación Estudiantil en Eventos de Innovación FI</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Participación > 25% del Total de Estudiantes (TE)</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Incremento en la involucración en iniciativas como Rallies, Hackathons y Concursos.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- KPI 6 -->
-            <article data-kpi="6" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 6</span>
-                    <i class="fas fa-globe-americas text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Práctica Profesional (PP) en el Extranjero</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Cantidad Estudiantes 2026 > 2025</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Incremento en la internacionalización a través de prácticas profesionales fuera del país.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- KPI 7 -->
-            <article data-kpi="7" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 7</span>
-                    <i class="fas fa-hands-helping text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Participación en Proyectos de Vinculación</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Estudiantes Vinculación 2026 > 2025</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Aumento en la incidencia local y proyección social mediante proyectos comunitarios.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- KPI 8 -->
-            <article data-kpi="8" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 8</span>
-                    <i class="fas fa-book-reader text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Publicaciones SCOPUS de la Facultad</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Cantidad de Publicaciones > 100</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Incremento sustancial en la producción científica indexada de la facultad.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- KPI 9 -->
-            <article data-kpi="9" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 9</span>
-                    <i class="fas fa-user-friends text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Publicaciones con Colaborador Internacional</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Colaboraciones > 15% del total de Papers</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Consolidación de las redes globales de investigación e intercambio académico.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- KPI 10 -->
-            <article data-kpi="10" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 10</span>
-                    <i class="fas fa-microphone-alt text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Participación en CONICIETI, CIE y SII</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Docentes/Estudiantes > 25% del TE</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Aumento en la divulgación científica en foros y congresos institucionales.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- KPI 11 -->
-            <article data-kpi="11" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 11</span>
-                    <i class="fas fa-layer-group text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Implementación del Ecosistema de Aprendizaje</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Asignaturas con evidencia de implementación CGS</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Transformación de la experiencia educativa (Encuestas a Estudiantes positivas).</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- KPI 12 -->
-            <article data-kpi="12" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 12</span>
-                    <i class="fas fa-boxes text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Levantamiento de Activos de Finanzas</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Tasa de incidencias menor al año anterior</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Reducción de incidencias y mayor precisión en el control del inventario de activos.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- KPI 13 -->
-            <article data-kpi="13" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 13</span>
-                    <i class="fas fa-broom text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Implementación de Metodología 5S</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>Mejora evidenciada (vs. Línea base inicial)</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Optimización del entorno en la segunda medición (laboratorios/talleres más eficientes).</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- KPI 14 -->
-            <article data-kpi="14" class="kpi-card bg-white border border-gray-200 p-8 relative overflow-hidden group hover:border-unitec-pacific transition-colors">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-200 group-hover:bg-unitec-pacific transition-colors"></div>
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-gray-50 text-unitec-federal text-xs font-bold px-3 py-1 uppercase tracking-widest border border-gray-200">KPI 14</span>
-                    <i class="fas fa-door-open text-unitec-sky text-xl opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </div>
-                <h2 class="text-lg font-bold text-unitec-federal mb-4 leading-tight">Uso de Espacios e Instalaciones</h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Métrica de Evaluación</p>
-                        <p class="text-sm text-gray-700 bg-gray-50 p-3 border border-gray-100 font-medium"><i class="fas fa-calculator text-unitec-pacific mr-2"></i>100% de reportes entregados por período</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Resultados Esperados</p>
-                        <p class="text-sm text-gray-600 font-light"><i class="fas fa-bullseye text-unitec-federal opacity-50 mr-2"></i>Entrega en tiempo y forma para asegurar una gestión operativa transparente.</p>
-                    </div>
-                </div>
-            </article>
-
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 mt-12 py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-3">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 1L23 12L12 23L1 12L12 1Z" fill="#06065C"/>
-                </svg>
-                <span class="font-bold text-unitec-federal">Monitoreo de Desempeño 2026</span>
             </div>
-            <p class="text-sm text-gray-500 font-light text-center">
-                &copy; 2026 Universidad Tecnológica Centroamericana (UNITEC). Todos los derechos reservados.
-            </p>
-        </div>
-    </footer>
+        </main>
+    </div>
 
-    <!-- Lógica de Filtrado -->
+    <!-- MODAL PARA LA FICHA DEL KPI -->
+    <div id="modal-ficha" class="fixed inset-0 z-50 hidden items-center justify-center pointer-events-none">
+        <!-- Backdrop oscuro -->
+        <div id="modal-backdrop" class="absolute inset-0 bg-unitec-federal/80 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto" onclick="cerrarFicha()"></div>
+        
+        <!-- Contenedor de la Ficha -->
+        <div id="modal-content" class="bg-transparent w-full max-w-2xl max-h-[90vh] overflow-y-auto custom-scrollbar relative z-10 opacity-0 transform scale-95 transition-all duration-300 pointer-events-auto p-4">
+            <!-- La ficha completa se inyecta aquí -->
+        </div>
+    </div>
+
     <script>
-        // Data estructurada consolidada final y agrupada por áreas
-        const colaboradores = [
+        // 1. Datos Estructurados de Colaboradores
+        const colaboradoresData = [
             // Decanatura y Dirección
             { nombre: "Marco Canales", puesto: "Decano TGU", kpis: [1,2,3,6,8,11], area: "Decanatura y Dirección" },
             { nombre: "Edwin Dore", puesto: "Director SPS", kpis: [1,2,3,6,8,11], area: "Decanatura y Dirección" },
@@ -501,143 +194,236 @@
             { nombre: "Tatiana Suazo", puesto: "Docente Asociado TGU", kpis: [3,4,7,10,11], area: "Ciencias y Matemáticas" }
         ];
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('colaboradores-container');
-            const btnClear = document.getElementById('btn-clear-filter');
-            const kpiCards = document.querySelectorAll('.kpi-card');
-            const toggleBtn = document.getElementById('toggle-filter-btn');
-            const filterWrapper = document.getElementById('colaboradores-wrapper');
-            const filterChevron = document.getElementById('filter-chevron');
-            const activeFilterBadge = document.getElementById('active-filter-badge');
-            let selectedColaborador = null;
-            let isFilterOpen = false;
+        // 2. Base de Datos de KPIs
+        const kpisData = [
+            { id: 1, nombre: "Índice de Compactación", metrica: "Índice 2026 > Índice 2025", resultado: "Mejora del Índice de Compactación de la facultad.", icon: "fa-compress-arrows-alt" },
+            { id: 2, nombre: "Clases por Estudiante", metrica: "Promedio 2026 > Promedio 2025", resultado: "Mejora del promedio de clases matriculadas por estudiante.", icon: "fa-users" },
+            { id: 3, nombre: "Deserción del 1er Período", metrica: "Tasa Deserción 2026 < Tasa Deserción 2025", resultado: "Disminución efectiva de la tasa de deserción estudiantil en su primer período.", icon: "fa-user-minus" },
+            { id: 4, nombre: "Tasa de Aprobación (CCMM)", metrica: "Tasa Aprobación 2026 > Tasa Aprobación 2025", resultado: "Mejora de la tasa de aprobación en cursos fundamentales como Introducción al Álgebra.", icon: "fa-calculator" },
+            { id: 5, nombre: "Participación Estudiantil en Eventos de Innovación FI", metrica: "Participación > 25% del Total de Estudiantes (TE)", resultado: "Incremento en la involucración en iniciativas como Rallies, Hackathons y Concursos.", icon: "fa-lightbulb" },
+            { id: 6, nombre: "Práctica Profesional (PP) en el Extranjero", metrica: "Cantidad Estudiantes 2026 > 2025", resultado: "Incremento en la internacionalización a través de prácticas profesionales fuera del país.", icon: "fa-globe-americas" },
+            { id: 7, nombre: "Participación en Proyectos de Vinculación", metrica: "Estudiantes Vinculación 2026 > 2025", resultado: "Aumento en la incidencia local y proyección social mediante proyectos comunitarios.", icon: "fa-hands-helping" },
+            { id: 8, nombre: "Publicaciones SCOPUS de la Facultad", metrica: "Cantidad de Publicaciones > 100", resultado: "Incremento sustancial en la producción científica indexada de la facultad.", icon: "fa-book-reader" },
+            { id: 9, nombre: "Publicaciones con Colaborador Internacional", metrica: "Colaboraciones > 15% del total de Papers", resultado: "Consolidación de las redes globales de investigación e intercambio académico.", icon: "fa-user-friends" },
+            { id: 10, nombre: "Participación en CONICIETI, CIE y SII", metrica: "Docentes/Estudiantes > 25% del TE", resultado: "Aumento en la divulgación científica en foros y congresos institucionales.", icon: "fa-microphone-alt" },
+            { id: 11, nombre: "Implementación del Ecosistema de Aprendizaje", metrica: "Asignaturas con evidencia de implementación CGS", resultado: "Transformación de la experiencia educativa (Encuestas a Estudiantes positivas).", icon: "fa-layer-group" },
+            { id: 12, nombre: "Levantamiento de Activos de Finanzas", metrica: "Tasa de incidencias menor al año anterior", resultado: "Reducción de incidencias y mayor precisión en el control del inventario de activos.", icon: "fa-boxes" },
+            { id: 13, nombre: "Implementación de Metodología 5S", metrica: "Mejora evidenciada (vs. Línea base inicial)", resultado: "Optimización del entorno en la segunda medición (laboratorios/talleres más eficientes).", icon: "fa-broom" },
+            { id: 14, nombre: "Uso de Espacios e Instalaciones", metrica: "100% de reportes entregados por período", resultado: "Entrega en tiempo y forma para asegurar una gestión operativa transparente.", icon: "fa-door-open" }
+        ];
 
-            // Función para abrir/cerrar el acordeón de filtros
-            function toggleFilterPanel() {
-                isFilterOpen = !isFilterOpen;
-                if (isFilterOpen) {
-                    filterWrapper.style.maxHeight = filterWrapper.scrollHeight + "px";
-                    filterWrapper.style.opacity = "1";
-                    filterWrapper.classList.add('mt-4', 'pt-4');
-                    filterChevron.style.transform = "rotate(180deg)";
-                } else {
-                    filterWrapper.style.maxHeight = "0";
-                    filterWrapper.style.opacity = "0";
-                    filterWrapper.classList.remove('mt-4', 'pt-4');
-                    filterChevron.style.transform = "rotate(0deg)";
-                }
-            }
+        // Orden estático de las áreas
+        const areasOrden = [
+            "Decanatura y Dirección",
+            "Ciencias de la Computación",
+            "Industrial y de Sistemas",
+            "Civil",
+            "Mecatrónica",
+            "Biomédica",
+            "Energía y Telecomunicaciones",
+            "Ciencias y Matemáticas"
+        ];
 
-            toggleBtn.addEventListener('click', toggleFilterPanel);
+        let colaboradorActivo = null;
 
-            // Actualizar max-height en resize por si el contenido cambia
-            window.addEventListener('resize', () => {
-                if (isFilterOpen) {
-                    filterWrapper.style.maxHeight = "none";
-                    const newHeight = filterWrapper.scrollHeight;
-                    filterWrapper.style.maxHeight = newHeight + "px";
-                }
-            });
+        // 3. Renderizar el Menú Vertical Lateral (Sidebar)
+        function renderSidebar() {
+            const container = document.getElementById('sidebar-colaboradores');
+            container.innerHTML = '';
 
-            // Agrupar colaboradores por área
-            const agrupados = {};
-            colaboradores.forEach((colab, index) => {
-                if (!agrupados[colab.area]) agrupados[colab.area] = [];
-                // Guardamos el índice original para mantener la coherencia de la selección global
-                agrupados[colab.area].push({ ...colab, originalIndex: index });
-            });
+            areasOrden.forEach(areaNombre => {
+                const colaboradoresDelArea = colaboradoresData.filter(c => c.area === areaNombre);
+                if (colaboradoresDelArea.length === 0) return;
 
-            // Renderizar botones categorizados
-            Object.keys(agrupados).forEach(area => {
-                const areaSection = document.createElement('div');
-                
-                const title = document.createElement('h4');
-                title.className = 'text-sm font-bold text-gray-400 uppercase tracking-widest mb-3 border-b border-gray-100 pb-2';
-                title.innerHTML = `<i class="fas fa-sitemap mr-2 text-unitec-pacific opacity-50"></i>${area}`;
-                areaSection.appendChild(title);
+                const areaHeader = document.createElement('div');
+                areaHeader.className = 'mt-5 mb-2 text-[10px] font-black text-gray-400 uppercase tracking-widest pl-2 border-l-2 border-gray-300';
+                areaHeader.textContent = areaNombre;
+                container.appendChild(areaHeader);
 
-                const btnGroup = document.createElement('div');
-                btnGroup.className = 'flex flex-wrap gap-2';
-
-                agrupados[area].forEach(colab => {
+                colaboradoresDelArea.forEach(colab => {
                     const btn = document.createElement('button');
-                    btn.className = `btn-colab px-4 py-2 border border-gray-200 rounded text-xs text-left transition-colors font-medium flex flex-col gap-1 
-                                     hover:border-unitec-pacific hover:text-unitec-pacific text-gray-600 bg-white`;
+                    const isActive = (colaboradorActivo === colab.nombre);
+                    
+                    btn.className = `w-full text-left p-2.5 rounded-md mb-1 flex flex-col transition-all duration-200 border group
+                        ${isActive 
+                            ? 'bg-unitec-federal text-white border-unitec-federal shadow-md' 
+                            : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:border-unitec-pacific'}`;
+
                     btn.innerHTML = `
-                        <span class="font-bold pointer-events-none">${colab.nombre}</span>
-                        <span class="text-[10px] uppercase tracking-widest font-light pointer-events-none opacity-80">${colab.puesto}</span>
+                        <span class="text-xs font-bold truncate block w-full ${isActive ? 'text-white' : 'text-unitec-federal group-hover:text-unitec-pacific'}">${colab.nombre}</span>
+                        <span class="text-[10px] truncate block w-full ${isActive ? 'text-blue-200 font-medium' : 'text-gray-500'}">${colab.puesto}</span>
                     `;
-                    btn.dataset.index = colab.originalIndex;
 
-                    btn.addEventListener('click', () => {
-                        // Si hacemos click en el que ya está seleccionado, no hace nada
-                        if (selectedColaborador === colab.originalIndex) return;
-                        
-                        selectedColaborador = colab.originalIndex;
-                        updateUI();
-                        filterKPIs(colab.kpis);
-                        
-                        // Opcional: auto-cerrar el panel tras seleccionar (comentar si no se desea)
-                        // toggleFilterPanel();
-                    });
-
-                    btnGroup.appendChild(btn);
+                    btn.onclick = () => seleccionarColaborador(colab.nombre);
+                    container.appendChild(btn);
                 });
-
-                areaSection.appendChild(btnGroup);
-                container.appendChild(areaSection);
             });
 
-            // Acción de limpiar filtro
-            btnClear.addEventListener('click', () => {
-                selectedColaborador = null;
-                updateUI();
-                showAllKPIs();
-            });
+            // Control visual del badge
+            const badge = document.getElementById('colaborador-badge');
+            const badgeNombre = document.getElementById('colaborador-nombre-badge');
+            if (colaboradorActivo) {
+                badgeNombre.textContent = colaboradorActivo;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
 
-            function updateUI() {
-                const buttons = document.querySelectorAll('.btn-colab');
-                buttons.forEach((btn, idx) => {
-                    if (idx === selectedColaborador) {
-                        btn.classList.remove('text-gray-600', 'border-gray-200', 'hover:border-unitec-pacific', 'hover:text-unitec-pacific', 'bg-white');
-                        btn.classList.add('bg-unitec-federal', 'text-white', 'border-unitec-federal', 'shadow-md');
-                    } else {
-                        btn.classList.add('text-gray-600', 'border-gray-200', 'hover:border-unitec-pacific', 'hover:text-unitec-pacific', 'bg-white');
-                        btn.classList.remove('bg-unitec-federal', 'text-white', 'border-unitec-federal', 'shadow-md');
-                    }
-                });
+        // 4. Seleccionar Colaborador y Filtrar KPIs
+        function seleccionarColaborador(nombre) {
+            if (colaboradorActivo === nombre) {
+                colaboradorActivo = null; 
+            } else {
+                colaboradorActivo = nombre;
+            }
+            renderSidebar();
+            aplicarFiltroKPIs();
+        }
 
-                if (selectedColaborador !== null) {
-                    btnClear.classList.remove('hidden');
-                    activeFilterBadge.classList.remove('hidden');
-                } else {
-                    btnClear.classList.add('hidden');
-                    activeFilterBadge.classList.add('hidden');
+        // 5. Aplicar Filtrado en el Área Principal
+        function aplicarFiltroKPIs() {
+            let kpisAMostrar = kpisData;
+
+            if (colaboradorActivo) {
+                const colabInfo = colaboradoresData.find(c => c.nombre === colaboradorActivo);
+                if (colabInfo) {
+                    kpisAMostrar = kpisData.filter(kpi => colabInfo.kpis.includes(kpi.id));
                 }
             }
 
-            function filterKPIs(activeKpis) {
-                kpiCards.forEach(card => {
-                    const kpiNum = parseInt(card.dataset.kpi);
-                    if (activeKpis.includes(kpiNum)) {
-                        card.style.display = 'block';
-                        // Pequeño truco para forzar el reflow y aplicar la animación
-                        setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'scale(0.95)';
-                        setTimeout(() => { card.style.display = 'none'; }, 400); // 400ms match the CSS transition
-                    }
-                });
+            renderGridKPIs(kpisAMostrar);
+        }
+
+        // 6. Construir HTML de cada Botón KPI
+        function buildKPIButton(kpi) {
+            return `
+                <button onclick="abrirFichaKPI(${kpi.id})" class="bg-white border-2 border-gray-200 hover:border-unitec-federal hover:shadow-lg transition-all duration-300 p-5 rounded flex flex-col items-start text-left group w-full relative overflow-hidden h-full">
+                    
+                    <div class="flex justify-between w-full mb-4 z-10 relative">
+                        <span class="bg-gray-100 text-unitec-federal group-hover:bg-unitec-pacific group-hover:text-white transition-colors text-[10px] font-bold px-3 py-1 tracking-widest uppercase rounded">
+                            KPI ${kpi.id}
+                        </span>
+                        <i class="fas ${kpi.icon} text-unitec-sky opacity-40 group-hover:opacity-100 transition-opacity text-xl"></i>
+                    </div>
+
+                    <span class="font-black text-unitec-federal group-hover:text-unitec-pacific text-sm md:text-base leading-tight relative z-10 transition-colors">
+                        ${kpi.nombre}
+                    </span>
+                    
+                    <!-- Elemento decorativo hover -->
+                    <div class="absolute -bottom-6 -right-6 text-gray-100 group-hover:text-blue-50 transition-colors duration-300 z-0">
+                        <i class="fas ${kpi.icon} text-6xl"></i>
+                    </div>
+                </button>
+            `;
+        }
+
+        // 7. Renderizar el Grid de KPIs en pantalla principal
+        function renderGridKPIs(listaKpis) {
+            const container = document.getElementById('cards-container');
+            const contador = document.getElementById('contador-kpis');
+            container.innerHTML = ''; 
+            
+            contador.textContent = listaKpis.length;
+
+            if (listaKpis.length === 0) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-16 px-4 bg-gray-50 border border-gray-200 border-dashed rounded-lg text-center">
+                        <i class="fas fa-folder-open text-4xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-500 font-medium text-base">Este colaborador no tiene KPIs asignados.</p>
+                        <button onclick="seleccionarColaborador(null)" class="mt-4 text-sm text-unitec-federal font-bold hover:text-unitec-pacific underline decoration-2">Limpiar selección</button>
+                    </div>`;
+                return;
             }
 
-            function showAllKPIs() {
-                kpiCards.forEach(card => {
-                    card.style.display = 'block';
-                    setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
-                });
-            }
-        });
+            const gridHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
+                    ${listaKpis.map(kpi => buildKPIButton(kpi)).join('')}
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', gridHTML);
+        }
+
+        // 8. Abrir Modal de la Ficha del KPI
+        function abrirFichaKPI(id) {
+            const kpi = kpisData.find(x => x.id === id);
+            if (!kpi) return;
+
+            const modal = document.getElementById('modal-ficha');
+            const backdrop = document.getElementById('modal-backdrop');
+            const content = document.getElementById('modal-content');
+            
+            const cardHTML = `
+                <div class="bg-white border-t-4 border-unitec-pacific flex flex-col relative shadow-2xl rounded">
+                    
+                    <!-- Botón de Cerrar Modal -->
+                    <button onclick="cerrarFicha()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors z-20 focus:outline-none w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full hover:bg-red-50">
+                        <i class="fas fa-times fa-lg"></i>
+                    </button>
+
+                    <div class="p-6 md:p-8 flex-grow flex flex-col gap-6">
+                        
+                        <div class="pr-8">
+                            <span class="bg-unitec-federal text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest rounded-sm mb-3 inline-block">
+                                KPI ${kpi.id}
+                            </span>
+                            <h3 class="font-black text-unitec-federal text-xl md:text-2xl leading-tight">${kpi.nombre}</h3>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 gap-5">
+                            
+                            <!-- Métrica -->
+                            <div class="bg-blue-50/50 p-5 border border-blue-100 rounded">
+                                <span class="font-bold text-unitec-pacific block text-[10px] uppercase tracking-widest mb-2 flex items-center">
+                                    <i class="fas fa-calculator mr-2"></i> Métrica de Evaluación
+                                </span>
+                                <span class="text-unitec-federal font-semibold text-sm md:text-base">${kpi.metrica}</span>
+                            </div>
+                            
+                            <!-- Resultado Esperado -->
+                            <div class="bg-gray-50 p-5 border border-gray-200 rounded">
+                                <span class="font-bold text-gray-500 block text-[10px] uppercase tracking-widest mb-2 flex items-center">
+                                    <i class="fas fa-bullseye mr-2"></i> Resultado Esperado
+                                </span>
+                                <span class="text-gray-700 font-medium text-sm md:text-base leading-relaxed">${kpi.resultado}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            content.innerHTML = cardHTML;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                content.classList.remove('opacity-0', 'scale-95');
+            }, 10);
+        }
+
+        // 9. Cerrar Ficha del Modal
+        function cerrarFicha() {
+            const modal = document.getElementById('modal-ficha');
+            const backdrop = document.getElementById('modal-backdrop');
+            const content = document.getElementById('modal-content');
+            
+            backdrop.classList.add('opacity-0');
+            content.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        // Inicialización al cargar la página
+        window.onload = () => {
+            renderSidebar();
+            aplicarFiltroKPIs(); // Muestra todos al inicio
+        };
     </script>
 </body>
 </html>
