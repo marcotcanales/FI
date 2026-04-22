@@ -40,7 +40,8 @@
         /* Scrollbar personalizado para mejor estética */
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        /* Cero bordes redondeados, como un buen diamante */
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 0px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
         @media print {
@@ -78,7 +79,8 @@
     <div class="flex flex-col md:flex-row flex-1 overflow-hidden w-full bg-white">
         
         <!-- SIDEBAR: Colaboradores -->
-        <aside class="w-full md:w-80 bg-slate-50 border-b md:border-b-0 md:border-r border-gray-200 shrink-0 flex flex-col h-[35vh] md:h-full no-print z-10 relative shadow-[4px_0_15px_-3px_rgba(0,0,0,0.05)]">
+        <!-- Eliminada la sombra para acatar el manual -->
+        <aside class="w-full md:w-80 bg-slate-50 border-b md:border-b-0 md:border-r border-gray-200 shrink-0 flex flex-col h-[35vh] md:h-full no-print z-10 relative">
             <div class="p-4 md:p-5 border-b border-gray-200 bg-white shrink-0">
                 <h2 class="text-base md:text-lg font-black text-unitec-federal uppercase tracking-widest flex items-center">
                     <i class="fas fa-users mr-2 text-unitec-cyan"></i> Colaboradores
@@ -86,7 +88,7 @@
                 <p class="text-[10px] md:text-xs text-gray-500 mt-1 font-medium">Seleccione a un miembro para ver sus proyectos asignados.</p>
                 
                 <!-- Badge de filtro activo (oculto por defecto) -->
-                <div id="colaborador-badge" class="hidden mt-3 bg-blue-50 border border-blue-200 px-3 py-2 flex justify-between items-center rounded-md">
+                <div id="colaborador-badge" class="hidden mt-3 bg-blue-50 border border-blue-200 px-3 py-2 flex justify-between items-center rounded-none">
                     <span class="text-xs font-bold text-unitec-federal truncate mr-2" id="colaborador-nombre-badge"></span>
                     <button onclick="seleccionarColaborador(null)" class="text-gray-400 hover:text-red-500 transition-colors">
                         <i class="fas fa-times-circle"></i>
@@ -104,7 +106,7 @@
             <div class="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8">
                 
                 <!-- Sección de Filtros por Eje/Impacto (COLAPSABLE) -->
-                <div id="filters-section" class="bg-white p-5 md:p-6 mb-6 md:mb-8 no-print border-2 border-unitec-federal relative shadow-sm transition-all duration-300">
+                <div id="filters-section" class="bg-white p-5 md:p-6 mb-6 md:mb-8 no-print border-2 border-unitec-federal relative transition-all duration-300">
                     <div class="absolute -top-3 -left-3 w-6 h-6 bg-unitec-cyan transform rotate-45 border-2 border-white"></div>
                     
                     <div class="flex justify-between items-center cursor-pointer group select-none" onclick="toggleFilters()">
@@ -113,11 +115,11 @@
                                 <i class="fas fa-filter mr-2 text-unitec-cyan"></i> Filtrar por Impactos
                             </h2>
                             <!-- Badge indicador del filtro actual -->
-                            <span id="filtro-aplicado-texto" class="mt-2 md:mt-0 md:ml-4 px-2.5 py-1 bg-blue-50 text-unitec-federal text-[10px] md:text-xs rounded border border-blue-100 font-bold uppercase tracking-wider inline-block w-max">
+                            <span id="filtro-aplicado-texto" class="mt-2 md:mt-0 md:ml-4 px-2.5 py-1 bg-blue-50 text-unitec-federal text-[10px] md:text-xs border border-blue-100 font-bold uppercase tracking-wider inline-block w-max rounded-none">
                                 Mostrando todos
                             </span>
                         </div>
-                        <div class="bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center group-hover:bg-blue-50 transition-colors shrink-0">
+                        <div class="bg-gray-100 w-8 h-8 flex items-center justify-center group-hover:bg-blue-50 transition-colors shrink-0 rounded-none">
                             <i id="filters-chevron" class="fas fa-chevron-down text-unitec-federal transition-transform duration-300"></i>
                         </div>
                     </div>
@@ -132,7 +134,7 @@
                                     <i class="fas fa-hand-pointer mr-1"></i> Haga clic en un Eje o Impacto para filtrar.
                                 </p>
                             </div>
-                            <button id="btn-mostrar-todos" onclick="filtrarProyectos('todos', ''); event.stopPropagation();" class="w-full xl:w-auto mt-2 xl:mt-0 bg-unitec-federal text-white border-2 border-unitec-federal font-black py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap cursor-default shadow-sm">
+                            <button id="btn-mostrar-todos" onclick="filtrarProyectos('todos', ''); event.stopPropagation();" class="w-full xl:w-auto mt-2 xl:mt-0 bg-unitec-federal text-white border-2 border-unitec-federal font-black py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap cursor-default">
                                 Mostrar Todos
                             </button>
                         </div>
@@ -147,7 +149,7 @@
                     <h3 class="text-lg font-black text-unitec-federal uppercase tracking-wider flex items-center">
                         <i class="fas fa-layer-group mr-2 text-unitec-cyan"></i> Proyectos
                     </h3>
-                    <span id="contador-proyectos" class="text-xs font-bold bg-gray-100 text-gray-500 px-3 py-1 rounded-full"></span>
+                    <span id="contador-proyectos" class="text-xs font-bold bg-gray-100 text-gray-500 px-3 py-1 rounded-none"></span>
                 </div>
 
                 <!-- Contenedor de Fichas -->
@@ -171,7 +173,7 @@
     </div>
 
     <script>
-        // 1. Datos de proyectos originales
+        // 1. Datos de proyectos originales (¡INTACTOS!)
         const proyectosData = [
             { "Codigo": "PRO1A", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Acreditacion", "Metrica": "Numero de acreditaciones completadas", "Indicador": "Acreditacion otorgada por ACAAI", "Actividades Acordadas": "Completar la acreditación de Ingeniería en Telecomunicaciones y Redes con ACAAI, y completar el Autoestudio para la acreditacion de Ingeniería en Energía", "Resultados Esperados": "Acreditacion de Telecomunicaciones completa y Autoestudio de Energía listo", "Período": "Q2 a Q4" },
             { "Codigo": "PRO1B", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "1. Transformacion del Aprendizaje", "Impacto": "Experiencia estudiantil transformadora", "Nombre Breve": "Actualizacion Curricular", "Metrica": "Porcentaje de avance en la reforma curricular.", "Indicador": "Reformas completadas en Mecatrónica y Biomédica.", "Actividades Acordadas": "Completar la reforma de los programas de Mecatrónica y Biomédica.", "Resultados Esperados": "Planes de estudio modernizados y alineados a necesidades del sector.", "Período": "Q2 a Q4" },
@@ -197,7 +199,7 @@
             { "Codigo": "PRO2B", "Objetivo": "Proyectos Alineados a Impactos", "Eje": "2. Incidencia Local y Conexión Global", "Impacto": "Vinculación institucional estratégica", "Nombre Breve": "Eventos de Vinculacion estratégica", "Metrica": "Numero de eventos realizados", "Indicador": "Al menos 8 eventos (hackathons, rallies, concursos) al año con el involucramiento de un socio estratégico", "Actividades Acordadas": "Realización de concursos, hackathons, competencias y rallies que impulsen la innovación con la participación de un socio estratégico (Empleadores locales o internacionales, universidades en el extranjero, organizaciones internacionales). ExpoFI y Mecaton cuentan para este proyecto.", "Resultados Esperados": "Elevar la vinculación institucional estratégica con el uso del FabLab", "Período": "Q2 a Q4" }
         ];
 
-        // 2. Base de datos del personal
+        // 2. Base de datos del personal (¡INTACTA!)
         const colaboradoresData = [
             { nombre: "Marco Canales", puesto: "Decano TGU", area: "Decanatura y Dirección", proys: { PRO1A: 'R', PRO1B: 'A', PRO1C: 'L', PRO1D: 'R', PRO1E: 'A', PRO1F: 'R', PRO1G: 'R', PRO1H: 'A', PRO1I: 'R', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'R', PRO2F: 'R', PRO2G: 'A', PRO2H: 'A', PRO3A: 'A', PRO3B: 'A', PRO3C: 'A', PRO3D: 'R' } },
             { nombre: "Edwin Dore", puesto: "Director SPS", area: "Decanatura y Dirección", proys: { PRO1A: 'R', PRO1B: 'A', PRO1C: 'R', PRO1D: 'L', PRO1E: 'A', PRO1F: 'R', PRO1G: 'R', PRO1H: 'A', PRO1I: 'L', PRO2A: 'A', PRO2B: 'A', PRO2C: 'R', PRO2D: 'R', PRO2E: 'R', PRO2F: 'A', PRO2G: 'A', PRO2H: 'A', PRO3A: 'A', PRO3B: 'A', PRO3C: 'A', PRO3D: 'R' } },
@@ -275,6 +277,15 @@
         let filtroActualValor = '';
         let colaboradorActivo = null;
 
+        // EDNA'S LOGIC: Mapear colores de los Ejes estrictamente
+        function getEjeColorConfig(ejeNombre) {
+            if (!ejeNombre) return { bg: 'bg-gray-200', text: 'text-gray-800', border: 'border-gray-200' };
+            if (ejeNombre.includes("1.")) return { bg: 'bg-unitec-sky', text: 'text-unitec-federal', border: 'border-unitec-sky' };
+            if (ejeNombre.includes("2.")) return { bg: 'bg-unitec-cyan', text: 'text-unitec-federal', border: 'border-unitec-cyan' };
+            if (ejeNombre.includes("3.")) return { bg: 'bg-unitec-federal', text: 'text-white', border: 'border-unitec-federal' };
+            return { bg: 'bg-unitec-cyan', text: 'text-unitec-federal', border: 'border-unitec-cyan' };
+        }
+
         function normalizeStr(str) {
             if (!str) return "";
             return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
@@ -309,9 +320,10 @@
                     const btn = document.createElement('button');
                     const isActive = (colaboradorActivo === colab.nombre);
                     
-                    btn.className = `w-full text-left p-2.5 rounded-md mb-1 flex flex-col transition-all duration-200 border group
+                    // EDNA: Eliminado shadow-md y rounded-md
+                    btn.className = `w-full text-left p-2.5 rounded-none mb-1 flex flex-col transition-all duration-200 border group
                         ${isActive 
-                            ? 'bg-unitec-federal text-white border-unitec-federal shadow-md' 
+                            ? 'bg-unitec-federal text-white border-unitec-federal' 
                             : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:border-unitec-cyan'}`;
 
                     btn.innerHTML = `
@@ -378,14 +390,18 @@
                 let ejeHtml = `<div class="flex flex-col gap-2.5">`;
                 
                 const isEjeActive = (filtroActualTipo === 'eje' && filtroActualValor === eje.nombre);
+                const colorConf = getEjeColorConfig(eje.nombre);
+                
+                // EDNA: Integrar colorConf para que el filtro de eje también haga match visual
                 const ejeClasses = isEjeActive
-                    ? "w-full text-left font-black bg-unitec-cyan text-unitec-federal p-3 md:p-3.5 border-2 border-unitec-federal transition-colors duration-300 text-xs md:text-sm flex justify-between items-center group shadow-sm"
-                    : "w-full text-left font-bold bg-unitec-federal text-white p-3 md:p-3.5 border-2 border-transparent hover:border-unitec-cyan transition-colors duration-300 text-xs md:text-sm flex justify-between items-center group shadow-sm";
-                const ejeDiamondColor = isEjeActive ? "bg-unitec-federal" : "bg-white";
+                    ? `w-full text-left font-black ${colorConf.bg} ${colorConf.text} p-3 md:p-3.5 border-2 border-unitec-federal transition-colors duration-300 text-xs md:text-sm flex justify-between items-center group`
+                    : `w-full text-left font-bold bg-unitec-federal text-white p-3 md:p-3.5 border-2 border-transparent hover:${colorConf.border} transition-colors duration-300 text-xs md:text-sm flex justify-between items-center group`;
+                
+                const ejeDiamondColor = isEjeActive ? (colorConf.text === 'text-white' ? 'bg-white' : 'bg-unitec-federal') : "bg-white";
                 
                 ejeHtml += `<button onclick="filtrarProyectos('eje', '${eje.nombre}')" class="${ejeClasses}">
                                 <span class="leading-tight">${eje.nombre}</span>
-                                <div class="w-2 h-2 shrink-0 ml-3 ${ejeDiamondColor} transform rotate-45 group-hover:bg-unitec-cyan transition-colors"></div>
+                                <div class="w-2 h-2 shrink-0 ml-3 ${ejeDiamondColor} transform rotate-45 transition-colors"></div>
                             </button>`;
                 
                 eje.impactos.forEach(impacto => {
@@ -394,9 +410,9 @@
                     if (hasProjects) {
                         const isImpactoActive = (filtroActualTipo === 'impacto' && filtroActualValor === impacto);
                         const impactoClasses = isImpactoActive
-                            ? "w-full text-left text-[10px] md:text-xs p-3 border-2 border-unitec-federal text-white bg-unitec-federal transition-colors font-bold flex items-center shadow-sm"
-                            : "w-full text-left text-[10px] md:text-xs p-3 border-2 border-gray-200 text-unitec-federal bg-white hover:border-unitec-cyan transition-colors font-medium flex items-center shadow-sm";
-                        const impactoDiamondColor = isImpactoActive ? "bg-unitec-cyan" : "bg-unitec-sky";
+                            ? `w-full text-left text-[10px] md:text-xs p-3 border-2 border-unitec-federal ${colorConf.bg} ${colorConf.text} transition-colors font-bold flex items-center`
+                            : `w-full text-left text-[10px] md:text-xs p-3 border-2 border-gray-200 text-unitec-federal bg-white hover:${colorConf.border} transition-colors font-medium flex items-center`;
+                        const impactoDiamondColor = isImpactoActive ? (colorConf.text === 'text-white' ? 'bg-white' : 'bg-unitec-federal') : colorConf.bg;
 
                         ejeHtml += `<button onclick="filtrarProyectos('impacto', '${impacto}')" class="${impactoClasses}">
                                         <div class="w-1.5 h-1.5 shrink-0 ${impactoDiamondColor} transform rotate-45 mr-3"></div> 
@@ -428,9 +444,9 @@
             
             const btnTodos = document.getElementById('btn-mostrar-todos');
             if (tipo === 'todos') {
-                btnTodos.className = "w-full xl:w-auto mt-2 xl:mt-0 bg-unitec-federal text-white border-2 border-unitec-federal font-black py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap cursor-default shadow-sm";
+                btnTodos.className = "w-full xl:w-auto mt-2 xl:mt-0 bg-unitec-federal text-white border-2 border-unitec-federal font-black py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap cursor-default";
             } else {
-                btnTodos.className = "w-full xl:w-auto mt-2 xl:mt-0 bg-white text-unitec-federal border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white font-bold py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap shadow-sm";
+                btnTodos.className = "w-full xl:w-auto mt-2 xl:mt-0 bg-white text-unitec-federal border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white font-bold py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap";
             }
 
             actualizarBadgeFiltro();
@@ -463,7 +479,7 @@
             filtroActualValor = impactoNombre;
             
             const btnTodos = document.getElementById('btn-mostrar-todos');
-            btnTodos.className = "w-full xl:w-auto mt-2 xl:mt-0 bg-white text-unitec-federal border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white font-bold py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap shadow-sm";
+            btnTodos.className = "w-full xl:w-auto mt-2 xl:mt-0 bg-white text-unitec-federal border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white font-bold py-2 md:py-2.5 px-6 transition-colors duration-300 text-xs md:text-sm uppercase tracking-wider whitespace-nowrap";
             
             actualizarBadgeFiltro();
             renderFilters();
@@ -471,7 +487,7 @@
 
             const container = document.getElementById('cards-container');
             container.innerHTML = `
-                <div class="col-span-full bg-white border-2 border-unitec-federal p-6 md:p-8 relative shadow-sm">
+                <div class="col-span-full bg-white border-2 border-unitec-federal p-6 md:p-8 relative">
                     <div class="absolute -top-3 -right-3 w-6 h-6 bg-unitec-federal transform rotate-45 border-2 border-white"></div>
                     <div class="flex flex-col md:flex-row items-start">
                         <div class="md:ml-6 flex-grow">
@@ -483,7 +499,7 @@
                                 En el <strong>2026 no se tienen proyectos mapeados</strong> a este impacto específico en la Facultad de Ingeniería de UNITEC, 
                                 pero esto evolucionará en base a nuestro crecimiento institucional planificado para el 2027 en adelante.
                             </p>
-                            <button onclick="filtrarProyectos('todos', '')" class="bg-unitec-federal text-white hover:bg-unitec-cyan font-bold py-3 px-6 transition-colors text-xs md:text-sm uppercase tracking-wider shadow-sm">
+                            <button onclick="filtrarProyectos('todos', '')" class="bg-unitec-federal text-white hover:bg-unitec-cyan font-bold py-3 px-6 transition-colors text-xs md:text-sm uppercase tracking-wider">
                                 Volver al Portafolio Actual
                             </button>
                         </div>
@@ -492,15 +508,29 @@
             `;
         }
 
-        // CONSTRUCCIÓN DEL HTML PARA UN BOTÓN INDIVIDUAL
+        // CONSTRUCCIÓN DEL HTML PARA UN BOTÓN INDIVIDUAL (EDNA'S UPDATE)
         function buildButtonHTML(p) {
+            const colorConf = getEjeColorConfig(p['Eje']);
+            
+            // EDNA: Fuera sombras, fuera redondos. Entra información de Eje e Impacto.
             return `
-                <button onclick="abrirFicha('${p['Codigo']}')" class="bg-white border-2 border-unitec-federal hover:bg-unitec-federal hover:text-white text-unitec-federal transition-all duration-300 p-4 rounded shadow-sm flex flex-col items-start text-left group w-full relative overflow-hidden">
-                    <span class="bg-unitec-cyan text-white text-[10px] font-bold px-2 py-0.5 mb-3 tracking-widest uppercase shadow-sm relative z-10">${p['Codigo']}</span>
-                    <span class="font-black text-sm md:text-base leading-tight relative z-10 group-hover:text-white transition-colors">${p['Nombre Breve']}</span>
+                <button onclick="abrirFicha('${p['Codigo']}')" class="bg-white border-2 border-unitec-federal hover:bg-gray-50 text-unitec-federal transition-all duration-300 p-4 rounded-none flex flex-col items-start text-left group w-full relative overflow-hidden h-full">
+                    <span class="${colorConf.bg} ${colorConf.text} text-[10px] font-bold px-2 py-0.5 mb-3 tracking-widest uppercase relative z-10">${p['Codigo']}</span>
+                    <span class="font-black text-sm md:text-base leading-tight relative z-10 mb-4 flex-grow">${p['Nombre Breve']}</span>
+                    
+                    <div class="w-full border-t border-gray-100 pt-3 mt-auto flex flex-col gap-1.5 relative z-10">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 shrink-0 ${colorConf.bg} transform rotate-45 mt-1"></div>
+                            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider leading-tight">${p['Eje']}</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 shrink-0 ${colorConf.bg} transform rotate-45 mt-1"></div>
+                            <span class="text-[10px] font-medium text-gray-500 leading-tight">${p['Impacto']}</span>
+                        </div>
+                    </div>
                     
                     <!-- Elemento decorativo hover -->
-                    <div class="absolute -bottom-6 -right-6 text-unitec-sky opacity-0 group-hover:opacity-20 transition-opacity duration-300 z-0">
+                    <div class="absolute -bottom-6 -right-6 ${colorConf.text} opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-0">
                         <i class="fas fa-project-diagram text-6xl"></i>
                     </div>
                 </button>
@@ -512,10 +542,10 @@
             return `
                 <div class="mb-4">
                     <h4 class="text-xs md:text-sm font-black text-gray-800 uppercase tracking-widest mb-4 flex items-center border-b border-gray-200 pb-2">
-                        <span class="w-6 h-6 flex items-center justify-center rounded-sm text-[10px] mr-2 shadow-sm ${badgeClasses}">${badgeLetter}</span>
+                        <span class="w-6 h-6 flex items-center justify-center rounded-none text-[10px] mr-2 ${badgeClasses}">${badgeLetter}</span>
                         ${title} <span class="ml-2 text-gray-400 font-bold">(${proyectosList.length})</span>
                     </h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 items-stretch">
                         ${proyectosList.map(p => buildButtonHTML(p)).join('')}
                     </div>
                 </div>
@@ -540,7 +570,7 @@
                 }
 
                 container.innerHTML = `
-                    <div class="col-span-full flex flex-col items-center justify-center py-12 md:py-16 px-4 bg-gray-50 border border-gray-200 border-dashed rounded-lg text-center">
+                    <div class="col-span-full flex flex-col items-center justify-center py-12 md:py-16 px-4 bg-gray-50 border border-gray-200 border-dashed text-center">
                         <i class="fas fa-folder-open text-3xl md:text-4xl text-gray-300 mb-4"></i>
                         <p class="text-gray-500 font-medium text-base md:text-lg max-w-xl leading-relaxed">${mensajeVacio}</p>
                         ${colaboradorActivo ? `<button onclick="seleccionarColaborador(null)" class="mt-4 text-xs md:text-sm text-unitec-federal font-bold hover:text-unitec-cyan underline decoration-2 underline-offset-4">Limpiar filtro de colaborador</button>` : ''}
@@ -578,7 +608,7 @@
                 // Render normal sin agrupaciones si no hay colaborador seleccionado
                 contador.textContent = proyectos.length;
                 const generalGridHTML = `
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 w-full">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 w-full items-stretch">
                         ${proyectos.map(p => buildButtonHTML(p)).join('')}
                     </div>
                 `;
@@ -613,6 +643,7 @@
             const criterioACAAI = determinarCriterioACAAI(p);
             const periodo = normalizarPeriodo(p['Período']);
             const team = getProjectTeam(p['Codigo']);
+            const colorConf = getEjeColorConfig(p['Eje']);
             
             let equipoHTML = `<div class="border-t-2 border-gray-100 pt-4 mt-2">
                                 <span class="font-black text-unitec-federal block text-xs uppercase tracking-widest mb-3 flex items-center">
@@ -620,24 +651,24 @@
                                 </span>
                                 <div class="flex flex-col gap-2">`;
             
-            equipoHTML += `<div class="flex items-start"><span class="bg-unitec-federal text-white text-[10px] font-bold px-2 py-0.5 rounded-sm mr-2 w-7 text-center shrink-0 shadow-sm">L</span><span class="${team.L.length > 0 ? 'text-sm font-semibold text-unitec-federal' : 'text-xs italic text-gray-400 mt-0.5'}">${team.L.length > 0 ? team.L.join(', ') : 'En proceso de asignación'}</span></div>`;
-            equipoHTML += `<div class="flex items-start"><span class="bg-unitec-cyan text-white text-[10px] font-bold px-2 py-0.5 rounded-sm mr-2 w-7 text-center shrink-0 shadow-sm">R</span><span class="${team.R.length > 0 ? 'text-xs md:text-sm font-medium text-gray-700 leading-tight' : 'text-xs italic text-gray-400 mt-0.5'}">${team.R.length > 0 ? team.R.join(', ') : 'En proceso de asignación'}</span></div>`;
-            equipoHTML += `<div class="flex items-start"><span class="bg-gray-200 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-sm mr-2 w-7 text-center shrink-0 shadow-sm">A</span><span class="${team.A.length > 0 ? 'text-xs font-normal text-gray-500 leading-tight' : 'text-xs italic text-gray-400 mt-0.5'}">${team.A.length > 0 ? team.A.join(', ') : 'En proceso de asignación'}</span></div>`;
+            equipoHTML += `<div class="flex items-start"><span class="bg-unitec-federal text-white text-[10px] font-bold px-2 py-0.5 rounded-none mr-2 w-7 text-center shrink-0">L</span><span class="${team.L.length > 0 ? 'text-sm font-semibold text-unitec-federal' : 'text-xs italic text-gray-400 mt-0.5'}">${team.L.length > 0 ? team.L.join(', ') : 'En proceso de asignación'}</span></div>`;
+            equipoHTML += `<div class="flex items-start"><span class="bg-unitec-cyan text-white text-[10px] font-bold px-2 py-0.5 rounded-none mr-2 w-7 text-center shrink-0">R</span><span class="${team.R.length > 0 ? 'text-xs md:text-sm font-medium text-gray-700 leading-tight' : 'text-xs italic text-gray-400 mt-0.5'}">${team.R.length > 0 ? team.R.join(', ') : 'En proceso de asignación'}</span></div>`;
+            equipoHTML += `<div class="flex items-start"><span class="bg-gray-200 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-none mr-2 w-7 text-center shrink-0">A</span><span class="${team.A.length > 0 ? 'text-xs font-normal text-gray-500 leading-tight' : 'text-xs italic text-gray-400 mt-0.5'}">${team.A.length > 0 ? team.A.join(', ') : 'En proceso de asignación'}</span></div>`;
             equipoHTML += `</div></div>`;
 
-            // Construir interior del modal (Reutilizando diseño de tarjeta original)
+            // Construir interior del modal (EDNA: Sin sombras y aplicando el color del Eje al código)
             const cardHTML = `
-                <div class="bg-white border-2 border-unitec-federal flex flex-col relative card-impresion shadow-2xl">
+                <div class="bg-white border-2 border-unitec-federal flex flex-col relative card-impresion">
                     
                     <!-- Botón de Cerrar Modal -->
-                    <button onclick="cerrarFicha()" class="absolute top-3 md:top-4 right-3 md:right-4 text-white hover:text-unitec-cyan transition-colors z-20 focus:outline-none bg-unitec-federal rounded-full w-8 h-8 flex items-center justify-center shadow-md no-print">
+                    <button onclick="cerrarFicha()" class="absolute top-3 md:top-4 right-3 md:right-4 text-white hover:text-unitec-cyan transition-colors z-20 focus:outline-none bg-unitec-federal rounded-none w-8 h-8 flex items-center justify-center no-print">
                         <i class="fas fa-times fa-lg"></i>
                     </button>
 
                     <div class="bg-unitec-federal text-white p-5 pr-14 transition-colors">
                         <div class="flex flex-col md:flex-row md:items-center justify-between items-start gap-3 md:gap-4">
                             <h3 class="font-black text-xl md:text-2xl leading-tight uppercase tracking-tight">${p['Nombre Breve'] || 'Proyecto Sin Nombre'}</h3>
-                            <span class="bg-unitec-cyan text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 whitespace-nowrap tracking-widest border border-unitec-cyan shadow-sm self-start md:self-auto">
+                            <span class="${colorConf.bg} ${colorConf.text} text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 whitespace-nowrap tracking-widest border-2 border-transparent self-start md:self-auto">
                                 ${p['Codigo'] || '-'}
                             </span>
                         </div>
@@ -659,7 +690,7 @@
                         </div>
                         
                         <div>
-                            <span class="font-black text-white bg-unitec-federal px-2 py-1 text-[10px] uppercase tracking-widest inline-block mb-3 shadow-sm">Actividades Acordadas</span>
+                            <span class="font-black text-white bg-unitec-federal px-2 py-1 text-[10px] uppercase tracking-widest inline-block mb-3">Actividades Acordadas</span>
                             <p class="text-gray-700 leading-relaxed font-medium text-sm md:text-base">${p['Actividades Acordadas'] || 'Ninguna actividad descrita.'}</p>
                         </div>
                         
