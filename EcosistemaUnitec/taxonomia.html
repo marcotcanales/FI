@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNITEC | Constructor de Metas Ecosistema de Aprendizaje</title>
+    
+    <!-- Fuentes: Poppins Estricto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        unitec: {
+                            blue: '#06065C',    // Federal Blue
+                            cyan: '#03AED2',    // Pacific Cyan
+                            sky: '#47C8FD',     // Vivid Sky Blue
+                            gray: '#F3F4F6',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- React y Babel -->
+    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; overflow-x: hidden; }
+        
+        /* Cortes geométricos del diamante - CERO BORDES REDONDEADOS */
+        .diamond-cut { clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%); }
+        .diamond-cut-reverse { clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 85%); }
+        .diamond-shape { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+        
+        /* Cero sombras, cero degradados. Desplazamientos sólidos. */
+        .hover-solid-shift { transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .hover-solid-shift:hover { transform: translate(-8px, -8px); }
+
+        /* Animaciones limpias */
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        .slide-up { animation: slideUp 0.6s ease-out forwards; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #06065C; }
+        ::-webkit-scrollbar-thumb:hover { background: #03AED2; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased bg-slate-50 min-h-screen flex flex-col selection:bg-unitec-sky selection:text-unitec-blue">
+    <div id="root" class="flex-grow flex flex-col"></div>
+
+    <script type="text/babel">
+        // --- ICONOS SVG (Mapeados estrictamente a JSX para React sin dependencias externas) ---
+        const IconWrapper = ({ children, className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>{children}</svg>
+        );
+        
+        // Logotipo Institucional Estricto
+        const UnitecLogo = () => (
+            <div className="flex items-center gap-3">
+                <svg width="32" height="32" viewBox="0 0 100 100" className="fill-current text-unitec-sky">
+                    <polygon points="50,0 100,50 50,100 0,50" />
+                </svg>
+                <span className="text-3xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
+            </div>
+        );
+
+        // Iconos específicos de la aplicación
+        const Brain = ({ className }) => <IconWrapper className={className}><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5A3 3 0 0 0 13.6 2.17"/><path d="M6.401 6.5A3 3 0 0 1 10.4 2.17"/><path d="M11 16h2"/><path d="M12 21v-5"/></IconWrapper>;
+        const Lightbulb = ({ className }) => <IconWrapper className={className}><line x1="9" x2="15" y1="18" y2="18"/><line x1="10" x2="14" y1="22" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 12 2a4.65 4.65 0 0 0-4.5 9.65c.76.76 1.23 1.52 1.4 2.5a2 2 0 0 0 4.19 0Z"/></IconWrapper>;
+        const PenTool = ({ className }) => <IconWrapper className={className}><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></IconWrapper>;
+        const Search = ({ className }) => <IconWrapper className={className}><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></IconWrapper>;
+        const Scale = ({ className }) => <IconWrapper className={className}><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></IconWrapper>;
+        const Rocket = ({ className }) => <IconWrapper className={className}><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 3.82-13.04L13.5 2c-.93 2.14 1.05 4.07 3.19 3.16l1.22.42A22 22 0 0 1 15 12z"/><path d="M9 11l.01.01"/><path d="M11 9l.01.01"/></IconWrapper>;
+        const CheckCircle2 = ({ className }) => <IconWrapper className={className}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></IconWrapper>;
+        const Copy = ({ className }) => <IconWrapper className={className}><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></IconWrapper>;
+        const Target = ({ className }) => <IconWrapper className={className}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></IconWrapper>;
+        const Compass = ({ className }) => <IconWrapper className={className}><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></IconWrapper>;
+
+        // Datos de la taxonomía (Despojados de colores arcoíris, adaptados a la marca)
+        const bloomData = [
+          { 
+            id: 1, level: 'Recordar', icon: <Brain className="w-6 h-6" />, brandAccent: 'bg-unitec-sky text-unitec-federal', brandBorder: 'border-unitec-sky', bgCard: 'bg-white',
+            def: 'Exhibir la memoria del material aprendido previamente recordando hechos, términos, conceptos básicos y respuestas.', 
+            verbs: ['Listar', 'Nombrar', 'Recordar', 'Registrar', 'Relatar', 'Repetir', 'Expresar', 'Contar', 'Definir'],
+            Dimension: 'Base (Pre-requisito)'
+          },
+          { 
+            id: 2, level: 'Comprender', icon: <Lightbulb className="w-6 h-6" />, brandAccent: 'bg-unitec-cyan text-white', brandBorder: 'border-unitec-cyan', bgCard: 'bg-white',
+            def: 'Demostrar comprensión de hechos e ideas organizando, comparando, traduciendo, interpretando y expresando las ideas.', 
+            verbs: ['Comparar', 'Describir', 'Discutir', 'Explicar', 'Identificar', 'Reconocer', 'Reafirmar', 'Traducir', 'Clasificar'],
+            Dimension: 'Conceptual'
+          },
+          { 
+            id: 3, level: 'Aplicar', icon: <PenTool className="w-6 h-6" />, brandAccent: 'bg-unitec-blue text-white', brandBorder: 'border-unitec-blue', bgCard: 'bg-white',
+            def: 'Resolver problemas en situaciones nuevas aplicando los conocimientos adquiridos, técnicas y reglas de manera diferente.', 
+            verbs: ['Solicitar', 'Completar', 'Construir', 'Demostrar', 'Emplear', 'Ilustrar', 'Interpretar', 'Funcionar', 'Bosquejar'],
+            Dimension: 'Competencial'
+          },
+          { 
+            id: 4, level: 'Analizar', icon: <Search className="w-6 h-6" />, brandAccent: 'bg-unitec-sky text-unitec-federal', brandBorder: 'border-unitec-sky', bgCard: 'bg-gray-50',
+            def: 'Examinar y dividir la información en partes identificando motivos o causas. Hacer inferencias y encontrar evidencia.', 
+            verbs: ['Analizar', 'Evaluar', 'Categorizar', 'Comparar', 'Contrastar', 'Debatir', 'Diagramar', 'Diferenciar', 'Examinar'],
+            Dimension: 'Conceptual / Competencial'
+          },
+          { 
+            id: 5, level: 'Evaluar', icon: <Scale className="w-6 h-6" />, brandAccent: 'bg-unitec-cyan text-white', brandBorder: 'border-unitec-cyan', bgCard: 'bg-gray-50',
+            def: 'Presentar y defender opiniones haciendo juicios sobre la validez de las ideas o la calidad con base en criterios.', 
+            verbs: ['Evaluar', 'Argumentar', 'Escoger', 'Concluir', 'Estimar', 'Juzgar', 'Justificar', 'Medir', 'Revisar'],
+            Dimension: 'Carácter / Conceptual'
+          },
+          { 
+            id: 6, level: 'Crear', icon: <Rocket className="w-6 h-6" />, brandAccent: 'bg-unitec-blue text-white', brandBorder: 'border-unitec-blue', bgCard: 'bg-gray-50',
+            def: 'Compilar información de forma diferente combinando elementos en un nuevo patrón o proponiendo soluciones alternativas.', 
+            verbs: ['Arreglar', 'Armar', 'Combinar', 'Componer', 'Construir', 'Crear', 'Diseñar', 'Idear', 'Inventar', 'Sintetizar'],
+            Dimension: 'Competencial / Carácter'
+          }
+        ];
+
+        // --- COMPONENTE PRINCIPAL APP ---
+        const App = () => {
+          const [selectedVerb, setSelectedVerb] = React.useState('');
+          const [learningContent, setLearningContent] = React.useState('');
+          const [learningContext, setLearningContext] = React.useState('');
+          const [selected, setSelected] = React.useState('Conceptual');
+          const [copied, setCopied] = React.useState(false);
+
+          const handleVerbClick = (verb) => {
+            setSelectedVerb(verb.toLowerCase());
+            // Desplazamiento suave hacia el constructor
+            document.getElementById('builder-section').scrollIntoView({ behavior: 'smooth' });
+          };
+
+          const getGeneratedObjective = () => {
+            if (!selectedVerb && !learningContent && !learningContext) return 'Selecciona un verbo arriba y completa los campos para generar tu meta de aprendizaje...';
+            return `El estudiante será capaz de ${selectedVerb || '[verbo]'} ${learningContent || '[qué contenido/habilidad]'} ${learningContext ? `para ${learningContext}` : '[para qué/contexto]'} .`;
+          };
+
+          const handleCopy = () => {
+            const textToCopy = `Meta ${selected}: ${getGeneratedObjective()}`;
+            // Método seguro para copiar al portapapeles sin iFrame blocks
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+              document.execCommand('copy');
+              setCopied(true);
+              setTimeout(() => setCopied(false), 2000);
+            } catch (err) {
+              console.error('Failed to copy', err);
+            }
+            document.body.removeChild(textArea);
+          };
+
+          return (
+            <div className="flex-grow flex flex-col font-sans">
+              
+              {/* Encabezado Corporativo Estricto */}
+              <nav className="w-full bg-unitec-blue border-b-4 border-unitec-cyan py-6 px-6 md:px-8 flex justify-between items-center z-50 sticky top-0 shadow-lg">
+                <UnitecLogo />
+                <div className="hidden md:flex gap-4 items-center">
+                    <span className="text-unitec-sky font-semibold tracking-widest uppercase text-xs mt-1">Herramientas del Ecosistema de Aprendizaje</span>
+                </div>
+              </nav>
+
+              {/* Título Principal (Cortes geométricos) */}
+              <div className="bg-white border-b-8 border-unitec-cyan py-12 px-6 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-unitec-sky opacity-10 diamond-shape translate-x-1/4 -translate-y-1/4"></div>
+                <div className="max-w-6xl mx-auto fade-in relative z-10 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
+                    <div>
+                        <h2 className="text-3xl md:text-5xl font-black text-unitec-blue mb-2 uppercase tracking-tight flex items-center gap-3">
+                            Constructor <span className="text-unitec-cyan">de Metas</span>
+                        </h2>
+                        <p className="text-unitec-blue text-base font-medium border-l-4 border-unitec-cyan pl-3">
+                            Taxonomía de Verbos de Acción para el Diseño de Metas de Aprendizaje
+                        </p>
+                    </div>
+                    {/* Dimensiones badge */}
+                    <div className="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-widest">
+                        <span className="bg-unitec-blue text-white px-3 py-1.5 diamond-cut">Conceptual</span>
+                        <span className="bg-unitec-cyan text-white px-3 py-1.5 diamond-cut">Competencial</span>
+                        <span className="bg-unitec-sky text-unitec-blue px-3 py-1.5 diamond-cut">Carácter</span>
+                    </div>
+                </div>
+              </div>
+
+              <main className="flex-grow max-w-6xl mx-auto p-6 md:p-8 space-y-16 slide-up w-full">
+                
+                {/* Intro Section - Diamante */}
+                <section className="relative group">
+                    <div className="absolute inset-0 bg-unitec-cyan diamond-cut mt-2 ml-2"></div>
+                    <div className="relative bg-white p-8 diamond-cut border border-gray-200 z-10 hover-solid-shift">
+                        <h2 className="text-2xl font-black text-unitec-blue mb-4 flex items-center gap-3 uppercase">
+                            <Target className="text-unitec-cyan w-8 h-8" />
+                            Integración con el Unitec Planner
+                        </h2>
+                        <p className="text-gray-700 font-medium leading-relaxed mb-4">
+                            Utiliza esta taxonomía para describir acciones observables que indiquen la actividad cognitiva de los estudiantes. 
+                            Al diseñar experiencias, asegúrate de equilibrar las <strong className="text-unitec-blue font-black">tres dimensiones del aprendizaje (3Cs)</strong>. Un buen módulo no solo transfiere información, sino que exige la aplicación práctica y fomenta el juicio ético y reflexivo.
+                        </p>
+                        <div className="bg-gray-50 border-l-4 border-unitec-cyan p-4">
+                            <p className="text-sm text-unitec-blue font-bold uppercase tracking-widest flex items-center gap-2">
+                                <i data-lucide="info" className="w-4 h-4"></i> Instrucción
+                            </p>
+                            <p className="text-sm text-gray-600 font-medium mt-1">
+                                Haz clic en cualquier verbo de las tarjetas inferiores para enviarlo automáticamente al "Constructor de Metas" al final de la página.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Taxonomy Grid (Estricto a la marca) */}
+                <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {bloomData.map((level, index) => (
+                    <div key={level.id} className="relative group">
+                        {/* Sombra sólida decorativa basada en el índice para alternar colores de la marca */}
+                        <div className={`absolute inset-0 ${index % 2 === 0 ? 'bg-unitec-blue' : 'bg-unitec-cyan'} diamond-cut mt-2 ml-2 transition-transform group-hover:translate-x-1 group-hover:translate-y-1`}></div>
+                        
+                        <div className={`relative ${level.bgCard} p-6 diamond-cut border-l-8 ${level.brandBorder} border-y border-r border-gray-200 z-10 h-full flex flex-col`}>
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className={`p-3 diamond-shape flex items-center justify-center ${level.brandAccent}`}>
+                                    {level.icon}
+                                </div>
+                                <h3 className="text-xl font-black text-unitec-blue uppercase">{level.level}</h3>
+                            </div>
+                            
+                            <div className="mb-4 border-b border-gray-200 pb-2">
+                                <span className="text-xs font-bold uppercase tracking-widest text-unitec-cyan">
+                                    CGS: {level.cgsDimension}
+                                </span>
+                            </div>
+
+                            <p className="text-sm text-gray-700 font-medium mb-6 flex-grow leading-relaxed">{level.def}</p>
+                            
+                            <div className="flex flex-wrap gap-2 mt-auto">
+                                {level.verbs.map((verb, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => handleVerbClick(verb)}
+                                    className="bg-white hover:bg-unitec-blue hover:text-white text-unitec-blue text-xs font-bold uppercase tracking-wider px-3 py-1.5 border border-gray-200 transition-colors focus:outline-none focus:bg-unitec-cyan focus:text-white diamond-cut"
+                                    title={`Usar el verbo "${verb}"`}
+                                >
+                                    {verb}
+                                </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                  ))}
+                </section>
+
+                {/* Builder Section */}
+                <section id="builder-section" className="relative group scroll-mt-32">
+                    <div className="absolute inset-0 bg-unitec-sky diamond-cut mt-3 ml-3"></div>
+                    <div className="relative bg-white p-8 md:p-12 diamond-cut border border-gray-200 z-10 hover-solid-shift">
+                        
+                        <div className="flex items-center gap-4 mb-8 border-b-4 border-unitec-cyan pb-4">
+                            <PenTool className="w-8 h-8 text-unitec-cyan" />
+                            <h2 className="text-2xl md:text-3xl font-black text-unitec-blue uppercase tracking-tight">Estructura tu Meta</h2>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                            <div className="lg:col-span-2 space-y-8">
+                                
+                                {/* Selector de Dimensión CGS */}
+                                <div>
+                                    <label className="block text-sm font-black text-unitec-blue uppercase tracking-widest mb-3">1. Dimensión (CGS)</label>
+                                    <div className="flex flex-wrap gap-3">
+                                        {['Conceptual', 'Competencial', 'Carácter'].map(dim => (
+                                            <button
+                                                key={dim}
+                                                onClick={() => setSelectedCGS(dim)}
+                                                className={`px-5 py-2 font-bold uppercase tracking-widest text-xs transition-colors diamond-cut border-2 ${
+                                                    selectedCGS === dim 
+                                                    ? 'bg-unitec-blue text-white border-unitec-blue' 
+                                                    : 'bg-gray-50 text-unitec-blue border-gray-200 hover:border-unitec-cyan'
+                                                }`}
+                                            >
+                                                {dim}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {/* Verb Input */}
+                                    <div>
+                                        <label className="block text-sm font-black text-unitec-blue uppercase tracking-widest mb-3">2. Verbo de Acción</label>
+                                        <input 
+                                            type="text" 
+                                            value={selectedVerb}
+                                            onChange={(e) => setSelectedVerb(e.target.value)}
+                                            placeholder="Ej. diseñar, analizar..."
+                                            className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 focus:border-unitec-cyan focus:outline-none font-medium text-gray-800 diamond-cut"
+                                        />
+                                        <p className="text-xs font-bold text-unitec-cyan uppercase tracking-wider mt-2">← Autocompleta tocando arriba</p>
+                                    </div>
+
+                                    {/* Content Input */}
+                                    <div>
+                                        <label className="block text-sm font-black text-unitec-blue uppercase tracking-widest mb-3">3. ¿Qué? (Contenido)</label>
+                                        <input 
+                                            type="text" 
+                                            value={learningContent}
+                                            onChange={(e) => setLearningContent(e.target.value)}
+                                            placeholder="Ej. un modelo estructural..."
+                                            className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 focus:border-unitec-cyan focus:outline-none font-medium text-gray-800 diamond-cut"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Context Input */}
+                                <div>
+                                    <label className="block text-sm font-black text-unitec-blue uppercase tracking-widest mb-3">4. ¿Para qué? (Contexto / Propósito)</label>
+                                    <input 
+                                        type="text" 
+                                        value={learningContext}
+                                        onChange={(e) => setLearningContext(e.target.value)}
+                                        placeholder="Ej. garantizar la seguridad frente a cargas sísmicas."
+                                        className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 focus:border-unitec-cyan focus:outline-none font-medium text-gray-800 diamond-cut"
+                                    />
+                                </div>
+
+                            </div>
+
+                            {/* Panel de Resultado */}
+                            <div className="bg-unitec-federal text-white p-8 diamond-cut border-l-8 border-unitec-sky flex flex-col">
+                                <h3 className="text-xs font-black text-unitec-sky uppercase tracking-[0.2em] mb-6 border-b border-white/20 pb-2">Resultado Final</h3>
+                                
+                                <div className="flex-grow flex items-center justify-center">
+                                    <p className={`text-lg leading-relaxed ${(!selectedVerb && !learningContent) ? 'text-gray-400 italic text-center text-sm' : 'font-bold'}`}>
+                                        {getGeneratedObjective()}
+                                    </p>
+                                </div>
+                                
+                                <div className="mt-8">
+                                    <button 
+                                        onClick={handleCopy}
+                                        className="w-full flex items-center justify-center gap-3 bg-unitec-cyan hover:bg-unitec-sky text-unitec-blue py-4 px-4 font-black uppercase tracking-widest text-sm transition-colors focus:outline-none diamond-cut"
+                                    >
+                                        {copied ? (
+                                            <>
+                                                <CheckCircle2 className="w-5 h-5" />
+                                                ¡Copiado!
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Copy className="w-5 h-5" />
+                                                Copiar Meta
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+              </main>
+              
+              {/* Footer Estricto */}
+              <footer className="bg-unitec-blue text-gray-400 py-12 px-6 border-t-8 border-unitec-cyan mt-auto">
+                  <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                      <UnitecLogo />
+                      <div className="text-center md:text-right">
+                          <p className="text-sm font-bold text-white uppercase tracking-widest mb-1">
+                              Herramientas Docentes
+                          </p>
+                          <p className="text-xs font-medium text-unitec-sky uppercase tracking-widest">
+                              Visión UNITEC 2030 | Collective Growth System
+                          </p>
+                      </div>
+                  </div>
+              </footer>
+            </div>
+          );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
