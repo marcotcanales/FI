@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +7,6 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- React & ReactDOM -->
-    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-    
-    <!-- Babel for JSX -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -73,586 +66,673 @@
         }
     </style>
 </head>
-<body>
-    <div id="root"></div>
+<body class="selection:bg-[#03AED2] selection:text-white overflow-x-hidden">
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-
-        // --- ICONOS INCRUSTADOS (ZERO DEPENDENCIES) ---
-        const IconBase = ({ children, size = 24, className = "" }) => (
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width={size} 
-                height={size} 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                className={className}
-            >
-                {children}
-            </svg>
-        );
-
-        const Icons = {
-            Menu: (props) => <IconBase {...props}><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></IconBase>,
-            X: (props) => <IconBase {...props}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></IconBase>,
-            Award: (props) => <IconBase {...props}><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></IconBase>,
-            Globe: (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></IconBase>,
-            Zap: (props) => <IconBase {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></IconBase>,
-            Users: (props) => <IconBase {...props}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></IconBase>,
-            BookOpen: (props) => <IconBase {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase>,
-            Target: (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></IconBase>,
-            Layout: (props) => <IconBase {...props}><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="9" y2="21"/></IconBase>,
-            Lightbulb: (props) => <IconBase {...props}><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></IconBase>,
-            Compass: (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></IconBase>,
-            MessageCircle: (props) => <IconBase {...props}><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></IconBase>,
-            Heart: (props) => <IconBase {...props}><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></IconBase>,
-            Star: (props) => <IconBase {...props}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></IconBase>,
-            Sprout: (props) => <IconBase {...props}><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.2.4-4.8.4a2.5 2.5 0 0 1 0-5Z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1.7-1.3 2.9-1.3 3-1.2a3 3 0 0 0-3-3.1Z"/></IconBase>,
-            Map: (props) => <IconBase {...props}><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></IconBase>
-        };
-
-        const App = () => {
-            const [isMenuOpen, setIsMenuOpen] = useState(false);
-            const [scrolled, setScrolled] = useState(false);
-            const [selectedCapability, setSelectedCapability] = useState(null); // Estado para el modal de Capacidad
-
-            const { 
-                Menu, X, Award, Globe, Zap, Users, BookOpen, Target, 
-                Layout, Lightbulb, Compass, MessageCircle, Heart, Star, 
-                Sprout, Map 
-            } = Icons;
-
-            useEffect(() => {
-                const handleScroll = () => {
-                    setScrolled(window.scrollY > 50);
-                };
-                window.addEventListener('scroll', handleScroll);
-                return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
-
-            // Lock body scroll when modal is open
-            useEffect(() => {
-                if (selectedCapability) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = 'auto';
-                }
-            }, [selectedCapability]);
-
-            const scrollTo = (id) => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                    setIsMenuOpen(false);
-                }
-            };
-
-            // DATA STRICTLY FROM DOCUMENT "VISION 2030"
-            const visionText = "Ser una Universidad de clase mundial, protagonista del desarrollo de Honduras, reconocida por su excelencia académica, innovación constante y por construir una comunidad de aprendizaje donde la conexión humana y la experiencia educativa fortalecen el crecimiento integral de las personas a lo largo de su vida.";
-
-            const principles = [
-                { title: "Honestidad y Coherencia", desc: "Actuamos con honestidad y coherencia.", icon: <Award size={32} /> },
-                { title: "Desafío como Oportunidad", desc: "Convertimos cada desafio en una oportunidad para crecer.", icon: <Zap size={32} /> },
-                { title: "Responsabilidad", desc: "Tomamos nuestras decisiones con responsabilidad para cuidar nuestro entorno y nuestra comunidad.", icon: <Globe size={32} /> },
-                { title: "Respeto y Diversidad", desc: "Creemos que cada persona merece respeto y que las diferencias nos enriquecen.", icon: <Users size={32} /> },
-                { title: "Innovación y Emprendimiento", desc: "Impulsamos la innovación y el emprendimiento como motores de cambio.", icon: <Lightbulb size={32} /> }
-            ];
-
-            const axes = [
-                {
-                    id: 1,
-                    title: "Transformación del aprendizaje",
-                    impacts: [
-                        "Ecosistema de aprendizaje",
-                        "Campus y sedes referentes",
-                        "Docentes como motor de la innovación Educativa y del aprendizaje continuo",
-                        "Propuesta institucional de aprendizaje a lo largo de la vida",
-                        "Experiencia estudiantil transformadora"
-                    ]
-                },
-                {
-                    id: 2,
-                    title: "Incidencia local y conexión global",
-                    impacts: [
-                        "Vinculación institucional estratégica",
-                        "Presencia global",
-                        "Investigación e innovación para el desarrollo"
-                    ]
-                },
-                {
-                    id: 3,
-                    title: "Fortalecimiento Institucional",
-                    impacts: [
-                        "Cultura organizacional de alto desempeño e inclusiva",
-                        "Gobernanza institucional sostenible",
-                        "Gestión ambiental",
-                        "Capacidades tecnológicas fortalecidas"
-                    ]
-                }
-            ];
-
-            // Retrato del Egresado con textos extraídos del PDF proporcionado
-            const portraitCapabilities = [
-                { 
-                    title: "Líder con Propósito", 
-                    icon: <Star size={24} />, 
-                    pos: "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2", 
-                    labelPos: "-top-12 left-1/2 -translate-x-1/2",
-                    desc: "Un egresado de UNITEC ha alcanzado equilibrio personal y bienestar. Se guía por la curiosidad y un compromiso con el aprendizaje a lo largo de la vida. Tiene un fuerte sentido de propósito y es adaptable y resiliente en la búsqueda de sus metas. Actúa con integridad y sirve tanto a comunidades locales como globales, siempre preparado para hacer lo correcto."
-                },
-                { 
-                    title: "Ciudadano Responsable", 
-                    icon: <Globe size={24} />, 
-                    pos: "top-[25%] right-[2%] translate-x-1/2", 
-                    labelPos: "-right-4 translate-x-full md:-right-4 md:translate-x-full mt-10 md:mt-0",
-                    desc: "Un egresado de UNITEC siente un sentido de responsabilidad personal por sostener sistemas sociales saludables y ecosistemas naturales, y actúa para transformar su entorno para mejorarlo."
-                },
-                { 
-                    title: "Innovador Creativo", 
-                    icon: <Lightbulb size={24} />, 
-                    pos: "bottom-[25%] right-[2%] translate-x-1/2", 
-                    labelPos: "-right-4 translate-x-full md:-right-4 md:translate-x-full mb-10 md:mb-0",
-                    desc: "Un egresado de UNITEC aporta originalidad de Interpretación y creatividad de expresión a su experiencia del mundo. Crea nuevos artefactos, tecnologias y herramientas, llevando un espiritu emprendedor a la solución de problemas."
-                },
-                { 
-                    title: "Comunicador Efectivo", 
-                    icon: <MessageCircle size={24} />, 
-                    pos: "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2", 
-                    labelPos: "-bottom-12 left-1/2 -translate-x-1/2",
-                    desc: "Un egresado de UNITEC domina las habilidades de comunicación oral, escrita y digital. Expresa ideas complejas de manera efectiva, ética y estratégica, utilizando la comunicación para defender principios y compartir ideas que importan."
-                },
-                { 
-                    title: "Colaborador Constructivo", 
-                    icon: <Users size={24} />, 
-                    pos: "bottom-[25%] left-[2%] -translate-x-1/2", 
-                    labelPos: "-left-4 -translate-x-full md:-left-4 md:-translate-x-full mb-10 md:mb-0",
-                    desc: "Un egresado de UNITEC trabaja eficazmente con personas de distintos orígenes, disciplinas y culturas. Construye relaciones respetuosas para alcanzar metas comunes con apertura, empatia y respeto."
-                },
-                { 
-                    title: "Solucionador Empático", 
-                    icon: <Heart size={24} />, 
-                    pos: "top-[25%] left-[2%] -translate-x-1/2", 
-                    labelPos: "-left-4 -translate-x-full md:-left-4 md:-translate-x-full mt-10 md:mt-0",
-                    desc: "Un egresado de UNITEC trabaja para comprender los patrones y principios que determinan cómo funciona el mundo. Es un pensador critico con un profundo entendimiento de la causalidad, y combina esto con empatia para abordar problemas complejos y crear soluciones sostenibles y equitativas."
-                },
-            ];
-
-             const ecosystemData = [
-                {
-                    title: "La Cultura",
-                    subtitle: "El Suelo Fértil",
-                    icon: <Sprout size={32} />,
-                    desc: "Es la base invisible pero poderosa. Se refiere al 'cómo hacemos las cosas aquí'.",
-                    detail: "Alineada con GENTE y PASIÓN."
-                },
-                {
-                    title: "El Currículo",
-                    subtitle: "El Mapa Definido",
-                    icon: <Map size={32} />,
-                    desc: "Lo que definimos que vale la pena aprender.",
-                    detail: "Conceptos, Competencias y Carácter (3C's)."
-                },
-                {
-                    title: "El Contexto",
-                    subtitle: "El Escenario",
-                    icon: <Layout size={32} />,
-                    desc: "El 'dónde' y el 'cuándo' ocurre el aprendizaje.",
-                    detail: "Conexión auténtica con el mundo real."
-                },
-                {
-                    title: "La Comunidad",
-                    subtitle: "Los Actores",
-                    icon: <Users size={32} />,
-                    desc: "El aprendizaje es una actividad social fundamental.",
-                    detail: "Estudiantes, docentes, expertos y sociedad."
-                }
-            ];
-
-            return (
-                <div className="min-h-screen selection:bg-[#03AED2] selection:text-white overflow-x-hidden">
-                    {/* Navigation */}
-                    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#06065C]/95 backdrop-blur-md shadow-lg border-b border-[#03AED2]/30' : 'bg-transparent'}`}>
-                        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-                            <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollTo('hero')}>
-                                <div className="w-8 h-8 bg-[#03AED2] rotate-45 transform flex items-center justify-center shadow-[0_0_15px_rgba(3,174,210,0.6)]">
-                                    <div className="w-4 h-4 bg-[#06065C]"></div>
-                                </div>
-                                <span className="text-2xl font-bold tracking-tight text-white">unitec<span className="text-[#03AED2]">2030</span></span>
-                            </div>
-
-                            {/* Desktop Menu */}
-                            <div className="hidden md:flex gap-6 text-sm font-medium">
-                                {['Vision', 'Principios', 'Propuesta', 'Ejes', 'Retrato', 'Ecosistema'].map((item) => (
-                                    <button 
-                                        key={item}
-                                        onClick={() => scrollTo(item.toLowerCase())}
-                                        className="hover:text-[#03AED2] transition-colors uppercase tracking-wider text-white"
-                                    >
-                                        {item}
-                                    </button>
-                                ))}
-                            </div>
-
-                            {/* Mobile Toggle */}
-                            <button className="md:hidden text-white p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                                {isMenuOpen ? <X /> : <Menu />}
-                            </button>
-                        </div>
-
-                        {/* Mobile Menu */}
-                        {isMenuOpen && (
-                            <div className="md:hidden absolute top-full left-0 w-full bg-[#06065C]/95 backdrop-blur-xl border-b border-[#03AED2]/30 p-6 flex flex-col gap-4 shadow-2xl">
-                                {['Vision', 'Principios', 'Propuesta', 'Ejes', 'Retrato', 'Ecosistema'].map((item) => (
-                                    <button 
-                                        key={item}
-                                        onClick={() => scrollTo(item.toLowerCase())}
-                                        className="text-left py-3 hover:text-[#03AED2] border-b border-white/10 uppercase tracking-wider text-white font-semibold"
-                                    >
-                                        {item}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </nav>
-
-                    {/* HERO SECTION WITH FULL VISION TEXT */}
-                    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12">
-                        <div className="absolute top-0 left-0 w-full h-full diamond-bg opacity-20 pointer-events-none"></div>
-                        <div className="absolute top-1/4 -right-20 w-96 h-96 bg-[#03AED2] rounded-full blur-[120px] opacity-20"></div>
-                        <div className="absolute bottom-0 -left-20 w-96 h-96 bg-[#47C8FD] rounded-full blur-[120px] opacity-20"></div>
-
-                        <div className="container mx-auto px-6 relative z-10 text-center">
-                            <div className="inline-block mb-6 px-4 py-1 border border-[#03AED2] rounded-full text-[#03AED2] text-sm font-semibold tracking-widest uppercase">
-                                Recorrido Estratégico
-                            </div>
-                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8">
-                                Vision Unitec <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#03AED2] to-[#47C8FD]">2030</span>
-                            </h1>
-                            
-                            {/* FULL TEXT DISPLAY */}
-                            <div className="relative max-w-5xl mx-auto mb-12 group">
-                                <div className="absolute -inset-4 bg-[#03AED2]/5 rounded-xl blur-lg group-hover:bg-[#03AED2]/10 transition-all duration-500"></div>
-                                <p className="relative text-lg md:text-2xl text-gray-100 leading-relaxed font-light">
-                                    "{visionText}"
-                                </p>
-                            </div>
-                            
-                            <button 
-                                onClick={() => scrollTo('principios')}
-                                className="group relative px-8 py-3 bg-[#03AED2] text-[#06065C] font-bold rounded-sm hover:bg-white transition-all duration-300"
-                            >
-                                Descubre el Futuro
-                                <div className="absolute -inset-1 border border-[#03AED2] group-hover:border-white rounded-sm scale-105 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-                            </button>
-                        </div>
-                    </section>
-
-                    {/* PRINCIPIOS */}
-                    <section id="principios" className="py-24 relative bg-[#05054B]">
-                        <div className="container mx-auto px-6">
-                            <div className="flex flex-col md:flex-row gap-12 items-start">
-                                <div className="w-full md:w-1/3 relative md:sticky md:top-32 text-center md:text-left">
-                                    <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#47C8FD] leading-tight">Principios que nos guían</h2>
-                                    <p className="text-gray-300 leading-relaxed text-sm md:text-base">
-                                        Nuestra brújula moral y estratégica para la próxima década. Valores innegociables que definen nuestra identidad institucional.
-                                    </p>
-                                </div>
-                                <div className="w-full md:w-2/3 grid grid-cols-1 gap-6">
-                                    {principles.map((principle, idx) => (
-                                        <div key={idx} className="group p-6 md:p-8 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#03AED2]/50 transition-all duration-300 rounded-sm relative overflow-hidden">
-                                            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 relative z-10 text-center sm:text-left">
-                                                <div className="text-[#03AED2] p-3 bg-[#06065C] rounded-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                                    {principle.icon}
-                                                </div>
-                                                <div>
-                                                    <h3 className="text-xl font-bold mb-2 text-white">{principle.title}</h3>
-                                                    <p className="text-gray-300 text-sm md:text-base">{principle.desc}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* PROPUESTA EDUCATIVA - UPDATED WITH FULL TEXT */}
-                    <section id="propuesta" className="py-24 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-white transform -skew-y-3 origin-top-left scale-110 z-0"></div>
-                        <div className="container mx-auto px-6 relative z-10">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-16 text-[#06065C] text-center">Propuesta Educativa</h2>
-                            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-stretch">
-                                {/* Unitec Grado */}
-                                <div className="relative group flex">
-                                    <div className="absolute -inset-2 bg-gradient-to-r from-[#06065C] to-[#03AED2] rounded-lg opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
-                                    <div className="relative p-8 bg-[#06065C] rounded-lg w-full flex flex-col items-center text-center">
-                                        <div className="w-16 h-16 bg-white rotate-45 flex items-center justify-center mb-8 shadow-lg flex-shrink-0">
-                                            <BookOpen className="-rotate-45 text-[#06065C]" size={32} />
-                                        </div>
-                                        <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">Unitec Grado</h3>
-                                        <p className="text-gray-300 leading-relaxed text-sm md:text-base flex-grow">
-                                            En Unitec Grado impulsamos a jóvenes a transformar su futuro con un ecosistema de aprendizaje que despierta una mentalidad de crecimiento y un espíritu emprendedor para convertirse en constructores de oportunidades y alcanzar una vida plena.
-                                        </p>
-                                    </div>
-                                </div>
-                                {/* Unitec for Life */}
-                                <div className="relative group flex">
-                                    <div className="absolute -inset-2 bg-gradient-to-r from-[#03AED2] to-[#47C8FD] rounded-lg opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
-                                    <div className="relative p-8 bg-[#F3F4F6] rounded-lg w-full flex flex-col items-center text-center">
-                                        <div className="w-16 h-16 bg-[#06065C] rotate-45 flex items-center justify-center mb-8 shadow-lg flex-shrink-0">
-                                            <Compass className="-rotate-45 text-[#03AED2]" size={32} />
-                                        </div>
-                                        <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#06065C]">Unitec for Life</h3>
-                                        <p className="text-[#06065C] leading-relaxed text-sm md:text-base flex-grow">
-                                            En Unitec for Life impulsamos el aprendizaje continuo con programas flexibles, innovadores y con contenido global, que permiten a cada persona actualizarse, reinventarse y crecer en cualquier etapa de su vida.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* EJES */}
-                    <section id="ejes" className="py-24 bg-[#06065C] relative">
-                        <div className="container mx-auto px-6">
-                            <div className="text-center mb-16">
-                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Nuestros Ejes Institucionales</h2>
-                                <p className="text-[#03AED2] text-lg md:text-xl">Visibles y tangibles en 12 impactos institucionales</p>
-                            </div>
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {axes.map((eje) => (
-                                    <div key={eje.id} className="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-[#03AED2] transition-all duration-300 group">
-                                        <div className="p-6 bg-white/5 border-b border-white/10">
-                                            <div className="text-5xl font-black text-[#03AED2]/20 mb-2">0{eje.id}</div>
-                                            <h3 className="text-xl font-bold text-white group-hover:text-[#47C8FD] transition-colors">{eje.title}</h3>
-                                        </div>
-                                        <div className="p-6">
-                                            <ul className="space-y-4">
-                                                {eje.impacts.map((impact, i) => (
-                                                    <li key={i} className="flex items-start gap-3 text-gray-300">
-                                                        <div className="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
-                                                        <span className="text-sm">{impact}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* RETRATO SECTION - MODIFIED FOR INTERACTIVITY */}
-                    <section id="retrato" className="py-32 relative bg-gradient-to-b from-[#05054B] to-[#06065C] overflow-hidden">
-                        <div className="container mx-auto px-6 relative z-10">
-                            <div className="text-center mb-12 md:mb-24">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Retrato del Egresado</h2>
-                                <p className="text-gray-300 max-w-2xl mx-auto text-sm md:text-base mb-2">
-                                    Nuestro modelo forma profesionales integrales, definidos por capacidades humanas conectadas a un núcleo equilibrado.
-                                </p>
-                                <p className="text-[#47C8FD] font-semibold text-sm">
-                                    Haz clic en cada capacidad para conocer su definición.
-                                </p>
-                            </div>
-
-                            <div className="relative w-full max-w-5xl mx-auto min-h-[400px] md:min-h-[600px] flex items-center justify-center">
-                                {/* MOBILE SCALE FIX: scale-[0.65] to prevent cut-off */}
-                                <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] transform scale-[0.65] sm:scale-75 md:scale-100 transition-transform duration-500 origin-center">
-                                    
-                                    {/* Outer Orbit Rings */}
-                                    <div className="absolute inset-[-40px] md:inset-[-60px] border border-[#03AED2]/20 rounded-full animate-spin-slow"></div>
-                                    <div className="absolute inset-[20px] md:inset-[30px] border border-[#47C8FD]/10 rounded-full"></div>
-                                    
-                                    {/* Radial Lines */}
-                                    <div className="absolute inset-[-20px] md:inset-[-30px]">
-                                        {[0, 60, 120, 180, 240, 300].map((deg) => (
-                                            <div key={deg} className="absolute top-1/2 left-1/2 w-full h-px bg-[#03AED2]/10 -translate-y-1/2 -translate-x-1/2" style={{ transform: `translate(-50%, -50%) rotate(${deg}deg)` }}></div>
-                                        ))}
-                                    </div>
-
-                                    {/* The 6 Capabilities (Nodes) - Clickable */}
-                                    {portraitCapabilities.map((cap, idx) => (
-                                        <div 
-                                            key={idx} 
-                                            className={`absolute ${cap.pos} flex flex-col items-center group z-20 cursor-pointer`}
-                                            onClick={() => setSelectedCapability(cap)}
-                                            role="button"
-                                            tabIndex="0"
-                                        >
-                                            <div className="relative">
-                                                <div className={`w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 ${selectedCapability?.title === cap.title ? 'border-white bg-[#03AED2] text-white' : 'border-[#03AED2] text-[#47C8FD]'} rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10`}>
-                                                    {cap.icon}
-                                                </div>
-                                                <div className={`absolute ${cap.labelPos} w-32 md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#06065C]/95 px-3 py-1.5 rounded border ${selectedCapability?.title === cap.title ? 'border-white' : 'border-[#03AED2]/30'} backdrop-blur-md z-30 shadow-xl`}>
-                                                    <span className={`text-xs md:text-sm font-bold ${selectedCapability?.title === cap.title ? 'text-[#47C8FD]' : 'text-white'} group-hover:text-[#47C8FD] transition-colors leading-tight block`}>
-                                                        {cap.title}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-
-                                    {/* CENTER CORE */}
-                                    <div className="absolute top-1/2 left-1/2 w-56 h-56 md:w-72 md:h-72 bg-[#06065C] border-4 border-[#03AED2] rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-10 shadow-[0_0_60px_rgba(3,174,210,0.4)] pointer-events-none">
-                                        <div className="absolute inset-3 border border-[#47C8FD]/30 rounded-full"></div>
-                                        <div className="relative w-full h-full">
-                                            {/* Conceptos */}
-                                            <div className="absolute top-[15%] left-1/2 -translate-x-1/2 text-center w-full">
-                                                <div className="text-[#03AED2] mb-1 flex justify-center"><BookOpen size={20} /></div>
-                                                <span className="text-sm md:text-lg font-bold text-white tracking-wider uppercase">Conceptos</span>
-                                            </div>
-                                            {/* Competencias */}
-                                            <div className="absolute bottom-[20%] right-[10%] text-center w-[45%]">
-                                                <div className="text-[#03AED2] mb-1 flex justify-center"><Award size={20} /></div>
-                                                <span className="text-xs md:text-sm font-bold text-white tracking-wider uppercase block">Competencias</span>
-                                            </div>
-                                            {/* Carácter */}
-                                            <div className="absolute bottom-[20%] left-[10%] text-center w-[45%]">
-                                                <div className="text-[#03AED2] mb-1 flex justify-center"><Target size={20} /></div>
-                                                <span className="text-xs md:text-sm font-bold text-white tracking-wider uppercase block">Carácter</span>
-                                            </div>
-                                            {/* Divider */}
-                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-20 pointer-events-none">
-                                                <div className="absolute top-1/2 left-1/2 w-px h-[40%] bg-white -translate-x-1/2 -translate-y-full"></div>
-                                                <div className="absolute top-1/2 left-1/2 w-px h-[40%] bg-white -translate-x-1/2 origin-top rotate-[120deg]"></div>
-                                                <div className="absolute top-1/2 left-1/2 w-px h-[40%] bg-white -translate-x-1/2 origin-top rotate-[-120deg]"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* MODAL / PANEL DE DEFINICIÓN (Opción A: Seguro y Clásico) */}
-                        {selectedCapability && (
-                            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                                {/* Backdrop */}
-                                <div 
-                                    className="absolute inset-0 bg-[#040435]/80 backdrop-blur-sm cursor-pointer transition-opacity"
-                                    onClick={() => setSelectedCapability(null)}
-                                ></div>
-                                
-                                {/* Modal Content - Diamond precise cuts inspired */}
-                                <div className="relative bg-[#06065C] border border-[#03AED2] p-8 md:p-10 max-w-2xl w-full shadow-[0_0_50px_rgba(3,174,210,0.2)] animate-fade-in-up z-10">
-                                    {/* Esquinas decorativas estilo diamante */}
-                                    <div className="absolute -top-1 -left-1 w-6 h-6 border-t-2 border-l-2 border-[#47C8FD]"></div>
-                                    <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-2 border-r-2 border-[#47C8FD]"></div>
-                                    
-                                    <button 
-                                        className="absolute top-4 right-4 text-[#03AED2] hover:text-white transition-colors"
-                                        onClick={() => setSelectedCapability(null)}
-                                        aria-label="Cerrar"
-                                    >
-                                        <X size={28} />
-                                    </button>
-
-                                    <div className="flex items-center gap-4 mb-6 pb-6 border-b border-[#03AED2]/20">
-                                        <div className="p-3 bg-[#03AED2]/10 rounded-sm text-[#47C8FD]">
-                                            {selectedCapability.icon}
-                                        </div>
-                                        <h3 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">
-                                            {selectedCapability.title}
-                                        </h3>
-                                    </div>
-                                    
-                                    <p className="text-gray-200 font-light leading-relaxed text-base md:text-lg">
-                                        {selectedCapability.desc}
-                                    </p>
-
-                                    <div className="mt-8 flex justify-end">
-                                         <button 
-                                            onClick={() => setSelectedCapability(null)}
-                                            className="px-6 py-2 bg-transparent border border-[#03AED2] text-[#47C8FD] hover:bg-[#03AED2] hover:text-[#06065C] font-semibold transition-all duration-300 text-sm tracking-wider uppercase"
-                                        >
-                                            Entendido
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </section>
-
-                    {/* ECOSISTEMA DE APRENDIZAJE */}
-                    <section id="ecosistema" className="py-24 bg-[#040435] relative">
-                        <div className="container mx-auto px-6">
-                            <div className="text-center mb-16">
-                                <div className="inline-block px-3 py-1 border border-[#47C8FD] rounded-full text-[#47C8FD] text-xs font-bold tracking-widest uppercase mb-4">Modelo CGS</div>
-                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ecosistema de Aprendizaje UNITEC</h2>
-                                <p className="text-lg md:text-xl text-gray-300">Las 4 Dimensiones</p>
-                            </div>
-
-                            <div className="flex flex-col lg:flex-row gap-16 items-center">
-                                {/* Left Column: List */}
-                                <div className="w-full lg:w-1/2 space-y-8">
-                                    {ecosystemData.map((item, idx) => (
-                                        <div key={idx} className="flex gap-4 md:gap-6 group">
-                                            <div className="flex-shrink-0">
-                                                <div className="w-12 h-12 md:w-14 md:h-14 bg-[#06065C] border border-[#03AED2] rounded-full flex items-center justify-center text-white shadow-lg group-hover:bg-[#03AED2] transition-colors duration-300">
-                                                    {item.icon}
-                                                </div>
-                                                {idx !== ecosystemData.length - 1 && (
-                                                    <div className="w-px h-full bg-[#03AED2]/20 mx-auto my-2"></div>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <h3 className="text-lg md:text-xl font-bold text-white mb-1 flex flex-wrap items-center gap-2">
-                                                    {item.title} <span className="text-[#47C8FD] text-xs md:text-sm font-normal uppercase tracking-wider">- "{item.subtitle}"</span>
-                                                </h3>
-                                                <p className="text-gray-300 text-sm leading-relaxed mb-2">{item.desc}</p>
-                                                <p className="text-[#03AED2] text-xs italic">{item.detail}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Right Column: Visual Venn Diagram */}
-                                <div className="w-full lg:w-1/2 flex items-center justify-center relative min-h-[400px] md:min-h-[500px]">
-                                    <div className="relative w-full max-w-[350px] md:max-w-[500px] aspect-square transform scale-90 md:scale-100">
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 bg-white z-20 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.3)] text-center p-2 md:p-4">
-                                            <span className="text-[#06065C] font-bold text-xs md:text-sm leading-tight">Aprendizaje Profundo</span>
-                                        </div>
-                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#03AED2]/20 border border-[#03AED2] rounded-full venn-circle flex items-start justify-center pt-6 md:pt-8 backdrop-blur-sm">
-                                            <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm">Comunidad</span>
-                                        </div>
-                                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#47C8FD]/20 border border-[#47C8FD] rounded-full venn-circle flex items-end justify-center pb-6 md:pb-8 backdrop-blur-sm">
-                                            <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm">Cultura</span>
-                                        </div>
-                                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#06065C]/40 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-start pl-6 md:pl-8 backdrop-blur-sm">
-                                            <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm transform -rotate-90">Contexto</span>
-                                        </div>
-                                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#03AED2]/10 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-end pr-6 md:pr-8 backdrop-blur-sm">
-                                            <span className="font-bold text-white uppercase tracking-widest text-xs md:text-sm transform rotate-90">Currículo</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* FOOTER */}
-                    <footer className="bg-[#040435] text-white py-12 border-t border-white/5">
-                        <div className="container mx-auto px-6 text-center">
-                            <div className="flex items-center justify-center gap-3 mb-8 opacity-80">
-                                <div className="w-6 h-6 bg-[#03AED2] rotate-45"></div>
-                                <span className="text-xl font-bold tracking-tight">unitec</span>
-                            </div>
-                            <p className="text-gray-400 text-sm mb-4">
-                                © 2030 Universidad Tecnológica Centroamericana. Todos los derechos reservados.
-                            </p>
-                        </div>
-                    </footer>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="scrollToSection('hero')">
+                <div class="w-8 h-8 bg-[#03AED2] rotate-45 transform flex items-center justify-center shadow-[0_0_15px_rgba(3,174,210,0.6)]">
+                    <div class="w-4 h-4 bg-[#06065C]"></div>
                 </div>
-            );
-        };
+                <span class="text-2xl font-bold tracking-tight text-white">unitec<span class="text-[#03AED2]">2030</span></span>
+            </div>
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-6 text-sm font-medium">
+                <button onclick="scrollToSection('vision')" class="hover:text-[#03AED2] transition-colors uppercase tracking-wider text-white">Vision</button>
+                <button onclick="scrollToSection('principios')" class="hover:text-[#03AED2] transition-colors uppercase tracking-wider text-white">Principios</button>
+                <button onclick="scrollToSection('propuesta')" class="hover:text-[#03AED2] transition-colors uppercase tracking-wider text-white">Propuesta</button>
+                <button onclick="scrollToSection('ejes')" class="hover:text-[#03AED2] transition-colors uppercase tracking-wider text-white">Ejes</button>
+                <button onclick="scrollToSection('retrato')" class="hover:text-[#03AED2] transition-colors uppercase tracking-wider text-white">Retrato</button>
+                <button onclick="scrollToSection('ecosistema')" class="hover:text-[#03AED2] transition-colors uppercase tracking-wider text-white">Ecosistema</button>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="menuBtn" class="md:hidden text-white p-2">
+                <!-- Icono Menú -->
+                <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
+                </svg>
+                <!-- Icono X (Oculto por defecto) -->
+                <svg id="xIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 w-full bg-[#06065C]/95 backdrop-blur-xl border-b border-[#03AED2]/30 p-6 flex flex-col gap-4 shadow-2xl">
+            <button onclick="scrollToSection('vision')" class="text-left py-3 hover:text-[#03AED2] border-b border-white/10 uppercase tracking-wider text-white font-semibold">Vision</button>
+            <button onclick="scrollToSection('principios')" class="text-left py-3 hover:text-[#03AED2] border-b border-white/10 uppercase tracking-wider text-white font-semibold">Principios</button>
+            <button onclick="scrollToSection('propuesta')" class="text-left py-3 hover:text-[#03AED2] border-b border-white/10 uppercase tracking-wider text-white font-semibold">Propuesta</button>
+            <button onclick="scrollToSection('ejes')" class="text-left py-3 hover:text-[#03AED2] border-b border-white/10 uppercase tracking-wider text-white font-semibold">Ejes</button>
+            <button onclick="scrollToSection('retrato')" class="text-left py-3 hover:text-[#03AED2] border-b border-white/10 uppercase tracking-wider text-white font-semibold">Retrato</button>
+            <button onclick="scrollToSection('ecosistema')" class="text-left py-3 hover:text-[#03AED2] border-b border-white/10 uppercase tracking-wider text-white font-semibold">Ecosistema</button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION WITH FULL VISION TEXT -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12">
+        <div id="vision"></div> <!-- Anchor para scroll -->
+        <div class="absolute top-0 left-0 w-full h-full diamond-bg opacity-20 pointer-events-none"></div>
+        <div class="absolute top-1/4 -right-20 w-96 h-96 bg-[#03AED2] rounded-full blur-[120px] opacity-20"></div>
+        <div class="absolute bottom-0 -left-20 w-96 h-96 bg-[#47C8FD] rounded-full blur-[120px] opacity-20"></div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="inline-block mb-6 px-4 py-1 border border-[#03AED2] rounded-full text-[#03AED2] text-sm font-semibold tracking-widest uppercase">
+                Recorrido Estratégico
+            </div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8">
+                Vision Unitec <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#03AED2] to-[#47C8FD]">2030</span>
+            </h1>
+            
+            <!-- FULL TEXT DISPLAY -->
+            <div class="relative max-w-5xl mx-auto mb-12 group">
+                <div class="absolute -inset-4 bg-[#03AED2]/5 rounded-xl blur-lg group-hover:bg-[#03AED2]/10 transition-all duration-500"></div>
+                <p class="relative text-lg md:text-2xl text-gray-100 leading-relaxed font-light">
+                    "Ser una Universidad de clase mundial, protagonista del desarrollo de Honduras, reconocida por su excelencia académica, innovación constante y por construir una comunidad de aprendizaje donde la conexión humana y la experiencia educativa fortalecen el crecimiento integral de las personas a lo largo de su vida."
+                </p>
+            </div>
+            
+            <button onclick="scrollToSection('principios')" class="group relative px-8 py-3 bg-[#03AED2] text-[#06065C] font-bold rounded-sm hover:bg-white transition-all duration-300">
+                Descubre el Futuro
+                <div class="absolute -inset-1 border border-[#03AED2] group-hover:border-white rounded-sm scale-105 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+            </button>
+        </div>
+    </section>
+
+    <!-- PRINCIPIOS -->
+    <section id="principios" class="py-24 relative bg-[#05054B]">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-12 items-start">
+                <div class="w-full md:w-1/3 relative md:sticky md:top-32 text-center md:text-left">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-[#47C8FD] leading-tight">Principios que nos guían</h2>
+                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
+                        Nuestra brújula moral y estratégica para la próxima década. Valores innegociables que definen nuestra identidad institucional.
+                    </p>
+                </div>
+                <div class="w-full md:w-2/3 grid grid-cols-1 gap-6">
+                    
+                    <div class="group p-6 md:p-8 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#03AED2]/50 transition-all duration-300 rounded-sm relative overflow-hidden">
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 relative z-10 text-center sm:text-left">
+                            <div class="text-[#03AED2] p-3 bg-[#06065C] rounded-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2 text-white">Honestidad y Coherencia</h3>
+                                <p class="text-gray-300 text-sm md:text-base">Actuamos con honestidad y coherencia.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group p-6 md:p-8 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#03AED2]/50 transition-all duration-300 rounded-sm relative overflow-hidden">
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 relative z-10 text-center sm:text-left">
+                            <div class="text-[#03AED2] p-3 bg-[#06065C] rounded-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2 text-white">Desafío como Oportunidad</h3>
+                                <p class="text-gray-300 text-sm md:text-base">Convertimos cada desafio en una oportunidad para crecer.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group p-6 md:p-8 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#03AED2]/50 transition-all duration-300 rounded-sm relative overflow-hidden">
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 relative z-10 text-center sm:text-left">
+                            <div class="text-[#03AED2] p-3 bg-[#06065C] rounded-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2 text-white">Responsabilidad</h3>
+                                <p class="text-gray-300 text-sm md:text-base">Tomamos nuestras decisiones con responsabilidad para cuidar nuestro entorno y nuestra comunidad.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group p-6 md:p-8 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#03AED2]/50 transition-all duration-300 rounded-sm relative overflow-hidden">
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 relative z-10 text-center sm:text-left">
+                            <div class="text-[#03AED2] p-3 bg-[#06065C] rounded-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2 text-white">Respeto y Diversidad</h3>
+                                <p class="text-gray-300 text-sm md:text-base">Creemos que cada persona merece respeto y que las diferencias nos enriquecen.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group p-6 md:p-8 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#03AED2]/50 transition-all duration-300 rounded-sm relative overflow-hidden">
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 relative z-10 text-center sm:text-left">
+                            <div class="text-[#03AED2] p-3 bg-[#06065C] rounded-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2 text-white">Innovación y Emprendimiento</h3>
+                                <p class="text-gray-300 text-sm md:text-base">Impulsamos la innovación y el emprendimiento como motores de cambio.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROPUESTA EDUCATIVA -->
+    <section id="propuesta" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-white transform -skew-y-3 origin-top-left scale-110 z-0"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-[#06065C] text-center">Propuesta Educativa</h2>
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+                <!-- Unitec Grado -->
+                <div class="relative group flex">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-[#06065C] to-[#03AED2] rounded-lg opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
+                    <div class="relative p-8 bg-[#06065C] rounded-lg w-full flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-white rotate-45 flex items-center justify-center mb-8 shadow-lg flex-shrink-0">
+                            <svg class="-rotate-45 text-[#06065C]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4 text-white">Unitec Grado</h3>
+                        <p class="text-gray-300 leading-relaxed text-sm md:text-base flex-grow">
+                            En Unitec Grado impulsamos a jóvenes a transformar su futuro con un ecosistema de aprendizaje que despierta una mentalidad de crecimiento y un espíritu emprendedor para convertirse en constructores de oportunidades y alcanzar una vida plena.
+                        </p>
+                    </div>
+                </div>
+                <!-- Unitec for Life -->
+                <div class="relative group flex">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-[#03AED2] to-[#47C8FD] rounded-lg opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
+                    <div class="relative p-8 bg-[#F3F4F6] rounded-lg w-full flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-[#06065C] rotate-45 flex items-center justify-center mb-8 shadow-lg flex-shrink-0">
+                            <svg class="-rotate-45 text-[#03AED2]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4 text-[#06065C]">Unitec for Life</h3>
+                        <p class="text-[#06065C] leading-relaxed text-sm md:text-base flex-grow">
+                            En Unitec for Life impulsamos el aprendizaje continuo con programas flexibles, innovadores y con contenido global, que permiten a cada persona actualizarse, reinventarse y crecer en cualquier etapa de su vida.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EJES -->
+    <section id="ejes" class="py-24 bg-[#06065C] relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nuestros Ejes Institucionales</h2>
+                <p class="text-[#03AED2] text-lg md:text-xl">Visibles y tangibles en 12 impactos institucionales</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-[#03AED2] transition-all duration-300 group">
+                    <div class="p-6 bg-white/5 border-b border-white/10">
+                        <div class="text-5xl font-black text-[#03AED2]/20 mb-2">01</div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-[#47C8FD] transition-colors">Transformación del aprendizaje</h3>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Ecosistema de aprendizaje</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Campus y sedes referentes</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Docentes como motor de la innovación Educativa y del aprendizaje continuo</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Propuesta institucional de aprendizaje a lo largo de la vida</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Experiencia estudiantil transformadora</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-[#03AED2] transition-all duration-300 group">
+                    <div class="p-6 bg-white/5 border-b border-white/10">
+                        <div class="text-5xl font-black text-[#03AED2]/20 mb-2">02</div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-[#47C8FD] transition-colors">Incidencia local y conexión global</h3>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Vinculación institucional estratégica</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Presencia global</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Investigación e innovación para el desarrollo</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-[#03AED2] transition-all duration-300 group">
+                    <div class="p-6 bg-white/5 border-b border-white/10">
+                        <div class="text-5xl font-black text-[#03AED2]/20 mb-2">03</div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-[#47C8FD] transition-colors">Fortalecimiento Institucional</h3>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Cultura organizacional de alto desempeño e inclusiva</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Gobernanza institucional sostenible</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Gestión ambiental</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-gray-300">
+                                <div class="mt-1.5 w-1.5 h-1.5 bg-[#47C8FD] rotate-45 flex-shrink-0"></div>
+                                <span class="text-sm">Capacidades tecnológicas fortalecidas</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- RETRATO SECTION -->
+    <section id="retrato" class="py-32 relative bg-gradient-to-b from-[#05054B] to-[#06065C] overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-12 md:mb-24">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Retrato del Egresado</h2>
+                <p class="text-gray-300 max-w-2xl mx-auto text-sm md:text-base mb-2">
+                    Nuestro modelo forma profesionales integrales, definidos por capacidades humanas conectadas a un núcleo equilibrado.
+                </p>
+                <p class="text-[#47C8FD] font-semibold text-sm">
+                    Haz clic en cada capacidad para conocer su definición.
+                </p>
+            </div>
+
+            <div class="relative w-full max-w-5xl mx-auto min-h-[400px] md:min-h-[600px] flex items-center justify-center">
+                <div class="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] transform scale-[0.65] sm:scale-75 md:scale-100 transition-transform duration-500 origin-center">
+                    
+                    <!-- Outer Orbit Rings -->
+                    <div class="absolute inset-[-40px] md:inset-[-60px] border border-[#03AED2]/20 rounded-full animate-spin-slow"></div>
+                    <div class="absolute inset-[20px] md:inset-[30px] border border-[#47C8FD]/10 rounded-full"></div>
+                    
+                    <!-- Radial Lines -->
+                    <div class="absolute inset-[-20px] md:inset-[-30px]">
+                        <div class="absolute top-1/2 left-1/2 w-full h-px bg-[#03AED2]/10 -translate-y-1/2 -translate-x-1/2" style="transform: translate(-50%, -50%) rotate(0deg)"></div>
+                        <div class="absolute top-1/2 left-1/2 w-full h-px bg-[#03AED2]/10 -translate-y-1/2 -translate-x-1/2" style="transform: translate(-50%, -50%) rotate(60deg)"></div>
+                        <div class="absolute top-1/2 left-1/2 w-full h-px bg-[#03AED2]/10 -translate-y-1/2 -translate-x-1/2" style="transform: translate(-50%, -50%) rotate(120deg)"></div>
+                        <div class="absolute top-1/2 left-1/2 w-full h-px bg-[#03AED2]/10 -translate-y-1/2 -translate-x-1/2" style="transform: translate(-50%, -50%) rotate(180deg)"></div>
+                        <div class="absolute top-1/2 left-1/2 w-full h-px bg-[#03AED2]/10 -translate-y-1/2 -translate-x-1/2" style="transform: translate(-50%, -50%) rotate(240deg)"></div>
+                        <div class="absolute top-1/2 left-1/2 w-full h-px bg-[#03AED2]/10 -translate-y-1/2 -translate-x-1/2" style="transform: translate(-50%, -50%) rotate(300deg)"></div>
+                    </div>
+
+                    <!-- Nodes -->
+                    <!-- Node 0 -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group z-20 cursor-pointer" onclick="openModal(0)">
+                        <div class="relative">
+                            <div class="w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 border-[#03AED2] text-[#47C8FD] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            </div>
+                            <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-32 md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#06065C]/95 px-3 py-1.5 rounded border border-[#03AED2]/30 backdrop-blur-md z-30 shadow-xl">
+                                <span class="text-xs md:text-sm font-bold text-white group-hover:text-[#47C8FD] transition-colors leading-tight block">Líder con Propósito</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node 1 -->
+                    <div class="absolute top-[25%] right-[2%] translate-x-1/2 flex flex-col items-center group z-20 cursor-pointer" onclick="openModal(1)">
+                        <div class="relative">
+                            <div class="w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 border-[#03AED2] text-[#47C8FD] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                            </div>
+                            <div class="absolute -right-4 translate-x-full md:-right-4 md:translate-x-full mt-10 md:mt-0 w-32 md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#06065C]/95 px-3 py-1.5 rounded border border-[#03AED2]/30 backdrop-blur-md z-30 shadow-xl">
+                                <span class="text-xs md:text-sm font-bold text-white group-hover:text-[#47C8FD] transition-colors leading-tight block">Ciudadano Responsable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node 2 -->
+                    <div class="absolute bottom-[25%] right-[2%] translate-x-1/2 flex flex-col items-center group z-20 cursor-pointer" onclick="openModal(2)">
+                        <div class="relative">
+                            <div class="w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 border-[#03AED2] text-[#47C8FD] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+                            </div>
+                            <div class="absolute -right-4 translate-x-full md:-right-4 md:translate-x-full mb-10 md:mb-0 w-32 md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#06065C]/95 px-3 py-1.5 rounded border border-[#03AED2]/30 backdrop-blur-md z-30 shadow-xl">
+                                <span class="text-xs md:text-sm font-bold text-white group-hover:text-[#47C8FD] transition-colors leading-tight block">Innovador Creativo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node 3 -->
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 flex flex-col items-center group z-20 cursor-pointer" onclick="openModal(3)">
+                        <div class="relative">
+                            <div class="w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 border-[#03AED2] text-[#47C8FD] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                            </div>
+                            <div class="absolute -bottom-12 left-1/2 -translate-x-1/2 w-32 md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#06065C]/95 px-3 py-1.5 rounded border border-[#03AED2]/30 backdrop-blur-md z-30 shadow-xl">
+                                <span class="text-xs md:text-sm font-bold text-white group-hover:text-[#47C8FD] transition-colors leading-tight block">Comunicador Efectivo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node 4 -->
+                    <div class="absolute bottom-[25%] left-[2%] -translate-x-1/2 flex flex-col items-center group z-20 cursor-pointer" onclick="openModal(4)">
+                        <div class="relative">
+                            <div class="w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 border-[#03AED2] text-[#47C8FD] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <div class="absolute -left-4 -translate-x-full md:-left-4 md:-translate-x-full mb-10 md:mb-0 w-32 md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#06065C]/95 px-3 py-1.5 rounded border border-[#03AED2]/30 backdrop-blur-md z-30 shadow-xl">
+                                <span class="text-xs md:text-sm font-bold text-white group-hover:text-[#47C8FD] transition-colors leading-tight block">Colaborador Constructivo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node 5 -->
+                    <div class="absolute top-[25%] left-[2%] -translate-x-1/2 flex flex-col items-center group z-20 cursor-pointer" onclick="openModal(5)">
+                        <div class="relative">
+                            <div class="w-14 h-14 md:w-20 md:h-20 bg-[#06065C] border-2 border-[#03AED2] text-[#47C8FD] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(3,174,210,0.3)] group-hover:bg-[#03AED2] group-hover:text-white transition-all duration-300 relative z-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                            </div>
+                            <div class="absolute -left-4 -translate-x-full md:-left-4 md:-translate-x-full mt-10 md:mt-0 w-32 md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#06065C]/95 px-3 py-1.5 rounded border border-[#03AED2]/30 backdrop-blur-md z-30 shadow-xl">
+                                <span class="text-xs md:text-sm font-bold text-white group-hover:text-[#47C8FD] transition-colors leading-tight block">Solucionador Empático</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CENTER CORE -->
+                    <div class="absolute top-1/2 left-1/2 w-56 h-56 md:w-72 md:h-72 bg-[#06065C] border-4 border-[#03AED2] rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-10 shadow-[0_0_60px_rgba(3,174,210,0.4)] pointer-events-none">
+                        <div class="absolute inset-3 border border-[#47C8FD]/30 rounded-full"></div>
+                        <div class="relative w-full h-full">
+                            <!-- Conceptos -->
+                            <div class="absolute top-[15%] left-1/2 -translate-x-1/2 text-center w-full">
+                                <div class="text-[#03AED2] mb-1 flex justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                                </div>
+                                <span class="text-sm md:text-lg font-bold text-white tracking-wider uppercase">Conceptos</span>
+                            </div>
+                            <!-- Competencias -->
+                            <div class="absolute bottom-[20%] right-[10%] text-center w-[45%]">
+                                <div class="text-[#03AED2] mb-1 flex justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                                </div>
+                                <span class="text-xs md:text-sm font-bold text-white tracking-wider uppercase block">Competencias</span>
+                            </div>
+                            <!-- Carácter -->
+                            <div class="absolute bottom-[20%] left-[10%] text-center w-[45%]">
+                                <div class="text-[#03AED2] mb-1 flex justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                                </div>
+                                <span class="text-xs md:text-sm font-bold text-white tracking-wider uppercase block">Carácter</span>
+                            </div>
+                            <!-- Divider -->
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-20 pointer-events-none">
+                                <div class="absolute top-1/2 left-1/2 w-px h-[40%] bg-white -translate-x-1/2 -translate-y-full"></div>
+                                <div class="absolute top-1/2 left-1/2 w-px h-[40%] bg-white -translate-x-1/2 origin-top rotate-[120deg]"></div>
+                                <div class="absolute top-1/2 left-1/2 w-px h-[40%] bg-white -translate-x-1/2 origin-top rotate-[-120deg]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL (Oculto por defecto) -->
+        <div id="capabilityModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <!-- Backdrop -->
+            <div class="absolute inset-0 bg-[#040435]/80 backdrop-blur-sm cursor-pointer transition-opacity" onclick="closeModal()"></div>
+            
+            <!-- Modal Content -->
+            <div class="relative bg-[#06065C] border border-[#03AED2] p-8 md:p-10 max-w-2xl w-full shadow-[0_0_50px_rgba(3,174,210,0.2)] animate-fade-in-up z-10">
+                <!-- Esquinas decorativas -->
+                <div class="absolute -top-1 -left-1 w-6 h-6 border-t-2 border-l-2 border-[#47C8FD]"></div>
+                <div class="absolute -bottom-1 -right-1 w-6 h-6 border-b-2 border-r-2 border-[#47C8FD]"></div>
+                
+                <button class="absolute top-4 right-4 text-[#03AED2] hover:text-white transition-colors" onclick="closeModal()" aria-label="Cerrar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+
+                <div class="flex items-center gap-4 mb-6 pb-6 border-b border-[#03AED2]/20">
+                    <div id="modalIconContainer" class="p-3 bg-[#03AED2]/10 rounded-sm text-[#47C8FD]">
+                        <!-- Icono se inyecta por JS -->
+                    </div>
+                    <h3 id="modalTitle" class="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">
+                        Título
+                    </h3>
+                </div>
+                
+                <p id="modalDesc" class="text-gray-200 font-light leading-relaxed text-base md:text-lg">
+                    Descripción...
+                </p>
+
+                <div class="mt-8 flex justify-end">
+                     <button onclick="closeModal()" class="px-6 py-2 bg-transparent border border-[#03AED2] text-[#47C8FD] hover:bg-[#03AED2] hover:text-[#06065C] font-semibold transition-all duration-300 text-sm tracking-wider uppercase">
+                        Entendido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ECOSISTEMA DE APRENDIZAJE -->
+    <section id="ecosistema" class="py-24 bg-[#040435] relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-block px-3 py-1 border border-[#47C8FD] rounded-full text-[#47C8FD] text-xs font-bold tracking-widest uppercase mb-4">Modelo CGS</div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ecosistema de Aprendizaje UNITEC</h2>
+                <p class="text-lg md:text-xl text-gray-300">Las 4 Dimensiones</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <!-- Left Column: List -->
+                <div class="w-full lg:w-1/2 space-y-8">
+                    
+                    <div class="flex gap-4 md:gap-6 group">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-[#06065C] border border-[#03AED2] rounded-full flex items-center justify-center text-white shadow-lg group-hover:bg-[#03AED2] transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.2.4-4.8.4a2.5 2.5 0 0 1 0-5Z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1.7-1.3 2.9-1.3 3-1.2a3 3 0 0 0-3-3.1Z"/></svg>
+                            </div>
+                            <div class="w-px h-full bg-[#03AED2]/20 mx-auto my-2"></div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-1 flex flex-wrap items-center gap-2">
+                                La Cultura <span class="text-[#47C8FD] text-xs md:text-sm font-normal uppercase tracking-wider">- "El Suelo Fértil"</span>
+                            </h3>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-2">Es la base invisible pero poderosa. Se refiere al 'cómo hacemos las cosas aquí'.</p>
+                            <p class="text-[#03AED2] text-xs italic">Alineada con GENTE y PASIÓN.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 md:gap-6 group">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-[#06065C] border border-[#03AED2] rounded-full flex items-center justify-center text-white shadow-lg group-hover:bg-[#03AED2] transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>
+                            </div>
+                            <div class="w-px h-full bg-[#03AED2]/20 mx-auto my-2"></div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-1 flex flex-wrap items-center gap-2">
+                                El Currículo <span class="text-[#47C8FD] text-xs md:text-sm font-normal uppercase tracking-wider">- "El Mapa Definido"</span>
+                            </h3>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-2">Lo que definimos que vale la pena aprender.</p>
+                            <p class="text-[#03AED2] text-xs italic">Conceptos, Competencias y Carácter (3C's).</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 md:gap-6 group">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-[#06065C] border border-[#03AED2] rounded-full flex items-center justify-center text-white shadow-lg group-hover:bg-[#03AED2] transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="9" y2="21"/></svg>
+                            </div>
+                            <div class="w-px h-full bg-[#03AED2]/20 mx-auto my-2"></div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-1 flex flex-wrap items-center gap-2">
+                                El Contexto <span class="text-[#47C8FD] text-xs md:text-sm font-normal uppercase tracking-wider">- "El Escenario"</span>
+                            </h3>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-2">El 'dónde' y el 'cuándo' ocurre el aprendizaje.</p>
+                            <p class="text-[#03AED2] text-xs italic">Conexión auténtica con el mundo real.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 md:gap-6 group">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-[#06065C] border border-[#03AED2] rounded-full flex items-center justify-center text-white shadow-lg group-hover:bg-[#03AED2] transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-1 flex flex-wrap items-center gap-2">
+                                La Comunidad <span class="text-[#47C8FD] text-xs md:text-sm font-normal uppercase tracking-wider">- "Los Actores"</span>
+                            </h3>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-2">El aprendizaje es una actividad social fundamental.</p>
+                            <p class="text-[#03AED2] text-xs italic">Estudiantes, docentes, expertos y sociedad.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Visual Venn Diagram -->
+                <div class="w-full lg:w-1/2 flex items-center justify-center relative min-h-[400px] md:min-h-[500px]">
+                    <div class="relative w-full max-w-[350px] md:max-w-[500px] aspect-square transform scale-90 md:scale-100">
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 bg-white z-20 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.3)] text-center p-2 md:p-4">
+                            <span class="text-[#06065C] font-bold text-xs md:text-sm leading-tight">Aprendizaje Profundo</span>
+                        </div>
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#03AED2]/20 border border-[#03AED2] rounded-full venn-circle flex items-start justify-center pt-6 md:pt-8 backdrop-blur-sm">
+                            <span class="font-bold text-white uppercase tracking-widest text-xs md:text-sm">Comunidad</span>
+                        </div>
+                        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#47C8FD]/20 border border-[#47C8FD] rounded-full venn-circle flex items-end justify-center pb-6 md:pb-8 backdrop-blur-sm">
+                            <span class="font-bold text-white uppercase tracking-widest text-xs md:text-sm">Cultura</span>
+                        </div>
+                        <div class="absolute left-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#06065C]/40 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-start pl-6 md:pl-8 backdrop-blur-sm">
+                            <span class="font-bold text-white uppercase tracking-widest text-xs md:text-sm transform -rotate-90">Contexto</span>
+                        </div>
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#03AED2]/10 border border-[#ffffff]/30 rounded-full venn-circle flex items-center justify-end pr-6 md:pr-8 backdrop-blur-sm">
+                            <span class="font-bold text-white uppercase tracking-widest text-xs md:text-sm transform rotate-90">Currículo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#040435] text-white py-12 border-t border-white/5">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex items-center justify-center gap-3 mb-8 opacity-80">
+                <div class="w-6 h-6 bg-[#03AED2] rotate-45"></div>
+                <span class="text-xl font-bold tracking-tight">unitec</span>
+            </div>
+            <p class="text-gray-400 text-sm mb-4">
+                © 2030 Universidad Tecnológica Centroamericana. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JS nativo (Vanilla JS) -->
+    <script>
+        // Lógica de Scroll Navbar
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-[#06065C]/95', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-[#03AED2]/30');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-[#06065C]/95', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-[#03AED2]/30');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+
+        // Toggle del Menú Móvil
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+        const xIcon = document.getElementById('xIcon');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            xIcon.classList.toggle('hidden');
+        });
+
+        // Scroll Suave hacia las secciones
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                // Cerrar menú móvil si está abierto
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                xIcon.classList.add('hidden');
+            }
+        }
+
+        // Datos del Modal de Capacidades (Retrato del Egresado)
+        const capabilitiesData = [
+            { 
+                title: "Líder con Propósito", 
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`, 
+                desc: "Un egresado de UNITEC ha alcanzado equilibrio personal y bienestar. Se guía por la curiosidad y un compromiso con el aprendizaje a lo largo de la vida. Tiene un fuerte sentido de propósito y es adaptable y resiliente en la búsqueda de sus metas. Actúa con integridad y sirve tanto a comunidades locales como globales, siempre preparado para hacer lo correcto."
+            },
+            { 
+                title: "Ciudadano Responsable", 
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>`, 
+                desc: "Un egresado de UNITEC siente un sentido de responsabilidad personal por sostener sistemas sociales saludables y ecosistemas naturales, y actúa para transformar su entorno para mejorarlo."
+            },
+            { 
+                title: "Innovador Creativo", 
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`, 
+                desc: "Un egresado de UNITEC aporta originalidad de Interpretación y creatividad de expresión a su experiencia del mundo. Crea nuevos artefactos, tecnologias y herramientas, llevando un espiritu emprendedor a la solución de problemas."
+            },
+            { 
+                title: "Comunicador Efectivo", 
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>`, 
+                desc: "Un egresado de UNITEC domina las habilidades de comunicación oral, escrita y digital. Expresa ideas complejas de manera efectiva, ética y estratégica, utilizando la comunicación para defender principios y compartir ideas que importan."
+            },
+            { 
+                title: "Colaborador Constructivo", 
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`, 
+                desc: "Un egresado de UNITEC trabaja eficazmente con personas de distintos orígenes, disciplinas y culturas. Construye relaciones respetuosas para alcanzar metas comunes con apertura, empatia y respeto."
+            },
+            { 
+                title: "Solucionador Empático", 
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`, 
+                desc: "Un egresado de UNITEC trabaja para comprender los patrones y principios que determinan cómo funciona el mundo. Es un pensador critico con un profundo entendimiento de la causalidad, y combina esto con empatia para abordar problemas complejos y crear soluciones sostenibles y equitativas."
+            }
+        ];
+
+        // Lógica del Modal
+        const modal = document.getElementById('capabilityModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalIconContainer = document.getElementById('modalIconContainer');
+
+        function openModal(index) {
+            const data = capabilitiesData[index];
+            modalTitle.innerText = data.title;
+            modalDesc.innerText = data.desc;
+            modalIconContainer.innerHTML = data.icon;
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Bloquear scroll del fondo
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+        }
     </script>
 </body>
 </html>
