@@ -52,7 +52,7 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
-            overflow: hidden; /* Prevent body scroll, use main instead */
+            overflow: hidden;
         }
 
         /* === HEADER === */
@@ -412,11 +412,14 @@
                 </div>
                 
                 <div class="csv-uploader">
-                    <p>¿Tienes el archivo maestro actualizado?</p>
+                    <p>¿Tienes un nuevo archivo para actualizar?</p>
                     <label class="custom-file-upload">
                         <input type="file" id="csvFileInput" accept=".csv" />
-                        Cargar CSV Propio
+                        Cargar Nuevo CSV
                     </label>
+                    <div id="storage-notice" style="margin-top: 10px; font-size: 13px; color: var(--success); font-weight: 600; display: none;">
+                        ✓ Datos personalizados cargados
+                    </div>
                 </div>
             </div>
 
@@ -448,30 +451,100 @@
 
     <script>
         /**
-         * Datos por defecto (Basados en el fragmento proporcionado por el usuario)
-         * Si el usuario carga su propio CSV, estos datos serán reemplazados.
+         * Todos los datos del archivo cellphones_master_table.csv 
+         * incrustados directamente por defecto.
          */
         const defaultCSV = `model,brand,store,price,specs,note
-400 Lite,Honor,Jetstereo,7495,"8 GB RAM + 256 GB Storage, 5230 mAh battery","Precio Oferta (Normal L9,695.00)"
-400 Lite,Honor,Lady Lee,7499,8+8 GB RAM + 256 GB Storage,"Oferta (Normal L11,685.00)"
-400 Lite,Honor,Walmart,8195,"256 GB Storage, 8+8 GB RAM, 5230 mAh battery, Android 15, 108MP Camera","Rebaja (Was L9,465.00)"
-400 Pro,Honor,Jetstereo,18995,"12 GB RAM + 512 GB Storage, 6000 mAh battery","Precio Oferta (Normal L19,995.00)"
-400 Smart,Honor,Jetstereo,6495,"8 GB RAM + 256 GB Storage, 6500 mAh battery","Precio Oferta (Normal L6,895.00)"
-400 Smart,Honor,Lady Lee,6498,"8 GB RAM + 256 GB Storage, 6500 mAh battery","Oferta (Normal L8,435.00)"
-600,Honor,Jetstereo,24495,"8 GB RAM + 512 GB Storage, 7000 mAh battery, 200MP Camera","Precio Oferta (Normal L24,995.00)"
-Galaxy S25 Ultra,Samsung,Lady Lee,46000,256 GB Storage,"Oferta (Normal L55,420.00)"
-Galaxy S26,Samsung,Radio Shack,34997,"256GB Storage, 50MP Cam","Normal L39,299.00"
-Galaxy S26 Ultra,Samsung,Radio Shack,44997,"512GB Storage, 200MP Cam","Normal L52,399.00"
-S25 Ultra,Samsung,Jetstereo,29995,"256 GB Storage, 12 GB RAM, 5000 mAh battery, 200MP Camera","Precio Oferta (Normal L33,995.00)"
-Redmi 15,Xiaomi,Jetstereo,5395,"256 GB Storage, 8 GB RAM, 7000 mAh battery","Precio Oferta (Normal L5,595.00)"
-Redmi 15,Xiaomi,Lady Lee,5499,8 GB RAM + 256 GB Storage,"Oferta (Normal L6,625.00)"
-Redmi 15C,Xiaomi,Radio Shack,4297,"8GB+256GB, 6000mAh","Normal L4,599.00"
-Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Android 15, 108MP Camera",Precio Bajo Todos Los Días`;
+400 Lite,Honor,Jetstereo,7495.0,"8 GB RAM + 256 GB Storage, 5230 mAh battery","Precio Oferta (Normal L9,695.00)"
+400 Lite,Honor,Lady Lee,7499.0,8+8 GB RAM + 256 GB Storage,"Oferta (Normal L11,685.00)"
+400 Lite,Honor,Walmart,8195.0,"256 GB Storage, 8+8 GB RAM, 5230 mAh battery, Android 15, 108MP Camera","Rebaja (Was L9,465.00)"
+400 Pro,Honor,Jetstereo,18995.0,"12 GB RAM + 512 GB Storage, 6000 mAh battery","Precio Oferta (Normal L19,995.00)"
+400 Smart,Honor,Jetstereo,6495.0,"8 GB RAM + 256 GB Storage, 6500 mAh battery","Precio Oferta (Normal L6,895.00)"
+400 Smart,Honor,Lady Lee,6498.0,"8 GB RAM + 256 GB Storage, 6500 mAh battery","Oferta (Normal L8,435.00)"
+600,Honor,Jetstereo,24495.0,"8 GB RAM + 512 GB Storage, 7000 mAh battery, 200MP Camera","Precio Oferta (Normal L24,995.00)"
+600 Pro,Honor,Jetstereo,34995.0,"12 GB RAM + 512 GB Storage, Gold",Standard Price Tag
+600e,Honor,Jetstereo,20995.0,"8 GB RAM + 512 GB Storage, 6520 mAh battery","Gold, Standard Price Tag"
+Magic 7 Lite,Honor,Jetstereo,8995.0,"256 GB Storage, Cyan","Precio Oferta (Normal L10,995.00)"
+Magic 7 Lite,Honor,Walmart,9995.0,"256 GB Storage, 8+8 GB RAM, 6600 mAh battery, Android 14, 108+16+2MP Camera","Rebaja (Was L11,495.00)"
+Magic 8 Lite,Honor,Lady Lee,12999.0,8 GB RAM + 256 GB Storage,"El Mejor Precio (Normal L13,699.00)"
+Magic 8 Lite,Honor,Jetstereo,14995.0,"8 GB RAM + 512 GB Storage, 5300 mAh battery","Black, Standard Price Tag"
+Magic 8 Lite (256GB),Honor,Walmart,11595.0,"256 GB Storage, 8+8 GB RAM, 6300 mAh battery, Android 15, 108+16MP Camera","Rebaja (Was L12,996.00)"
+Magic 8 Lite (512GB),Honor,Walmart,12595.0,512 GB Storage,"Rebaja (Was L13,995.00)"
+X6c,Honor,Jetstereo,4895.0,"8 GB RAM + 256 GB Storage, 5300 mAh battery","Precio Oferta (Normal L5,295.00)"
+X7d,Honor,Jetstereo,5795.0,"8 GB RAM + 256 GB Storage, 6500 mAh battery","Precio Oferta (Normal L6,795.00)"
+Edge 50,Motorola,Jetstereo,10495.0,"12 GB RAM + 256 GB Storage, 5000 mAh","Precio Oferta (Normal L12,995.00)"
+Edge 60 Fusion,Motorola,Walmart,8195.0,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Android 15","Rebaja (Was L10,195.00)"
+Edge 60 Pro,Motorola,Jetstereo,10995.0,"12 GB RAM + 512 GB Storage, 6000 mAh","Precio Oferta (Normal L14,995.00)"
+Edge 70,Motorola,Jetstereo,18995.0,"12 GB RAM + 512 GB Storage, 4800 mAh, Grey","Precio Oferta (Normal L19,295.00)"
+Edge 70 Fusion,Motorola,Jetstereo,14595.0,"8 GB RAM + 256 GB Storage, 5200 mAh, FIFA Blue","Precio Oferta (Normal L15,995.00)"
+Moto G06,Motorola,Jetstereo,2995.0,"128 GB Storage, 4 GB RAM, 5200 mAh battery, 50MP Camera","Precio Oferta (Normal L3,895.00) Green & Orange variants"
+Moto G17,Motorola,Radio Shack,5999.0,Dolby Atmos display,"Normal L6,400.00"
+Moto G17 Power,Motorola,Jetstereo,6995.0,"8 GB RAM + 256 GB Storage, 6000 mAh",Standard Price Tag
+Moto G35,Motorola,Radio Shack,3997.0,Baseline storage,"Normal L4,699.00"
+Moto G35,Motorola,Lady Lee,4999.0,4 GB RAM + 256 GB Storage,"Oferta (Normal L6,025.00)"
+Moto G56,Motorola,Jetstereo,5195.0,"8 GB RAM + 256 GB Storage, 5200 mAh","Precio Oferta (Normal L6,595.00)"
+Moto G60,Motorola,Lady Lee,4295.0,128 GB Storage,"El Mejor Precio (Normal L12,045.00)"
+Moto G75,Motorola,Walmart,6995.0,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Android 14, 50+8MP Camera / 108MP display variation",Precio Bajo Todos Los Días
+Moto G77,Motorola,Jetstereo,9795.0,"8 GB RAM + 256 GB Storage, 5200 mAh",Standard Price Tag
+Moto G77,Motorola,Radio Shack,9799.0,108 MP Cam display,"Normal L11,300.00"
+A20,Oppo,Lady Lee,3499.0,4 GB RAM + 128 GB Storage,"El Mejor Precio (Normal L4,215.00)"
+A5,Oppo,Jetstereo,4295.0,"256 GB Storage, 4 GB RAM, 6000 mAh battery","Precio Oferta (Normal L4,895.00)"
+A5 4G,Oppo,Lady Lee,4899.0,4 GB RAM + 256 GB Storage,"El Mejor Precio (Normal L5,900.00)"
+A5M,Oppo,Jetstereo,5895.0,"256 GB Storage, White variant","Precio Oferta (Normal L6,495.00)"
+A5M,Oppo,Lady Lee,6195.0,8 GB RAM + 256 GB Storage,"El Mejor Precio (Normal L8,435.00)"
+A5X,Oppo,Jetstereo,3995.0,"128 GB Storage, Blue Variant",Standard Jetstereo tag
+A5X,Oppo,Lady Lee,3999.0,4 GB RAM + 128 GB Storage,"El Mejor Precio (Normal L4,820.00)"
+A79,Oppo,Lady Lee,8595.0,8 GB RAM + 256 GB Storage,"El Mejor Precio (Normal L10,355.00)"
+Reno 13F,Oppo,Jetstereo,13495.0,"256 GB Storage, Gray","Precio Oferta (Normal L13,995.00) Includes Awei H35 Smartwatch Bundle"
+Reno 13F,Oppo,Lady Lee,14999.0,12 GB RAM + 512 GB Storage,"El Mejor Precio (Normal L18,070.00)"
+Galaxy A06,Samsung,Jetstereo,2495.0,"64 GB Storage, 4 GB RAM, 5000 mAh battery","Precio Oferta (Normal L3,195.00) Black variant"
+Galaxy A06,Samsung,Lady Lee,2699.0,4 GB RAM + 128 GB Storage,"Oferta (Normal L4,575.00)"
+Galaxy A06,Samsung,Radio Shack,3199.0,Entry level tier,"Normal L3,199.00"
+Galaxy A07,Samsung,Walmart,3195.0,"128 GB Storage, 4 GB RAM, 5000 mAh battery, Android 14, 50MP Camera","Rebaja (Was L3,995.00)"
+Galaxy A07,Samsung,Lady Lee,3199.0,4 GB RAM + 128 GB Storage,"Oferta (Normal L4,455.00)"
+Galaxy A07,Samsung,Jetstereo,3495.0,"128 GB Storage, 4 GB RAM, 5000 mAh battery, 50MP Camera","Precio Oferta (Normal L3,595.00) Violet and Green"
+Galaxy A16,Samsung,Jetstereo,3895.0,"128 GB Storage, Gray variant","Precio Oferta (Normal L5,995.00)"
+Galaxy A16,Samsung,Lady Lee,3898.0,4 GB RAM + 128 GB Storage,"El Mejor Precio (Normal L6,385.00)"
+Galaxy A16,Samsung,Radio Shack,4397.0,Standard 128GB baseline,"Normal L5,099.00"
+Galaxy A16 5G,Samsung,Lady Lee,5299.0,128 GB Storage,"Oferta (Normal L6,385.00)"
+Galaxy A17,Samsung,Lady Lee,4799.0,4 GB RAM + 128 GB Storage,"Oferta (Normal L6,265.00)"
+Galaxy A17,Samsung,Jetstereo,4995.0,"128 GB Storage, Light Blue variant","Precio Oferta (Normal L7,495.00)"
+Galaxy A17,Samsung,Radio Shack,7999.0,"5G, 6.7"" FHD+ Super AMOLED, 50 MP Cam",Promo Shack Tag
+Galaxy A26,Samsung,Walmart,6695.0,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Android 15, 50+8+2MP Camera","Rebaja (Was L7,895.00)"
+Galaxy A26 5G,Samsung,Jetstereo,6995.0,"256 GB Storage, Light Green variant","Precio Oferta (Normal L7,595.00)"
+Galaxy A36,Samsung,Walmart,7995.0,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Android 15, 50+8+5MP Camera","Rebaja (Was L11,195.00)"
+Galaxy A36 5G,Samsung,Jetstereo,7995.0,"256 GB Storage, Light Green variant","Precio Oferta (Normal L9,995.00)"
+Galaxy A36 5G,Samsung,Lady Lee,11899.0,128 GB Storage,"Oferta (Normal L14,335.00)"
+Galaxy A37,Samsung,Walmart,11995.0,256 GB Storage (Vari),"Rebaja (Was L15,395.00) Includes cover + 25W charger"
+Galaxy A37,Samsung,Radio Shack,14499.0,5G variant display,Promo Shack Tag
+Galaxy A54,Samsung,Walmart,14395.0,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Android 14, 50+32MP Camera",Standard Price tag
+Galaxy A56 5G,Samsung,Jetstereo,10995.0,"256 GB Storage, Black variant","Precio Oferta (Normal L12,995.00)"
+Galaxy A57,Samsung,Radio Shack,18499.0,5G variant display,Promo Shack Tag
+Galaxy A57,Samsung,Walmart,19795.0,"512 GB Storage, 12 GB RAM, 5000 mAh battery, Android 15, 50+12+5MP Camera","Rebaja (Was L22,295.00)"
+Galaxy A57 5G,Samsung,Lady Lee,19899.0,12 GB RAM + 512 GB Storage,"Oferta (Normal L22,895.00)"
+Galaxy S24 Plus,Samsung,Walmart,26995.0,512 GB Storage,"Rebaja (Was L32,495.00)"
+Galaxy S25 FE,Samsung,Walmart,18635.0,"256 GB Storage, 8 GB RAM, 4900 mAh battery, Android 15, 50+10+12MP Camera","Rebaja (Was L29,595.00)"
+Galaxy S25 Ultra,Samsung,Walmart,32995.0,"512 GB Storage, 12 GB RAM, 5000 mAh battery, Android 15, 200+12+10MP Camera","Rebaja (Was L43,595.00)"
+Galaxy S25 Ultra,Samsung,Lady Lee,46000.0,256 GB Storage,"Oferta (Normal L55,420.00)"
+Galaxy S26,Samsung,Radio Shack,34997.0,"256GB Storage, 50MP Cam","Normal L39,299.00"
+Galaxy S26 Ultra,Samsung,Radio Shack,44997.0,"512GB Storage, 200MP Cam","Normal L52,399.00"
+S25 Ultra,Samsung,Jetstereo,29995.0,"256 GB Storage, 12 GB RAM, 5000 mAh battery, 200MP Camera","Precio Oferta (Normal L33,995.00)"
+Redmi 15,Xiaomi,Jetstereo,5395.0,"256 GB Storage, 8 GB RAM, 7000 mAh battery","Precio Oferta (Normal L5,595.00)"
+Redmi 15,Xiaomi,Lady Lee,5499.0,8 GB RAM + 256 GB Storage,"Oferta (Normal L6,625.00)"
+Redmi 15C,Xiaomi,Radio Shack,4297.0,"8GB+256GB, 6000mAh","Normal L4,599.00"
+Redmi 15C,Xiaomi,Walmart,4995.0,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Android 15, 108MP Camera",Precio Bajo Todos Los Días
+Redmi 15C,Xiaomi,Lady Lee,5540.0,8 GB RAM + 256 GB Storage,"Oferta (Normal L5,540.00)"
+Redmi A5,Xiaomi,Radio Shack,2997.0,"4GB+128GB, 5200mAh","Normal L3,199.00"
+Redmi A5,Xiaomi,Jetstereo,3095.0,"128 GB Storage, Android 15","Precio Oferta (Normal L3,295.00)"
+Redmi A7 Pro,Xiaomi,Radio Shack,3597.0,"4GB+128GB, 6.9"" 120Hz","Normal L4,299.00"
+Redmi Note 15,Xiaomi,Jetstereo,6495.0,"256 GB Storage, 8 GB RAM, 6000 mAh battery, 108MP Camera","Precio Oferta (Normal L7,495.00)"
+Redmi Note 15 Pro,Xiaomi,Jetstereo,8295.0,"256 GB Storage, 8 GB RAM, 6500 mAh battery, 200MP Camera","Precio Oferta (Normal L9,295.00)"
+Xiaomi 15T,Xiaomi,Jetstereo,13995.0,"512 GB Storage, 12 GB RAM, Leica Telephoto Camera","Precio Oferta (Normal L16,995.00)"`;
 
         // === ESTADO DE LA APP ===
-        let appData = {}; // Estructura: { "Marca": { "Modelo": [ {store, price, specs, note} ] } }
+        let appData = {};
         let currentView = 'brands'; 
-        let viewStack = [{ id: 'brands', title: 'Comparador Celulares' }]; // Para manejar el botón "Volver"
+        let viewStack = [{ id: 'brands', title: 'Comparador Celulares' }];
 
         // Referencias al DOM
         const views = {
@@ -490,27 +563,23 @@ Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Andro
 
         // === LÓGICA DE NAVEGACIÓN ===
         function navigateTo(viewId, title) {
-            // Ocultar todas las vistas
             Object.values(views).forEach(v => v.classList.remove('active'));
-            // Mostrar la nueva vista
             views[viewId].classList.add('active');
             
             headerTitle.textContent = title;
             currentView = viewId;
 
-            // Actualizar stack de navegación si vamos hacia adelante
             if (viewStack[viewStack.length - 1].id !== viewId) {
                 viewStack.push({ id: viewId, title: title });
             }
 
             updateBackButton();
-            // Scroll to top
             document.querySelector('main').scrollTop = 0;
         }
 
         function navigateBack() {
             if (viewStack.length > 1) {
-                viewStack.pop(); // Eliminar la vista actual
+                viewStack.pop();
                 const previous = viewStack[viewStack.length - 1];
                 
                 Object.values(views).forEach(v => v.classList.remove('active'));
@@ -534,10 +603,6 @@ Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Andro
         backBtn.addEventListener('click', navigateBack);
 
         // === LÓGICA DE DATOS (CSV) ===
-        
-        /**
-         * Parser simple de CSV que maneja comillas, comas y saltos de línea correctamente
-         */
         function parseCSV(str) {
             const arr = [];
             let quote = false;
@@ -561,11 +626,10 @@ Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Andro
 
         function processCSVData(csvString) {
             const parsed = parseCSV(csvString.trim());
-            if (parsed.length < 2) return; // No hay datos
+            if (parsed.length < 2) return;
             
             const headers = parsed[0].map(h => h.trim().toLowerCase());
             
-            // Índices de columnas
             const iModel = headers.indexOf('model');
             const iBrand = headers.indexOf('brand');
             const iStore = headers.indexOf('store');
@@ -573,11 +637,11 @@ Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Andro
             const iSpecs = headers.indexOf('specs');
             const iNote = headers.indexOf('note');
 
-            appData = {}; // Resetear datos
+            appData = {};
 
             for (let i = 1; i < parsed.length; i++) {
                 const row = parsed[i];
-                if (!row || row.length < headers.length) continue; // Fila incompleta
+                if (!row || row.length < headers.length) continue;
 
                 const brand = row[iBrand].trim();
                 const model = row[iModel].trim();
@@ -595,7 +659,6 @@ Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Andro
             renderBrands();
         }
 
-        // Leer archivo CSV si el usuario lo sube
         csvFileInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
@@ -603,15 +666,21 @@ Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Andro
             const reader = new FileReader();
             reader.onload = function(event) {
                 const contents = event.target.result;
+                
+                try {
+                    localStorage.setItem('savedCellphonesCSV', contents);
+                    document.getElementById('storage-notice').style.display = 'block';
+                } catch (err) {
+                    console.warn("No se pudo guardar en localStorage", err);
+                }
+
                 processCSVData(contents);
-                alert("¡Datos actualizados exitosamente con tu archivo!");
+                alert("¡Datos actualizados exitosamente! Se han guardado en tu navegador.");
             };
             reader.readAsText(file);
         });
 
-
         // === RENDERIZADO DE INTERFAZ ===
-
         function renderBrands() {
             const container = document.getElementById('brand-grid-container');
             container.innerHTML = '';
@@ -639,7 +708,6 @@ Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Andro
                 container.appendChild(btn);
             });
 
-            // Reiniciar navegación
             viewStack = [{ id: 'brands', title: 'Comparador Celulares' }];
             navigateTo('brands', 'Comparador Celulares');
         }
@@ -654,19 +722,15 @@ Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Andro
             modelNames.forEach(modelName => {
                 const stores = models[modelName];
                 
-                // Calcular rango de precios
                 const prices = stores.map(s => s.price);
                 const minPrice = Math.min(...prices);
                 const maxPrice = Math.max(...prices);
                 
-                // Texto de rango de precio
                 let priceText = formatCurrency(minPrice);
                 if (minPrice !== maxPrice) {
                     priceText += ` - ${formatCurrency(maxPrice)}`;
                 }
 
-                // Usar las especificaciones de la primera tienda como resumen
-                // (Seleccionamos la especificación más larga asumiendo que tiene más detalles)
                 let bestSpecs = stores.reduce((a, b) => a.specs.length > b.specs.length ? a : b).specs;
 
                 const card = document.createElement('div');
@@ -694,13 +758,9 @@ Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Andro
             document.getElementById('detail-model-title').textContent = modelName;
             
             const stores = appData[brand][modelName];
-            
-            // Ordenar tiendas de menor a mayor precio
             stores.sort((a, b) => a.price - b.price);
+            const minPrice = stores[0].price; 
             
-            const minPrice = stores[0].price; // El más bajo garantizado por el sort
-            
-            // Mostrar la especificación más detallada (la cadena más larga)
             let bestSpecs = stores.reduce((a, b) => a.specs.length > b.specs.length ? a : b).specs;
             document.getElementById('detail-specs-text').textContent = bestSpecs;
 
@@ -734,8 +794,14 @@ Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Andro
 
         // === INICIALIZACIÓN ===
         window.addEventListener('DOMContentLoaded', () => {
-            // Cargar datos por defecto al iniciar
-            processCSVData(defaultCSV);
+            const savedCSV = localStorage.getItem('savedCellphonesCSV');
+            
+            if (savedCSV) {
+                processCSVData(savedCSV);
+                document.getElementById('storage-notice').style.display = 'block';
+            } else {
+                processCSVData(defaultCSV);
+            }
         });
 
     </script>
