@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Comparador de Celulares</title>
+    <style>
+        /* === VARIABLES & TEMA === */
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f3f4f6;
+            --surface: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --success: #10b981;
+            --success-light: #d1fae5;
+            --success-text: #065f46;
+            --brand-color: #374151;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #111827;
+                --surface: #1f2937;
+                --text-main: #f9fafb;
+                --text-muted: #9ca3af;
+                --border: #374151;
+                --success: #059669;
+                --success-light: #064e3b;
+                --success-text: #6ee7b7;
+                --brand-color: #4b5563;
+                --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        /* === RESET & BASE === */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scroll, use main instead */
+        }
+
+        /* === HEADER === */
+        header {
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            position: relative;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .header-content {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #back-btn {
+            position: absolute;
+            left: 0;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        #back-btn.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 60%;
+        }
+
+        /* === CONTENEDOR PRINCIPAL === */
+        main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 16px;
+            position: relative;
+        }
+
+        .app-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* === VISTAS === */
+        .view {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === VISTA: MARCAS === */
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px;
+        }
+
+        .brand-btn {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px 16px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: transform 0.1s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-btn:active {
+            transform: scale(0.97);
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--brand-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .brand-models-count {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* === VISTA: MODELOS === */
+        .model-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .model-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .model-card:active {
+            background-color: var(--border);
+        }
+
+        .model-info {
+            flex: 1;
+            padding-right: 12px;
+        }
+
+        .model-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .model-price-range {
+            font-size: 15px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .model-specs-tag {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+
+        .chevron {
+            color: var(--text-muted);
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* === VISTA: DETALLE DE MODELO === */
+        .detail-header {
+            margin-bottom: 24px;
+        }
+
+        .detail-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .detail-specs {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        
+        .detail-specs strong {
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+
+        .stores-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .store-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .store-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-card.cheapest {
+            border: 2px solid var(--success);
+            background-color: var(--success-light);
+        }
+
+        .store-card.cheapest::before {
+            content: 'MEJOR PRECIO';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--success);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .store-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .store-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .store-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        
+        .store-card.cheapest .store-price {
+            color: var(--success-text);
+        }
+
+        .store-note {
+            font-size: 13px;
+            color: var(--text-muted);
+            background-color: var(--bg-color);
+            padding: 6px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            align-self: flex-start;
+        }
+        
+        /* === UPLOADER CSV === */
+        .csv-uploader {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+        }
+        
+        .csv-uploader p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+        
+        .custom-file-upload {
+            display: inline-block;
+            padding: 8px 16px;
+            cursor: pointer;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--primary);
+            transition: background 0.2s;
+        }
+        
+        .custom-file-upload:hover {
+            background-color: var(--bg-color);
+        }
+        
+        input[type="file"] {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <button id="back-btn" aria-label="Volver">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Volver
+            </button>
+            <h1 id="header-title">Comparador Celulares</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="app-container">
+            
+            <!-- VISTA 1: MARCAS -->
+            <div id="view-brands" class="view active">
+                <div class="brand-grid" id="brand-grid-container">
+                    <!-- Las marcas se generan dinámicamente aquí -->
+                </div>
+                
+                <div class="csv-uploader">
+                    <p>¿Tienes el archivo maestro actualizado?</p>
+                    <label class="custom-file-upload">
+                        <input type="file" id="csvFileInput" accept=".csv" />
+                        Cargar CSV Propio
+                    </label>
+                </div>
+            </div>
+
+            <!-- VISTA 2: MODELOS DE UNA MARCA -->
+            <div id="view-models" class="view">
+                <div class="model-list" id="model-list-container">
+                    <!-- Los modelos se generan dinámicamente aquí -->
+                </div>
+            </div>
+
+            <!-- VISTA 3: DETALLE DEL MODELO Y TIENDAS -->
+            <div id="view-details" class="view">
+                <div class="detail-header">
+                    <h2 class="detail-title" id="detail-model-title">Nombre del Modelo</h2>
+                    <div class="detail-specs" id="detail-specs-container">
+                        <strong>Especificaciones Generales</strong>
+                        <span id="detail-specs-text">Especificaciones...</span>
+                    </div>
+                </div>
+                
+                <h3 class="stores-title">Disponible en:</h3>
+                <div class="store-list" id="store-list-container">
+                    <!-- Las tiendas se generan dinámicamente aquí -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        /**
+         * Datos por defecto (Basados en el fragmento proporcionado por el usuario)
+         * Si el usuario carga su propio CSV, estos datos serán reemplazados.
+         */
+        const defaultCSV = `model,brand,store,price,specs,note
+400 Lite,Honor,Jetstereo,7495,"8 GB RAM + 256 GB Storage, 5230 mAh battery","Precio Oferta (Normal L9,695.00)"
+400 Lite,Honor,Lady Lee,7499,8+8 GB RAM + 256 GB Storage,"Oferta (Normal L11,685.00)"
+400 Lite,Honor,Walmart,8195,"256 GB Storage, 8+8 GB RAM, 5230 mAh battery, Android 15, 108MP Camera","Rebaja (Was L9,465.00)"
+400 Pro,Honor,Jetstereo,18995,"12 GB RAM + 512 GB Storage, 6000 mAh battery","Precio Oferta (Normal L19,995.00)"
+400 Smart,Honor,Jetstereo,6495,"8 GB RAM + 256 GB Storage, 6500 mAh battery","Precio Oferta (Normal L6,895.00)"
+400 Smart,Honor,Lady Lee,6498,"8 GB RAM + 256 GB Storage, 6500 mAh battery","Oferta (Normal L8,435.00)"
+600,Honor,Jetstereo,24495,"8 GB RAM + 512 GB Storage, 7000 mAh battery, 200MP Camera","Precio Oferta (Normal L24,995.00)"
+Galaxy S25 Ultra,Samsung,Lady Lee,46000,256 GB Storage,"Oferta (Normal L55,420.00)"
+Galaxy S26,Samsung,Radio Shack,34997,"256GB Storage, 50MP Cam","Normal L39,299.00"
+Galaxy S26 Ultra,Samsung,Radio Shack,44997,"512GB Storage, 200MP Cam","Normal L52,399.00"
+S25 Ultra,Samsung,Jetstereo,29995,"256 GB Storage, 12 GB RAM, 5000 mAh battery, 200MP Camera","Precio Oferta (Normal L33,995.00)"
+Redmi 15,Xiaomi,Jetstereo,5395,"256 GB Storage, 8 GB RAM, 7000 mAh battery","Precio Oferta (Normal L5,595.00)"
+Redmi 15,Xiaomi,Lady Lee,5499,8 GB RAM + 256 GB Storage,"Oferta (Normal L6,625.00)"
+Redmi 15C,Xiaomi,Radio Shack,4297,"8GB+256GB, 6000mAh","Normal L4,599.00"
+Redmi 15C,Xiaomi,Walmart,4995,"256 GB Storage, 8 GB RAM, 5000 mAh battery, Android 15, 108MP Camera",Precio Bajo Todos Los Días`;
+
+        // === ESTADO DE LA APP ===
+        let appData = {}; // Estructura: { "Marca": { "Modelo": [ {store, price, specs, note} ] } }
+        let currentView = 'brands'; 
+        let viewStack = [{ id: 'brands', title: 'Comparador Celulares' }]; // Para manejar el botón "Volver"
+
+        // Referencias al DOM
+        const views = {
+            brands: document.getElementById('view-brands'),
+            models: document.getElementById('view-models'),
+            details: document.getElementById('view-details')
+        };
+        const headerTitle = document.getElementById('header-title');
+        const backBtn = document.getElementById('back-btn');
+        const csvFileInput = document.getElementById('csvFileInput');
+
+        // Formateador de moneda para Lempiras
+        const formatCurrency = (value) => {
+            return 'L. ' + value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        };
+
+        // === LÓGICA DE NAVEGACIÓN ===
+        function navigateTo(viewId, title) {
+            // Ocultar todas las vistas
+            Object.values(views).forEach(v => v.classList.remove('active'));
+            // Mostrar la nueva vista
+            views[viewId].classList.add('active');
+            
+            headerTitle.textContent = title;
+            currentView = viewId;
+
+            // Actualizar stack de navegación si vamos hacia adelante
+            if (viewStack[viewStack.length - 1].id !== viewId) {
+                viewStack.push({ id: viewId, title: title });
+            }
+
+            updateBackButton();
+            // Scroll to top
+            document.querySelector('main').scrollTop = 0;
+        }
+
+        function navigateBack() {
+            if (viewStack.length > 1) {
+                viewStack.pop(); // Eliminar la vista actual
+                const previous = viewStack[viewStack.length - 1];
+                
+                Object.values(views).forEach(v => v.classList.remove('active'));
+                views[previous.id].classList.add('active');
+                
+                headerTitle.textContent = previous.title;
+                currentView = previous.id;
+                
+                updateBackButton();
+            }
+        }
+
+        function updateBackButton() {
+            if (viewStack.length > 1) {
+                backBtn.classList.add('show');
+            } else {
+                backBtn.classList.remove('show');
+            }
+        }
+
+        backBtn.addEventListener('click', navigateBack);
+
+        // === LÓGICA DE DATOS (CSV) ===
+        
+        /**
+         * Parser simple de CSV que maneja comillas, comas y saltos de línea correctamente
+         */
+        function parseCSV(str) {
+            const arr = [];
+            let quote = false;
+            let row = 0, col = 0;
+            for (let c = 0; c < str.length; c++) {
+                let cc = str[c], nc = str[c+1];
+                arr[row] = arr[row] || [];
+                arr[row][col] = arr[row][col] || '';
+
+                if (cc == '"' && quote && nc == '"') { arr[row][col] += cc; ++c; continue; }
+                if (cc == '"') { quote = !quote; continue; }
+                if (cc == ',' && !quote) { ++col; continue; }
+                if (cc == '\r' && nc == '\n' && !quote) { ++row; col = 0; ++c; continue; }
+                if (cc == '\n' && !quote) { ++row; col = 0; continue; }
+                if (cc == '\r' && !quote) { ++row; col = 0; continue; }
+
+                arr[row][col] += cc;
+            }
+            return arr;
+        }
+
+        function processCSVData(csvString) {
+            const parsed = parseCSV(csvString.trim());
+            if (parsed.length < 2) return; // No hay datos
+            
+            const headers = parsed[0].map(h => h.trim().toLowerCase());
+            
+            // Índices de columnas
+            const iModel = headers.indexOf('model');
+            const iBrand = headers.indexOf('brand');
+            const iStore = headers.indexOf('store');
+            const iPrice = headers.indexOf('price');
+            const iSpecs = headers.indexOf('specs');
+            const iNote = headers.indexOf('note');
+
+            appData = {}; // Resetear datos
+
+            for (let i = 1; i < parsed.length; i++) {
+                const row = parsed[i];
+                if (!row || row.length < headers.length) continue; // Fila incompleta
+
+                const brand = row[iBrand].trim();
+                const model = row[iModel].trim();
+                const store = row[iStore].trim();
+                const price = parseFloat(row[iPrice].replace(/[^0-9.-]+/g, "")) || 0;
+                const specs = row[iSpecs] ? row[iSpecs].trim() : "Sin especificaciones detalladas";
+                const note = row[iNote] ? row[iNote].trim() : "";
+
+                if (!appData[brand]) appData[brand] = {};
+                if (!appData[brand][model]) appData[brand][model] = [];
+
+                appData[brand][model].push({ store, price, specs, note });
+            }
+
+            renderBrands();
+        }
+
+        // Leer archivo CSV si el usuario lo sube
+        csvFileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const contents = event.target.result;
+                processCSVData(contents);
+                alert("¡Datos actualizados exitosamente con tu archivo!");
+            };
+            reader.readAsText(file);
+        });
+
+
+        // === RENDERIZADO DE INTERFAZ ===
+
+        function renderBrands() {
+            const container = document.getElementById('brand-grid-container');
+            container.innerHTML = '';
+            
+            const brands = Object.keys(appData).sort();
+
+            brands.forEach(brand => {
+                const modelCount = Object.keys(appData[brand]).length;
+                const initial = brand.charAt(0).toUpperCase();
+                
+                const btn = document.createElement('div');
+                btn.className = 'brand-btn';
+                btn.innerHTML = `
+                    <div class="brand-icon">${initial}</div>
+                    <div class="brand-info">
+                        <div class="brand-name">${brand}</div>
+                        <div class="brand-models-count">${modelCount} modelo${modelCount !== 1 ? 's' : ''}</div>
+                    </div>
+                `;
+                
+                btn.addEventListener('click', () => {
+                    renderModels(brand);
+                });
+
+                container.appendChild(btn);
+            });
+
+            // Reiniciar navegación
+            viewStack = [{ id: 'brands', title: 'Comparador Celulares' }];
+            navigateTo('brands', 'Comparador Celulares');
+        }
+
+        function renderModels(brand) {
+            const container = document.getElementById('model-list-container');
+            container.innerHTML = '';
+
+            const models = appData[brand];
+            const modelNames = Object.keys(models).sort();
+
+            modelNames.forEach(modelName => {
+                const stores = models[modelName];
+                
+                // Calcular rango de precios
+                const prices = stores.map(s => s.price);
+                const minPrice = Math.min(...prices);
+                const maxPrice = Math.max(...prices);
+                
+                // Texto de rango de precio
+                let priceText = formatCurrency(minPrice);
+                if (minPrice !== maxPrice) {
+                    priceText += ` - ${formatCurrency(maxPrice)}`;
+                }
+
+                // Usar las especificaciones de la primera tienda como resumen
+                // (Seleccionamos la especificación más larga asumiendo que tiene más detalles)
+                let bestSpecs = stores.reduce((a, b) => a.specs.length > b.specs.length ? a : b).specs;
+
+                const card = document.createElement('div');
+                card.className = 'model-card';
+                card.innerHTML = `
+                    <div class="model-info">
+                        <div class="model-title">${modelName}</div>
+                        <div class="model-price-range">${priceText}</div>
+                        <div class="model-specs-tag">${bestSpecs}</div>
+                    </div>
+                    <div class="chevron">›</div>
+                `;
+
+                card.addEventListener('click', () => {
+                    renderModelDetails(brand, modelName);
+                });
+
+                container.appendChild(card);
+            });
+
+            navigateTo('models', brand);
+        }
+
+        function renderModelDetails(brand, modelName) {
+            document.getElementById('detail-model-title').textContent = modelName;
+            
+            const stores = appData[brand][modelName];
+            
+            // Ordenar tiendas de menor a mayor precio
+            stores.sort((a, b) => a.price - b.price);
+            
+            const minPrice = stores[0].price; // El más bajo garantizado por el sort
+            
+            // Mostrar la especificación más detallada (la cadena más larga)
+            let bestSpecs = stores.reduce((a, b) => a.specs.length > b.specs.length ? a : b).specs;
+            document.getElementById('detail-specs-text').textContent = bestSpecs;
+
+            const container = document.getElementById('store-list-container');
+            container.innerHTML = '';
+
+            stores.forEach(storeObj => {
+                const isCheapest = storeObj.price === minPrice;
+                
+                const card = document.createElement('div');
+                card.className = `store-card ${isCheapest ? 'cheapest' : ''}`;
+                
+                let noteHtml = '';
+                if (storeObj.note) {
+                    noteHtml = `<div class="store-note">${storeObj.note}</div>`;
+                }
+
+                card.innerHTML = `
+                    <div class="store-header">
+                        <span class="store-name">${storeObj.store}</span>
+                        <span class="store-price">${formatCurrency(storeObj.price)}</span>
+                    </div>
+                    ${noteHtml}
+                `;
+                
+                container.appendChild(card);
+            });
+
+            navigateTo('details', modelName);
+        }
+
+        // === INICIALIZACIÓN ===
+        window.addEventListener('DOMContentLoaded', () => {
+            // Cargar datos por defecto al iniciar
+            processCSVData(defaultCSV);
+        });
+
+    </script>
+</body>
+</html>
