@@ -32,22 +32,22 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            min-height: 100vh;
         }
 
-        /* Container designed for mobile portrait ratio, scales up cleanly for desktop */
+        /* Container designed to adapt: full width on mobile, max 900px centered on desktop */
         .infographic-container {
             width: 100%;
-            max-width: 500px; /* Slightly wider to accommodate text and buttons comfortably */
+            max-width: 900px; /* Expansión clásica para escritorio */
             background-color: #ffffff;
             min-height: 100vh;
             position: relative;
-            display: flex;
-            flex-direction: column;
-            /* CERO SOMBRAS - Cumplimiento estricto de guia-rapida-manual-de-marca-unitec (2).pdf */
+            margin: 0 auto;
+            /* STRICT COMPLIANCE: Cero sombras, solo bordes sutiles para delimitar en pantallas grandes */
+            border-left: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
         }
 
-        /* Pure CSS Diamond Shape for the list numbers */
+        /* Pure CSS Diamond Shape */
         .diamond-shape {
             width: 40px;
             height: 40px;
@@ -57,178 +57,159 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            border: 2px solid #ffffff;
         }
 
-        /* Counter-rotate the number inside the diamond so it sits upright */
+        /* Counter-rotate the number inside the diamond */
         .diamond-content {
             transform: rotate(-45deg);
             color: #ffffff;
-            font-weight: 700; /* Bold */
+            font-weight: 700; 
             font-size: 1.25rem;
         }
 
-        /* Utilidad para cortes geométricos sin usar curvas suaves */
+        /* Utility for sharp edges matching brand guidelines */
         .sharp-edges {
             border-radius: 0px;
         }
-        
-        /* Estilos específicos para los botones de navegación */
-        .nav-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #03AED2; /* Pacific Cyan */
-            color: #06065C; /* Federal Blue */
-            font-weight: 700;
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.875rem;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
 
-        .nav-btn:hover {
-            background-color: #06065C;
-            color: #ffffff;
+        /* Button specific styles (no shadows, solid colors, sharp edges) */
+        .nav-button {
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .nav-button:hover {
+            background-color: #03AED2; /* Pacific Cyan on hover */
             border-color: #03AED2;
-        }
-        
-        .nav-btn svg {
-            transition: transform 0.3s ease;
-        }
-        
-        .nav-btn:hover svg {
-            transform: translateX(4px);
+            color: #ffffff !important;
         }
     </style>
 </head>
 <body class="antialiased text-federal-blue">
 
-    <div class="infographic-container border-x border-gray-100">
+    <div class="infographic-container flex flex-col">
 
-        <!-- Header Section -->
-        <header class="w-full bg-white pt-8 pb-4 flex flex-col items-center border-b-2 border-vivid-sky-blue relative">
-            <!-- As per the manual, vertical layout is for Mobile Apps/Packaging/Advs -->
-            <img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC Logo" class="h-16 mb-4 object-contain">
+        <!-- Header Section: Column on mobile, Row on desktop -->
+        <header class="w-full bg-white pt-8 pb-6 px-6 md:px-12 flex flex-col md:flex-row items-center md:justify-between border-b-4 border-vivid-sky-blue">
+            <img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC Logo" class="h-16 md:h-20 mb-6 md:mb-0 object-contain">
             
             <!-- Botón Superior -->
-            <div class="w-full px-6 flex justify-end">
-                <a href="http://capexfi25-30.netlify.app/desafiosfrecuentes/que.html" class="nav-btn sharp-edges">
-                    Siguiente Sección
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
+            <a href="http://capexfi25-30.netlify.app/desafiosfrecuentes/que.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-sm md:text-base uppercase tracking-widest px-6 py-3 flex items-center justify-center w-full md:w-auto">
+                Siguiente Sección
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </a>
         </header>
 
         <!-- Title Block -->
-        <section class="bg-federal-blue px-6 py-8 text-center relative overflow-hidden">
+        <section class="bg-federal-blue px-6 md:px-16 py-10 md:py-16 text-center relative overflow-hidden">
             <!-- Detalles decorativos geométricos estrictos -->
-            <div class="absolute -top-12 -right-12 w-32 h-32 bg-pacific-cyan opacity-20 transform rotate-45"></div>
+            <div class="absolute -top-12 -right-12 w-32 md:w-48 h-32 md:h-48 bg-pacific-cyan opacity-20 transform rotate-45"></div>
             
-            <h1 class="text-white font-black text-2xl leading-tight mb-2 uppercase tracking-wide relative z-10">
+            <h1 class="text-white font-black text-2xl md:text-4xl leading-tight mb-2 md:mb-4 uppercase tracking-wide relative z-10">
                 Guía de Errores Comunes
             </h1>
-            <h2 class="text-pacific-cyan font-medium text-lg leading-tight mb-2 relative z-10">
-                al Diseñar el Planner de <br> Unitec y Ceutec
+            <h2 class="text-pacific-cyan font-semibold text-lg md:text-2xl leading-tight mb-4 relative z-10">
+                al Diseñar el Planner de Unitec y Ceutec
             </h2>
-            <div class="mt-4 inline-block bg-vivid-sky-blue text-federal-blue font-bold text-xs px-3 py-1 uppercase tracking-widest sharp-edges relative z-10">
+            <div class="mt-2 md:mt-4 inline-block bg-vivid-sky-blue text-federal-blue font-bold text-xs md:text-sm px-4 py-2 sharp-edges uppercase tracking-widest relative z-10">
                 Ciclo de mentoría 2026
             </div>
         </section>
 
         <!-- Note Section -->
-        <section class="px-6 py-6 bg-gray-50 border-b border-gray-200">
-            <div class="border-l-4 border-pacific-cyan pl-4 bg-white p-4 sharp-edges">
-                <h3 class="font-bold text-pacific-cyan text-sm uppercase tracking-wide mb-2 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+        <section class="px-6 md:px-16 py-6 md:py-10 bg-gray-50 border-b border-gray-200">
+            <div class="border-l-4 border-pacific-cyan pl-5 md:pl-8 bg-white p-5 md:p-8 sharp-edges">
+                <h3 class="font-bold text-pacific-cyan text-sm md:text-base uppercase tracking-wide mb-3 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
                     </svg>
                     Nota para quien use esta guía
                 </h3>
-                <p class="font-medium text-sm leading-relaxed text-federal-blue">
-                    Esta no es una lista de "lo que está mal". Es un mapa de los ajustes que <span class="font-bold text-pacific-cyan">casi todos los docentes</span> hacen en su primer Planner.
+                <p class="font-medium text-sm md:text-base leading-relaxed text-federal-blue">
+                    Esta no es una lista de "lo que está mal". Es un mapa de los ajustes que <span class="font-black text-pacific-cyan">casi todos los docentes</span> hacen en su primer Planner.
                 </p>
-                <p class="font-regular text-sm leading-relaxed text-federal-blue mt-2">
+                <p class="font-normal text-sm md:text-base leading-relaxed text-federal-blue mt-3">
                     Si tu primer borrador tiene 2 o 3 de estos puntos, vas exactamente donde debes ir. La meta es que llegues a tu primera retroalimentación con la mayor parte resuelta.
                 </p>
             </div>
         </section>
 
         <!-- Main Content: The 3 Errors -->
-        <section class="flex-grow px-6 py-8 bg-white">
-            <div class="flex items-center mb-6 pb-2 border-b-2 border-gray-100">
-                <span class="text-2xl mr-3">🔝</span>
-                <h2 class="font-black text-xl text-federal-blue uppercase tracking-wide">
+        <section class="flex-grow px-6 md:px-16 py-8 md:py-12 bg-white">
+            <div class="flex items-center mb-8 border-b-2 border-gray-100 pb-4">
+                <span class="text-3xl mr-3">🔝</span>
+                <h2 class="font-black text-xl md:text-2xl text-federal-blue uppercase tracking-wide">
                     Los 3 errores más frecuentes
                 </h2>
             </div>
 
-            <div class="flex flex-col gap-6">
+            <div class="flex flex-col gap-6 md:gap-8">
                 
                 <!-- Error 1 -->
-                <div class="flex items-start bg-white p-5 border-2 border-gray-100 sharp-edges relative">
-                    <div class="diamond-shape absolute -top-4 -left-4">
-                        <span class="diamond-content">1</span>
+                <div class="flex flex-col md:flex-row items-start bg-white p-5 md:p-6 border-2 border-gray-100 sharp-edges relative transition-colors hover:border-pacific-cyan">
+                    <div class="diamond-shape md:mt-1 mb-4 md:mb-0 mr-0 md:mr-6 w-[40px] h-[40px] md:w-[48px] md:h-[48px]">
+                        <span class="diamond-content text-lg md:text-xl">1</span>
                     </div>
-                    <div class="ml-4 mt-2">
-                        <h4 class="font-bold text-federal-blue text-[15px] mb-2 leading-tight">Tareas de Evaluación Culminantes (GRASPS)</h4>
-                        <p class="font-medium text-sm text-gray-600 bg-gray-50 p-2 border-l-2 border-pacific-cyan">
-                            Piden un solo producto obligatorio, sin brindar opciones al estudiante.
-                        </p>
+                    <div class="w-full">
+                        <h4 class="font-bold text-federal-blue text-base md:text-lg mb-2">Tareas de Evaluación Culminantes (GRASPS)</h4>
+                        <div class="bg-gray-50 p-3 md:p-4 border-l-4 border-pacific-cyan">
+                            <p class="font-medium text-sm md:text-base text-gray-700">
+                                Piden un solo producto obligatorio, sin brindar opciones al estudiante.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Error 2 -->
-                <div class="flex items-start bg-white p-5 border-2 border-gray-100 sharp-edges relative mt-4">
-                    <div class="diamond-shape absolute -top-4 -left-4">
-                        <span class="diamond-content">2</span>
+                <div class="flex flex-col md:flex-row items-start bg-white p-5 md:p-6 border-2 border-gray-100 sharp-edges relative transition-colors hover:border-pacific-cyan">
+                    <div class="diamond-shape md:mt-1 mb-4 md:mb-0 mr-0 md:mr-6 w-[40px] h-[40px] md:w-[48px] md:h-[48px]">
+                        <span class="diamond-content text-lg md:text-xl">2</span>
                     </div>
-                    <div class="ml-4 mt-2">
-                        <h4 class="font-bold text-federal-blue text-[15px] mb-2 leading-tight">Metas de Carácter</h4>
-                        <p class="font-medium text-sm text-gray-600 bg-gray-50 p-2 border-l-2 border-pacific-cyan">
-                            No utilizan la fórmula establecida: <br><span class="font-bold text-pacific-cyan mt-1 block">"Los estudiantes se convierten en…"</span>
-                        </p>
+                    <div class="w-full">
+                        <h4 class="font-bold text-federal-blue text-base md:text-lg mb-2">Metas de Carácter</h4>
+                        <div class="bg-gray-50 p-3 md:p-4 border-l-4 border-pacific-cyan">
+                            <p class="font-medium text-sm md:text-base text-gray-700">
+                                No utilizan la fórmula establecida: <br><span class="font-bold text-pacific-cyan mt-1 block">"Los estudiantes se convierten en…"</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Error 3 -->
-                <div class="flex items-start bg-white p-5 border-2 border-gray-100 sharp-edges relative mt-4">
-                    <div class="diamond-shape absolute -top-4 -left-4">
-                        <span class="diamond-content">3</span>
+                <div class="flex flex-col md:flex-row items-start bg-white p-5 md:p-6 border-2 border-gray-100 sharp-edges relative transition-colors hover:border-pacific-cyan">
+                    <div class="diamond-shape md:mt-1 mb-4 md:mb-0 mr-0 md:mr-6 w-[40px] h-[40px] md:w-[48px] md:h-[48px]">
+                        <span class="diamond-content text-lg md:text-xl">3</span>
                     </div>
-                    <div class="ml-4 mt-2">
-                        <h4 class="font-bold text-federal-blue text-[15px] mb-2 leading-tight">La Gran Idea</h4>
-                        <p class="font-medium text-sm text-gray-600 bg-gray-50 p-2 border-l-2 border-pacific-cyan">
-                            No comienza con la frase obligatoria: <br><span class="font-bold text-pacific-cyan mt-1 block">"Entender que…"</span>
-                        </p>
+                    <div class="w-full">
+                        <h4 class="font-bold text-federal-blue text-base md:text-lg mb-2">La Gran Idea</h4>
+                        <div class="bg-gray-50 p-3 md:p-4 border-l-4 border-pacific-cyan">
+                            <p class="font-medium text-sm md:text-base text-gray-700">
+                                No comienza con la frase obligatoria: <br><span class="font-bold text-pacific-cyan mt-1 block">"Entender que…"</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
             </div>
             
             <!-- Botón Inferior -->
-            <div class="mt-10 mb-4 flex justify-center w-full">
-                <a href="http://capexfi25-30.netlify.app/desafiosfrecuentes/que.html" class="nav-btn sharp-edges w-full max-w-xs">
+            <div class="mt-12 md:mt-16 mb-4 flex justify-center w-full">
+                <a href="http://capexfi25-30.netlify.app/desafiosfrecuentes/que.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-base md:text-lg uppercase tracking-widest px-8 py-4 flex items-center justify-center w-full md:w-2/3">
                     Siguiente Sección
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
                 </a>
             </div>
-            
         </section>
 
         <!-- Footer / Bottom Anchor -->
         <footer class="mt-auto w-full flex">
             <!-- Decorative colored bars anchored at the bottom -->
-            <div class="h-4 bg-vivid-sky-blue flex-1"></div>
-            <div class="h-4 bg-pacific-cyan flex-1"></div>
-            <div class="h-4 bg-federal-blue flex-1"></div>
+            <div class="h-4 md:h-6 bg-vivid-sky-blue flex-1"></div>
+            <div class="h-4 md:h-6 bg-pacific-cyan flex-1"></div>
+            <div class="h-4 md:h-6 bg-federal-blue flex-1"></div>
         </footer>
 
     </div>
