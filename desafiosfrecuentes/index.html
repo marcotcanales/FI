@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Guía de Errores Planner UNITEC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'federal-blue': '#06065C',
+                        'pacific-cyan': '#03AED2',
+                        'vivid-sky-blue': '#47C8FD',
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Contenedor más ancho para aprovechar pantallas de escritorio */
+        .landing-container {
+            width: 100%;
+            max-width: 900px; 
+            background-color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            /* STRICT COMPLIANCE: Cero sombras */
+        }
+
+        .diamond-shape {
+            width: 20px;
+            height: 20px;
+            background-color: #03AED2;
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 2px solid #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .diamond-inner {
+            width: 8px;
+            height: 8px;
+            background-color: #06065C;
+            transition: all 0.3s ease;
+        }
+
+        .sharp-edges {
+            border-radius: 0px;
+        }
+
+        .menu-card {
+            transition: all 0.3s ease;
+        }
+
+        .menu-card:hover {
+            background-color: #06065C;
+            border-color: #06065C;
+        }
+
+        .menu-card:hover h3, 
+        .menu-card:hover p, 
+        .menu-card:hover .card-number {
+            color: #ffffff;
+        }
+
+        .menu-card:hover .diamond-shape {
+            background-color: #47C8FD;
+            transform: rotate(135deg); /* Rotación extra al interactuar */
+        }
+
+        .menu-card:hover .diamond-inner {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="antialiased text-federal-blue">
+
+    <div class="landing-container border-x border-gray-100">
+
+        <header class="w-full bg-white pt-10 pb-8 flex flex-col items-center border-b-4 border-vivid-sky-blue relative overflow-hidden">
+            <!-- Detalles decorativos geométricos en el fondo -->
+            <div class="absolute -top-16 -left-16 w-48 h-48 bg-gray-50 transform rotate-45 z-0"></div>
+            <div class="absolute -bottom-16 -right-16 w-32 h-32 bg-gray-50 transform rotate-45 z-0"></div>
+            
+            <img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC Logo" class="h-20 mb-6 object-contain z-10 relative">
+            
+            <div class="text-center px-6 z-10 relative">
+                <span class="bg-federal-blue text-white text-[11px] font-bold px-3 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">
+                    Ciclo de Mentoría 2026
+                </span>
+                <h1 class="text-federal-blue font-black text-3xl md:text-4xl leading-tight mb-2 uppercase tracking-wide">
+                    Guía de Errores Comunes
+                </h1>
+                <h2 class="text-pacific-cyan font-bold text-lg md:text-xl leading-tight">
+                    Diseño del Planner UNITEC y CEUTEC
+                </h2>
+                <p class="mt-4 text-sm md:text-base text-gray-600 max-w-2xl mx-auto font-medium">
+                    Un mapa de ajustes rápidos para llevar tu primer borrador hacia la excelencia académica. Selecciona un módulo para comenzar la revisión.
+                </p>
+            </div>
+        </header>
+
+        <section class="flex-grow px-6 md:px-12 py-10 bg-white">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                
+                <!-- Enlace 1: El Porqué -->
+                <a href="porque.html" class="menu-card border-2 border-gray-200 p-5 bg-white sharp-edges flex items-center gap-4 cursor-pointer group no-underline">
+                    <div class="diamond-shape">
+                        <div class="diamond-inner"></div>
+                    </div>
+                    <div class="flex-grow">
+                        <span class="card-number text-pacific-cyan font-black text-xl leading-none">1</span>
+                        <h3 class="text-federal-blue font-bold text-lg leading-tight uppercase mt-1">El Porqué</h3>
+                        <p class="text-gray-500 text-xs mt-1 font-medium group-hover:text-gray-300">Propósito, Historia y Pregunta</p>
+                    </div>
+                    <div class="text-gray-300 group-hover:text-vivid-sky-blue transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="square" stroke-linejoin="miter" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Enlace 2: El Qué -->
+                <a href="que.html" class="menu-card border-2 border-gray-200 p-5 bg-white sharp-edges flex items-center gap-4 cursor-pointer group no-underline">
+                    <div class="diamond-shape">
+                        <div class="diamond-inner"></div>
+                    </div>
+                    <div class="flex-grow">
+                        <span class="card-number text-pacific-cyan font-black text-xl leading-none">2</span>
+                        <h3 class="text-federal-blue font-bold text-lg leading-tight uppercase mt-1">El Qué</h3>
+                        <p class="text-gray-500 text-xs mt-1 font-medium group-hover:text-gray-300">Metas de Aprendizaje y Carácter</p>
+                    </div>
+                    <div class="text-gray-300 group-hover:text-vivid-sky-blue transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="square" stroke-linejoin="miter" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Enlace 3: La Evidencia -->
+                <a href="laevidencia.html" class="menu-card border-2 border-gray-200 p-5 bg-white sharp-edges flex items-center gap-4 cursor-pointer group no-underline">
+                    <div class="diamond-shape">
+                        <div class="diamond-inner"></div>
+                    </div>
+                    <div class="flex-grow">
+                        <span class="card-number text-pacific-cyan font-black text-xl leading-none">3</span>
+                        <h3 class="text-federal-blue font-bold text-lg leading-tight uppercase mt-1">La Evidencia</h3>
+                        <p class="text-gray-500 text-xs mt-1 font-medium group-hover:text-gray-300">Evaluación GRASPS y Rúbricas</p>
+                    </div>
+                    <div class="text-gray-300 group-hover:text-vivid-sky-blue transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="square" stroke-linejoin="miter" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Enlace 4: El Cómo -->
+                <a href="como.html" class="menu-card border-2 border-gray-200 p-5 bg-white sharp-edges flex items-center gap-4 cursor-pointer group no-underline">
+                    <div class="diamond-shape">
+                        <div class="diamond-inner"></div>
+                    </div>
+                    <div class="flex-grow">
+                        <span class="card-number text-pacific-cyan font-black text-xl leading-none">4</span>
+                        <h3 class="text-federal-blue font-bold text-lg leading-tight uppercase mt-1">El Cómo</h3>
+                        <p class="text-gray-500 text-xs mt-1 font-medium group-hover:text-gray-300">Secuencias y Metodologías</p>
+                    </div>
+                    <div class="text-gray-300 group-hover:text-vivid-sky-blue transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="square" stroke-linejoin="miter" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Enlace 5: La Reflexión -->
+                <a href="reflexion.html" class="menu-card border-2 border-gray-200 p-5 bg-white sharp-edges flex items-center gap-4 cursor-pointer group no-underline">
+                    <div class="diamond-shape">
+                        <div class="diamond-inner"></div>
+                    </div>
+                    <div class="flex-grow">
+                        <span class="card-number text-pacific-cyan font-black text-xl leading-none">5</span>
+                        <h3 class="text-federal-blue font-bold text-lg leading-tight uppercase mt-1">La Reflexión</h3>
+                        <p class="text-gray-500 text-xs mt-1 font-medium group-hover:text-gray-300">Cierre y Autoevaluación</p>
+                    </div>
+                    <div class="text-gray-300 group-hover:text-vivid-sky-blue transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="square" stroke-linejoin="miter" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Enlace 6: Resumen -->
+                <a href="resumen.html" class="menu-card border-2 border-vivid-sky-blue bg-blue-50 p-5 sharp-edges flex items-center gap-4 cursor-pointer group no-underline hover:bg-federal-blue">
+                    <div class="diamond-shape bg-federal-blue group-hover:bg-vivid-sky-blue group-hover:border-federal-blue">
+                        <div class="diamond-inner bg-vivid-sky-blue group-hover:bg-federal-blue"></div>
+                    </div>
+                    <div class="flex-grow">
+                        <span class="card-number text-federal-blue font-black text-xl leading-none group-hover:text-vivid-sky-blue">6</span>
+                        <h3 class="text-federal-blue font-bold text-lg leading-tight uppercase mt-1">Resumen Visual</h3>
+                        <p class="text-federal-blue text-xs mt-1 font-medium opacity-80 group-hover:text-white">Infografía de ajustes rápidos</p>
+                    </div>
+                    <div class="text-federal-blue group-hover:text-vivid-sky-blue transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="square" stroke-linejoin="miter" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="mt-12 p-5 bg-gray-50 border border-gray-200 sharp-edges relative">
+                <!-- Pequeño detalle de diseño superior -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-federal-blue via-pacific-cyan to-vivid-sky-blue"></div>
+                <p class="text-[11px] md:text-xs text-gray-500 font-medium leading-relaxed text-justify">
+                    <strong class="text-federal-blue">Nota de Origen:</strong> Guía elaborada a partir de la retroalimentación real registrada en los Planners de: Inglés VI, PSE111 (Psicología), Biología General (BIO201), Introducción a la Ingeniería en Electrónica, Introducción al Estudio del Derecho, Ofimática Avanzada y Sociología (SOC101).
+                </p>
+            </div>
+            
+        </section>
+
+        <footer class="mt-auto w-full">
+            <div class="w-full flex">
+                <div class="h-4 md:h-6 bg-vivid-sky-blue flex-1"></div>
+                <div class="h-4 md:h-6 bg-pacific-cyan flex-1"></div>
+                <div class="h-4 md:h-6 bg-federal-blue flex-1"></div>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
