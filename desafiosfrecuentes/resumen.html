@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen Visual - Errores Planner UNITEC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'federal-blue': '#06065C',
+                        'pacific-cyan': '#03AED2',
+                        'vivid-sky-blue': '#47C8FD',
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Contenedor responsivo: 100% en móvil, hasta 900px en desktop */
+        .infographic-container {
+            width: 100%;
+            max-width: 900px; 
+            background-color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            margin: 0 auto;
+            border-left: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            /* CERO SOMBRAS - Cumplimiento estricto del manual de marca */
+        }
+
+        /* Forma de diamante CSS Puro */
+        .diamond-shape {
+            width: 24px;
+            height: 24px;
+            background-color: #03AED2;
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid #ffffff; 
+        }
+
+        .diamond-inner {
+            width: 10px;
+            height: 10px;
+            background-color: #06065C;
+        }
+
+        /* Eliminación radical de bordes redondeados */
+        .sharp-edges {
+            border-radius: 0px !important;
+        }
+
+        /* Botones de navegación interactivos sin sombras */
+        .nav-button {
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .nav-button:hover {
+            background-color: #03AED2; 
+            border-color: #03AED2;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body class="antialiased text-federal-blue">
+
+    <div class="infographic-container flex flex-col">
+
+        <!-- Header Section -->
+        <header class="w-full bg-white pt-8 pb-6 px-6 md:px-12 flex flex-col md:flex-row items-center md:justify-between border-b-4 border-vivid-sky-blue">
+            <img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC Logo" class="h-16 md:h-20 mb-6 md:mb-0 object-contain">
+            
+            <!-- Botón Superior: Regreso al Índice -->
+            <a href="https://capexfi25-30.netlify.app/desafiosfrecuentes/index.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-sm md:text-base uppercase tracking-widest px-6 py-3 flex items-center justify-center w-full md:w-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                Regreso al Índice
+            </a>
+        </header>
+
+        <section class="bg-federal-blue px-6 md:px-16 py-10 md:py-16 text-center relative overflow-hidden">
+            <!-- Detalles decorativos geométricos estrictos -->
+            <div class="absolute -top-12 -right-12 w-32 md:w-48 h-32 md:h-48 bg-pacific-cyan opacity-20 transform rotate-45"></div>
+            <div class="absolute -bottom-10 -left-10 w-20 md:w-32 h-20 md:h-32 bg-vivid-sky-blue opacity-20 transform rotate-45"></div>
+            
+            <h1 class="text-white font-black text-3xl md:text-5xl leading-tight mb-2 uppercase tracking-wide relative z-10">
+                RESUMEN VISUAL
+            </h1>
+            <h2 class="text-pacific-cyan font-medium text-lg md:text-2xl leading-tight relative z-10">
+                Mapa de Ajustes Rápidos - Mentoría 2026
+            </h2>
+        </section>
+
+        <section class="flex-grow px-6 md:px-16 py-8 md:py-12 bg-white">
+            <p class="text-sm md:text-base font-medium text-center text-federal-blue mb-8 px-2 border-b-2 border-gray-100 pb-6">
+                Identifica la sección, revisa el error más frecuente y <span class="font-black uppercase tracking-wide text-pacific-cyan">aplica el ajuste recomendado</span> de forma inmediata.
+            </p>
+
+            <!-- Cuadrícula Responsiva: 1 columna en móvil, 2 en desktop -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                
+                <!-- Ítem 1 -->
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
+                    <span class="bg-vivid-sky-blue text-federal-blue text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">1 - El Porqué</span>
+                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Gran Idea sin "Entender que…"</h3>
+                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-75">
+                            <div class="diamond-inner"></div>
+                        </div>
+                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Agregar el encabezado formal al inicio de la frase.</p>
+                    </div>
+                </div>
+
+                <!-- Ítem 2 -->
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
+                    <span class="bg-vivid-sky-blue text-federal-blue text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">1 - El Porqué</span>
+                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Historia sin frase de cierre</h3>
+                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-75">
+                            <div class="diamond-inner"></div>
+                        </div>
+                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Terminar textualmente con "Por eso esta asignatura importa."</p>
+                    </div>
+                </div>
+
+                <!-- Ítem 3 -->
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
+                    <span class="bg-federal-blue text-white text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">2 - El Qué</span>
+                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Meta Conceptual redactada como competencia</h3>
+                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-75">
+                            <div class="diamond-inner"></div>
+                        </div>
+                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Usar "Los estudiantes comprenden que…" en lugar de verbos.</p>
+                    </div>
+                </div>
+
+                <!-- Ítem 4 -->
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
+                    <span class="bg-federal-blue text-white text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">2 - El Qué</span>
+                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Meta de Carácter sin fórmula de identidad</h3>
+                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-75">
+                            <div class="diamond-inner"></div>
+                        </div>
+                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Usar "Los estudiantes se convierten en…"</p>
+                    </div>
+                </div>
+
+                <!-- Ítem 5 -->
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
+                    <span class="bg-pacific-cyan text-federal-blue text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">3 - La Evidencia</span>
+                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">GRASPS con un solo producto obligatorio</h3>
+                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-75">
+                            <div class="diamond-inner"></div>
+                        </div>
+                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Ofrecer 2 a 3 opciones de formato de evidencia.</p>
+                    </div>
+                </div>
+
+                <!-- Ítem 6 -->
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
+                    <span class="border-2 border-federal-blue text-federal-blue text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">4 - El Cómo</span>
+                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Solo existe la secuencia CCC</h3>
+                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-75">
+                            <div class="diamond-inner"></div>
+                        </div>
+                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Esbozar al menos un ejemplo de secuencia DIP y de CAR.</p>
+                    </div>
+                </div>
+
+                <!-- Ítem 7 - Centrado en la fila final para desktop -->
+                <div class="md:col-span-2 md:w-1/2 md:mx-auto border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
+                    <span class="bg-gray-200 text-federal-blue text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">5 - La Reflexión</span>
+                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Autoevaluación genérica</h3>
+                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-75">
+                            <div class="diamond-inner"></div>
+                        </div>
+                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Personalizar redactando 2-3 preguntas propias del curso.</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Botón Inferior: Regreso al Índice -->
+            <div class="mt-12 md:mt-16 mb-4 flex flex-col items-center w-full border-t-2 border-gray-100 pt-8">
+                <p class="text-sm md:text-base text-gray-500 font-bold uppercase tracking-wider mb-6">Fin de la Guía Rápida</p>
+                <a href="https://capexfi25-30.netlify.app/desafiosfrecuentes/index.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-base md:text-lg uppercase tracking-widest px-8 py-4 flex items-center justify-center w-full md:w-2/3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Regreso al Índice
+                </a>
+            </div>
+        </section>
+
+        <footer class="mt-auto w-full flex">
+            <!-- Barras de color institucionales ancladas al fondo -->
+            <div class="h-4 md:h-6 bg-vivid-sky-blue flex-1"></div>
+            <div class="h-4 md:h-6 bg-pacific-cyan flex-1"></div>
+            <div class="h-4 md:h-6 bg-federal-blue flex-1"></div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
