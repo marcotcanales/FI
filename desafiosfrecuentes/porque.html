@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía de Errores Comunes - Planner UNITEC</title>
+    <title>Guía de Errores - El Porqué - Planner UNITEC</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
         tailwind.config = {
             theme: {
@@ -24,6 +25,7 @@
             }
         }
     </script>
+    
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -34,51 +36,51 @@
             justify-content: center;
         }
 
-        /* Container designed to adapt: full width on mobile, max 900px centered on desktop */
+        /* Contenedor responsivo: 100% en móvil, hasta 900px en desktop */
         .infographic-container {
             width: 100%;
-            max-width: 900px; /* Expansión clásica para escritorio */
+            max-width: 900px; 
             background-color: #ffffff;
             min-height: 100vh;
             position: relative;
             margin: 0 auto;
-            /* STRICT COMPLIANCE: Cero sombras, solo bordes sutiles para delimitar en pantallas grandes */
             border-left: 1px solid #e2e8f0;
             border-right: 1px solid #e2e8f0;
         }
 
-        /* Pure CSS Diamond Shape */
+        /* Forma de diamante CSS Puro: Precisión y cortes geométricos */
         .diamond-shape {
             width: 40px;
             height: 40px;
-            background-color: #06065C; /* Federal Blue */
+            background-color: #06065C;
             transform: rotate(45deg);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            border: 2px solid #ffffff; 
+            outline: 1px solid #03AED2; 
         }
 
-        /* Counter-rotate the number inside the diamond */
         .diamond-content {
             transform: rotate(-45deg);
             color: #ffffff;
-            font-weight: 700; 
-            font-size: 1.25rem;
+            font-weight: 800; 
+            font-size: 1.1rem;
         }
 
-        /* Utility for sharp edges matching brand guidelines */
+        /* Eliminación radical de bordes redondeados, como exige la marca */
         .sharp-edges {
-            border-radius: 0px;
+            border-radius: 0px !important;
         }
 
-        /* Button specific styles (no shadows, solid colors, sharp edges) */
+        /* Botones de navegación interactivos SIN SOMBRAS */
         .nav-button {
             transition: all 0.3s ease;
             text-decoration: none;
         }
         .nav-button:hover {
-            background-color: #03AED2; /* Pacific Cyan on hover */
+            background-color: #03AED2; 
             border-color: #03AED2;
             color: #ffffff !important;
         }
@@ -88,12 +90,11 @@
 
     <div class="infographic-container flex flex-col">
 
-        <!-- Header Section: Column on mobile, Row on desktop -->
         <header class="w-full bg-white pt-8 pb-6 px-6 md:px-12 flex flex-col md:flex-row items-center md:justify-between border-b-4 border-vivid-sky-blue">
             <img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC Logo" class="h-16 md:h-20 mb-6 md:mb-0 object-contain">
             
             <!-- Botón Superior -->
-            <a href="http://capexfi25-30.netlify.app/desafiosfrecuentes/que.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-sm md:text-base uppercase tracking-widest px-6 py-3 flex items-center justify-center w-full md:w-auto">
+            <a href="https://capexfi25-30.netlify.app/desafiosfrecuentes/que.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-sm md:text-base uppercase tracking-widest px-6 py-3 flex items-center justify-center w-full md:w-auto">
                 Siguiente Sección
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -101,112 +102,146 @@
             </a>
         </header>
 
-        <!-- Title Block -->
         <section class="bg-federal-blue px-6 md:px-16 py-10 md:py-16 text-center relative overflow-hidden">
-            <!-- Detalles decorativos geométricos estrictos -->
+            <!-- Detalles decorativos geométricos puros -->
             <div class="absolute -top-12 -right-12 w-32 md:w-48 h-32 md:h-48 bg-pacific-cyan opacity-20 transform rotate-45"></div>
+            <div class="absolute -bottom-10 -left-10 w-20 md:w-32 h-20 md:h-32 bg-vivid-sky-blue opacity-20 transform rotate-45"></div>
             
-            <h1 class="text-white font-black text-2xl md:text-4xl leading-tight mb-2 md:mb-4 uppercase tracking-wide relative z-10">
-                Guía de Errores Comunes
+            <div class="inline-block bg-vivid-sky-blue text-federal-blue font-bold text-sm px-4 py-2 sharp-edges uppercase tracking-widest mb-4 relative z-10">
+                1️⃣ Módulo 1
+            </div>
+            <h1 class="text-white font-black text-3xl md:text-5xl leading-tight mb-2 uppercase tracking-wide relative z-10">
+                EL PORQUÉ
             </h1>
-            <h2 class="text-pacific-cyan font-semibold text-lg md:text-2xl leading-tight mb-4 relative z-10">
-                al Diseñar el Planner de Unitec y Ceutec
+            <h2 class="text-pacific-cyan font-medium text-lg md:text-2xl leading-tight relative z-10">
+                Propósito y Contexto
             </h2>
-            <div class="mt-2 md:mt-4 inline-block bg-vivid-sky-blue text-federal-blue font-bold text-xs md:text-sm px-4 py-2 sharp-edges uppercase tracking-widest relative z-10">
-                Ciclo de mentoría 2026
-            </div>
         </section>
 
-        <!-- Note Section -->
-        <section class="px-6 md:px-16 py-6 md:py-10 bg-gray-50 border-b border-gray-200">
-            <div class="border-l-4 border-pacific-cyan pl-5 md:pl-8 bg-white p-5 md:p-8 sharp-edges">
-                <h3 class="font-bold text-pacific-cyan text-sm md:text-base uppercase tracking-wide mb-3 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-                    </svg>
-                    Nota para quien use esta guía
-                </h3>
-                <p class="font-medium text-sm md:text-base leading-relaxed text-federal-blue">
-                    Esta no es una lista de "lo que está mal". Es un mapa de los ajustes que <span class="font-black text-pacific-cyan">casi todos los docentes</span> hacen en su primer Planner.
-                </p>
-                <p class="font-normal text-sm md:text-base leading-relaxed text-federal-blue mt-3">
-                    Si tu primer borrador tiene 2 o 3 de estos puntos, vas exactamente donde debes ir. La meta es que llegues a tu primera retroalimentación con la mayor parte resuelta.
-                </p>
-            </div>
-        </section>
-
-        <!-- Main Content: The 3 Errors -->
         <section class="flex-grow px-6 md:px-16 py-8 md:py-12 bg-white">
-            <div class="flex items-center mb-8 border-b-2 border-gray-100 pb-4">
-                <span class="text-3xl mr-3">🔝</span>
-                <h2 class="font-black text-xl md:text-2xl text-federal-blue uppercase tracking-wide">
-                    Los 3 errores más frecuentes
-                </h2>
-            </div>
+            <p class="text-sm md:text-base font-medium text-center text-federal-blue mb-8 px-2 border-b-2 border-gray-100 pb-6">
+                Ajustes frecuentes en la redacción del <span class="font-black uppercase tracking-wide">Propósito y Contexto</span> del Planner.
+            </p>
 
             <div class="flex flex-col gap-6 md:gap-8">
                 
-                <!-- Error 1 -->
-                <div class="flex flex-col md:flex-row items-start bg-white p-5 md:p-6 border-2 border-gray-100 sharp-edges relative transition-colors hover:border-pacific-cyan">
+                <!-- Error A -->
+                <div class="flex flex-col md:flex-row items-start bg-white p-5 md:p-6 border-2 border-gray-100 border-t-4 border-t-pacific-cyan sharp-edges relative transition-colors hover:border-pacific-cyan">
                     <div class="diamond-shape md:mt-1 mb-4 md:mb-0 mr-0 md:mr-6 w-[40px] h-[40px] md:w-[48px] md:h-[48px]">
-                        <span class="diamond-content text-lg md:text-xl">1</span>
+                        <span class="diamond-content text-lg md:text-xl">A</span>
                     </div>
                     <div class="w-full">
-                        <h4 class="font-bold text-federal-blue text-base md:text-lg mb-2">Tareas de Evaluación Culminantes (GRASPS)</h4>
-                        <div class="bg-gray-50 p-3 md:p-4 border-l-4 border-pacific-cyan">
-                            <p class="font-medium text-sm md:text-base text-gray-700">
-                                Piden un solo producto obligatorio, sin brindar opciones al estudiante.
-                            </p>
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                            <h4 class="font-bold text-federal-blue text-base md:text-lg pr-4 mb-2 md:mb-0">La Gran Idea no usa la fórmula esperada</h4>
+                            <span class="inline-block bg-vivid-sky-blue text-federal-blue font-bold text-[10px] md:text-xs px-2 py-1 sharp-edges uppercase tracking-wider self-start md:self-auto whitespace-nowrap">
+                                Frecuencia: Casi Todos
+                            </span>
+                        </div>
+                        
+                        <p class="font-medium text-sm md:text-base text-gray-700 mb-4 leading-relaxed">
+                            El contenido conceptual casi siempre está bien pensado. El problema es el encabezado, que debe convertir "una idea" en "una idea que se va a <span class="font-black text-federal-blue">desarrollar</span>".
+                        </p>
+
+                        <div class="mb-4 bg-gray-50 p-4 border border-gray-200 sharp-edges">
+                            <div class="flex items-start mb-3">
+                                <span class="text-red-500 mr-3 mt-0.5 text-sm md:text-base">❌</span> 
+                                <p class="text-xs md:text-sm text-gray-500 font-medium italic leading-snug">"La electrónica es un sistema donde se comprende…"</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-green-500 mr-3 mt-0.5 text-sm md:text-base">✅</span> 
+                                <p class="text-xs md:text-sm text-federal-blue font-bold italic leading-snug">"Entender que la electrónica es un sistema donde comprender…"</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-pacific-cyan bg-opacity-10 border-l-4 border-pacific-cyan p-3 md:p-4 sharp-edges">
+                            <p class="text-xs md:text-sm text-federal-blue font-medium"><span class="font-black text-pacific-cyan uppercase tracking-wide mr-1">TIP:</span> Si tu Gran Idea no empieza con "Entender que…", probablemente todavía no lo has escrito, solo lo has pensado.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Error 2 -->
-                <div class="flex flex-col md:flex-row items-start bg-white p-5 md:p-6 border-2 border-gray-100 sharp-edges relative transition-colors hover:border-pacific-cyan">
+                <!-- Error B -->
+                <div class="flex flex-col md:flex-row items-start bg-white p-5 md:p-6 border-2 border-gray-100 border-t-4 border-t-pacific-cyan sharp-edges relative transition-colors hover:border-pacific-cyan">
                     <div class="diamond-shape md:mt-1 mb-4 md:mb-0 mr-0 md:mr-6 w-[40px] h-[40px] md:w-[48px] md:h-[48px]">
-                        <span class="diamond-content text-lg md:text-xl">2</span>
+                        <span class="diamond-content text-lg md:text-xl">B</span>
                     </div>
                     <div class="w-full">
-                        <h4 class="font-bold text-federal-blue text-base md:text-lg mb-2">Metas de Carácter</h4>
-                        <div class="bg-gray-50 p-3 md:p-4 border-l-4 border-pacific-cyan">
-                            <p class="font-medium text-sm md:text-base text-gray-700">
-                                No utilizan la fórmula establecida: <br><span class="font-bold text-pacific-cyan mt-1 block">"Los estudiantes se convierten en…"</span>
-                            </p>
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                            <h4 class="font-bold text-federal-blue text-base md:text-lg pr-4 mb-2 md:mb-0">Falta la frase de cierre en la Historia</h4>
+                            <span class="inline-block bg-gray-200 text-federal-blue font-bold text-[10px] md:text-xs px-2 py-1 sharp-edges uppercase tracking-wider self-start md:self-auto whitespace-nowrap">
+                                Frecuencia: > 50% Planners
+                            </span>
+                        </div>
+                        
+                        <p class="font-medium text-sm md:text-base text-gray-700 mb-4 leading-relaxed">
+                            Las historias suelen estar bien escritas, pero se olvida el ritual de cierre. Este cierre no es decorativo: ancla el propósito de la historia.
+                        </p>
+
+                        <div class="bg-pacific-cyan bg-opacity-10 border-l-4 border-pacific-cyan p-3 md:p-4 sharp-edges">
+                            <p class="text-xs md:text-sm text-federal-blue font-medium"><span class="font-black text-pacific-cyan uppercase tracking-wide mr-1">TIP:</span> Si tu Historia no termina textualmente con <span class="font-black text-federal-blue">"Por eso esta asignatura importa."</span>, todavía no está "cerrada" aunque el contenido esté completo.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Error 3 -->
-                <div class="flex flex-col md:flex-row items-start bg-white p-5 md:p-6 border-2 border-gray-100 sharp-edges relative transition-colors hover:border-pacific-cyan">
+                <!-- Error C -->
+                <div class="flex flex-col md:flex-row items-start bg-white p-5 md:p-6 border-2 border-gray-100 border-t-4 border-t-vivid-sky-blue sharp-edges relative transition-colors hover:border-vivid-sky-blue">
                     <div class="diamond-shape md:mt-1 mb-4 md:mb-0 mr-0 md:mr-6 w-[40px] h-[40px] md:w-[48px] md:h-[48px]">
-                        <span class="diamond-content text-lg md:text-xl">3</span>
+                        <span class="diamond-content text-lg md:text-xl">C</span>
                     </div>
                     <div class="w-full">
-                        <h4 class="font-bold text-federal-blue text-base md:text-lg mb-2">La Gran Idea</h4>
-                        <div class="bg-gray-50 p-3 md:p-4 border-l-4 border-pacific-cyan">
-                            <p class="font-medium text-sm md:text-base text-gray-700">
-                                No comienza con la frase obligatoria: <br><span class="font-bold text-pacific-cyan mt-1 block">"Entender que…"</span>
-                            </p>
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                            <h4 class="font-bold text-federal-blue text-base md:text-lg pr-4 mb-2 md:mb-0">La Historia para estudiantes suena "académica"</h4>
+                            <span class="inline-block bg-gray-200 text-federal-blue font-bold text-[10px] md:text-xs px-2 py-1 sharp-edges uppercase tracking-wider self-start md:self-auto whitespace-nowrap">
+                                Frecuencia: Ocasional
+                            </span>
                         </div>
+                        
+                        <p class="font-medium text-sm md:text-base text-gray-700 mb-4 leading-relaxed">
+                            Ocurre cuando se redacta para estudiantes con el mismo tono que para docentes. Se requiere un lenguaje concreto e inmediato, <span class="font-bold italic">"como un tráiler de película"</span>.
+                        </p>
+
+                        <div class="bg-vivid-sky-blue bg-opacity-10 border-l-4 border-vivid-sky-blue p-3 md:p-4 sharp-edges">
+                            <p class="text-xs md:text-sm text-federal-blue font-medium"><span class="font-black text-vivid-sky-blue uppercase tracking-wide mr-1">TIP:</span> Si podrías leer la Historia en una clase de posgrado sin que suene rara, probablemente es muy académica para un estudiante nuevo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error D -->
+                <div class="flex flex-col md:flex-row items-start bg-white p-5 md:p-6 border-2 border-gray-100 border-t-4 border-t-vivid-sky-blue sharp-edges relative transition-colors hover:border-vivid-sky-blue">
+                    <div class="diamond-shape md:mt-1 mb-4 md:mb-0 mr-0 md:mr-6 w-[40px] h-[40px] md:w-[48px] md:h-[48px]">
+                        <span class="diamond-content text-lg md:text-xl">D</span>
+                    </div>
+                    <div class="w-full">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                            <h4 class="font-bold text-federal-blue text-base md:text-lg pr-4 mb-2 md:mb-0">Pregunta Detonante sin gancho investigativo</h4>
+                            <span class="inline-block bg-gray-200 text-federal-blue font-bold text-[10px] md:text-xs px-2 py-1 sharp-edges uppercase tracking-wider self-start md:self-auto whitespace-nowrap">
+                                Frecuencia: Ocasional
+                            </span>
+                        </div>
+                        
+                        <p class="font-medium text-sm md:text-base text-gray-700 mb-2 leading-relaxed">
+                            La pregunta refleja el tema, es abierta y conecta con algo que importa, pero le falta tensión narrativa.
+                        </p>
+                        <p class="font-medium text-sm md:text-base text-gray-700 leading-relaxed">
+                            Falta ese <span class="font-black text-federal-blue">"gancho"</span> que empuja a indagar y buscar la respuesta, no solo a reflexionar sobre ella.
+                        </p>
                     </div>
                 </div>
 
             </div>
-            
-            <!-- Botón Inferior -->
-            <div class="mt-12 md:mt-16 mb-4 flex justify-center w-full">
-                <a href="http://capexfi25-30.netlify.app/desafiosfrecuentes/que.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-base md:text-lg uppercase tracking-widest px-8 py-4 flex items-center justify-center w-full md:w-2/3">
+
+            <div class="mt-10 md:mt-16 mb-4 flex justify-center w-full">
+                <a href="https://capexfi25-30.netlify.app/desafiosfrecuentes/que.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-base md:text-lg uppercase tracking-widest px-8 py-4 flex items-center justify-center w-full md:w-2/3">
                     Siguiente Sección
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
                 </a>
             </div>
+
         </section>
 
-        <!-- Footer / Bottom Anchor -->
         <footer class="mt-auto w-full flex">
-            <!-- Decorative colored bars anchored at the bottom -->
+            <!-- Barras de color institucionales ancladas al fondo -->
             <div class="h-4 md:h-6 bg-vivid-sky-blue flex-1"></div>
             <div class="h-4 md:h-6 bg-pacific-cyan flex-1"></div>
             <div class="h-4 md:h-6 bg-federal-blue flex-1"></div>
