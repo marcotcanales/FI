@@ -34,10 +34,10 @@
             justify-content: center;
         }
 
-        /* Contenedor responsivo: 100% en móvil, hasta 900px en desktop */
+        /* Contenedor ampliado a 1200px para aprovechar pantallas de PC de forma óptima */
         .infographic-container {
             width: 100%;
-            max-width: 900px; 
+            max-width: 1200px; 
             background-color: #ffffff;
             min-height: 100vh;
             position: relative;
@@ -87,131 +87,145 @@
 
     <div class="infographic-container flex flex-col">
 
-        <!-- Header Section -->
-        <header class="w-full bg-white pt-8 pb-6 px-6 md:px-12 flex flex-col md:flex-row items-center md:justify-between border-b-4 border-vivid-sky-blue">
-            <img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC Logo" class="h-16 md:h-20 mb-6 md:mb-0 object-contain">
+        <!-- Header Section optimizado -->
+        <header class="w-full bg-white pt-8 pb-6 px-6 md:px-12 lg:px-16 flex flex-col md:flex-row items-center md:justify-between border-b-4 border-vivid-sky-blue">
+            <img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC Logo" class="h-20 md:h-24 mb-6 md:mb-0 object-contain">
             
             <!-- Botón Superior: Regreso al Índice -->
-            <a href="https://capexfi25-30.netlify.app/desafiosfrecuentes/index.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-sm md:text-base uppercase tracking-widest px-6 py-3 flex items-center justify-center w-full md:w-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <a href="https://capexfi25-30.netlify.app/desafiosfrecuentes/index.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-base md:text-lg uppercase tracking-widest px-8 py-3.5 flex items-center justify-center w-full md:w-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                 </svg>
                 Regreso al Índice
             </a>
         </header>
 
-        <section class="bg-federal-blue px-6 md:px-16 py-10 md:py-16 text-center relative overflow-hidden">
+        <section class="bg-federal-blue px-6 md:px-16 lg:px-20 py-12 md:py-20 text-center relative overflow-hidden">
             <!-- Detalles decorativos geométricos estrictos -->
-            <div class="absolute -top-12 -right-12 w-32 md:w-48 h-32 md:h-48 bg-pacific-cyan opacity-20 transform rotate-45"></div>
-            <div class="absolute -bottom-10 -left-10 w-20 md:w-32 h-20 md:h-32 bg-vivid-sky-blue opacity-20 transform rotate-45"></div>
+            <div class="absolute -top-12 -right-12 w-48 md:w-64 h-48 md:h-64 bg-pacific-cyan opacity-20 transform rotate-45"></div>
+            <div class="absolute -bottom-10 -left-10 w-32 md:w-48 h-32 md:h-48 bg-vivid-sky-blue opacity-20 transform rotate-45"></div>
             
-            <h1 class="text-white font-black text-3xl md:text-5xl leading-tight mb-2 uppercase tracking-wide relative z-10">
+            <h1 class="text-white font-black text-4xl md:text-6xl leading-tight mb-3 md:mb-4 uppercase tracking-wide relative z-10">
                 RESUMEN VISUAL
             </h1>
-            <h2 class="text-pacific-cyan font-medium text-lg md:text-2xl leading-tight relative z-10">
+            <h2 class="text-pacific-cyan font-medium text-xl md:text-3xl leading-tight relative z-10">
                 Mapa de Ajustes Rápidos - Mentoría 2026
             </h2>
         </section>
 
-        <section class="flex-grow px-6 md:px-16 py-8 md:py-12 bg-white">
-            <p class="text-sm md:text-base font-medium text-center text-federal-blue mb-8 px-2 border-b-2 border-gray-100 pb-6">
+        <section class="flex-grow px-6 md:px-16 py-10 md:py-16 bg-white">
+            <p class="text-base md:text-lg lg:text-xl font-medium text-center text-federal-blue mb-12 px-2 border-b-2 border-gray-100 pb-6 max-w-4xl mx-auto">
                 Identifica la sección, revisa el error más frecuente y <span class="font-black uppercase tracking-wide text-pacific-cyan">aplica el ajuste recomendado</span> de forma inmediata.
             </p>
 
-            <!-- Cuadrícula Responsiva: 1 columna en móvil, 2 en desktop -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <!-- Cuadrícula Responsiva: 1 columna en móvil, 2 en tablet, 3 en desktop para aprovechar pantallas grandes -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 
                 <!-- Ítem 1 -->
-                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
-                    <span class="bg-vivid-sky-blue text-federal-blue text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">1 - El Porqué</span>
-                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Gran Idea sin "Entender que…"</h3>
-                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
-                        <div class="diamond-shape mt-1 scale-75">
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-6 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan flex flex-col justify-between h-full">
+                    <div>
+                        <span class="bg-vivid-sky-blue text-federal-blue text-xs md:text-sm font-bold px-3 py-1.5 uppercase tracking-widest mb-4 inline-block sharp-edges">1 - El Porqué</span>
+                        <h3 class="text-federal-blue font-bold text-lg md:text-xl leading-tight mb-4">Gran Idea sin "Entender que…"</h3>
+                    </div>
+                    <div class="flex items-start gap-3 mt-4 bg-gray-50 p-4 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-90">
                             <div class="diamond-inner"></div>
                         </div>
-                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Agregar el encabezado formal al inicio de la frase.</p>
+                        <p class="text-federal-blue text-sm md:text-base font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Agregar el encabezado formal al inicio de la frase.</p>
                     </div>
                 </div>
 
                 <!-- Ítem 2 -->
-                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
-                    <span class="bg-vivid-sky-blue text-federal-blue text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">1 - El Porqué</span>
-                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Historia sin frase de cierre</h3>
-                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
-                        <div class="diamond-shape mt-1 scale-75">
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-6 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan flex flex-col justify-between h-full">
+                    <div>
+                        <span class="bg-vivid-sky-blue text-federal-blue text-xs md:text-sm font-bold px-3 py-1.5 uppercase tracking-widest mb-4 inline-block sharp-edges">1 - El Porqué</span>
+                        <h3 class="text-federal-blue font-bold text-lg md:text-xl leading-tight mb-4">Historia sin frase de cierre</h3>
+                    </div>
+                    <div class="flex items-start gap-3 mt-4 bg-gray-50 p-4 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-90">
                             <div class="diamond-inner"></div>
                         </div>
-                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Terminar textualmente con "Por eso esta asignatura importa."</p>
+                        <p class="text-federal-blue text-sm md:text-base font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Terminar textualmente con "Por eso esta asignatura importa."</p>
                     </div>
                 </div>
 
                 <!-- Ítem 3 -->
-                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
-                    <span class="bg-federal-blue text-white text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">2 - El Qué</span>
-                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Meta Conceptual redactada como competencia</h3>
-                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
-                        <div class="diamond-shape mt-1 scale-75">
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-6 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan flex flex-col justify-between h-full">
+                    <div>
+                        <span class="bg-federal-blue text-white text-xs md:text-sm font-bold px-3 py-1.5 uppercase tracking-widest mb-4 inline-block sharp-edges">2 - El Qué</span>
+                        <h3 class="text-federal-blue font-bold text-lg md:text-xl leading-tight mb-4">Meta Conceptual redactada como competencia</h3>
+                    </div>
+                    <div class="flex items-start gap-3 mt-4 bg-gray-50 p-4 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-90">
                             <div class="diamond-inner"></div>
                         </div>
-                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Usar "Los estudiantes comprenden que…" en lugar de verbos.</p>
+                        <p class="text-federal-blue text-sm md:text-base font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Usar "Los estudiantes comprenden que…" en lugar de verbos.</p>
                     </div>
                 </div>
 
                 <!-- Ítem 4 -->
-                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
-                    <span class="bg-federal-blue text-white text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">2 - El Qué</span>
-                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Meta de Carácter sin fórmula de identidad</h3>
-                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
-                        <div class="diamond-shape mt-1 scale-75">
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-6 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan flex flex-col justify-between h-full">
+                    <div>
+                        <span class="bg-federal-blue text-white text-xs md:text-sm font-bold px-3 py-1.5 uppercase tracking-widest mb-4 inline-block sharp-edges">2 - El Qué</span>
+                        <h3 class="text-federal-blue font-bold text-lg md:text-xl leading-tight mb-4">Meta de Carácter sin fórmula de identidad</h3>
+                    </div>
+                    <div class="flex items-start gap-3 mt-4 bg-gray-50 p-4 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-90">
                             <div class="diamond-inner"></div>
                         </div>
-                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Usar "Los estudiantes se convierten en…"</p>
+                        <p class="text-federal-blue text-sm md:text-base font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Usar "Los estudiantes se convierten en…"</p>
                     </div>
                 </div>
 
                 <!-- Ítem 5 -->
-                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
-                    <span class="bg-pacific-cyan text-federal-blue text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">3 - La Evidencia</span>
-                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">GRASPS con un solo producto obligatorio</h3>
-                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
-                        <div class="diamond-shape mt-1 scale-75">
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-6 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan flex flex-col justify-between h-full">
+                    <div>
+                        <span class="bg-pacific-cyan text-federal-blue text-xs md:text-sm font-bold px-3 py-1.5 uppercase tracking-widest mb-4 inline-block sharp-edges">3 - La Evidencia</span>
+                        <h3 class="text-federal-blue font-bold text-lg md:text-xl leading-tight mb-4">GRASPS con un solo producto obligatorio</h3>
+                    </div>
+                    <div class="flex items-start gap-3 mt-4 bg-gray-50 p-4 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-90">
                             <div class="diamond-inner"></div>
                         </div>
-                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Ofrecer 2 a 3 opciones de formato de evidencia.</p>
+                        <p class="text-federal-blue text-sm md:text-base font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Ofrecer 2 a 3 opciones de formato de evidencia.</p>
                     </div>
                 </div>
 
                 <!-- Ítem 6 -->
-                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
-                    <span class="border-2 border-federal-blue text-federal-blue text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">4 - El Cómo</span>
-                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Solo existe la secuencia CCC</h3>
-                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
-                        <div class="diamond-shape mt-1 scale-75">
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-6 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan flex flex-col justify-between h-full">
+                    <div>
+                        <span class="border-2 border-federal-blue text-federal-blue text-xs md:text-sm font-bold px-3 py-1.5 uppercase tracking-widest mb-4 inline-block sharp-edges">4 - El Cómo</span>
+                        <h3 class="text-federal-blue font-bold text-lg md:text-xl leading-tight mb-4">Solo existe la secuencia CCC</h3>
+                    </div>
+                    <div class="flex items-start gap-3 mt-4 bg-gray-50 p-4 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-90">
                             <div class="diamond-inner"></div>
                         </div>
-                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Esbozar al menos un ejemplo de secuencia DIP y de CAR.</p>
+                        <p class="text-federal-blue text-sm md:text-base font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Esbozar al menos un ejemplo de secuencia DIP y de CAR.</p>
                     </div>
                 </div>
 
-                <!-- Ítem 7 - Centrado en la fila final para desktop -->
-                <div class="md:col-span-2 md:w-1/2 md:mx-auto border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-4 md:p-5 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan">
-                    <span class="bg-gray-200 text-federal-blue text-[10px] md:text-xs font-bold px-2 py-1 uppercase tracking-widest mb-3 inline-block sharp-edges">5 - La Reflexión</span>
-                    <h3 class="text-federal-blue font-bold text-sm md:text-base leading-tight mb-2">Autoevaluación genérica</h3>
-                    <div class="flex items-start gap-3 mt-3 bg-gray-50 p-3 border border-gray-100 sharp-edges">
-                        <div class="diamond-shape mt-1 scale-75">
+                <!-- Ítem 7 - Adaptado simétricamente para ocupar una celda limpia en desktop -->
+                <div class="border-l-4 border-pacific-cyan border-t border-r border-b border-gray-200 p-6 bg-white sharp-edges relative transition-colors hover:border-pacific-cyan flex flex-col justify-between h-full lg:col-start-2">
+                    <div>
+                        <span class="bg-gray-200 text-federal-blue text-xs md:text-sm font-bold px-3 py-1.5 uppercase tracking-widest mb-4 inline-block sharp-edges">5 - La Reflexión</span>
+                        <h3 class="text-federal-blue font-bold text-lg md:text-xl leading-tight mb-4">Autoevaluación genérica</h3>
+                    </div>
+                    <div class="flex items-start gap-3 mt-4 bg-gray-50 p-4 border border-gray-100 sharp-edges">
+                        <div class="diamond-shape mt-1 scale-90">
                             <div class="diamond-inner"></div>
                         </div>
-                        <p class="text-federal-blue text-xs md:text-sm font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Personalizar redactando 2-3 preguntas propias del curso.</p>
+                        <p class="text-federal-blue text-sm md:text-base font-medium leading-snug"><span class="font-black text-pacific-cyan tracking-wide">AJUSTE:</span> Personalizar redactando 2-3 preguntas propias del curso.</p>
                     </div>
                 </div>
 
             </div>
             
             <!-- Botón Inferior: Regreso al Índice -->
-            <div class="mt-12 md:mt-16 mb-4 flex flex-col items-center w-full border-t-2 border-gray-100 pt-8">
-                <p class="text-sm md:text-base text-gray-500 font-bold uppercase tracking-wider mb-6">Fin de la Guía Rápida</p>
-                <a href="https://capexfi25-30.netlify.app/desafiosfrecuentes/index.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-base md:text-lg uppercase tracking-widest px-8 py-4 flex items-center justify-center w-full md:w-2/3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" viewBox="0 0 20 20" fill="currentColor">
+            <div class="mt-16 md:mt-20 mb-6 flex flex-col items-center w-full border-t-2 border-gray-100 pt-10">
+                <p class="text-base md:text-lg text-gray-500 font-bold uppercase tracking-wider mb-6">Fin de la Guía Rápida</p>
+                <a href="https://capexfi25-30.netlify.app/desafiosfrecuentes/index.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-lg md:text-xl uppercase tracking-widest px-10 py-5 flex items-center justify-center w-full max-w-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                     </svg>
                     Regreso al Índice
