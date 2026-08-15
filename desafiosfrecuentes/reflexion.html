@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Errores - La Reflexión - Planner UNITEC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'federal-blue': '#06065C',
+                        'pacific-cyan': '#03AED2',
+                        'vivid-sky-blue': '#47C8FD',
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Contenedor responsivo: 100% en móvil, hasta 900px en desktop (Opción A: Escalabilidad Clásica) */
+        .infographic-container {
+            width: 100%;
+            max-width: 900px; 
+            background-color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            margin: 0 auto;
+            border-left: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        /* Forma de diamante CSS Puro: Precisión y cortes geométricos, cero sombras */
+        .diamond-shape {
+            width: 40px;
+            height: 40px;
+            background-color: #06065C;
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 2px solid #ffffff; 
+            outline: 1px solid #03AED2; 
+        }
+
+        .diamond-content {
+            transform: rotate(-45deg);
+            color: #ffffff;
+            font-weight: 800; 
+            font-size: 1.1rem;
+        }
+
+        /* Eliminación radical de bordes redondeados */
+        .sharp-edges {
+            border-radius: 0px !important;
+        }
+
+        /* Botones de navegación interactivos sin sombras */
+        .nav-button {
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .nav-button:hover {
+            background-color: #03AED2; 
+            border-color: #03AED2;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body class="antialiased text-federal-blue">
+
+    <div class="infographic-container flex flex-col">
+
+        <header class="w-full bg-white pt-8 pb-6 px-6 md:px-12 flex flex-col md:flex-row items-center md:justify-between border-b-4 border-vivid-sky-blue">
+            <img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC Logo" class="h-16 md:h-20 mb-6 md:mb-0 object-contain">
+            
+            <!-- Botón Superior -->
+            <a href="https://capexfi25-30.netlify.app/desafiosfrecuentes/resumen.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-sm md:text-base uppercase tracking-widest px-6 py-3 flex items-center justify-center w-full md:w-auto">
+                Siguiente Sección
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </header>
+
+        <section class="bg-federal-blue px-6 md:px-16 py-10 md:py-16 text-center relative overflow-hidden">
+            <!-- Detalles decorativos geométricos puros -->
+            <div class="absolute -top-12 -right-12 w-32 md:w-48 h-32 md:h-48 bg-pacific-cyan opacity-20 transform rotate-45"></div>
+            <div class="absolute -bottom-10 -left-10 w-20 md:w-32 h-20 md:h-32 bg-vivid-sky-blue opacity-20 transform rotate-45"></div>
+            
+            <div class="inline-block bg-vivid-sky-blue text-federal-blue font-bold text-sm px-4 py-2 sharp-edges uppercase tracking-widest mb-4 relative z-10">
+                5️⃣ Módulo 5
+            </div>
+            <h1 class="text-white font-black text-3xl md:text-5xl leading-tight mb-2 uppercase tracking-wide relative z-10">
+                LA REFLEXIÓN
+            </h1>
+            <h2 class="text-pacific-cyan font-medium text-lg md:text-2xl leading-tight relative z-10">
+                Cierre del Módulo
+            </h2>
+        </section>
+
+        <section class="flex-grow px-6 md:px-16 py-8 md:py-12 bg-white">
+            
+            <!-- Bloque de Refuerzo Positivo -->
+            <div class="mb-10 p-5 md:p-8 bg-gray-50 border-l-4 border-pacific-cyan sharp-edges relative">
+                <div class="absolute -top-3 -right-3 text-4xl">🌟</div>
+                <p class="text-sm md:text-base font-medium text-federal-blue leading-relaxed">
+                    Esta es consistentemente <span class="font-black uppercase tracking-wide text-pacific-cyan">la sección más sólida</span> de los Planners revisados: la mayoría logra preguntas de reflexión personal, transferencia y reflexión docente bien alineadas y con verdadero potencial metacognitivo.
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-6 md:gap-8">
+                
+                <!-- Único Error Común -->
+                <div class="flex flex-col md:flex-row items-start bg-white p-5 md:p-6 border-2 border-gray-100 border-t-4 border-t-pacific-cyan sharp-edges relative transition-colors hover:border-pacific-cyan">
+                    <div class="diamond-shape md:mt-1 mb-4 md:mb-0 mr-0 md:mr-6 w-[40px] h-[40px] md:w-[48px] md:h-[48px]">
+                        <span class="diamond-content text-lg md:text-xl">A</span>
+                    </div>
+                    <div class="w-full">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                            <h4 class="font-bold text-federal-blue text-base md:text-lg pr-4 mb-2 md:mb-0">La herramienta de autoevaluación se deja genérica</h4>
+                            <span class="inline-block bg-gray-200 text-federal-blue font-bold text-[10px] md:text-xs px-2 py-1 sharp-edges uppercase tracking-wider self-start md:self-auto whitespace-nowrap">
+                                Frecuencia: Ocasional
+                            </span>
+                        </div>
+                        
+                        <p class="font-medium text-sm md:text-base text-gray-700 mb-4 leading-relaxed">
+                            Se conserva el texto de ejemplo de la plantilla ("Autoevaluación de las 3Cs") sin redactar 2-3 preguntas propias del curso. El resultado se siente como un recordatorio genérico y no como una herramienta hecha específicamente para esa asignatura.
+                        </p>
+
+                        <div class="bg-pacific-cyan bg-opacity-10 border-l-4 border-pacific-cyan p-3 md:p-4 sharp-edges">
+                            <p class="text-xs md:text-sm text-federal-blue font-medium"><span class="font-black text-pacific-cyan uppercase tracking-wide mr-1">TIP:</span> Si tu herramienta de autoevaluación podría copiarse y pegarse en cualquier otro curso sin cambiar una palabra, probablemente aún no está personalizada.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-10 md:mt-16 mb-4 flex justify-center w-full">
+                <a href="https://capexfi25-30.netlify.app/desafiosfrecuentes/resumen.html" class="nav-button sharp-edges bg-federal-blue text-white border-2 border-federal-blue font-bold text-base md:text-lg uppercase tracking-widest px-8 py-4 flex items-center justify-center w-full md:w-2/3">
+                    Siguiente Sección
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+
+        </section>
+
+        <footer class="mt-auto w-full flex">
+            <!-- Barras de color institucionales ancladas al fondo -->
+            <div class="h-4 md:h-6 bg-vivid-sky-blue flex-1"></div>
+            <div class="h-4 md:h-6 bg-pacific-cyan flex-1"></div>
+            <div class="h-4 md:h-6 bg-federal-blue flex-1"></div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
