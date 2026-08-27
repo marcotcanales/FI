@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Train the Trainers | Ecosistema UNITEC</title>
+    <title>Entrenamiento Docente | UNITEC/CEUTEC</title>
     <!-- Importando la tipografía oficial: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,16 +75,15 @@
             border-bottom: 2px solid var(--pacific-cyan);
             margin-bottom: 4rem;
         }
-
         .brand-logo {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 1rem;
         }
 
         .diamond-isotype {
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
         }
 
         .logotype {
@@ -92,6 +91,19 @@
             font-weight: 800;
             letter-spacing: -0.5px;
             color: var(--white);
+        }
+        .header-logo-image {
+            display: block;
+            height: 150px;
+            width: auto;
+            max-width: min(760px, 92vw);
+        }
+
+        @media (max-width: 768px) {
+            .header-logo-image {
+                height: 88px;
+                max-width: min(500px, 86vw);
+            }
         }
 
         /* Hero Section */
@@ -346,31 +358,20 @@
         <!-- Header con Identidad de Marca Estricta -->
         <header>
             <div class="brand-logo">
-                <!-- Construcción del Isotipo en SVG para garantizar nitidez, proporciones y colores exactos -->
-                <svg class="diamond-isotype" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Faceta Superior Izquierda -->
-                    <polygon points="50,0 50,50 0,50" fill="#47C8FD" />
-                    <!-- Faceta Superior Derecha -->
-                    <polygon points="50,0 100,50 50,50" fill="#03AED2" />
-                    <!-- Faceta Inferior Izquierda -->
-                    <polygon points="0,50 50,50 50,100" fill="#03AED2" />
-                    <!-- Faceta Inferior Derecha -->
-                    <polygon points="100,50 50,50 50,100" fill="#47C8FD" />
-                </svg>
-                <div class="logotype">unitec</div>
+                <img src="IMG/UNITEC-LOGO-BLANCO.png" alt="UNITEC" class="header-logo-image">
             </div>
         </header>
 
         <!-- Hero Section -->
         <section class="hero">
-            <h1>Train the <span>Trainers</span></h1>
-            <p>Ecosistema de Aprendizaje UNITEC/CEUTEC. Plataforma asincrónica para Jefes y Coordinadores Académicos.</p>
+            <h1>Entrenamiento <span>Docente</span></h1>
+            <p>Ecosistema de Aprendizaje UNITEC/CEUTEC. Plataforma asincrónica para docentes.</p>
         </section>
 
         <!-- ========== SECCIÓN DE VIDEO (NUEVA) ========== -->
         <section class="video-section">
             <div class="video-text">
-                <h2 class="video-title">¿Qué es el <br><span>Ecosistema</span> de Aprendizaje UNITEC/CEUTEC?</h2>
+                <h2 class="video-title">¿QUE ES EL <br><span>Ecosistema </span>Aprendizaje UNITEC/CEUTEC?</h2>
                 <p class="video-subtitle">Este curso es para aprender a implementarlo en el aula.</p>
             </div>
             
@@ -396,7 +397,7 @@
                     <h2 class="session-title">El Ecosistema de Aprendizaje y el Nuevo Paradigma</h2>
                     <p class="session-desc">Comprende la filosofía del Ecosistema de Aprendizaje, interioriza el Retrato del Aprendiz y domina el concepto de Las 3 Cs.</p>
                 </div>
-                <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion1/" target="_blank" class="btn-link">Ingresar al Módulo</a>
+                <a href="./sesion1/index.html" class="btn-link">Ingresar al Módulo</a>
             </article>
 
             <!-- Sesión 2 -->
@@ -406,7 +407,7 @@
                     <h2 class="session-title">Definiendo "El Porqué" y "El Qué"</h2>
                     <p class="session-desc">Taller de Construcción del Planner. Deconstrucción del sílabo, La Gran Idea y Preguntas de Encuadre.</p>
                 </div>
-                <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion2/" target="_blank" class="btn-link">Ingresar al Módulo</a>
+                <a href="./sesion2/index.html" class="btn-link">Ingresar al Módulo</a>
             </article>
 
             <!-- Sesión 3 -->
@@ -416,7 +417,7 @@
                     <h2 class="session-title">Construyendo "La Evidencia"</h2>
                     <p class="session-desc">Taller de Evaluación Auténtica y S.T.A.R. Feedback. Diseños GRASPS y cultura de retroalimentación.</p>
                 </div>
-                <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion3/" target="_blank" class="btn-link">Ingresar al Módulo</a>
+                <a href="./sesion3/index.html" class="btn-link">Ingresar al Módulo</a>
             </article>
 
             <!-- Sesión 4 -->
@@ -426,7 +427,7 @@
                     <h2 class="session-title">Planificando "El Cómo"</h2>
                     <p class="session-desc">Secuencias de Aprendizaje (Connect, Construct, Contribute) y formación del Carácter en el Aula.</p>
                 </div>
-                <a href="https://capexfi25-30.netlify.app/ecosistemaunitec/sesion4/" target="_blank" class="btn-link">Ingresar al Módulo</a>
+                <a href="./sesion4/index.html" class="btn-link">Ingresar al Módulo</a>
             </article>
 
         </main>
