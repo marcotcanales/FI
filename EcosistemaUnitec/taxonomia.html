@@ -60,10 +60,7 @@
     <!-- Encabezado Corporativo Estricto -->
     <nav class="w-full bg-unitec-blue border-b-4 border-unitec-cyan py-6 px-6 md:px-8 flex justify-between items-center z-50 sticky top-0 shadow-lg">
         <div class="flex items-center gap-3">
-            <svg width="32" height="32" viewBox="0 0 100 100" class="fill-current text-unitec-sky">
-                <polygon points="50,0 100,50 50,100 0,50" />
-            </svg>
-            <span class="text-3xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
+            <img src="IMG/UNITEC-LOGO-BLANCO.png" alt="UNITEC" class="h-14 md:h-16 w-auto object-contain">
         </div>
         <div class="hidden md:flex gap-4 items-center">
             <span class="text-unitec-sky font-semibold tracking-widest uppercase text-xs mt-1">Herramientas del Ecosistema de Aprendizaje</span>
@@ -135,9 +132,9 @@
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
                     <div class="lg:col-span-2 space-y-8">
                         
-                        <!-- Selector de Dimensión CGS -->
+                        <!-- Selector de Dimensión Ecosistema de Aprendizaje -->
                         <div>
-                            <label class="block text-sm font-black text-unitec-blue uppercase tracking-widest mb-3">1. Dimensión (CGS)</label>
+                            <label class="block text-sm font-black text-unitec-blue uppercase tracking-widest mb-3">1. Dimensión (Ecosistema de Aprendizaje)</label>
                             <div id="dimension-selector" class="flex flex-wrap gap-3">
                                 <button data-dim="Conceptual" onclick="selectDimension('Conceptual')" class="dim-btn px-5 py-2 font-bold uppercase tracking-widest text-xs transition-colors diamond-cut border-2 bg-unitec-blue text-white border-unitec-blue">Conceptual</button>
                                 <button data-dim="Competencial" onclick="selectDimension('Competencial')" class="dim-btn px-5 py-2 font-bold uppercase tracking-widest text-xs transition-colors diamond-cut border-2 bg-gray-50 text-unitec-blue border-gray-200 hover:border-unitec-cyan">Competencial</button>
@@ -217,17 +214,14 @@
     <footer class="bg-unitec-blue text-gray-400 py-12 px-6 border-t-8 border-unitec-cyan mt-auto">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-3">
-                <svg width="32" height="32" viewBox="0 0 100 100" class="fill-current text-unitec-sky">
-                    <polygon points="50,0 100,50 50,100 0,50" />
-                </svg>
-                <span class="text-3xl font-bold tracking-tight text-white mt-1 lowercase">unitec</span>
+                <img src="IMG/UNITEC-LOGO-BLANCO.png" alt="UNITEC" class="h-14 md:h-16 w-auto object-contain">
             </div>
             <div class="text-center md:text-right">
                 <p class="text-sm font-bold text-white uppercase tracking-widest mb-1">
                     Herramientas Docentes
                 </p>
                 <p class="text-xs font-medium text-unitec-sky uppercase tracking-widest">
-                    Visión UNITEC 2030 | Collective Growth System
+                    Visión UNITEC 2030 | Ecosistema de Aprendizaje
                 </p>
             </div>
         </div>
@@ -301,7 +295,7 @@
                         
                         <div class="mb-4 border-b border-gray-200 pb-2">
                             <span class="text-xs font-bold uppercase tracking-widest text-unitec-cyan">
-                                CGS: ${level.dimension}
+                                Ecosistema de Aprendizaje: ${level.dimension}
                             </span>
                         </div>
 
