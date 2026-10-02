@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>List #1: Crab's Adventure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sand: #fdf5e6;
+            --ocean: #4fc3f7;
+            --crab: #ff6f61;
+            --card-bg: #fff8dc;
+            --text-color: #5d4037;
+        }
+
+        body {
+            font-family: 'Patrick Hand', cursive; /* Handwritten style */
+            background-color: var(--ocean);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: white;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+            font-size: 2.5rem;
+            margin: 10px 0;
+        }
+
+        /* Mode Switcher */
+        .controls {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            background-color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            font-family: 'Fredoka One', cursive;
+            color: var(--ocean);
+            border-radius: 15px;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        button:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        button.active-mode {
+            background-color: var(--crab);
+            color: white;
+        }
+
+        /* Container Areas */
+        #study-area, #game-area {
+            width: 100%;
+            max-width: 800px;
+            display: none; /* Hidden by default */
+        }
+
+        .visible {
+            display: flex !important;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Flashcards (Study Mode) */
+        .card {
+            background-color: var(--card-bg);
+            width: 140px;
+            height: 140px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: var(--text-color);
+            box-shadow: 0 5px 0 #deb887;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s;
+            border: 2px solid #deb887;
+        }
+
+        .card:active {
+            transform: scale(0.95);
+        }
+
+        /* Game Mode Styles */
+        .game-status {
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .bubble {
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: var(--ocean);
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: 3px solid white;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .bubble:nth-child(even) { animation-duration: 4s; }
+        .bubble:nth-child(3n) { animation-duration: 5s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Animations for correct/wrong */
+        .correct {
+            background-color: #66bb6a !important;
+            color: white !important;
+            transform: scale(1.1) !important;
+        }
+
+        .shake {
+            animation: shake 0.5s;
+            background-color: #ef5350 !important;
+            color: white !important;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        #start-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .big-btn {
+            font-size: 2rem;
+            padding: 30px;
+            background: var(--crab);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="start-overlay">
+        <button class="big-btn" onclick="initAudio()">tap to start 🦀</button>
+    </div>
+
+    <h1>List #1: The Beach</h1>
+
+    <div class="controls">
+        <button id="btn-study" class="active-mode" onclick="setMode('study')">Study 📖</button>
+        <button id="btn-game" onclick="setMode('game')">Play 🎮</button>
+    </div>
+
+    <div id="study-area" class="visible">
+        </div>
+
+    <div id="game-area">
+        <div class="game-status">
+            Find the word: <span id="target-word" style="font-weight:bold; font-size: 2rem; color: #ffd54f;">???</span>
+            <br>
+            <button onclick="speakTarget()" style="padding: 5px 15px; font-size: 1rem; margin-top: 10px;">🔊 Hear it again</button>
+        </div>
+        <div id="bubble-container" class="visible">
+            </div>
+    </div>
+
+    <script>
+        const wordList = ["the", "can", "you", "up", "and", "trip", "crab", "down", "that", "nap"];
+        let currentTarget = "";
+        let synth = window.speechSynthesis;
+        let voices = [];
+
+        // Load voices (fixes iPad/Safari issues)
+        function loadVoices() {
+            voices = synth.getVoices();
+        }
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        // Initialize Audio Context
+        function initAudio() {
+            document.getElementById('start-overlay').style.display = 'none';
+            // Play a silent utterance to unlock iOS audio
+            const utter = new SpeechSynthesisUtterance('');
+            synth.speak(utter);
+            loadVoices();
+            renderStudy();
+        }
+
+        function speak(text) {
+            if (synth.speaking) {
+                synth.cancel();
+            }
+            const utterThis = new SpeechSynthesisUtterance(text);
+            utterThis.rate = 0.8; // Slower for ESL
+            utterThis.pitch = 1.1; // Slightly friendlier pitch
+            utterThis.lang = 'en-US';
+            synth.speak(utterThis);
+        }
+
+        function setMode(mode) {
+            document.getElementById('study-area').classList.remove('visible');
+            document.getElementById('game-area').style.display = 'none';
+            document.getElementById('btn-study').classList.remove('active-mode');
+            document.getElementById('btn-game').classList.remove('active-mode');
+
+            if (mode === 'study') {
+                document.getElementById('study-area').classList.add('visible');
+                document.getElementById('btn-study').classList.add('active-mode');
+                renderStudy();
+            } else {
+                document.getElementById('game-area').style.display = 'block';
+                document.getElementById('btn-game').classList.add('active-mode');
+                startRound();
+            }
+        }
+
+        // RENDER STUDY CARDS
+        function renderStudy() {
+            const container = document.getElementById('study-area');
+            container.innerHTML = '';
+            wordList.forEach(word => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerText = word;
+                card.onclick = () => {
+                    speak(word);
+                    // Visual pop effect
+                    card.style.transform = "scale(1.1)";
+                    setTimeout(() => card.style.transform = "scale(1)", 200);
+                };
+                container.appendChild(card);
+            });
+        }
+
+        // GAME LOGIC
+        function startRound() {
+            // Pick random word
+            currentTarget = wordList[Math.floor(Math.random() * wordList.length)];
+            document.getElementById('target-word').innerText = "???";
+            
+            // Speak it
+            setTimeout(() => speak("Find " + currentTarget), 500);
+
+            // Render Bubbles (Shuffled)
+            const container = document.getElementById('bubble-container');
+            container.innerHTML = '';
+            
+            // Shuffle array copy
+            const shuffled = [...wordList].sort(() => 0.5 - Math.random());
+
+            shuffled.forEach(word => {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.innerText = word;
+                bubble.onclick = () => checkAnswer(word, bubble);
+                container.appendChild(bubble);
+            });
+        }
+
+        function speakTarget() {
+            speak("Find " + currentTarget);
+        }
+
+        function checkAnswer(selectedWord, element) {
+            if (selectedWord === currentTarget) {
+                element.classList.add('correct');
+                speak("Great job! " + selectedWord);
+                document.getElementById('target-word').innerText = currentTarget;
+                setTimeout(startRound, 2000);
+            } else {
+                element.classList.add('shake');
+                speak("Try again");
+                setTimeout(() => element.classList.remove('shake'), 500);
+            }
+        }
+    </script>
+</body>
+</html>
