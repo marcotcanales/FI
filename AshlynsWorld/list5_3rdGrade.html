@@ -495,8 +495,7 @@
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <div class="badge" style="background: ${badgeColor}; border-color: ${badgeColor};">${item.type}</div>
-                            <div class="card-emoji">${item.icon}</div>
-                            <h2 class="card-word font-fun">${item.word}</h2>
+                            <h2 class="card-word font-fun" style="font-size: 3.5rem; margin: 20px 0;">${item.word}</h2>
                             <button class="speaker-btn" onclick="event.stopPropagation(); speak('${item.word}')">🔊</button>
                             <div style="margin-top: 15px; color: #888; font-size: 0.9rem;">Tap card to flip!</div>
                         </div>
@@ -526,11 +525,23 @@
 
         // --- PLAY MODE LOGIC ---
         let currentTarget = null;
+        let playQueue = [];
+
+        function shuffleQueue(array) {
+            let newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
 
         function startMission() {
-            // 1. Pick a random word
-            const randomIndex = Math.floor(Math.random() * vocabData.length);
-            currentTarget = vocabData[randomIndex];
+            // 1. Pick a word from the queue (ensures no repeats until list is finished)
+            if (playQueue.length === 0) {
+                playQueue = shuffleQueue(vocabData);
+            }
+            currentTarget = playQueue.pop();
 
             // 2. Display Definition
             document.getElementById('mission-def').innerText = currentTarget.def;
@@ -555,7 +566,7 @@
             options.forEach(opt => {
                 const bubble = document.createElement('div');
                 bubble.className = 'word-bubble font-fun';
-                bubble.innerHTML = `${opt.icon} ${opt.word}`;
+                bubble.innerHTML = `${opt.word}`;
                 
                 bubble.onclick = () => checkAnswer(opt.word, bubble);
                 container.appendChild(bubble);
