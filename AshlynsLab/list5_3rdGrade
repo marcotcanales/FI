@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ashlyn's Cosmic Word Quest</title>
+    <!-- Import friendly, rounded fonts for easy reading -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --space-dark: #2b1055;
+            --space-light: #7597de;
+            --star-pink: #ff9a9e;
+            --star-yellow: #fecfef;
+            --success-green: #00e676;
+            --wrong-red: #ff5252;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(to bottom, var(--space-dark), var(--space-light));
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            touch-action: manipulation;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, .font-fun {
+            font-family: 'Fredoka One', cursive;
+            letter-spacing: 1px;
+        }
+
+        /* --- Animated Background Stars --- */
+        #star-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .bg-star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px white; }
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            text-align: center;
+            padding: 20px 10px;
+            z-index: 10;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+            color: var(--star-yellow);
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            z-index: 10;
+        }
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.2s;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+        }
+        .tab-btn.active {
+            background: var(--star-pink);
+            border-color: white;
+            color: var(--space-dark);
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* --- Main Content Areas --- */
+        .view-section {
+            display: none;
+            flex-grow: 1;
+            padding: 20px;
+            z-index: 10;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .view-section.active {
+            display: flex;
+        }
+
+        /* --- STUDY MODE: Flip Cards --- */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            padding-bottom: 50px;
+        }
+        
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 220px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 25px;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border: 4px solid white;
+        }
+        
+        .flip-card-front {
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            color: var(--space-dark);
+        }
+        .flip-card-back {
+            background: linear-gradient(135deg, var(--star-yellow), #f8bbd0);
+            color: var(--space-dark);
+            transform: rotateY(180deg);
+        }
+
+        .card-emoji { font-size: 4rem; margin-bottom: 10px; line-height: 1; }
+        .card-word { font-size: 2.2rem; margin: 0; color: #4a148c; }
+        .card-def { font-size: 1.2rem; font-weight: 700; line-height: 1.4; }
+        
+        .badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--space-dark);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 2px solid white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        .speaker-btn {
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            margin-top: 15px;
+            box-shadow: 0 4px 0 #2e7d32;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s;
+        }
+        .speaker-btn:active { transform: translateY(4px); box-shadow: none; }
+
+        /* --- PLAY MODE: Space Mission --- */
+        .mission-board {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 25px;
+            width: 100%;
+            text-align: center;
+            color: var(--space-dark);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 5px solid var(--star-pink);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .mission-title {
+            color: #d81b60;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .target-def {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.4;
+        }
+        .read-def-btn {
+            background: #00bcd4;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+            margin-top: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #0097a7;
+            font-family: 'Fredoka One', cursive;
+        }
+        .read-def-btn:active { transform: translateY(4px); box-shadow: none; }
+
+        .bubbles-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .word-bubble {
+            background: linear-gradient(135deg, #ffffff, #e1bee7);
+            color: var(--space-dark);
+            padding: 20px 30px;
+            border-radius: 40px;
+            font-size: 1.8rem;
+            border: 4px solid white;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: float 3s ease-in-out infinite alternate;
+        }
+        .word-bubble:nth-child(2) { animation-duration: 3.5s; animation-direction: alternate-reverse; }
+        .word-bubble:nth-child(3) { animation-duration: 4s; }
+        .word-bubble:nth-child(4) { animation-duration: 2.5s; animation-direction: alternate-reverse; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(-2deg); }
+            100% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .word-bubble:active {
+            transform: scale(0.95);
+        }
+
+        /* Animations for Answers */
+        .bubble-correct {
+            background: var(--success-green) !important;
+            color: white !important;
+            transform: scale(1.1) !important;
+            animation: none !important;
+        }
+        .bubble-wrong {
+            animation: shake 0.5s !important;
+            background: var(--wrong-red) !important;
+            color: white !important;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        /* --- Start Overlay --- */
+        #start-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(43, 16, 85, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .start-btn {
+            background: var(--star-pink);
+            color: white;
+            border: 5px solid white;
+            padding: 20px 50px;
+            font-size: 2.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #d81b60, 0 15px 30px rgba(0,0,0,0.5);
+            transition: transform 0.1s;
+            animation: pulse 2s infinite;
+        }
+        .start-btn:active { transform: translateY(8px); box-shadow: 0 0 0 #d81b60; }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 15px; height: 15px;
+            background-color: #f00;
+            animation: fall linear forwards;
+            z-index: 999;
+            pointer-events: none;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Requires a tap to unlock Audio API on tablets/phones -->
+    <div id="start-overlay">
+        <h1 class="font-fun" style="font-size: 3rem; text-align: center; margin-bottom: 40px; color: var(--star-yellow);">Ready for a Space Adventure?</h1>
+        <button class="start-btn font-fun" onclick="initApp()">Blast Off! 🚀</button>
+    </div>
+
+    <div id="star-container"></div>
+
+    <header>
+        <h1>Ashlyn's Cosmic Words</h1>
+        <div class="nav-tabs font-fun">
+            <button class="tab-btn active" id="tab-study" onclick="switchTab('study')">🌠 Star Cards</button>
+            <button class="tab-btn" id="tab-play" onclick="switchTab('play')">🚀 Space Mission</button>
+        </div>
+    </header>
+
+    <!-- STUDY MODE -->
+    <section id="view-study" class="view-section active">
+        <div class="card-grid" id="card-container">
+            <!-- Cards generated by JS -->
+        </div>
+    </section>
+
+    <!-- PLAY MODE -->
+    <section id="view-play" class="view-section">
+        <div class="mission-board">
+            <div class="mission-title font-fun">Mission: Find the matching word!</div>
+            <p class="target-def" id="mission-def">Loading definition...</p>
+            <button class="read-def-btn" onclick="speakTargetDef()">🔊 Read it to me!</button>
+        </div>
+        <div class="bubbles-container" id="bubbles-container">
+            <!-- Bubbles generated by JS -->
+        </div>
+    </section>
+
+    <script>
+        // --- DATA DICTIONARY ---
+        const vocabData = [
+            // Short /o/ Words
+            { word: "Bottle", type: "Short /o/", def: "A container with a narrow neck used to hold liquids like water or juice.", icon: "🍼" },
+            { word: "Holler", type: "Short /o/", def: "To shout or call out loudly.", icon: "🗣️" },
+            { word: "Monster", type: "Short /o/", def: "A scary, imaginary creature.", icon: "👾" },
+            { word: "Rocket", type: "Short /o/", def: "A vehicle shaped like a cylinder that travels high up into space.", icon: "🚀" },
+            // Long /o/ Words
+            { word: "Alone", type: "Long /o/", def: "Being by yourself with no one else around.", icon: "🧍‍♀️" },
+            { word: "Below", type: "Long /o/", def: "In a lower place or underneath something.", icon: "⬇️" },
+            { word: "Follow", type: "Long /o/", def: "To go after or behind someone or something.", icon: "👣" },
+            { word: "Globe", type: "Long /o/", def: "A round model of planet Earth.", icon: "🌍" },
+            { word: "Pillow", type: "Long /o/", def: "A soft cushion that you put your head on when you sleep.", icon: "☁️" },
+            { word: "Suppose", type: "Long /o/", def: "To think that something is likely or true; to guess.", icon: "🤔" },
+            { word: "Whole", type: "Long /o/", def: "Complete or all of something, with no parts missing.", icon: "🌕" },
+            { word: "Window", type: "Long /o/", def: "An opening in a wall or door with glass that lets light and air inside.", icon: "🪟" },
+            // Review / Challenge Words
+            { word: "Blanket", type: "Review", def: "A warm piece of fabric used on a bed to keep you cozy.", icon: "🛏️" },
+            { word: "Feathers", type: "Review", def: "The soft, light parts that cover a bird's body.", icon: "🪶" },
+            { word: "Trouble", type: "Review", def: "Difficulty, a problem, or a situation that causes worry.", icon: "⚠️" }
+        ];
+
+        // --- AUDIO ENGINE ---
+        const synth = window.speechSynthesis;
+        let audioCtx;
+
+        function initApp() {
+            document.getElementById('start-overlay').style.display = 'none';
+            
+            // Unlock Web Speech API (iOS/Safari requirement)
+            const unlockUtter = new SpeechSynthesisUtterance("");
+            synth.speak(unlockUtter);
+            
+            // Unlock Web Audio API (for sound effects)
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            speak("Welcome to your cosmic adventure Ashlyn!", 1.0);
+            generateStudyCards();
+        }
+
+        function speak(text, rate = 0.85) {
+            synth.cancel(); // Stop anything currently speaking
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = rate; // Slightly slower for ESL learners
+            utterance.pitch = 1.1; // Friendly higher pitch
+            synth.speak(utterance);
+        }
+
+        function playSoundFx(type) {
+            if(!audioCtx) return;
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            if (type === 'success') {
+                // Happy chime
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.1); // C6
+                gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.5);
+            } else if (type === 'wrong') {
+                // Gentle boop
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.2);
+                gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            }
+        }
+
+        // --- NAVIGATION ---
+        function switchTab(tabName) {
+            // UI Toggle
+            document.getElementById('tab-study').classList.remove('active');
+            document.getElementById('tab-play').classList.remove('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+
+            document.getElementById('view-study').classList.remove('active');
+            document.getElementById('view-play').classList.remove('active');
+            document.getElementById('view-' + tabName).classList.add('active');
+
+            synth.cancel(); // Stop talking when switching tabs
+
+            if (tabName === 'play') {
+                startMission();
+            }
+        }
+
+        // --- STUDY MODE LOGIC ---
+        function generateStudyCards() {
+            const container = document.getElementById('card-container');
+            container.innerHTML = '';
+
+            vocabData.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'flip-card';
+                
+                // Determine badge color based on type
+                let badgeColor = item.type.includes("Short") ? "#ff9800" : 
+                                 item.type.includes("Long") ? "#9c27b0" : "#009688";
+
+                card.innerHTML = `
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="badge" style="background: ${badgeColor}; border-color: ${badgeColor};">${item.type}</div>
+                            <div class="card-emoji">${item.icon}</div>
+                            <h2 class="card-word font-fun">${item.word}</h2>
+                            <button class="speaker-btn" onclick="event.stopPropagation(); speak('${item.word}')">🔊</button>
+                            <div style="margin-top: 15px; color: #888; font-size: 0.9rem;">Tap card to flip!</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h2 class="card-word font-fun" style="font-size: 1.5rem; margin-bottom:10px;">${item.word}</h2>
+                            <div class="card-def">${item.def}</div>
+                            <button class="speaker-btn" style="background: #e91e63; box-shadow: 0 4px 0 #c2185b;" 
+                                    onclick="event.stopPropagation(); speak('${item.def}')">🔊</button>
+                        </div>
+                    </div>
+                `;
+
+                // Flip logic
+                card.addEventListener('click', () => {
+                    card.classList.toggle('flipped');
+                    // Automatically read the side that is shown
+                    if(card.classList.contains('flipped')){
+                        speak(item.def);
+                    } else {
+                        speak(item.word);
+                    }
+                });
+
+                container.appendChild(card);
+            });
+        }
+
+        // --- PLAY MODE LOGIC ---
+        let currentTarget = null;
+
+        function startMission() {
+            // 1. Pick a random word
+            const randomIndex = Math.floor(Math.random() * vocabData.length);
+            currentTarget = vocabData[randomIndex];
+
+            // 2. Display Definition
+            document.getElementById('mission-def').innerText = currentTarget.def;
+            speakTargetDef();
+
+            // 3. Generate options (1 correct, 3 wrong)
+            const options = [currentTarget];
+            while (options.length < 4) {
+                const randomWrong = vocabData[Math.floor(Math.random() * vocabData.length)];
+                if (!options.includes(randomWrong)) {
+                    options.push(randomWrong);
+                }
+            }
+            
+            // Shuffle options
+            options.sort(() => Math.random() - 0.5);
+
+            // 4. Render bubbles
+            const container = document.getElementById('bubbles-container');
+            container.innerHTML = '';
+            
+            options.forEach(opt => {
+                const bubble = document.createElement('div');
+                bubble.className = 'word-bubble font-fun';
+                bubble.innerHTML = `${opt.icon} ${opt.word}`;
+                
+                bubble.onclick = () => checkAnswer(opt.word, bubble);
+                container.appendChild(bubble);
+            });
+        }
+
+        function speakTargetDef() {
+            if(currentTarget) {
+                speak("Find the word for: " + currentTarget.def);
+            }
+        }
+
+        function checkAnswer(selectedWord, bubbleElement) {
+            if (selectedWord === currentTarget.word) {
+                // Correct!
+                bubbleElement.classList.add('bubble-correct');
+                playSoundFx('success');
+                speak("Amazing! You found " + currentTarget.word, 1.0);
+                triggerConfetti();
+                
+                // Disable clicking on other bubbles
+                document.querySelectorAll('.word-bubble').forEach(b => b.style.pointerEvents = 'none');
+
+                setTimeout(() => {
+                    startMission();
+                }, 2500);
+
+            } else {
+                // Wrong!
+                bubbleElement.classList.add('bubble-wrong');
+                playSoundFx('wrong');
+                speak("Oops, try again!", 1.0);
+                
+                setTimeout(() => {
+                    bubbleElement.classList.remove('bubble-wrong');
+                }, 600);
+            }
+        }
+
+        // --- VISUAL EFFECTS ---
+        function generateBackgroundStars() {
+            const container = document.getElementById('star-container');
+            for(let i=0; i<50; i++){
+                const star = document.createElement('div');
+                star.className = 'bg-star';
+                star.style.width = Math.random() * 4 + 2 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDuration = Math.random() * 3 + 1 + 's';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        function triggerConfetti() {
+            const colors = ['#ff9a9e', '#fecfef', '#a1c4fd', '#00e676', '#ffeb3b'];
+            for (let i = 0; i < 60; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.top = '-20px';
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                // Random shapes (squares and circles)
+                if(Math.random() > 0.5) conf.style.borderRadius = '50%';
+                
+                conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(conf);
+
+                // Cleanup
+                setTimeout(() => conf.remove(), 4000);
+            }
+        }
+
+        // Run on load
+        generateBackgroundStars();
+
+    </script>
+</body>
+</html>
