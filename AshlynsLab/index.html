@@ -3,286 +3,478 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ashlyn's Lab</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <title>Ashlyn's World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka+One&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f0f4f8;
-            --card-bg: #ffffff;
-            --text-main: #2d3748;
-            
-            /* List 1: Day Theme */
-            --day-primary: #4fc3f7;
-            --day-accent: #e1f5fe;
-            --day-text: #01579b;
-            
-            /* List 2: Sunset Theme */
-            --sunset-primary: #ff8a65;
-            --sunset-accent: #fbe9e7;
-            --sunset-text: #bf360c;
-            
-            /* List 3: Night Theme */
-            --night-primary: #7e57c2;
-            --night-accent: #ede7f6;
-            --night-text: #311b92;
+            /* General Theme (Matches 2nd Grade) */
+            --princess-pink: #ff80ab;
+            --royal-purple: #9c27b0;
+            --deep-purple: #4a148c;
+            --sparkle-yellow: #ffd740;
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.4);
+
+            /* 3rd Grade Magic Theme */
+            --magic-pink: #ff6b81;
+            --magic-yellow: #ffeaa7;
+            --magic-purple: #6c5ce7;
         }
 
         body {
-            font-family: 'Quicksand', sans-serif;
-            background-color: var(--bg-color);
-            /* Subtle lab grid pattern */
-            background-image: radial-gradient(#cbd5e0 1px, transparent 1px);
-            background-size: 20px 20px;
+            font-family: 'Fredoka One', cursive;
+            background: linear-gradient(135deg, var(--princess-pink), var(--royal-purple));
             margin: 0;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            color: var(--text-main);
+            overflow-x: hidden;
+            color: white;
+            text-align: center;
         }
 
-        /* --- HEADER --- */
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            animation: fadeInDown 0.8s ease-out;
+        /* Twinkling Background Stars */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle infinite alternate;
+            z-index: -1;
+        }
+        
+        @keyframes twinkle {
+            from { opacity: 0.2; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1.2); }
         }
 
         h1 {
-            font-family: 'Fredoka One', cursive;
+            font-family: 'Chewy', cursive;
             font-size: 3.5rem;
-            margin: 0;
-            color: #4a5568;
-            text-shadow: 2px 2px 0px white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
+            margin-bottom: 5px;
+            margin-top: 10px;
+            text-shadow: 4px 4px 0px var(--deep-purple);
+            z-index: 10;
+            animation: floatText 3s ease-in-out infinite;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: #718096;
-            margin-top: 5px;
-            font-weight: 700;
-        }
-
-        /* --- LAB GRID --- */
-        .lab-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            width: 100%;
-            max-width: 1100px;
-            margin-bottom: 40px;
-        }
-
-        /* --- MODULE CARDS --- */
-        .module-card {
-            background: var(--card-bg);
-            border-radius: 25px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 4px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .module-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-
-        .card-header {
-            font-family: 'Fredoka One', cursive;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            width: 100%;
-            text-align: center;
-            padding-bottom: 15px;
-            border-bottom: 2px dashed #e2e8f0;
-            z-index: 1;
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        /* --- THEME SPECIFICS --- */
-        
-        /* List 1: Day */
-        .card-day {
-            border-color: var(--day-primary);
-            background: linear-gradient(to bottom, #ffffff, var(--day-accent));
-        }
-        .card-day .card-header { color: var(--day-text); border-bottom-color: var(--day-primary); }
-        .btn-day { background-color: var(--day-primary); color: white; }
-        .btn-day:hover { background-color: #29b6f6; }
-
-        /* List 2: Sunset */
-        .card-sunset {
-            border-color: var(--sunset-primary);
-            background: linear-gradient(to bottom, #ffffff, var(--sunset-accent));
-        }
-        .card-sunset .card-header { color: var(--sunset-text); border-bottom-color: var(--sunset-primary); }
-        .btn-sunset { background-color: var(--sunset-primary); color: white; }
-        .btn-sunset:hover { background-color: #ff7043; }
-
-        /* List 3: Night */
-        .card-night {
-            border-color: var(--night-primary);
-            background: linear-gradient(to bottom, #ffffff, var(--night-accent));
-        }
-        .card-night .card-header { color: var(--night-text); border-bottom-color: var(--night-primary); }
-        .btn-night { background-color: var(--night-primary); color: white; }
-        .btn-night:hover { background-color: #673ab7; }
-
-
-        /* --- BUTTONS --- */
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            z-index: 1;
-        }
-
-        .lab-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 25px;
-            border-radius: 15px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.2rem;
-            transition: all 0.2s;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
-        }
-
-        .lab-btn:active {
-            transform: translateY(3px);
-            box-shadow: none;
-        }
-
-        .btn-icon {
-            font-size: 1.5rem;
-        }
-
-        /* --- DECORATIONS --- */
-        /* Beaker bubbles */
-        .bubble {
-            position: absolute;
-            background: rgba(255,255,255,0.4);
-            border-radius: 50%;
-            z-index: 0;
-            animation: rise 10s infinite ease-in;
-        }
-        @keyframes rise {
-            0% { bottom: -50px; transform: translateX(0); opacity: 0; }
-            50% { opacity: 1; }
-            100% { bottom: 120%; transform: translateX(-20px); opacity: 0; }
-        }
-
-        @keyframes float {
+        @keyframes floatText {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
-        
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            z-index: 10;
+        }
+
+        /* --- TAB NAVIGATION --- */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            z-index: 10;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+            backdrop-filter: blur(5px);
+        }
+
+        .tab-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* Active Tab Styling */
+        .tab-btn.active {
+            background: var(--sparkle-yellow);
+            color: var(--deep-purple);
+            border-color: white;
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* Tab Content Areas */
+        .tab-content {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Footer */
-        footer {
-            margin-top: auto;
-            color: #a0aec0;
-            font-size: 0.9rem;
-            text-align: center;
+        /* --- FOLDER / SECTION STYLES --- */
+        .folder-section {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--glass-bg);
+            border: 3px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(4px);
+            z-index: 10;
         }
 
+        .folder-header {
+            font-family: 'Chewy', cursive;
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 0 var(--deep-purple);
+            margin-bottom: 20px;
+            text-align: left;
+            padding-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .folder-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* --- STANDARD CARD STYLES --- */
+        .adventure-card {
+            background: white;
+            width: 180px;
+            height: 220px;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            text-decoration: none;
+            box-shadow: 0 8px 0 rgba(0,0,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid white;
+            gap: 10px;
+        }
+
+        .adventure-card:active {
+            transform: scale(0.95) translateY(5px);
+            box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+        }
+
+        .adventure-card .icon {
+            font-size: 4rem;
+            line-height: 1;
+        }
+
+        .adventure-card h2 {
+            margin: 0;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            color: #333;
+            line-height: 1.1;
+        }
+
+        .play-badge {
+            background: var(--deep-purple);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        /* Card Themes (2nd Grade) */
+        .theme-beach { border-color: #fdd835; background: linear-gradient(to bottom, #fff9c4, #81d4fa); }
+        .theme-beach h2 { color: #f57f17; }
+        
+        .theme-race { border-color: #388e3c; background: linear-gradient(to bottom, #cfd8dc, #81c784); }
+        .theme-race h2 { color: #2e7d32; }
+        
+        .theme-pond { border-color: #01579b; background: linear-gradient(to bottom, #b3e5fc, #0288d1); }
+        .theme-pond h2 { color: #01579b; }
+
+        .theme-noun { border-color: #d84315; background: linear-gradient(to bottom, #ffcc80, #ff7043); }
+        .theme-noun h2 { color: #bf360c; }
+        
+        .theme-game { border-color: #8e24aa; background: linear-gradient(to bottom, #e1bee7, #ba68c8); }
+        .theme-game h2 { color: #4a148c; }
+        
+        .theme-sort { border-color: #b71c1c; background: linear-gradient(to bottom, #ffcdd2, #e57373); }
+        .theme-sort h2 { color: #b71c1c; }
+
+        .theme-verb { border-color: #00695c; background: linear-gradient(to bottom, #b2dfdb, #26a69a); }
+        .theme-verb h2 { color: #004d40; }
+
+        /* --- 3RD GRADE MAGIC THEME --- */
+        .theme-magic { 
+            border-color: var(--magic-pink); 
+            background: linear-gradient(to bottom, #ffffff, var(--magic-yellow)); 
+        }
+        .theme-magic h2 { color: var(--magic-purple); }
+        .theme-magic .icon { animation: floatText 3s ease-in-out infinite; }
+
+        /* --- SPELLING CARD STYLES --- */
+        .spelling-card {
+            background: white;
+            width: 260px;
+            border-radius: 25px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 0 rgba(0,0,0,0.15);
+        }
+
+        .spelling-title {
+            font-size: 1.5rem;
+            color: var(--deep-purple);
+            margin: 5px 0;
+        }
+
+        .spelling-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: white;
+            transition: transform 0.1s;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+        }
+
+        .spelling-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.1);
+        }
+
+        .btn-listen { background: #4caf50; border-bottom: 4px solid #2e7d32; }
+        .btn-practice { background: #ff9800; border-bottom: 4px solid #e65100; }
+
+        /* Footer */
+        .footer {
+            margin-top: 20px;
+            font-size: 1rem;
+            opacity: 0.8;
+            z-index: 10;
+            padding-bottom: 20px;
+        }
     </style>
 </head>
 <body>
+    <div id="star-container"></div>
+    
+    <h1>Ashlyn's World 🌟</h1>
+    <div class="subtitle">Pick your grade to start playing!</div>
 
-    <header>
-        <h1>🧪 Ashlyn's Lab 🔬</h1>
-        <div class="subtitle">Select your experiment!</div>
-    </header>
+    <!-- TAB NAVIGATION -->
+    <div class="tabs">
+        <!-- 3rd Grade is Active by default -->
+        <button class="tab-btn active" onclick="switchTab('grade3', this)">✨ 3rd Grade</button>
+        <button class="tab-btn" onclick="switchTab('grade2', this)">🎒 2nd Grade</button>
+    </div>
 
-    <div class="lab-grid">
-
-        <!-- CARD 1: DAYTIME -->
-        <div class="module-card card-day">
-            <div class="card-icon">☀️</div>
-            <div class="card-header">List 1: Day</div>
-            <div class="bubble" style="width: 40px; height: 40px; left: 10%; animation-delay: 0s;"></div>
-            <div class="bubble" style="width: 20px; height: 20px; left: 80%; animation-delay: 2s;"></div>
-            
-            <div class="btn-container">
-                <a href="spellinglisten1.html" class="lab-btn btn-day">
-                    <span>Listen & Catch</span>
-                    <span class="btn-icon">🎧</span>
+    <!-- ==================== 3RD GRADE TAB ==================== -->
+    <div id="grade3" class="tab-content active">
+        
+        <div class="folder-section" style="border-color: var(--magic-pink); background: rgba(255, 107, 129, 0.2);">
+            <div class="folder-header">🦄 Magic Spells</div>
+            <div class="folder-grid">
+                
+                <!-- LIST 5 MAGIC CARD -->
+                <a href="list5_3rdGrade.html" class="adventure-card theme-magic">
+                    <div class="icon">✨</div>
+                    <h2>List 5</h2>
+                    <div class="play-badge" style="background: var(--magic-purple);">New!</div>
                 </a>
-                <a href="spellingpractice1.html" class="lab-btn btn-day">
-                    <span>Practice Test</span>
-                    <span class="btn-icon">✏️</span>
-                </a>
-            </div>
-        </div>
 
-        <!-- CARD 2: SUNSET -->
-        <div class="module-card card-sunset">
-            <div class="card-icon">🌅</div>
-            <div class="card-header">List 2: Sunset</div>
-            <div class="bubble" style="width: 50px; height: 50px; left: 20%; animation-delay: 1s;"></div>
-            <div class="bubble" style="width: 30px; height: 30px; left: 70%; animation-delay: 3s;"></div>
-
-            <div class="btn-container">
-                <a href="spellinglisten2.html" class="lab-btn btn-sunset">
-                    <span>Listen & Catch</span>
-                    <span class="btn-icon">🎧</span>
-                </a>
-                <a href="spellingpractice2.html" class="lab-btn btn-sunset">
-                    <span>Practice Test</span>
-                    <span class="btn-icon">✏️</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- CARD 3: NIGHT -->
-        <div class="module-card card-night">
-            <div class="card-icon">🌌</div>
-            <div class="card-header">List 3: Night</div>
-            <div class="bubble" style="width: 60px; height: 60px; left: 15%; animation-delay: 0.5s;"></div>
-            <div class="bubble" style="width: 25px; height: 25px; left: 85%; animation-delay: 2.5s;"></div>
-
-            <div class="btn-container">
-                <a href="spellinglisten3.html" class="lab-btn btn-night">
-                    <span>Listen & Catch</span>
-                    <span class="btn-icon">🎧</span>
-                </a>
-                <a href="spellingpractice3.html" class="lab-btn btn-night">
-                    <span>Practice Test</span>
-                    <span class="btn-icon">✏️</span>
-                </a>
             </div>
         </div>
 
     </div>
 
-    <footer>
-        Created with ❤️ for 2nd Grade! | <a href="index.html" style="color: #a0aec0; text-decoration: none;">Back to Ashlyn's World</a>
-    </footer>
+    <!-- ==================== 2ND GRADE TAB ==================== -->
+    <div id="grade2" class="tab-content">
+        
+        <!-- Folder 1: Sight Words -->
+        <div class="folder-section">
+            <div class="folder-header">🌴 Sight Words</div>
+            <div class="folder-grid">
+                <a href="list1.html" class="adventure-card theme-beach">
+                    <div class="icon">🦀</div>
+                    <h2>The Beach</h2>
+                    <div class="play-badge">List 1</div>
+                </a>
+                <a href="list2.html" class="adventure-card theme-race">
+                    <div class="icon">🏎️</div>
+                    <h2>Big Race</h2>
+                    <div class="play-badge">List 2</div>
+                </a>
+                <a href="list3.html" class="adventure-card theme-pond">
+                    <div class="icon">🐸</div>
+                    <h2>Magic Pond</h2>
+                    <div class="play-badge">List 3</div>
+                </a>
+            </div>
+        </div>
 
+        <!-- Folder 2: Noun Town -->
+        <div class="folder-section">
+            <div class="folder-header">🏙️ Noun Town</div>
+            <div class="folder-grid">
+                <a href="nouns1.html" class="adventure-card theme-noun">
+                    <div class="icon">🍎</div>
+                    <h2>Noun Sort</h2>
+                </a>
+                <a href="nouns2.html" class="adventure-card theme-game">
+                    <div class="icon">🎮</div>
+                    <h2>Noun Game</h2>
+                </a>
+                <a href="nouns3.html" class="adventure-card theme-sort">
+                    <div class="icon">🧺</div>
+                    <h2>Noun Baskets</h2>
+                </a>
+            </div>
+        </div>
+
+        <!-- Folder 3: Verb Vybe -->
+        <div class="folder-section">
+            <div class="folder-header">🏃‍♀️ Verb Vybe</div>
+            <div class="folder-grid">
+                <a href="verbs1.html" class="adventure-card theme-verb">
+                    <div class="icon">⚡</div>
+                    <h2>Verb Sort</h2>
+                    <div class="play-badge">Action!</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Folder 4: Spelling -->
+        <div class="folder-section">
+            <div class="folder-header">📝 Spelling</div>
+            <div class="folder-grid">
+                
+                <!-- Spelling List 1 -->
+                <div class="spelling-card">
+                    <div class="spelling-title">List 1</div>
+                    <a href="spellinglisten1.html" class="spelling-btn btn-listen">Listen 🎧</a>
+                    <a href="spellingpractice1.html" class="spelling-btn btn-practice">Practice ✏️</a>
+                </div>
+
+                <!-- Spelling List 2 -->
+                <div class="spelling-card">
+                    <div class="spelling-title">List 2</div>
+                    <a href="spellinglisten2.html" class="spelling-btn btn-listen">Listen 🎧</a>
+                    <a href="spellingpractice2.html" class="spelling-btn btn-practice">Practice ✏️</a>
+                </div>
+
+                <!-- Spelling List 3 -->
+                <div class="spelling-card">
+                    <div class="spelling-title">List 3</div>
+                    <a href="spellinglisten3.html" class="spelling-btn btn-listen">Listen 🎧</a>
+                    <a href="spellingpractice3.html" class="spelling-btn btn-practice">Practice ✏️</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Created with ❤️ for a Super Reader!
+    </div>
+
+    <script>
+        // Generate sparkling stars in the background
+        const body = document.body;
+        const starCount = 50;
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = Math.random() * 4 + 2;
+            const duration = Math.random() * 2 + 1;
+            star.style.left = x + 'vw';
+            star.style.top = y + 'vh';
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.animationDuration = duration + 's';
+            document.getElementById('star-container').appendChild(star);
+        }
+
+        // --- Tab Switching Logic ---
+        function switchTab(tabId, btnElement) {
+            // 1. Hide all tab contents
+            const allTabs = document.querySelectorAll('.tab-content');
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // 2. Remove 'active' styling from all buttons
+            const allBtns = document.querySelectorAll('.tab-btn');
+            allBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // 3. Show the targeted tab and highlight the clicked button
+            document.getElementById(tabId).classList.add('active');
+            btnElement.classList.add('active');
+
+            // 4. Fun voice feedback when switching!
+            const synth = window.speechSynthesis;
+            synth.cancel(); // stop previous speech
+            let message = tabId === 'grade3' ? "Third Grade!" : "Second Grade!";
+            const utter = new SpeechSynthesisUtterance(message);
+            utter.pitch = 1.2;
+            utter.rate = 1.0;
+            synth.speak(utter);
+        }
+
+        // Add a gentle "Welcome" voice greeting when she taps anywhere first
+        let hasGreeted = false;
+        document.body.addEventListener('click', () => {
+            if (!hasGreeted) {
+                const synth = window.speechSynthesis;
+                const utter = new SpeechSynthesisUtterance("Welcome back to Ashlyn's World!");
+                utter.pitch = 1.2;
+                utter.rate = 1.0;
+                synth.speak(utter);
+                hasGreeted = true;
+            }
+        });
+    </script>
 </body>
 </html>
