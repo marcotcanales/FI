@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Estudios Sociales - Ashlyn's World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka+One&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --honduras-blue: #0073cf;
+            --sky-blue: #29b6f6;
+            --deep-blue: #01579b;
+            --tropical-mint: #26a69a;
+            --warm-gold: #ffd54f;
+            --gold-shadow: #ffb300;
+            --coral-pink: #ff7043;
+            --princess-purple: #7b1fa2;
+            --card-white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #e1f5fe 0%, #b3e5fc 45%, #e8f5e9 100%);
+            min-height: 100dvh;
+            width: 100vw;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #263238;
+        }
+
+        /* Oculta automáticamente todos los botones de voz si el dispositivo no tiene voz en español */
+        body:not(.es-tts-ready) .tts-btn {
+            display: none !important;
+        }
+
+        h1, h2, h3, .font-title {
+            font-family: 'Fredoka One', cursive;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- BARRA SUPERIOR --- */
+        .top-bar {
+            width: 100%;
+            max-width: 1050px;
+            padding: 12px 18px 6px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            z-index: 20;
+        }
+
+        .nav-pill-btn {
+            text-decoration: none;
+            background: white;
+            color: var(--deep-blue);
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.1rem;
+            padding: 10px 18px;
+            border-radius: 25px;
+            box-shadow: 0 4px 0 rgba(1, 87, 155, 0.18);
+            border: 3px solid #b3e5fc;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .nav-pill-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 rgba(1, 87, 155, 0.18);
+        }
+
+        .app-title {
+            font-family: 'Chewy', cursive;
+            font-size: 2.3rem;
+            color: var(--deep-blue);
+            text-shadow: 2px 2px 0px white, 4px 4px 0px rgba(0, 115, 207, 0.15);
+            margin: 0;
+            text-align: center;
+        }
+
+        /* --- SELECTOR DE MODOS --- */
+        .control-hub {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            width: 95%;
+            max-width: 850px;
+            margin: 6px 0 14px 0;
+            z-index: 20;
+        }
+
+        .mode-switcher {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 6px;
+            border-radius: 32px;
+            display: flex;
+            gap: 8px;
+            box-shadow: 0 6px 14px rgba(1, 87, 155, 0.08);
+            border: 3px solid white;
+        }
+
+        .mode-btn {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.2rem;
+            padding: 11px 24px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            background: transparent;
+            color: #546e7a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, var(--honduras-blue), var(--sky-blue));
+            color: white;
+            box-shadow: 0 4px 0 var(--deep-blue);
+            transform: translateY(-2px);
+        }
+
+        /* --- BARRA DE PROGRESO --- */
+        .status-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 18px;
+            border-radius: 22px;
+            margin-bottom: 14px;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--deep-blue);
+        }
+
+        .progress-track {
+            flex-grow: 1;
+            height: 14px;
+            background: #e1f5fe;
+            border-radius: 10px;
+            margin: 0 15px;
+            overflow: hidden;
+            border: 1px solid #b3e5fc;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #29b6f6, #00c853);
+            width: 0%;
+            transition: width 0.35s ease;
+            border-radius: 10px;
+        }
+
+        .shuffle-mini-btn {
+            background: #fff9c4;
+            border: 2px solid #fbc02d;
+            color: #f57f17;
+            font-family: 'Fredoka One', cursive;
+            padding: 6px 14px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            box-shadow: 0 3px 0 #fbc02d;
+        }
+        .shuffle-mini-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #fbc02d;
+        }
+
+        /* */
+        /* --- MODO 1: FLASHCARDS 3D --- */
+        #flashcard-view {
+            width: 100%;
+            max-width: 780px;
+            padding: 0 16px 24px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .card-scene {
+            width: 100%;
+            max-width: 660px;
+            height: 370px;
+            perspective: 1200px;
+            margin-bottom: 18px;
+        }
+
+        .flashcard-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .flashcard-3d.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 32px;
+            padding: 24px 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 12px 0 rgba(1, 87, 155, 0.14), 0 15px 30px rgba(0,0,0,0.08);
+            border: 6px solid white;
+            text-align: center;
+        }
+
+        .card-front {
+            background: linear-gradient(180deg, #ffffff 0%, #f1f9ff 100%);
+            border-color: #ffffff;
+        }
+
+        .card-back {
+            background: linear-gradient(180deg, #fffde7 0%, #fff9c4 100%);
+            border-color: #ffe082;
+            transform: rotateY(180deg);
+        }
+
+        .card-badge-top {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-number-pill {
+            background: #e1f5fe;
+            color: var(--deep-blue);
+            font-family: 'Fredoka One', cursive;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 1rem;
+            border: 2px solid #81d4fa;
+        }
+
+        .answer-pill {
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-family: 'Fredoka One', cursive;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 1rem;
+            border: 2px solid #81c784;
+        }
+
+        .tts-btn {
+            background: #fff3e0;
+            border: 3px solid #ffb74d;
+            color: #e65100;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 22px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 0 #ffa726;
+            transition: transform 0.1s;
+            flex-shrink: 0;
+        }
+        .tts-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #ffa726;
+        }
+
+        .card-center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            width: 100%;
+            overflow-y: auto;
+            padding: 6px 4px;
+        }
+
+        .card-emoji {
+            font-size: 3.4rem;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08));
+        }
+
+        .card-question-text {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.85rem;
+            color: var(--deep-blue);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .card-answer-box {
+            background: white;
+            border: 3px solid #ffd54f;
+            border-radius: 22px;
+            padding: 16px 20px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #263238;
+            line-height: 1.4;
+            width: 100%;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.03);
+            text-align: center;
+        }
+
+        .card-answer-box ul {
+            text-align: left;
+            margin: 6px auto;
+            padding-left: 24px;
+            display: inline-block;
+        }
+        .card-answer-box li {
+            margin-bottom: 6px;
+        }
+
+        .tap-hint {
+            font-size: 1rem;
+            color: var(--honduras-blue);
+            background: #e1f5fe;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            animation: gentlePulse 2s infinite;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+
+        /* Navegación de Flashcards */
+        .deck-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .nav-big-btn {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.25rem;
+            padding: 14px 26px;
+            border-radius: 25px;
+            border: 3px solid white;
+            cursor: pointer;
+            background: white;
+            color: var(--deep-blue);
+            box-shadow: 0 6px 0 rgba(1, 87, 155, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.1s;
+        }
+        .nav-big-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 rgba(1, 87, 155, 0.2);
+        }
+        .nav-big-btn.primary {
+            background: linear-gradient(135deg, #26a69a, #00897b);
+            color: white;
+            box-shadow: 0 6px 0 #00695c;
+        }
+
+        /* */
+        /* --- MODO 2: PRACTICAR (OPCIÓN MÚLTIPLE) --- */
+        #quiz-view {
+            width: 100%;
+            max-width: 780px;
+            padding: 0 16px 30px 16px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .quiz-question-card {
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            border: 5px solid #b3e5fc;
+            padding: 20px 24px;
+            box-shadow: 0 10px 0 rgba(1, 87, 155, 0.12);
+            margin-bottom: 16px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz-question-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quiz-question-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.65rem;
+            color: var(--deep-blue);
+            margin: 4px 0;
+            line-height: 1.3;
+        }
+
+        .options-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .option-card {
+            background: white;
+            border: 4px solid #e1f5fe;
+            border-radius: 22px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #b3e5fc;
+            transition: transform 0.15s, background-color 0.25s, border-color 0.25s;
+            text-align: left;
+        }
+
+        .option-card:active {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #b3e5fc;
+        }
+
+        .option-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+        }
+
+        .option-letter {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #e1f5fe;
+            color: var(--deep-blue);
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 2px solid #81d4fa;
+        }
+
+        .option-text {
+            font-size: 1.18rem;
+            font-weight: 700;
+            color: #37474f;
+            line-height: 1.35;
+        }
+
+        /* Estados de acierto y error suave */
+        .option-card.correct-choice {
+            background: #c8e6c9 !important;
+            border-color: #43a047 !important;
+            box-shadow: 0 6px 0 #2e7d32 !important;
+            transform: scale(1.02);
+        }
+        .option-card.correct-choice .option-letter {
+            background: #2e7d32;
+            color: white;
+            border-color: white;
+        }
+
+        .option-card.wrong-choice {
+            background: #ffecb3 !important;
+            border-color: #ffb300 !important;
+            box-shadow: 0 4px 0 #ffa000 !important;
+            animation: gentleShake 0.45s ease;
+            opacity: 0.75;
+        }
+
+        @keyframes gentleShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-7px); }
+            75% { transform: translateX(7px); }
+        }
+
+        .quiz-feedback-banner {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+            text-align: center;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            animation: popIn 0.25s ease-out;
+        }
+        .quiz-feedback-banner.show {
+            display: flex;
+        }
+        .quiz-feedback-banner.success {
+            background: #e8f5e9;
+            border: 3px solid #66bb6a;
+            color: #1b5e20;
+        }
+        .quiz-feedback-banner.retry {
+            background: #fff8e1;
+            border: 3px solid #ffca28;
+            color: #e65100;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.92); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- MODAL DE CELEBRACIÓN --- */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(1, 87, 155, 0.65);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 16px;
+        }
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal-card {
+            background: linear-gradient(180deg, #ffffff, #fff9c4);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 32px;
+            border: 6px solid #ffd54f;
+            padding: 26px;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .confetti-piece {
+            position: fixed;
+            top: -20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            z-index: 200;
+            pointer-events: none;
+            animation: confettiFall linear forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(105vh) rotate(720deg);
+            }
+        }
+
+        /* Ajustes responsivos para pantallas horizontales de tablet */
+        @media (max-height: 680px) {
+            .card-scene { height: 315px; }
+            .card-emoji { font-size: 2.5rem; margin-bottom: 4px; }
+            .card-question-text { font-size: 1.5rem; }
+            .card-answer-box { font-size: 1.15rem; padding: 12px 14px; }
+            .option-card { padding: 10px 14px; }
+            .option-text { font-size: 1.05rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENCABEZADO -->
+    <header class="top-bar">
+        <a href="index.html" class="nav-pill-btn">🏠 Ashlyn's World</a>
+        <h1 class="app-title">Estudios Sociales 🇭🇳</h1>
+        <button class="nav-pill-btn" onclick="restartCurrentActivity()" title="Reiniciar">🔄 Reiniciar</button>
+    </header>
+
+    <!-- SELECTOR DE LOS 2 MODOS -->
+    <div class="control-hub">
+        <div class="mode-switcher">
+            <button id="btn-mode-flashcards" class="mode-btn active" onclick="switchMode('flashcards')">
+                🃏 Modo 1: Flashcards
+            </button>
+            <button id="btn-mode-quiz" class="mode-btn" onclick="switchMode('quiz')">
+                🎯 Modo 2: Practicar
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== MODO 1: FLASHCARDS ==================== -->
+    <main id="flashcard-view">
+        <div class="status-bar">
+            <span id="fc-counter">Tarjeta 1 de 12</span>
+            <div class="progress-track">
+                <div id="fc-progress-fill" class="progress-fill"></div>
+            </div>
+            <button class="shuffle-mini-btn" onclick="shuffleFlashcards()">🔀 Mezclar</button>
+        </div>
+
+        <!-- Tarjeta 3D -->
+        <div class="card-scene">
+            <div id="flashcard-3d" class="flashcard-3d" onclick="handleFlashcardClick(event)">
+                
+                <!-- FRENTE: LA PREGUNTA -->
+                <div class="card-face card-front">
+                    <div class="card-badge-top">
+                        <span id="fc-num-front" class="question-number-pill">Pregunta #1</span>
+                        <button class="tts-btn" onclick="speakFlashcardQuestion(event)" title="Escuchar pregunta en español">
+                            🔊 Escuchar
+                        </button>
+                    </div>
+
+                    <div class="card-center-content">
+                        <div id="fc-emoji-front" class="card-emoji">🧠</div>
+                        <h2 id="fc-question-text" class="card-question-text">
+                            ¿Qué es el pensamiento?
+                        </h2>
+                    </div>
+
+                    <div class="tap-hint">👆 ¡Toca la tarjeta para ver la respuesta!</div>
+                </div>
+
+                <!-- REVERSO: LA RESPUESTA -->
+                <div class="card-face card-back">
+                    <div class="card-badge-top">
+                        <span class="answer-pill">✨ Respuesta</span>
+                        <button class="tts-btn" onclick="speakFlashcardAnswer(event)" title="Escuchar respuesta en español">
+                            🔊 Escuchar
+                        </button>
+                    </div>
+
+                    <div class="card-center-content">
+                        <div id="fc-answer-html" class="card-answer-box">
+                            Es aquello que nos ayuda a recordar, imaginar, analizar y tomar decisiones.
+                        </div>
+                    </div>
+
+                    <div class="tap-hint" style="background:#fff3e0; color:#e65100;">
+                        👆 Toca para volver a la pregunta
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Botones de navegación -->
+        <div class="deck-nav">
+            <button class="nav-big-btn" onclick="prevFlashcard()">⬅️ Anterior</button>
+            <button class="nav-big-btn" onclick="flipFlashcard()">🔄 Voltear</button>
+            <button class="nav-big-btn primary" onclick="nextFlashcard()">Siguiente ➡️</button>
+        </div>
+    </main>
+
+    <!-- ==================== MODO 2: PRACTICAR (OPCIÓN MÚLTIPLE) ==================== -->
+    <section id="quiz-view">
+        <div class="status-bar">
+            <span id="qz-counter">Pregunta 1 de 12</span>
+            <div class="progress-track">
+                <div id="qz-progress-fill" class="progress-fill"></div>
+            </div>
+            <span id="qz-score">⭐ 0 / 12</span>
+        </div>
+
+        <!-- Caja de la Pregunta -->
+        <div class="quiz-question-card">
+            <div class="quiz-question-header">
+                <span id="qz-num-badge" class="question-number-pill">Pregunta #1</span>
+                <button class="tts-btn" onclick="speakQuizQuestion()">🔊 Leer Pregunta</button>
+            </div>
+            <div id="qz-emoji" style="font-size: 2.8rem; line-height: 1;">🧠</div>
+            <h2 id="qz-question-text" class="quiz-question-title">
+                ¿Qué es el pensamiento?
+            </h2>
+        </div>
+
+        <!-- Opciones de Respuesta -->
+        <div id="qz-options-list" class="options-container">
+            <!-- Generado dinámicamente por JS -->
+        </div>
+
+        <!-- Banner de Retroalimentación y Botón Siguiente -->
+        <div id="qz-feedback-banner" class="quiz-feedback-banner">
+            <span id="qz-feedback-text">¡Muy bien, Ashlyn! 🌟</span>
+            <button id="qz-next-btn" class="nav-big-btn primary" style="padding: 10px 22px; font-size: 1.15rem;" onclick="nextQuizQuestion()">
+                Siguiente ➡️
+            </button>
+        </div>
+    </section>
+
+    <!-- ==================== MODAL DE CELEBRACIÓN ==================== -->
+    <div id="celebration-modal" class="modal-backdrop">
+        <div class="modal-card">
+            <div id="celeb-icon" style="font-size: 5rem; line-height: 1; margin-bottom: 10px;">🏆</div>
+            <h2 id="celeb-title" class="font-title" style="font-size: 2.4rem; color: var(--deep-blue); margin: 0 0 8px 0;">
+                ¡Excelente Trabajo, Ashlyn!
+            </h2>
+            <p id="celeb-message" style="font-size: 1.3rem; font-weight: 700; color: #455a64; margin: 0 0 22px 0;">
+                ¡Completaste todo el repaso de Estudios Sociales!
+            </p>
+            <button class="nav-big-btn primary" style="width:100%; justify-content:center; font-size:1.35rem;" onclick="closeCelebrationModal()">
+                🎉 ¡Jugar de Nuevo!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- BANCO DE PREGUNTAS DE LAS DOS IMÁGENES DE ESTUDIOS SOCIALES ---
+        const socialStudiesData = [
+            {
+                id: 1,
+                emoji: "🧠",
+                question: "¿Qué es el pensamiento?",
+                answerHtml: "Es aquello que nos ayuda a recordar, imaginar, analizar y tomar decisiones.",
+                answerSpeech: "Es aquello que nos ayuda a recordar, imaginar, analizar y tomar decisiones.",
+                distractors: [
+                    "Es un juego donde rebotamos una pelota y la lanzamos a una red alta.",
+                    "Es la estación más fría del año que ocurre entre el otoño y la primavera."
+                ]
+            },
+            {
+                id: 2,
+                emoji: "⚖️",
+                question: "¿Qué es tomar decisiones?",
+                answerHtml: "Es seleccionar la mejor opción de acuerdo con nuestras posibilidades, dentro del conjunto disponible, para resolver un evento en particular.",
+                answerSpeech: "Es seleccionar la mejor opción de acuerdo con nuestras posibilidades, dentro del conjunto disponible, para resolver un evento en particular.",
+                distractors: [
+                    "Es hacer todas las cosas al azar sin pensar en lo que puede pasar.",
+                    "Es olvidar nuestras tareas y dejar que otras personas elijan siempre."
+                ]
+            },
+            {
+                id: 3,
+                emoji: "🏠",
+                question: "¿Qué son las necesidades sociales?",
+                answerHtml: "Son aquellas de las cuales el ser humano no puede prescindir, entre ellas están: El alimento, la vivienda, la salud y el amor.",
+                answerSpeech: "Son aquellas de las cuales el ser humano no puede prescindir, entre ellas están: El alimento, la vivienda, la salud y el amor.",
+                distractors: [
+                    "Son únicamente los juguetes, los videojuegos y los dulces de las fiestas.",
+                    "Son las cosas que solo usamos cuando vamos de paseo a la playa."
+                ]
+            },
+            {
+                id: 4,
+                emoji: "🍎",
+                question: "¿En qué nos ayudan los alimentos?",
+                answerHtml: "Son importantes porque nos ayudan al crecimiento y fortalecimiento de los huesos y a tener una buena salud, al igual que, nos dotan de energía para realizar nuestras actividades diarias.",
+                answerSpeech: "Son importantes porque nos ayudan al crecimiento y fortalecimiento de los huesos y a tener una buena salud, al igual que nos dotan de energía para realizar nuestras actividades diarias.",
+                distractors: [
+                    "Nos sirven solamente para decorar la mesa y la cocina de la casa.",
+                    "Nos hacen sentir cansados y sin fuerzas para estudiar o jugar."
+                ]
+            },
+            {
+                id: 5,
+                emoji: "🌎",
+                question: "¿Cuál es la organización encargada de la salud?",
+                answerHtml: "<strong>OMS:</strong> Organización Mundial de la Salud.",
+                answerSpeech: "O M S: Organización Mundial de la Salud.",
+                distractors: [
+                    "El Club Deportivo de Fútbol y Tenis.",
+                    "El Museo Nacional de Historia y Antropología."
+                ]
+            },
+            {
+                id: 6,
+                emoji: "🏥",
+                question: "En Honduras la Institución encargada de la salud es:",
+                answerHtml: "<strong>Secretaría de Salud</strong>",
+                answerSpeech: "Secretaría de Salud.",
+                distractors: [
+                    "Secretaría de Deportes y Juegos.",
+                    "Estación Central de Bomberos."
+                ]
+            },
+            {
+                id: 7,
+                emoji: "❤️",
+                question: "¿Qué es el amor?",
+                answerHtml: "Es un sentimiento de afecto hacia otra persona, para que siempre se busque el bien.",
+                answerSpeech: "Es un sentimiento de afecto hacia otra persona, para que siempre se busque el bien.",
+                distractors: [
+                    "Es sentir enojo cuando alguien no nos presta sus juguetes.",
+                    "Es un lugar frío hecho con bloques de nieve."
+                ]
+            },
+            {
+                id: 8,
+                emoji: "🇭🇳",
+                question: "¿Qué es la identidad nacional?",
+                answerHtml: "Es un elemento formador de cultura y patriotismo, que genera un patrón positivo de orgullo y fervor patrio, en la vida personal y social, por lo tanto, jugará un papel fundamental en el desarrollo de la sociedad y el progreso.",
+                answerSpeech: "Es un elemento formador de cultura y patriotismo, que genera un patrón positivo de orgullo y fervor patrio, en la vida personal y social, por lo tanto, jugará un papel fundamental en el desarrollo de la sociedad y el progreso.",
+                distractors: [
+                    "Es un documento para viajar en avión a otros planetas del espacio.",
+                    "Es olvidar las tradiciones y la historia del lugar donde nacimos."
+                ]
+            },
+            {
+                id: 9,
+                emoji: "🏛️",
+                question: "¿En qué elementos o acciones se identifica tu sentido de pertenencia?",
+                answerHtml: "<ul><li>En lugares que son parte de nuestra historia: Ruinas de Copán</li><li>En las ferias patronales</li><li>Las costumbres y tradiciones de los pueblos</li></ul>",
+                answerSpeech: "En lugares que son parte de nuestra historia como las Ruinas de Copán, en las ferias patronales, y en las costumbres y tradiciones de los pueblos.",
+                distractors: [
+                    "En olvidar nuestra historia, no ir a las ferias y tirar basura en la calle.",
+                    "Solamente en los programas de televisión de otros países lejanos."
+                ]
+            },
+            {
+                id: 10,
+                emoji: "🌳",
+                question: "¿Por qué debemos amar a Honduras?",
+                answerHtml: "Porque es nuestra casa, el lugar donde nacimos, vivimos con nuestra familia y disfrutamos de su hermosa naturaleza.",
+                answerSpeech: "Porque es nuestra casa, el lugar donde nacimos, vivimos con nuestra familia y disfrutamos de su hermosa naturaleza.",
+                distractors: [
+                    "Porque allí todo el año cae nieve y vivimos dentro de un iglú.",
+                    "Porque solo debemos querer a nuestro país cuando ganamos un partido."
+                ]
+            },
+            {
+                id: 11,
+                emoji: "🌱",
+                question: "¿Cómo demostramos nuestro amor por el país?",
+                answerHtml: "Cuidando la naturaleza, no tirando basura, estudiando mucho y siendo respetuosos con los demás.",
+                answerSpeech: "Cuidando la naturaleza, no tirando basura, estudiando mucho y siendo respetuosos con los demás.",
+                distractors: [
+                    "Tirando basura en los parques, cortando las plantas y sin estudiar.",
+                    "Gritando fuerte en clase y no respetando a nuestros compañeros."
+                ]
+            },
+            {
+                id: 12,
+                emoji: "⭐",
+                question: "¿Qué nos enseña nuestra Bandera Nacional?",
+                answerHtml: "El azul representa nuestros mares y cielo, el blanco la paz, y las estrellas la unión de todos nuestros hermanos centroamericanos.",
+                answerSpeech: "El azul representa nuestros mares y cielo, el blanco la paz, y las estrellas la unión de todos nuestros hermanos centroamericanos.",
+                distractors: [
+                    "El azul representa la nieve del invierno y las estrellas son los planetas del universo.",
+                    "Que cada estrella representa un deporte diferente como el fútbol y el baloncesto."
+                ]
+            }
+        ];
+
+        //        // --- DETECTOR DE VOZ EN ESPAÑOL (GARANTIZA PRONUNCIACIÓN EN ESPAÑOL O SE OCULTA) ---
+        const synth = window.speechSynthesis;
+        let spanishVoice = null;
+        let isSpanishTtsAvailable = false;
+
+        function detectSpanishVoice() {
+            if (!synth) return;
+            const voices = synth.getVoices();
+            if (!voices || voices.length === 0) return;
+
+            // Filtrar exclusivamente voces cuyo código de idioma sea español (es-HN, es-MX, es-US, es-ES, es_419, etc.)
+            const esVoices = voices.filter(v => {
+                const lang = (v.lang || '').toLowerCase().replace('_', '-');
+                return lang === 'es' || lang.startsWith('es-');
+            });
+
+            if (esVoices.length > 0) {
+                // Priorizar español latinoamericano (Honduras, México, EE.UU., Latinoamérica) y voces femeninas amigables (Paulina, Mónica, Google español)
+                const preferredOrder = ['es-hn', 'es-mx', 'es-us', 'es-419', 'es-cr', 'es-gt', 'es-co', 'es-es'];
+                
+                spanishVoice = esVoices.find(v =>
+                    /paulina|monica|mónica|helena|sabina|google español/i.test(v.name) &&
+                    preferredOrder.some(code => v.lang.toLowerCase().replace('_', '-').startsWith(code))
+                );
+
+                if (!spanishVoice) {
+                    for (const code of preferredOrder) {
+                        const match = esVoices.find(v => v.lang.toLowerCase().replace('_', '-').startsWith(code));
+                        if (match) {
+                            spanishVoice = match;
+                            break;
+                        }
+                    }
+                }
+
+                if (!spanishVoice) {
+                    spanishVoice = esVoices[0];
+                }
+
+                isSpanishTtsAvailable = true;
+                document.body.classList.add('es-tts-ready');
+            } else {
+                // Si la tablet no tiene ninguna voz en español instalada, ocultamos los botones de lectura
+                isSpanishTtsAvailable = false;
+                document.body.classList.remove('es-tts-ready');
+            }
+        }
+
+        if (synth) {
+            detectSpanishVoice();
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = detectSpanishVoice;
+            }
+            // Reintentos por si iOS/Android tarda unos milisegundos en poblar las voces
+            setTimeout(detectSpanishVoice, 300);
+            setTimeout(detectSpanishVoice, 1000);
+        }
+
+        function speakSpanish(text, event) {
+            if (event) event.stopPropagation();
+            if (!synth || !isSpanishTtsAvailable || !spanishVoice) return;
+
+            synth.cancel();
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.voice = spanishVoice;
+            utter.lang = spanishVoice.lang || 'es-MX';
+            utter.rate = 0.92; // Ritmo claro y natural para una niña de 8 años
+            utter.pitch = 1.08;
+            synth.speak(utter);
+        }
+
+        // --- EFECTOS DE SONIDO MUSICALES (WEB AUDIO API) ---
+        let audioCtx = null;
+        function getAudioCtx() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playSoundEffect(type) {
+            try {
+                const ctx = getAudioCtx();
+                const now = ctx.currentTime;
+
+                if (type === 'flip') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(340, now);
+                    osc.frequency.exponentialRampToValueAtTime(600, now + 0.12);
+                    gain.gain.setValueAtTime(0.14, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.12);
+                    osc.start(now);
+                    osc.stop(now + 0.12);
+                } else if (type === 'correct') {
+                    const notes = [523.25, 659.25, 783.99, 1046.50];
+                    notes.forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+                        gain.gain.setValueAtTime(0.2, now + idx * 0.08);
+                        gain.gain.exponentialRampToValueAtTime(0.008, now + idx * 0.08 + 0.3);
+                        osc.start(now + idx * 0.08);
+                        osc.stop(now + idx * 0.08 + 0.3);
+                    });
+                } else if (type === 'wrong') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(240, now);
+                    osc.frequency.linearRampToValueAtTime(170, now + 0.22);
+                    gain.gain.setValueAtTime(0.16, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.22);
+                    osc.start(now);
+                    osc.stop(now + 0.22);
+                }
+            } catch (e) {
+                // Ignorar si el navegador restringe el audio antes del primer toque
+            }
+        }
+
+        //        // --- ESTADO DE LA APLICACIÓN ---
+        let currentMode = 'flashcards'; // 'flashcards' o 'quiz'
+        let fcDeck = [...socialStudiesData];
+        let fcIndex = 0;
+        let isFcFlipped = false;
+
+        let quizDeck = [];
+        let quizIndex = 0;
+        let quizScore = 0;
+        let quizQuestionSolved = false;
+
+        function shuffleArray(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        function switchMode(mode) {
+            if (synth) synth.cancel();
+            currentMode = mode;
+
+            document.getElementById('btn-mode-flashcards').classList.toggle('active', mode === 'flashcards');
+            document.getElementById('btn-mode-quiz').classList.toggle('active', mode === 'quiz');
+
+            document.getElementById('flashcard-view').style.display = mode === 'flashcards' ? 'flex' : 'none';
+            document.getElementById('quiz-view').style.display = mode === 'quiz' ? 'flex' : 'none';
+
+            if (mode === 'flashcards') {
+                renderFlashcard();
+            } else {
+                if (quizDeck.length === 0) {
+                    initQuiz();
+                } else {
+                    renderQuizQuestion();
+                }
+            }
+        }
+
+        function restartCurrentActivity() {
+            if (currentMode === 'flashcards') {
+                fcDeck = [...socialStudiesData];
+                fcIndex = 0;
+                isFcFlipped = false;
+                document.getElementById('flashcard-3d').classList.remove('is-flipped');
+                renderFlashcard();
+                playSoundEffect('flip');
+            } else {
+                initQuiz();
+                playSoundEffect('flip');
+            }
+        }
+
+        // --- LÓGICA DEL MODO 1: FLASHCARDS ---
+        function renderFlashcard() {
+            const item = fcDeck[fcIndex];
+            const total = fcDeck.length;
+
+            document.getElementById('fc-counter').textContent = `Tarjeta ${fcIndex + 1} de ${total}`;
+            document.getElementById('fc-progress-fill').style.width = `${((fcIndex + 1) / total) * 100}%`;
+
+            document.getElementById('fc-num-front').textContent = `Pregunta #${item.id}`;
+            document.getElementById('fc-emoji-front').textContent = item.emoji;
+            document.getElementById('fc-question-text').textContent = item.question;
+            document.getElementById('fc-answer-html').innerHTML = item.answerHtml;
+        }
+
+        function handleFlashcardClick(event) {
+            if (event.target.closest('button')) return;
+            flipFlashcard();
+        }
+
+        function flipFlashcard() {
+            isFcFlipped = !isFcFlipped;
+            document.getElementById('flashcard-3d').classList.toggle('is-flipped', isFcFlipped);
+            playSoundEffect('flip');
+        }
+
+        function speakFlashcardQuestion(event) {
+            const item = fcDeck[fcIndex];
+            speakSpanish(item.question, event);
+        }
+
+        function speakFlashcardAnswer(event) {
+            const item = fcDeck[fcIndex];
+            speakSpanish(item.answerSpeech, event);
+        }
+
+        function prevFlashcard() {
+            if (fcIndex > 0) {
+                if (synth) synth.cancel();
+                fcIndex--;
+                isFcFlipped = false;
+                document.getElementById('flashcard-3d').classList.remove('is-flipped');
+                playSoundEffect('flip');
+                renderFlashcard();
+            }
+        }
+
+        function nextFlashcard() {
+            if (synth) synth.cancel();
+            if (fcIndex < fcDeck.length - 1) {
+                fcIndex++;
+                isFcFlipped = false;
+                document.getElementById('flashcard-3d').classList.remove('is-flipped');
+                playSoundEffect('flip');
+                renderFlashcard();
+            } else {
+                showCelebration(
+                    "¡Super Exploradora! 🌟",
+                    "¡Repasaste las 12 tarjetas de Estudios Sociales!",
+                    "🇭🇳"
+                );
+            }
+        }
+
+        function shuffleFlashcards() {
+            if (synth) synth.cancel();
+            fcDeck = shuffleArray(socialStudiesData);
+            fcIndex = 0;
+            isFcFlipped = false;
+            document.getElementById('flashcard-3d').classList.remove('is-flipped');
+            playSoundEffect('flip');
+            renderFlashcard();
+        }
+
+        // --- LÓGICA DEL MODO 2: PRACTICAR (OPCIÓN MÚLTIPLE) ---
+        function initQuiz() {
+            quizDeck = shuffleArray(socialStudiesData);
+            quizIndex = 0;
+            quizScore = 0;
+            renderQuizQuestion();
+        }
+
+        function renderQuizQuestion() {
+            quizQuestionSolved = false;
+            const item = quizDeck[quizIndex];
+            const total = quizDeck.length;
+
+            document.getElementById('qz-counter').textContent = `Pregunta ${quizIndex + 1} de ${total}`;
+            document.getElementById('qz-progress-fill').style.width = `${((quizIndex + 1) / total) * 100}%`;
+            document.getElementById('qz-score').textContent = `⭐ ${quizScore} / ${total}`;
+
+            document.getElementById('qz-num-badge').textContent = `Pregunta #${item.id}`;
+            document.getElementById('qz-emoji').textContent = item.emoji;
+            document.getElementById('qz-question-text').textContent = item.question;
+
+            const banner = document.getElementById('qz-feedback-banner');
+            banner.className = 'quiz-feedback-banner';
+            document.getElementById('qz-next-btn').style.display = 'none';
+
+            // Construir y mezclar las 3 opciones de respuesta
+            const options = shuffleArray([
+                { text: item.answerSpeech, isCorrect: true },
+                { text: item.distractors[0], isCorrect: false },
+                { text: item.distractors[1], isCorrect: false }
+            ]);
+
+            const letters = ['A', 'B', 'C'];
+            const listEl = document.getElementById('qz-options-list');
+            listEl.innerHTML = '';
+
+            options.forEach((opt, idx) => {
+                const card = document.createElement('div');
+                card.className = 'option-card';
+                card.onclick = () => selectQuizOption(card, opt);
+
+                const left = document.createElement('div');
+                left.className = 'option-left';
+
+                const letterBadge = document.createElement('div');
+                letterBadge.className = 'option-letter';
+                letterBadge.textContent = letters[idx];
+
+                const textSpan = document.createElement('div');
+                textSpan.className = 'option-text';
+                textSpan.textContent = opt.text;
+
+                left.appendChild(letterBadge);
+                left.appendChild(textSpan);
+                card.appendChild(left);
+
+                // Botón de audio individual para escuchar cada opción en español (si está disponible)
+                const ttsBtn = document.createElement('button');
+                ttsBtn.className = 'tts-btn';
+                ttsBtn.innerHTML = '🔊';
+                ttsBtn.title = 'Escuchar opción';
+                ttsBtn.onclick = (e) => speakSpanish(opt.text, e);
+                card.appendChild(ttsBtn);
+
+                listEl.appendChild(card);
+            });
+        }
+
+        function speakQuizQuestion() {
+            const item = quizDeck[quizIndex];
+            speakSpanish(item.question);
+        }
+
+        function selectQuizOption(cardEl, optionObj) {
+            if (quizQuestionSolved) return;
+
+            const banner = document.getElementById('qz-feedback-banner');
+            const feedbackText = document.getElementById('qz-feedback-text');
+            const nextBtn = document.getElementById('qz-next-btn');
+
+            if (optionObj.isCorrect) {
+                quizQuestionSolved = true;
+                quizScore++;
+                document.getElementById('qz-score').textContent = `⭐ ${quizScore} / ${quizDeck.length}`;
+
+                cardEl.classList.add('correct-choice');
+                playSoundEffect('correct');
+                launchConfetti(35);
+
+                banner.className = 'quiz-feedback-banner show success';
+                feedbackText.textContent = '¡Excelente respuesta, Ashlyn! 🌟';
+                nextBtn.style.display = 'inline-flex';
+
+                if (isSpanishTtsAvailable) {
+                    speakSpanish("¡Muy bien, Ashlyn!");
+                }
+            } else {
+                cardEl.classList.remove('wrong-choice');
+                void cardEl.offsetWidth;
+                cardEl.classList.add('wrong-choice');
+                playSoundEffect('wrong');
+
+                banner.className = 'quiz-feedback-banner show retry';
+                feedbackText.textContent = '¡Casi! Intenta con otra opción 💡';
+                nextBtn.style.display = 'none';
+
+                if (isSpanishTtsAvailable) {
+                    speakSpanish("Intenta de nuevo");
+                }
+            }
+        }
+
+        function nextQuizQuestion() {
+            if (synth) synth.cancel();
+            if (quizIndex < quizDeck.length - 1) {
+                quizIndex++;
+                playSoundEffect('flip');
+                renderQuizQuestion();
+            } else {
+                showCelebration(
+                    "¡Campeona de Estudios Sociales! 👑",
+                    `¡Respondiste correctamente las ${quizDeck.length} preguntas del cuestionario!`,
+                    "🏆"
+                );
+            }
+        }
+
+        // --- CELEBRACIÓN Y CONFETI ---
+        function showCelebration(title, message, icon) {
+            document.getElementById('celeb-icon').textContent = icon || "🏆";
+            document.getElementById('celeb-title').textContent = title;
+            document.getElementById('celeb-message').textContent = message;
+            document.getElementById('celebration-modal').classList.add('open');
+
+            playSoundEffect('correct');
+            launchConfetti(85);
+            if (isSpanishTtsAvailable) {
+                speakSpanish(`${title}. ${message}`);
+            }
+        }
+
+        function closeCelebrationModal() {
+            document.getElementById('celebration-modal').classList.remove('open');
+            restartCurrentActivity();
+        }
+
+        function launchConfetti(count = 50) {
+            const colors = ['#0073cf', '#29b6f6', '#ffd54f', '#26a69a', '#ff7043', '#ab47bc'];
+            for (let i = 0; i < count; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + 'vw';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.width = (Math.random() * 8 + 8) + 'px';
+                piece.style.height = (Math.random() * 8 + 8) + 'px';
+                piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                piece.style.animationDelay = (Math.random() * 0.25) + 's';
+                document.body.appendChild(piece);
+                setTimeout(() => piece.remove(), 4500);
+            }
+        }
+
+        // Inicializar al cargar
+        window.onload = function () {
+            detectSpanishVoice();
+            renderFlashcard();
+            initQuiz();
+        };
+    </script>
+</body>
+</html>
