@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ashlyn's Vocabulary Kingdom</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka+One&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --princess-pink: #ff80ab;
+            --hot-pink: #ec407a;
+            --royal-purple: #8e24aa;
+            --deep-purple: #4a148c;
+            --candy-blue: #29b6f6;
+            --deep-blue: #0277bd;
+            --mint-green: #26a69a;
+            --sunny-yellow: #ffd54f;
+            --gold-border: #ffb300;
+            --coral-orange: #ff7043;
+            --soft-cream: #fffdf9;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #e1bee7 50%, #bbdefb 100%);
+            min-height: 100dvh;
+            width: 100vw;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #37474f;
+        }
+
+        h1, h2, h3, .font-title {
+            font-family: 'Fredoka One', cursive;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- TOP NAVIGATION & HEADER --- */
+        .top-bar {
+            width: 100%;
+            max-width: 1100px;
+            padding: 12px 18px 6px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            z-index: 20;
+        }
+
+        .back-link {
+            text-decoration: none;
+            background: white;
+            color: var(--deep-purple);
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.1rem;
+            padding: 10px 18px;
+            border-radius: 25px;
+            box-shadow: 0 4px 0 rgba(74, 20, 140, 0.18);
+            border: 3px solid #f3e5f5;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.1s;
+        }
+        .back-link:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 rgba(74, 20, 140, 0.18);
+        }
+
+        .app-title {
+            font-family: 'Chewy', cursive;
+            font-size: 2.3rem;
+            color: var(--deep-purple);
+            text-shadow: 2px 2px 0px white, 4px 4px 0px rgba(156, 39, 176, 0.2);
+            margin: 0;
+            text-align: center;
+        }
+
+        /* --- MODE SWITCHER & LIST FILTER --- */
+        .control-hub {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            width: 95%;
+            max-width: 900px;
+            margin: 6px 0 14px 0;
+            z-index: 20;
+        }
+
+        .mode-switcher {
+            background: rgba(255, 255, 255, 0.75);
+            padding: 6px;
+            border-radius: 30px;
+            display: flex;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 3px solid white;
+        }
+
+        .mode-btn {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.2rem;
+            padding: 10px 22px;
+            border-radius: 24px;
+            border: none;
+            cursor: pointer;
+            background: transparent;
+            color: #546e7a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, var(--hot-pink), var(--royal-purple));
+            color: white;
+            box-shadow: 0 4px 0 var(--deep-purple);
+            transform: translateY(-2px);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.75);
+            padding: 6px;
+            border-radius: 25px;
+            border: 2px solid white;
+        }
+
+        .filter-pill {
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.95rem;
+            padding: 8px 14px;
+            border-radius: 18px;
+            border: none;
+            background: transparent;
+            color: #546e7a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-pill.active {
+            background: var(--candy-blue);
+            color: white;
+            box-shadow: 0 3px 0 var(--deep-blue);
+        }
+
+        /* --- STREAMING_CHUNK:Styling the 3D Flashcard Flip container and reverse buttons... --- */
+        /* --- FLASHCARD VIEW --- */
+        #flashcard-view {
+            width: 100%;
+            max-width: 760px;
+            padding: 0 16px 24px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .deck-status-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 10px 18px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--deep-purple);
+        }
+
+        .progress-track {
+            flex-grow: 1;
+            height: 14px;
+            background: #e1bee7;
+            border-radius: 10px;
+            margin: 0 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff80ab, #ab47bc);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .shuffle-mini-btn {
+            background: #fff9c4;
+            border: 2px solid #fbc02d;
+            color: #f57f17;
+            font-family: 'Fredoka One', cursive;
+            padding: 6px 12px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            box-shadow: 0 3px 0 #fbc02d;
+        }
+        .shuffle-mini-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #fbc02d;
+        }
+
+        /* 3D Flip Scene */
+        .card-scene {
+            width: 100%;
+            max-width: 580px;
+            height: 360px;
+            perspective: 1200px;
+            margin-bottom: 18px;
+        }
+
+        .flashcard-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .flashcard-3d.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 32px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 0 rgba(74, 20, 140, 0.15), 0 15px 30px rgba(0,0,0,0.1);
+            border: 6px solid white;
+            text-align: center;
+        }
+
+        .card-front {
+            background: linear-gradient(180deg, #ffffff 0%, #fff9fb 100%);
+        }
+
+        .card-back {
+            background: linear-gradient(180deg, #fffde7 0%, #fff9c4 100%);
+            border-color: #ffe082;
+            transform: rotateY(180deg);
+            justify-content: space-between;
+        }
+
+        .spelled-ribbon {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 2px solid #81c784;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.9rem;
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+        .spelled-ribbon.show {
+            display: inline-flex;
+        }
+
+        .phonics-tag {
+            background: #e1f5fe;
+            color: #0277bd;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            border: 2px solid #81d4fa;
+        }
+
+        .card-emoji {
+            font-size: 4.4rem;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08));
+        }
+
+        .card-word-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 3.4rem;
+            color: var(--deep-purple);
+            margin: 4px 0 14px 0;
+        }
+
+        .tap-hint {
+            font-size: 1.05rem;
+            color: #8e24aa;
+            background: #f3e5f5;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            animation: gentlePulse 2s infinite;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Card Back Elements */
+        .back-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .back-word-small {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.7rem;
+            color: var(--deep-purple);
+            margin: 0;
+        }
+
+        .definition-box {
+            background: white;
+            padding: 14px 18px;
+            border-radius: 22px;
+            border: 3px solid #ffe082;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #37474f;
+            line-height: 1.35;
+            width: 100%;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .sentence-drawer {
+            background: #e0f7fa;
+            border: 3px solid #4dd0e1;
+            color: #006064;
+            padding: 10px 14px;
+            border-radius: 18px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            width: 100%;
+            display: none;
+            animation: popIn 0.25s ease-out;
+        }
+        .sentence-drawer.show {
+            display: block;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .back-actions {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* --- STREAMING_CHUNK:Styling action buttons and Grid Mode tiles... --- */
+        .action-btn {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.15rem;
+            padding: 12px 20px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform 0.1s, box-shadow 0.1s;
+            flex: 1;
+            min-width: 150px;
+        }
+        .action-btn:active {
+            transform: translateY(3px);
+        }
+
+        .btn-sentence {
+            background: #26c6da;
+            box-shadow: 0 5px 0 #00838f;
+        }
+        .btn-sentence:active { box-shadow: 0 2px 0 #00838f; }
+
+        .btn-spell {
+            background: #ff7043;
+            box-shadow: 0 5px 0 #d84315;
+        }
+        .btn-spell:active { box-shadow: 0 2px 0 #d84315; }
+
+        .btn-audio-circle {
+            background: #f3e5f5;
+            border: 2px solid #ce93d8;
+            color: var(--deep-purple);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 0 #ce93d8;
+            flex-shrink: 0;
+        }
+        .btn-audio-circle:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #ce93d8;
+        }
+
+        /* Flashcard Deck Navigation */
+        .deck-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            width: 100%;
+            max-width: 580px;
+        }
+
+        .nav-big-btn {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+            padding: 14px 28px;
+            border-radius: 25px;
+            border: 3px solid white;
+            cursor: pointer;
+            background: white;
+            color: var(--deep-purple);
+            box-shadow: 0 6px 0 rgba(74, 20, 140, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.1s;
+        }
+        .nav-big-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 rgba(74, 20, 140, 0.2);
+        }
+        .nav-big-btn.primary {
+            background: linear-gradient(135deg, #66bb6a, #43a047);
+            color: white;
+            box-shadow: 0 6px 0 #2e7d32;
+        }
+
+        /* --- GRID VIEW --- */
+        #grid-view {
+            width: 100%;
+            max-width: 1100px;
+            padding: 0 16px 40px 16px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .grid-stats-banner {
+            background: rgba(255, 255, 255, 0.85);
+            border: 3px solid white;
+            border-radius: 22px;
+            padding: 10px 22px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 700px;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--deep-purple);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+            gap: 14px;
+            width: 100%;
+        }
+
+        .word-tile {
+            background: white;
+            border: 4px solid #f3e5f5;
+            border-radius: 24px;
+            padding: 16px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #ce93d8, 0 8px 15px rgba(0,0,0,0.06);
+            transition: transform 0.15s, box-shadow 0.15s, background-color 0.3s;
+            position: relative;
+            min-height: 120px;
+        }
+
+        .word-tile:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #ce93d8;
+        }
+
+        .word-tile .tile-emoji {
+            font-size: 2.2rem;
+            line-height: 1;
+        }
+
+        .word-tile .tile-word {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.45rem;
+            color: var(--deep-purple);
+            text-align: center;
+            word-break: break-word;
+        }
+
+        .word-tile .tile-phonics {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #0277bd;
+            background: #e1f5fe;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* Greyed out state when spelled correctly! Still clickable! */
+        .word-tile.spelled-done {
+            background: #cfd8dc;
+            border-color: #b0bec5;
+            box-shadow: 0 4px 0 #90a4ae;
+            opacity: 0.72;
+        }
+
+        .word-tile.spelled-done .tile-word {
+            color: #546e7a;
+            text-decoration: none;
+        }
+
+        .word-tile.spelled-done .tile-emoji {
+            filter: grayscale(60%);
+        }
+
+        .tile-check-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #66bb6a;
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .word-tile.spelled-done .tile-check-badge {
+            display: flex;
+        }
+
+        /* --- STREAMING_CHUNK:Styling Modals for Grid Word Details, Spelling Keyboard, and Celebrations... --- */
+        /* --- MODALS --- */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(49, 27, 146, 0.65);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 14px;
+        }
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal-card {
+            background: white;
+            width: 100%;
+            max-width: 680px;
+            border-radius: 32px;
+            border: 6px solid #f3e5f5;
+            padding: 22px;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-height: 94dvh;
+            overflow-y: auto;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: #ffebee;
+            color: #d32f2f;
+            border: 2px solid #ffcdd2;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Spelling Keyboard inside Modal */
+        .letter-slots-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 14px 0;
+            min-height: 62px;
+        }
+
+        .letter-slot {
+            width: 46px;
+            height: 58px;
+            background: #f3e5f5;
+            border-radius: 14px;
+            border-bottom: 5px solid #ab47bc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fredoka One', cursive;
+            font-size: 2rem;
+            color: var(--deep-purple);
+            text-transform: lowercase;
+            transition: all 0.2s;
+        }
+        .letter-slot.filled {
+            background: #fff9c4;
+            border-bottom-color: #fbc02d;
+            transform: translateY(-2px);
+        }
+        .letter-slot.correct-slot {
+            background: #c8e6c9 !important;
+            border-bottom-color: #43a047 !important;
+            color: #1b5e20 !important;
+        }
+        .letter-slot.wrong-slot {
+            background: #ffcdd2 !important;
+            border-bottom-color: #e53935 !important;
+            color: #b71c1c !important;
+            animation: gentleShake 0.4s;
+        }
+
+        @keyframes gentleShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .keyboard-wrapper {
+            width: 100%;
+            background: #f8f9fa;
+            padding: 12px 8px;
+            border-radius: 24px;
+            border: 3px solid #e1bee7;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .kb-row {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .key-btn {
+            flex: 1;
+            max-width: 52px;
+            height: 50px;
+            border-radius: 14px;
+            border: none;
+            background: white;
+            color: var(--deep-purple);
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.35rem;
+            box-shadow: 0 4px 0 #ce93d8;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #f3e5f5;
+            touch-action: manipulation;
+        }
+        .key-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #ce93d8;
+            background: #f3e5f5;
+        }
+
+        .kb-controls-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 4px;
+            padding: 0 6px;
+        }
+
+        .kb-action-btn {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.1rem;
+            padding: 10px 18px;
+            border-radius: 16px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex: 1;
+        }
+        .kb-action-btn:active { transform: translateY(3px); }
+
+        .btn-peek { background: #29b6f6; box-shadow: 0 4px 0 #0288d1; }
+        .btn-delete { background: #ef5350; box-shadow: 0 4px 0 #c62828; }
+        .btn-check-spell { background: #66bb6a; box-shadow: 0 4px 0 #2e7d32; }
+
+        /* Highlighted word in sentence */
+        .highlight-word {
+            background: #fff59d;
+            color: #d81b60;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 800;
+        }
+
+        /* Confetti */
+        .confetti-piece {
+            position: fixed;
+            top: -20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            z-index: 200;
+            pointer-events: none;
+            animation: confettiFall linear forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(105vh) rotate(720deg);
+            }
+        }
+
+        /* Responsive adjustments for smaller tablet landscape heights */
+        @media (max-height: 680px) {
+            .card-scene { height: 310px; }
+            .card-emoji { font-size: 3.2rem; }
+            .card-word-title { font-size: 2.6rem; }
+            .key-btn { height: 42px; font-size: 1.15rem; }
+            .letter-slot { width: 40px; height: 48px; font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <a href="index.html" class="back-link">🏠 Ashlyn's World</a>
+        <h1 class="app-title">Vocabulary Kingdom ✨</h1>
+        <button class="back-link" onclick="resetAllProgress()" title="Reset Progress">🔄 Reset</button>
+    </header>
+
+    <div class="control-hub">
+        <!-- 2 Main Mode Choices -->
+        <div class="mode-switcher">
+            <button id="mode-flashcards-btn" class="mode-btn active" onclick="switchMode('flashcards')">
+                🃏 Flashcards
+            </button>
+            <button id="mode-grid-btn" class="mode-btn" onclick="switchMode('grid')">
+                🧩 Word Grid
+            </button>
+        </div>
+
+        <!-- Optional List Filter (All 41, Page 1, Page 2) -->
+        <div class="filter-group">
+            <button id="filter-all" class="filter-pill active" onclick="setListFilter('all')">All (41)</button>
+            <button id="filter-p1" class="filter-pill" onclick="setListFilter('page1')">Page 1 (21)</button>
+            <button id="filter-p2" class="filter-pill" onclick="setListFilter('page2')">Page 2 (20)</button>
+        </div>
+    </div>
+
+    <!-- ==================== MODE 1: FLASHCARDS VIEW ==================== -->
+    <main id="flashcard-view">
+        <div class="deck-status-bar">
+            <span id="fc-counter">Card 1 of 41</span>
+            <div class="progress-track">
+                <div id="fc-progress-fill" class="progress-fill"></div>
+            </div>
+            <button class="shuffle-mini-btn" onclick="reshuffleDeck()">🔀 Shuffle</button>
+        </div>
+
+        <!-- 3D Flip Card -->
+        <div class="card-scene">
+            <div id="flashcard-3d" class="flashcard-3d" onclick="handleCardClick(event)">
+                
+                <!-- FRONT SIDE: THE WORD -->
+                <div class="card-face card-front">
+                    <div id="fc-spelled-badge" class="spelled-ribbon">⭐ Spelled!</div>
+                    <div id="fc-phonics-front" class="phonics-tag" style="display:none;"></div>
+                    <div id="fc-emoji-front" class="card-emoji">🚪</div>
+                    <h2 id="fc-word-front" class="card-word-title">Enter</h2>
+                    <div style="display:flex; align-items:center; gap:12px; margin-top:4px;">
+                        <button class="btn-audio-circle" onclick="speakCurrentWord(event)" title="Hear Word">🔊</button>
+                        <div class="tap-hint">👆 Tap Card to Flip!</div>
+                    </div>
+                </div>
+
+                <!-- REVERSE SIDE: DEFINITION + SENTENCE & SPELL BUTTONS -->
+                <div class="card-face card-back">
+                    <div class="back-header">
+                        <span id="fc-emoji-back" style="font-size: 2rem;">🚪</span>
+                        <h3 id="fc-word-back" class="back-word-small">Enter</h3>
+                        <button class="btn-audio-circle" onclick="speakCurrentDefinition(event)" title="Hear Definition">🔊</button>
+                    </div>
+
+                    <div id="fc-definition-text" class="definition-box">
+                        To go inside a place.
+                    </div>
+
+                    <!-- Example Sentence Box (Revealed when Sentence button is tapped) -->
+                    <div id="fc-sentence-drawer" class="sentence-drawer"></div>
+
+                    <!-- Buttons on Reverse Side -->
+                    <div class="back-actions">
+                        <button class="action-btn btn-sentence" onclick="toggleFlashcardSentence(event)">
+                            💬 Example Sentence
+                        </button>
+                        <button class="action-btn btn-spell" onclick="openSpellingModalFromFlashcard(event)">
+                            ✏️ Spell the Word
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Flashcard Navigation -->
+        <div class="deck-nav">
+            <button class="nav-big-btn" onclick="prevFlashcard()">⬅️ Back</button>
+            <button class="nav-big-btn" onclick="flipFlashcardManual()">🔄 Flip</button>
+            <button class="nav-big-btn primary" onclick="nextFlashcard()">Next ➡️</button>
+        </div>
+    </main>
+
+    <!-- ==================== MODE 2: GRID VIEW ==================== -->
+    <section id="grid-view">
+        <div class="grid-stats-banner">
+            <span>👆 Tap any tile to hear & explore!</span>
+            <span id="grid-spelled-count">⭐ Spelled: 0 / 41</span>
+        </div>
+
+        <div id="tiles-grid" class="tiles-grid">
+            <!-- Populated dynamically by JS -->
+        </div>
+    </section>
+
+    <!-- ==================== MODAL 1: GRID TILE EXPLORER MODAL ==================== -->
+    <div id="tile-modal" class="modal-backdrop" onclick="closeModalOnBackdrop(event, 'tile-modal')">
+        <div class="modal-card">
+            <button class="modal-close-btn" onclick="closeModal('tile-modal')">✖</button>
+
+            <div id="tm-phonics" class="phonics-tag" style="display:none;"></div>
+            <div id="tm-emoji" class="card-emoji" style="font-size: 3.6rem; margin-bottom: 4px;">🚪</div>
+            
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
+                <h2 id="tm-word" class="card-word-title" style="font-size: 2.8rem; margin:0;">Enter</h2>
+                <button class="btn-audio-circle" onclick="speakActiveModalWord()" title="Hear Word">🔊</button>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:10px; width:100%; margin-bottom: 14px;">
+                <div id="tm-definition" class="definition-box" style="flex:1;">
+                    To go inside a place.
+                </div>
+                <button class="btn-audio-circle" onclick="speakActiveModalDefinition()" title="Hear Definition">🗣️</button>
+            </div>
+
+            <div id="tm-sentence-box" class="sentence-drawer" style="margin-bottom: 14px;"></div>
+
+            <div class="back-actions">
+                <button class="action-btn btn-sentence" onclick="toggleGridModalSentence()">
+                    💬 Used in a Sentence
+                </button>
+                <button class="action-btn btn-spell" onclick="openSpellingFromGridModal()">
+                    ✏️ Practice Spelling
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 2: INTERACTIVE SPELLING KEYBOARD ==================== -->
+    <div id="spelling-modal" class="modal-backdrop" onclick="closeModalOnBackdrop(event, 'spelling-modal')">
+        <div class="modal-card">
+            <button class="modal-close-btn" onclick="closeModal('spelling-modal')">✖</button>
+
+            <h2 class="font-title" style="color: var(--deep-purple); font-size: 1.8rem; margin: 0 0 6px 0;">
+                Spell the Word! ✏️
+            </h2>
+
+            <!-- Audio Prompt & Definition Clue (Word is hidden so she spells from memory!) -->
+            <div style="display:flex; align-items:center; justify-content:center; gap:12px; width:100%; margin-bottom:6px;">
+                <button class="action-btn" style="background:#ab47bc; box-shadow:0 4px 0 #6a1b9a; max-width:210px; padding:10px 16px;" onclick="speakSpellingTarget()">
+                    🔊 Hear Word
+                </button>
+                <span id="sp-emoji" style="font-size: 2.6rem;">🚪</span>
+            </div>
+
+            <div id="sp-definition-clue" style="font-size: 1.05rem; color:#546e7a; font-weight:700; background:#f3e5f5; padding:8px 14px; border-radius:16px; width:100%;">
+                To go inside a place.
+            </div>
+
+            <!-- Peek Hint Banner (Hidden unless Peek button pressed) -->
+            <div id="sp-peek-banner" style="display:none; margin-top:6px; font-family:'Fredoka One', cursive; font-size:1.3rem; color:#0277bd; background:#e1f5fe; padding:4px 16px; border-radius:12px;"></div>
+
+            <!-- Letter Slots -->
+            <div id="sp-letter-slots" class="letter-slots-container"></div>
+
+            <!-- On-Screen QWERTY Keyboard -->
+            <div class="keyboard-wrapper">
+                <div class="kb-row" id="kb-row-1"></div>
+                <div class="kb-row" id="kb-row-2"></div>
+                <div class="kb-row" id="kb-row-3"></div>
+
+                <div class="kb-controls-row">
+                    <button class="kb-action-btn btn-peek" onclick="peekSpellingWord()">👀 Hint</button>
+                    <button class="kb-action-btn btn-delete" onclick="deleteSpellingLetter()">⌫ Delete</button>
+                    <button class="kb-action-btn btn-check-spell" onclick="checkSpellingAttempt()">✔️ Check</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 3: CELEBRATION MODAL ==================== -->
+    <div id="celebration-modal" class="modal-backdrop">
+        <div class="modal-card" style="max-width: 500px; background: linear-gradient(180deg, #ffffff, #fff9c4); border-color: #ffd54f;">
+            <div id="celeb-icon" style="font-size: 5rem; line-height: 1; margin-bottom: 10px;">🏆</div>
+            <h2 id="celeb-title" class="font-title" style="font-size: 2.5rem; color: var(--deep-purple); margin: 0 0 8px 0;">
+                Super Star, Ashlyn!
+            </h2>
+            <p id="celeb-message" style="font-size: 1.3rem; font-weight: 700; color: #546e7a; margin: 0 0 20px 0;">
+                You finished the whole vocabulary list!
+            </p>
+            <button id="celeb-btn" class="nav-big-btn primary" style="width:100%; justify-content:center; font-size:1.4rem;" onclick="closeCelebrationModal()">
+                🎉 Awesome!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- COMPLETE VOCABULARY DATA FROM BOTH WORKSHEET IMAGES ---
+        const vocabularyData = [
+            // PAGE 1 (21 Words)
+            {
+                id: "enter",
+                word: "Enter",
+                phonics: "",
+                page: "page1",
+                emoji: "🚪",
+                definition: "To go inside a place.",
+                sentence: "Please knock on the door before you <span class='highlight-word'>enter</span> the room.",
+                sentencePlain: "Please knock on the door before you enter the room.",
+                spelled: false
+            },
+            {
+                id: "basketball",
+                word: "Basketball",
+                phonics: "",
+                page: "page1",
+                emoji: "🏀",
+                definition: "A game where you bounce a ball and throw it into a high net.",
+                sentence: "Ashlyn bounced the orange <span class='highlight-word'>basketball</span> and scored two points!",
+                sentencePlain: "Ashlyn bounced the orange basketball and scored two points!",
+                spelled: false
+            },
+            {
+                id: "soccer",
+                word: "Soccer",
+                phonics: "",
+                page: "page1",
+                emoji: "⚽",
+                definition: "A game where you kick a ball into a goal without using your hands.",
+                sentence: "We kicked the <span class='highlight-word'>soccer</span> ball right into the goal!",
+                sentencePlain: "We kicked the soccer ball right into the goal!",
+                spelled: false
+            },
+            {
+                id: "tennis",
+                word: "Tennis",
+                phonics: "",
+                page: "page1",
+                emoji: "🎾",
+                definition: "A game where you hit a small yellow ball over a net using a racket.",
+                sentence: "She hit the yellow <span class='highlight-word'>tennis</span> ball over the net with her racket.",
+                sentencePlain: "She hit the yellow tennis ball over the net with her racket.",
+                spelled: false
+            },
+            {
+                id: "scream",
+                word: "Scream",
+                phonics: "",
+                page: "page1",
+                emoji: "😱",
+                definition: "To make a loud noise with your voice when you are scared or excited.",
+                sentence: "The fast roller coaster made everyone <span class='highlight-word'>scream</span> with excitement!",
+                sentencePlain: "The fast roller coaster made everyone scream with excitement!",
+                spelled: false
+            },
+            {
+                id: "reason",
+                word: "Reason",
+                phonics: "",
+                page: "page1",
+                emoji: "💡",
+                definition: "Why something happens or why you do something.",
+                sentence: "Playing with a friend is a great <span class='highlight-word'>reason</span> to smile.",
+                sentencePlain: "Playing with a friend is a great reason to smile.",
+                spelled: false
+            },
+            {
+                id: "team",
+                word: "Team",
+                phonics: "",
+                page: "page1",
+                emoji: "🤝",
+                definition: "A group of people who play a sport or work together.",
+                sentence: "Our whole <span class='highlight-word'>team</span> cheered together after winning the game.",
+                sentencePlain: "Our whole team cheered together after winning the game.",
+                spelled: false
+            },
+            {
+                id: "reach",
+                word: "Reach",
+                phonics: "",
+                page: "page1",
+                emoji: "🫳",
+                definition: "To stretch your arm out to touch or grab something.",
+                sentence: "Can you stretch your arm to <span class='highlight-word'>reach</span> the book on the shelf?",
+                sentencePlain: "Can you stretch your arm to reach the book on the shelf?",
+                spelled: false
+            },
+            {
+                id: "between",
+                word: "Between",
+                phonics: "",
+                page: "page1",
+                emoji: "↔️",
+                definition: "In the middle of two things or people.",
+                sentence: "The fluffy puppy sat right <span class='highlight-word'>between</span> Mom and Dad.",
+                sentencePlain: "The fluffy puppy sat right between Mom and Dad.",
+                spelled: false
+            },
+            {
+                id: "winter",
+                word: "Winter",
+                phonics: "",
+                page: "page1",
+                emoji: "❄️",
+                definition: "The coldest season of the year, occurring between autumn and spring.",
+                sentence: "In the <span class='highlight-word'>winter</span>, we wear warm coats and play in the snow.",
+                sentencePlain: "In the winter, we wear warm coats and play in the snow.",
+                spelled: false
+            },
+            {
+                id: "middle",
+                word: "Middle",
+                phonics: "",
+                page: "page1",
+                emoji: "🎯",
+                definition: "The exact center or midpoint between two points, sides, or times.",
+                sentence: "She put a sweet strawberry right in the <span class='highlight-word'>middle</span> of the cake.",
+                sentencePlain: "She put a sweet strawberry right in the middle of the cake.",
+                spelled: false
+            },
+            {
+                id: "frighten",
+                word: "Frighten",
+                phonics: "",
+                page: "page1",
+                emoji: "👻",
+                definition: "To make someone feel suddenly afraid or scared.",
+                sentence: "The loud thunder might <span class='highlight-word'>frighten</span> the little kitten.",
+                sentencePlain: "The loud thunder might frighten the little kitten.",
+                spelled: false
+            },
+            {
+                id: "children",
+                word: "Children",
+                phonics: "",
+                page: "page1",
+                emoji: "🧒",
+                definition: "Young human beings who are between infancy and youth.",
+                sentence: "All the <span class='highlight-word'>children</span> laughed and played on the swings.",
+                sentencePlain: "All the children laughed and played on the swings.",
+                spelled: false
+            },
+            {
+                id: "kitchen",
+                word: "Kitchen",
+                phonics: "",
+                page: "page1",
+                emoji: "🍳",
+                definition: "A room or area specially designed and equipped for cooking food.",
+                sentence: "Warm chocolate chip cookies are baking in the <span class='highlight-word'>kitchen</span>.",
+                sentencePlain: "Warm chocolate chip cookies are baking in the kitchen.",
+                spelled: false
+            },
+            {
+                id: "igloo",
+                word: "Igloo",
+                phonics: "",
+                page: "page1",
+                emoji: "🛖",
+                definition: "A dome-shaped house traditionally built from blocks of solid snow.",
+                sentence: "They built a round white <span class='highlight-word'>igloo</span> out of blocks of snow.",
+                sentencePlain: "They built a round white igloo out of blocks of snow.",
+                spelled: false
+            },
+            {
+                id: "alone",
+                word: "Alone",
+                phonics: "",
+                page: "page1",
+                emoji: "🧘‍♀️",
+                definition: "Being by yourself with no one else around.",
+                sentence: "She read her favorite storybook all <span class='highlight-word'>alone</span> in her cozy bed.",
+                sentencePlain: "She read her favorite storybook all alone in her cozy bed.",
+                spelled: false
+            },
+            {
+                id: "below",
+                word: "Below",
+                phonics: "",
+                page: "page1",
+                emoji: "⬇️",
+                definition: "In a lower place or underneath something.",
+                sentence: "The colorful fish swam deep <span class='highlight-word'>below</span> the boat.",
+                sentencePlain: "The colorful fish swam deep below the boat.",
+                spelled: false
+            },
+            {
+                id: "follow",
+                word: "Follow",
+                phonics: "",
+                page: "page1",
+                emoji: "🐥",
+                definition: "To go after or behind someone or something.",
+                sentence: "The baby ducklings <span class='highlight-word'>follow</span> their mother across the pond.",
+                sentencePlain: "The baby ducklings follow their mother across the pond.",
+                spelled: false
+            },
+            {
+                id: "globe",
+                word: "Globe",
+                phonics: "",
+                page: "page1",
+                emoji: "🌍",
+                definition: "A round model of planet Earth.",
+                sentence: "We spun the round <span class='highlight-word'>globe</span> to find different oceans on Earth.",
+                sentencePlain: "We spun the round globe to find different oceans on Earth.",
+                spelled: false
+            },
+            {
+                id: "pillow",
+                word: "Pillow",
+                phonics: "",
+                page: "page1",
+                emoji: "🛌",
+                definition: "A soft cushion that you put your head on when you sleep.",
+                sentence: "She rested her head on the soft, fluffy <span class='highlight-word'>pillow</span>.",
+                sentencePlain: "She rested her head on the soft, fluffy pillow.",
+                spelled: false
+            },
+            {
+                id: "bottle",
+                word: "Bottle",
+                phonics: "",
+                page: "page1",
+                emoji: "🍼",
+                definition: "A container with a narrow neck used to hold liquids like water or juice.",
+                sentence: "I drank cool water from my <span class='highlight-word'>bottle</span> after the race.",
+                sentencePlain: "I drank cool water from my bottle after the race.",
+                spelled: false
+            },
+
+            // PAGE 2 (20 Words)
+            {
+                id: "black",
+                word: "Black",
+                phonics: "short a",
+                page: "page2",
+                emoji: "🖤",
+                definition: "A dark color, like the night sky.",
+                sentence: "Bright silver stars twinkled in the <span class='highlight-word'>black</span> night sky.",
+                sentencePlain: "Bright silver stars twinkled in the black night sky.",
+                spelled: false
+            },
+            {
+                id: "blast",
+                word: "Blast",
+                phonics: "short a",
+                page: "page2",
+                emoji: "🚀",
+                definition: "A sudden, strong blow of wind or a loud noise.",
+                sentence: "The space rocket zoomed into the sky with a loud <span class='highlight-word'>blast</span>!",
+                sentencePlain: "The space rocket zoomed into the sky with a loud blast!",
+                spelled: false
+            },
+            {
+                id: "blend",
+                word: "Blend",
+                phonics: "short e",
+                page: "page2",
+                emoji: "🍓",
+                definition: "To mix two or more things together completely.",
+                sentence: "Let's <span class='highlight-word'>blend</span> strawberries and milk to make a pink smoothie.",
+                sentencePlain: "Let's blend strawberries and milk to make a pink smoothie.",
+                spelled: false
+            },
+            {
+                id: "clap",
+                word: "Clap",
+                phonics: "short a",
+                page: "page2",
+                emoji: "👏",
+                definition: "To hit your hands together to make a sound.",
+                sentence: "Everyone started to <span class='highlight-word'>clap</span> their hands after the song.",
+                sentencePlain: "Everyone started to clap their hands after the song.",
+                spelled: false
+            },
+            {
+                id: "clip",
+                word: "Clip",
+                phonics: "short i",
+                page: "page2",
+                emoji: "📎",
+                definition: "A small object used to hold papers or things together.",
+                sentence: "She used a shiny <span class='highlight-word'>clip</span> to keep her drawing papers together.",
+                sentencePlain: "She used a shiny clip to keep her drawing papers together.",
+                spelled: false
+            },
+            {
+                id: "clog",
+                word: "Clog",
+                phonics: "short o",
+                page: "page2",
+                emoji: "🚰",
+                definition: "A block or plug that stops liquid from moving through a pipe.",
+                sentence: "Fallen leaves can <span class='highlight-word'>clog</span> the water pipe outside.",
+                sentencePlain: "Fallen leaves can clog the water pipe outside.",
+                spelled: false
+            },
+            {
+                id: "drum",
+                word: "Drum",
+                phonics: "short u",
+                page: "page2",
+                emoji: "🥁",
+                definition: "A musical instrument you hit with sticks or your hands.",
+                sentence: "She played a happy beat on the big round <span class='highlight-word'>drum</span>.",
+                sentencePlain: "She played a happy beat on the big round drum.",
+                spelled: false
+            },
+            {
+                id: "grab",
+                word: "Grab",
+                phonics: "short a",
+                page: "page2",
+                emoji: "✊",
+                definition: "To take hold of something suddenly with your hand.",
+                sentence: "Quick, <span class='highlight-word'>grab</span> your hat before the wind blows it away!",
+                sentencePlain: "Quick, grab your hat before the wind blows it away!",
+                spelled: false
+            },
+            {
+                id: "grin",
+                word: "Grin",
+                phonics: "short i",
+                page: "page2",
+                emoji: "😁",
+                definition: "A big, wide smile.",
+                sentence: "Ashlyn had a big, happy <span class='highlight-word'>grin</span> on her face.",
+                sentencePlain: "Ashlyn had a big, happy grin on her face.",
+                spelled: false
+            },
+            {
+                id: "plot",
+                word: "Plot",
+                phonics: "short o",
+                page: "page2",
+                emoji: "📖",
+                definition: "The main story and events in a book or movie.",
+                sentence: "The <span class='highlight-word'>plot</span> of the movie is about a magical princess.",
+                sentencePlain: "The plot of the movie is about a magical princess.",
+                spelled: false
+            },
+            {
+                id: "plug",
+                word: "Plug",
+                phonics: "short u",
+                page: "page2",
+                emoji: "🔌",
+                definition: "An object used to fill a hole or connect an electric cord.",
+                sentence: "Put the <span class='highlight-word'>plug</span> in the tub so the bath water stays inside.",
+                sentencePlain: "Put the plug in the tub so the bath water stays inside.",
+                spelled: false
+            },
+            {
+                id: "plum",
+                word: "Plum",
+                phonics: "short u",
+                page: "page2",
+                emoji: "🍑",
+                definition: "A sweet, round fruit with purple or red skin.",
+                sentence: "She ate a sweet, juicy purple <span class='highlight-word'>plum</span> for her snack.",
+                sentencePlain: "She ate a sweet, juicy purple plum for her snack.",
+                spelled: false
+            },
+            {
+                id: "dragon",
+                word: "Dragon",
+                phonics: "",
+                page: "page2",
+                emoji: "🐉",
+                definition: "An imaginary big lizard with wings that can breathe fire.",
+                sentence: "The friendly green <span class='highlight-word'>dragon</span> flew high over the castle.",
+                sentencePlain: "The friendly green dragon flew high over the castle.",
+                spelled: false
+            },
+            {
+                id: "today",
+                word: "Today",
+                phonics: "",
+                page: "page2",
+                emoji: "☀️",
+                definition: "This day right now.",
+                sentence: "<span class='highlight-word'>Today</span> is a wonderful day to learn and play!",
+                sentencePlain: "Today is a wonderful day to learn and play!",
+                spelled: false
+            },
+            {
+                id: "brave",
+                word: "Brave",
+                phonics: "",
+                page: "page2",
+                emoji: "🦁",
+                definition: "Having no fear when something is hard or scary.",
+                sentence: "The <span class='highlight-word'>brave</span> girl climbed all the way to the top!",
+                sentencePlain: "The brave girl climbed all the way to the top!",
+                spelled: false
+            },
+            {
+                id: "plains",
+                word: "Plains",
+                phonics: "",
+                page: "page2",
+                emoji: "🌾",
+                definition: "Large areas of flat land with almost no trees.",
+                sentence: "Wild horses ran across the wide, grassy <span class='highlight-word'>plains</span>.",
+                sentencePlain: "Wild horses ran across the wide, grassy plains.",
+                spelled: false
+            },
+            {
+                id: "mistake",
+                word: "Mistake",
+                phonics: "",
+                page: "page2",
+                emoji: "✏️",
+                definition: "Something you do wrong or an error.",
+                sentence: "If you make a <span class='highlight-word'>mistake</span>, you can erase it and try again!",
+                sentencePlain: "If you make a mistake, you can erase it and try again!",
+                spelled: false
+            },
+            {
+                id: "something",
+                word: "Something",
+                phonics: "",
+                page: "page2",
+                emoji: "🎁",
+                definition: "A thing that is not named, known, or specified.",
+                sentence: "There is <span class='highlight-word'>something</span> fun hiding inside the treasure box.",
+                sentencePlain: "There is something fun hiding inside the treasure box.",
+                spelled: false
+            },
+            {
+                id: "raise",
+                word: "Raise",
+                phonics: "",
+                page: "page2",
+                emoji: "🙋‍♀️",
+                definition: "To lift something up to a higher place (like raising your hand).",
+                sentence: "Please <span class='highlight-word'>raise</span> your hand if you want a turn.",
+                sentencePlain: "Please raise your hand if you want a turn.",
+                spelled: false
+            },
+            {
+                id: "maybe",
+                word: "Maybe",
+                phonics: "",
+                page: "page2",
+                emoji: "🤔",
+                definition: "Possibly, or when you are not sure if the answer is yes or no.",
+                sentence: "<span class='highlight-word'>Maybe</span> we will see a rainbow after the rain stops!",
+                sentencePlain: "Maybe we will see a rainbow after the rain stops!",
+                spelled: false
+            }
+        ];
+
+        // --- APPLICATION STATE ---
+        let currentMode = 'flashcards'; // 'flashcards' or 'grid'
+        let currentFilter = 'all';      // 'all', 'page1', 'page2'
+        let flashcardDeck = [];         // Shuffled subset of vocabularyData
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
+
+        let activeModalItem = null;     // Currently selected word item in Grid or Spelling Modal
+        let currentSpellingInput = "";  // Current letters typed in Spelling Modal
+
+        // --- WEB SPEECH API & WEB AUDIO SYNTH ---
+        const synth = window.speechSynthesis;
+        let audioCtx = null;
+
+        function getAudioCtx() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function speakText(text, rate = 0.85) {
+            if (!synth) return;
+            synth.cancel();
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = 'en-US';
+            utter.rate = rate;
+            utter.pitch = 1.1;
+            synth.speak(utter);
+        }
+
+        function playSoundEffect(type) {
+            try {
+                const ctx = getAudioCtx();
+                const now = ctx.currentTime;
+
+                if (type === 'flip') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(320, now);
+                    osc.frequency.exponentialRampToValueAtTime(580, now + 0.12);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.12);
+                    osc.start(now);
+                    osc.stop(now + 0.12);
+                } else if (type === 'key') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(480, now);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } else if (type === 'wrong') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(190, now);
+                    osc.frequency.linearRampToValueAtTime(130, now + 0.25);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'win') {
+                    // Happy major arpeggio fanfare
+                    const notes = [523.25, 659.25, 783.99, 1046.50];
+                    notes.forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.09);
+                        gain.gain.setValueAtTime(0.22, now + idx * 0.09);
+                        gain.gain.exponentialRampToValueAtTime(0.008, now + idx * 0.09 + 0.35);
+                        osc.start(now + idx * 0.09);
+                        osc.stop(now + idx * 0.09 + 0.35);
+                    });
+                }
+            } catch (e) {
+                // Ignore audio context errors on restricted devices
+            }
+        }
+
+        function getFilteredList() {
+            if (currentFilter === 'page1') {
+                return vocabularyData.filter(item => item.page === 'page1');
+            } else if (currentFilter === 'page2') {
+                return vocabularyData.filter(item => item.page === 'page2');
+            }
+            return [...vocabularyData];
+        }
+
+        function shuffleArray(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        function setListFilter(filterName) {
+            currentFilter = filterName;
+            document.getElementById('filter-all').classList.toggle('active', filterName === 'all');
+            document.getElementById('filter-p1').classList.toggle('active', filterName === 'page1');
+            document.getElementById('filter-p2').classList.toggle('active', filterName === 'page2');
+
+            reshuffleDeck(false);
+            renderGrid();
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            document.getElementById('mode-flashcards-btn').classList.toggle('active', mode === 'flashcards');
+            document.getElementById('mode-grid-btn').classList.toggle('active', mode === 'grid');
+
+            document.getElementById('flashcard-view').style.display = mode === 'flashcards' ? 'flex' : 'none';
+            document.getElementById('grid-view').style.display = mode === 'grid' ? 'flex' : 'none';
+
+            if (mode === 'flashcards') {
+                renderCurrentFlashcard();
+            } else {
+                renderGrid();
+            }
+        }
+
+        // --- FLASHCARDS LOGIC ---
+        function reshuffleDeck(announce = true) {
+            flashcardDeck = shuffleArray(getFilteredList());
+            currentCardIndex = 0;
+            isCardFlipped = false;
+            document.getElementById('flashcard-3d').classList.remove('is-flipped');
+            renderCurrentFlashcard();
+            if (announce) {
+                playSoundEffect('flip');
+                speakText("Cards shuffled! Let's go!");
+            }
+        }
+
+        function renderCurrentFlashcard() {
+            if (flashcardDeck.length === 0) return;
+            const currentItem = flashcardDeck[currentCardIndex];
+
+            // Update Progress Bar & Counter
+            const total = flashcardDeck.length;
+            document.getElementById('fc-counter').textContent = `Card ${currentCardIndex + 1} of ${total}`;
+            const pct = ((currentCardIndex + 1) / total) * 100;
+            document.getElementById('fc-progress-fill').style.width = `${pct}%`;
+
+            // Front Face
+            document.getElementById('fc-emoji-front').textContent = currentItem.emoji;
+            document.getElementById('fc-word-front').textContent = currentItem.word;
+
+            const phonicsEl = document.getElementById('fc-phonics-front');
+            if (currentItem.phonics) {
+                phonicsEl.textContent = currentItem.phonics;
+                phonicsEl.style.display = 'inline-block';
+            } else {
+                phonicsEl.style.display = 'none';
+            }
+
+            const spelledBadge = document.getElementById('fc-spelled-badge');
+            spelledBadge.classList.toggle('show', currentItem.spelled);
+
+            // Back Face
+            document.getElementById('fc-emoji-back').textContent = currentItem.emoji;
+            document.getElementById('fc-word-back').textContent = currentItem.word;
+            document.getElementById('fc-definition-text').textContent = currentItem.definition;
+
+            // Reset sentence drawer
+            const sentenceDrawer = document.getElementById('fc-sentence-drawer');
+            sentenceDrawer.innerHTML = currentItem.sentence;
+            sentenceDrawer.classList.remove('show');
+        }
+
+        function handleCardClick(event) {
+            // Do not flip if clicking a button inside the card
+            if (event.target.closest('button')) return;
+            flipFlashcardManual();
+        }
+
+        function flipFlashcardManual() {
+            const cardEl = document.getElementById('flashcard-3d');
+            isCardFlipped = !isCardFlipped;
+            cardEl.classList.toggle('is-flipped', isCardFlipped);
+            playSoundEffect('flip');
+
+            const currentItem = flashcardDeck[currentCardIndex];
+            if (isCardFlipped) {
+                speakText(`${currentItem.word}. ${currentItem.definition}`);
+            } else {
+                speakText(currentItem.word);
+            }
+        }
+
+        function speakCurrentWord(event) {
+            if (event) event.stopPropagation();
+            const currentItem = flashcardDeck[currentCardIndex];
+            speakText(currentItem.word);
+        }
+
+        function speakCurrentDefinition(event) {
+            if (event) event.stopPropagation();
+            const currentItem = flashcardDeck[currentCardIndex];
+            speakText(currentItem.definition);
+        }
+
+        function toggleFlashcardSentence(event) {
+            if (event) event.stopPropagation();
+            const currentItem = flashcardDeck[currentCardIndex];
+            const drawer = document.getElementById('fc-sentence-drawer');
+            drawer.classList.add('show');
+            speakText(currentItem.sentencePlain);
+        }
+
+        function openSpellingModalFromFlashcard(event) {
+            if (event) event.stopPropagation();
+            const currentItem = flashcardDeck[currentCardIndex];
+            openSpellingModal(currentItem);
+        }
+
+        function prevFlashcard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                isCardFlipped = false;
+                document.getElementById('flashcard-3d').classList.remove('is-flipped');
+                playSoundEffect('flip');
+                renderCurrentFlashcard();
+                speakText(flashcardDeck[currentCardIndex].word);
+            }
+        }
+
+        function nextFlashcard() {
+            if (currentCardIndex < flashcardDeck.length - 1) {
+                currentCardIndex++;
+                isCardFlipped = false;
+                document.getElementById('flashcard-3d').classList.remove('is-flipped');
+                playSoundEffect('flip');
+                renderCurrentFlashcard();
+                speakText(flashcardDeck[currentCardIndex].word);
+            } else {
+                // Finished the entire randomized list! Trigger Grand Celebration!
+                triggerCelebration(
+                    "🎉 You Finished the List!",
+                    "Amazing job, Ashlyn! You went through all the flashcards!",
+                    "🏆",
+                    true
+                );
+            }
+        }
+
+        // --- GRID MODE LOGIC ---
+        function renderGrid() {
+            const container = document.getElementById('tiles-grid');
+            container.innerHTML = '';
+
+            const list = getFilteredList();
+            const spelledCount = list.filter(i => i.spelled).length;
+            document.getElementById('grid-spelled-count').textContent = `⭐ Spelled: ${spelledCount} / ${list.length}`;
+
+            list.forEach(item => {
+                const tile = document.createElement('div');
+                tile.className = 'word-tile' + (item.spelled ? ' spelled-done' : '');
+                tile.onclick = () => handleTileClick(item);
+
+                const badge = document.createElement('div');
+                badge.className = 'tile-check-badge';
+                badge.textContent = '✓';
+                tile.appendChild(badge);
+
+                const emoji = document.createElement('div');
+                emoji.className = 'tile-emoji';
+                emoji.textContent = item.emoji;
+                tile.appendChild(emoji);
+
+                const wordText = document.createElement('div');
+                wordText.className = 'tile-word';
+                wordText.textContent = item.word;
+                tile.appendChild(wordText);
+
+                if (item.phonics) {
+                    const ph = document.createElement('div');
+                    ph.className = 'tile-phonics';
+                    ph.textContent = item.phonics;
+                    tile.appendChild(ph);
+                }
+
+                container.appendChild(tile);
+            });
+        }
+
+        function handleTileClick(item) {
+            activeModalItem = item;
+            // Speak the word immediately when she clicks the tile, as requested
+            speakText(item.word);
+
+            // Populate Tile Explorer Modal
+            document.getElementById('tm-emoji').textContent = item.emoji;
+            document.getElementById('tm-word').textContent = item.word;
+            document.getElementById('tm-definition').textContent = item.definition;
+
+            const phEl = document.getElementById('tm-phonics');
+            if (item.phonics) {
+                phEl.textContent = item.phonics;
+                phEl.style.display = 'inline-block';
+            } else {
+                phEl.style.display = 'none';
+            }
+
+            const sentBox = document.getElementById('tm-sentence-box');
+            sentBox.innerHTML = item.sentence;
+            sentBox.classList.remove('show');
+
+            document.getElementById('tile-modal').classList.add('open');
+        }
+
+        function speakActiveModalWord() {
+            if (activeModalItem) speakText(activeModalItem.word);
+        }
+
+        function speakActiveModalDefinition() {
+            if (activeModalItem) speakText(activeModalItem.definition);
+        }
+
+        function toggleGridModalSentence() {
+            if (!activeModalItem) return;
+            const sentBox = document.getElementById('tm-sentence-box');
+            sentBox.classList.add('show');
+            speakText(activeModalItem.sentencePlain);
+        }
+
+        function openSpellingFromGridModal() {
+            if (!activeModalItem) return;
+            closeModal('tile-modal');
+            openSpellingModal(activeModalItem);
+        }
+
+        // --- INTERACTIVE SPELLING KEYBOARD LOGIC ---
+        function setupOnScreenKeyboard() {
+            const rows = [
+                { id: 'kb-row-1', keys: 'qwertyuiop'.split('') },
+                { id: 'kb-row-2', keys: 'asdfghjkl'.split('') },
+                { id: 'kb-row-3', keys: 'zxcvbnm'.split('') }
+            ];
+
+            rows.forEach(r => {
+                const rowEl = document.getElementById(r.id);
+                rowEl.innerHTML = '';
+                r.keys.forEach(letter => {
+                    const btn = document.createElement('button');
+                    btn.className = 'key-btn';
+                    btn.textContent = letter;
+                    btn.onclick = () => handleKeyPress(letter);
+                    rowEl.appendChild(btn);
+                });
+            });
+        }
+
+        function openSpellingModal(item) {
+            activeModalItem = item;
+            currentSpellingInput = "";
+
+            document.getElementById('sp-emoji').textContent = item.emoji;
+            document.getElementById('sp-definition-clue').textContent = item.definition;
+
+            const peekBanner = document.getElementById('sp-peek-banner');
+            peekBanner.style.display = 'none';
+            peekBanner.textContent = item.word;
+
+            renderSpellingSlots();
+            document.getElementById('spelling-modal').classList.add('open');
+
+            // Automatically say "Spell [word]"
+            setTimeout(() => {
+                speakText(`Spell ${item.word}`);
+            }, 150);
+        }
+
+        function speakSpellingTarget() {
+            if (activeModalItem) {
+                speakText(activeModalItem.word, 0.75);
+            }
+        }
+
+        function peekSpellingWord() {
+            if (!activeModalItem) return;
+            const peekBanner = document.getElementById('sp-peek-banner');
+            peekBanner.style.display = 'block';
+            speakText(activeModalItem.word, 0.7);
+            setTimeout(() => {
+                peekBanner.style.display = 'none';
+            }, 2200);
+        }
+
+        function renderSpellingSlots() {
+            const container = document.getElementById('sp-letter-slots');
+            container.innerHTML = '';
+            if (!activeModalItem) return;
+
+            const targetLen = activeModalItem.word.length;
+            for (let i = 0; i < targetLen; i++) {
+                const slot = document.createElement('div');
+                slot.className = 'letter-slot';
+                if (i < currentSpellingInput.length) {
+                    slot.textContent = currentSpellingInput[i];
+                    slot.classList.add('filled');
+                }
+                container.appendChild(slot);
+            }
+        }
+
+        function handleKeyPress(letter) {
+            if (!activeModalItem) return;
+            const targetWord = activeModalItem.word.toLowerCase();
+
+            if (currentSpellingInput.length < targetWord.length) {
+                playSoundEffect('key');
+                currentSpellingInput += letter.toLowerCase();
+                renderSpellingSlots();
+
+                // Automatically check if she finished typing the exact right word!
+                if (currentSpellingInput.length === targetWord.length) {
+                    if (currentSpellingInput === targetWord) {
+                        handleSpellingSuccess();
+                    }
+                }
+            }
+        }
+
+        function deleteSpellingLetter() {
+            if (currentSpellingInput.length > 0) {
+                playSoundEffect('key');
+                currentSpellingInput = currentSpellingInput.slice(0, -1);
+                renderSpellingSlots();
+            }
+        }
+
+        function checkSpellingAttempt() {
+            if (!activeModalItem) return;
+            const targetWord = activeModalItem.word.toLowerCase();
+            const slots = document.querySelectorAll('#sp-letter-slots .letter-slot');
+
+            if (currentSpellingInput === targetWord) {
+                handleSpellingSuccess();
+                return;
+            }
+
+            playSoundEffect('wrong');
+            speakText("Almost! Check the red letters and try again.");
+
+            slots.forEach((slot, idx) => {
+                if (!currentSpellingInput[idx]) return;
+                if (currentSpellingInput[idx] === targetWord[idx]) {
+                    slot.classList.add('correct-slot');
+                } else {
+                    slot.classList.add('wrong-slot');
+                }
+            });
+
+            setTimeout(() => {
+                slots.forEach(slot => slot.classList.remove('correct-slot', 'wrong-slot'));
+            }, 1800);
+        }
+
+        function handleSpellingSuccess() {
+            const slots = document.querySelectorAll('#sp-letter-slots .letter-slot');
+            slots.forEach(slot => slot.classList.add('correct-slot'));
+
+            // Mark word as spelled in data
+            activeModalItem.spelled = true;
+
+            // Update UI in both views
+            renderCurrentFlashcard();
+            renderGrid();
+
+            playSoundEffect('win');
+            launchConfetti(55);
+            speakText(`Great job! You spelled ${activeModalItem.word}!`);
+
+            setTimeout(() => {
+                closeModal('spelling-modal');
+
+                // Check if all words in the current filter are now spelled!
+                const list = getFilteredList();
+                const allSpelled = list.every(item => item.spelled);
+                if (allSpelled) {
+                    triggerCelebration(
+                        "👑 Spelling Queen Ashlyn!",
+                        "You spelled EVERY single word on the list! Incredible!",
+                        "👑",
+                        false
+                    );
+                }
+            }, 1300);
+        }
+
+        // --- CELEBRATION & MODAL HELPERS ---
+        let reshuffleAfterCeleb = false;
+
+        function triggerCelebration(title, message, icon, shouldReshuffleOnClose) {
+            reshuffleAfterCeleb = shouldReshuffleOnClose;
+            document.getElementById('celeb-icon').textContent = icon || "🏆";
+            document.getElementById('celeb-title').textContent = title;
+            document.getElementById('celeb-message').textContent = message;
+            document.getElementById('celebration-modal').classList.add('open');
+
+            playSoundEffect('win');
+            launchConfetti(80);
+            speakText(`${title} ${message}`);
+        }
+
+        function closeCelebrationModal() {
+            document.getElementById('celebration-modal').classList.remove('open');
+            if (reshuffleAfterCeleb) {
+                reshuffleDeck(false);
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('open');
+        }
+
+        function closeModalOnBackdrop(event, modalId) {
+            if (event.target.id === modalId) {
+                closeModal(modalId);
+            }
+        }
+
+        function launchConfetti(count = 50) {
+            const colors = ['#ff4081', '#7c4dff', '#00e5ff', '#ffd740', '#69f0ae', '#ff6e40'];
+            for (let i = 0; i < count; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + 'vw';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.width = (Math.random() * 8 + 8) + 'px';
+                piece.style.height = (Math.random() * 8 + 8) + 'px';
+                piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                piece.style.animationDelay = (Math.random() * 0.3) + 's';
+                document.body.appendChild(piece);
+                setTimeout(() => piece.remove(), 4500);
+            }
+        }
+
+        function resetAllProgress() {
+            vocabularyData.forEach(item => item.spelled = false);
+            reshuffleDeck(false);
+            renderGrid();
+            playSoundEffect('flip');
+            speakText("All words reset! Ready to play again!");
+        }
+
+        // Support hardware keyboard if connected to tablet
+        window.addEventListener('keydown', (e) => {
+            const spellModalOpen = document.getElementById('spelling-modal').classList.contains('open');
+            if (!spellModalOpen) return;
+
+            if (e.key === 'Backspace') {
+                e.preventDefault();
+                deleteSpellingLetter();
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                checkSpellingAttempt();
+            } else if (/^[a-zA-Z]$/.test(e.key)) {
+                handleKeyPress(e.key.toLowerCase());
+            }
+        });
+
+        // Preload voices on tablet
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+        }
+
+        // Initialize on load
+        window.onload = function () {
+            setupOnScreenKeyboard();
+            reshuffleDeck(false);
+            renderGrid();
+        };
+    </script>
+</body>
+</html>
