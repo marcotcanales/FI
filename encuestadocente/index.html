@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal UNITEC</title>
+    <!-- Font: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        federalBlue: '#06065C',
+                        pacificCyan: '#03AED2',
+                        vividSkyBlue: '#47C8FD',
+                        unitecRed: '#C8102E' // For the warnings
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Strict adherence: No shadows, no gradients */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F8F9FA;
+            color: #06065C;
+        }
+        .flat-border {
+            border: 1px solid #E5E7EB;
+        }
+        .btn-primary {
+            background-color: #06065C;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #03AED2;
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #06065C;
+            border: 2px solid #06065C;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover {
+            background-color: #E5E7EB;
+        }
+        /* Custom radio buttons for Likert Scale */
+        .likert-radio {
+            accent-color: #06065C;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        /* Hide views by default */
+        .view-hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row">
+
+    <!-- Sidebar (Matches Portal Screenshot) -->
+    <aside class="w-full md:w-64 bg-white flat-border flex flex-col z-10 relative">
+        <div class="p-6 border-b border-gray-200 flex flex-col items-center">
+            <!-- Profile Avatar -->
+            <div class="w-16 h-16 bg-gray-200 rounded-full mb-3 flex items-center justify-center overflow-hidden">
+                <svg class="w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+            </div>
+            <h2 class="font-bold text-federalBlue text-lg">Howie Jaguar</h2>
+            <p class="text-xs text-gray-500 uppercase tracking-wider">UNITEC</p>
+            <p class="text-xs text-gray-500 truncate w-full text-center">howiejaguar@unitec.edu</p>
+        </div>
+        
+        <nav class="flex-1 py-4">
+            <p class="px-6 text-xs font-bold text-gray-400 mb-2">HERRAMIENTAS</p>
+            <ul class="space-y-1">
+                <li>
+                    <a href="#" class="flex items-center px-6 py-3 text-sm text-federalBlue hover:bg-gray-50">
+                        <span class="mr-3">☐</span> Para colaboradores
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showView('view-portal')" class="flex items-center px-6 py-3 text-sm bg-federalBlue text-white font-semibold">
+                        <span class="mr-3">■</span> Para docentes
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center px-6 py-3 text-sm text-federalBlue hover:bg-gray-50 justify-between">
+                        <div class="flex items-center"><span class="mr-3">≡</span> Reglamentos</div>
+                        <span>›</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center px-6 py-3 text-sm text-federalBlue hover:bg-gray-50 justify-between">
+                        <div class="flex items-center"><span class="mr-3">↓</span> Descarga de recursos</div>
+                        <span>›</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col bg-gray-50 h-screen overflow-y-auto">
+        
+        <!-- Top Header -->
+        <header class="bg-white flat-border h-16 flex items-center justify-between px-6 shrink-0">
+            <div class="text-federalBlue font-bold text-xl flex items-center">
+                <span class="mr-4 cursor-pointer">☰</span>
+                <span id="header-title">Portal UNITEC</span>
+            </div>
+            <img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC Logo" class="h-8">
+        </header>
+
+        <!-- VIEW 1: Portal Dashboard -->
+        <div id="view-portal" class="p-8">
+            <div class="bg-white p-8 rounded-md flat-border mb-8">
+                <h1 class="text-2xl font-bold text-federalBlue mb-2">¡Hola Howie Jaguar!</h1>
+                <p class="text-gray-600 text-sm">Este es tu nuevo Portal de UNITEC.<br>Aquí encontrarás todas tus aplicaciones y herramientas de trabajo de siempre y también algunas nuevas que te serán muy útiles.</p>
+            </div>
+
+            <!-- Grid of Tools -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Standard mock cards -->
+                <div class="bg-white p-6 rounded-md flat-border text-center hover:border-federalBlue transition-colors cursor-pointer flex flex-col items-center justify-center h-40">
+                    <svg class="w-12 h-12 text-federalBlue mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <span class="font-semibold text-federalBlue text-sm">Sistema de Atención de Casos</span>
+                </div>
+                <div class="bg-white p-6 rounded-md flat-border text-center hover:border-federalBlue transition-colors cursor-pointer flex flex-col items-center justify-center h-40">
+                    <svg class="w-12 h-12 text-federalBlue mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span class="font-semibold text-federalBlue text-sm">Control de Asistencia</span>
+                </div>
+                
+                <!-- NEW FEATURE LINK -->
+                <div onclick="showView('view-reflexion-menu')" class="bg-white p-6 rounded-md border-2 border-pacificCyan text-center hover:bg-blue-50 transition-colors cursor-pointer flex flex-col items-center justify-center h-40 group">
+                    <svg class="w-12 h-12 text-pacificCyan group-hover:text-federalBlue mb-3 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    <span class="font-bold text-federalBlue text-sm">Reflexión sobre mi Experiencia de Aprendizaje</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2: Reflexión Menu -->
+        <div id="view-reflexion-menu" class="p-8 view-hidden">
+            <button onclick="showView('view-portal')" class="text-federalBlue font-semibold mb-6 flex items-center hover:underline">
+                <span class="mr-2">←</span> Volver al Portal
+            </button>
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-3xl font-bold text-federalBlue mb-2">Reflexión sobre mi Experiencia de Aprendizaje</h1>
+                <p class="text-gray-600 mb-8">Seleccione la etapa de evaluación correspondiente a su progreso en la asignatura.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Link 1: Chequeo -->
+                    <div onclick="showView('view-chequeo-instrucciones')" class="bg-white p-8 rounded-md flat-border cursor-pointer hover:border-pacificCyan transition-colors">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <span class="text-federalBlue font-bold text-xl">1</span>
+                        </div>
+                        <h2 class="text-xl font-bold text-federalBlue mb-2">Chequeo inicial de mi experiencia de aprendizaje</h2>
+                        <p class="text-sm text-pacificCyan font-semibold mb-4">Semana 1 - Semana 3</p>
+                        <p class="text-sm text-gray-600">Evalúa tu experiencia en las primeras semanas para realizar ajustes a tiempo en tu proceso.</p>
+                    </div>
+
+                    <!-- Link 2: Balance -->
+                    <div onclick="showView('view-balance-instrucciones')" class="bg-white p-8 rounded-md flat-border cursor-pointer hover:border-pacificCyan transition-colors">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <span class="text-federalBlue font-bold text-xl">2</span>
+                        </div>
+                        <h2 class="text-xl font-bold text-federalBlue mb-2">Balance de mi experiencia e impacto de aprendizaje</h2>
+                        <p class="text-sm text-pacificCyan font-semibold mb-4">Semana 5 - Semana 7</p>
+                        <p class="text-sm text-gray-600">Evalúa el desarrollo de competencias, metodologías y el impacto final en tu aprendizaje.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 3: Chequeo Instrucciones -->
+        <div id="view-chequeo-instrucciones" class="p-8 view-hidden">
+            <div class="max-w-3xl mx-auto bg-white p-10 rounded-md flat-border">
+                <h1 class="text-2xl font-bold text-federalBlue mb-6 text-center">Chequeo inicial de mi Experiencia de Aprendizaje</h1>
+                
+                <p class="mb-4 text-gray-700">En UNITEC y CEUTEC nos importa comprender tu experiencia de aprendizaje desde las primeras semanas para realizar ajustes a tiempo. Marca tu nivel de acuerdo con cada una de las afirmaciones según tu experiencia actual en esta asignatura.</p>
+                <p class="mb-8 text-gray-700 font-semibold text-center">¡Tu respuesta es importante para comenzar juntos este proceso de aprendizaje!</p>
+
+                <div class="bg-gray-50 p-6 rounded-md mb-8 flat-border">
+                    <h3 class="font-bold text-federalBlue mb-4">INSTRUCCIONES</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
+                        <li>Esto <strong>NO</strong> es un examen.</li>
+                        <li>No afecta tu calificación.</li>
+                        <li>No hay respuestas correctas o incorrectas.</li>
+                        <li>Responde con honestidad y tranquilidad, de acuerdo con lo que actualmente sabes.</li>
+                        <li>El o la docente <strong>NO</strong> tendrá acceso a ver el nombre de la persona que escribe el comentario.</li>
+                        <li>Comentarios con faltas de respeto o palabras soeces son eliminados y no son tomados en cuenta.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-red-50 p-4 border border-red-200 rounded-md mb-8">
+                    <p class="text-red-700 text-sm font-semibold text-center">
+                        Nota: Las respuestas se pueden ingresar y guardar, pero se enviarán automáticamente en la Semana 3.
+                    </p>
+                </div>
+
+                <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+                    <button onclick="showView('view-reflexion-menu')" class="btn-secondary">Cancelar</button>
+                    <button onclick="showView('view-chequeo-preguntas')" class="btn-primary">Siguiente</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 4: Chequeo Preguntas -->
+        <div id="view-chequeo-preguntas" class="p-8 view-hidden">
+            <div class="max-w-4xl mx-auto">
+                <button onclick="showView('view-chequeo-instrucciones')" class="text-federalBlue font-semibold mb-6 flex items-center hover:underline">
+                    <span class="mr-2">←</span> Atrás
+                </button>
+                
+                <div class="bg-white p-10 rounded-md flat-border mb-6">
+                    <h2 class="text-xl font-bold text-federalBlue mb-2">Chequeo inicial</h2>
+                    <p class="text-sm text-gray-600 mb-6">Valora los siguientes ítems usando la escala proporcionada.</p>
+                    
+                    <!-- Escala de Leyenda -->
+                    <div class="bg-gray-100 p-4 rounded-md flex justify-between text-xs font-semibold text-federalBlue mb-8 flat-border text-center">
+                        <div class="flex-1">1 = Totalmente en desacuerdo</div>
+                        <div class="flex-1">2 = En desacuerdo</div>
+                        <div class="flex-1">3 = Ni de acuerdo ni en desacuerdo</div>
+                        <div class="flex-1">4 = De acuerdo</div>
+                        <div class="flex-1">5 = Totalmente de acuerdo</div>
+                    </div>
+
+                    <!-- Preguntas Likert -->
+                    <div class="space-y-8">
+                        <!-- Q1 -->
+                        <div class="border-b border-gray-200 pb-6">
+                            <p class="text-gray-700 mb-4"><span class="font-bold text-pacificCyan mr-2">1.</span>Entiendo que el aprendizaje cobra sentido cuando conozco el propósito de la asignatura y cómo contribuye a convertirme en el profesional competente y ético que aspiro a ser.</p>
+                            <p class="text-gray-700 mb-4 italic">Comprendo por qué es importante esta asignatura y cómo aporta a mi formación como futuro profesional.</p>
+                            <div class="flex justify-between w-full md:w-2/3 mx-auto px-4">
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q1" value="1" class="likert-radio mt-2"><span class="mt-1 text-xs">1</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q1" value="2" class="likert-radio mt-2"><span class="mt-1 text-xs">2</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q1" value="3" class="likert-radio mt-2"><span class="mt-1 text-xs">3</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q1" value="4" class="likert-radio mt-2"><span class="mt-1 text-xs">4</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q1" value="5" class="likert-radio mt-2"><span class="mt-1 text-xs">5</span></label>
+                            </div>
+                        </div>
+                        
+                        <!-- Q2 -->
+                        <div class="border-b border-gray-200 pb-6">
+                            <p class="text-gray-700 mb-4"><span class="font-bold text-pacificCyan mr-2">2.</span>Entiendo que conocer desde el principio cómo haré visible mi aprendizaje y con qué criterios se valorará mi trabajo me permite dirigir mis esfuerzos con claridad.</p>
+                            <p class="text-gray-700 mb-4 italic">Tengo claridad sobre las actividades o proyectos con los que demostraré mi aprendizaje y los criterios con los que seré evaluado(a).</p>
+                            <div class="flex justify-between w-full md:w-2/3 mx-auto px-4">
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q2" value="1" class="likert-radio mt-2"><span class="mt-1 text-xs">1</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q2" value="2" class="likert-radio mt-2"><span class="mt-1 text-xs">2</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q2" value="3" class="likert-radio mt-2"><span class="mt-1 text-xs">3</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q2" value="4" class="likert-radio mt-2"><span class="mt-1 text-xs">4</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q2" value="5" class="likert-radio mt-2"><span class="mt-1 text-xs">5</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="border-b border-gray-200 pb-6">
+                            <p class="text-gray-700 mb-4"><span class="font-bold text-pacificCyan mr-2">3.</span>Entiendo que contar oportunamente con los materiales, guías y herramientas necesarias es fundamental para aprender con autonomía y prepararme para las evaluaciones.</p>
+                            <p class="text-gray-700 mb-4 italic">Cuento con acceso claro y oportuno a los recursos, materiales e instrucciones que necesito para realizar las actividades y evaluaciones de la clase.</p>
+                            <div class="flex justify-between w-full md:w-2/3 mx-auto px-4">
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q3" value="1" class="likert-radio mt-2"><span class="mt-1 text-xs">1</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q3" value="2" class="likert-radio mt-2"><span class="mt-1 text-xs">2</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q3" value="3" class="likert-radio mt-2"><span class="mt-1 text-xs">3</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q3" value="4" class="likert-radio mt-2"><span class="mt-1 text-xs">4</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q3" value="5" class="likert-radio mt-2"><span class="mt-1 text-xs">5</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="border-b border-gray-200 pb-6">
+                            <p class="text-gray-700 mb-4"><span class="font-bold text-pacificCyan mr-2">4.</span>Entiendo que expresar mis dudas, inquietudes o dificultades a tiempo es parte esencial de una comunidad de aprendizaje basada en el respeto y la mejora continua.</p>
+                            <p class="text-gray-700 mb-4 italic">Siento confianza y apertura en esta clase para plantear consultas, solicitar apoyo o comunicar cualquier inquietud al docente.</p>
+                            <div class="flex justify-between w-full md:w-2/3 mx-auto px-4">
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q4" value="1" class="likert-radio mt-2"><span class="mt-1 text-xs">1</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q4" value="2" class="likert-radio mt-2"><span class="mt-1 text-xs">2</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q4" value="3" class="likert-radio mt-2"><span class="mt-1 text-xs">3</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q4" value="4" class="likert-radio mt-2"><span class="mt-1 text-xs">4</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="c_q4" value="5" class="likert-radio mt-2"><span class="mt-1 text-xs">5</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Open Question -->
+                        <div class="pt-2">
+                            <h3 class="font-bold text-federalBlue mb-2">PREGUNTAS ABIERTAS</h3>
+                            <p class="text-gray-700 mb-2 font-semibold">¿Hay algo que nos quieras decir?</p>
+                            <p class="text-sm text-gray-600 mb-4">(Pueden ser inconformidades, obstáculos o necesidades específicas en relación con la dinámica de la clase, los recursos o las evaluaciones. Si todo marcha bien, puedes decirlo también).</p>
+                            <textarea class="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-federalBlue focus:ring-1 focus:ring-federalBlue" rows="4" placeholder="Escribe tu respuesta aquí..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-red-50 p-4 border border-red-200 rounded-md mb-6">
+                    <p class="text-red-700 text-sm font-semibold text-center">
+                        Tus respuestas se guardarán. Se enviarán automáticamente en la Semana 3.
+                    </p>
+                </div>
+
+                <div class="flex justify-end mb-10">
+                    <button onclick="saveAndReturn()" class="btn-primary">Guardar Respuestas</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 5: Balance Instrucciones -->
+        <div id="view-balance-instrucciones" class="p-8 view-hidden">
+            <div class="max-w-3xl mx-auto bg-white p-10 rounded-md flat-border">
+                <h1 class="text-2xl font-bold text-federalBlue mb-6 text-center">Balance de mi Experiencia e Impacto de Aprendizaje</h1>
+                
+                <p class="mb-4 text-gray-700">En UNITEC y CEUTEC nos importa comprender tu experiencia de aprendizaje. Marca tu nivel de acuerdo con cada una de las afirmaciones según tu experiencia actual en esta asignatura.</p>
+                
+                <div class="bg-gray-50 p-6 rounded-md mb-8 flat-border">
+                    <h3 class="font-bold text-federalBlue mb-4">INSTRUCCIONES</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
+                        <li>Esto <strong>NO</strong> es un examen.</li>
+                        <li>No afecta tu calificación.</li>
+                        <li>No hay respuestas correctas o incorrectas.</li>
+                        <li>Responde con honestidad y tranquilidad.</li>
+                        <li>El o la docente <strong>NO</strong> tendrá acceso a ver el nombre de la persona que escribe el comentario.</li>
+                        <li>Comentarios con faltas de respeto o palabras soeces son eliminados y no son tomados en cuenta.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-red-50 p-4 border border-red-200 rounded-md mb-8">
+                    <p class="text-red-700 text-sm font-semibold text-center">
+                        Nota: Las respuestas se pueden ingresar y guardar, pero se enviarán automáticamente en la Semana 7.
+                    </p>
+                </div>
+
+                <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+                    <button onclick="showView('view-reflexion-menu')" class="btn-secondary">Cancelar</button>
+                    <button onclick="showView('view-balance-preguntas-1')" class="btn-primary">Siguiente</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 6: Balance Preguntas Pagina 1 -->
+        <div id="view-balance-preguntas-1" class="p-8 view-hidden">
+            <div class="max-w-4xl mx-auto">
+                <button onclick="showView('view-balance-instrucciones')" class="text-federalBlue font-semibold mb-6 flex items-center hover:underline">
+                    <span class="mr-2">←</span> Atrás
+                </button>
+                
+                <div class="bg-white p-10 rounded-md flat-border mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-federalBlue">Balance de Impacto (Página 1/2)</h2>
+                        <span class="text-sm font-semibold text-pacificCyan">Paso 1 de 2</span>
+                    </div>
+                    
+                    <!-- Escala de Leyenda -->
+                    <div class="bg-gray-100 p-4 rounded-md flex justify-between text-xs font-semibold text-federalBlue mb-8 flat-border text-center">
+                        <div class="flex-1">1 = Totalmente en desacuerdo</div>
+                        <div class="flex-1">2 = En desacuerdo</div>
+                        <div class="flex-1">3 = Ni de acuerdo ni en desacuerdo</div>
+                        <div class="flex-1">4 = De acuerdo</div>
+                        <div class="flex-1">5 = Totalmente de acuerdo</div>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- Q1 -->
+                        <div class="border-b border-gray-200 pb-6">
+                            <p class="text-gray-700 mb-4"><span class="font-bold text-pacificCyan mr-2">1.</span>Entiendo que aprender profundamente implica comprender el "porqué" de los conceptos clave para transferirlos a problemas reales, superando la simple memorización a corto plazo.</p>
+                            <p class="text-gray-700 mb-4 italic">En esta asignatura logré desarrollar y comprender nuevos conceptos, conectándolos con situaciones o desafíos reales de mi profesión.</p>
+                            <div class="flex justify-between w-full md:w-2/3 mx-auto px-4">
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q1" value="1" class="likert-radio mt-2"><span class="mt-1 text-xs">1</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q1" value="2" class="likert-radio mt-2"><span class="mt-1 text-xs">2</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q1" value="3" class="likert-radio mt-2"><span class="mt-1 text-xs">3</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q1" value="4" class="likert-radio mt-2"><span class="mt-1 text-xs">4</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q1" value="5" class="likert-radio mt-2"><span class="mt-1 text-xs">5</span></label>
+                            </div>
+                        </div>
+                        
+                        <!-- Q2 -->
+                        <div class="border-b border-gray-200 pb-6">
+                            <p class="text-gray-700 mb-4"><span class="font-bold text-pacificCyan mr-2">2.</span>Entiendo que las competencias profesionales se consolidan cuando practico deliberadamente cómo transformar la teoría en soluciones, modelos o acciones concretas.</p>
+                            <p class="text-gray-700 mb-4 italic">A través de la práctica en la asignatura, desarrollé nuevas competencias y habilidades que me permiten resolver problemas de mi área con mayor eficacia.</p>
+                            <div class="flex justify-between w-full md:w-2/3 mx-auto px-4">
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q2" value="1" class="likert-radio mt-2"><span class="mt-1 text-xs">1</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q2" value="2" class="likert-radio mt-2"><span class="mt-1 text-xs">2</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q2" value="3" class="likert-radio mt-2"><span class="mt-1 text-xs">3</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q2" value="4" class="likert-radio mt-2"><span class="mt-1 text-xs">4</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q2" value="5" class="likert-radio mt-2"><span class="mt-1 text-xs">5</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="border-b border-gray-200 pb-6">
+                            <p class="text-gray-700 mb-4"><span class="font-bold text-pacificCyan mr-2">3.</span>Entiendo que mi formación busca desarrollar mi integridad, responsabilidad, empatía y resiliencia para tomar decisiones éticas que aporten al bien común.</p>
+                            <p class="text-gray-700 mb-4 italic">La experiencia en esta asignatura impulsó mi crecimiento en el carácter (fortaleciendo mi ética profesional, responsabilidad, colaboración constructiva o resiliencia).</p>
+                            <div class="flex justify-between w-full md:w-2/3 mx-auto px-4">
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q3" value="1" class="likert-radio mt-2"><span class="mt-1 text-xs">1</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q3" value="2" class="likert-radio mt-2"><span class="mt-1 text-xs">2</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q3" value="3" class="likert-radio mt-2"><span class="mt-1 text-xs">3</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q3" value="4" class="likert-radio mt-2"><span class="mt-1 text-xs">4</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q3" value="5" class="likert-radio mt-2"><span class="mt-1 text-xs">5</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="pb-2">
+                            <p class="text-gray-700 mb-4"><span class="font-bold text-pacificCyan mr-2">4.</span>Entiendo que el aprendizaje duradero requiere que piense activamente, indague, debata y construya soluciones con mis pares, más allá de escuchar de forma pasiva.</p>
+                            <p class="text-gray-700 mb-4 italic">Las metodologías activas aplicadas en clase me mantuvieron pensando críticamente, indagando y colaborando activamente en la construcción de mi aprendizaje.</p>
+                            <div class="flex justify-between w-full md:w-2/3 mx-auto px-4">
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q4" value="1" class="likert-radio mt-2"><span class="mt-1 text-xs">1</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q4" value="2" class="likert-radio mt-2"><span class="mt-1 text-xs">2</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q4" value="3" class="likert-radio mt-2"><span class="mt-1 text-xs">3</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q4" value="4" class="likert-radio mt-2"><span class="mt-1 text-xs">4</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q4" value="5" class="likert-radio mt-2"><span class="mt-1 text-xs">5</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end mb-10">
+                    <button onclick="showView('view-balance-preguntas-2')" class="btn-primary">Continuar a Página 2</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 7: Balance Preguntas Pagina 2 -->
+        <div id="view-balance-preguntas-2" class="p-8 view-hidden">
+            <div class="max-w-4xl mx-auto">
+                <button onclick="showView('view-balance-preguntas-1')" class="text-federalBlue font-semibold mb-6 flex items-center hover:underline">
+                    <span class="mr-2">←</span> Atrás
+                </button>
+                
+                <div class="bg-white p-10 rounded-md flat-border mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-federalBlue">Balance de Impacto (Página 2/2)</h2>
+                        <span class="text-sm font-semibold text-pacificCyan">Paso 2 de 2</span>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- Q5 -->
+                        <div class="border-b border-gray-200 pb-6">
+                            <p class="text-gray-700 mb-4"><span class="font-bold text-pacificCyan mr-2">5.</span>Entiendo que las herramientas tecnológicas y digitales deben potenciar mi análisis y criterio profesional, nunca reemplazar mi propio esfuerzo cognitivo.</p>
+                            <p class="text-gray-700 mb-4 italic">Las herramientas tecnológicas y digitales se integraron adecuadamente para fortalecer mi comprensión y análisis sin sustituir mi propio razonamiento.</p>
+                            <div class="flex justify-between w-full md:w-2/3 mx-auto px-4">
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q5" value="1" class="likert-radio mt-2"><span class="mt-1 text-xs">1</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q5" value="2" class="likert-radio mt-2"><span class="mt-1 text-xs">2</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q5" value="3" class="likert-radio mt-2"><span class="mt-1 text-xs">3</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q5" value="4" class="likert-radio mt-2"><span class="mt-1 text-xs">4</span></label>
+                                <label class="flex flex-col items-center cursor-pointer"><input type="radio" name="b_q5" value="5" class="likert-radio mt-2"><span class="mt-1 text-xs">5</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Open Questions -->
+                        <div class="pt-2">
+                            <h3 class="font-bold text-federalBlue mb-6 uppercase">Preguntas Abiertas</h3>
+                            
+                            <div class="mb-6">
+                                <p class="text-gray-700 font-semibold mb-2">Lo que funcionó bien en mi aprendizaje:</p>
+                                <p class="text-sm text-gray-600 mb-3">Menciona 1 o 2 actividades, proyectos o estrategias de la asignatura que más te ayudaron a aprender y explica brevemente por qué.</p>
+                                <textarea class="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-federalBlue focus:ring-1 focus:ring-federalBlue" rows="4" placeholder="Escribe tu respuesta aquí..."></textarea>
+                            </div>
+
+                            <div>
+                                <p class="text-gray-700 font-semibold mb-2">Sería aún mejor si... (Oportunidad de crecimiento):</p>
+                                <p class="text-sm text-gray-600 mb-3">¿Qué mejora específica y constructiva propondrías en las actividades, evaluaciones o acompañamiento de esta asignatura para potenciar aún más el aprendizaje?</p>
+                                <textarea class="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-federalBlue focus:ring-1 focus:ring-federalBlue" rows="4" placeholder="Escribe tu respuesta aquí..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-red-50 p-4 border border-red-200 rounded-md mb-6">
+                    <p class="text-red-700 text-sm font-semibold text-center">
+                        Tus respuestas se guardarán. Se enviarán automáticamente en la Semana 7.
+                    </p>
+                </div>
+
+                <div class="flex justify-end mb-10">
+                    <button onclick="saveAndReturn()" class="btn-primary">Guardar Respuestas</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Custom Modal for Success Message (No Alerts allowed!) -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center view-hidden">
+        <div class="bg-white p-8 rounded-md max-w-sm w-full flat-border shadow-none text-center">
+            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-pacificCyan">
+                <svg class="w-8 h-8 text-pacificCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-federalBlue mb-2">¡Guardado con éxito!</h3>
+            <p class="text-gray-600 text-sm mb-6">Tus respuestas han sido almacenadas temporalmente.</p>
+            <button onclick="closeModalAndReturn()" class="btn-primary w-full">Aceptar</button>
+        </div>
+    </div>
+
+    <!-- Logic Script -->
+    <script>
+        const views = [
+            'view-portal',
+            'view-reflexion-menu',
+            'view-chequeo-instrucciones',
+            'view-chequeo-preguntas',
+            'view-balance-instrucciones',
+            'view-balance-preguntas-1',
+            'view-balance-preguntas-2'
+        ];
+
+        function showView(targetId) {
+            views.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (id === targetId) {
+                        el.classList.remove('view-hidden');
+                        window.scrollTo(0, 0);
+                    } else {
+                        el.classList.add('view-hidden');
+                    }
+                }
+            });
+        }
+
+        function saveAndReturn() {
+            // Show custom modal instead of alert()
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('view-hidden');
+        }
+
+        function closeModalAndReturn() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.add('view-hidden');
+            showView('view-reflexion-menu');
+        }
+    </script>
+</body>
+</html>
