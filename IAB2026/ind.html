@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados SLO - IAB Ingeniería Industrial UNITEC</title>
+    
+    <!-- Google Fonts: Poppins (Strictly requested by brand manual) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS for layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Brand Colors & Configurations -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        federalBlue: '#06065C',
+                        pacificCyan: '#03AED2',
+                        vividSkyBlue: '#47C8FD',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Strict Brand Rules Implementation */
+        * {
+            box-shadow: none !important; /* NO SHADOWS ALLOWED */
+            text-shadow: none !important; /* NO SHADOWS ALLOWED */
+        }
+        
+        body {
+            background-color: #e5e7eb; /* Neutral gray outside presentation */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Slide Container Setup */
+        #presentation-container {
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 16 / 9;
+            margin: auto;
+            background-color: #ffffff;
+            position: relative;
+            border: 2px solid #06065C; /* Federal Blue Border */
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 3rem 4rem;
+            box-sizing: border-box;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Typography Hierarchy */
+        h1, h2, h3, h4 { color: #06065C; }
+        .accent-text { color: #03AED2; }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 4px solid #06065C;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .slide-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            width: 80%;
+        }
+
+        .logo-container img {
+            height: 50px;
+            width: auto;
+            /* Prohibido rotar, sombras o gradientes */
+        }
+
+        /* Controls */
+        #controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #ffffff;
+            border-top: 1px solid #d1d5db;
+        }
+
+        button {
+            background-color: #06065C;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover { background-color: #03AED2; }
+        button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #06065C;
+        }
+
+        /* Custom structural components for Option A */
+        .data-card {
+            border-top: 6px solid #03AED2;
+            background-color: #f3f4f6;
+            padding: 1.5rem;
+            height: 100%;
+        }
+
+        .alert-card {
+            border-top: 6px solid #06065C;
+            background-color: #f3f4f6;
+            padding: 1.5rem;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+
+    <div class="flex-grow flex items-center justify-center p-4">
+        <div id="presentation-container">
+            
+            <!-- Diapositiva 1: Portada y Apertura -->
+            <div class="slide active" id="slide-1">
+                <div class="flex-grow flex flex-col items-center justify-center text-center px-12">
+                    <img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC Logo" class="h-24 mb-10">
+                    <h1 class="text-5xl font-black text-federalBlue mb-4 leading-tight">Estado de las Competencias de Egreso y Aseguramiento de la Calidad — Período Q1</h1>
+                    <div class="w-24 h-2 bg-pacificCyan mx-auto mb-6"></div>
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-8">Resultados del Diagnóstico de Competencias (SLO), Pertinencia Industrial y Plan de Mejora Continua</h2>
+                    
+                    <div class="bg-federalBlue w-full p-6 mt-6">
+                        <p class="text-white text-lg font-medium">Presentador: Jefatura Académica y Comité de Mejora Continua de Ingeniería Industrial y de Sistemas</p>
+                    </div>
+                </div>
+                <div class="mt-auto border-t-2 border-vividSkyBlue pt-4">
+                    <p class="text-sm font-medium"><strong class="text-federalBlue">Objetivo central:</strong> Presentar el diagnóstico de desempeño técnico y profesional de los estudiantes, contextualizar la metodología de evaluación y retroalimentar con el sector productivo las prioridades de formación para la industria.</p>
+                </div>
+            </div>
+
+            <!-- Diapositiva 2: Metodología del Assessment y Contextualización de la Muestra -->
+            <div class="slide" id="slide-2">
+                <div class="slide-header">
+                    <h2>Metodología del Assessment y Contextualización de la Muestra</h2>
+                    <div class="logo-container"><img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 flex-grow">
+                    <div class="data-card">
+                        <h3 class="text-xl font-bold mb-3">Alcance del Período</h3>
+                        <p class="mb-2">Consolidación de <strong>19 secciones</strong> pertenecientes a <strong>14 asignaturas</strong>.</p>
+                        <p class="mb-2">Impartidas por <strong>9 docentes</strong>.</p>
+                        <p>Cohorte total de <strong class="text-pacificCyan text-2xl">263</strong> estudiantes.</p>
+                    </div>
+                    <div class="data-card border-t-federalBlue">
+                        <h3 class="text-xl font-bold mb-3">Naturaleza de la Muestra</h3>
+                        <p class="text-sm mb-2">Protocolo vigente: Los docentes seleccionan únicamente 1 o 2 portafolios por sección para representar al curso.</p>
+                        <p class="text-sm">El instrumento institucional evalúa esta muestra reducida: <strong>41 portafolios evaluados (16% de la cohorte)</strong>, a pesar de que el 100% entrega proyectos en el aula virtual.</p>
+                    </div>
+                    <div class="data-card">
+                        <h3 class="text-xl font-bold mb-3">Implicación en Acreditación (ABET/ACAAI)</h3>
+                        <p class="text-sm mb-2">Debido al tamaño de muestra, el umbral de acreditación del 70% de la cohorte no se puede obtener formalmente como medición censal.</p>
+                        <p class="text-sm font-semibold text-federalBlue mt-2">Criterio de Análisis:</p>
+                        <p class="text-sm">Para efectos de diagnóstico pedagógico con el IAB, esta muestra refleja con claridad las fortalezas y brechas metodológicas compartidas a lo largo del plan de estudios.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diapositiva 3: Panorama General de Desempeño por Resultados de Aprendizaje (SLO) -->
+            <div class="slide" id="slide-3">
+                <div class="slide-header">
+                    <h2>Panorama General de Desempeño por Resultados de Aprendizaje (SLO)</h2>
+                    <div class="logo-container"><img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC"></div>
+                </div>
+                
+                <div class="grid grid-cols-5 gap-4 mb-6">
+                    <div class="col-span-2 bg-federalBlue text-white p-4">
+                        <p class="text-sm uppercase tracking-wide font-semibold">Evidencia Documental</p>
+                        <p class="text-4xl font-black mt-2">82%</p>
+                        <p class="text-sm mt-1">de las subcompetencias mapeadas registraron evidencia.</p>
+                    </div>
+                    <div class="col-span-3 bg-pacificCyan text-white p-4">
+                        <p class="text-sm uppercase tracking-wide font-semibold">Frente a la Meta Técnica</p>
+                        <p class="text-2xl font-bold mt-2">Sólo 7% (5 de 68) alcanzaron nivel deseado (≥ 70% en Nivel 3 o 4).</p>
+                        <p class="text-sm mt-2">20 de 31 subcompetencias se concentraron en Nivel 1 (Inicial) y 2 (En Desarrollo).</p>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold mb-4 border-b-2 border-gray-200 pb-2">Distribución de logro por competencia de egreso (Productos en Nivel 3 o superior)</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center"><div class="w-16 font-bold text-xl text-federalBlue">33%</div> <div class="flex-grow"><strong class="text-gray-900">Resolución de problemas complejos (SO 1)</strong></div></li>
+                    <li class="flex items-center"><div class="w-16 font-bold text-xl text-federalBlue">33%</div> <div class="flex-grow"><strong class="text-gray-900">Trabajo en equipo y colaboración (SO 5)</strong></div></li>
+                    <li class="flex items-center"><div class="w-16 font-bold text-xl text-federalBlue">25%</div> <div class="flex-grow"><strong class="text-gray-900">Diseño en ingeniería con restricciones (SO 2)</strong></div></li>
+                    <li class="flex items-center"><div class="w-16 font-bold text-xl text-pacificCyan">7%</div> <div class="flex-grow"><strong class="text-gray-900">Experimentación y análisis de datos (SO 6)</strong></div></li>
+                    <li class="flex items-center"><div class="w-16 font-black text-2xl text-red-600">0%</div> <div class="flex-grow"><strong class="text-gray-900">Juicios de impacto ambiental, social y económico (SO 4)</strong> (0 de 24 productos)</div></li>
+                </ul>
+            </div>
+
+            <!-- Diapositiva 4: Fortalezas Formativas y Pertinencia con el Entorno Industrial -->
+            <div class="slide" id="slide-4">
+                <div class="slide-header">
+                    <h2>Fortalezas Formativas y Pertinencia con el Entorno Industrial</h2>
+                    <div class="logo-container"><img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-federalBlue mb-4 flex items-center"><span class="w-4 h-4 bg-pacificCyan mr-2 inline-block"></span>Vinculación Empresarial y Social</h3>
+                        <p class="mb-4">Desarrollo de proyectos aplicados a PYMES, centros educativos y organizaciones comunitarias en asignaturas (IND403, IND404, IND430, IND431, IND436 y LOG406).</p>
+                        <div class="bg-gray-100 p-4 border-l-4 border-federalBlue">
+                            <strong class="block text-federalBlue">Alta satisfacción externa:</strong>
+                            <p>Organizaciones y beneficiarios calificaron a los equipos estudiantiles con <strong>4 a 5 sobre 5</strong>.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-federalBlue mb-4 flex items-center"><span class="w-4 h-4 bg-pacificCyan mr-2 inline-block"></span>Competencias Técnicas Sobresalientes</h3>
+                        <ul class="list-disc pl-5 space-y-2 mb-4">
+                            <li><strong>Modelado y Manufactura Esbelta:</strong> 100% de cumplimiento mediante VSM y Muda Check (IND430).</li>
+                            <li><strong>Sistemas de Gestión (SGI):</strong> 75% de logro en diseño estructurado bajo ISO 56002 (IND436).</li>
+                            <li><strong>Delimitación de problemas:</strong> 64% de logro, diagnósticos fundamentados en Pareto y capacidad de procesos.</li>
+                        </ul>
+                        <div class="bg-vividSkyBlue text-federalBlue p-4 font-medium">
+                            <strong>Manejo fluido de software:</strong> Minitab, Solver, WinQSB, POM-QM, SIMPRO, MARKLOG y estándares (MTM, MOST, NIOSH, RULA).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diapositiva 5: Brechas Críticas en Competencias Técnicas de Ingeniería -->
+            <div class="slide" id="slide-5">
+                <div class="slide-header">
+                    <h2>Brechas Críticas en Competencias Técnicas de Ingeniería</h2>
+                    <div class="logo-container"><img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-8 h-full">
+                    <div class="alert-card">
+                        <div class="flex items-baseline mb-4">
+                            <h3 class="text-2xl font-black text-federalBlue mr-2">SO 1</h3>
+                            <span class="text-lg font-bold text-gray-600">El reto del ciclo completo de solución</span>
+                        </div>
+                        <p class="font-bold text-red-600 mb-2">Desempeño del 29% en formulación cuantitativa y resolución verificada.</p>
+                        <p class="font-bold text-sm uppercase text-gray-500 mt-4 border-b pb-1 mb-2">Patrón Detectado:</p>
+                        <p class="text-sm">Los estudiantes diagnostican la causa raíz y proponen contramedidas lógicas, pero <strong>no formulan objetivos cuantificados</strong> con línea base ni meta numérica.</p>
+                        <p class="text-sm mt-2">Concluyen los proyectos sin una medición posterior que verifique el impacto real de la mejora.</p>
+                    </div>
+                    
+                    <div class="alert-card">
+                        <div class="flex items-baseline mb-4">
+                            <h3 class="text-2xl font-black text-federalBlue mr-2">SO 6</h3>
+                            <span class="text-lg font-bold text-gray-600">Rigor en experimentación y análisis estadístico</span>
+                        </div>
+                        <p class="font-bold text-red-600 mb-2">Desempeño del 0% en análisis e interpretación de datos (Asignaturas: IND310, IND401, LOG406).</p>
+                        <p class="font-bold text-sm uppercase text-gray-500 mt-4 border-b pb-1 mb-2">Hallazgos:</p>
+                        <ul class="list-disc pl-4 text-sm space-y-1">
+                            <li>Errores en validación de supuestos estadísticos (normalidad, independencia).</li>
+                            <li>Discrepancias frecuentes entre cartas de control y las conclusiones.</li>
+                            <li><strong>Dificultades de acceso a datos históricos</strong> empresariales, forzando el uso de datos estimados.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diapositiva 6: Brechas en Habilidades Transversales (Sostenibilidad y Liderazgo) -->
+            <div class="slide" id="slide-6">
+                <div class="slide-header">
+                    <h2>Brechas en Habilidades Transversales (Sostenibilidad y Liderazgo)</h2>
+                    <div class="logo-container"><img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC"></div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="flex border border-gray-300">
+                        <div class="bg-federalBlue text-white p-6 w-1/3 flex flex-col justify-center">
+                            <h3 class="font-black text-xl mb-2">Evaluación de Impactos (SO 4)</h3>
+                            <p class="text-3xl font-black text-pacificCyan">0 de 24</p>
+                            <p class="text-sm">entregables evidenciaron un análisis estructurado.</p>
+                        </div>
+                        <div class="p-6 w-2/3 bg-white">
+                            <p class="font-bold text-federalBlue uppercase text-sm mb-2">Causa Raíz:</p>
+                            <p>Las propuestas se asumen inherentemente positivas. Se omiten:</p>
+                            <ul class="list-disc pl-5 mt-2 font-medium">
+                                <li>Matrices de riesgos.</li>
+                                <li>Marcos normativos técnicos/legales (nacionales e internacionales).</li>
+                                <li>Análisis de costos de ciclo de vida.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex border border-gray-300">
+                        <div class="bg-federalBlue text-white p-6 w-1/3 flex flex-col justify-center">
+                            <h3 class="font-black text-xl mb-2">Gobernanza de Equipo (SO 5)</h3>
+                            <p class="text-sm">Ausencia de evidencia evaluable en liderazgo individual.</p>
+                        </div>
+                        <div class="p-6 w-2/3 bg-white">
+                            <p class="font-bold text-federalBlue uppercase text-sm mb-2">Situación Actual:</p>
+                            <p>Aunque el trabajo grupal predomina, las secciones obligadas a medir liderazgo (IND430, IND431) carecen de registros formales de gestión de equipo.</p>
+                            <p class="mt-2 text-pacificCyan font-bold">Ausencia de:</p>
+                            <ul class="list-disc pl-5 mt-1 font-medium text-sm">
+                                <li>Actas de reunión.</li>
+                                <li>Definición explícita de roles.</li>
+                                <li>Mecanismos de evaluación entre pares (peer review).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diapositiva 7: Hallazgos Curriculares e Instrumentales -->
+            <div class="slide" id="slide-7">
+                <div class="slide-header">
+                    <h2>Hallazgos Curriculares e Instrumentales</h2>
+                    <div class="logo-container"><img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC"></div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="data-card">
+                        <h3 class="text-2xl font-bold text-federalBlue mb-4">Alineación de Sílabos</h3>
+                        <div class="flex items-center mb-4">
+                            <div class="w-1/4 text-4xl font-black text-pacificCyan">26%</div>
+                            <div class="w-3/4 pl-4 border-l border-gray-300">
+                                <p class="text-sm font-medium">De las subcompetencias oficiales (37 de 142) están <strong>plenamente declaradas</strong> en los sílabos vigentes.</p>
+                            </div>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2 text-sm mt-4">
+                            <li>88 subcompetencias aparecen de forma parcial.</li>
+                            <li>17 subcompetencias no están planificadas.</li>
+                            <li>Coexistencia de códigos y prerrequisitos desactualizados de planes anteriores en líneas de operaciones, calidad y proyectos.</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-card border-t-federalBlue">
+                        <h3 class="text-2xl font-bold text-federalBlue mb-4">Instrumentos de Evaluación</h3>
+                        <p class="font-bold mb-2">Estado Actual:</p>
+                        <p class="text-sm mb-4">Ausencia de la Lista de Cotejo Maestra de Nivel Básico institucional durante el período, limitando asignaturas formativas a verificación cualitativa.</p>
+                        
+                        <div class="bg-federalBlue text-white p-4 mt-4">
+                            <p class="font-bold text-pacificCyan mb-1">Necesidad Urgente:</p>
+                            <p class="text-sm">Migrar de rúbricas basadas en formato y entrega hacia rúbricas analíticas centradas en <strong>criterios técnicos y de desempeño profesional</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diapositiva 8: Plan de Mejora Continua — Evolución del Muestreo -->
+            <div class="slide" id="slide-8">
+                <div class="slide-header">
+                    <h2>Plan de Mejora Continua — Evolución del Muestreo de Evidencia</h2>
+                    <div class="logo-container"><img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC"></div>
+                </div>
+                
+                <h3 class="font-bold text-pacificCyan uppercase tracking-wide mb-4">Eje E2 y E7 del Plan 2027</h3>
+                
+                <div class="bg-gray-100 p-6 border-l-8 border-federalBlue mb-6">
+                    <h4 class="text-xl font-bold text-federalBlue mb-2">Transición del Muestreo</h4>
+                    <p>Reemplazar la directriz actual de "1 o 2 portafolios a criterio docente" por un <strong>protocolo de muestreo estratificado y sistemático.</strong></p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 mb-4">
+                    <div class="bg-white border border-gray-300 p-4">
+                        <h4 class="font-bold text-federalBlue text-sm mb-2 border-b pb-1">Proyectos Integradores</h4>
+                        <p class="text-sm">Archivar obligatoriamente los productos del <strong>100%</strong> de los equipos de trabajo en vinculación.</p>
+                    </div>
+                    <div class="bg-white border border-gray-300 p-4">
+                        <h4 class="font-bold text-federalBlue text-sm mb-2 border-b pb-1">Productos Individuales</h4>
+                        <p class="text-sm">Muestra de al menos el <strong>50%</strong> (100% en clases menores a 30 estudiantes), estratificada por nivel de desempeño (alto, medio, bajo).</p>
+                    </div>
+                    <div class="bg-white border border-gray-300 p-4">
+                        <h4 class="font-bold text-federalBlue text-sm mb-2 border-b pb-1">Instrumentos Rigurosos</h4>
+                        <p class="text-sm">Incluir exámenes resueltos anonimizados y registros formales de defensas orales ante terna.</p>
+                    </div>
+                </div>
+                
+                <p class="text-center font-bold text-gray-800 bg-vividSkyBlue bg-opacity-20 py-2">Propósito: Garantizar que los indicadores reflejen el desempeño real, cerrando observaciones de ABET/ACAAI.</p>
+            </div>
+
+            <!-- Diapositiva 9: Plan de Mejora Continua — Estándar Técnico de Proyectos -->
+            <div class="slide" id="slide-9">
+                <div class="slide-header">
+                    <h2>Plan de Mejora Continua — Estándar Técnico de Proyectos Integradores</h2>
+                    <div class="logo-container"><img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC"></div>
+                </div>
+                
+                <h3 class="font-bold text-pacificCyan uppercase tracking-wide mb-6">Eje E5 del Plan 2027: Estandarización de proyectos de vinculación</h3>
+
+                <div class="grid grid-cols-2 gap-x-8 gap-y-6">
+                    <div class="flex items-start">
+                        <div class="bg-federalBlue text-white font-bold text-xl rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 mr-4">1</div>
+                        <div>
+                            <h4 class="font-bold text-lg text-federalBlue mb-1">Ficha de Formulación SMART</h4>
+                            <p class="text-sm">Obligatoriedad de definir el problema técnico con indicador, línea base medida y meta numérica antes de iniciar la intervención.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-pacificCyan text-white font-bold text-xl rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 mr-4">2</div>
+                        <div>
+                            <h4 class="font-bold text-lg text-federalBlue mb-1">Protocolo de Verificación Post-mejora</h4>
+                            <p class="text-sm">Exigir mediciones comparativas (antes y después) o pilotos de validación antes de dar por cerrada la solución.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-pacificCyan text-white font-bold text-xl rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 mr-4">3</div>
+                        <div>
+                            <h4 class="font-bold text-lg text-federalBlue mb-1">Matriz Integral de Impactos</h4>
+                            <p class="text-sm">Incorporar análisis costo-beneficio/VPN, matriz IPERC de riesgos operacionales y evaluación de impacto ambiental normativo.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-federalBlue text-white font-bold text-xl rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 mr-4">4</div>
+                        <div>
+                            <h4 class="font-bold text-lg text-federalBlue mb-1">Expediente de Gobernanza</h4>
+                            <p class="text-sm">Implementación de actas de seguimiento, asignación formal de roles y evaluación de pares estandarizada en dos momentos del ciclo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diapositiva 10: Agenda de Colaboración con el Industry Advisory Board -->
+            <div class="slide" id="slide-10">
+                <div class="slide-header">
+                    <h2>Agenda de Colaboración con el Industry Advisory Board</h2>
+                    <div class="logo-container"><img src="https://www.unitec.edu/wp-content/uploads/2025/04/logo-unitec.png" alt="UNITEC"></div>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-6 mb-8">
+                    <div class="data-card border-t-pacificCyan">
+                        <h4 class="font-bold text-federalBlue mb-2">Acceso a Datos Reales</h4>
+                        <p class="text-sm">Alianzas para proporcionar datasets operativos (tiempos, paradas, registros) bajo confidencialidad académica, erradicando datos simulados.</p>
+                    </div>
+                    <div class="data-card border-t-federalBlue">
+                        <h4 class="font-bold text-federalBlue mb-2">Validación de KPIs</h4>
+                        <p class="text-sm">Retroalimentación del IAB sobre los KPIs críticos demandados en la manufactura actual para estandarizarlos en los cursos de planta.</p>
+                    </div>
+                    <div class="data-card border-t-pacificCyan">
+                        <h4 class="font-bold text-federalBlue mb-2">Evaluación de Egresados</h4>
+                        <p class="text-sm">Incorporación de ejecutivos del IAB en ternas evaluadoras de Proyecto de Investigación (IND438) y defensas de Práctica Profesional.</p>
+                    </div>
+                </div>
+
+                <div class="bg-federalBlue text-white p-6 rounded-sm">
+                    <h3 class="font-black text-xl mb-4 text-vividSkyBlue uppercase">Preguntas de cierre para el Consejo</h3>
+                    <ul class="space-y-4 font-medium text-lg">
+                        <li class="flex"><span class="mr-3">💬</span> ¿Coinciden estas brechas de análisis cuantitativo e impacto ambiental con lo observado en los recién graduados en sus industrias?</li>
+                        <li class="flex"><span class="mr-3">💬</span> ¿Qué herramientas analíticas consideran indispensables reforzar para afrontar los desafíos operativos de los próximos 3 años?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide Number Indicator -->
+            <div class="slide-number"><span id="current-slide">1</span> / 10</div>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div id="controls">
+        <button id="prev-btn" onclick="prevSlide()" disabled>Anterior</button>
+        <button id="next-btn" onclick="nextSlide()">Siguiente</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const currentSlideSpan = document.getElementById('current-slide');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentSlideIndex) {
+                    slide.classList.add('active');
+                }
+            });
+
+            currentSlideSpan.textContent = currentSlideIndex + 1;
+            
+            prevBtn.disabled = currentSlideIndex === 0;
+            nextBtn.disabled = currentSlideIndex === slides.length - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSlides();
+            }
+        }
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
