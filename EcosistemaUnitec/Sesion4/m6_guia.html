@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Coreografía del Aula</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* Layout: bloques planos Federal Blue / blanco separados por cortes diagonales (facetas del diamante); un solo eje de lectura con un selector interactivo como momento central. */
+:root{
+  --federal:#06065C; --cobalt:#0F49B6; --cyan:#03AED2; --sky:#47C8F0; --white:#FFFFFF; --surface:#F2F2F2;
+  --bg:var(--white); --fg:var(--federal);
+  --font:'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --cut:clamp(28px,6vw,72px);
+  --maxw:1120px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+img{max-width:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[hidden]{display:none!important}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--federal)}
+h1,h2,h3,h4{font-family:var(--font);line-height:1.12;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.lead{font-size:clamp(1.02rem,1.6vw,1.18rem);font-weight:300;max-width:62ch}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+
+/* ---------- Barra superior ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--federal);color:var(--white)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.topbar img{height:30px;width:auto;display:block}
+.topnav{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.topnav a{font-size:.82rem;font-weight:500;text-decoration:none;padding:6px 10px;border-radius:4px;color:var(--white)}
+.topnav a:hover{background:var(--cobalt)}
+.menu-btn{display:none;align-items:center;gap:10px;font-family:var(--font);font-weight:700;font-size:.9rem;color:var(--white);background:transparent;border:2px solid var(--cobalt);min-height:44px;padding:0 14px;cursor:pointer;border-radius:2px}
+.bars{display:grid;gap:4px}.bars i{display:block;width:18px;height:2px;background:var(--white);transition:transform .2s,opacity .2s}
+.menu-btn[aria-expanded="true"] .bars i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] .bars i:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] .bars i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@media (max-width:1024px){
+  .topbar .wrap{position:relative}
+  .menu-btn{display:inline-flex}
+  .topnav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;flex-wrap:nowrap;gap:0;background:var(--federal);border-top:1px solid var(--cobalt);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px));max-height:calc(100vh - 70px);overflow-y:auto}
+  .topnav.open{display:flex}
+  .topnav a{font-size:1rem;padding:12px 8px;min-height:44px;border-bottom:1px solid var(--cobalt);border-radius:0}
+}
+section[id]{scroll-margin-top:72px}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;background:var(--federal);color:var(--white);overflow:hidden;clip-path:polygon(0 0,100% 0,100% calc(100% - var(--cut)),0 100%)}
+.hero .wrap{position:relative;z-index:2;padding-block:clamp(56px,9vw,112px) calc(clamp(56px,9vw,104px) + var(--cut))}
+.hero .mono{position:absolute;z-index:1;right:-6%;top:-12%;height:135%;width:auto;max-width:none;pointer-events:none;opacity:.9}
+.hero .eyebrow{color:var(--sky)}
+.hero h1{font-weight:900;font-size:clamp(2.6rem,8.4vw,6.4rem);letter-spacing:-.03em;margin:.35em 0 .3em;max-width:11ch}
+.hero h1 span{color:var(--sky)}
+.hero .sub{font-weight:600;font-size:clamp(1.05rem,2vw,1.35rem);margin-bottom:1.2rem}
+.hero .lead{color:var(--white)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:2rem}
+.btn{display:inline-flex;align-items:center;gap:.5em;font-family:var(--font);font-weight:700;font-size:.95rem;padding:.85em 1.4em;border:2px solid transparent;cursor:pointer;text-decoration:none;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:transform .15s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn-sky{background:var(--sky);color:var(--federal)}
+.btn-ghost{background:transparent;color:var(--white);border-color:var(--white);clip-path:none;border-radius:2px}
+.btn-cobalt{background:var(--cobalt);color:var(--white)}
+
+/* ---------- Objetivos de la guía ---------- */
+.outcomes{padding-block:clamp(40px,6vw,72px)}
+.outcomes h2{font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:800;margin:.4rem 0 1.6rem}
+.outcomes .eyebrow{color:var(--cobalt)}
+.out-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px}
+.out{display:flex;gap:14px;align-items:flex-start}
+.out .verb{font-weight:800;color:var(--cobalt);display:block;margin-bottom:2px}
+.gem{flex:none;width:18px;height:18px;margin-top:5px;background:var(--cyan);clip-path:polygon(50% 0,100% 38%,50% 100%,0 38%)}
+
+/* ---------- Secciones genéricas ---------- */
+section.block{padding-block:clamp(56px,8vw,96px)}
+.sec-head{display:grid;gap:12px;margin-bottom:clamp(28px,4vw,44px)}
+.sec-head h2{font-size:clamp(1.9rem,4.6vw,3.2rem);font-weight:900;letter-spacing:-.02em}
+.sec-head .eyebrow{color:var(--cobalt)}
+.dark{background:var(--federal);color:var(--white)}
+.dark .sec-head .eyebrow{color:var(--sky)}
+.cut-top{clip-path:polygon(0 var(--cut),100% 0,100% 100%,0 100%);margin-top:calc(-1 * var(--cut));padding-top:calc(clamp(56px,8vw,96px) + var(--cut))}
+.cut-both{clip-path:polygon(0 var(--cut),100% 0,100% calc(100% - var(--cut)),0 100%);margin-block:calc(-1 * var(--cut));padding-block:calc(clamp(56px,8vw,96px) + var(--cut))}
+.surface{background:var(--surface)}
+
+/* ---------- Fundamento ---------- */
+.fund-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,64px)}
+@media (max-width:860px){.fund-grid{grid-template-columns:minmax(0,1fr)}}
+.retrato h3,.principios h3{font-size:1.15rem;font-weight:800;margin-bottom:6px}
+.retrato p.note,.principios p.note{font-weight:300;margin-bottom:18px}
+.retrato ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.retrato li{display:flex;align-items:center;gap:12px;font-weight:600;background:var(--surface);padding:12px 16px}
+.retrato li::before{content:"";flex:none;width:14px;height:14px;background:var(--cobalt);clip-path:polygon(50% 0,100% 38%,50% 100%,0 38%)}
+.p-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:520px){.p-grid{grid-template-columns:1fr}}
+.pcard{border-top:5px solid var(--cobalt);background:var(--white);padding:18px 18px 20px;box-shadow:0 0 0 1px var(--surface) inset}
+.pcard.motor{border-top-color:var(--cyan);background:var(--surface)}
+.pcard h4{font-size:1.25rem;font-weight:800}
+.pcard .q{font-weight:600;color:var(--cobalt);margin:2px 0 10px;font-size:.95rem}
+.pcard p{font-size:.92rem;font-weight:400}
+.pcard .tag{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--federal);background:var(--sky);padding:2px 8px;display:inline-block;margin-bottom:8px}
+
+.metas{margin-top:clamp(36px,5vw,56px)}
+.metas-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:18px}
+.metas-head h3{font-size:1.4rem;font-weight:800}
+.metas-head p{font-size:.92rem;font-weight:300;max-width:52ch}
+.m-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+@media (max-width:760px){.m-grid{grid-template-columns:1fr}}
+.meta{padding:24px 22px 26px;color:var(--white);display:grid;gap:8px;align-content:start}
+.meta:nth-child(1){background:var(--cobalt)}
+.meta:nth-child(2){background:var(--federal)}
+.meta:nth-child(3){background:var(--cyan);color:var(--federal)}
+.meta .kind{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.95}
+.meta h4{font-size:1.6rem;font-weight:900}
+.meta .stem{font-weight:600;font-style:italic}
+.meta p{font-size:.92rem}
+.meta .seq{font-weight:800;letter-spacing:.08em;margin-top:6px}
+
+/* ---------- Instrumentos x objetivos ---------- */
+.io-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:clamp(28px,5vw,56px);align-items:start}
+@media (max-width:900px){.io-grid{grid-template-columns:minmax(0,1fr)}}
+.io-grid>*,.fund-grid>*{min-width:0}
+.io-list{display:grid;gap:22px}
+.io-list h3{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--sky);margin-bottom:8px}
+.io-list dl{margin:0;display:grid;gap:10px}
+.io-list dt{font-weight:800;font-size:1.05rem}
+.io-list dd{margin:0;font-weight:300;font-size:.93rem}
+.io-list .key{border-left:4px solid var(--cyan);padding:10px 14px;background:var(--cobalt);font-size:.92rem}
+.matrix-wrap{overflow-x:auto}
+.matrix{width:100%;min-width:480px;border-collapse:separate;border-spacing:6px;table-layout:fixed}
+.matrix th{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sky);text-align:left;padding:4px 6px;vertical-align:bottom}
+.matrix th.row{color:var(--white);text-transform:none;letter-spacing:0;font-size:.9rem;font-weight:700;width:26%}
+.matrix td{background:rgba(255,255,255,.06);border:1px solid var(--cobalt);height:86px;padding:8px;vertical-align:top}
+.matrix td.empty{background:transparent;border-style:dashed}
+.stage-pill{display:block;font-size:.82rem;font-weight:700;padding:4px 8px;margin-bottom:4px;background:var(--cobalt);color:var(--white);transition:background .25s,color .25s,opacity .25s}
+.stage-pill small{font-weight:500;opacity:.85;margin-left:4px}
+.matrix[data-focus] .stage-pill{opacity:.28}
+.matrix[data-focus="ccc"] .stage-pill[data-seq="ccc"],
+.matrix[data-focus="dip"] .stage-pill[data-seq="dip"],
+.matrix[data-focus="car"] .stage-pill[data-seq="car"]{opacity:1;background:var(--sky);color:var(--federal)}
+.mx-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.mx-filter button{font-family:var(--font);font-weight:700;font-size:.85rem;padding:6px 14px;background:transparent;color:var(--white);border:2px solid var(--cobalt);cursor:pointer;border-radius:2px}
+.mx-filter button[aria-pressed="true"]{background:var(--sky);border-color:var(--sky);color:var(--federal)}
+.mx-caption{font-size:.85rem;font-weight:300;margin-top:10px}
+
+/* ---------- Selector de secuencia ---------- */
+.picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:28px}
+@media (max-width:760px){.picker{grid-template-columns:1fr}}
+.pick{font-family:var(--font);text-align:left;cursor:pointer;background:var(--white);color:var(--federal);border:2px solid var(--federal);padding:18px 20px;display:grid;gap:4px;transition:background .2s,color .2s,transform .15s}
+.pick:hover{transform:translateY(-2px)}
+.pick .ask{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.pick strong{font-size:1.15rem;font-weight:800;line-height:1.25}
+.pick .code{font-weight:900;font-size:.9rem;letter-spacing:.1em}
+.pick[aria-pressed="true"]{background:var(--federal);color:var(--white)}
+.pick[aria-pressed="true"] .ask{color:var(--sky)}
+.seq-panel{background:var(--federal);color:var(--white);padding:clamp(22px,4vw,40px);clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,28px 100%,0 calc(100% - 28px))}
+.seq-top{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-start;margin-bottom:24px}
+.seq-top .code{font-size:clamp(2.6rem,7vw,4.4rem);font-weight:900;letter-spacing:-.02em;line-height:1;color:var(--sky)}
+.seq-top h3{font-size:clamp(1.2rem,2.4vw,1.6rem);font-weight:800}
+.seq-top .stem{font-style:italic;font-weight:500;color:var(--sky);margin-top:4px}
+.seq-top .flow{font-weight:700;font-size:.95rem;margin-top:6px}
+.stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:st}
+@media (max-width:820px){.stages{grid-template-columns:1fr}}
+.stage{position:relative;background:var(--cobalt);padding:20px 18px 22px;display:grid;gap:10px;align-content:start;min-width:0}
+.stage:last-child{background:var(--cyan);color:var(--federal)}
+.stage .num{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+.stage h4{font-size:1.45rem;font-weight:900}
+.io-tag{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:.82rem;font-weight:700}
+.io-tag span{background:var(--white);color:var(--federal);padding:2px 8px}
+.stage p{font-size:.93rem}
+.stage.reveal{animation:stageIn .5s cubic-bezier(.2,.7,.2,1) both}
+.stage.reveal:nth-child(2){animation-delay:.12s}.stage.reveal:nth-child(3){animation-delay:.24s}
+@keyframes stageIn{from{transform:translateY(14px);opacity:.25}to{transform:none;opacity:1}}
+.golden{display:flex;gap:14px;align-items:flex-start;margin-top:22px;padding-top:18px;border-top:1px solid var(--cobalt);font-size:.95rem}
+.golden strong{color:var(--sky)}
+.seq-slide{margin-top:20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.seq-slide button{font-family:var(--font)}
+
+/* ---------- Arsenal ---------- */
+.tabs{display:flex;gap:0;border-bottom:3px solid var(--federal);margin-bottom:28px;flex-wrap:wrap}
+.tab{font-family:var(--font);font-weight:800;font-size:1rem;padding:12px 20px;border:none;background:transparent;color:var(--federal);cursor:pointer}
+.tab small{display:block;font-weight:400;font-size:.78rem}
+.tab[aria-selected="true"]{background:var(--federal);color:var(--white)}
+.case{font-size:.92rem;font-weight:300;margin-bottom:22px;max-width:70ch}
+.case strong{font-weight:700}
+.grasps-strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin-bottom:24px}
+@media (max-width:640px){.grasps-strip{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.gl{background:var(--federal);color:var(--white);padding:10px 8px;text-align:center}
+.gl b{display:block;font-size:1.6rem;font-weight:900;color:var(--sky);line-height:1}
+.gl span{font-size:.74rem;font-weight:600}
+.proj-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:760px){.proj-grid{grid-template-columns:1fr}}
+.proj{background:var(--white);border:2px solid var(--federal);padding:22px;display:grid;gap:10px;align-content:start}
+.proj .meta-line{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;background:var(--surface);color:var(--federal)}
+.pill.c{background:var(--cobalt);color:var(--white)}
+.proj h3{font-size:1.3rem;font-weight:800}
+.proj p{font-size:.93rem}
+.phases{display:grid;gap:8px;margin-top:4px}
+.phase{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:.9rem;align-items:start}
+.phase b{background:var(--federal);color:var(--white);font-size:.75rem;padding:2px 8px;font-weight:700;white-space:nowrap}
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+.flip{perspective:1000px;min-height:270px;cursor:pointer;background:none;border:none;padding:0;font-family:var(--font);text-align:left;color:inherit}
+.flip-inner{position:relative;width:100%;height:100%;min-height:270px;transition:transform .55s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+.flip[aria-pressed="true"] .flip-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:20px;display:flex;flex-direction:column;gap:10px;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%)}
+.face.front{background:var(--federal);color:var(--white)}
+.face.back{background:var(--cyan);color:var(--federal);transform:rotateY(180deg)}
+.face .time{font-weight:900;font-size:2rem;color:var(--sky);line-height:1}
+.face .time small{font-size:.8rem;font-weight:600;color:var(--white);margin-left:4px}
+.face h3{font-size:1.25rem;font-weight:800}
+.face .alias{font-size:.82rem;font-weight:500;color:var(--sky)}
+.face .hint{margin-top:auto;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.face.back p{font-size:.9rem}
+.face.back .why{font-weight:700;font-size:.85rem;margin-top:auto}
+.star{margin-top:28px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:var(--surface);padding:18px 20px}
+.star-letters{display:flex;gap:4px}
+.star-letters span{width:40px;height:40px;display:grid;place-items:center;font-weight:900;color:var(--white);background:var(--cobalt)}
+.star p{font-size:.92rem}
+@media (max-width:560px){.star{grid-template-columns:1fr}}
+
+/* ---------- Hoja de ruta ---------- */
+.road{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:900px){.road{grid-template-columns:1fr}}
+.track{position:absolute;left:0;right:0;top:27px;height:4px;background:var(--cobalt);z-index:0}
+.track i{display:block;height:100%;width:0;background:var(--sky);transition:width .4s ease}
+@media (max-width:900px){.track{display:none}}
+.step{position:relative;z-index:1;display:grid;gap:10px;align-content:start}
+.step .node{width:58px;height:58px;display:grid;place-items:center;background:var(--federal);color:var(--white);border:4px solid var(--cobalt);font-weight:900;font-size:1.3rem;clip-path:polygon(50% 0,100% 38%,50% 100%,0 38%);transition:background .3s}
+.step.done .node{background:var(--sky);color:var(--federal)}
+.step h3{font-size:1.15rem;font-weight:800}
+.step p{font-size:.92rem;font-weight:300}
+.step label{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--sky);cursor:pointer}
+.step input{width:18px;height:18px;accent-color:var(--sky)}
+.road-status{margin-top:24px;font-weight:600}
+
+/* ---------- Galería ---------- */
+.gal-note{font-size:.88rem;font-weight:300;max-width:72ch;margin-top:6px}
+.film{display:grid;grid-auto-flow:column;grid-auto-columns:min(78vw,440px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;margin-top:8px}
+.film::-webkit-scrollbar{height:8px}.film::-webkit-scrollbar-thumb{background:var(--cobalt)}
+.shot{scroll-snap-align:start;margin:0;display:grid;gap:8px;min-width:0}
+.shot button{display:block;width:100%;padding:0;border:none;background:var(--surface);cursor:zoom-in;aspect-ratio:1376/768;max-width:100%;overflow:hidden}
+.shot img{display:block;width:100%;height:100%;object-fit:cover}
+.shot figcaption{font-size:.82rem;font-weight:500}
+.shot figcaption b{color:var(--cobalt);font-weight:800;margin-right:6px}
+.ph{width:100%;height:100%;display:grid;place-items:center;text-align:center;padding:14px;background:var(--surface);color:var(--federal);font-size:.85rem;font-weight:500}
+.ph b{display:block;font-weight:800;color:var(--cobalt);margin-bottom:4px}
+.film-nav{display:flex;gap:8px;justify-content:flex-end;margin-top:4px}
+.film-nav button{font-family:var(--font);font-weight:800;width:44px;height:44px;border:2px solid var(--federal);background:var(--white);color:var(--federal);cursor:pointer}
+.media-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;margin-top:36px}
+@media (max-width:820px){.media-row{grid-template-columns:1fr}}
+.media-card h3{font-size:1.15rem;font-weight:800;margin-bottom:10px}
+.media-box{background:var(--federal);aspect-ratio:16/9;max-width:100%;overflow:hidden;display:grid}
+.media-box video,.media-box img{width:100%;height:100%;object-fit:contain;display:block}
+.media-box button{padding:0;border:none;background:none;cursor:zoom-in}
+.media-box .ph{background:var(--federal);color:var(--white)}
+.media-box .ph b{color:var(--sky)}
+
+
+.example-note{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:start;background:var(--white);border:2px dashed var(--cobalt);padding:18px 20px;margin-bottom:28px;max-width:880px}
+.example-note p{font-size:.95rem;grid-column:2}
+.example-note .ex-link{grid-column:2;font-weight:700;color:var(--cobalt);font-size:.9rem}
+.ex-badge{grid-row:span 2;align-self:start;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--cobalt);color:var(--white);padding:6px 10px;white-space:nowrap}
+@media (max-width:560px){.example-note{grid-template-columns:1fr}.example-note p,.example-note .ex-link{grid-column:1}.ex-badge{grid-row:auto;justify-self:start}}
+.io-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btn-line{background:transparent;color:var(--white);border:2px solid var(--sky);clip-path:none;border-radius:2px;font-size:.85rem;padding:.6em 1em}
+.seq-slide .btn-line{color:var(--white)}
+.film-title{font-size:1.15rem;font-weight:800;margin:36px 0 4px}
+.film.info{grid-auto-columns:min(82vw,520px)}
+.shot.info button{aspect-ratio:2752/1536}
+.practice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+.pr-card{display:grid;gap:8px;align-content:start;text-decoration:none;background:var(--white);color:var(--federal);border:2px solid var(--federal);padding:22px 20px;transition:transform .15s,background .2s,color .2s;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%)}
+.pr-card:hover{transform:translateY(-3px);background:var(--federal);color:var(--white)}
+.pr-card .big{font-size:2.4rem;font-weight:900;line-height:1;color:var(--cobalt)}
+.pr-card:hover .big{color:var(--sky)}
+.pr-card .big small{font-size:.85rem;font-weight:600;margin-left:6px}
+.pr-card h3{font-size:1.15rem;font-weight:800}
+.pr-card p{font-size:.9rem}
+.pr-card .go{margin-top:6px;font-weight:700;font-size:.85rem;color:var(--cobalt)}
+.pr-card:hover .go{color:var(--sky)}
+.pdf-row{margin-top:14px}
+.video-wrap{margin-top:8px;max-width:880px}
+.video-wrap .media-box{margin-top:12px}
+.video-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:32px;background:var(--federal);color:var(--white);padding:20px 22px}
+.video-cta p{font-size:.95rem;max-width:60ch}
+.video-cta strong{color:var(--sky)}
+
+/* ---------- Ajustes para teléfono y tableta ---------- */
+@media (max-width:760px){
+  .hero .mono{height:85%;right:-38%;top:auto;bottom:6%;opacity:.55}
+  .hero h1{max-width:none}
+  .cta-row .btn{width:100%;justify-content:center}
+  .mx-filter button{min-height:44px;padding:8px 16px}
+  .tab{flex:1 1 50%;min-height:56px;padding:10px 12px;font-size:.95rem}
+  .pick{padding:16px}
+  .seq-slide .btn{width:100%;justify-content:center}
+  .step label{min-height:44px}
+  .pdf-row .btn{width:100%;justify-content:center}
+  .lb-stage{touch-action:pan-y}
+}
+.swipe-hint{display:none;font-size:.8rem;font-weight:600;color:var(--sky);margin-bottom:8px}
+@media (max-width:640px){.swipe-hint{display:block}.matrix{min-width:440px}.matrix td{height:auto;min-height:64px}}
+.film-hint{display:none;font-size:.8rem;font-weight:600;color:var(--cobalt);margin:0 0 6px}
+@media (hover:none){.film-hint{display:block}}
+
+/* ---------- Lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:80;background:var(--federal);display:grid;grid-template-rows:auto 1fr auto;padding:calc(env(safe-area-inset-top,0px) + 12px) max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 12px) max(16px,env(safe-area-inset-left,0px));color:var(--white)}
+.lb-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lb-top p{font-size:.9rem;font-weight:500}
+.lb-stage{display:grid;place-items:center;min-height:0;padding:12px 0}
+.lb-stage img{max-width:100%;max-height:100%;object-fit:contain}
+.lb-bot{display:flex;justify-content:center;gap:10px}
+.lb button{font-family:var(--font);font-weight:800;min-width:44px;height:44px;padding:0 14px;border:2px solid var(--white);background:transparent;color:var(--white);cursor:pointer}
+
+/* ---------- Resumen y pie ---------- */
+.keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
+.key-card{border-left:5px solid var(--sky);padding:6px 0 6px 16px}
+.key-card h3{font-size:1.05rem;font-weight:800;margin-bottom:6px;color:var(--sky)}
+.key-card p{font-size:.92rem}
+.key-card .flows{font-weight:700;font-size:.9rem;display:grid;gap:2px}
+.closing{margin-top:40px;font-size:clamp(1.15rem,2.4vw,1.6rem);font-weight:300;max-width:46ch}
+.closing b{font-weight:800;color:var(--sky)}
+.ai-note{background:var(--surface);padding-block:clamp(40px,6vw,64px)}
+.ai-box{background:var(--white);border-left:6px solid var(--cyan);padding:clamp(20px,3vw,32px);display:grid;gap:12px;max-width:900px}
+.ai-badge{justify-self:start;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--federal);color:var(--white);padding:5px 10px}
+.ai-box h2{font-size:clamp(1.3rem,2.6vw,1.7rem);font-weight:800}
+.ai-box p{font-size:.95rem;max-width:72ch}
+.ai-box a{color:var(--cobalt);font-weight:600;overflow-wrap:anywhere}
+.ai-small{font-size:.82rem!important;font-weight:300}
+footer{background:var(--white);padding-block:40px 48px}
+footer .wrap{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start}
+@media (max-width:700px){footer .wrap{grid-template-columns:1fr}}
+footer img.logo{height:44px;width:auto}
+footer p{font-size:.82rem;font-weight:400;max-width:80ch}
+footer p + p{margin-top:8px}
+footer a{color:var(--cobalt);font-weight:600}
+</style>
+
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <img src="IMG/unitec-horizontal-blanco.png" alt="UNITEC">
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="topnav"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>Secciones</button>
+    <nav class="topnav" id="topnav" aria-label="Secciones">
+      <a href="#fundamento">Fundamento</a>
+      <a href="#instrumentos">Instrumentos</a>
+      <a href="#secuencias">Secuencias</a>
+      <a href="#ejemplo">Ejemplo</a>
+      <a href="#ruta">Hoja de ruta</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#practica">Practicar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="t-hero">
+  <img class="mono" src="IMG/unitec-monograma-ut-cobalt.png" alt="" aria-hidden="true">
+  <div class="wrap">
+    <p class="eyebrow">Guía Docente · Ecosistema de Aprendizaje UNITEC</p>
+    <h1 id="t-hero">La coreografía <span>del aula</span></h1>
+    <p class="sub">Secuencias de aprendizaje CCC, DIP y CAR</p>
+    <p class="lead">¿Es posible transformar a un estudiante de receptor pasivo en el comandante activo de su propio aprendizaje solo cambiando el orden intencional de las actividades de clase? La respuesta está en entender cómo aprende el cerebro y en diseñar el orden de cada momento.</p>
+    <div class="cta-row">
+      <a class="btn btn-sky" href="#secuencias">Encontrar mi secuencia</a>
+      <a class="btn btn-ghost" href="https://notebooklm.link.google/B3ktnbLnm01E" target="_blank" rel="noopener">Ver la guía original en Gemini Notebook ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="outcomes" aria-labelledby="t-out">
+  <div class="wrap">
+    <p class="eyebrow">Al terminar esta guía, usted podrá</p>
+    <h2 id="t-out">Cuatro capacidades para planificar con intención</h2>
+    <div class="out-grid">
+      <div class="out"><span class="gem" aria-hidden="true"></span><p><span class="verb">Identificar</span>los principios del Ecosistema de Aprendizaje y los tres tipos de metas formativas.</p></div>
+      <div class="out"><span class="gem" aria-hidden="true"></span><p><span class="verb">Diferenciar</span>la arquitectura interna de las secuencias CCC, DIP y CAR.</p></div>
+      <div class="out"><span class="gem" aria-hidden="true"></span><p><span class="verb">Analizar</span>tareas GRASPS de alta carga cognitiva y dinámicas ágiles de aula a partir de un ejemplo real.</p></div>
+      <div class="out"><span class="gem" aria-hidden="true"></span><p><span class="verb">Diseñar</span>una primera secuencia progresiva, sostenible y centrada en el estudiante.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block surface" id="fundamento" aria-labelledby="t-fund">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">01 · El fundamento</p>
+      <h2 id="t-fund">Ninguna clase existe por inercia</h2>
+      <p class="lead">Cada asignatura responde a una razón de ser: el Retrato del Egresado. Los Principios de Aprendizaje son el suelo firme sobre el que se construye cada actividad.</p>
+    </div>
+    <div class="fund-grid">
+      <div class="retrato">
+        <h3>El Retrato del Egresado</h3>
+        <p class="note">La estrella del norte: seis atributos que cada clase ayuda a cultivar.</p>
+        <ul>
+          <li>Líder con Propósito</li>
+          <li>Solucionador de Problemas Empático</li>
+          <li>Innovador Creativo</li>
+          <li>Comunicador Efectivo</li>
+          <li>Ciudadano Responsable</li>
+          <li>Colaborador Constructivo</li>
+        </ul>
+      </div>
+      <div class="principios">
+        <h3>Los cuatro Principios de Aprendizaje</h3>
+        <p class="note">Cada principio responde a una pregunta guía. Úsela como filtro al diseñar.</p>
+        <div class="p-grid">
+          <article class="pcard"><h4>Propósito</h4><p class="q">¿Por qué aprendemos?</p><p>Tener siempre claro para qué sirve cada actividad. Si una tarea no aporta al propósito formativo del perfil profesional, vale la pena cuestionar su permanencia.</p></article>
+          <article class="pcard"><h4>Posibilidad</h4><p class="q">¿Quiénes estamos llegando a ser?</p><p>Ver el potencial del estudiante a futuro. No sabemos qué decisiones tomará en veinte años; el aula forma hoy la base técnica y ética para ese momento.</p></article>
+          <article class="pcard"><h4>Personas</h4><p class="q">¿Con quién aprendemos?</p><p>La humanidad está al centro. Cultivamos relaciones basadas en la confianza y el respeto para apoyar la motivación y el bienestar integral de toda la comunidad universitaria.</p></article>
+          <article class="pcard"><h4>Autonomía</h4><p class="q">¿Cómo asumimos la responsabilidad?</p><p>Diseñar el aula para que el estudiante asuma la agencia de su aprendizaje, sin que el docente tenga que empujarlo constantemente.</p></article>
+        </div>
+      </div>
+    </div>
+
+    <div class="metas">
+      <div class="metas-head">
+        <h3>Las tres metas de aprendizaje</h3>
+        <p>Defina un número manejable de metas por asignatura, equilibrando las tres dimensiones.</p>
+      </div>
+      <div class="m-grid">
+        <article class="meta"><span class="kind">Saber</span><h4>Conceptual</h4><p class="stem">"Los estudiantes entienden que…"</p><p>Comprender principios profundos e interrelacionados. Es la base teórica de la pirámide.</p><span class="seq">→ Secuencia CCC</span></article>
+        <article class="meta"><span class="kind">Saber hacer</span><h4>Competencia</h4><p class="stem">"Los estudiantes serán capaces de…"</p><p>Modelar habilidades y procedimientos del ejercicio profesional real, alineados con los estándares de calidad de su disciplina.</p><span class="seq">→ Secuencia DIP</span></article>
+        <article class="meta"><span class="kind">Ser</span><h4>Carácter</h4><p class="stem">"Los estudiantes se vuelven más…"</p><p>Cultivar valores éticos, juicio, apertura a la retroalimentación y responsabilidad social. Es lo que distingue al egresado en el mundo laboral.</p><span class="seq">→ Secuencia CAR</span></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block dark cut-both" id="instrumentos" aria-labelledby="t-io">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">02 · Cómo aprende el cerebro</p>
+      <h2 id="t-io">3 instrumentos, 3 objetivos</h2>
+      <p class="lead">El aprendizaje no ocurre por transmisión pasiva. Cada etapa de una secuencia combina un instrumento con un objetivo, y el orden de esas combinaciones decide el éxito.</p>
+    </div>
+    <div class="io-grid">
+      <div class="io-list">
+        <div>
+          <h3>Instrumentos</h3>
+          <dl>
+            <div><dt>Conocimiento previo</dt><dd>El cerebro nunca llega en blanco: vivencias, conceptos e intuiciones son el punto de anclaje.</dd></div>
+            <div><dt>Indagación</dt><dd>El territorio de lo desconocido. Activa la curiosidad y desestabiliza certezas.</dd></div>
+            <div><dt>Aplicación</dt><dd>Práctica real o simulada. Sin aplicación no hay retención a largo plazo.</dd></div>
+          </dl>
+        </div>
+        <div>
+          <h3>Objetivos</h3>
+          <dl>
+            <div><dt>Observar</dt><dd>Que la información entre y se registre activamente en el pensamiento.</dd></div>
+            <div><dt>Comprender</dt><dd>Procesar las relaciones lógicas del concepto o proceso.</dd></div>
+            <div><dt>Crecer</dt><dd>El conocimiento se interioriza y transforma la capacidad del estudiante.</dd></div>
+          </dl>
+        </div>
+        <p class="key"><b>Entender no es lo mismo que aprender.</b> Comprender es una etapa intermedia; todas las secuencias terminan en crecer.</p>
+        <div class="io-links"><button type="button" class="btn btn-line" data-info="0">Ver infografía: instrumentos y objetivos</button><button type="button" class="btn btn-line" data-info="1">Ver infografía: coreografía del aula</button></div>
+      </div>
+      <div>
+        <div class="mx-filter" role="group" aria-label="Resaltar una secuencia en la matriz">
+          <button type="button" data-mx="" aria-pressed="true">Todas</button>
+          <button type="button" data-mx="ccc" aria-pressed="false">CCC</button>
+          <button type="button" data-mx="dip" aria-pressed="false">DIP</button>
+          <button type="button" data-mx="car" aria-pressed="false">CAR</button>
+        </div>
+        <p class="swipe-hint">Deslice la matriz hacia los lados →</p>
+        <div class="matrix-wrap">
+          <table class="matrix" id="matrix">
+            <thead><tr><th scope="col"><span class="sr">Instrumento ↓ · Objetivo →</span></th><th scope="col">Observar</th><th scope="col">Comprender</th><th scope="col">Crecer</th></tr></thead>
+            <tbody>
+              <tr><th class="row" scope="row">Conocimiento previo</th>
+                <td><span class="stage-pill" data-seq="ccc">Conectar<small>CCC</small></span></td>
+                <td><span class="stage-pill" data-seq="dip">Identificar<small>DIP</small></span><span class="stage-pill" data-seq="car">Considerar<small>CAR</small></span></td>
+                <td class="empty"></td></tr>
+              <tr><th class="row" scope="row">Indagación</th>
+                <td><span class="stage-pill" data-seq="dip">Deconstruir<small>DIP</small></span></td>
+                <td><span class="stage-pill" data-seq="ccc">Construir<small>CCC</small></span></td>
+                <td><span class="stage-pill" data-seq="car">Reflexionar<small>CAR</small></span></td></tr>
+              <tr><th class="row" scope="row">Aplicación</th>
+                <td><span class="stage-pill" data-seq="car">Actuar<small>CAR</small></span></td>
+                <td class="empty"></td>
+                <td><span class="stage-pill" data-seq="ccc">Contribuir<small>CCC</small></span><span class="stage-pill" data-seq="dip">Practicar<small>DIP</small></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mx-caption">Cada etapa ocupa una sola combinación instrumento → objetivo. Elija una secuencia para ver su recorrido por la matriz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="secuencias" aria-labelledby="t-seq">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">03 · Las secuencias intencionales</p>
+      <h2 id="t-seq">¿Qué tipo de meta quiere lograr?</h2>
+      <p class="lead">No existe un modelo único, pero sí una secuencia óptima para cada tipo de meta. Elija la suya.</p>
+    </div>
+    <div class="picker" role="group" aria-label="Tipo de meta">
+      <button class="pick" type="button" data-seq="ccc" aria-pressed="true"><span class="ask">Quiero que comprendan</span><strong>un principio o concepto profundo</strong><span class="code">CCC · Conceptual</span></button>
+      <button class="pick" type="button" data-seq="dip" aria-pressed="false"><span class="ask">Quiero que dominen</span><strong>una habilidad o procedimiento técnico</strong><span class="code">DIP · Competencias</span></button>
+      <button class="pick" type="button" data-seq="car" aria-pressed="false"><span class="ask">Quiero que formen</span><strong>juicio ético y profesional</strong><span class="code">CAR · Carácter</span></button>
+    </div>
+    <div class="seq-panel" id="seqPanel" aria-live="polite">
+      <div class="seq-top">
+        <div><p class="code" id="sqCode">CCC</p></div>
+        <div style="flex:1;min-width:220px">
+          <h3 id="sqName">Aprendizaje Conceptual</h3>
+          <p class="stem" id="sqStem">"Los estudiantes entienden que…"</p>
+          <p class="flow" id="sqFlow">Conectar → Construir → Contribuir</p>
+        </div>
+      </div>
+      <div class="stages" id="sqStages"></div>
+      <div class="golden"><span class="gem" aria-hidden="true"></span><p><strong>Regla de oro.</strong> La duración de cada etapa puede variar (minutos, días o semanas); lo que no cambia es el orden de las fases.</p></div>
+      <div class="seq-slide"><button type="button" class="btn btn-sky" id="sqInfoBtn">Ver la infografía de esta secuencia</button><button type="button" class="btn btn-line" id="sqSlideBtn">Ver la diapositiva</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="block surface" id="ejemplo" aria-labelledby="t-ars">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">04 · Ejemplo en Ingeniería</p>
+      <h2 id="t-ars">Así se ve en Diseño Estructural en Concreto</h2>
+      <p class="lead">Un caso real de la asignatura CIV414 que combina proyectos auténticos de varias semanas con dinámicas breves de 10 a 40 minutos.</p>
+    </div>
+    <div class="example-note" role="note">
+      <span class="ex-badge">Ejemplo ilustrativo</span>
+      <p><strong>Tómelo como inspiración, no como receta.</strong> Estas tareas muestran una forma posible de llevar las secuencias al aula en una asignatura de ingeniería. Adapte los roles, productos y tiempos a su disciplina, a sus metas y a sus estudiantes; no es necesario replicarlas tal cual.</p>
+      <a class="ex-link" href="https://notebooklm.link.google/BtwXHxPchG7c" target="_blank" rel="noopener">Ver el mapa conceptual del ejemplo ↗</a>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Tipo de tarea">
+      <button class="tab" role="tab" id="tab-g" aria-controls="pan-g" aria-selected="true">Tareas GRASPS<small>Alta carga cognitiva</small></button>
+      <button class="tab" role="tab" id="tab-n" aria-controls="pan-n" aria-selected="false" tabindex="-1">Dinámicas ágiles<small>Baja carga cognitiva</small></button>
+    </div>
+
+    <div role="tabpanel" id="pan-g" aria-labelledby="tab-g">
+      <div class="grasps-strip" aria-label="Componentes GRASPS">
+        <div class="gl"><b>G</b><span>Goal · Meta</span></div>
+        <div class="gl"><b>R</b><span>Role · Rol</span></div>
+        <div class="gl"><b>A</b><span>Audience · Audiencia</span></div>
+        <div class="gl"><b>S</b><span>Situation · Situación</span></div>
+        <div class="gl"><b>P</b><span>Product · Producto</span></div>
+        <div class="gl"><b>S</b><span>Standards · Estándares</span></div>
+      </div>
+      <div class="proj-grid">
+        <article class="proj">
+          <div class="meta-line"><span class="pill c">Individual</span><span class="pill">2 fases</span></div>
+          <h3>El Analista Estructural</h3>
+          <p>El estudiante asume el rol de auditor técnico de la Secretaría de Infraestructura (SIT).</p>
+          <div class="phases">
+            <div class="phase"><b>Fase 1</b><span>Reconstruye un modelo computacional y detecta errores de idealización.</span></div>
+            <div class="phase"><b>Fase 2</b><span>Audita el trabajo de un compañero con retroalimentación STAR y emite un dictamen final.</span></div>
+          </div>
+          <p><strong>Detalle de diseño:</strong> cada estudiante recibe parámetros únicos vinculados a su número de cuenta, lo que evita el fraude y obliga a decidir con autonomía.</p>
+        </article>
+        <article class="proj">
+          <div class="meta-line"><span class="pill c">Grupal</span><span class="pill">Panel evaluador</span></div>
+          <h3>La Firma Consultora</h3>
+          <p>Los estudiantes forman una firma de ingeniería contratada para diseñar una escuela comunitaria a partir de planos arquitectónicos rudimentarios.</p>
+          <div class="phases">
+            <div class="phase"><b>Producto</b><span>Propuesta técnica y económica.</span></div>
+            <div class="phase"><b>Audiencia</b><span>Panel de cliente y docentes, ante quien compiten profesionalmente por puntos de mérito.</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="pan-n" aria-labelledby="tab-n" hidden>
+      <div class="flip-grid">
+        <button class="flip" type="button" aria-pressed="false"><div class="flip-inner">
+          <div class="face front"><p class="time">10–15<small>min</small></p><h3>El Pre-Mortem</h3><p class="alias">Ingeniería forense inversa</p><p class="hint">Toque para ver cómo funciona</p></div>
+          <div class="face back"><p>Año 2030: un sismo ficticio colapsó su edificio. En 10 a 15 minutos redactan "La autopsia del modelo" con 3 errores de criterio que causaron el fallo.</p><p class="why">Combate el sesgo de confirmación.</p></div>
+        </div></button>
+        <button class="flip" type="button" aria-pressed="false"><div class="flip-inner">
+          <div class="face front"><p class="time">⇄</p><h3>Tira y afloja</h3><p class="alias">Tug of War</p><p class="hint">Toque para ver cómo funciona</p></div>
+          <div class="face back"><p>Debate en la pizarra con notas adhesivas para sopesar compromisos técnicos entre dos sistemas, por ejemplo losa maciza contra vigueta y bovedilla.</p><p class="why">Hace visibles los trade-offs.</p></div>
+        </div></button>
+        <button class="flip" type="button" aria-pressed="false"><div class="flip-inner">
+          <div class="face front"><p class="time">35<small>min</small></p><h3>Consenso 1-3-6</h3><p class="alias">Dilemas éticos en tres rondas</p><p class="hint">Toque para ver cómo funciona</p></div>
+          <div class="face back"><p>Reflexión individual (8 min), negociación en tríos sin votar por mayoría (12 min) y síntesis en sextetos (15 min), cerrada con una firma de compromiso ético.</p><p class="why">Útil en la etapa Considerar de CAR.</p></div>
+        </div></button>
+        <button class="flip" type="button" aria-pressed="false"><div class="flip-inner">
+          <div class="face front"><p class="time">5<small>estaciones</small></p><h3>Bajada de cargas</h3><p class="alias">Claim · Support · Question</p><p class="hint">Toque para ver cómo funciona</p></div>
+          <div class="face back"><p>Recorrido técnico por el campus en 5 estaciones físicas para rastrear cómo tributan las fuerzas estructurales en tiempo real.</p><p class="why">Lleva la teoría al edificio que pisan.</p></div>
+        </div></button>
+      </div>
+    </div>
+
+    <div class="star">
+      <div class="star-letters" aria-hidden="true"><span>S</span><span>T</span><span>A</span><span>R</span></div>
+      <p><strong>Retroalimentación STAR</strong>, presente en la Fase 2 del Analista Estructural y en la etapa Practicar de DIP: Específica, Oportuna, Accionable y Respetuosa. "Lo que funcionó bien… Aún mejor si…"</p>
+    </div>
+  </div>
+</section>
+
+<section class="block dark cut-top" id="ruta" aria-labelledby="t-ruta">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">05 · Hoja de ruta</p>
+      <h2 id="t-ruta">Empiece por una sola secuencia</h2>
+      <p class="lead">Cambiar toda la asignatura de golpe genera sobrecarga y frustración. Avance en cuatro pasos y marque su progreso.</p>
+    </div>
+    <div class="road" id="road">
+      <div class="track" aria-hidden="true"><i id="trackFill"></i></div>
+      <div class="step"><span class="node">1</span><h3>Condensar y seleccionar metas</h3><p>Revise su programa y reorganice las subcompetencias en un número manejable de metas, articulando lo conceptual, la competencia y el carácter.</p><label><input type="checkbox" id="rs1"> Hecho</label></div>
+      <div class="step"><span class="node">2</span><h3>Diseñar una unidad piloto</h3><p>Elija un solo tema o módulo, una meta específica y su secuencia: CCC para un principio, DIP para una habilidad, CAR para el juicio ético.</p><label><input type="checkbox" id="rs2"> Hecho</label></div>
+      <div class="step"><span class="node">3</span><h3>Integrar una dinámica ágil</h3><p>Introduzca una tarea breve, como un Pre-Mortem de 10 a 15 minutos o un Claim-Support-Question, para romper la pasividad.</p><label><input type="checkbox" id="rs3"> Hecho</label></div>
+      <div class="step"><span class="node">4</span><h3>Probar, recoger evidencia y ajustar</h3><p>Ejecute la experiencia. Haga del error un insumo y no una penalización, observe el clima del aula y amplíe poco a poco.</p><label><input type="checkbox" id="rs4"> Hecho</label></div>
+    </div>
+    <p class="road-status" id="roadStatus" aria-live="polite">0 de 4 pasos completados.</p>
+  </div>
+</section>
+
+<section class="block" id="recursos" aria-labelledby="t-rec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">06 · Recursos de la guía original</p>
+      <h2 id="t-rec">Presentación, infografías y video</h2>
+      <p class="gal-note">Materiales generados con IA en Gemini Notebook a partir de las fuentes del Ecosistema. Se muestran tal como fueron creados; su diseño no sigue el Manual de Marca UNITEC. Toque cualquier imagen para ampliarla.</p>
+    </div>
+    <h3 class="film-title">Presentación: 12 diapositivas</h3>
+    <p class="film-hint">Deslice para ver más · toque una imagen para ampliarla</p>
+    <div class="film" id="film" tabindex="0" aria-label="Diapositivas de la presentación"></div>
+    <div class="film-nav"><button type="button" data-film="film" data-dir="-1" aria-label="Diapositivas anteriores">←</button><button type="button" data-film="film" data-dir="1" aria-label="Diapositivas siguientes">→</button></div>
+    <div class="pdf-row"><a class="btn btn-cobalt" href="PDF/presentacion-ecosistema-de-aprendizaje.pdf" target="_blank" rel="noopener">Abrir la presentación en PDF ↗</a></div>
+    <h3 class="film-title">Infografías</h3>
+    <p class="film-hint">Deslice para ver más · toque una imagen para ampliarla</p>
+    <div class="film info" id="filmInfo" tabindex="0" aria-label="Infografías"></div>
+    <div class="film-nav"><button type="button" data-film="filmInfo" data-dir="-1" aria-label="Infografías anteriores">←</button><button type="button" data-film="filmInfo" data-dir="1" aria-label="Infografías siguientes">→</button></div>
+    <div class="video-wrap">
+      <h3 class="film-title">Video resumen: diseñar la secuencia piloto</h3>
+      <p class="gal-note">Duración 4:31 · Los textos en pantalla están en inglés.</p>
+      <div class="media-box"><video id="vid" controls preload="metadata" playsinline poster="IMG/video-portada.jpg" src="VID/video-resumen.mp4"></video></div>
+    </div>
+  </div>
+</section>
+
+<section class="block surface" id="practica" aria-labelledby="t-pr">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">07 · Practique y explore</p>
+      <h2 id="t-pr">Ponga a prueba lo aprendido</h2>
+      <p class="lead">Actividades interactivas creadas en Gemini Notebook. Se abren en una pestaña nueva.</p>
+    </div>
+    <div class="practice-grid">
+      <a class="pr-card" href="https://notebooklm.link.google/FP4iRGTmGLt0" target="_blank" rel="noopener"><span class="big">7<small>preguntas</small></span><h3>Cuestionario</h3><p>Compruebe su comprensión de los instrumentos, objetivos y secuencias.</p><span class="go">Responder el cuestionario ↗</span></a>
+      <a class="pr-card" href="https://notebooklm.link.google/ONKAk1YdTEFt" target="_blank" rel="noopener"><span class="big">26<small>tarjetas</small></span><h3>Tarjetas de repaso</h3><p>Repase conceptos clave, desde las tareas GRASPS hasta el ejemplo de Ingeniería Estructural.</p><span class="go">Repasar con tarjetas ↗</span></a>
+      <a class="pr-card" href="https://notebooklm.link.google/DGd5UhVnhqMS" target="_blank" rel="noopener"><span class="big">3<small>secuencias</small></span><h3>Mapa conceptual</h3><p>Explore CCC, DIP y CAR como un mapa que se despliega rama por rama.</p><span class="go">Abrir el mapa ↗</span></a>
+      <a class="pr-card" href="https://notebooklm.link.google/BtwXHxPchG7c" target="_blank" rel="noopener"><span class="big">CIV414</span><h3>Mapa del ejemplo en Ingeniería</h3><p>Vea cómo se articulan las secuencias en Diseño Estructural en Concreto.</p><span class="go">Abrir el mapa del ejemplo ↗</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="block dark cut-top" id="resumen" aria-labelledby="t-res">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">08 · Resumen</p>
+      <h2 id="t-res">Puntos clave</h2>
+    </div>
+    <div class="keys">
+      <div class="key-card"><h3>Tres metas</h3><p>Equilibre metas conceptuales (saber), de competencia (saber hacer) y de carácter (ser).</p></div>
+      <div class="key-card"><h3>Tres instrumentos</h3><p>Conocimiento previo, indagación y aplicación, al servicio de observar, comprender y crecer.</p></div>
+      <div class="key-card"><h3>Tres secuencias</h3><p class="flows"><span>CCC: Conectar → Construir → Contribuir</span><span>DIP: Deconstruir → Identificar → Practicar</span><span>CAR: Considerar → Actuar → Reflexionar</span></p></div>
+      <div class="key-card"><h3>Evaluación auténtica</h3><p>Combine tareas GRASPS con dinámicas ágiles como el Pre-Mortem, el Consenso 1-3-6 o Tira y afloja.</p></div>
+      <div class="key-card"><h3>Implementación progresiva</h3><p>Diseñe una sola secuencia y una tarea piloto antes de reestructurar toda la asignatura.</p></div>
+    </div>
+    <p class="closing">Al dominar CCC, DIP y CAR, el docente se convierte en <b>coreógrafo del aula</b>, y sus estudiantes en constructores autónomos, éticos y competentes de su propio saber.</p>
+  </div>
+</section>
+</main>
+
+<section class="ai-note" aria-labelledby="t-ia">
+  <div class="wrap">
+    <div class="ai-box">
+      <span class="ai-badge">Transparencia en el uso de IA</span>
+      <h2 id="t-ia">Cómo se construyó esta guía</h2>
+      <p>Esta guía fue construida haciendo uso de herramientas de inteligencia artificial. Para el diseño web se utilizó <strong>Claude Opus 5.5</strong> con esfuerzo medio. Para el contenido, la presentación, las infografías, el video y las actividades se utilizó <strong>Gemini Notebook</strong>, a partir de la transcripción del audio de las capacitaciones brindadas por el equipo de UNITEC y de los documentos de presentación utilizados en ellas.</p>
+      <p>Puede consultar el cuaderno de Gemini Notebook en: <a href="https://notebook.google.com/notebook/6ce6bb17-da38-4b00-822b-e7bbd3f8062d" target="_blank" rel="noopener">notebook.google.com/notebook/6ce6bb17-da38-4b00-822b-e7bbd3f8062d</a></p>
+      <p class="ai-small">El contenido se contrastó con la Guía del Unitec Planner y el Manual de Diseño de Cursos de UNITEC.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img class="logo" src="IMG/unitec-horizontal-color.png" alt="UNITEC">
+    <div>
+      <p>Guía Docente: Secuencias de Aprendizaje y la Coreografía del Aula · Ecosistema de Aprendizaje UNITEC</p>
+      <p><a href="https://notebooklm.link.google/B3ktnbLnm01E" target="_blank" rel="noopener">Abrir la guía original en Gemini Notebook ↗</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Visor de diapositivas">
+  <div class="lb-top"><p id="lbCap"></p><button type="button" id="lbClose" aria-label="Cerrar visor">✕</button></div>
+  <div class="lb-stage"><img id="lbImg" alt=""></div>
+  <div class="lb-bot"><button type="button" id="lbPrev" aria-label="Anterior">←</button><button type="button" id="lbNext" aria-label="Siguiente">→</button></div>
+</div>
+
+<script>
+(function(){
+  /* ---------- Secuencias ---------- */
+  var SEQ={
+    ccc:{code:'CCC',name:'Aprendizaje Conceptual',stem:'"Los estudiantes entienden que…"',flow:'Conectar → Construir → Contribuir',slide:7,stages:[
+      {n:'Conectar',i:'Conocimiento previo',o:'Observar',t:'Active lo que ya saben con preguntas detonantes o discusiones, para que observen cómo funcionan los conceptos básicos.'},
+      {n:'Construir',i:'Indagación',o:'Comprender',t:'Exponga a los estudiantes a información nueva o a problemas intrincados para que indaguen y comprendan los principios profundos.'},
+      {n:'Contribuir',i:'Aplicación',o:'Crecer',t:'Ponga a prueba la teoría en contextos reales o proyectos, donde compartan y refinen sus hallazgos con la comunidad.'}]},
+    dip:{code:'DIP',name:'Aprendizaje de Competencias',stem:'"Los estudiantes serán capaces de…"',flow:'Deconstruir → Identificar → Practicar',slide:8,stages:[
+      {n:'Deconstruir',i:'Indagación',o:'Observar',t:'Muestre el producto terminado o el modelo experto (ingeniería inversa) y desglóselo para observar el estándar esperado.'},
+      {n:'Identificar',i:'Conocimiento previo',o:'Comprender',t:'El estudiante relaciona cada componente con fundamentos y herramientas ya aprendidos para comprender el rol de cada parte.'},
+      {n:'Practicar',i:'Aplicación',o:'Crecer',t:'Ejecución directa con andamiaje docente y retroalimentación STAR hasta alcanzar el dominio.'}]},
+    car:{code:'CAR',name:'Aprendizaje del Carácter',stem:'"Los estudiantes se vuelven más…"',flow:'Considerar → Actuar → Reflexionar',slide:9,stages:[
+      {n:'Considerar',i:'Conocimiento previo',o:'Comprender',t:'Analice dilemas éticos, casos reales anonimizados o conflictos para comprender sus implicaciones morales e interpersonales.'},
+      {n:'Actuar',i:'Aplicación',o:'Observar',t:'Coloque al estudiante en simulaciones o roles profesionales donde decida bajo presión e incertidumbre y observe las consecuencias.'},
+      {n:'Reflexionar',i:'Indagación',o:'Crecer',t:'Guíe una evaluación metacognitiva del propio juicio: "¿En quién me estoy convirtiendo?"'}]}
+  };
+  var current='ccc';
+  function $(id){return document.getElementById(id)}
+  function renderSeq(key,animate){
+    var s=SEQ[key];current=key;
+    $('sqCode').textContent=s.code;$('sqName').textContent=s.name;$('sqStem').textContent=s.stem;$('sqFlow').textContent=s.flow;
+    var html='';
+    s.stages.forEach(function(st,ix){
+      html+='<article class="stage'+(animate?' reveal':'')+'"><span class="num">Etapa '+(ix+1)+(ix===2?' · Crecer':'')+'</span><h4>'+st.n+'</h4><p class="io-tag"><span>'+st.i+'</span>→<span>'+st.o+'</span></p><p>'+st.t+'</p></article>';
+    });
+    $('sqStages').innerHTML=html;
+    document.querySelectorAll('.pick').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.seq===key?'true':'false')});
+    setMatrix(key);
+  }
+  document.querySelectorAll('.pick').forEach(function(b){b.addEventListener('click',function(){renderSeq(b.dataset.seq,true)})});
+
+  /* ---------- Matriz ---------- */
+  function setMatrix(key){
+    var m=$('matrix');
+    if(key){m.setAttribute('data-focus',key)}else{m.removeAttribute('data-focus')}
+    document.querySelectorAll('.mx-filter button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mx===(key||'')?'true':'false')});
+  }
+  document.querySelectorAll('.mx-filter button').forEach(function(b){b.addEventListener('click',function(){setMatrix(b.dataset.mx)})});
+
+  /* ---------- Pestañas ---------- */
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function selectTab(t){
+    tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;$(x.getAttribute('aria-controls')).hidden=!on});
+    t.focus();
+  }
+  tabs.forEach(function(t,ix){
+    t.addEventListener('click',function(){selectTab(t)});
+    t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();selectTab(tabs[(ix+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length])}});
+  });
+  document.querySelectorAll('.flip').forEach(function(f){f.addEventListener('click',function(){f.setAttribute('aria-pressed',f.getAttribute('aria-pressed')==='true'?'false':'true')})});
+
+  /* ---------- Hoja de ruta (se recuerda solo en este navegador) ---------- */
+  var KEY='coreografia-ruta';
+  var saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){}
+  var boxes=[1,2,3,4].map(function(n){return $('rs'+n)});
+  function updRoad(){
+    var done=0;
+    boxes.forEach(function(b){var on=b.checked;b.closest('.step').classList.toggle('done',on);if(on)done++});
+    $('trackFill').style.width=(done/4*100)+'%';
+    $('roadStatus').textContent=done===4?'4 de 4 pasos completados. Listo para ampliar a toda la asignatura.':done+' de 4 pasos completados.';
+    var st={};boxes.forEach(function(b){st[b.id]=b.checked});try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}
+  }
+  boxes.forEach(function(b){b.checked=!!saved[b.id];b.addEventListener('change',updRoad)});
+  updRoad();
+
+  /* ---------- Recursos de Gemini ---------- */
+  var SLIDES=[
+    ['El Ecosistema de Aprendizaje: visión ejecutiva','Portada de la presentación sobre el Ecosistema de Aprendizaje'],
+    ['¿Cómo diseñamos la coreografía del aula?','De receptor pasivo a constructor activo de su aprendizaje'],
+    ['El fin en mente: el Retrato del Egresado','Diagrama concéntrico de conceptos, competencias, carácter y contexto'],
+    ['Las 6 capacidades humanas del egresado','Cuadrícula con las seis capacidades del egresado'],
+    ['Los cimientos: los 4 principios','Ilustración de cuatro columnas para los principios'],
+    ['Marco de referencia del Ecosistema','Propósito, Personas, Posibilidad y Autonomía'],
+    ['Las 3 dimensiones del aprendizaje','Pirámide de metas conceptuales, de competencia y de carácter'],
+    ['Meta 1: Aprendizaje Conceptual (CCC)','Conectar, Construir y Contribuir'],
+    ['Meta 2: Aprendizaje de Competencias (DIP)','Deconstruir, Identificar y Practicar'],
+    ['Meta 3: Aprendizaje de Carácter (CAR)','Considerar, Actuar y Reflexionar'],
+    ['Arquitectura de secuencias: matriz de síntesis','Comparación de las tres secuencias'],
+    ['El criterio profesional por diseño','Coreografía intencional, transformación y retrato final']
+  ].map(function(s,i){return {src:'IMG/slide-'+String(i+1).padStart(2,'0')+'.jpg',title:s[0],alt:s[1],label:'Diapositiva '+(i+1)+' de 12'}});
+  var INFOS=[
+    ['infografia','Instrumentos y objetivos del aprendizaje','Matriz comparativa de instrumentos y objetivos por secuencia'],
+    ['info-coreografia','Coreografía del aula','Los 3 instrumentos, los 3 objetivos y la arquitectura de las secuencias'],
+    ['info-ecosistema','Principios y secuencias del Ecosistema','Los 4 principios y las 3 secuencias pedagógicas'],
+    ['info-ccc','Secuencia CCC','De receptor pasivo a constructor activo'],
+    ['info-dip','Secuencia DIP','Desglosar para dominar las competencias'],
+    ['info-car','Secuencia CAR','El arte de cultivar el carácter en el aula']
+  ].map(function(s,i){return {src:'IMG/'+s[0]+'.jpg',title:s[1],alt:'Infografía: '+s[2],label:'Infografía '+(i+1)+' de 6'}});
+  function placeholder(title){return '<div class="ph"><div><b>'+title+'</b>Recurso pendiente de agregar</div></div>'}
+  function buildFilm(el,list,cls){
+    list.forEach(function(s,i){
+      var f=document.createElement('figure');f.className='shot'+(cls?' '+cls:'');
+      f.innerHTML='<button type="button" aria-label="Ampliar: '+s.title+'"><img loading="lazy" src="'+s.src+'" alt="'+s.alt+'"></button><figcaption><b>'+String(i+1).padStart(2,'0')+'</b>'+s.title+'</figcaption>';
+      var img=f.querySelector('img'),btn=f.querySelector('button');
+      img.addEventListener('error',function(){btn.innerHTML=placeholder(s.title);btn.disabled=true});
+      btn.addEventListener('click',function(){openLb(list,i)});
+      el.appendChild(f);
+    });
+  }
+  buildFilm($('film'),SLIDES);
+  buildFilm($('filmInfo'),INFOS,'info');
+  document.querySelectorAll('[data-film]').forEach(function(b){b.addEventListener('click',function(){var el=$(b.dataset.film);el.scrollBy({left:(+b.dataset.dir)*el.clientWidth*0.9,behavior:'smooth'})})});
+  document.querySelectorAll('[data-info]').forEach(function(b){b.addEventListener('click',function(){openLb(INFOS,+b.dataset.info)})});
+
+  /* ---------- Visor ---------- */
+  var lb=$('lb'),lbList=SLIDES,lbIx=0,lastFocus=null;
+  function showLb(){
+    var s=lbList[lbIx];
+    $('lbImg').src=s.src;$('lbImg').alt=s.alt;
+    $('lbCap').textContent=s.label+' · '+s.title;
+    $('lbPrev').hidden=$('lbNext').hidden=lbList.length<2;
+  }
+  function openLb(list,i){lastFocus=document.activeElement;lbList=list;lbIx=i;showLb();lb.hidden=false;$('lbClose').focus()}
+  function closeLb(){lb.hidden=true;if(lastFocus)lastFocus.focus()}
+  function step(d){lbIx=(lbIx+d+lbList.length)%lbList.length;showLb()}
+  $('lbImg').addEventListener('error',function(){$('lbCap').textContent+=' · recurso pendiente de agregar'});
+  $('lbClose').addEventListener('click',closeLb);
+  $('lbPrev').addEventListener('click',function(){step(-1)});
+  $('lbNext').addEventListener('click',function(){step(1)});
+  document.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')step(-1);if(e.key==='ArrowRight')step(1)});
+  var SEQ_INFO={ccc:3,dip:4,car:5};
+  $('sqSlideBtn').addEventListener('click',function(){openLb(SLIDES,SEQ[current].slide)});
+  $('sqInfoBtn').addEventListener('click',function(){openLb(INFOS,SEQ_INFO[current])});
+
+  /* ---------- Menú en teléfono y tableta ---------- */
+  var mb=$('menuBtn'),nav=$('topnav');
+  function setMenu(open){nav.classList.toggle('open',open);mb.setAttribute('aria-expanded',open?'true':'false')}
+  mb.addEventListener('click',function(){setMenu(!nav.classList.contains('open'))});
+  nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false)})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){setMenu(false);mb.focus()}});
+
+  /* ---------- Deslizar en el visor ---------- */
+  var sx=null;
+  lb.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  lb.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50&&lbList.length>1)step(dx<0?1:-1);sx=null},{passive:true});
+
+  renderSeq('ccc',false);
+})();
+</script>
+
+</body>
+</html>
